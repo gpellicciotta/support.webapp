@@ -13,6 +13,11 @@ Overview of all documentation for the `template.webapp` project.
 
 ---
 
+## Analysis
+- [ui-design-comparison.md](analysis/ui-design-comparison.md): How the sibling apps implement UI design, with sharing verdicts.
+
+---
+
 ## Related Projects
 - [todos.webapp](https://github.com/gpellicciotta/todos.webapp): ToDo's web app, a first adopter.
 - [family-portal](https://github.com/gpellicciotta/family-portal): Family space, a first adopter.
