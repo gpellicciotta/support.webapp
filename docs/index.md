@@ -17,8 +17,8 @@ Overview of all documentation for the `template.webapp` project.
 - [todos.webapp](https://github.com/gpellicciotta/todos.webapp): ToDo's web app, a first adopter.
 - [family-portal](https://github.com/gpellicciotta/family-portal): Family space, a first adopter.
 - [meteo](https://github.com/gpellicciotta/meteo): Weather forecast app, a first adopter.
-- [auth](https://github.com/gpellicciotta/auth.server): Identity service, to be redesigned later.
-- [counters](https://github.com/gpellicciotta/counters): Counters app, to be redesigned later.
+- auth.server: Identity service, to be redesigned later.
+- counters: Counters app, to be redesigned later.
 - [support.js](https://github.com/gpellicciotta/support.js): Shared JavaScript code and the older auth and counters styles.
 
 ---
