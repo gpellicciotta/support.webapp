@@ -23,13 +23,14 @@ This comparison is the evidence base for the design system plan of T0002.
   todos.webapp has small, tested APIs for dialog, menu, popover, toast, and live region; no sibling has equals.
 - family-portal leads on server-rendered shell parts, avatars, decorative tones, seasons, and a browser-based UI verifier.
   meteo leads on data visualization and attribute-based internationalization.
-  counters leads on a switch control, button archetypes, and visual regression tooling.
+  counters leads on button archetypes and visual regression tooling.
 - Gaps shared by the new systems: no loading or skeleton pattern, no tooltip component, no native `popover` use.
-  Both lack multi-select.
+  todos.webapp only spins its sync icon. Both lack multi-select, and no app has an accessible switch.
 - Every app breaks some of its own rules, from raw `z-index` values to unused tokens.
   meteo and the support.js lineage also lack reduced-motion handling and consistent focus rings.
 - Two of six known facts needed correction; see [Known Facts Checked](#known-facts-checked).
-- Main recommendation for T0002: share token names, tiers, theming, and behavior modules as a contract.
+- Main recommendation for T0002: share token names, tiers, and theming as a contract.
+  Share behavior modules as a pinned component package.
   Keep palette, fonts, and radius values per look, and keep each app shell local or shell-specific.
 
 ---
@@ -68,7 +69,7 @@ Method:
 | todos.webapp uses an SVG sprite; family-portal uses inline stroke SVG icons       | Confirmed, with a nuance | todos.webapp: one [icons.svg](../../../todos.webapp/src/img/icons.svg) file. family-portal: a `<symbol>` block pasted into each template, used through `<use href="#icon-…">`.                    |
 
 Notes on the corrections:
-- The fork direction is reversed: support.js extracted these stylesheets from auth and counters in v1.0.0 ([CHANGELOG.md](../../../support.js/CHANGELOG.md#L53)).
+- The fork direction is reversed: support.js extracted 9 shared stylesheets from auth and counters in v1.0.0 ([CHANGELOG.md](../../../support.js/CHANGELOG.md#L53)).
   Most small diffs are support.js normalization the forks never took back.
 - support.js uses CRLF line endings in its working tree and the forks use LF, so byte comparison flags every file.
 - The 45-of-71 measurement method is unknown; no tier split or history state of [tokens.css](../../../todos.webapp/src/css/tokens.css) reproduces it.
@@ -104,59 +105,59 @@ Notes on the corrections:
 ### Token Name Crosswalk
 Rows map tokens by role; a dash means the app has no token for the role.
 
-| Role                 | todos.webapp                                                         | family-portal                                                            | meteo                                           | support.js                                             |
-| :------------------- | :------------------------------------------------------------------- | :----------------------------------------------------------------------- | :---------------------------------------------- | :----------------------------------------------------- |
-| Page background      | `--color-bg`                                                         | `--color-bg`                                                             | `--color-bg`                                    | `--app-screen-bg-color`                                |
-| Surface              | `--color-surface`                                                    | `--color-surface`                                                        | `--color-card`                                  | `--primary-background-color`                           |
-| Sunken surface       | `--color-surface-sunken`                                             | `--color-surface-sunken`                                                 | `--color-card-subtle`                           | -                                                      |
-| Hover ground         | `--color-hover-bg`                                                   | -                                                                        | `--color-btn-tint-hover`                        | -                                                      |
-| Selected ground      | `--color-selected-bg`, `--color-active-bg`                           | -                                                                        | `--color-primary-tint`                          | -                                                      |
-| Body text            | `--color-text`                                                       | `--color-text`                                                           | `--color-text`                                  | `--primary-text-color`                                 |
-| Strong text          | -                                                                    | -                                                                        | `--color-text-strong`                           | -                                                      |
-| Muted text           | `--color-text-muted`                                                 | `--color-text-muted`                                                     | `--color-muted`                                 | `--muted-text-color`                                   |
-| Disabled text        | `--color-text-disabled`                                              | `--color-text-disabled`                                                  | -                                               | -                                                      |
-| Border               | `--color-border`                                                     | `--color-border`                                                         | `--color-border`, `--color-card-border`         | `--card-border-color`                                  |
-| Strong border        | `--color-border-strong`                                              | `--color-border-strong`                                                  | -                                               | -                                                      |
-| Subtle border        | -                                                                    | -                                                                        | `--color-border-subtle`                         | -                                                      |
-| Main action fill     | `--color-signal`                                                     | `--color-primary`                                                        | `--color-primary`                               | `--secondary-background-color`                         |
-| Main action hover    | `--color-signal-hover`                                               | `--color-primary-hover`                                                  | `--color-primary-dark`                          | `--form-button-hover-bg-color`                         |
-| Main action pressed  | `--color-signal-active`                                              | -                                                                        | -                                               | `--form-button-active-bg-color`                        |
-| Text on main action  | `--color-on-signal`                                                  | `--color-on-primary`                                                     | `--color-on-primary`                            | `--secondary-text-color`                               |
-| Inverse fill         | -                                                                    | `--color-inverse`, `--color-on-inverse`                                  | -                                               | `--ternary-background-color`                           |
-| Accent               | -                                                                    | `--color-accent`, `--color-on-accent`                                    | accent redefines `--color-primary`              | -                                                      |
-| Link                 | `--color-link`                                                       | `--color-link`, `--color-link-hover`                                     | `--color-primary-text`                          | -                                                      |
-| Focus color          | `--color-focus`                                                      | `--color-focus`                                                          | `--color-primary-focus`                         | `--form-element-focus-border-color`                    |
-| Focus ring shorthand | `--focus-ring`, `--focus-ring-width`                                 | `--focus-ring`, `--focus-ring-width`                                     | -                                               | -                                                      |
-| Danger               | `--color-danger`                                                     | `--color-danger`                                                         | `--color-wrong`                                 | `--color-danger`                                       |
-| Danger ground        | -                                                                    | `--color-danger-bg`                                                      | `--color-wrong-bg`                              | -                                                      |
-| Text on danger       | `--color-on-danger`                                                  | -                                                                        | -                                               | -                                                      |
-| Success              | -                                                                    | `--color-success`, `--color-success-bg`                                  | `--color-correct` (unused)                      | `--color-success`                                      |
-| Warning              | -                                                                    | `--color-warning`, `--color-warning-bg`                                  | `--color-warning`, `--color-warning-bg`         | `--color-warning`                                      |
-| Status hues          | `--color-status-in-progress`, `-completed`, `-cancelled`             | -                                                                        | -                                               | -                                                      |
-| Decorative tones     | -                                                                    | `--color-tone-1` to `-4`, `--color-on-tone-1` to `-4`                    | `--color-badge-{hue}-bg`, `-text`               | -                                                      |
-| Data series          | -                                                                    | -                                                                        | `--color-rain`, `--color-rain-text`             | -                                                      |
-| Backdrop             | `--color-backdrop`                                                   | primitive `--shadow-black-soft`                                          | `--color-overlay` (unused)                      | -                                                      |
-| Shadow color         | `--color-shadow`                                                     | `--shadow-color`, `-soft`, `-strong`                                     | `--color-primary-shadow`                        | -                                                      |
-| Tooltip              | -                                                                    | -                                                                        | `--color-tooltip-bg`, `-text`, `-border`        | -                                                      |
-| Body font            | `--font-body`                                                        | `--font-body`                                                            | -                                               | `--font-family-base`                                   |
-| Heading font         | -                                                                    | `--font-heading`                                                         | -                                               | -                                                      |
-| Mono font            | `--font-mono`                                                        | `--font-mono`                                                            | -                                               | `--font-family-mono`                                   |
-| Type scale           | `--text-xs` to `--text-xl` (5)                                       | `--text-xs` to `--text-3xl` (8)                                          | `--font-size-xs` to `--font-size-2xl` (7)       | -                                                      |
-| Weights              | `--weight-regular`, `-medium`, `-semibold`                           | same, plus `--weight-bold`                                               | -                                               | -                                                      |
-| Line heights         | `--leading-tight`, `-normal`                                         | `--leading-tight`, `-snug`, `-normal`                                    | -                                               | -                                                      |
-| Letter spacing       | -                                                                    | `--tracking-tight`, `-wide`                                              | -                                               | -                                                      |
-| Space                | `--space-1` to `--space-8`                                           | `--space-1` to `--space-12`                                              | -                                               | -                                                      |
-| Radii                | `--radius-sm`, `-md`, `-lg`, `-round`                                | same, plus `-xl`, `-pill`                                                | same as family-portal, plus `--radius`, `-full` | `--border-radius-sm`, `-md`, `-lg`, `-pill`, `-circle` |
-| Radius roles         | -                                                                    | -                                                                        | -                                               | `--control-border-radius`, `--card-border-radius`      |
-| Border widths        | `--border-width`, `-strong`                                          | `--border-width`, `-strong`                                              | -                                               | -                                                      |
-| Elevation            | `--elevation-1`, `-2`                                                | `--elevation-1`, `-2`                                                    | `--shadow-sm`, `-md`, `-lg`, `-modal`           | `--shadow-sm`, `-md`, `-lg`, `--card-shadow`           |
-| Layers               | `--layer-base`, `-sticky`, `-float`, `-popover`, `-dialog`, `-toast` | `--layer-base`, `-sticky`, `-overlay`, `-dialog`, `-toast`               | -                                               | nine `--{name}-z-level` tokens                         |
-| Motion               | `--duration-fast`, `-base`, `-spin`, `--ease-standard`               | `--duration-fast`, `-base`, `--ease-standard`, `--offset-press`, `-lift` | -                                               | -                                                      |
-| Touch target         | `--target-min`                                                       | `--target-min`                                                           | -                                               | -                                                      |
-| Control height       | -                                                                    | `--control-height`                                                       | -                                               | -                                                      |
-| Icon size            | `--icon-size`, `-lg`, `--icon-stroke`, `-thin`                       | `--icon-sm`, `--icon-md`                                                 | -                                               | -                                                      |
-| Layout widths        | `--width-main`, `-sidebar`, `-editor`, `-menu`, and 3 more           | `--width-content`, `-narrow`, `-reading`, `--gutter`                     | -                                               | `--view-max-width-form`, `-card`, `-wide`              |
-| Avatar sizes         | -                                                                    | `--avatar-sm`, `-md`, `-lg`, `-stack`                                    | -                                               | -                                                      |
+| Role                 | todos.webapp                                                         | family-portal                                                            | meteo                                                                 | support.js                                                                                  |
+| :------------------- | :------------------------------------------------------------------- | :----------------------------------------------------------------------- | :-------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| Page background      | `--color-bg`                                                         | `--color-bg`                                                             | `--color-bg`                                                          | `--app-screen-bg-color`                                                                     |
+| Surface              | `--color-surface`                                                    | `--color-surface`                                                        | `--color-card`                                                        | `--primary-background-color`                                                                |
+| Sunken surface       | `--color-surface-sunken`                                             | `--color-surface-sunken`                                                 | `--color-card-subtle`                                                 | -                                                                                           |
+| Hover ground         | `--color-hover-bg`                                                   | -                                                                        | `--color-btn-tint-hover`                                              | -                                                                                           |
+| Selected ground      | `--color-selected-bg`, `--color-active-bg`                           | -                                                                        | `--color-primary-tint`                                                | -                                                                                           |
+| Body text            | `--color-text`                                                       | `--color-text`                                                           | `--color-text`                                                        | `--primary-text-color`                                                                      |
+| Strong text          | -                                                                    | -                                                                        | `--color-text-strong`                                                 | -                                                                                           |
+| Muted text           | `--color-text-muted`                                                 | `--color-text-muted`                                                     | `--color-muted`                                                       | `--muted-text-color`                                                                        |
+| Disabled text        | `--color-text-disabled`                                              | `--color-text-disabled`                                                  | -                                                                     | -                                                                                           |
+| Border               | `--color-border`                                                     | `--color-border`                                                         | `--color-border`, `--color-card-border`                               | `--card-border-color`                                                                       |
+| Strong border        | `--color-border-strong`                                              | `--color-border-strong`                                                  | -                                                                     | -                                                                                           |
+| Subtle border        | -                                                                    | -                                                                        | `--color-border-subtle`                                               | -                                                                                           |
+| Main action fill     | `--color-signal`                                                     | `--color-primary`                                                        | `--color-primary`                                                     | `--secondary-background-color`                                                              |
+| Main action hover    | `--color-signal-hover`                                               | `--color-primary-hover`                                                  | `--color-primary-dark`                                                | `--form-button-hover-bg-color`                                                              |
+| Main action pressed  | `--color-signal-active`                                              | -                                                                        | -                                                                     | `--form-button-active-bg-color`                                                             |
+| Text on main action  | `--color-on-signal`                                                  | `--color-on-primary`                                                     | `--color-on-primary`                                                  | `--secondary-text-color`                                                                    |
+| Inverse fill         | -                                                                    | `--color-inverse`, `--color-on-inverse`                                  | -                                                                     | `--ternary-background-color`                                                                |
+| Accent               | -                                                                    | `--color-accent`, `--color-on-accent`                                    | accent redefines `--color-primary`                                    | -                                                                                           |
+| Link                 | `--color-link`                                                       | `--color-link`, `--color-link-hover`                                     | `--color-primary-text`                                                | -                                                                                           |
+| Focus color          | `--color-focus`                                                      | `--color-focus`                                                          | `--color-primary-focus`                                               | `--form-element-focus-border-color`                                                         |
+| Focus ring shorthand | `--focus-ring`, `--focus-ring-width`                                 | `--focus-ring`, `--focus-ring-width`                                     | -                                                                     | -                                                                                           |
+| Danger               | `--color-danger`                                                     | `--color-danger`                                                         | `--color-wrong`                                                       | `--color-danger`                                                                            |
+| Danger ground        | -                                                                    | `--color-danger-bg`                                                      | `--color-wrong-bg`                                                    | -                                                                                           |
+| Text on danger       | `--color-on-danger`                                                  | -                                                                        | -                                                                     | -                                                                                           |
+| Success              | -                                                                    | `--color-success`, `--color-success-bg`                                  | `--color-correct` (unused)                                            | `--color-success`                                                                           |
+| Warning              | -                                                                    | `--color-warning`, `--color-warning-bg`                                  | `--color-warning`, `--color-warning-bg`                               | `--color-warning`                                                                           |
+| Status hues          | `--color-status-in-progress`, `-completed`, `-cancelled`             | -                                                                        | -                                                                     | -                                                                                           |
+| Decorative tones     | -                                                                    | `--color-tone-1` to `-4`, `--color-on-tone-1` to `-4`                    | `--color-badge-{hue}-bg`, `-text`                                     | -                                                                                           |
+| Data series          | -                                                                    | -                                                                        | `--color-rain`, `--color-rain-text`                                   | -                                                                                           |
+| Backdrop             | `--color-backdrop`                                                   | primitive `--shadow-black-soft`                                          | `--color-overlay` (unused)                                            | -                                                                                           |
+| Shadow color         | `--color-shadow`                                                     | `--shadow-color`, `-soft`, `-strong`                                     | `--color-primary-shadow`                                              | -                                                                                           |
+| Tooltip              | -                                                                    | -                                                                        | `--color-tooltip-bg`, `-text`, `-border`                              | -                                                                                           |
+| Body font            | `--font-body`                                                        | `--font-body`                                                            | -                                                                     | `--font-family-base`                                                                        |
+| Heading font         | -                                                                    | `--font-heading`                                                         | -                                                                     | -                                                                                           |
+| Mono font            | `--font-mono`                                                        | `--font-mono`                                                            | -                                                                     | `--font-family-mono`                                                                        |
+| Type scale           | `--text-xs` to `--text-xl` (5)                                       | `--text-xs` to `--text-3xl` (8)                                          | `--font-size-xs` to `--font-size-2xl` (7)                             | -                                                                                           |
+| Weights              | `--weight-regular`, `-medium`, `-semibold`                           | same, plus `--weight-bold`                                               | -                                                                     | -                                                                                           |
+| Line heights         | `--leading-tight`, `-normal`                                         | `--leading-tight`, `-snug`, `-normal`                                    | -                                                                     | -                                                                                           |
+| Letter spacing       | -                                                                    | `--tracking-tight`, `-wide`                                              | -                                                                     | -                                                                                           |
+| Space                | `--space-1` to `--space-8`                                           | `--space-1` to `--space-12`                                              | -                                                                     | -                                                                                           |
+| Radii                | `--radius-sm`, `-md`, `-lg`, `-round`                                | same, plus `-xl`, `-pill`                                                | `--radius-sm`, `-md`, `-lg`, `-xl`, `-round`, `-full`, and `--radius` | `--border-radius-sm`, `-md`, `-lg`, `-pill`, `-circle`; aliases `--radius-sm`, `-md`, `-lg` |
+| Radius roles         | -                                                                    | -                                                                        | -                                                                     | `--control-border-radius`, `--card-border-radius`                                           |
+| Border widths        | `--border-width`, `-strong`                                          | `--border-width`, `-strong`                                              | -                                                                     | -                                                                                           |
+| Elevation            | `--elevation-1`, `-2`                                                | `--elevation-1`, `-2`                                                    | `--shadow-sm`, `-md`, `-lg`, `-modal`                                 | `--shadow-sm`, `-md`, `-lg`, `--card-shadow`                                                |
+| Layers               | `--layer-base`, `-sticky`, `-float`, `-popover`, `-dialog`, `-toast` | `--layer-base`, `-sticky`, `-overlay`, `-dialog`, `-toast`               | -                                                                     | nine `--{name}-z-level` tokens                                                              |
+| Motion               | `--duration-fast`, `-base`, `-spin`, `--ease-standard`               | `--duration-fast`, `-base`, `--ease-standard`, `--offset-press`, `-lift` | -                                                                     | -                                                                                           |
+| Touch target         | `--target-min`                                                       | `--target-min`                                                           | -                                                                     | -                                                                                           |
+| Control height       | -                                                                    | `--control-height`                                                       | -                                                                     | -                                                                                           |
+| Icon size            | `--icon-size`, `-lg`, `--icon-stroke`, `-thin`                       | `--icon-sm`, `--icon-md`                                                 | -                                                                     | -                                                                                           |
+| Layout widths        | `--width-main`, `-sidebar`, `-editor`, `-menu`, and 3 more           | `--width-content`, `-narrow`, `-reading`, `--gutter`                     | -                                                                     | `--view-max-width-form`, `-card`, `-wide`                                                   |
+| Avatar sizes         | -                                                                    | `--avatar-sm`, `-md`, `-lg`, `-stack`                                    | -                                                                     | -                                                                                           |
 
 Exact name overlap, all tiers and semantic on both sides:
 
@@ -181,7 +182,7 @@ Same names do not mean same values:
 - **Verdict:** shared contract for names; values stay look-specific.
 
 ### Colors, Contrast, and Color Meaning
-- todos.webapp: monochrome grays, one navy signal, deep orange danger, and status hues ([guide](../../../todos.webapp/docs/specs/visual-style-guide.md#L24-L27)).
+- todos.webapp: monochrome grays, one navy signal, deep orange danger, and status hues ([guide](../../../todos.webapp/docs/specs/visual-style-guide.md#L35-L43)).
   A unit test checks text pairs at 4.5:1, icons and focus at 3:1, and the raw-color ban ([tokens.test.js](../../../todos.webapp/tests/unit/tokens.test.js#L265-L325)).
 - family-portal: navy and ivory with saffron and brick accents; no green or purple ([guide](../../../family-portal/docs/specs/visual-style-guide.md#L64-L66)).
   Tones decorate and never carry meaning ([guide](../../../family-portal/docs/specs/visual-style-guide.md#L123)).
@@ -190,7 +191,8 @@ Same names do not mean same values:
   White on yellow is 2.94:1 and was kept by a recorded decision ([T0027 spec](../../../meteo/.plan/tasks/archived/T0027-use-white-text-on-yellow-accent-buttons-in/technical-spec.md#L3-L4)).
   No contrast test exists.
 - support.js: a 17-hue palette with RGB triples for alpha mixing ([colors.css](../../../support.js/css/colors.css#L9-L42)).
-  Computed failures: muted text on the app background 4.23:1, white on the warning tag 2.94:1, white on the green tag 2.57:1.
+  Computed failures: muted text on the app background, 4.23:1; white on the warning tag, 2.94:1.
+  White on the green tag reaches only 2.57:1.
 - auth added role tokens `--color-*` beside the ordinal names and fixed dark link contrast ([style.css](../../../auth/webapp/css/style.css#L56-L78)).
 - Differences that matter: only todos.webapp tests contrast statically; family-portal tests it in a live browser.
 - **Reference:** todos.webapp [tokens.test.js](../../../todos.webapp/tests/unit/tokens.test.js) for static checks; family-portal for rendered checks.
@@ -202,7 +204,7 @@ Same names do not mean same values:
 | todos.webapp   | Inter variable; system mono                                                  | self-hosted woff2, [fonts.css](../../../todos.webapp/src/css/fonts.css#L9-L15)                 | 5 steps, 0.75 to 1.375rem      | 1.25, 1.5 tokens      |
 | family-portal  | Outfit headings, DM Sans body; system mono                                   | self-hosted Fontsource woff2, [fonts.css](../../../family-portal/webapp/css/fonts.css#L12-L69) | 8 steps, two fluid `clamp()`   | 1.05, 1.3, 1.6 tokens |
 | meteo          | system stack ([style.css](../../../meteo/css/style.css#L218))                | none                                                                                           | 7 steps, 8 raw sizes bypass it | raw values only       |
-| support.js     | Roboto, Roboto Mono ([style.css](../../../support.js/css/style.css#L49-L52)) | left to the consumer                                                                           | none; 39 literal sizes         | reset sets 1          |
+| support.js     | Roboto, Roboto Mono ([style.css](../../../support.js/css/style.css#L49-L52)) | left to the consumer                                                                           | none; about 40 literal sizes   | reset sets 1          |
 | auth, counters | Roboto                                                                       | Google Fonts, regular weight only                                                              | literal sizes                  | literal values        |
 
 - Similarities: todos.webapp and family-portal self-host variable fonts with `font-display: swap` and precache them.
@@ -212,7 +214,7 @@ Same names do not mean same values:
 
 ### Spacing, Radii, Borders, Shadows, Layers, and Motion
 - Spacing: todos.webapp and family-portal use 4 px based scales ([todos](../../../todos.webapp/src/css/tokens.css#L118-L125), [family-portal](../../../family-portal/webapp/css/tokens.css#L212-L223)).
-  meteo and support.js have no spacing tokens: 120 and 138 literal declarations.
+  meteo and support.js have no spacing tokens; each holds well over 100 literal spacing declarations.
 - Radii: see the crosswalk; family-portal buttons are pills, todos.webapp buttons use `--radius-md`.
 - Borders: the strong border is 3 px in todos.webapp and 1.5 px in family-portal.
 - Shadows: two elevation levels in both new systems; family-portal tints them navy in light mode.
@@ -234,16 +236,16 @@ Same names do not mean same values:
 
 - todos.webapp builds icons with `spriteIcon` ([task-list.js](../../../todos.webapp/src/js/views/task-list.js#L80-L89)); four private helpers duplicate it.
   Its gallery still holds 45 inline-path icons, against its own decision ([guide](../../../todos.webapp/docs/specs/visual-style-guide.md#L55-L57)).
-- family-portal inserts icons from templates, Java strings in `Widgets.java`, and a helper copied into 8 modules.
+- family-portal inserts icons from templates, Java strings in `Widgets.java`, and a helper copied into 7 modules.
   Java-built icons work only if the host template carries the symbol.
-- meteo hydrates `[data-icon]` placeholders ([icons.js](../../../meteo/js/icons.js#L281-L300)); 9 weather icons have day and night variants.
+- meteo hydrates `[data-icon]` placeholders ([icons.js](../../../meteo/js/icons.js#L281-L300)); 2 of its 9 weather icons have day and night variants.
   16 icon definitions are unused quiz leftovers.
 - Similarities: all three new-style apps draw 24-unit stroke icons in `currentColor`.
 - **Reference:** todos.webapp, because one cached sprite file serves every page and the service worker precaches it.
 - **Verdict:** shared component (sprite format, `.icon` class, builder function); the glyph set is look-specific.
 
 ### Focus Indicators and Touch Targets
-- todos.webapp: global `:focus-visible` outline of 2 px in `--color-focus` ([style.css](../../../todos.webapp/src/css/style.css#L79-L82)).
+- todos.webapp: global `:focus-visible` outline of 2 px in `--color-focus` ([style.css](../../../todos.webapp/src/css/style.css#L77-L80)).
   Danger controls ring in the danger color; rows use an inset offset.
 - family-portal: global box-shadow ring of 3 px ([components.css](../../../family-portal/webapp/css/components.css#L276-L280)).
   Five components use an outline with offset instead.
@@ -271,6 +273,9 @@ Same names do not mean same values:
   counters added four archetypes with `:focus-visible` ([forms.css](../../../counters.server/webapp/css/forms.css#L685-L769)).
 - Similarities: todos.webapp and family-portal share the BEM API: `.button`, `--secondary`, `--danger`, and `.icon-button`.
 - Differences that matter: shape and fill colors; family-portal `--danger` is missing from its gallery.
+- Docs and tests: todos.webapp gallery [button](../../../todos.webapp/src/demo/visual-style-gallery.html#L325) and [icon button](../../../todos.webapp/src/demo/visual-style-gallery.html#L385) sections.
+  Guide at [visual-style-guide.md](../../../todos.webapp/docs/specs/visual-style-guide.md#L149-L156); tests in [gallery-controls.spec.js](../../../todos.webapp/tests/e2e/gallery-controls.spec.js) and [gallery-danger.spec.js](../../../todos.webapp/tests/e2e/gallery-danger.spec.js).
+  family-portal shows buttons in its [gallery](../../../family-portal/webapp/demo/visual-style-gallery.html#L336-L402).
 - **Reference:** todos.webapp, for full states, the danger focus ring, and tests of the 44 px target.
 - **Verdict:** shared component (class API and states); shape and colors are look-specific.
 
@@ -291,19 +296,25 @@ Same names do not mean same values:
   </div>
   ```
 - Differences that matter: family-portal uses a `<span>` for the error and has no counter or meta row.
+- Docs and tests: todos.webapp gallery [field](../../../todos.webapp/src/demo/visual-style-gallery.html#L400) and [checkbox and radio](../../../todos.webapp/src/demo/visual-style-gallery.html#L477) sections.
+  Guide at [visual-style-guide.md](../../../todos.webapp/docs/specs/visual-style-guide.md#L157-L161); family-portal [forms gallery](../../../family-portal/webapp/demo/visual-style-gallery.html#L496-L507).
 - **Reference:** todos.webapp, because `createField` turns the contract into one function.
 - **Verdict:** shared component.
 
 ### Chips, Toggles, and Segmented Controls
 - todos.webapp: `.chip`, `--overdue`, `--removable`, and `.filter-chip` ([controls.css](../../../todos.webapp/src/css/controls.css#L348-L443)).
   The segmented control is a `fieldset` of radios styled through `:has(:checked)` ([controls.css](../../../todos.webapp/src/css/controls.css#L445-L522)).
-- family-portal: `.chip` toggles with `aria-pressed`, `.reaction`, `.tag`, and `.segmented` ([components.css](../../../family-portal/webapp/css/components.css#L2670-L2707)).
-  Its segmented control uses `role="radiogroup"` on a `div`, not a `fieldset`.
+- family-portal: `.chip` toggles with `aria-pressed` ([components.css](../../../family-portal/webapp/css/components.css#L2227-L2261)) and `.reaction` toggles ([components.css](../../../family-portal/webapp/css/components.css#L2298-L2332)).
+  Its `.segmented` uses `role="radiogroup"` on a `div`, not a `fieldset` ([components.css](../../../family-portal/webapp/css/components.css#L2670-L2707)).
 - meteo: non-interactive badges and native checkboxes only.
-- counters: the only switch control, `.switch-control` with `role="switch"` ([forms.css](../../../counters.server/webapp/css/forms.css#L474-L488)).
-- No app has a switch in the new systems; both use native checkboxes with `accent-color`.
-- **Reference:** todos.webapp for chips and the segmented control; counters for the switch idea.
-- **Verdict:** shared component.
+- counters: `.switch-control` is a styled label around a plain checkbox, without `role="switch"` ([forms.css](../../../counters.server/webapp/css/forms.css#L474-L488)).
+  Only its gallery uses it ([design-system-gallery.html](../../../counters.server/webapp/demo/design-system-gallery.html#L1229-L1232)).
+- No app has an accessible switch; the new systems use native checkboxes with `accent-color`.
+- Docs and tests: todos.webapp gallery sections [chip](../../../todos.webapp/src/demo/visual-style-gallery.html#L499) and [segmented control](../../../todos.webapp/src/demo/visual-style-gallery.html#L535).
+  Its guide covers them at [visual-style-guide.md](../../../todos.webapp/docs/specs/visual-style-guide.md#L162-L168); [gallery-controls.spec.js](../../../todos.webapp/tests/e2e/gallery-controls.spec.js) tests them.
+- **Reference:** todos.webapp, because its segmented control keeps native radio semantics inside a `fieldset`.
+  counters offers only a visual idea for a switch.
+- **Verdict:** shared component; the switch still needs a design.
 
 ### Lists, Rows, Cards, and Tiles
 - todos.webapp: `ul.task-list` is a size container; rows react to a 36rem container query ([app-components.css](../../../todos.webapp/src/css/app-components.css#L16-L42)).
@@ -323,7 +334,11 @@ Same names do not mean same values:
     <span class="app-tile__body"><span class="card__title">…</span><span class="card__text">…</span></span>
   </a>
   ```
-- **Reference:** family-portal for cards and tiles; todos.webapp for rows and container queries; meteo for the chart.
+- Docs and tests: family-portal [cards gallery](../../../family-portal/webapp/demo/visual-style-gallery.html#L437-L494); todos.webapp [task row](../../../todos.webapp/src/demo/visual-style-gallery.html#L754) and [task list](../../../todos.webapp/src/demo/visual-style-gallery.html#L1251) sections.
+  todos.webapp tests rows in [gallery-app.spec.js](../../../todos.webapp/tests/e2e/gallery-app.spec.js) and [task-list.test.js](../../../todos.webapp/tests/unit/task-list.test.js).
+- **Reference:** family-portal for cards and tiles, the only generic card in the family.
+  todos.webapp for rows, since container queries adapt rows to any column width.
+  meteo for charts, since its per-hour sentences make the chart readable without sight.
 - **Verdict:** card and row base are a shared component; task rows and the chart are app-local.
 
 ### Multi-select, Bulk Actions, Delete, Undo, and Recycle Bin
@@ -336,19 +351,22 @@ Same names do not mean same values:
 - support.js: `CollectionEditor` offers checkbox rows and bulk delete ([collection-editor.mjs](../../../support.js/src/collection-editor.mjs#L39-L59)).
   Its checkbox is `display: none`, so selection works by pointer only.
 - counters: a recycle bin view ([recycle-bin-view.mjs](../../../counters.server/webapp/js/view/recycle-bin-view.mjs)) and multi-select through `CollectionEditor`.
-- **Reference:** todos.webapp for delete, undo, and the bin; no accessible multi-select reference exists.
+- **Reference:** todos.webapp, because it makes every delete reversible twice: Undo first, the bin later.
+  No accessible multi-select reference exists.
 - **Verdict:** shared contract (delete moves to a bin, Undo toast); the bin screen is app-local.
 
 ### Empty States, Loading, Progress, and Skeletons
 - todos.webapp: `.empty-state` with icon, title, text, and at most two actions ([app-chrome.css](../../../todos.webapp/src/css/app-chrome.css#L883-L918)).
-  No loading pattern: local work needs no spinner.
+  Its only progress cue is the spinning sync icon ([app-chrome.css](../../../todos.webapp/src/css/app-chrome.css#L282-L283)); local work needs no spinner.
+  Gallery [empty state](../../../todos.webapp/src/demo/visual-style-gallery.html#L1223) section.
 - family-portal: several unstyled or per-component empty messages; loading is text in the page header.
   `.widget--loading` with `aria-busy` exists only in the gallery.
 - meteo: a `role="status"` text line reports search and load progress.
 - support.js: skeleton classes, spinner, and a top progress bar ([component.css](../../../support.js/css/component.css#L87-L151)).
   The skeletons have no dark variant and no `aria-busy`.
-- **Reference:** todos.webapp for empty states; none for loading.
-- **Verdict:** shared component for empty states; loading is an open gap.
+- **Reference:** todos.webapp for empty states, because it caps actions at two and documents the anatomy.
+  No app offers an accessible loading reference.
+- **Verdict:** shared component for both; the loading pattern still needs a design.
 
 ### Toasts, Banners, System Notifications, and Inbox
 - todos.webapp: `createToaster` handles Undo, persistent toasts, Ctrl+Z, and holding while a modal is open ([toast.js](../../../todos.webapp/src/js/ui/toast.js#L31)).
@@ -367,7 +385,10 @@ Same names do not mean same values:
     <div class="toast"><p class="toast__text">…</p><button class="button button--quiet">Undo</button></div>
   </div>
   ```
-- **Reference:** todos.webapp `createToaster` plus the counters notification ADR for tier rules.
+- Docs and tests: todos.webapp gallery [banner](../../../todos.webapp/src/demo/visual-style-gallery.html#L679) and [toast](../../../todos.webapp/src/demo/visual-style-gallery.html#L701) sections.
+  Guide at [visual-style-guide.md](../../../todos.webapp/docs/specs/visual-style-guide.md#L182-L192); [toast.test.js](../../../todos.webapp/tests/unit/toast.test.js) tests the toaster.
+- **Reference:** todos.webapp `createToaster`, since it is gallery-wired and unit-tested.
+  The counters notification ADR supplies the tier rules.
 - **Verdict:** shared component for toasts and banners; Web Push is app-local.
 
 ### Menus, Popovers, Tooltips, and Collapsibles
@@ -389,7 +410,9 @@ Same names do not mean same values:
   ```
   This skeleton follows [visual-style-gallery.html](../../../todos.webapp/src/demo/visual-style-gallery.html#L571-L578), without the icons.
 - Tests: [menu.test.js](../../../todos.webapp/tests/unit/menu.test.js) covers menus and popovers; [behaviors.spec.js](../../../todos.webapp/tests/e2e/behaviors.spec.js) checks anchoring at 390 px.
-- **Reference:** todos.webapp for menus and popovers; meteo for tooltips.
+- **Reference:** todos.webapp for menus and popovers, the only keyboard-complete and tested set.
+  meteo for tooltips, provisionally: it shows tips on keyboard focus, which no other app does.
+  Its tip text lives in `::after` content, so screen reader exposure is unverified; `title` duplicates it.
 - **Verdict:** shared component.
 
 ### Dialogs and Confirmations
@@ -412,7 +435,8 @@ Same names do not mean same values:
     </div>
   </dialog>
   ```
-- Tests: todos.webapp covers the trap, Escape, and the 390 px sheet in [behaviors-dialog.spec.js](../../../todos.webapp/tests/e2e/behaviors-dialog.spec.js#L28-L65).
+- Docs and tests: todos.webapp gallery [dialog](../../../todos.webapp/src/demo/visual-style-gallery.html#L635) section; guide at [visual-style-guide.md](../../../todos.webapp/docs/specs/visual-style-guide.md#L175-L181).
+  [behaviors-dialog.spec.js](../../../todos.webapp/tests/e2e/behaviors-dialog.spec.js#L28-L65) covers the trap, Escape, and the 390 px sheet.
 - **Reference:** todos.webapp, the only complete and tested implementation.
 - **Verdict:** shared component.
 
@@ -424,7 +448,9 @@ Same names do not mean same values:
   An avatar cropper supports drag, pinch, and keys ([avatar-crop.mjs](../../../family-portal/webapp/portal/js/avatar-crop.mjs#L8)).
 - meteo: no accounts.
 - auth and counters: simple avatar circles in their account views.
-- **Reference:** family-portal for avatars; todos.webapp for the account menu.
+- Docs: family-portal [avatars gallery](../../../family-portal/webapp/demo/visual-style-gallery.html#L412-L436); todos.webapp [user menu](../../../todos.webapp/src/demo/visual-style-gallery.html#L1079) section.
+- **Reference:** family-portal for avatars, the only app with images, fallbacks, and stacks.
+  todos.webapp for the account menu, because its panel works by keyboard and marks the current route.
 - **Verdict:** shared component; the account button placement is shell-specific.
 
 ---
@@ -435,7 +461,8 @@ Same names do not mean same values:
 - todos.webapp: `renderShell` writes one DOM for both layouts ([layout.js](../../../todos.webapp/src/js/ui/layout.js#L124-L140)).
   Phone: top bar, view, sticky add bar, and bottom navigation.
   Desktop from 64rem: sidebar, main column, and editor panel ([app-shell.css](../../../todos.webapp/src/css/app-shell.css#L109-L157)).
-  The shell owns every fixed or sticky position.
+  The shell owns most fixed and sticky positions.
+  Exceptions: the fixed toast region ([controls.css](../../../todos.webapp/src/css/controls.css#L802)) and the sticky add block ([views.css](../../../todos.webapp/src/css/views.css#L94)).
 - family-portal: a sticky header with brand heart, breadcrumb, help, and account buttons.
   The header is hand-copied into all 14 portal templates ([page.html](../../../family-portal/webapp/portal/page.html#L34-L46)).
   A fixed footer, no sidebar, no bottom bar, and no floating action button.
@@ -473,7 +500,8 @@ Same names do not mean same values:
   Breadcrumbs come from `PagePaths.java`.
 - meteo: one page; `showScreen` toggles three sections ([screens.js](../../../meteo/js/screens.js#L12-L19)); no History API.
 - auth and counters: single-page apps with the History API.
-- **Reference:** todos.webapp for single-page apps; family-portal for server pages.
+- **Reference:** todos.webapp for single-page apps, since hash routes work on static hosting without rewrites.
+  family-portal for server pages, since real URLs and server breadcrumbs need no client router.
 - **Verdict:** shell-specific; `aria-current="page"` marking is a shared contract.
 
 ### Responsive Behavior
@@ -495,9 +523,16 @@ Same names do not mean same values:
 - todos.webapp: cache-first service worker with an enforced precache list ([service-worker.js](../../../todos.webapp/src/service-worker.js#L1-L45)).
   An Update toast handles new versions ([sw-update.js](../../../todos.webapp/src/js/ui/sw-update.js#L1-L25)); no splash page.
 - family-portal: an offline page with Retry ([offline.html](../../../family-portal/webapp/offline.html)); not-found pages render through `page.html`.
-- meteo: network-first navigations; the last forecast stays in local storage for 6 hours ([sw.js](../../../meteo/sw.js#L99-L137)).
+- meteo: network-first navigations and cache-first assets ([sw.js](../../../meteo/sw.js#L99-L137)).
+  A saved forecast reappears offline while at least 6 of its hours lie ahead ([forecast-view.js](../../../meteo/js/forecast-view.js#L689-L702)).
 - auth and counters: splash screens in `index.html` and versioned service worker caches.
-- **Reference:** todos.webapp for the update flow; family-portal for the offline page.
+- Install: all five apps ship a manifest with `display: standalone`; only family-portal and meteo add maskable icons.
+  meteo reveals an Install button on `beforeinstallprompt` ([pwa.js](../../../meteo/js/pwa.js#L17-L24)).
+  family-portal detects `display-mode: standalone` on its account page ([account.mjs](../../../family-portal/webapp/portal/js/account.mjs#L295)).
+  support.js wraps the install prompt in `Installer`; todos.webapp relies on the browser prompt.
+- **Reference:** todos.webapp for the update flow, because users choose when to reload.
+  family-portal for the offline page, because it explains the state and offers Retry.
+  meteo for install, as the only app with its own Install button.
 - **Verdict:** shared contract for update and offline behavior; caching strategy is app-local.
 
 ### Theme Switching and Variants
@@ -506,7 +541,8 @@ Same names do not mean same values:
   Seasons set `data-season` from date and hemisphere and animate a sky ([season.mjs](../../../family-portal/webapp/portal/js/season.mjs#L41-L67)).
 - meteo: theme plus three accents, previewed live in Settings ([config-view.js](../../../meteo/js/config-view.js#L28-L32)).
 - auth and counters: a theme `<select>` in the account view.
-- **Reference:** todos.webapp for the switch; family-portal `data-season` for variant hooks.
+- **Reference:** todos.webapp for the switch, because it applies at once and keeps System as a choice.
+  family-portal `data-season` for variant hooks, because one attribute redefines tokens without new classes.
 - **Verdict:** shared contract (`data-theme` values, storage key pattern); seasons and accents are look-specific.
 
 ### Internationalization Hooks
@@ -517,7 +553,8 @@ Same names do not mean same values:
 - meteo: `data-i18n`, `data-i18n-aria`, `data-i18n-tooltip`, and `data-i18n-placeholder` attributes ([i18n.js](../../../meteo/js/i18n.js#L102-L123)).
   A `languagechange` event re-renders the rest.
 - support.js, auth, and counters: no internationalization.
-- **Reference:** meteo for client attributes; family-portal for server rendering.
+- **Reference:** meteo for client attributes, because markup stays readable and translations reach ARIA labels.
+  family-portal for server rendering, because pages arrive translated before any script runs.
 - **Verdict:** shared contract (catalog format, attribute names); loading is shell-specific.
 
 ---
@@ -532,6 +569,7 @@ Same names do not mean same values:
 - support.js: one file per component, each re-importing `style.css`; plain classes and ID selectors.
   `.disabled` means hidden, not disabled.
 - **Reference:** todos.webapp, for its layering and its rule that components hold no fixed positions.
+  Two exceptions break that rule today: the toast region and the add block.
 - **Verdict:** shared contract.
 
 ### JavaScript Components and State
@@ -540,7 +578,7 @@ Same names do not mean same values:
 - meteo: an element registry, `CustomEvent` signals, and pure forecast logic.
 - support.js: class components on `Component`, built from template strings with `innerHTML`, and no ARIA.
   auth vendors pre-v2 copies; counters imports support.js through an import map.
-- **Reference:** todos.webapp `src/js/ui/` modules.
+- **Reference:** todos.webapp `src/js/ui/` modules, because they are DOM-only, framework-free, and injectable for tests.
 - **Verdict:** shared component library, consumed as a pinned package, not copied.
 
 ### Documentation, Galleries, and Tests
@@ -558,37 +596,43 @@ Same names do not mean same values:
 ---
 
 ## Sharing Verdicts
-| Pattern                      | Reference implementation       | Verdict                                |
-| :--------------------------- | :----------------------------- | :------------------------------------- |
-| Token tiers and theming      | todos.webapp                   | shared contract                        |
-| Token names                  | todos.webapp and family-portal | shared contract                        |
-| Palette and fonts            | each app                       | look-specific                          |
-| Contrast and raw-color tests | todos.webapp, family-portal    | shared contract                        |
-| Icons                        | todos.webapp                   | shared component; glyphs look-specific |
-| Focus and touch targets      | todos.webapp                   | shared contract                        |
-| Buttons                      | todos.webapp                   | shared component                       |
-| Fields and validation        | todos.webapp                   | shared component                       |
-| Chips and segmented controls | todos.webapp                   | shared component                       |
-| Switch                       | counters                       | shared component, to be built          |
-| Cards and tiles              | family-portal                  | shared component                       |
-| Task rows and forecast chart | todos.webapp, meteo            | app-local                              |
-| Delete, undo, and bin        | todos.webapp                   | shared contract                        |
-| Empty states                 | todos.webapp                   | shared component                       |
-| Loading and skeletons        | none                           | open gap                               |
-| Toasts and banners           | todos.webapp                   | shared component                       |
-| Menus and popovers           | todos.webapp                   | shared component                       |
-| Tooltips                     | meteo                          | shared component                       |
-| Dialogs and confirmations    | todos.webapp                   | shared component                       |
-| Avatars                      | family-portal                  | shared component                       |
-| App shell                    | todos.webapp                   | shell-specific                         |
-| Site shell                   | family-portal                  | shell-specific                         |
-| Routing                      | todos.webapp, family-portal    | shell-specific                         |
-| Service worker update flow   | todos.webapp                   | shared contract                        |
-| Theme switch                 | todos.webapp                   | shared contract                        |
-| Seasons and accents          | family-portal, meteo           | look-specific                          |
-| Internationalization         | meteo, family-portal           | shared contract                        |
-| CSS layering and naming      | todos.webapp                   | shared contract                        |
-| Behavior modules             | todos.webapp                   | shared component                       |
+| Pattern                                      | Reference implementation       | Verdict                                    |
+| :------------------------------------------- | :----------------------------- | :----------------------------------------- |
+| Token tiers and theming                      | todos.webapp                   | shared contract                            |
+| Token names                                  | todos.webapp and family-portal | shared contract                            |
+| Spacing, radius, and motion scales           | todos.webapp, family-portal    | shared contract; values look-specific      |
+| Palette and fonts                            | each app                       | look-specific                              |
+| Contrast and raw-color tests                 | todos.webapp, family-portal    | shared contract                            |
+| Icons                                        | todos.webapp                   | shared component; glyphs look-specific     |
+| Focus and touch targets                      | todos.webapp                   | shared contract                            |
+| Buttons                                      | todos.webapp                   | shared component                           |
+| Fields and validation                        | todos.webapp                   | shared component                           |
+| Chips and segmented controls                 | todos.webapp                   | shared component                           |
+| Switch                                       | none; counters offers a visual | shared component, needs a design           |
+| Cards and tiles                              | family-portal                  | shared component                           |
+| Task rows and forecast chart                 | todos.webapp, meteo            | app-local                                  |
+| Delete, undo, and bin                        | todos.webapp                   | shared contract                            |
+| Empty states                                 | todos.webapp                   | shared component                           |
+| Loading and skeletons                        | none                           | shared component, needs a design           |
+| Toasts and banners                           | todos.webapp                   | shared component                           |
+| Menus and popovers                           | todos.webapp                   | shared component                           |
+| Tooltips                                     | meteo, provisionally           | shared component                           |
+| Collapsibles                                 | todos.webapp                   | shared component                           |
+| Dialogs and confirmations                    | todos.webapp                   | shared component                           |
+| Avatars                                      | family-portal                  | shared component                           |
+| Account menu                                 | todos.webapp                   | shared component; placement shell-specific |
+| App shell                                    | todos.webapp                   | shell-specific                             |
+| Site shell                                   | family-portal                  | shell-specific                             |
+| Routing                                      | todos.webapp, family-portal    | shell-specific                             |
+| Responsive breakpoints and container queries | todos.webapp                   | shared contract; layouts shell-specific    |
+| Service worker update flow                   | todos.webapp                   | shared contract                            |
+| Offline page and install                     | family-portal, meteo           | shared contract; caching app-local         |
+| Theme switch                                 | todos.webapp                   | shared contract                            |
+| Seasons and accents                          | family-portal, meteo           | look-specific                              |
+| Internationalization                         | meteo, family-portal           | shared contract                            |
+| CSS layering and naming                      | todos.webapp                   | shared contract                            |
+| Behavior modules                             | todos.webapp                   | shared component                           |
+| Galleries and design checks                  | todos.webapp, family-portal    | shared contract; tools shared component    |
 
 ---
 
@@ -633,7 +677,8 @@ Recorded errors and limits:
 - Should todos.webapp and family-portal converge on one token value set, or share only names and mechanics?
 - Which radius naming wins, given the one-step value shift between the two systems?
 - Does the shared system ship behavior modules as a package, and how do server-rendered pages load them?
-- How is the shared system consumed without a build step: a pinned URL, a package with an import map, or a copy script?
+- How do apps consume the shared system without a build step?
+  Options: a pinned URL, a package with an import map, or a copy script.
 - Should family-portal adopt the external sprite, given that its Java widgets assume an in-page symbol block?
 - Does the shared system own a site shell for family-portal and an app shell for todos.webapp, or neither?
 - What loading pattern fills the gap: skeletons, `aria-busy`, or a status line like meteo's?
