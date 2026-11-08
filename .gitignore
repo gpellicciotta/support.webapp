@@ -1,0 +1,21 @@
+.plan/
+/PLAN.md
+/plan.code-workspace
+
+# Ignore installed dependencies
+node_modules/
+
+# Ignore task worktrees
+work/
+
+# Ignore env files
+**/*.env
+
+# Ignore Python caches
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+
+# Ignore Playwright output
+test-results/
+playwright-report/
