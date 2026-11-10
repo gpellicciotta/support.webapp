@@ -1,0 +1,830 @@
+[
+  {
+    "name": "todos-gallery",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8761/demo/visual-style-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-gallery-light-390.png"
+  },
+  {
+    "name": "todos-gallery",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8761/demo/visual-style-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-gallery-light-1440.png"
+  },
+  {
+    "name": "todos-gallery",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8761/demo/visual-style-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-gallery-dark-390.png"
+  },
+  {
+    "name": "todos-gallery",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8761/demo/visual-style-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-gallery-dark-1440.png"
+  },
+  {
+    "name": "todos-main",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8761/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-main-light-390.png"
+  },
+  {
+    "name": "todos-main",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8761/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-main-light-1440.png"
+  },
+  {
+    "name": "todos-main",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8761/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-main-dark-390.png"
+  },
+  {
+    "name": "todos-main",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8761/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-main-dark-1440.png"
+  },
+  {
+    "name": "meteo-main",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8762/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-main-light-390.png"
+  },
+  {
+    "name": "meteo-main",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8762/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-main-light-1440.png"
+  },
+  {
+    "name": "meteo-main",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8762/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-main-dark-390.png"
+  },
+  {
+    "name": "meteo-main",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8762/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-main-dark-1440.png"
+  },
+  {
+    "name": "family-portal-gallery",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8763/demo/visual-style-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-gallery-light-390.png"
+  },
+  {
+    "name": "family-portal-gallery",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8763/demo/visual-style-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-gallery-light-1440.png"
+  },
+  {
+    "name": "family-portal-gallery",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8763/demo/visual-style-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-gallery-dark-390.png"
+  },
+  {
+    "name": "family-portal-gallery",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8763/demo/visual-style-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-gallery-dark-1440.png"
+  },
+  {
+    "name": "family-portal-portal-mockup",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8763/demo/portal-mockup.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-portal-mockup-light-390.png"
+  },
+  {
+    "name": "family-portal-portal-mockup",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8763/demo/portal-mockup.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-portal-mockup-light-1440.png"
+  },
+  {
+    "name": "family-portal-portal-mockup",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8763/demo/portal-mockup.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-portal-mockup-dark-390.png"
+  },
+  {
+    "name": "family-portal-portal-mockup",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8763/demo/portal-mockup.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-portal-mockup-dark-1440.png"
+  },
+  {
+    "name": "meteo-about",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8762/?view=about",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-about-light-390.png"
+  },
+  {
+    "name": "meteo-about",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8762/?view=about",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-about-light-1440.png"
+  },
+  {
+    "name": "meteo-about",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8762/?view=about",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-about-dark-390.png"
+  },
+  {
+    "name": "meteo-about",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8762/?view=about",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-about-dark-1440.png"
+  },
+  {
+    "name": "meteo-settings",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8762/?config=1",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-settings-light-390.png"
+  },
+  {
+    "name": "meteo-settings",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8762/?config=1",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-settings-light-1440.png"
+  },
+  {
+    "name": "meteo-settings",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8762/?config=1",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-settings-dark-390.png"
+  },
+  {
+    "name": "meteo-settings",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8762/?config=1",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-settings-dark-1440.png"
+  },
+  {
+    "name": "todos-main-populated",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8761/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-main-populated-light-390.png"
+  },
+  {
+    "name": "todos-main-populated",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8761/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-main-populated-light-1440.png"
+  },
+  {
+    "name": "todos-main-populated",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8761/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-main-populated-dark-390.png"
+  },
+  {
+    "name": "todos-main-populated",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8761/",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "todos-main-populated-dark-1440.png"
+  },
+  {
+    "name": "family-portal-landing",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8764/",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "401 http://127.0.0.1:8764/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-landing-light-390.png"
+  },
+  {
+    "name": "family-portal-landing",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8764/",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "401 http://127.0.0.1:8764/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-landing-light-1440.png"
+  },
+  {
+    "name": "family-portal-landing",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8764/",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "401 http://127.0.0.1:8764/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-landing-dark-390.png"
+  },
+  {
+    "name": "family-portal-landing",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8764/",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "401 http://127.0.0.1:8764/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-landing-dark-1440.png"
+  },
+  {
+    "name": "family-portal-offline",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8764/offline.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-offline-light-390.png"
+  },
+  {
+    "name": "family-portal-offline",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8764/offline.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-offline-light-1440.png"
+  },
+  {
+    "name": "family-portal-offline",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8764/offline.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-offline-dark-390.png"
+  },
+  {
+    "name": "family-portal-offline",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8764/offline.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "family-portal-offline-dark-1440.png"
+  },
+  {
+    "name": "meteo-forecast",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8762/?location=Brussels",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-forecast-light-390.png"
+  },
+  {
+    "name": "meteo-forecast",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8762/?location=Brussels",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-forecast-light-1440.png"
+  },
+  {
+    "name": "meteo-forecast",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8762/?location=Brussels",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-forecast-dark-390.png"
+  },
+  {
+    "name": "meteo-forecast",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8762/?location=Brussels",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "meteo-forecast-dark-1440.png"
+  },
+  {
+    "name": "auth-main",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8765/index.html",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "404 http://127.0.0.1:8765/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "auth-main-light-390.png"
+  },
+  {
+    "name": "auth-main",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8765/index.html",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "404 http://127.0.0.1:8765/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "auth-main-light-1440.png"
+  },
+  {
+    "name": "auth-main",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8765/index.html",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "404 http://127.0.0.1:8765/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "auth-main-dark-390.png"
+  },
+  {
+    "name": "auth-main",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8765/index.html",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "404 http://127.0.0.1:8765/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "auth-main-dark-1440.png"
+  },
+  {
+    "name": "auth-dashboard-harness",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8765/demo/dashboard-view-harness.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "auth-dashboard-harness-light-390.png"
+  },
+  {
+    "name": "auth-dashboard-harness",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8765/demo/dashboard-view-harness.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "auth-dashboard-harness-light-1440.png"
+  },
+  {
+    "name": "auth-dashboard-harness",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8765/demo/dashboard-view-harness.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "auth-dashboard-harness-dark-390.png"
+  },
+  {
+    "name": "auth-dashboard-harness",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8765/demo/dashboard-view-harness.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "auth-dashboard-harness-dark-1440.png"
+  },
+  {
+    "name": "counters-gallery",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8766/demo/design-system-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "counters-gallery-light-390.png"
+  },
+  {
+    "name": "counters-gallery",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8766/demo/design-system-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "counters-gallery-light-1440.png"
+  },
+  {
+    "name": "counters-gallery",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8766/demo/design-system-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "counters-gallery-dark-390.png"
+  },
+  {
+    "name": "counters-gallery",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8766/demo/design-system-gallery.html",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "counters-gallery-dark-1440.png"
+  },
+  {
+    "name": "counters-main",
+    "scheme": "light",
+    "width": 390,
+    "url": "http://127.0.0.1:8766/",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "404 http://127.0.0.1:8766/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "counters-main-light-390.png"
+  },
+  {
+    "name": "counters-main",
+    "scheme": "light",
+    "width": 1440,
+    "url": "http://127.0.0.1:8766/",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "404 http://127.0.0.1:8766/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "counters-main-light-1440.png"
+  },
+  {
+    "name": "counters-main",
+    "scheme": "dark",
+    "width": 390,
+    "url": "http://127.0.0.1:8766/",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "404 http://127.0.0.1:8766/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "counters-main-dark-390.png"
+  },
+  {
+    "name": "counters-main",
+    "scheme": "dark",
+    "width": 1440,
+    "url": "http://127.0.0.1:8766/",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": [
+      "404 http://127.0.0.1:8766/api/auth-token"
+    ],
+    "status": 200,
+    "horizontalOverflow": 0,
+    "file": "counters-main-dark-1440.png"
+  }
+]
