@@ -1,7 +1,7 @@
 ---
 id: T0002
 owner: ~
-needs: [T0001]
+needs: []
 branch: —
 worktree: —
 status: ready
@@ -24,12 +24,11 @@ See [technical-spec.md](T0002-plan-the-design-system-from-the-comparison-archite
 ## Task Execution Steps
 - [ ] **[Read]**      Read the T0001 comparison, requirements.md, and the ui-guidelines.
 - [ ] **[Decide]**    Draft an ADR per decision area, each with options, trade-offs, a recommendation, and evidence links.
-- [ ] **[Preview]**   Present the draft ADRs to the user and record every choice as Decided.
 - [ ] **[Doc]**       Write the roadmap with phases, adoption order, and a lossless-extraction proof per adopter.
 - [ ] **[Doc]**       Update requirements.md, index.md, and CHANGELOG.md to match the decisions.
 - [ ] **[Doc]**       Create the first-phase tasks in PLAN.md, and later phases in the Backlog section.
 - [ ] **[Verify]**    Lint the changed markdown files and run plan tasks validate on every task.
-- [ ] **[Review]**    Request human review of the plan, then add the approved sibling backlog tasks.
+- [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-08] **[Doc]**
