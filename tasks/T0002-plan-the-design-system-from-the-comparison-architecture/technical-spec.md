@@ -123,4 +123,4 @@ Size note: Documentation-only planning; one ADR per decision area keeps each dec
 - Unit test: none (documentation-only task without code)
 - Integration test: none (documentation-only task without code)
 
-Completion check: `python ../dev-guidelines/scripts/lint-markdown.py check docs CHANGELOG.md`
+Completion check: `lint-markdown check docs CHANGELOG.md`, from support.python v2.0.0 or later
