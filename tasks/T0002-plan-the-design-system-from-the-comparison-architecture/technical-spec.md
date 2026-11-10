@@ -18,6 +18,32 @@ Decision areas, roadmap contents, and task creation rules for the design system 
 
 ---
 
+## Decided on the T0001 Open Questions
+Decided with the user on 2026-11-10; each ADR records these choices and their rejected options.
+- **[Decided]** Token values: one shared base for space, motion, layers, and widths.
+  Each look overrides only palette, fonts, radii, and type steps.
+- **[Decided]** Radius naming: components use role tokens such as `--radius-control` and `--radius-card`.
+  Each look maps the roles to its own scale steps.
+- **[Decided]** Consumption: a versioned package, copied into each web root by a script.
+  A check fails when the copy drifts from the pinned release.
+- **[Decided]** Behavior modules: CSS, sprite, and JavaScript ship together in that package as ES modules.
+- **[Decided]** Icons: family-portal templates, Java widgets, and JavaScript helpers move to the shared external sprite.
+- **[Decided]** Shells: one shell, documented as markup and CSS, with no shared router or shell script.
+  Optional areas: top bar, navigation, banners, action bar, side panel, and overlay layer.
+  Options: scroll owner (main column or page), navigation (sidebar, bottom bar, menu, breadcrumb, none), and width.
+  todos.webapp, counters, meteo, and family-portal all fit it with different options.
+- **[Decided]** Loading: `aria-busy` plus a polite status line as the baseline.
+  Skeletons only for slow lists, with reduced-motion handling.
+- **[Decided]** Popovers: the native `popover` attribute, with the todos.webapp JavaScript anchoring for placement.
+- **[Decided]** Internationalization: client-side `data-i18n` attributes, as in meteo.
+  Open for the ADR: family-portal's server-filled `{{t:key}}` pages migrate or stay an app-local exception.
+- **[Decided]** meteo adopts last and drops its quiz leftovers during that migration.
+- **[Decided]** Auth and counters move fully onto the system at their redesign; support.js CSS then retires.
+- **[Decided]** Verification: ship the todos.webapp static token test and a browser verifier based on family-portal's.
+  Pixel-diff visual regression is out of scope.
+
+---
+
 ## Decision Areas
 Write one ADR per area as `docs/adrs/ADR-{{nnnn}}-{{slug}}.md`.
 Each ADR lists options, trade-offs, the recommendation, and links to comparison evidence.
@@ -37,9 +63,9 @@ Components and patterns:
 - The JavaScript approach; candidate: light DOM, native elements, progressive enhancement.
 - When a component becomes shared; candidate: once a second app needs it.
 
-App shells:
-- Which shells to offer; candidates: single-page app with sidebar, multi-page site, single-screen tool.
-- Their markup, responsive behavior, and the slots an app fills.
+App shell:
+- One shell with optional areas and options, as decided above.
+- Its markup, responsive behavior, both scroll modes, and the areas and options each adopter uses.
 
 Distribution and versioning:
 - Package format and registry.
@@ -53,7 +79,7 @@ Generator:
 
 Documentation and verification:
 - One gallery with a look and theme switcher, and the structure of the shared style guide.
-- Visual regression, contrast, and raw color checks in this repository.
+- Contrast, raw color, target size, and focus checks in this repository, without pixel diffs.
 - A conformance check that each app runs against its pinned version.
 
 Repository layout:
