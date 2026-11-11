@@ -270,3 +270,84 @@ Consequences to carry into round 2:
 - ADR-0005: the CLI list shrinks to `vendor` and `check`; Node.js is still needed to run `vendor`.
 - Tasks T0014 (vendor and check commands) and T0022 (the create command and starter template) change scope.
 - The generator's test stays the same: create an app per look in a temporary folder and run its checks.
+
+## F12. ADR-0001: how composability and modularity are ensured
+- Source: user question.
+- Severity: should-fix. The mechanisms exist, but the ADRs never state the module rules.
+
+What exists today:
+- Ownership: three token tiers with one owner each; components reference only semantic tokens.
+- Isolation: component tokens are private (`--_{component}-`) and "outside the contract".
+- Separation: the base and a look never overlap, and the token test fails a look that redefines a base token.
+- Layout: components hold no fixed or sticky positions; only the shell sets them (ADR-0003, ADR-0004).
+- Files: one partial per component, all imported by `style.css` (ADR-0008).
+- JavaScript: one plain ES module per behavior, each a function returning a controller, with an injected `document` (ADR-0003).
+
+What is not stated:
+- Whether a component may use another component's classes or private tokens, such as a dialog styling its buttons.
+- Whether any check enforces that. ADR-0007 scans only the app's own stylesheets for private tokens, not the package's partials.
+- Whether an app can load a subset of components. `style.css` imports everything, so the package ships and loads all of them.
+- Whether JavaScript modules may import each other. ADR-0003 only mentions a shared `focus.js` through the T0009 task.
+
+Proposed change, for round 2:
+- State the dependency rules: which layers may depend on which, and that a component never reads another component's `--_` tokens.
+- Add a token-test rule that enforces the private-token rule inside the package.
+- Say whether partial loading is supported or deliberately not.
+
+## F13. ADR-0001: where group, role, and theme names are defined
+- Source: user questions.
+- Severity: must-fix. The normative lists exist only as prose in one ADR.
+
+Findings by name type:
+- Groups: the "Contract groups" list in ADR-0001 is called an "initial list" for the extraction tasks to confirm.
+  - The word "group" has two meanings: the headings of that list, such as Grounds or Text, and `{group}` in the rule `--{group}-{role}`, which is the name prefix, such as `color` or `space`.
+- Roles: the role names are the token names in the same list, such as `primary`, `danger`, and `surface`.
+  - No rule says what makes a valid role, which variant and state words exist (`hover`, `active`, `disabled`, `-bg`, `on-`), or who may add one.
+  - The only process is in "Filling a look's gaps": the extraction task adds a token and the user approves new hues.
+- Themes: ADR-0001 Theming names `light` and `dark` through `data-theme`; ADR-0007 adds `system` for the gallery switcher.
+  Nothing defines the set once.
+- No machine-readable contract exists in the ADR-0008 layout, yet the token test must check that "every required contract token is defined".
+  That test, the conformance check, the docs, and the generator all need the same list.
+
+Proposed change, for round 2:
+- Add one machine-readable contract file, for example `src/css/contract.json`, listing the required tokens, their groups, and the themes.
+  Generate or verify the style guide's token tables from it.
+- Define the vocabulary in one place: group, role, variant, state, theme, look, and look variant.
+- Split "group" into "category" for the list headings and "group" for the name prefix, or pick one meaning.
+- Add the contract file to ADR-0008 and to the token test of ADR-0007.
+
+## F14. ADRs use single-brace placeholders; the project standard is mustache style
+- Source: user question.
+- Severity: should-fix.
+
+Facts:
+- ADR-0001 writes `--_{component}-`, `--{group}-{role}[-{variant}][-{state}]`, and `--color-on-{role}`.
+- ADR-0002 writes `src/looks/{look}/`.
+- ADR-0005, ADR-0006, and ADR-0008 use the standard form, such as `{{look}}` and `{{web-root}}`.
+- The standard is mustache style with kebab-case names, as the user's guidelines require.
+- Claude found no reason for the exception. The braces may have seemed natural in CSS, but the style mixes inside one set of documents.
+
+Proposed change, for round 2:
+- Rewrite every placeholder to `{{name}}`, for example `--{{group}}-{{role}}`, and search all ADRs, the roadmap, and the tasks for leftovers.
+- Do the same for the placeholders that the generator and the template will use.
+
+## F15. Where the CSS naming style is defined
+- Source: user question.
+- Severity: should-fix. The conventions are scattered and incomplete.
+
+Where each convention lives today:
+- Token names: the "Naming rules" of ADR-0001.
+- Private component tokens, `--_{{component}}-`: the "Three tiers" bullet of ADR-0001, inline, with no rule on why the underscore.
+- Class names: ADR-0003, as BEM (block, `__element`, `--modifier`) with no ID selectors.
+- State: native states and ARIA attributes, plus the `.is-hover`, `.is-active`, and `.is-focus` classes for gallery specimens only (ADR-0003).
+- Look and theme attributes: `data-theme` in ADR-0001, `data-season` in ADR-0002, and no stated name for the accent mechanism.
+- The dev-guidelines UI guidelines do not define class naming.
+
+Not defined anywhere:
+- Prefixes for classes: whether components carry a namespace, which matters when an app mixes its own BEM classes with the package's.
+- Naming of JavaScript modules, functions, events, icon ids, and files beyond what ADR-0008 shows.
+
+Proposed change, for round 2:
+- Add a "Naming conventions" section to `docs/specs/visual-style-guide.md`, or a separate `docs/specs/naming.md`, covering tokens, private tokens, classes, state, data attributes, icon ids, modules, and files.
+- Link to it from ADR-0001 and ADR-0003 instead of repeating the rules.
+- Decide the class prefix question explicitly.
