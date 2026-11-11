@@ -3,6 +3,7 @@ Defines the folder structure of this repository for tokens, looks, components, s
 
 - Status: Proposed, revised after the rejected review round 1 of the planning task.
 - Date: 2026-11-11.
+- **[Decided]** with the user on 2026-11-12: no copy step to `dist/` until a build step needs one.
 
 ---
 
@@ -86,17 +87,18 @@ Package structure:
 - One repository per look: rejected, because looks and components could drift apart in version.
 
 Build step:
-- **[Chosen]** for now: no build step; `src/` is the package.
+- **[Decided]** with the user on 2026-11-12: no build step; `src/` is the package.
+  The copy step to `dist/` comes only once a build step needs it.
 - A build step that copies `src/` to `dist/`: changes nothing for apps, since files, paths, and bytes stay identical.
   It costs a build script, and the gallery and tests would have to serve `dist/`.
 - A minify-and-bundle step: fewer requests and smaller files on a first visit.
   It removes private partials, so it stays non-breaking only through the public entry points of ADR-0005.
-- **[Feedback Needed]** Add the copy step now, or only when a measurement asks for bundling?
-  Recommendation: wait, because the entry-point contract already keeps a later bundle non-breaking.
+- Adding the copy step now, as insurance for a later bundle: rejected by the user on 2026-11-12.
+  The entry-point contract already keeps a later bundle non-breaking.
 
 Look folder names:
 - **[Chosen]** Character names such as `neutral`, `warm`, and `bright`: several apps can share a look.
-  The names themselves are proposals awaiting the user in [ADR-0002](ADR-0002-looks.md).
+  The user decided the names on 2026-11-12 in [ADR-0002](ADR-0002-looks.md).
 - App names such as `todos`: rejected by the user on 2026-11-11, because a look must not belong to one app.
 
 ---

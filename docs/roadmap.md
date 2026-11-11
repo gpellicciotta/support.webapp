@@ -4,7 +4,6 @@ The decisions behind each phase are in the [ADRs](adrs/ADR-0001-layer-model-and-
 
 - Status: Proposed, revised after the rejected review round 1 of the planning task.
 - Date: 2026-11-11.
-- Look names `neutral`, `warm`, and `bright` are proposals: **[Feedback Needed]** in [ADR-0002](adrs/ADR-0002-looks.md).
 - Components follow the catalog in [components.md](specs/components.md) and the names in [naming.md](specs/naming.md).
 
 ---
@@ -40,7 +39,6 @@ Work in this repository, in the Next Milestone section of [PLAN.md](../PLAN.md):
 - T0026: the collapsible and the account menu.
 - T0027: the theme switch and service worker update modules, and the shared pattern docs.
 - T0028: the floating action button in the overlay layer, which todos.webapp needs for a lossless switch.
-  It sits in the Backlog section for now; **[Feedback Needed]** on moving it into the Next Milestone.
 
 Work in todos.webapp, as a backlog task created there after approval:
 - Vendor the first release, apply the renames of ADR-0001 and naming.md, and move the shell onto `shell.css`.
@@ -58,7 +56,7 @@ Entry criteria:
 - Phase 1 is complete.
 
 Work in this repository, in the Backlog section:
-- T0017: the `warm` look from family-portal with seasons, its glyph set, and the look template.
+- T0017: the `warm` look from family-portal with its seasons as `data-accent` values, its glyph set, and the look template.
 - T0018: cards, tiles, and avatars.
 - T0019: an accessible switch.
 - T0020: the loading pattern.
@@ -75,6 +73,7 @@ Work in family-portal, as backlog tasks created there after approval:
 - Render the top bar from one server template partial in the shell's markup.
 - Move `{{t:key}}` templates to `data-i18n` attributes, and measure the delay before translation.
 - Replace the box-shadow focus ring with the shared outline.
+- Rename `data-season` to `data-accent`, keeping the season names as values.
 
 Exit criteria:
 - Both looks pass the token test and the browser verifier.
@@ -108,10 +107,11 @@ Work in meteo, as backlog tasks created there after approval:
 - Vendor the release and move the three screens into the shell with `app--scroll-page` and `app--width-narrow`.
 - Measure meteo's main column against `--width-narrow` first, and propose a smaller width if needed.
 - Gain reduced-motion handling and visible focus rings through the shared components.
+- Rename `data-theme-color` to `data-accent`, and keep white text on yellow through one listed override.
 
 Exit criteria:
 - meteo passes the conformance check and the lossless switch proof, apart from listed deliberate changes.
-- The listed changes include dark text on the yellow accent, if the user confirms that reversal.
+- meteo's style guide lists its override of `--color-on-primary` on the yellow accent.
 
 ---
 

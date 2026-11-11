@@ -5,6 +5,8 @@ Defines the token tiers, the contract file, the shared names and vocabulary, val
 - Date: 2026-11-11.
 - **[Decided]** with the user on 2026-11-10: shared base values and radius role names.
 - **[Decided]** with the user on 2026-11-11: one kebab-case key per component, as [naming.md](../specs/naming.md) defines.
+- **[Decided]** with the user on 2026-11-12: looks own shape details.
+- **[Decided]** with the user on 2026-11-12: every look variant uses one attribute, `data-accent`.
 
 ---
 
@@ -25,11 +27,12 @@ Defines the token tiers, the contract file, the shared names and vocabulary, val
 - Group: the first segment of a token name, such as `color`, `space`, or `radius`.
 - Category: a heading that gathers related contract tokens for people, such as Grounds or Text.
 - Role: what a token is for, such as `primary`, `danger`, or `surface`; never what it looks like.
+  "Roles" below lists them.
 - Variant: a sub-role, such as `-bg` or `-strong`.
 - State: an interaction state, one of `hover`, `active`, `disabled`, or `selected`.
 - Theme: `light`, `dark`, or `system`; `system` means no `data-theme` attribute and follows the operating system.
 - Look: one palette, font, and shape set, as [ADR-0002](ADR-0002-looks.md) defines.
-- Look variant: an attribute that redefines some of a look's semantic tokens, such as `data-season`.
+- Look variant: an attribute that redefines some of a look's semantic tokens, always `data-accent` ([ADR-0002](ADR-0002-looks.md)).
 
 ### Three tiers, each with one owner
 - Primitive tier: raw values such as palette hues, font stacks, and the radius scale.
@@ -60,11 +63,10 @@ Shape of the file, as a sketch for the extraction task:
 ```
 
 ### Value ownership
-- The shared base in `base.css` sets space, motion, layers, and layout widths once for every look.
+- The shared base in `base.css` sets space, motion, layers, layout widths, and `--target-min` once for every look.
 - Each look sets palette roles, font roles, radius roles, and type steps.
-- **[Feedback Needed]** Each look also sets shape details: border widths, elevation, focus ring width, control height, and icon sizes.
-  These differ between the two systems today, and the decision of 2026-11-10 did not cover them.
-  Recommendation: let looks own them, since they are part of what makes a look recognizable.
+- **[Decided]** Each look also sets shape details: border widths, elevation, focus ring width and offsets, control height, and icon sizes.
+  They differ between the two systems today, and they are part of what makes a look recognizable.
 - The two sets never overlap: a look that redefines a base token fails the token test.
 
 ### Contract categories
@@ -76,7 +78,7 @@ An initial list, which the extraction tasks confirm against real use and record 
 - Danger: `--color-danger`, `--color-danger-hover`, `--color-danger-active`, `--color-danger-bg`, `--color-on-danger`.
 - Success and warning: `--color-success` and `--color-warning`, each with a `-bg` and an `--color-on-` token.
 - Overlay: `--color-backdrop` and `--color-shadow`.
-- Optional per look: `--color-accent`, `--color-inverse`, and four tones with matching `--color-on-tone-` tokens.
+- Optional per look: `--color-accent`, `--color-accent-bg`, `--color-inverse`, and four tones with matching `--color-on-tone-` tokens.
 - Fonts: `--font-body`, `--font-heading`, `--font-mono`, and `--weight-regular` to `--weight-bold`.
 - Type: `--text-xs`, `-sm`, `-base`, `-md`, `-lg`, `-xl`, `-2xl`, `-3xl`, three `--leading-` and two `--tracking-` steps.
 - Space: `--space-1` to `--space-12` with family-portal's values.
@@ -88,6 +90,42 @@ An initial list, which the extraction tasks confirm against real use and record 
 - Sizes: `--target-min` 2.75rem, `--control-height`, `--icon-sm`, `--icon-md`, `--icon-lg`, `--icon-stroke`.
 - Widths, owned by the base with family-portal's values: `--width-reading` 47.5rem, `--width-narrow` 55rem, `--width-content` 75rem.
   Also `--width-main`, `--width-sidebar`, `--width-side-panel`, `--width-menu`, and `--gutter`.
+
+### Roles
+Groups come in two kinds:
+- Role groups name what a token is for; the segment after the group is a role.
+- Scale groups name a step on a scale; the segment after the group is a step, never a role.
+
+Roles of the role groups, from the categories above:
+
+| Group        | Roles                                                                                                                                                          |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `color`      | `bg`, `surface`, `text`, `link`, `border`, `focus`, `primary`, `danger`, `success`, `warning`, `accent`, `inverse`, `tone-1` to `tone-4`, `backdrop`, `shadow` |
+| `font`       | `body`, `heading`, `mono`                                                                                                                                      |
+| `radius`     | `control`, `button`, `chip`, `card`, `dialog`, `round`                                                                                                         |
+| `layer`      | `base`, `sticky`, `float`, `popover`, `dialog`, `toast`                                                                                                        |
+| `width`      | `reading`, `narrow`, `content`, `main`, `sidebar`, `side-panel`, `menu`                                                                                        |
+| `border`     | `width`                                                                                                                                                        |
+| `focus-ring` | `width`, `offset`                                                                                                                                              |
+| `offset`     | `press`, `lift`                                                                                                                                                |
+| `ease`       | `standard`                                                                                                                                                     |
+| `target`     | `min`                                                                                                                                                          |
+| `control`    | `height`                                                                                                                                                       |
+
+Steps of the scale groups:
+- `space`: `1` to `12`; `text`: `xs` to `3xl`; `weight`: `regular` to `bold`; `elevation`: `1` and `2`.
+- `leading` and `tracking`: steps the extraction task names.
+- `icon`: `sm`, `md`, `lg`, plus the role `stroke`; `duration`: `fast`, `base`, plus the role `spin`.
+
+Variants and states in use:
+- Variants: `sunken` on `surface`, `muted` and `disabled` on `text`, `strong` on `border`, `bg` on filled roles, `inset` on `offset`.
+- States: `hover` and `active` on `primary`, `danger`, and `link`.
+- Text on a filled role adds `on-` before the role: `on-primary`, `on-danger`, `on-success`, `on-warning`, `on-tone-1` to `-4`.
+
+**[Feedback Needed]** Three todos.webapp grounds put a state where the role belongs:
+- `--color-hover-bg`, `--color-active-bg`, and `--color-selected-bg` tint neutral items, such as nav items, on hover, press, and `aria-current`.
+- Recommendation: rename them `--color-surface-hover`, `--color-surface-active`, and `--color-surface-selected`.
+  The names then follow `--{{group}}-{{role}}-{{state}}`, and the todos.webapp adoption renames them mechanically.
 
 ### Naming rules
 - Token names follow `--{{group}}-{{role}}[-{{variant}}][-{{state}}]`, such as `--color-primary-hover`.
@@ -137,6 +175,10 @@ Value sharing:
 - **[Chosen]** Shared base plus look overrides: space and motion live in one place, and looks stay distinct.
 - One value set for every look: rejected, because both adopters would lose their look.
 - Shared names only: rejected, because space and motion would drift for no gain.
+
+Shape details:
+- **[Decided]** with the user on 2026-11-12: each look owns border widths, elevation, focus ring, control height, and icon sizes.
+- The shared base owns them: rejected, because both adopters would lose part of their look.
 
 Radius naming:
 - **[Chosen]** Role tokens: components state their role, and each look maps roles to its own scale.

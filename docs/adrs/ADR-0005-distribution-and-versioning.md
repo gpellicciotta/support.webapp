@@ -6,6 +6,7 @@ Defines the package, its public entry points, how apps vendor it without a build
 - **[Decided]** with the user on 2026-11-10: one versioned package, copied into each web root by a script, with a drift check.
 - **[Decided]** with the user on 2026-11-11: GitHub Packages as the registry.
 - **[Decided]** with the user on 2026-11-11: `check.mjs` stays JavaScript, and the npm `create` subcommand is dropped.
+- **[Decided]** with the user on 2026-11-12: no copy step to `dist/` until a build step needs one.
 
 ---
 
@@ -110,13 +111,14 @@ Package split:
 - Separate CSS and JavaScript packages: rejected, because their versions could drift apart.
 
 Build step:
-- **[Chosen]** for now: ship `src/` as it is, so the gallery serves the exact files that apps vendor.
+- **[Decided]** with the user on 2026-11-12: ship `src/` as it is, so the gallery serves the exact files that apps vendor.
+  The copy step to `dist/` comes only once a build step needs it.
 - A build step that copies `src/` to `dist/`: changes nothing for apps, since files, paths, and bytes stay identical.
   It costs one more script, and the gallery and tests must then serve `dist/`.
 - A later minify-and-bundle step: smaller files and fewer requests on a first visit.
   It stays non-breaking only while the public entry points keep their paths and exports.
-- **[Feedback Needed]** Add the copy step now, as insurance for a later bundle, or only when a measurement asks for bundling?
-  Recommendation: wait, because the entry-point contract above already keeps a later bundle non-breaking.
+- Adding the copy step now, as insurance for a later bundle: rejected by the user on 2026-11-12.
+  The entry-point contract already keeps a later bundle non-breaking.
 
 ---
 

@@ -112,13 +112,12 @@ Modules without a component key hold shared helpers and never style anything:
 ## Global Hooks
 Some attributes belong to the whole page, not to one component:
 
-| Attribute        | Values                           | Set on           | Owner                          |
-| :--------------- | :------------------------------- | :--------------- | :----------------------------- |
-| `data-theme`     | `light`, `dark`; absent = system | root element     | theme switch                   |
-| `data-season`    | the `warm` look's seasons        | root element     | the app, for the `warm` look   |
-| `data-accent`    | `blue`, `yellow`, `red`          | root element     | the app, for the `bright` look |
-| `data-i18n`      | a translation key                | any text element | `i18n.js`                      |
-| `data-i18n-aria` | a translation key                | any element      | `i18n.js`                      |
+| Attribute        | Values                           | Set on           | Owner        |
+| :--------------- | :------------------------------- | :--------------- | :----------- |
+| `data-theme`     | `light`, `dark`; absent = system | root element     | theme switch |
+| `data-accent`    | the look's variant values        | root element     | the app      |
+| `data-i18n`      | a translation key                | any text element | `i18n.js`    |
+| `data-i18n-aria` | a translation key                | any element      | `i18n.js`    |
 
 `data-i18n-tooltip` and `data-i18n-placeholder` follow the same pattern as `data-i18n-aria`.
 
@@ -145,3 +144,6 @@ todos.webapp names that break the rule get the rule's name, plus a deprecated al
 | `anchorPanel` in `popover.js`   | `anchorPanel` in `anchor.js`   | it is shared by several components |
 | `.user-button`                  | `.account-menu__button`        | the key is `account-menu`          |
 | `.app-tile__body`               | `.card__body`                  | the parts belong to the card       |
+
+The variant attribute changes too: family-portal's `data-season` and meteo's `data-theme-color` become `data-accent`.
+[ADR-0002](../adrs/ADR-0002-looks.md) lists the values per look.
