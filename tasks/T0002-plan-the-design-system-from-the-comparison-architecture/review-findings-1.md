@@ -419,7 +419,6 @@ Proposed change, for round 2:
 - Make the gallery sections and the token test iterate over this catalog, so a component cannot ship without a gallery section.
 - Draft of the catalog, written by Claude on 2026-11-11: `component-catalog-draft.md` in this task folder, with the decisions and open questions.
 - Decisions (user, 2026-11-11): badge stays a component; select and textarea join T0008; list and data table, tabs, and progress and spinner are first set; multi-select is first set and needs a design; the floating action button is first set.
-- Draft of the catalog, written by Claude on 2026-11-11: `component-catalog-draft.md` in this task folder, with the decisions and open questions.
 
 ## F19. Components and shells must define their HTML, and one name must link HTML, CSS, and JavaScript
 - Source: user remark, 2026-11-11.
