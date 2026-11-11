@@ -351,3 +351,31 @@ Proposed change, for round 2:
 - Add a "Naming conventions" section to `docs/specs/visual-style-guide.md`, or a separate `docs/specs/naming.md`, covering tokens, private tokens, classes, state, data attributes, icon ids, modules, and files.
 - Link to it from ADR-0001 and ADR-0003 instead of repeating the rules.
 - Decide the class prefix question explicitly.
+
+## F16. ADR-0002: is there a shared icon set?
+- Source: user question.
+- Severity: decision needed. The ADR shares icon names, not drawings, and the reason against a shared set is thin.
+
+Answer:
+- No shared set of drawings. Each look ships its own `icons.svg` sprite.
+- What is shared is a contract: components name icons by id, such as `icon-close`, `icon-more`, `icon-check`, and `icon-undo`, and every look's sprite must provide every id of the core set.
+- The core id list does not exist yet; the icon extraction task T0006 fixes it from the shared components' needs.
+- A look may add glyphs beyond the core set, and an app may add local glyphs in its own sprite.
+- The sprite format, the `.icon` class, and the `spriteIcon` builder are shared (ADR-0003).
+
+Facts from the comparison:
+- todos.webapp has 29 symbols, family-portal 30 ids, and meteo 38 icons, all on a 24-unit grid in `currentColor`.
+- Their stroke widths differ: 2, 1.5 in the header, and 2.2.
+- The support.js lineage (auth, counters) uses Font Awesome, and is out of scope for now.
+
+Gaps and challenges:
+- The only reason against one shared glyph set is that adopters "would have to accept one drawing style".
+  Since all three draw 24-unit stroke icons in `currentColor`, the differences are mostly stroke width, which `--icon-stroke` already tokenizes.
+  One set means each glyph is drawn and maintained once instead of once per look.
+- No check enforces that a look's sprite provides every core id. ADR-0007 lists token checks only.
+- The ADRs do not say where the glyphs come from or under which license; this review did not check the three apps' icon sources.
+
+Proposed change, for round 2:
+- Decide between per-look sprites and one shared set with a per-look stroke token, and record the reasons either way.
+- Add a sprite-completeness check to the token test.
+- Record the origin and license of the glyphs in the style guide.
