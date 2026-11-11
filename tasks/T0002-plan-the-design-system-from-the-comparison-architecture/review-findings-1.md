@@ -145,3 +145,88 @@ Round 2 only records the decision and the rejected options in ADR-0007; no other
 
 Proposed change, for round 2:
 - Record the decision, and list the Python options as rejected in ADR-0007.
+
+## F7. ADR-0006: the rejected options lack real reasons
+- Source: user remark.
+- Severity: should-fix.
+
+Facts:
+- Copier gets one sentence: it adds a tool and template syntax, and updates can conflict.
+- The GitHub template repository gets one clause: no look or shell choices and no placeholders.
+- The chosen option's reason is only "the same model as the sibling templates".
+
+What a full reason would say, for round 2:
+- Copier is a Python tool that fills Jinja placeholders. Its key feature, `copier update`, re-applies later template changes to a generated project, like a merge.
+  - That is exactly what the ADR's Consequences give up: every boilerplate fix becomes a hand-applied backlog task per app.
+  - The ADR should weigh that loss against the cost: a second tool and language next to the Node command line tool, a new syntax, and merge conflicts in apps that edited the boilerplate.
+  - Also state that Copier would have to call the Node `vendor` command after generation.
+- A GitHub template repository copies a fixed set of files with the "Use this template" button.
+  - It cannot take a look, a shell setup, or an app name, so every combination would need its own repository or a manual edit.
+- Options the ADR does not list, suggested by Claude:
+  - No generator, only a documented recipe: copy todos.webapp by hand. Cheapest, but it is how the four diverging shells arose.
+  - A Python `create` in support.python, like template.python: familiar, but the template, `vendor`, and `check.mjs` are Node.
+
+## F8. ADR-0006: the shell flags need explanation
+- Source: user remark.
+- Severity: should-fix. The flags are named but not defined; the meaning lives only in ADR-0004.
+
+Meaning of each flag, for the ADR:
+- `--scroll main`: the window is a fixed frame, like a Swing frame with a scroll pane in the center.
+  The top bar, sidebar, and action bar stay in place, and only the main column scrolls.
+- `--scroll page`: the whole page scrolls like a normal web page, and the top bar and action bar stick to the window edge while it does.
+- `--nav sidebar`: a vertical menu on the left on wide screens.
+- `--nav bottom`: a tab bar at the bottom on narrow screens, like Android's bottom navigation.
+- `--nav menu`: a menu button in the top bar that opens the navigation.
+- `--nav breadcrumb`: a trail like Home > Section > Page in the top bar.
+- `--nav none`: no navigation.
+- `--nav` repeats: a sidebar plus a bottom bar shows one of them at a time, split at 64rem (1024 px at the default font size).
+- `--width`: centers the main column at a width token, `reading` for text, `narrow`, or `content`; without it the column fills the window.
+
+Gaps:
+- ADR-0006 gives no values for `--width` and no default for any flag.
+- The other areas of ADR-0004, which are banners, action bar, side panel, and overlay layer, have no flag.
+  It is unclear whether the generated shell includes them.
+- The numeric widths come from tokens that this review did not check.
+
+Proposed change, for round 2:
+- Add a flag table with values, default, and one line of meaning, linking ADR-0004.
+- Decide whether each optional area gets a flag, or the generated shell always includes all of them.
+- Give the four adopter setups of ADR-0004 as example commands, or as `--preset` names.
+
+## F9. ADR-0006: what "runs `vendor` for the chosen look" means
+- Source: user question.
+- Severity: should-fix. The sentence assumes ADR-0005.
+
+Answer:
+- `vendor` is the ADR-0005 command that copies the design system files into an app, into `{{web-root}}/vendor/design`.
+- `create` first copies the app skeleton from `template/`, which holds the app's own files.
+- It then runs `vendor`, so the new app already holds the design files: the look-neutral files, the chosen look, `manifest.json`, `check.mjs`, and a `design.json` that records the version.
+- The app's `style.css` then imports the vendored look entry.
+- The result is a new app that starts on a pinned, committed copy, with no second command to run.
+- Skeleton and design files come from the same package version, so they always match.
+- A Java analogy: generate the project and resolve its dependencies in one step, except the dependency files are committed.
+
+Proposed change, for round 2:
+- Replace the sentence with the three lines above, and name the target folder `src/vendor/design`.
+
+## F10. ADR-0006: the generated app lacks the standard boilerplate
+- Source: user question.
+- Severity: should-fix.
+
+Listed by the ADR: README, CHANGELOG, LICENSE, AGENTS.md, a documentation index, `package.json`, and a CI workflow.
+
+Not listed, but required or customary under the project-setup guidelines:
+- `CLAUDE.md`, containing only `@AGENTS.md`.
+- `docs/requirements.md` and `docs/devops.md`, which are mandatory documentation files.
+- `scripts/` with `bootstrap-dev-environment.py` and `devops.py`, since a web app is a code project.
+- `.plan/` and `PLAN.md`, created by `plan init`, plus the ignore entries for them.
+- `.gitignore`, and `.editorconfig` as in template.python.
+
+Open design questions:
+- The generator is a Node command, while `devops.py` and the bootstrap script are Python on support.python.
+  The generated `scripts/requirements.txt` must pin support.python, and the template must carry the scripts.
+- Who runs `git init` and `plan init`: `create` itself, or the bootstrap script, as in template.python?
+- LICENSE and the copyright owner need placeholders and flags.
+
+Proposed change, for round 2:
+- Replace the vague "project files" bullet with the full list, and state which command creates the plan store.
