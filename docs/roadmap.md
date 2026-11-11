@@ -4,6 +4,7 @@ The decisions behind each phase are in the [ADRs](adrs/ADR-0001-layer-model-and-
 
 - Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - Date: 2026-11-11.
+- **[Decided]** with the user on 2026-11-12: sibling backlog tasks wait until the system work of their phase is done.
 - Components follow the catalog in [components.md](specs/components.md) and the names in [naming.md](specs/naming.md).
 
 ---
@@ -40,7 +41,7 @@ Work in this repository, in the Next Milestone section of [PLAN.md](../PLAN.md):
 - T0027: the theme switch and service worker update modules, and the shared pattern docs.
 - T0028: the floating action button in the overlay layer, which todos.webapp needs for a lossless switch.
 
-Work in todos.webapp, as a backlog task created there after approval:
+Work in todos.webapp, as a backlog task created there once the phase's tasks in this repository are complete:
 - Vendor the first release, apply the renames of ADR-0001 and naming.md, and move the shell onto `shell.css`.
 - Search for every renamed token afterwards, so no `--space-8` silently shrinks.
 - Keep app-local components, such as task rows, in todos.webapp.
@@ -67,7 +68,7 @@ Work in this repository, in the Backlog section:
 - T0032: the progress bar and spinner.
 - T0033: multi-select with a bulk action bar, designed first.
 
-Work in family-portal, as backlog tasks created there after approval:
+Work in family-portal, as backlog tasks created there once the phase's tasks in this repository are complete:
 - Vendor the release into `webapp/vendor/design/` and move templates and Java widgets to the external sprite.
 - Add Node.js to its CI and devops script, so the conformance check runs there.
 - Render the top bar from one server template partial in the shell's markup.
@@ -102,7 +103,7 @@ Work in this repository:
 - T0023: the `bright` look from meteo with its accent variant and AA contrast on every accent.
 - T0024: the tooltip component, after a screen reader check.
 
-Work in meteo, as backlog tasks created there after approval:
+Work in meteo, as backlog tasks created there once the phase's tasks in this repository are complete:
 - Drop the quiz leftovers: unused icons, classes, and tokens.
 - Vendor the release and move the three screens into the shell with `app--scroll-page` and `app--width-narrow`.
 - Measure meteo's main column against `--width-narrow` first, and propose a smaller width if needed.
@@ -122,7 +123,7 @@ Entry criteria:
 Work in this repository:
 - T0025: the redesign plan for auth and counters, and the sibling tasks it proposes.
 
-Work in auth, counters, and support.js, as backlog tasks created there after approval:
+Work in auth, counters, and support.js, as backlog tasks created there once the phase's tasks in this repository are complete:
 - Re-create both apps on the system, with no support.js stylesheets left.
 - Retire the support.js stylesheets once no app loads them.
 
