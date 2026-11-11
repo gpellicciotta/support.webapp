@@ -12,18 +12,20 @@ See [README.md](README.md), [requirements.md](docs/requirements.md), and [devops
 - Install the tools: see [Setup](docs/devops.md#setup).
 - Run all checks before completing a task:
   ```bash
-  lint-markdown check --offline
+  python scripts/devops.py check
   ```
+- Release from a clean `main`: `python scripts/devops.py release --yes`.
 
 ## Architecture
+- [scripts/](scripts/): the devops script, with its pinned support.python requirement.
 - [docs/adrs/](docs/adrs/): architecture decision records of the design system.
 - [docs/analysis/](docs/analysis/): the UI design comparison of the sibling apps.
 - [docs/roadmap.md](docs/roadmap.md): the adoption roadmap.
 
 ## Project Conventions
 - Follow [dev-guidelines](https://github.com/gpellicciotta/dev-guidelines) v2.0.0.
-- Pin support.python at `v3.1.0` in [devops.md](docs/devops.md#setup).
+- Never check `CHANGELOG.md` with `lint-markdown`; [.lint-markdown.json](.lint-markdown.json) excludes it.
+- Pin support.python at `v3.1.0` in [requirements.txt](scripts/requirements.txt).
 
 ## Boundaries
 - Never add a `scripts/` directory before the tooling task creates it.
-- Never push without the user's consent.

@@ -6,27 +6,30 @@ Development environment, versioning, planning workflow, and operational procedur
 ## Development Environment
 ### Prerequisites
 - Git, with access to the `gpellicciotta/support.webapp` GitHub repository.
-- Python 3.9 or later, to install the tools below.
+- Python 3.15 or later, to install the tools below.
 - The [plan](https://github.com/gpellicciotta/plan) CLI, for tasks and the plan store.
 - [support.python](https://github.com/gpellicciotta/support.python) v3.1.0 or later, which provides `lint-markdown`.
 
-Build and test tooling arrives with the first code task, together with the `scripts/` folder.
+Build and test tooling arrives with the first code task.
 
 ### Setup
 Install the tools, preferably into a virtual environment:
 
 ```bash
-python -m pip install "git+https://github.com/gpellicciotta/plan.git" "git+https://github.com/gpellicciotta/support.python.git@v3.1.0"
+python -m pip install "git+https://github.com/gpellicciotta/plan.git" -r scripts/requirements.txt
 ```
+
+The support.python pin lives only in [requirements.txt](../scripts/requirements.txt).
 
 Check the documentation before completing a task:
 
 ```bash
-lint-markdown check --offline
+python scripts/devops.py check
 ```
 
-`--offline` skips external link checks, since links to private repositories fail without credentials.
-Run `lint-markdown help --verbose` for the rule list, and `lint-markdown fix` to repair formatting.
+The check runs `lint-markdown check --offline`, which skips external link checks, since links to private repositories fail without credentials.
+[.lint-markdown.json](../.lint-markdown.json) excludes `CHANGELOG.md`, which is never linted.
+Run `python scripts/devops.py format` to repair formatting, and `lint-markdown help --verbose` for the rule list.
 
 ---
 
@@ -38,31 +41,22 @@ Run `lint-markdown help --verbose` for the rule list, and `lint-markdown fix` to
 - Rename the heading to bump the minor or major version, as the change management guidelines require.
 
 ### Making a Release
-The release commit carries no `-pre` heading; the next `-pre` heading gets its own commit.
+Release from a clean, up-to-date `main` with [devops.py](../scripts/devops.py).
+Preview first, then release:
+
+```bash
+python scripts/devops.py release --dry-run
+python scripts/devops.py release --yes
+```
+
+Without `--yes`, the script asks you to type `release v{{version}}`.
+It stops before changing anything when the tree is dirty, `main` is behind `origin`, the tag exists, or the lint fails.
+The release then:
+1. Replaces the `-pre` suffix of the top heading with `[released: {{yyyy-mm-dd}}]` and commits it as `Released v{{version}}.`.
+2. Tags the commit as `v{{version}}`, and pushes `main` and the tag together.
+3. Adds a `## v{{next-patch-version}}-pre` heading, commits it as `Started v{{next-patch-version}}-pre.`, and pushes `main`.
+
 Publishing the package arrives with the publish workflow task.
-1. Run the checks on a clean, up-to-date `main`:
-   ```bash
-   git switch main
-   git pull --ff-only
-   git status --short
-   lint-markdown check --offline
-   ```
-2. Replace the `-pre` suffix of the top heading in [CHANGELOG.md](../CHANGELOG.md) with `[released: {{yyyy-mm-dd}}]`.
-3. Commit only that change:
-   ```bash
-   git add CHANGELOG.md
-   git commit -m "Released v{{version}}."
-   ```
-4. Tag the commit, then push both after confirming with the owner:
-   ```bash
-   git tag -a v{{version}} -m "Released v{{version}}."
-   git push --atomic origin main v{{version}}
-   ```
-5. Add a `## v{{next-patch-version}}-pre` heading above the released one, and commit it:
-   ```bash
-   git add CHANGELOG.md
-   git commit -m "Started v{{next-patch-version}}-pre."
-   ```
 
 ---
 

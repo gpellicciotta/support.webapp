@@ -9,7 +9,7 @@ Defines the folder structure of this repository for tokens, looks, components, s
 ## Context
 - The ui-guidelines place the style sheet at `{{web-root}}/css/style.css` and the gallery at `{{web-root}}/demo/`.
 - The package ships its files as they are ([ADR-0005](ADR-0005-distribution-and-versioning.md)), so the source layout is the shipped layout.
-- The project-setup guidelines expect `scripts/bootstrap-dev-environment.py` and `scripts/devops.py`.
+- The project-setup guidelines expect `scripts/bootstrap-dev-environment.py` and [devops.py](../../scripts/devops.py).
 - todos.webapp uses `src/` as its web root, with one stylesheet per layer and modules under `src/js/ui/`.
 
 ---
@@ -62,7 +62,7 @@ Rules:
 
 - `src/css/style.css` stays the single entry for look-neutral styles, as the ui-guidelines require.
 - `npm pack` ships `src/` without `demo/`, plus `bin/`, `template/`, the manifest, and the project files.
-- `scripts/devops.py` wraps tests, checks, linting, and release steps, following the cli-guidelines.
+- [devops.py](../../scripts/devops.py) wraps tests, checks, linting, and release steps, following the cli-guidelines.
 
 ---
 
