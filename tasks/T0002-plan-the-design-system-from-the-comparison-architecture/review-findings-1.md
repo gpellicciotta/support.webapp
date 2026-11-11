@@ -379,3 +379,41 @@ Proposed change, for round 2:
 - Decide between per-look sprites and one shared set with a per-look stroke token, and record the reasons either way.
 - Add a sprite-completeness check to the token test.
 - Record the origin and license of the glyphs in the style guide.
+
+## F17. All ADRs: mark the chosen option
+- Source: user remark, applies to every ADR.
+- Severity: should-fix.
+
+Facts:
+- Every Options Considered section marks the choice only with the lowercase word "chosen" inside a sentence.
+- Several ADRs also hold options lists outside that section, such as ADR-0008's layout choices and ADR-0003's loading and popover options.
+
+Proposed change, for round 2:
+- Mark the selected option of every option list with `**[Chosen]**`, and the user's explicit decisions with `**[Decided]**` where the user decided.
+- Put the marker at the start of the option, so it is visible when scanning.
+- Apply the same rule to every new ADR.
+
+## F18. ADR-0003: list all controls the system provides at minimum
+- Source: user question.
+- Severity: must-fix. The ADR lists what the apps already have, not a deliberate minimum catalog.
+
+Facts:
+- ADR-0003 has a "First component set", grouped by theme, with the reference implementation of each item.
+  It is an extraction inventory: it holds what todos.webapp, family-portal, and meteo already built, plus the switch and the loading pattern as new designs.
+- The list does not name common controls that a generated app (DS-2) needs, such as a text input, textarea, select, tabs, table or data list, badge, progress or spinner, link, and pagination.
+  The `createField` item may cover inputs, but the ADR does not say which input types.
+- The comparison reports that both new systems lack multi-select; the ADR does not decide whether it is in or out.
+- The ADR gives no variants, states, or sizes per component, so "done" for each task is unclear.
+- The mapping to tasks lives only in the roadmap.
+
+Proposed change, for round 2:
+- Add a component catalog as a table in `docs/specs/components.md`, linked from ADR-0003, with these columns:
+  - Component.
+  - Category: control, container, feedback, overlay, identity, or icon.
+  - Source: extract from an app, or new design.
+  - Status: in the first set, planned later, or out of scope, each with a reason.
+  - Required variants and states.
+  - Accessibility minimum: native element, keyboard, and ARIA.
+  - Owning task.
+- Decide for each missing control above whether it is in the first set, later, or out.
+- Make the gallery sections and the token test iterate over this catalog, so a component cannot ship without a gallery section.
