@@ -1,12 +1,14 @@
-.plan/
-/PLAN.md
-/plan.code-workspace
+# Ignore local files
+*.local.md
 
 # Ignore installed dependencies
 node_modules/
 
-# Ignore task worktrees
+# Ignore plan related files
 work/
+.plan/
+/PLAN.md
+/plan.code-workspace
 
 # Ignore env files
 **/*.env

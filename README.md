@@ -1,5 +1,5 @@
-# template.webapp
-Shared visual design system and app template for the gpellicciotta web apps.
+# Webapp Support
+A shared visual design system and templates for web apps.
 
 ---
 
