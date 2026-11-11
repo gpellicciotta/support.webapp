@@ -3,9 +3,9 @@ An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
 - [ ] T0028 [needs: T0007, T0013] Extract the floating action button from todos.webapp into the overlay layer of the shell.
-- [~] T0002 [owner: @claude-code] Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks.
+- [x] T0002 Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks.
 - [x] T0001 Compare the UI design of todos.webapp, family-portal, meteo, auth, and counters, from tokens to app shells.
-- [ ] T0003 [needs: T0002] Set up the repository tooling: package manifest, linters, unit and browser test runners, devops scripts, and CI.
+- [ ] T0003 Set up the repository tooling: package manifest, linters, unit and browser test runners, devops scripts, and CI.
 - [ ] T0004 [needs: T0003] Extract the shared base tokens, the contract file, and the neutral look from todos.webapp, with the static token test.
 - [ ] T0005 [needs: T0004] Build the visual style gallery with look and theme switchers, token specimens, and the browser verifier.
 - [ ] T0006 [needs: T0005] Extract the icon sprite format, the icon class, and the createIcon builder, with the neutral glyph set.
