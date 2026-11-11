@@ -47,7 +47,7 @@ The architecture decision records turn these requirements into a design:
 - [ADR-0003](adrs/ADR-0003-components-and-patterns.md): look-neutral components in the light DOM, and shared patterns.
 - [ADR-0004](adrs/ADR-0004-app-shell.md): one app shell with optional areas and options, and no router.
 - [ADR-0005](adrs/ADR-0005-distribution-and-versioning.md): one package on GitHub Packages, vendored into each web root.
-- [ADR-0006](adrs/ADR-0006-generator.md): a `create` command for one-time boilerplate.
+- [ADR-0006](adrs/ADR-0006-generator.md): a Python `generate-app` devops action for one-time boilerplate.
 - [ADR-0007](adrs/ADR-0007-documentation-and-verification.md): one gallery, static and browser checks, and app conformance.
 - [ADR-0008](adrs/ADR-0008-repository-layout.md): `src/` as the web root of the package and the gallery.
 

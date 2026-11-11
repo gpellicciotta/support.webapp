@@ -1,9 +1,9 @@
 # ADR-0004: App Shell
 Defines the one shared shell: its areas, options, markup, responsive behavior, scroll modes, and each adopter's settings.
 
-- Status: Proposed, awaiting approval in the review of the planning task.
+- Status: Proposed, revised after the rejected review round 1 of the planning task.
 - Date: 2026-11-11.
-- Decided with the user on 2026-11-10: one shell as markup and CSS, with optional areas and options, and no router.
+- **[Decided]** with the user on 2026-11-10: one shell as markup and CSS, with optional areas and options, and no router.
 
 ---
 
@@ -19,15 +19,18 @@ Defines the one shared shell: its areas, options, markup, responsive behavior, s
 
 ## Decision
 The shell is documented markup plus one `shell.css`, with no shell script and no router.
+Its component key is `app`, following the naming rules of [naming.md](../specs/naming.md).
 
-Areas, each optional:
+Areas, each optional except the main area:
 - Top bar: title or brand, a menu button or breadcrumb, and account actions.
+  Its parts are `app__title`, `app__brand`, `app__menu-button`, `app__breadcrumb`, and `app__top-actions`.
 - Navigation: a sidebar on wide screens, a bottom bar on narrow screens, or both.
 - Banners: system and status banners above the content.
 - Main: the content, the only required area.
 - Action bar: the main actions of the current screen, or a footer.
 - Side panel: a detail or editor panel beside the main column.
 - Overlay layer: the toast region and other floating parts.
+  The live region is not part of the markup: `createLiveRegion` appends it once at page load.
 
 Markup skeleton, with every area present:
 
@@ -45,22 +48,29 @@ Markup skeleton, with every area present:
 </body>
 ```
 
+The normative skeleton of each adopter setup is in [components.md](../specs/components.md#app-shell).
+Apps and the generator copy those skeletons, keeping only the areas they use.
+
 Options:
-- Scroll owner: `app--scroll-main` keeps the bars in place and scrolls the main column.
-  `app--scroll-page` scrolls the document, with a sticky top bar and a sticky action bar.
 
-- Navigation: the elements present choose it: a sidebar, a bottom bar, a menu button, or a breadcrumb.
-  An app without navigation leaves them out.
+| Option     | Values                                                | Default              | Meaning                                                                   |
+| :--------- | :---------------------------------------------------- | :------------------- | :------------------------------------------------------------------------ |
+| Scroll     | `app--scroll-main`, `app--scroll-page`                | `app--scroll-main`   | Main keeps the bars in place; page scrolls the document with sticky bars. |
+| Navigation | sidebar, bottom bar, menu button, breadcrumb, or none | none                 | The elements present choose it; a sidebar and a bottom bar can combine.   |
+| Width      | `app--width-reading`, `-narrow`, `-content`, or none  | none, the full width | Centers the main column at the matching width token.                      |
 
-- Width: `app--width-reading`, `-narrow`, or `-content` centers the main column at that width token.
-  The default fills the window.
+Width tokens, owned by the shared base of [ADR-0001](ADR-0001-layer-model-and-token-contract.md):
+- `--width-reading` is 47.5rem, a comfortable line length for prose.
+- `--width-narrow` is 55rem, for forms and single-column pages.
+- `--width-content` is 75rem, the widest page column.
+- The values are family-portal's, the only app that defines all three today.
 
 Layout rules:
 - The grid drops the track of an absent area through `:has()`.
   todos.webapp uses `:has()` in component styles only, so this shell use is new and needs its own tests.
 
 - `shell.css` is the only package stylesheet that sets fixed or sticky positions.
-  The floating action button of todos.webapp sits in the overlay layer, as the one fixed control.
+  The floating action button sits in the overlay layer, as the one fixed control.
 
 - The sidebar and the bottom bar both carry `aria-label="Main"`; only one shows at any width.
 - A skip link leads to the main area.
@@ -89,10 +99,15 @@ Adopter settings:
 ---
 
 ## Options Considered
-- One shell with options, chosen: one grid and one set of sticky rules serve all four apps.
-- An app shell plus a site shell: two near-identical grids, while family-portal fits the options of one.
-- No shared shell: every app keeps writing its own grid; the comparison found four versions already.
-- A shell with a router: routing differs by nature in each app and stays app-local, as server pages need (DS-9).
+- **[Chosen]** One shell with options: one grid and one set of sticky rules serve all four apps.
+- An app shell plus a site shell: rejected, because it means two near-identical grids to maintain.
+  family-portal fits the options of one shell, so the second grid buys nothing.
+- No shared shell: rejected, because every app keeps writing its own grid.
+  The comparison already found four diverging versions.
+- A shell with a router: rejected, because routing differs by nature in each app.
+  Server pages route on the server (DS-9), so routing stays app-local.
+- A shell script that builds the areas: rejected, because server-rendered pages must work without it.
+  Markup plus CSS works for static, script-built, and Java-rendered pages alike.
 
 ---
 
@@ -104,6 +119,12 @@ Adopter settings:
 - counters leaves its ID-anchored grid at its redesign.
 - One demo page per adopter's settings proves the fit; each gets browser checks at 390 and 1440 px.
 
+Open points:
+- meteo's main column was not measured, and its cards cap at 420 to 480 px in its own CSS.
+  Its adoption task checks the column against `--width-narrow`, and may propose a smaller width token.
+- todos.webapp's `--width-main` of 45rem maps to none of the three width tokens.
+  Its extraction task keeps the value as a look-neutral layout width, or maps it, and lists the choice.
+
 ---
 
 ## Evidence
@@ -111,6 +132,7 @@ Adopter settings:
 - Routing: [Navigation and Routing](../analysis/ui-design-comparison.md#navigation-and-routing).
 - Breakpoints: [Responsive Behavior](../analysis/ui-design-comparison.md#responsive-behavior).
 - Fixed and sticky positions: [CSS Organization and Class Naming](../analysis/ui-design-comparison.md#css-organization-and-class-naming).
+- Width values: family-portal `tokens.css` and todos.webapp `tokens.css`, read on 2026-11-11 in the review of the planning task, `[V:C]`.
 - Sibling facts are `[V:C]`: first-party code read at the commits pinned in the comparison.
 - Research context: written by Claude Opus 5.5 on 2026-11-11, knowledge cutoff June 2026, with web access to HTML pages.
 
