@@ -4,8 +4,6 @@ In round 2 this file moves to `docs/specs/components.md`, linked from ADR-0003.
 
 Statuses:
 - `first set`: shipped in the first release, by the task named.
-- `later`: planned, but not in the first set.
-- `decide`: needs a decision from the user.
 - `out`: not part of the package, with a reason.
 
 Sources come from the comparison sections on buttons, fields, chips, lists, feedback, menus, dialogs, and avatars.
@@ -19,19 +17,28 @@ A generated app needs at least these, from DS-2 and ADR-0006:
 
 ## Catalog
 ### Controls
-| Component                    | Source           | Status    | CSS block         | JS module and function | Variants and states                                                               | Accessibility minimum                               | Task                |
-| :--------------------------- | :--------------- | :-------- | :---------------- | :--------------------- | :-------------------------------------------------------------------------------- | :-------------------------------------------------- | :------------------ |
-| Button                       | todos.webapp     | first set | .button           | none                   | primary, secondary, danger, quiet, inverse, small; hover, active, focus, disabled | native button; visible focus; 44 px target          | T0007               |
-| Icon button                  | todos.webapp     | first set | .icon-button      | none                   | default, danger, pressed toggle                                                   | native button; aria-label; aria-pressed for toggles | T0007               |
-| Link button                  | family-portal    | first set | .link-button      | none                   | default, hover, focus                                                             | native button or anchor                             | T0007               |
-| Floating action button       | todos.webapp     | decide    | .fab              | none                   | one fixed control in the overlay layer                                            | native button; aria-label                           | none yet            |
-| Field (text input, textarea) | todos.webapp     | first set | .field            | field.js: createField  | valid, invalid, disabled, read-only; counter optional                             | label for control; aria-invalid; aria-describedby   | T0008               |
-| Select                       | meteo            | first set | .field            | field.js: createField  | native select inside the field block                                              | native select; label; same field rules              | T0008, scope to add |
-| Checkbox and radio           | todos.webapp     | first set | .checkbox, .radio | none                   | checked, indeterminate for checkbox; disabled, invalid                            | native inputs; group in fieldset with legend        | T0008               |
-| Switch                       | none, new design | first set | .switch           | none                   | off, on, disabled                                                                 | native checkbox with role switch                    | T0019               |
-| Chip                         | todos.webapp     | first set | .chip             | none                   | static, removable, filter, toggle; overdue tone                                   | button for interactive chips; remove has a label    | T0007               |
-| Segmented control            | todos.webapp     | first set | .segmented        | none                   | 2 to 5 options; selected, disabled                                                | fieldset of native radios                           | T0007               |
-| Badge                        | meteo            | decide    | .badge            | none                   | non-interactive count or status label                                             | text, not color alone                               | none yet            |
+| Component                            | Source              | Status    | CSS block         | JS module and function             | Variants and states                                                               | Accessibility minimum                               | Task     |
+| :----------------------------------- | :------------------ | :-------- | :---------------- | :--------------------------------- | :-------------------------------------------------------------------------------- | :-------------------------------------------------- | :------- |
+| Button                               | todos.webapp        | first set | .button           | none                               | primary, secondary, danger, quiet, inverse, small; hover, active, focus, disabled | native button; visible focus; 44 px target          | T0007    |
+| Icon button                          | todos.webapp        | first set | .icon-button      | none                               | default, danger, pressed toggle                                                   | native button; aria-label; aria-pressed for toggles | T0007    |
+| Link button                          | family-portal       | first set | .link-button      | none                               | default, hover, focus                                                             | native button or anchor                             | T0007    |
+| Floating action button               | todos.webapp        | first set | .fab              | none                               | one fixed control in the overlay layer                                            | native button; aria-label                           | none yet |
+| Field (text input, textarea, select) | todos.webapp, meteo | first set | .field            | field.js: createField, attachField | valid, invalid, pending, disabled, read-only; hint, counter, help toggle optional | label for control; aria-invalid; aria-describedby   | T0008    |
+| Checkbox and radio                   | todos.webapp        | first set | .checkbox, .radio | none                               | checked, indeterminate for checkbox; disabled, invalid                            | native inputs; group in fieldset with legend        | T0008    |
+| Switch                               | none, new design    | first set | .switch           | none                               | off, on, disabled                                                                 | native checkbox with role switch                    | T0019    |
+| Chip                                 | todos.webapp        | first set | .chip             | none                               | static, removable, filter, toggle; overdue tone                                   | button for interactive chips; remove has a label    | T0007    |
+| Segmented control                    | todos.webapp        | first set | .segmented        | none                               | 2 to 5 options; selected, disabled                                                | fieldset of native radios                           | T0007    |
+| Badge                                | meteo               | first set | .badge            | none                               | non-interactive count or status label                                             | text, not color alone                               | none yet |
+
+### Forms and selection
+| Component                      | Source                 | Status    | CSS block                                       | JS module and function                   | Variants and states                                             | Accessibility minimum                                                           | Task                     |
+| :----------------------------- | :--------------------- | :-------- | :---------------------------------------------- | :--------------------------------------- | :-------------------------------------------------------------- | :------------------------------------------------------------------------------ | :----------------------- |
+| Form                           | counters, todos.webapp | first set | .form                                           | form.js: attachForm                      | idle, busy, submitted with errors; actions bar                  | native form; submit by Enter; busy state announced                              | T0008, scope to add      |
+| Field help toggle              | counters, new design   | first set | .field__help-toggle, .field__help               | field.js: attachField                    | collapsed, expanded                                             | button with aria-expanded and aria-controls; help text also in aria-describedby | T0008, scope to add      |
+| Validation states              | counters, todos.webapp | first set | .field--valid, .field--invalid, .field--pending | field.js: setError, setValid, setPending | valid, invalid, pending, with icon and text, never color alone  | aria-invalid; aria-busy while pending; message in a live region                 | T0008, scope to add      |
+| Error summary                  | none, new design       | first set | .error-summary                                  | form.js: attachForm                      | hidden, shown after a failed submit; one link per invalid field | focus moves to the summary; links jump to the fields                            | T0008, scope to add      |
+| Field group                    | counters               | first set | .field-group                                    | none                                     | fieldset with legend; checkbox group, radio group               | native fieldset and legend                                                      | T0008                    |
+| Multi-select with bulk actions | none, new design       | first set | .selection, .bulk-bar                           | selection.js: attachSelection            | none selected, some, all; bulk action bar                       | native checkboxes; Shift range; count announced                                 | none yet, needs a design |
 
 ### Containers
 | Component           | Source           | Status    | CSS block             | JS module and function            | Variants and states                                       | Accessibility minimum                         | Task     |
@@ -41,8 +48,8 @@ A generated app needs at least these, from DS-2 and ADR-0006:
 | Row base            | todos.webapp     | first set | .row                  | none                              | dense row with trailing actions; container query at 36rem | list semantics; actions reachable by keyboard | T0016    |
 | Empty state         | todos.webapp     | first set | .empty-state          | none                              | icon, title, text, at most two actions                    | heading level set by the app                  | T0016    |
 | Collapsible         | todos.webapp     | first set | .collapsible          | collapsible.js: attachCollapsible | collapsed, expanded                                       | button with aria-expanded and aria-controls   | T0026    |
-| List and data table | none, new design | later     | .list, .table         | none                              | simple list, definition rows, data table                  | native table elements with headers            | none yet |
-| Tabs                | none, new design | later     | .tabs                 | tabs.js: attachTabs               | horizontal; selected, disabled                            | tablist, tab, tabpanel roles; arrow keys      | none yet |
+| List and data table | none, new design | first set | .list, .table         | none                              | simple list, definition rows, data table                  | native table elements with headers            | none yet |
+| Tabs                | none, new design | first set | .tabs                 | tabs.js: attachTabs               | horizontal; selected, disabled                            | tablist, tab, tabpanel roles; arrow keys      | none yet |
 
 ### Feedback
 | Component                | Source           | Status    | CSS block              | JS module and function   | Variants and states                          | Accessibility minimum                                      | Task     |
@@ -51,7 +58,7 @@ A generated app needs at least these, from DS-2 and ADR-0006:
 | Live region              | todos.webapp     | first set | .live-region           | live-region.js: announce | polite, assertive                            | aria-live set once at page load                            | T0010    |
 | Banner                   | todos.webapp     | first set | .banner                | none                     | info, error, success, warning                | status or alert role by severity                           | T0007    |
 | Loading pattern          | none, new design | first set | .skeleton, [aria-busy] | none                     | busy region, status line, slow-list skeleton | aria-busy; polite status text; static under reduced motion | T0020    |
-| Progress bar and spinner | support.js       | later     | .progress, .spinner    | none                     | determinate, indeterminate                   | progress element or role progressbar                       | none yet |
+| Progress bar and spinner | support.js       | first set | .progress, .spinner    | none                     | determinate, indeterminate                   | progress element or role progressbar                       | none yet |
 
 ### Overlays
 | Component                     | Source       | Status                   | CSS block                | JS module and function                 | Variants and states                                       | Accessibility minimum                            | Task         |
@@ -70,14 +77,13 @@ A generated app needs at least these, from DS-2 and ADR-0006:
 | Theme switch | todos.webapp  | first set | .segmented          | theme.js: attachThemeSwitch        | System, Light, Dark                                | segmented control pattern; sets data-theme     | T0027 |
 
 ### Not in the package, or undecided
-| Component                                              | Source                      | Status | Reason                                                | Task     |
-| :----------------------------------------------------- | :-------------------------- | :----- | :---------------------------------------------------- | :------- |
-| Task row, bin screen                                   | todos.webapp                | out    | app-local                                             | none     |
-| Forecast chart                                         | meteo                       | out    | app-local; its per-hour sentence is the model to copy | none     |
-| Reaction toggle, drag handles, avatar cropper          | family-portal               | out    | app-local; drag lacks keyboard support                | none     |
-| Inbox panel, Web Push                                  | todos.webapp, family-portal | out    | app-local, connected features                         | none     |
-| Multi-select with bulk actions                         | none, new design            | decide | no accessible reference exists                        | none yet |
-| Pagination, slider, date picker, file upload, combobox | none                        | out    | no adopter needs them; add under the sharing rule     | none     |
+| Component                                              | Source                      | Status | Reason                                                | Task |
+| :----------------------------------------------------- | :-------------------------- | :----- | :---------------------------------------------------- | :--- |
+| Task row, bin screen                                   | todos.webapp                | out    | app-local                                             | none |
+| Forecast chart                                         | meteo                       | out    | app-local; its per-hour sentence is the model to copy | none |
+| Reaction toggle, drag handles, avatar cropper          | family-portal               | out    | app-local; drag lacks keyboard support                | none |
+| Inbox panel, Web Push                                  | todos.webapp, family-portal | out    | app-local, connected features                         | none |
+| Pagination, slider, date picker, file upload, combobox | none                        | out    | no adopter needs them; add under the sharing rule     | none |
 
 ## Markup contracts
 Each first-set component states its HTML skeleton, so CSS, JavaScript, and generated apps agree on it.
@@ -153,9 +159,17 @@ The catalog needs one skeleton per option combination that an adopter uses, whic
 Rows without a skeleton above get one in round 2, before their task starts.
 
 ## Naming link between HTML, CSS, and JavaScript
-Proposal, not decided: each component has one kebab-case key, and every artifact derives its name from it.
-Take the key `dialog`:
+Status: proposal, not decided. The user asked for more elaboration on 2026-11-11.
 
+### The problem
+- A component is made of up to five artifacts: HTML markup, a CSS file, a JavaScript module, a gallery section, and tests.
+- A developer who sees `class="dialog"` in a page should find `dialog.css`, `dialog.js`, and the gallery section without searching.
+- JavaScript must find its elements without breaking when the CSS changes, and CSS must not depend on what JavaScript sets.
+
+### The rule in one sentence
+Each component has one kebab-case key, such as `dialog`, and every artifact derives its name from that key.
+
+### The key `dialog`, end to end
 | Artifact          | Rule                                                      | Example                            |
 | :---------------- | :-------------------------------------------------------- | :--------------------------------- |
 | HTML root class   | `.{{key}}`                                                | `.dialog`                          |
@@ -172,19 +186,57 @@ Take the key `dialog`:
 | Icon ids          | `icon-{{name}}`                                           | `icon-close`                       |
 | i18n keys         | `{{key}}.{{name}}`                                        | `dialog.cancel`                    |
 
-Names in the first set that break the rule, to settle in round 2:
+### Why each choice, in Java and Python terms
+- Hooks as `data-*` attributes: like annotations on a Java element. Renaming a CSS class for a redesign must not break the behavior, so JavaScript never selects by style class.
+- State from native states and ARIA: the browser and screen readers already understand `[open]` and `[aria-expanded]`. A JavaScript-set class such as `.is-open` is invisible to assistive technology and can disagree with the real state.
+- One key for the module: like one Java class per file, named after the class, so `import { openDialog } from './dialog.js'` needs no lookup.
+- Verb prefixes on functions: `open` shows and returns a result, `attach` enhances markup that already exists, and `create` builds new markup.
+
+### How `createField` fits
+What todos.webapp has today:
+- `createField(doc, options)` lives in `views/editor-panel.js`, not in a module named after the component.
+- It builds the markup itself: a `div.field` holding a label, one control, and an error line.
+- Its `setError(message)` sets `aria-invalid`, adds the error line to `aria-describedby`, and announces the message in a live region.
+- It has no hint, counter, or help toggle, although the CSS defines hint and counter parts.
+
+What the rule would make of it:
+- The key is `field`, so the module is `js/field.js`, and the CSS block is `.field` with parts `__label`, `__control`, `__hint`, `__counter`, `__error`, and `__help`.
+- The HTML skeleton is the contract. Server-rendered pages, such as family-portal's Java templates, write that skeleton by hand.
+- `attachField(element)` enhances existing markup and returns a controller with `setError`, `setValid`, `setPending`, and the help toggle. It works on server-rendered and on built markup alike.
+- `createField(doc, options)` builds the skeleton for JavaScript-first apps, then calls `attachField` on it. The returned object keeps todos.webapp's `{element, control, setError}` and gains the rest, so the switch stays lossless.
+- Fields of every kind go through the same pair: input, textarea, and select, with the options in the catalog row.
+
+### Names that break the rule today
 - `createToaster` against the key `toast`; `createField` against `field`, with no module named in ADR-0008.
 - `spriteIcon` against the key `icon`; `attachPopover` and `anchorPanel` both live in `popover.js`.
 - The tooltip, switch, and loading pattern have no JavaScript, so their key still names the CSS, gallery, and tests.
-- `data-dialog-close` follows the rule; `data-i18n` and `data-theme` are global hooks, not component hooks.
+- `data-i18n` and `data-theme` are global hooks, not component hooks.
 - The shared `focus.js` that T0009 needs has no component key; it is a utility module.
 
-A check can enforce the rule: the token test lists the catalog keys and verifies that each has a CSS partial, a gallery section, and a markup skeleton.
+### Open choices for the user
+- Hooks as `data-{{key}}-{{name}}` attributes, or a single `data-js` marker, or classes with a `js-` prefix.
+- Whether `createToaster` keeps its name, or becomes `createToast`, with a deprecated alias.
+- Whether components with no JavaScript still get an entry in the catalog's module column, as "none".
+- Whether the token test enforces the key rule: each key needs a CSS partial, a gallery section, and a markup skeleton.
 
-## Questions for the user
-- Is `Badge` a separate component, or a non-interactive chip variant?
-- Should select, textarea, and the other field types join T0008, or get their own task?
-- Do `List and data table`, `Tabs`, and `Progress bar and spinner` belong in the first set, as starter apps may need them?
-- Should multi-select get a design task, since no accessible reference exists?
-- Should the floating action button join the first set, since the shell reserves a place for it?
-- Do you accept the naming rule above, including `data-{{key}}-{{name}}` hooks and no JavaScript-set classes?
+## Glossary
+- Live region: a part of the page that screen readers watch, and announce when its text changes, without moving focus.
+  - `role="status"` (polite) waits until the user is idle; `role="alert"` (assertive) interrupts.
+  - It is the web counterpart of Android's `announceForAccessibility`.
+  - It must exist in the page before its text changes, so the shell creates it once at page load.
+  - Toasts, form errors, loading status lines, and "Saved" messages all use it.
+- Controller: the object that a behavior function returns, with methods such as `destroy()`.
+- Skeleton: the reference HTML of a component, which CSS and JavaScript both rely on.
+
+## Decisions by the user, 2026-11-11
+- Badge stays a separate component.
+- Select, textarea, and the other field types join T0008.
+- List and data table, tabs, and progress bar and spinner are in the first set.
+- Multi-select is in the first set, and needs a design task.
+- The floating action button is in the first set.
+
+## Open questions
+- Do you accept the naming rule, or which choices in "Open choices" need to change?
+- Should forms, validation states, help toggles, and the error summary stay inside T0008, or become a task of their own?
+  The rows under "Forms and selection" add scope to T0008, which already holds fields, checkboxes, and radios.
+- Should the validation icons come from the shared sprite, with ids such as `icon-alert`, `icon-check`, and `icon-help`?

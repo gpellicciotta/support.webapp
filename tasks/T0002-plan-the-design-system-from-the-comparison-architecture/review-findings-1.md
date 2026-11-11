@@ -417,7 +417,9 @@ Proposed change, for round 2:
   - Owning task.
 - Decide for each missing control above whether it is in the first set, later, or out.
 - Make the gallery sections and the token test iterate over this catalog, so a component cannot ship without a gallery section.
-- Draft of the catalog, written by Claude on 2026-11-11: `component-catalog-draft.md` in this task folder, with six questions for the user.
+- Draft of the catalog, written by Claude on 2026-11-11: `component-catalog-draft.md` in this task folder, with the decisions and open questions.
+- Decisions (user, 2026-11-11): badge stays a component; select and textarea join T0008; list and data table, tabs, and progress and spinner are first set; multi-select is first set and needs a design; the floating action button is first set.
+- Draft of the catalog, written by Claude on 2026-11-11: `component-catalog-draft.md` in this task folder, with the decisions and open questions.
 
 ## F19. Components and shells must define their HTML, and one name must link HTML, CSS, and JavaScript
 - Source: user remark, 2026-11-11.
@@ -435,3 +437,28 @@ Proposed change, for round 2:
 - Define one kebab-case component key and derive every name from it, as the table in `component-catalog-draft.md` proposes.
 - Enforce the link in the token test: each catalog key needs a CSS partial, a gallery section, and a markup skeleton.
 - Put the naming rule in the naming conventions of F15, and link ADR-0003 and ADR-0004 to it.
+
+## F20. ADR-0003: forms, validation messages, and field help
+- Source: user question, with the counters app as the reference.
+- Severity: must-fix. The ADR has fields but no form, and no help or validation model.
+
+What counters does today, in `counter-edit-or-create-view.mjs`, `forms.css`, and `app.mjs`:
+- Each field is an `.input-group` grid: label, help icon, state icon, control, help text, and error text.
+- The help icon is a Font Awesome question mark in an `<i>` element.
+  A delegated click handler in `app.mjs` toggles a `help` class on the group, which shows the help text.
+  Clicking the label does the same, because on mobile the label is often the touched element.
+- State icons mark valid, error, and pending fields, and `markInvalid` fills the error text from client checks and server errors.
+- Neither the help icon nor the state icons are focusable or labeled.
+  Keyboard and screen reader users cannot reach the help, and the state shows by color and icon only.
+
+What todos.webapp does:
+- `createField` gives a label, a control, and an error line with `aria-invalid`, `aria-describedby`, and a live announcement.
+- It has no help toggle, no valid or pending state, and no form-level error summary.
+
+Proposed change, for round 2:
+- Add the rows under "Forms and selection" in the catalog draft: form, field help toggle, validation states, error summary, and field group.
+- Make the help toggle a real button with `aria-expanded` and `aria-controls`, and keep the help text in `aria-describedby`.
+- Define when validation runs, such as on blur and on submit, and how server errors reach a field through `setError`.
+- Define the pending state for asynchronous checks, with `aria-busy` and a status line.
+- State that icon, text, and color together carry each state.
+- Decide whether these belong in T0008, or in a new task, since T0008 already holds fields, checkboxes, and radios.
