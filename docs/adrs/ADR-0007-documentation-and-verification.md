@@ -1,7 +1,7 @@
 # ADR-0007: Documentation and Verification
 Defines the gallery, the style guide, this repository's checks, the two jobs of each app's vendored check, and the lossless switch proof.
 
-- Status: Proposed, revised after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - Date: 2026-11-11.
 - **[Decided]** with the user on 2026-11-10: ship the static token test and a browser verifier; no pixel-diff regression.
 - **[Decided]** with the user on 2026-11-11: the vendored check stays JavaScript, as `check.mjs`.

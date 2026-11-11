@@ -1,7 +1,7 @@
 # ADR-0006: Generator
 Defines the tool that creates a new web app, what it generates, and how later template changes reach generated apps.
 
-- Status: Proposed, revised after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - Date: 2026-11-11.
 - **[Decided]** with the user on 2026-11-11: an own generator; Copier is rejected.
 - **[Decided]** with the user on 2026-11-11: the generator is Python, run from a checkout of this repository at a release tag.

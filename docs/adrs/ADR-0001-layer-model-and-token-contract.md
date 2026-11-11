@@ -1,12 +1,13 @@
 # ADR-0001: Layer Model and Token Contract
 Defines the token tiers, the contract file, the shared names and vocabulary, value ownership, modularity rules, and token retirement.
 
-- Status: Proposed, revised after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - Date: 2026-11-11.
 - **[Decided]** with the user on 2026-11-10: shared base values and radius role names.
 - **[Decided]** with the user on 2026-11-11: one kebab-case key per component, as [naming.md](../specs/naming.md) defines.
 - **[Decided]** with the user on 2026-11-12: looks own shape details.
 - **[Decided]** with the user on 2026-11-12: every look variant uses one attribute, `data-accent`.
+- **[Decided]** with the user on 2026-11-12: the state-named grounds become `--color-surface-{{state}}` tokens.
 
 ---
 
@@ -71,7 +72,7 @@ Shape of the file, as a sketch for the extraction task:
 
 ### Contract categories
 An initial list, which the extraction tasks confirm against real use and record in `src/contract.json`:
-- Grounds: `--color-bg`, `--color-surface`, `--color-surface-sunken`, `--color-hover-bg`, `--color-selected-bg`, `--color-active-bg`.
+- Grounds: `--color-bg`, `--color-surface`, `--color-surface-sunken`, `--color-surface-hover`, `--color-surface-active`, `--color-surface-selected`.
 - Text: `--color-text`, `--color-text-muted`, `--color-text-disabled`, `--color-link`, `--color-link-hover`.
 - Lines and focus: `--color-border`, `--color-border-strong`, `--color-focus`.
 - Main action: `--color-primary`, `--color-primary-hover`, `--color-primary-active`, `--color-on-primary`.
@@ -119,13 +120,14 @@ Steps of the scale groups:
 
 Variants and states in use:
 - Variants: `sunken` on `surface`, `muted` and `disabled` on `text`, `strong` on `border`, `bg` on filled roles, `inset` on `offset`.
-- States: `hover` and `active` on `primary`, `danger`, and `link`.
+- States: `hover` and `active` on `primary`, `danger`, and `link`; `hover`, `active`, and `selected` on `surface`.
 - Text on a filled role adds `on-` before the role: `on-primary`, `on-danger`, `on-success`, `on-warning`, `on-tone-1` to `-4`.
 
-**[Feedback Needed]** Three todos.webapp grounds put a state where the role belongs:
-- `--color-hover-bg`, `--color-active-bg`, and `--color-selected-bg` tint neutral items, such as nav items, on hover, press, and `aria-current`.
-- Recommendation: rename them `--color-surface-hover`, `--color-surface-active`, and `--color-surface-selected`.
-  The names then follow `--{{group}}-{{role}}-{{state}}`, and the todos.webapp adoption renames them mechanically.
+**[Decided]** with the user on 2026-11-12: three todos.webapp grounds, which put a state where the role belongs, are renamed:
+- `--color-hover-bg`, `--color-active-bg`, and `--color-selected-bg` tint neutral items, such as nav items.
+  They apply on hover, on press, and on `aria-current`.
+- They become `--color-surface-hover`, `--color-surface-active`, and `--color-surface-selected`.
+  The names then follow `--{{group}}-{{role}}-{{state}}`.
 
 ### Naming rules
 - Token names follow `--{{group}}-{{role}}[-{{variant}}][-{{state}}]`, such as `--color-primary-hover`.
@@ -204,6 +206,7 @@ Private component tokens:
 ## Consequences
 todos.webapp renames, each keeping its value, so the switch stays lossless:
 - `--color-signal` tokens become `--color-primary` tokens.
+- `--color-hover-bg`, `--color-active-bg`, and `--color-selected-bg` become `--color-surface-hover`, `-active`, and `-selected`.
 - `--space-8` becomes `--space-9`, `--width-editor` becomes `--width-side-panel`.
 - `--icon-size` becomes `--icon-md`, and `--icon-size-lg` becomes `--icon-lg`.
 - Each direct use of `--radius-sm`, `-md`, or `-lg` moves to the radius role it serves.

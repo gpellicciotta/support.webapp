@@ -2,7 +2,7 @@
 Every component the design system provides, with its key, source, owning task, HTML skeleton, and accessibility minimum.
 [ADR-0003](../adrs/ADR-0003-components-and-patterns.md) records the decisions; [naming.md](naming.md) defines how each key names its files.
 
-- Status: Proposed, part of the revision after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - **[Decided]** with the user on 2026-11-11: badge, floating action button, list and data table, tabs, progress bar and spinner, and multi-select join the first set.
 - **[Decided]** with the user on 2026-11-11: forms, validation states, the help toggle, the error summary, and field groups are part of T0008.
 - **[Decided]** with the user on 2026-11-11: validation icons come from the shared sprite.

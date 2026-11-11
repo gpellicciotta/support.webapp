@@ -2,7 +2,7 @@
 Names for tokens, classes, hooks, modules, files, gallery sections, tests, icons, and translation keys.
 [ADR-0001](../adrs/ADR-0001-layer-model-and-token-contract.md) and [ADR-0003](../adrs/ADR-0003-components-and-patterns.md) record the decisions; this page holds the rules.
 
-- Status: Proposed, part of the revision after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - **[Decided]** with the user on 2026-11-11: one kebab-case key per component, with every name derived from it.
 
 ---

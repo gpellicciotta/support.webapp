@@ -1,7 +1,7 @@
 # ADR-0008: Repository Layout
 Defines the folder structure of this repository for tokens, looks, components, shell, gallery, tools, template, and docs.
 
-- Status: Proposed, revised after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - Date: 2026-11-11.
 - **[Decided]** with the user on 2026-11-12: no copy step to `dist/` until a build step needs one.
 

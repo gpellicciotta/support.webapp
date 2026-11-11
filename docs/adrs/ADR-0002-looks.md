@@ -1,7 +1,7 @@
 # ADR-0002: Looks
 Defines look contents, look names, selection, app-local looks, icons, and the first looks.
 
-- Status: Proposed, revised after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - Date: 2026-11-11.
 - **[Decided]** with the user on 2026-11-11: meteo's appearance becomes its own third look.
 - **[Decided]** with the user on 2026-11-11: looks carry character names, never app names.

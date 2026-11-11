@@ -2,7 +2,7 @@
 Phases, entry and exit criteria, and adoption order for building and adopting the design system.
 The decisions behind each phase are in the [ADRs](adrs/ADR-0001-layer-model-and-token-contract.md), numbered 0001 to 0008.
 
-- Status: Proposed, revised after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - Date: 2026-11-11.
 - Components follow the catalog in [components.md](specs/components.md) and the names in [naming.md](specs/naming.md).
 

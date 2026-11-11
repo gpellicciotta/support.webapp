@@ -1,7 +1,7 @@
 # ADR-0004: App Shell
 Defines the one shared shell: its areas, options, markup, responsive behavior, scroll modes, and each adopter's settings.
 
-- Status: Proposed, revised after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - Date: 2026-11-11.
 - **[Decided]** with the user on 2026-11-10: one shell as markup and CSS, with optional areas and options, and no router.
 

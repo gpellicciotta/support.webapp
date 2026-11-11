@@ -1,7 +1,7 @@
 # ADR-0003: Components and Patterns
 Defines the markup contract, naming link, JavaScript approach, modularity, sharing rule, catalog, and shared patterns.
 
-- Status: Proposed, revised after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - Date: 2026-11-11.
 - **[Decided]** with the user on 2026-11-10: loading, popovers, internationalization, and shipping modules in the package.
 - **[Decided]** with the user on 2026-11-11: family-portal migrates to `data-i18n` attributes.

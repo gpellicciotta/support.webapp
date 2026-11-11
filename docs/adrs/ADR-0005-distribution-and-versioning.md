@@ -1,7 +1,7 @@
 # ADR-0005: Distribution and Versioning
 Defines the package, its public entry points, how apps vendor it without a build step, the versioning rules, and how releases reach apps.
 
-- Status: Proposed, revised after the rejected review round 1 of the planning task.
+- Status: Accepted on 2026-11-12, in review round 2 of the planning task.
 - Date: 2026-11-11.
 - **[Decided]** with the user on 2026-11-10: one versioned package, copied into each web root by a script, with a drift check.
 - **[Decided]** with the user on 2026-11-11: GitHub Packages as the registry.

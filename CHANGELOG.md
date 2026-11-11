@@ -5,6 +5,7 @@ All notable changes to this project are documented here.
 > for the versioning and changelog conventions used across projects.
 
 ## v0.1.0-pre
+- Docs: Accepted the ADRs, roadmap, and specifications after review round 2, renaming three ground tokens.
 - Docs: Recorded the decisions on look names, `data-accent` variants, per-look sprites, shape details, and the copy step in the ADRs.
 - Docs: Revised the eight ADRs and the [roadmap](docs/roadmap.md) after review round 1, and added the [component catalog](docs/specs/components.md) and [naming conventions](docs/specs/naming.md).
 - Docs: Added [devops.py](scripts/devops.py) with a one-command release, excluded `CHANGELOG.md` from `lint-markdown`, and required Python 3.15.
