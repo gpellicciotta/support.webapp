@@ -186,10 +186,16 @@ Gaps:
 - ADR-0006 gives no values for `--width` and no default for any flag.
 - The other areas of ADR-0004, which are banners, action bar, side panel, and overlay layer, have no flag.
   It is unclear whether the generated shell includes them.
-- The numeric widths come from tokens that this review did not check.
+- ADR-0001 lists `--width-reading`, `--width-narrow`, and `--width-content` as contract tokens but gives no values.
+- Today's only values are family-portal's: content 75rem (1200 px), narrow 55rem (880 px), reading 47.5rem (760 px), at the default 16 px.
+  - `reading` caps a line of prose at a comfortable length; `narrow` suits forms and single-column pages; `content` is the widest page column.
+- Possible mismatch: ADR-0004 gives meteo `app--width-narrow`, but meteo's own CSS caps its cards at 420 to 480 px, and one block at 640 px.
+  Claude did not find which of those is meteo's main column, so the match is unverified.
+- todos.webapp has one value, `--width-main` at 45rem (720 px), which maps to none of the three names.
 
 Proposed change, for round 2:
 - Add a flag table with values, default, and one line of meaning, linking ADR-0004.
+- Define the three width values in ADR-0001 or ADR-0004, say which look owns them, and check meteo against them.
 - Decide whether each optional area gets a flag, or the generated shell always includes all of them.
 - Give the four adopter setups of ADR-0004 as example commands, or as `--preset` names.
 
@@ -230,3 +236,29 @@ Open design questions:
 
 Proposed change, for round 2:
 - Replace the vague "project files" bullet with the full list, and state which command creates the plan store.
+
+## F11. ADR-0006: generate the app from Python, not from the Node command
+- Source: user preference, `python devops generate-app` or similar.
+- Severity: decision needed. It changes ADR-0006 and touches ADR-0005 and ADR-0008.
+
+Why it fits:
+- Every sibling has a Python `scripts/devops.py`, and `DevopsCli` accepts extra actions, so `python scripts/devops.py generate-app {{app-name}} --look {{look}}` is feasible.
+- template.python already generates its projects from Python, in `scaffold.py`.
+- It removes the Node dependency for creating an app, and makes the generator match F10, where the generated app carries Python scripts.
+
+Open questions, with Claude's lean:
+- Where does the code live?
+  - In this repository's `scripts/devops.py`, run from a checkout at a release tag. This matches how template.python works. Lean: this one.
+  - Or as a tool in support.python, which then needs to fetch the template of a given release.
+- How does the new app get its vendored copy?
+  - A Python generator that runs from a checkout can call the same `node bin/cli.mjs vendor` command from that checkout. No registry token is needed, and `vendor` exists once.
+  - Reimplementing `vendor` in Python gives two implementations that must produce identical manifests. Lean: do not.
+- Does `create` still exist as an npm subcommand? Lean: no. Then `bin/cli.mjs` keeps `vendor` and `check`.
+- Who runs `git init` and `plan init`? Now that the code is Python, the generator can run both, or leave them to the generated bootstrap script (see F10).
+
+Consequences to carry into round 2:
+- ADR-0006: replace the `npx ... create` command, and the flags table of F8, with the devops action.
+- ADR-0008: `bin/cli.mjs` loses `create`, and `template/` need not ship in the npm package, since the generator runs from a checkout.
+- ADR-0005: the CLI list shrinks to `vendor` and `check`; Node.js is still needed to run `vendor`.
+- Tasks T0014 (vendor and check commands) and T0022 (the create command and starter template) change scope.
+- The generator's test stays the same: create an app per look in a temporary folder and run its checks.
