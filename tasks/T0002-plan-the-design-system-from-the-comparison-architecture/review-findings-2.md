@@ -1,5 +1,13 @@
+---
+task: T0002
+round: 2
+verdict: approved
+reviewer: "@giova"
+reviewed_at: 2026-11-11T23:26:57Z
+reviewed_commit: 45ff5df
+---
 # T0002 Review, Round 2
-Verdict: pending; the user records it with `plan tasks review T0002`.
+Verdict: approved by the user, `@giova`, on 2026-11-12.
 Findings: the user's answers to the round 2 `**[Feedback Needed]**` items, and one question, from 2026-11-12.
 Scope: the ADRs, `docs/roadmap.md`, `docs/specs/`, and the tasks, at commit `9d8c7d3`.
 
@@ -14,8 +22,8 @@ Scope: the ADRs, `docs/roadmap.md`, `docs/specs/`, and the tasks, at commit `9d8
 - Source: user question.
 - Answer: ADR-0001 gains a "Roles" section listing the roles per group, with variants and states.
 - Groups split into role groups, such as `color` and `radius`, and scale groups, such as `space` and `text`.
-- Open: `--color-hover-bg`, `--color-active-bg`, and `--color-selected-bg` put a state where the role belongs.
-  The rename to `--color-surface-hover`, `-active`, and `-selected` is marked `**[Feedback Needed]**`.
+- `--color-hover-bg`, `--color-active-bg`, and `--color-selected-bg` put a state where the role belongs.
+- Decision: the user approved the rename to `--color-surface-hover`, `-active`, and `-selected`.
 
 ## F3. ADR-0002: the look names
 - Source: user decision.
@@ -42,3 +50,11 @@ Scope: the ADRs, `docs/roadmap.md`, `docs/specs/`, and the tasks, at commit `9d8
 ## F8. Roadmap: the FAB task
 - Source: user decision.
 - Applied: T0028 moves into the Next Milestone, and the roadmap drops its open question.
+
+---
+
+## Decisions Closing Round 2
+Recorded from the user on 2026-11-12:
+- F2: the three state-named grounds are renamed during the todos.webapp adoption.
+- The plan is approved: the ADRs, the roadmap, the specifications, and the tasks are accepted.
+- No `**[Feedback Needed]**` items remain.

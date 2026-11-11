@@ -78,3 +78,21 @@ Key changes:
 - All eight ADRs: `**[Chosen]**`, `**[Decided]**`, and `**[Feedback Needed]**` markers, reasons for rejected options, and mustache placeholders.
 - New specifications: [components.md](../../../docs/specs/components.md) and [naming.md](../../../docs/specs/naming.md).
 - Tasks: look names, the naming rule, and forms in T0008 applied to T0004 to T0027; new tasks T0028 to T0033.
+
+---
+
+## Round 2 Approval
+The user approved round 2 on 2026-11-12; [review-findings-2.md](review-findings-2.md) records the decisions.
+
+Markdown lint of the repository at commit `45ff5df`:
+```text
+$ lint-markdown check --offline
+All 19 markdown files passed linting.
+exit code: 0
+```
+
+Open items left in the docs:
+```text
+$ grep -rn "Feedback Needed" docs | wc -l
+0
+```
