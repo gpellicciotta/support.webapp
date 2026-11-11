@@ -11,7 +11,8 @@ Decision areas, roadmap contents, and task creation rules for the design system 
 ---
 
 ## Decided in the Design Conversation
-- **[Decided]** The project lives in its own repository, `template.webapp`, not inside support.js.
+- **[Decided]** The project lives in its own repository, not inside support.js.
+  Renamed from `template.webapp` to `support.webapp` on 2026-11-11, since apps consume it mainly as a library.
 - **[Decided]** The system supports several looks, and new looks get added over time.
 - **[Decided]** First adopters are todos.webapp, family-portal, and meteo.
 - **[Decided]** Auth and counters get redesigned and re-created on the system later, not in this plan's first phase.
@@ -36,11 +37,16 @@ Decided with the user on 2026-11-10; each ADR records these choices and their re
   Skeletons only for slow lists, with reduced-motion handling.
 - **[Decided]** Popovers: the native `popover` attribute, with the todos.webapp JavaScript anchoring for placement.
 - **[Decided]** Internationalization: client-side `data-i18n` attributes, as in meteo.
-  Open for the ADR: family-portal's server-filled `{{t:key}}` pages migrate or stay an app-local exception.
+  family-portal's server-filled `{{t:key}}` pages migrate to `data-i18n` during its adoption (decided 2026-11-11).
 - **[Decided]** meteo adopts last and drops its quiz leftovers during that migration.
 - **[Decided]** Auth and counters move fully onto the system at their redesign; support.js CSS then retires.
 - **[Decided]** Verification: ship the todos.webapp static token test and a browser verifier based on family-portal's.
   Pixel-diff visual regression is out of scope.
+
+Decided with the user on 2026-11-11:
+- **[Decided]** Registry: GitHub Packages, published by a workflow on each GitHub Release, as for support.js.
+- **[Decided]** Generator: an own `create` command, as in template.java and template.python; Copier is rejected.
+- **[Decided]** meteo gets its own third look, with its accents as a variant hook.
 
 ---
 

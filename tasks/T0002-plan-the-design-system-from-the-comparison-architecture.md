@@ -1,15 +1,17 @@
 ---
 id: T0002
-owner: ~
+owner: "@claude-code"
 needs: []
 branch: —
 worktree: —
-status: ready
-started_at: —
+status: suspended
+started_at: "2026-11-11T08:20:19Z"
 ended_at: —
 review: human
 preview: none
 protocol: standard
+review_status: pending
+review_round: 1
 ---
 # T0002: Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks
 
@@ -22,14 +24,37 @@ This is a planning task that changes documentation only, so the code sizing gate
 See [technical-spec.md](T0002-plan-the-design-system-from-the-comparison-architecture/technical-spec.md) for the decisions to make.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read the T0001 comparison, requirements.md, and the ui-guidelines.
-- [ ] **[Decide]**    Draft an ADR per decision area, each with options, trade-offs, a recommendation, and evidence links.
-- [ ] **[Doc]**       Write the roadmap with phases, adoption order, and a lossless-extraction proof per adopter.
-- [ ] **[Doc]**       Update requirements.md, index.md, and CHANGELOG.md to match the decisions.
-- [ ] **[Doc]**       Create the first-phase tasks in PLAN.md, and later phases in the Backlog section.
-- [ ] **[Verify]**    Lint the changed markdown files and run plan tasks validate on every task.
+- [x] **[Read]**      Read the T0001 comparison, requirements.md, and the ui-guidelines.
+- [x] **[Decide]**    Draft an ADR per decision area, each with options, trade-offs, a recommendation, and evidence links.
+- [x] **[Doc]**       Write the roadmap with phases, adoption order, and a lossless-extraction proof per adopter.
+- [x] **[Doc]**       Update requirements.md, index.md, and CHANGELOG.md to match the decisions.
+- [x] **[Doc]**       Create the first-phase tasks in PLAN.md, and later phases in the Backlog section.
+- [x] **[Verify]**    Lint the changed markdown files and run plan tasks validate on every task.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-08] **[Doc]**
   Companion task file scaffolded at task creation.
+
+- [2026-11-11] **[Decided]**
+  Settled the remaining open choices with the user: GitHub Packages, own create command, a meteo look, and data-i18n migration.
+
+- [2026-11-11] **[Doc]**
+  Wrote eight ADRs and the roadmap, updated requirements, index, and changelog, and created tasks T0003 to T0025.
+  - T0003 to T0015 in Next Milestone.
+  - T0016 to T0025 in Backlog.
+
+- [2026-11-11] **[Verify]**
+  Fixed the findings of an independent agent review, renamed the project to support.webapp in docs, and passed lint, link, and task checks.
+  - Added tasks T0026 and T0027 to phase 1.
+  - Undeclared file touched: docs/devops.md, for the rename.
+
+- [2026-11-11] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 13.
+  - Lines touched: 1001.
+  - Reopenings: 0.
+
+- [2026-11-11] **[Review]**
+  Round 1 requested (mode: human).
+
