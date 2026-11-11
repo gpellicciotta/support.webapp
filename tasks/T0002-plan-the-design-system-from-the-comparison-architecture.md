@@ -4,14 +4,15 @@ owner: "@claude-code"
 needs: []
 branch: —
 worktree: —
-status: suspended
+status: active
 started_at: "2026-11-11T08:20:19Z"
 ended_at: —
 review: human
 preview: none
 protocol: standard
-review_status: pending
+review_status: rejected
 review_round: 1
+reviewed_by: "@giova"
 ---
 # T0002: Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks
 
@@ -57,4 +58,8 @@ See [technical-spec.md](T0002-plan-the-design-system-from-the-comparison-archite
 
 - [2026-11-11] **[Review]**
   Round 1 requested (mode: human).
+
+- [2026-11-11] **[Review]**
+  Round 1 rejected by @giova: Rejected round 1: twenty findings on the ADRs, roadmap, and tasks need a second round.
+  - Findings are in review-findings-1.md, with decisions per finding.
 

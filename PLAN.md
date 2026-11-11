@@ -2,7 +2,7 @@
 An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
-- [!] T0002 [reason: awaiting human review] [owner: @claude-code] Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks.
+- [~] T0002 [owner: @claude-code] Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks.
 - [x] T0001 Compare the UI design of todos.webapp, family-portal, meteo, auth, and counters, from tokens to app shells.
 - [ ] T0003 [needs: T0002] Set up the repository tooling: package manifest, linters, unit and browser test runners, devops scripts, and CI.
 - [ ] T0004 [needs: T0003] Extract the shared base tokens and the todos look from todos.webapp, with the static token test.

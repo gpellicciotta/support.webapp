@@ -1,10 +1,17 @@
-# T0002 Review, Round 1 (draft)
+---
+task: T0002
+round: 1
+verdict: rejected
+reviewer: "@giova"
+reviewed_at: 2026-11-11T18:57:26Z
+reviewed_commit: e44a826
+---
+# T0002 Review, Round 1
 
-Status: open. Findings are collected during the human review; no verdict is recorded yet.
-The YAML frontmatter that `plan` requires (`verdict`, `reviewer`, `reviewed_at`) is added when the user records the verdict.
-Source: the user's review remarks (`@giova`), with Claude's clarifications written as answers under each finding.
-Scope: `docs/adrs/ADR-0001` to `ADR-0008`, `docs/roadmap.md`, and the tasks T0003 to T0027.
-A second round works through these findings.
+Verdict: rejected, recorded by the user, `@giova`, on 2026-11-11.
+Findings: the user's review remarks, with Claude's clarifications written as answers under each finding.
+Scope: `docs/adrs/ADR-0001` to `ADR-0008`, `docs/roadmap.md`, and the tasks T0003 to T0027, at commit `e44a826`.
+Round 2 works through these findings; each finding states its proposed change and any decision the user made.
 
 ---
 
@@ -461,3 +468,16 @@ Proposed change, for round 2:
 - Define the pending state for asynchronous checks, with `aria-busy` and a status line.
 - State that icon, text, and color together carry each state.
 - Decide whether these belong in T0008, or in a new task, since T0008 already holds fields, checkboxes, and radios.
+
+---
+
+## Decisions Closing Round 1
+Recorded from the user on 2026-11-11, in addition to the decisions inside each finding:
+- F19: the naming rule of the catalog draft is accepted: one kebab-case key per component, with every name derived from it.
+- F20: forms, validation states, the help toggle, and the error summary are part of T0008.
+- F20: validation icons come from the shared sprite, with ids such as `icon-alert`, `icon-check`, and `icon-help`.
+
+Findings still waiting for a user decision, which round 2 drafts as proposals marked `**[Feedback Needed]**`:
+- F2: whether to add the copy step to `dist/` now.
+- F4: the character-based names of the three looks.
+- F16: per-look sprites, or one shared glyph set with a per-look stroke token.
