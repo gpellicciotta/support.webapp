@@ -107,6 +107,7 @@ Answer, as the ADRs describe it. The tool does not exist yet; task T0014 builds 
 - It needs no network and imports nothing else.
 - App CI runs it on every push. Developers run it locally with `node {{web-root}}/vendor/design/bin/check.mjs`.
 - Its purpose is DS-10: copies must not drift, as auth's stale copies did.
+- Two jobs: integrity of the vendored files, and conformance of the app's own stylesheets. Only the first concerns vendored code.
 
 Gaps:
 - ADR-0005 says the check fails against "the pin" but never defines the pin. Presumably it is the `version` in `design.json`.
@@ -136,10 +137,8 @@ Options:
 - A `design-check` tool inside support.python: Python and already installed, but its version is not pinned to the design version.
   A newer checker could reject an older vendored copy.
 
-Claude's lean: the vendored `check.py`. Every consumer already runs Python in CI, and the check is small.
-The token test and browser verifier stay in JavaScript inside this repository, since they never reach the apps.
-The user decides.
+Decision (user, 2026-11-11): keep `check.mjs` in JavaScript. Claude's lean was a vendored `check.py`, which the user declined.
+Round 2 only records the decision and the rejected options in ADR-0007; no other ADR or task changes.
 
 Proposed change, for round 2:
-- Record the chosen language of the check as a decision, and list the other options in ADR-0007.
-- If Python wins, update ADR-0005 (the Node.js consequence) and T0014 and the family-portal adoption task.
+- Record the decision, and list the Python options as rejected in ADR-0007.
