@@ -239,12 +239,15 @@ Proposed change, for round 2:
 
 ## F11. ADR-0006: generate the app from Python, not from the Node command
 - Source: user preference, `python devops generate-app` or similar.
-- Severity: decision made in part. It changes ADR-0006 and touches ADR-0005 and ADR-0008.
+- Severity: decided; round 2 applies it. It changes ADR-0006 and touches ADR-0005 and ADR-0008.
 
 Decisions (user, 2026-11-11):
 - The generator is Python code, run as a devops action from a checkout of this repository at a release tag.
 - The generator never runs `git init` or `plan init`.
-- Still open: calling the Node `vendor` command from the checkout, and dropping the npm `create` subcommand.
+- The generator calls the Node `vendor` command from the checkout, and the npm `create` subcommand is dropped.
+- Premise of that decision: `vendor` also works directly in a project the generator did not create.
+  ADR-0005 already allows this: `npx @gpellicciotta/support.webapp@{{version}} vendor --look {{look}} --to {{web-root}}/vendor/design`, which needs a GitHub Packages token.
+  The generator reaches the same command from its checkout without a token. Round 2 must keep both entry points on one implementation.
 
 Why it fits:
 - Every sibling has a Python `scripts/devops.py`, and `DevopsCli` accepts extra actions, so `python scripts/devops.py generate-app {{app-name}} --look {{look}}` is feasible.
