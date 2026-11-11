@@ -2,6 +2,7 @@
 An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
+- [ ] T0028 [needs: T0007, T0013] Extract the floating action button from todos.webapp into the overlay layer of the shell.
 - [!] T0002 [reason: awaiting human review] [owner: @claude-code] Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks.
 - [x] T0001 Compare the UI design of todos.webapp, family-portal, meteo, auth, and counters, from tokens to app shells.
 - [ ] T0003 [needs: T0002] Set up the repository tooling: package manifest, linters, unit and browser test runners, devops scripts, and CI.
@@ -31,7 +32,6 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0023 [needs: T0017] Add the bright look from meteo with its accent variant and AA contrast on every accent.
 - [ ] T0024 [needs: T0012] Add the tooltip component after a screen reader check of meteo's tooltips.
 - [ ] T0025 [needs: T0022, T0023, T0024] Plan the redesign of auth and counters on the design system.
-- [ ] T0028 [needs: T0007, T0013] Extract the floating action button from todos.webapp into the overlay layer of the shell.
 - [ ] T0029 [needs: T0007] Add the badge component for non-interactive counts and status labels, based on meteo's badges.
 - [ ] T0030 [needs: T0007] Design and add the tabs component with tablist roles and arrow-key navigation.
 - [ ] T0031 [needs: T0016] Design and add the list and data table components on native list and table elements.
