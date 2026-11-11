@@ -1,5 +1,5 @@
 # Documentation Index
-Overview of all documentation for the `template.webapp` project.
+Overview of all documentation for the `support.webapp` project.
 
 ---
 
@@ -10,6 +10,19 @@ Overview of all documentation for the `template.webapp` project.
 - [LICENSE.md](../LICENSE.md): MIT License.
 - [requirements.md](requirements.md): Goals, scope, and constraints of the design system.
 - [devops.md](devops.md): Prerequisites, plan store setup, and task workflow.
+- [roadmap.md](roadmap.md): Phases, entry and exit criteria, and adoption order.
+
+---
+
+## Architecture Decisions
+- [ADR-0001](adrs/ADR-0001-layer-model-and-token-contract.md): Layer model and token contract.
+- [ADR-0002](adrs/ADR-0002-looks.md): Looks.
+- [ADR-0003](adrs/ADR-0003-components-and-patterns.md): Components and patterns.
+- [ADR-0004](adrs/ADR-0004-app-shell.md): App shell.
+- [ADR-0005](adrs/ADR-0005-distribution-and-versioning.md): Distribution and versioning.
+- [ADR-0006](adrs/ADR-0006-generator.md): Generator.
+- [ADR-0007](adrs/ADR-0007-documentation-and-verification.md): Documentation and verification.
+- [ADR-0008](adrs/ADR-0008-repository-layout.md): Repository layout.
 
 ---
 

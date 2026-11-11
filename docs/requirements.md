@@ -40,10 +40,15 @@ The system documents all three for every component and pattern.
 
 ---
 
-## Working Model
-These directions came out of the first design conversation.
-The planning task turns them into decisions:
-- A shared token contract of semantic names, with one theme per look.
-- Look-neutral components: CSS on contract tokens, a documented markup structure, and optional JavaScript.
-- App shells as templates, such as a single-page app with sidebar, a multi-page site, and a single-screen tool.
-- A versioned package for code that keeps changing, and a generator for one-time boilerplate.
+## Architecture Decisions
+The architecture decision records turn these requirements into a design:
+- [ADR-0001](adrs/ADR-0001-layer-model-and-token-contract.md): three token tiers, a shared base, and look-owned values.
+- [ADR-0002](adrs/ADR-0002-looks.md): looks as folders with primitives, mapping, fonts, and a sprite.
+- [ADR-0003](adrs/ADR-0003-components-and-patterns.md): look-neutral components in the light DOM, and shared patterns.
+- [ADR-0004](adrs/ADR-0004-app-shell.md): one app shell with optional areas and options, and no router.
+- [ADR-0005](adrs/ADR-0005-distribution-and-versioning.md): one package on GitHub Packages, vendored into each web root.
+- [ADR-0006](adrs/ADR-0006-generator.md): a `create` command for one-time boilerplate.
+- [ADR-0007](adrs/ADR-0007-documentation-and-verification.md): one gallery, static and browser checks, and app conformance.
+- [ADR-0008](adrs/ADR-0008-repository-layout.md): `src/` as the web root of the package and the gallery.
+
+The [roadmap](roadmap.md) sets the phases and the adoption order.

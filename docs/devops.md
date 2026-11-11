@@ -1,10 +1,10 @@
 # DevOps
-Development environment, planning workflow, and operational procedures for `template.webapp`.
+Development environment, planning workflow, and operational procedures for `support.webapp`.
 
 ---
 
 ## Prerequisites
-- Git, with access to the `gpellicciotta/template.webapp` GitHub repository.
+- Git, with access to the `gpellicciotta/support.webapp` GitHub repository.
 - The [plan](https://github.com/gpellicciotta/plan) CLI.
 - Python 3.10 or later, for the markdown linter of the dev-guidelines.
 
@@ -26,8 +26,8 @@ Tasks live on the `plan` branch, checked out at `.plan/`; [PLAN.md](../PLAN.md) 
 A fresh clone has no `.plan/` until you attach the store:
 
 ```bash
-git clone https://github.com/gpellicciotta/template.webapp.git
-cd template.webapp
+git clone https://github.com/gpellicciotta/support.webapp.git
+cd support.webapp
 plan init --store branch
 ```
 
