@@ -16,15 +16,16 @@ Extract the collapsible and the account menu components from todos.webapp.
 - `src/js/account-menu.js`
 - `src/demo/visual-style-gallery.html`
 - `tests/unit/account-menu.test.js`
-- `tests/e2e/disclosure.spec.js`
+- `tests/e2e/collapsible.spec.js`
+- `tests/e2e/account-menu.spec.js`
 - `docs/specs/visual-style-guide.md`
 - `CHANGELOG.md`
 
-Size estimate: 9 files, 550 lines
-Size note: Both are disclosure widgets on `aria-expanded` that share one browser test.
+Size estimate: 10 files, 570 lines
+Size note: Both are disclosure widgets on `aria-expanded`, tested with the same steps in two specs.
 
 ### Tests
 - Unit: `account-menu.test.js` checks initials, the person icon fallback, the current route mark, and Escape.
-- Integration: `disclosure.spec.js` opens and closes both widgets by pointer and keyboard at 390 and 1440 px.
+- Integration: `collapsible.spec.js` and `account-menu.spec.js` open and closes both widgets by pointer and keyboard at 390 and 1440 px.
 
-Completion check: `npx playwright test tests/e2e/disclosure.spec.js`, exit code 0
+Completion check: `npx playwright test tests/e2e/collapsible.spec.js tests/e2e/account-menu.spec.js`, exit code 0

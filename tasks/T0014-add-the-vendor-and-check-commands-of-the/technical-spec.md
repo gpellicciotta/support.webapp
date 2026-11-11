@@ -29,6 +29,6 @@ Size note: `vendor` and `check` share the manifest format, and the integration t
 
 ### Tests
 - Unit: `manifest.test.js` and `check.test.js` cover hashing, pin mismatch, edited files, and each token rule.
-- Integration: `vendor.test.js` packs the package, vendors the todos look into a temporary app, and runs `check` there.
+- Integration: `vendor.test.js` packs the package, vendors the neutral look into a temporary app, and runs `check` there.
 
 Completion check: `npx vitest run tests/integration/vendor.test.js`, exit code 0

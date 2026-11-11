@@ -1,5 +1,5 @@
 # T0023 Technical Specification
-Add the meteo look with its accent variant and AA contrast on every accent.
+Add the bright look from meteo with its accent variant and AA contrast on every accent.
 
 ---
 

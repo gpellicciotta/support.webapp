@@ -1,5 +1,5 @@
 # T0017 Technical Specification
-Add the family-portal look with its seasons variant, glyph set, and the look template.
+Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
 
 ---
 

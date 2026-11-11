@@ -15,7 +15,7 @@ protocol: standard
 
 ## Goals
 Build the gallery, the style guide skeleton, and the browser verifier of [ADR-0007](../../docs/adrs/ADR-0007-documentation-and-verification.md).
-The gallery shows every token group of the `todos` look, with a look switcher and a light, dark, and system theme switch.
+The gallery shows every token group of the `neutral` look, with a look switcher and a light, dark, and system theme switch.
 Port the checks of family-portal's verifier, described in [the comparison](../../docs/analysis/ui-design-comparison.md#documentation-galleries-and-tests), to Playwright Test.
 Capture gallery screenshots per look and theme at 390 and 1440 px.
 See the technical specification for files, tests, and the completion check.

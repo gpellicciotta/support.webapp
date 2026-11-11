@@ -11,10 +11,10 @@ review: agent
 preview: none
 protocol: standard
 ---
-# T0023: Add the meteo look with its accent variant and AA contrast on every accent
+# T0023: Add the bright look from meteo with its accent variant and AA contrast on every accent.
 
 ## Goals
-Create the meteo look with the system font stack and a `data-accent` variant, pairing yellow with dark text.
+Create the `bright` look from meteo with the system font stack and a `data-accent` variant, pairing yellow with dark text.
 Follow [ADR-0002](../../docs/adrs/ADR-0002-looks.md) and the roadmap.
 Refine declared files, size estimate, and tests in the technical specification before starting.
 

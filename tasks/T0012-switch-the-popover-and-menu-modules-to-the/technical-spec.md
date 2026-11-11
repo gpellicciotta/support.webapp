@@ -16,15 +16,16 @@ Switch the popover and menu modules to the native popover attribute, keeping the
 - `src/css/components/menu.css`
 - `tests/unit/popover.test.js`
 - `tests/unit/menu.test.js`
-- `tests/e2e/overlays.spec.js`
+- `tests/e2e/menu.spec.js`
+- `tests/e2e/popover.spec.js`
 - `docs/specs/visual-style-guide.md`
 - `CHANGELOG.md`
 
-Size estimate: 9 files, 350 lines
+Size estimate: 10 files, 350 lines
 Size note: Menus build on popovers, so both move to the attribute in one change.
 
 ### Tests
 - Unit: `popover.test.js` checks that panels use the `popover` attribute and still receive anchor positions.
-- Integration: `overlays.spec.js` checks light dismiss and that open panels render above the sticky bars.
+- Integration: `menu.spec.js` and `popover.spec.js` checks light dismiss and that open panels render above the sticky bars.
 
-Completion check: `npx playwright test tests/e2e/overlays.spec.js`, exit code 0
+Completion check: `npx playwright test tests/e2e/menu.spec.js tests/e2e/popover.spec.js`, exit code 0

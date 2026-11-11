@@ -11,13 +11,14 @@ review: agent
 preview: none
 protocol: standard
 ---
-# T0008: Extract the field, checkbox, and radio components with the createField module from todos.webapp
+# T0008: Extract fields, checkboxes, radios, and createField from todos.webapp, adding forms, validation states, help toggles, and error summaries.
 
 ## Goals
 Extract the field contract and `createField` of todos.webapp, under [ADR-0003](../../docs/adrs/ADR-0003-components-and-patterns.md).
 `createField` toggles `aria-invalid` and merges `aria-describedby` for hints, counters, and errors.
 Add checkbox and radio styles with `accent-color` and visible focus.
-Show every field state in the gallery.
+Add the form, field group, help toggle, valid and pending states, and error summary of [components.md](../../docs/specs/components.md).
+Validation icons come from the shared sprite; show every field and form state in the gallery.
 See the technical specification for files, tests, and the completion check.
 
 ## Task Execution Steps

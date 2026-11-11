@@ -1,5 +1,5 @@
 # T0022 Technical Specification
-Build the create command and the starter app template.
+Build the Python generate-app devops action and the starter app template.
 
 ---
 

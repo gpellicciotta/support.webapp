@@ -14,7 +14,7 @@ protocol: standard
 # T0010: Extract the toast and live region modules from todos.webapp, including Undo and modal holding
 
 ## Goals
-Extract `createToaster` and the live region of todos.webapp, under [ADR-0003](../../docs/adrs/ADR-0003-components-and-patterns.md).
+Extract the toaster as `createToast`, with `createToaster` as a deprecated alias, and the live region of todos.webapp, under [ADR-0003](../../docs/adrs/ADR-0003-components-and-patterns.md).
 Keep Undo actions, persistent toasts, Ctrl+Z, and holding toasts while a modal is open.
 Apply the notification tier rules of the counters ADR to the documentation.
 See the technical specification for files, tests, and the completion check.

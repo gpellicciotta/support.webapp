@@ -11,12 +11,12 @@ review: agent
 preview: none
 protocol: standard
 ---
-# T0006: Extract the icon sprite format, the icon class, and the spriteIcon builder, with the todos glyph set
+# T0006: Extract the icon sprite format, the icon class, and the createIcon builder, with the neutral glyph set.
 
 ## Goals
 Extract the icon system of todos.webapp, as [ADR-0002](../../docs/adrs/ADR-0002-looks.md) and [ADR-0003](../../docs/adrs/ADR-0003-components-and-patterns.md) define it.
 Fix the core icon id list that every look sprite must provide.
-Add the `.icon` class, the `spriteIcon` builder module, and the `todos` look sprite.
+Add the `.icon` class, the `createIcon` builder module, and the `neutral` look sprite.
 Show every glyph in the gallery and check every sprite reference in the browser.
 See the technical specification for files, tests, and the completion check.
 

@@ -11,10 +11,10 @@ review: agent
 preview: none
 protocol: standard
 ---
-# T0017: Add the family-portal look with its seasons variant, glyph set, and the look template
+# T0017: Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
 
 ## Goals
-Extract the family-portal look and its `data-season` variant, add its sprite, and create `src/looks/_template/` from the two looks.
+Extract the `warm` look from family-portal with its `data-season` variant, add its sprite, and create `src/looks/_template/` from the two looks.
 Follow [ADR-0001](../../docs/adrs/ADR-0001-layer-model-and-token-contract.md) and [ADR-0002](../../docs/adrs/ADR-0002-looks.md) and the roadmap.
 Refine declared files, size estimate, and tests in the technical specification before starting.
 

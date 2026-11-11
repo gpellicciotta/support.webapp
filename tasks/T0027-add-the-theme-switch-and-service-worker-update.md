@@ -15,7 +15,7 @@ protocol: standard
 
 ## Goals
 Add the shared patterns of [ADR-0003](../../docs/adrs/ADR-0003-components-and-patterns.md) that todos.webapp already implements.
-`theme.js` applies System, Light, or Dark to `data-theme` and stores the choice.
+`theme-switch.js` applies System, Light, or Dark to `data-theme` and stores the choice.
 `sw-update.js` shows an Update toast for a waiting service worker and reloads on request.
 Document the delete and Undo, offline page, and `aria-current` patterns in the style guide.
 See the technical specification for files, tests, and the completion check.

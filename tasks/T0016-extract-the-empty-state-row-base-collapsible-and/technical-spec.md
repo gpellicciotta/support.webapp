@@ -14,14 +14,15 @@ Extract the empty state and the row base components from todos.webapp.
 - `src/css/components/row.css`
 - `src/css/style.css`
 - `src/demo/visual-style-gallery.html`
-- `tests/e2e/containers.spec.js`
+- `tests/e2e/empty-state.spec.js`
+- `tests/e2e/row.spec.js`
 - `docs/specs/visual-style-guide.md`
 - `CHANGELOG.md`
 
-Size estimate: 7 files, 350 lines
+Size estimate: 8 files, 370 lines
 
 ### Tests
 - Unit test: none (CSS-only components without modules; the static token test covers their tokens)
-- Integration: `containers.spec.js` checks the row layout at narrow and wide container widths and the two-action limit.
+- Integration: `row.spec.js` and `empty-state.spec.js` check the row layout at narrow and wide container widths and the two-action limit.
 
-Completion check: `npx playwright test tests/e2e/containers.spec.js`, exit code 0
+Completion check: `npx playwright test tests/e2e/empty-state.spec.js tests/e2e/row.spec.js`, exit code 0

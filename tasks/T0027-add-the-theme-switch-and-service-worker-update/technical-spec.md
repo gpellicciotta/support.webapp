@@ -11,12 +11,12 @@ Add the theme switch and service worker update modules, and document the shared 
 ---
 
 ## Declared Files
-- `src/js/theme.js`
+- `src/js/theme-switch.js`
 - `src/js/sw-update.js`
 - `src/demo/gallery.js`
-- `tests/unit/theme.test.js`
+- `tests/unit/theme-switch.test.js`
 - `tests/unit/sw-update.test.js`
-- `tests/e2e/theme.spec.js`
+- `tests/e2e/theme-switch.spec.js`
 - `docs/specs/visual-style-guide.md`
 - `CHANGELOG.md`
 
@@ -24,7 +24,7 @@ Size estimate: 8 files, 450 lines
 Size note: Two small modules plus pattern documentation; the documentation carries no code to split off.
 
 ### Tests
-- Unit: `theme.test.js` and `sw-update.test.js` check stored choices, the System default, and the reload on request.
-- Integration: `theme.spec.js` switches the gallery theme, reloads, and checks the stored choice at 390 and 1440 px.
+- Unit: `theme-switch.test.js` and `sw-update.test.js` check stored choices, the System default, and the reload on request.
+- Integration: `theme-switch.spec.js` switches the gallery theme, reloads, and checks the stored choice at 390 and 1440 px.
 
-Completion check: `npx playwright test tests/e2e/theme.spec.js`, exit code 0
+Completion check: `npx playwright test tests/e2e/theme-switch.spec.js`, exit code 0

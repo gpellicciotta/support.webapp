@@ -52,3 +52,29 @@ Its 22 findings were addressed as follows:
 - Fixed: T0013 demos all four adopter settings; T0025 needs the meteo tasks; sentences over 20 words were shortened.
 - Kept: family-portal's fixed footer and a sticky action bar both stay visible at the bottom, so no change is listed.
 - Kept: sizing notes on tasks above the typical line; every task stays below the large line.
+
+---
+
+## Round 2 Verification
+Round 2 applies findings F1 to F20 of [review-findings-1.md](review-findings-1.md), following [round-2-decisions.md](round-2-decisions.md).
+
+Markdown lint of the repository, which skips `CHANGELOG.md` through `.lint-markdown.json`:
+```text
+$ lint-markdown check --offline
+All 19 markdown files passed linting.
+exit code: 0
+```
+
+Task file validation; T0001 fails only TF017, which backlog task T0653 in the plan project addresses:
+```text
+$ plan tasks validate
+Task files with issues:
+- **NOT OK** T0001
+
+Found 1 lint issue across 33 task files.
+```
+
+Key changes:
+- All eight ADRs: `**[Chosen]**`, `**[Decided]**`, and `**[Feedback Needed]**` markers, reasons for rejected options, and mustache placeholders.
+- New specifications: [components.md](../../../docs/specs/components.md) and [naming.md](../../../docs/specs/naming.md).
+- Tasks: look names, the naming rule, and forms in T0008 applied to T0004 to T0027; new tasks T0028 to T0033.

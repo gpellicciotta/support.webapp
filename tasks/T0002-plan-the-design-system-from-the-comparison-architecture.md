@@ -4,15 +4,14 @@ owner: "@claude-code"
 needs: []
 branch: —
 worktree: —
-status: active
+status: suspended
 started_at: "2026-11-11T08:20:19Z"
 ended_at: —
 review: human
 preview: none
 protocol: standard
-review_status: rejected
-review_round: 1
-reviewed_by: "@giova"
+review_status: pending
+review_round: 2
 ---
 # T0002: Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks
 
@@ -30,6 +29,8 @@ See [technical-spec.md](T0002-plan-the-design-system-from-the-comparison-archite
 - [x] **[Doc]**       Write the roadmap with phases, adoption order, and a lossless-extraction proof per adopter.
 - [x] **[Doc]**       Update requirements.md, index.md, and CHANGELOG.md to match the decisions.
 - [x] **[Doc]**       Create the first-phase tasks in PLAN.md, and later phases in the Backlog section.
+- [x] **[Verify]**    Lint the changed markdown files and run plan tasks validate on every task.
+- [x] **[Doc]**       Revise the ADRs, roadmap, and tasks for round 2, following the round-2 decisions sheet.
 - [x] **[Verify]**    Lint the changed markdown files and run plan tasks validate on every task.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
@@ -62,4 +63,18 @@ See [technical-spec.md](T0002-plan-the-design-system-from-the-comparison-archite
 - [2026-11-11] **[Review]**
   Round 1 rejected by @giova: Rejected round 1: twenty findings on the ADRs, roadmap, and tasks need a second round.
   - Findings are in review-findings-1.md, with decisions per finding.
+
+- [2026-11-11] **[Doc]**
+  Started round 2: recorded the shared decisions, renamed looks in task titles, and created tasks T0028 to T0033.
+  - Decisions sheet: round-2-decisions.md in the task folder.
+  - Two forks revise ADR-0001 to 0003 and ADR-0004 to 0008.
+
+- [2026-11-11] **[Verify]**
+  Finished round 2: revised eight ADRs, the roadmap, and tasks, added two specifications, and passed lint and task checks.
+  - Main commit 9d8c7d3.
+  - Size note: round 2 touched 14 files and 1529 lines.
+  - Open items are marked Feedback Needed in the ADRs.
+
+- [2026-11-11] **[Review]**
+  Round 2 requested (mode: human).
 
