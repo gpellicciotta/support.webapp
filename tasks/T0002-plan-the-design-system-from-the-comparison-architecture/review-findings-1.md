@@ -231,7 +231,7 @@ Not listed, but required or customary under the project-setup guidelines:
 Open design questions:
 - The generator is a Node command, while `devops.py` and the bootstrap script are Python on support.python.
   The generated `scripts/requirements.txt` must pin support.python, and the template must carry the scripts.
-- Who runs `git init` and `plan init`: `create` itself, or the bootstrap script, as in template.python?
+- `git init` and `plan init`: decided in F11, the generator runs neither; the bootstrap script or the user does.
 - LICENSE and the copyright owner need placeholders and flags.
 
 Proposed change, for round 2:
@@ -239,7 +239,12 @@ Proposed change, for round 2:
 
 ## F11. ADR-0006: generate the app from Python, not from the Node command
 - Source: user preference, `python devops generate-app` or similar.
-- Severity: decision needed. It changes ADR-0006 and touches ADR-0005 and ADR-0008.
+- Severity: decision made in part. It changes ADR-0006 and touches ADR-0005 and ADR-0008.
+
+Decisions (user, 2026-11-11):
+- The generator is Python code, run as a devops action from a checkout of this repository at a release tag.
+- The generator never runs `git init` or `plan init`.
+- Still open: calling the Node `vendor` command from the checkout, and dropping the npm `create` subcommand.
 
 Why it fits:
 - Every sibling has a Python `scripts/devops.py`, and `DevopsCli` accepts extra actions, so `python scripts/devops.py generate-app {{app-name}} --look {{look}}` is feasible.
@@ -254,7 +259,7 @@ Open questions, with Claude's lean:
   - A Python generator that runs from a checkout can call the same `node bin/cli.mjs vendor` command from that checkout. No registry token is needed, and `vendor` exists once.
   - Reimplementing `vendor` in Python gives two implementations that must produce identical manifests. Lean: do not.
 - Does `create` still exist as an npm subcommand? Lean: no. Then `bin/cli.mjs` keeps `vendor` and `check`.
-- Who runs `git init` and `plan init`? Now that the code is Python, the generator can run both, or leave them to the generated bootstrap script (see F10).
+- `git init` and `plan init`: decided, the generator runs neither. The generated bootstrap script or the user does.
 
 Consequences to carry into round 2:
 - ADR-0006: replace the `npx ... create` command, and the flags table of F8, with the devops action.
