@@ -116,7 +116,10 @@ Gaps:
 
 Proposed change, for round 2:
 - Define the pin, and state whether deliberate manifest edits are in scope.
-- Add one "Conformance check" section to ADR-0007 that lists what it checks and when it runs.
+- Describe the two jobs of the vendored tool separately in ADR-0007 (user decision, 2026-11-11):
+  - Integrity: the vendored files against the manifest and the pin.
+  - Conformance: the app's own stylesheets against the token rules.
+- For each job, state what it checks, what fails, and that app CI runs both on every push.
 
 ## F6. ADR-0007: JavaScript or Python for the tools?
 - Source: user question.
