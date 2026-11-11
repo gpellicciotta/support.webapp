@@ -92,3 +92,54 @@ Proposed change, for round 2:
 - Describe each look by its traits: for example monochrome gray with a navy signal color, or warm ivory with saffron accents.
 - Document how an app keeps its own look outside the package, and confirm that `vendor` and `check.mjs` accept it.
 - Rename the folder, task titles, roadmap entries, and the examples that use `--look todos`.
+
+## F5. ADR-0005 and ADR-0007: what the vendored check does, and when it runs
+- Source: user question.
+- Severity: should-fix. The behavior is split over two ADRs and the word "pin" is undefined.
+
+Answer, as the ADRs describe it. The tool does not exist yet; task T0014 builds it:
+- `check.mjs` is copied into the app by `vendor`, so each app runs the version that matches its copy.
+- Integrity: it hashes every vendored file and compares the hashes with `manifest.json`.
+  - It fails on a changed file, a missing file, or a file the manifest does not list.
+  - It fails when the version in `design.json` differs from the pin.
+- Rules: it scans the app's own stylesheet folders, listed in `design.json`, for raw colors, primitive or private tokens, and deprecated names.
+- Warning: it flags fixed or sticky positions outside the shell.
+- It needs no network and imports nothing else.
+- App CI runs it on every push. Developers run it locally with `node {{web-root}}/vendor/design/bin/check.mjs`.
+- Its purpose is DS-10: copies must not drift, as auth's stale copies did.
+
+Gaps:
+- ADR-0005 says the check fails against "the pin" but never defines the pin. Presumably it is the `version` in `design.json`.
+- The manifest travels with the copy, so an edit to a file and to its manifest entry passes the hash check.
+  The check catches accidental edits, not deliberate ones. This is Claude's inference, not stated in the ADRs.
+
+Proposed change, for round 2:
+- Define the pin, and state whether deliberate manifest edits are in scope.
+- Add one "Conformance check" section to ADR-0007 that lists what it checks and when it runs.
+
+## F6. ADR-0007: JavaScript or Python for the tools?
+- Source: user question.
+- Severity: decision needed. The ADR's only reason is "one toolchain".
+
+Facts, checked in the sibling checkouts on 2026-11-11:
+- All five apps have `scripts/devops.py`. family-portal has 29 Python files and no Node.js tooling.
+- todos.webapp, meteo, auth (`webapp/`), and counters (`scripts/`) already have a `package.json`.
+- ADR-0007 ports family-portal's Python browser verifier to JavaScript, so the one app that is Python-only gets a new language.
+- The Node.js requirement of ADR-0005 covers `vendor` and `check`, and the adoption task adds Node.js to family-portal's CI.
+
+Options:
+- JavaScript for everything, as drafted: one toolchain with the Vitest token test and the Playwright verifier.
+  Costs: Node.js in family-portal's CI, and a language that most Java and Python developers know less well.
+- A stdlib-only Python `check.py` vendored beside the copy, run from each app's `devops.py`:
+  - CI needs no Node.js, because only developers who run `vendor` need npm.
+  - Costs: the hash and scan rules exist in Python, while the token test stays JavaScript, so a parity test is needed.
+- A `design-check` tool inside support.python: Python and already installed, but its version is not pinned to the design version.
+  A newer checker could reject an older vendored copy.
+
+Claude's lean: the vendored `check.py`. Every consumer already runs Python in CI, and the check is small.
+The token test and browser verifier stay in JavaScript inside this repository, since they never reach the apps.
+The user decides.
+
+Proposed change, for round 2:
+- Record the chosen language of the check as a decision, and list the other options in ADR-0007.
+- If Python wins, update ADR-0005 (the Node.js consequence) and T0014 and the family-portal adoption task.
