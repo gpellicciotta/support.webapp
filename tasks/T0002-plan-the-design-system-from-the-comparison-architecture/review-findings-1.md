@@ -225,7 +225,7 @@ Not listed, but required or customary under the project-setup guidelines:
 - `CLAUDE.md`, containing only `@AGENTS.md`.
 - `docs/requirements.md` and `docs/devops.md`, which are mandatory documentation files.
 - `scripts/` with `bootstrap-dev-environment.py` and `devops.py`, since a web app is a code project.
-- `.plan/` and `PLAN.md`, created by `plan init`, plus the ignore entries for them.
+- The ignore entries for `.plan/` and `PLAN.md`; the generator does not create them, because the user runs `plan init` later.
 - `.gitignore`, and `.editorconfig` as in template.python.
 
 Open design questions:
