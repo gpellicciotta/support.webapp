@@ -417,3 +417,21 @@ Proposed change, for round 2:
   - Owning task.
 - Decide for each missing control above whether it is in the first set, later, or out.
 - Make the gallery sections and the token test iterate over this catalog, so a component cannot ship without a gallery section.
+- Draft of the catalog, written by Claude on 2026-11-11: `component-catalog-draft.md` in this task folder, with six questions for the user.
+
+## F19. Components and shells must define their HTML, and one name must link HTML, CSS, and JavaScript
+- Source: user remark, 2026-11-11.
+- Severity: must-fix. ADR-0003 and ADR-0004 mainly specify CSS and behavior.
+
+Facts:
+- ADR-0003 says the markup contract is "documented per component in the style guide and the gallery", but no ADR or catalog lists it.
+- ADR-0004 gives one skeleton with every shell area, not the markup of the option combinations that adopters use.
+- Nothing states how a component's HTML class, CSS file, JavaScript module, gallery section, and tests share one name.
+- Today's names drift: `createToaster` against `.toast`, `createField` against `.field`, and `spriteIcon` against `.icon`.
+
+Proposed change, for round 2:
+- Give every catalog row a normative HTML skeleton, with its classes, parts, variants, hooks, and ARIA.
+  The same applies to every shell option combination in ADR-0004.
+- Define one kebab-case component key and derive every name from it, as the table in `component-catalog-draft.md` proposes.
+- Enforce the link in the token test: each catalog key needs a CSS partial, a gallery section, and a markup skeleton.
+- Put the naming rule in the naming conventions of F15, and link ADR-0003 and ADR-0004 to it.
