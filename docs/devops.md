@@ -1,23 +1,68 @@
 # DevOps
-Development environment, planning workflow, and operational procedures for `support.webapp`.
+Development environment, versioning, planning workflow, and operational procedures for `support.webapp`.
 
 ---
 
-## Prerequisites
+## Development Environment
+### Prerequisites
 - Git, with access to the `gpellicciotta/support.webapp` GitHub repository.
-- The [plan](https://github.com/gpellicciotta/plan) CLI.
-- Python 3.10 or later, for the markdown linter of the dev-guidelines.
+- Python 3.9 or later, to install the tools below.
+- The [plan](https://github.com/gpellicciotta/plan) CLI, for tasks and the plan store.
+- [support.python](https://github.com/gpellicciotta/support.python) v3.1.0 or later, which provides `lint-markdown`.
 
 Build and test tooling arrives with the first code task, together with the `scripts/` folder.
 
----
-
-## Documentation Checks
-Lint the documentation with the dev-guidelines markdown linter, from a sibling checkout:
+### Setup
+Install the tools, preferably into a virtual environment:
 
 ```bash
-python ../dev-guidelines/scripts/lint-markdown.py check README.md CHANGELOG.md docs
+python -m pip install "git+https://github.com/gpellicciotta/plan.git" "git+https://github.com/gpellicciotta/support.python.git@v3.1.0"
 ```
+
+Check the documentation before completing a task:
+
+```bash
+lint-markdown check --offline
+```
+
+`--offline` skips external link checks, since links to private repositories fail without credentials.
+Run `lint-markdown help --verbose` for the rule list, and `lint-markdown fix` to repair formatting.
+
+---
+
+## Versioning and Releasing
+### Updating Versions
+- The top `## v{{version}}-pre` heading in [CHANGELOG.md](../CHANGELOG.md) is the only version source until the package manifest arrives.
+- `plan tasks stop {{task-id}} --status completed` raises the patch number for every completed task.
+- Never edit the patch number yourself.
+- Rename the heading to bump the minor or major version, as the change management guidelines require.
+
+### Making a Release
+The release commit carries no `-pre` heading; the next `-pre` heading gets its own commit.
+Publishing the package arrives with the publish workflow task.
+1. Run the checks on a clean, up-to-date `main`:
+   ```bash
+   git switch main
+   git pull --ff-only
+   git status --short
+   lint-markdown check --offline
+   ```
+2. Replace the `-pre` suffix of the top heading in [CHANGELOG.md](../CHANGELOG.md) with `[released: {{yyyy-mm-dd}}]`.
+3. Commit only that change:
+   ```bash
+   git add CHANGELOG.md
+   git commit -m "Released v{{version}}."
+   ```
+4. Tag the commit, then push both after confirming with the owner:
+   ```bash
+   git tag -a v{{version}} -m "Released v{{version}}."
+   git push --atomic origin main v{{version}}
+   ```
+5. Add a `## v{{next-patch-version}}-pre` heading above the released one, and commit it:
+   ```bash
+   git add CHANGELOG.md
+   git commit -m "Started v{{next-patch-version}}-pre."
+   ```
 
 ---
 

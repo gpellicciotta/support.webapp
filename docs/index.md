@@ -9,7 +9,7 @@ Overview of all documentation for the `support.webapp` project.
 - [PLAN.md](../PLAN.md): Task index for planned, active, and backlog work.
 - [LICENSE.md](../LICENSE.md): MIT License.
 - [requirements.md](requirements.md): Goals, scope, and constraints of the design system.
-- [devops.md](devops.md): Prerequisites, plan store setup, and task workflow.
+- [devops.md](devops.md): Tool setup, documentation checks, versioning, releasing, plan store, and task workflow.
 - [roadmap.md](roadmap.md): Phases, entry and exit criteria, and adoption order.
 
 ---
