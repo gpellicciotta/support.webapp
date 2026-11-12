@@ -8,12 +8,20 @@ InterVariable.woff2 and OFL.txt are unchanged copies; the font uses SIL OFL 1.1.
 Shared space extensions, widths, gutter, and offsets follow ADR-0001 and family-portal primitives.
 Read family-portal commit `1953f75484a2fe65aa3444730b3a9f459ae21cb4` for those shared values.
 
+### Glyphs
+[icons.svg](../../../src/looks/neutral/icons.svg) copies todos.webapp `src/img/icons.svg` at the same commit.
+Mechanical command: `sed -E 's/<symbol id="/<symbol id="icon-/' {{todos-webapp}}/src/img/icons.svg`.
+The header comment and the new `icon-help` glyph were then written by hand.
+The glyphs are first-party drawings of todos.webapp under its MIT license.
+Neither the sprite nor the todos.webapp docs attribute any glyph to a third-party icon set.
+The sprite holds 30 glyphs: the 29 of todos.webapp and `icon-help`.
+
 ## Usage
 Import [index.css](../../../src/looks/neutral/index.css) from the app stylesheet.
 Use semantic names from [contract.json](../../../src/contract.json), never private primitives.
 Set `data-theme` to `light` or `dark`; remove it to follow the system.
 The light fallback supports browsers without `light-dark()`.
-The icon extraction task supplies the sprite and final core icon list.
+Pass the sprite path to `setSpriteUrl`, such as `vendor/design/looks/neutral/icons.svg`.
 
 ## Contract gaps
 **[Decided]** Existing values remain unchanged; these additions use existing roles, primitives, or typography steps.

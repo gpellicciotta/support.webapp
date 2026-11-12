@@ -324,3 +324,27 @@ a:hover { color: var(--color-link-hover); }
 .token--width-narrow { --specimen: var(--width-narrow); }
 .token--width-reading { --specimen: var(--width-reading); }
 .token--gutter { --specimen: var(--gutter); }
+
+/* Icon section: one card per glyph or size, with its name. */
+.glyph-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, calc(var(--space-12) * 2)), 1fr));
+  gap: var(--space-3);
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.glyph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-2);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  font-size: var(--text-xs);
+  text-align: center;
+  overflow-wrap: anywhere;
+}

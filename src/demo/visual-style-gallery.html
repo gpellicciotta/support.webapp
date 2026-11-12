@@ -13,7 +13,7 @@
     <header class="gallery-header">
         <div class="gallery-header__inner">
             <h1>Visual style gallery</h1>
-            <p>Every token group of the selected look, in the selected theme, with placeholder content only.
+            <p>Every token group and component of the selected look, in the selected theme, with placeholder content only.
                 The visual style guide, <code>docs/specs/visual-style-guide.md</code>, explains when to use each group.</p>
             <form class="gallery-controls" aria-label="Gallery settings">
                 <div class="gallery-controls__look">
@@ -29,7 +29,7 @@
                     <label><input type="radio" name="theme" value="dark"> Dark</label>
                 </fieldset>
             </form>
-            <nav aria-label="Token groups">
+            <nav aria-label="Gallery sections">
                 <ul class="gallery-nav">
                     <li><a href="#tokens-grounds">Grounds</a></li>
                     <li><a href="#tokens-text">Text</a></li>
@@ -49,6 +49,7 @@
                     <li><a href="#tokens-motion">Motion</a></li>
                     <li><a href="#tokens-sizes">Sizes</a></li>
                     <li><a href="#tokens-widths">Widths</a></li>
+                    <li><a href="#icon">Icon</a></li>
                 </ul>
             </nav>
         </div>
@@ -278,6 +279,48 @@
                 <li class="token token--width-narrow" data-token="--width-narrow"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--width-narrow</code><span class="token__value"></span></li>
                 <li class="token token--width-reading" data-token="--width-reading"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--width-reading</code><span class="token__value"></span></li>
                 <li class="token token--gutter" data-token="--gutter"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--gutter</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="icon" class="gallery-section" aria-labelledby="icon-title">
+            <h2 id="icon-title">Icon</h2>
+            <p>Sizes of the <code>.icon</code> class, drawn with the stroke token of the look.</p>
+            <ul class="glyph-grid">
+                <li class="glyph"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg><code>icon--sm</code></li>
+                <li class="glyph"><svg class="icon icon--md" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg><code>icon--md</code></li>
+                <li class="glyph"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg><code>icon--lg</code></li>
+            </ul>
+            <p>Every glyph of the look sprite; components reference the core ids that <code>contract.json</code> lists.</p>
+            <ul class="glyph-grid">
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-status-todo"/></svg><code>icon-status-todo</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-status-in-progress"/></svg><code>icon-status-in-progress</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-status-completed"/></svg><code>icon-status-completed</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-status-cancelled"/></svg><code>icon-status-cancelled</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg><code>icon-clock</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg><code>icon-alert</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-help"/></svg><code>icon-help</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-note"/></svg><code>icon-note</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-people"/></svg><code>icon-people</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-more"/></svg><code>icon-more</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-grip"/></svg><code>icon-grip</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg><code>icon-check</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-close"/></svg><code>icon-close</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-back"/></svg><code>icon-back</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg><code>icon-plus</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-search"/></svg><code>icon-search</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sort"/></svg><code>icon-sort</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg><code>icon-chevron-down</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-tasks"/></svg><code>icon-tasks</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-lists"/></svg><code>icon-lists</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bin"/></svg><code>icon-bin</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-settings"/></svg><code>icon-settings</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg><code>icon-user</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bell"/></svg><code>icon-bell</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sync-local"/></svg><code>icon-sync-local</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sync-synced"/></svg><code>icon-sync-synced</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sync-syncing"/></svg><code>icon-sync-syncing</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sync-offline"/></svg><code>icon-sync-offline</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sync-sign-in"/></svg><code>icon-sync-sign-in</code></li>
+                <li class="glyph"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sync-error"/></svg><code>icon-sync-error</code></li>
             </ul>
         </section>
     </main>

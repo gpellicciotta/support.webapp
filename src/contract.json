@@ -844,7 +844,8 @@
     "icon-more",
     "icon-check",
     "icon-alert",
-    "icon-help"
+    "icon-help",
+    "icon-chevron-down"
   ],
   "components": [
     "button",

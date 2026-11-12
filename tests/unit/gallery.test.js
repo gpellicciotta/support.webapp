@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { applyLook, applyTheme, initGallery, lookHref, looks, showTokenValues, themes } from '../../src/demo/gallery.js';
+import { applyLook, applyTheme, initGallery, lookHref, looks, showTokenValues, spriteHref, themes } from '../../src/demo/gallery.js';
 import { categories, readContract } from './contract.js';
 
 const read = (path) => readFileSync(new URL(`../../src/demo/${path}`, import.meta.url), 'utf8');
@@ -59,14 +59,15 @@ function fakeGallery({ values = {}, checked = 'system' } = {}) {
     select.value = looks[0];
     const radios = themes.map((value) => Object.assign(new FakeElement(), { value, checked: value === checked }));
     const tokens = [token('--color-bg'), token('--color-accent')];
+    const uses = [new FakeElement({ href: 'stale.svg#icon-close' }), new FakeElement({ href: 'stale.svg#icon-check' })];
     const doc = {
         documentElement: root,
         getElementById: (id) => ({ 'look-stylesheet': link, 'look-select': select })[id] || null,
         querySelector: (selector) => (selector === 'input[name="theme"]:checked' ? radios.find((radio) => radio.checked) || null : null),
-        querySelectorAll: (selector) => ({ '[data-token]': tokens, 'input[name="theme"]': radios })[selector] || []
+        querySelectorAll: (selector) => ({ '[data-token]': tokens, 'input[name="theme"]': radios, 'svg.icon use': uses })[selector] || []
     };
     const view = { getComputedStyle: () => ({ getPropertyValue: (name) => values[name] || '' }) };
-    return { doc, view, root, link, select, radios, tokens };
+    return { doc, view, root, link, select, radios, tokens, uses };
 }
 
 describe('look switcher', () => {
@@ -75,6 +76,13 @@ describe('look switcher', () => {
         link.setAttribute('href', 'stale.css');
         applyLook(doc, look);
         expect(link.getAttribute('href')).toBe(`../looks/${look}/index.css`);
+    });
+
+    it.each(looks)('points every gallery icon at the %s sprite', (look) => {
+        const { doc, uses } = fakeGallery();
+        applyLook(doc, look);
+        expect(spriteHref(look)).toBe(`../looks/${look}/icons.svg`);
+        expect(uses.map((use) => use.getAttribute('href'))).toEqual([`${spriteHref(look)}#icon-close`, `${spriteHref(look)}#icon-check`]);
     });
 
     it('rejects an unknown look and keeps the current link', () => {

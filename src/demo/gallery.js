@@ -14,7 +14,16 @@ export function lookHref(look) {
 }
 
 /**
- * Swap the look stylesheet link to another look.
+ * Return the gallery-relative icon sprite of a look.
+ * @param {string} look look name
+ * @returns {string} the look's `icons.svg` path
+ */
+export function spriteHref(look) {
+    return `../looks/${look}/icons.svg`;
+}
+
+/**
+ * Swap the look stylesheet link and every gallery icon's sprite to another look.
  * @param {Document} doc gallery document
  * @param {string} look one of `looks`
  */
@@ -23,6 +32,9 @@ export function applyLook(doc, look) {
         throw new RangeError(`Unknown look: ${look}`);
     }
     doc.getElementById('look-stylesheet').setAttribute('href', lookHref(look));
+    for (const use of doc.querySelectorAll('svg.icon use')) {
+        use.setAttribute('href', `${spriteHref(look)}#${use.getAttribute('href').split('#')[1]}`);
+    }
 }
 
 /**

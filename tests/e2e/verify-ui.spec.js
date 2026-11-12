@@ -119,6 +119,37 @@ function collect() {
 }
 
 /**
+ * Fetch every sprite file the page references and list the references that do not resolve.
+ * @returns {Promise<{references: number, problems: string[]}>} the reference count and one line per unresolved reference
+ */
+async function collectSprites() {
+    const uses = [...document.querySelectorAll('use')].map((use) => use.getAttribute('href') ?? use.getAttribute('xlink:href') ?? '');
+    const files = new Map();
+    const problems = [];
+    for (const href of uses) {
+        const url = new URL(href, document.baseURI);
+        const file = url.href.split('#')[0];
+        if (!url.hash) {
+            problems.push(`sprite reference without an id: ${href}`);
+            continue;
+        }
+        if (!files.has(file)) {
+            files.set(file, fetch(file).then(async (response) => (response.ok
+                ? new DOMParser().parseFromString(await response.text(), 'image/svg+xml')
+                : null)));
+        }
+        const sprite = await files.get(file);
+        if (!sprite) {
+            problems.push(`sprite file not loaded: ${href}`);
+        }
+        else if (!sprite.getElementById(decodeURIComponent(url.hash.slice(1)))) {
+            problems.push(`unresolved sprite reference: ${href}`);
+        }
+    }
+    return { references: uses.length, problems };
+}
+
+/**
  * Parse a computed CSS color into 0-255 channels and alpha.
  * @param {string} value computed color, such as `rgb(1 2 3 / 50%)` or `color(srgb 0.1 0.2 0.3)`
  * @returns {number[]|null} `[r, g, b, a]`, or null when the format is unknown
@@ -297,15 +328,18 @@ for (const target of pages) {
                     expect(response.status()).toBe(200);
                     await page.screenshot({ path: testInfo.outputPath(`${target.name}-${look}-${effective}-${viewport.width}-${theme === 'system' ? 'system' : 'explicit'}.png`), fullPage: true });
                     const data = await check(page);
+                    const sprites = await page.evaluate(collectSprites);
                     // One summary line per run, as family-portal's verifier printed.
                     console.log(`[${look} ${theme} ${viewport.width}px] ${data.stylesheets.length} stylesheets, ${data.texts.length} texts, `
-                        + `${data.targets.length} targets, ${data.focus.length} focus records, overflow ${data.overflow}px, errors ${errors.length}`);
+                        + `${data.targets.length} targets, ${data.focus.length} focus records, ${sprites.references} sprite references, `
+                        + `overflow ${data.overflow}px, errors ${errors.length}`);
                     expect(data.stylesheets.some((href) => href.endsWith(lookHref(look).replace(/^(\.\.\/)+/, '/')))).toBe(true);
                     expect(data.stylesheets.some((href) => href.endsWith('/css/style.css'))).toBe(true);
                     expect(data.texts.length).toBeGreaterThan(0);
                     expect(data.targets.length).toBeGreaterThan(0);
+                    expect(sprites.references).toBeGreaterThan(0);
                     expect(luminance(parseColor(data.background).slice(0, 3)) < 0.2, `${effective} background ${data.background}`).toBe(effective === 'dark');
-                    expect([...errors, ...summarize(data)]).toEqual([]);
+                    expect([...errors, ...summarize(data), ...sprites.problems]).toEqual([]);
                     await page.close();
                 });
             }
@@ -333,4 +367,18 @@ test('reports injected overflow, contrast, target, and focus violations', async 
     expect(problems.some((problem) => problem.startsWith('p#faint') && problem.includes('contrast'))).toBe(true);
     expect(problems.some((problem) => problem.startsWith('button#tiny: target 10x10px'))).toBe(true);
     expect(problems).toContain('button#unringed: no visible focus indicator');
+});
+
+test('reports unresolved sprite references', async ({ page }) => {
+    await open(page, pages[0].path, looks[0], 'system');
+    await page.evaluate(() => {
+        document.querySelector('main').insertAdjacentHTML('beforeend', `<div id="faults">
+            <svg class="icon" aria-hidden="true"><use href="../looks/neutral/icons.svg#icon-missing"/></svg>
+            <svg class="icon" aria-hidden="true"><use href="../looks/missing/icons.svg#icon-close"/></svg></div>`);
+    });
+    const { problems } = await page.evaluate(collectSprites);
+    expect(problems).toEqual([
+        'unresolved sprite reference: ../looks/neutral/icons.svg#icon-missing',
+        'sprite file not loaded: ../looks/missing/icons.svg#icon-close'
+    ]);
 });

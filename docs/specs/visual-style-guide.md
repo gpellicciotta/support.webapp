@@ -49,6 +49,27 @@ The gallery shows each group in the selected look and theme, with computed value
 [components.md](components.md) is the catalog: keys, markup skeletons, variants, states, and accessibility minimums.
 Each component gains a gallery section `id="{{key}}"` in the task that builds it.
 
+### Icons
+Each look ships one sprite, `looks/{{look}}/icons.svg`, with one 24-unit `<symbol>` per glyph ([ADR-0002](../adrs/ADR-0002-looks.md#icons)).
+Every sprite provides the core ids that `icons` in [contract.json](../../src/contract.json) lists.
+Components reference only core ids; apps may add local glyphs in their own sprite.
+
+- Draw an icon with `<svg class="icon" aria-hidden="true" focusable="false"><use href="{{sprite}}#icon-{{name}}"/></svg>`.
+- The plain class draws the md size; `icon--sm`, `icon--md`, and `icon--lg` pick a size token.
+- The lg size uses `--icon-stroke-thin` when the look defines it.
+- Glyphs carry no color; they follow the text color through `currentColor`.
+- An icon that carries meaning alone sets `role="img"` and `aria-label` instead of `aria-hidden`.
+- In script, call `setSpriteUrl` once with the vendored sprite path, then `createIcon(document, 'close')`.
+- `createIcon` takes the name without the `icon-` prefix, plus `size`, `className`, and `label` options.
+- `spriteIcon` is the deprecated todos.webapp alias; it goes away in the next minor release.
+- The [Icon section](../../src/demo/visual-style-gallery.html#icon) shows every size and every glyph.
+
+**[Decided]** `createIcon` throws until the app calls `setSpriteUrl`.
+- A default path: rejected, because a wrong path renders blank icons without any error.
+- A default of the neutral sprite: rejected, because other looks would silently show neutral glyphs.
+
+**[Decided]** The core list adds `icon-chevron-down` for disclosure toggles, such as the collapsible and select menus.
+
 ---
 
 ## Patterns
@@ -67,6 +88,7 @@ The app shell task adds its areas, scroll modes, and demo pages here ([ADR-0004]
 - Specimens use classes only; [gallery.css](../../src/demo/gallery.css) maps each token to `--specimen`.
 - The gallery shows placeholder content only.
 - Add a look to `looks` in [gallery.js](../../src/demo/gallery.js) and to the look select.
+- The look switcher also points every gallery icon at the selected look's sprite.
 - No look defines a `data-accent` variant yet, so the gallery has no variant switch.
 
 **[Decided]** One mapping rule per token in `gallery.css`, such as `.token--color-bg { --specimen: var(--color-bg); }`.
@@ -79,11 +101,13 @@ The app shell task adds its areas, scroll modes, and demo pages here ([ADR-0004]
 ## Verification
 - [tokens.test.js](../../tests/unit/tokens.test.js) checks the contract, contrast pairs, fallbacks, and raw colors statically.
 - [gallery.test.js](../../tests/unit/gallery.test.js) checks the switchers and that the gallery covers every token.
+- [icon.test.js](../../tests/unit/icon.test.js) checks `createIcon`, the icon class, and that every look sprite holds the core ids.
 - [verify-ui.spec.js](../../tests/e2e/verify-ui.spec.js) is the browser verifier, ported from family-portal's `verify-ui.py`.
 
 The verifier runs each look at 390 and 1440 px, with system and explicit themes:
 - HTTP 200, every stylesheet and import loaded, no font errors, no console errors, and no failed requests.
 - No horizontal scroll.
+- Every `<use>` reference resolves to a symbol in a loaded sprite file.
 - Rendered text contrast of 4.5:1, or 3:1 for large text.
 - Targets of at least `--target-min`, except links inside sentences.
 - A `:focus-visible` outline of at least 2 px at 3:1, or a focus shadow, on every interactive element.
