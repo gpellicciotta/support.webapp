@@ -1,5 +1,161 @@
 ## Walkthrough & Validation
 
+### Review rework: final verification
+Command: `plan tasks validate T0018 --completion`
+Exit code: 0
+
+```text
+All 1 task file passed validation.
+```
+
+Command: `python scripts/devops.py check`
+Exit code: 0
+Full verbatim output: [review2-check.log](review2-check.log).
+
+```text
+Command: C:\Dev-Projects\plan\.venv\Scripts\lint-markdown.EXE check --offline
+Process ID: 78780
+All 24 markdown files passed linting.
+Command: C:\Dev-Projects\plan\.venv\Scripts\python.exe -m ruff check scripts tests
+Process ID: 78676
+All checks passed!
+Command: C:\Dev-Projects\plan\.venv\Scripts\python.exe -m ruff format --check scripts tests
+Process ID: 78520
+4 files already formatted
+Command: "C:\Program Files\nodejs\npm.CMD" run lint
+Process ID: 85048
+> @gpellicciotta/support.webapp@0.1.0-pre lint
+> eslint .
+Command: C:\Dev-Projects\plan\.venv\Scripts\python.exe -m pytest
+Process ID: 76964
+============================= test session starts =============================
+platform win32 -- Python 3.12.8, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Dev-Projects\support.webapp\.plan\work\T0018-extract-the-card-tile-and-avatar-components-from
+configfile: pyproject.toml
+testpaths: tests
+plugins: timeout-2.4.0, xdist-3.8.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+created: 8/8 workers
+8 workers [3 items]
+...                                                                      [100%]
+============================== 3 passed in 2.13s ==============================
+Command: "C:\Program Files\nodejs\npm.CMD" test
+Process ID: 25344
+> @gpellicciotta/support.webapp@0.1.0-pre test
+> vitest run
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0018-extract-the-card-tile-and-avatar-components-from
+ Test Files  11 passed (11)
+      Tests  1458 passed (1458)
+   Start at  15:07:54
+   Duration  988ms (tests 45%, import 39%, worker 8%, transform 8%)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:slow
+Process ID: 87000
+> @gpellicciotta/support.webapp@0.1.0-pre test:slow
+[... 256 lines omitted ...]
+```
+
+```text
+  172 passed (58.5s)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:integration
+Process ID: 69864
+> @gpellicciotta/support.webapp@0.1.0-pre test:integration
+> vitest run --config vitest.integration.config.js
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0018-extract-the-card-tile-and-avatar-components-from
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+   Start at  15:08:56
+   Duration  4.78s (tests 98%, import 1%)
+Command: "C:\Program Files\nodejs\npm.CMD" pack --dry-run
+[... 63 lines omitted ...]
+```
+
+```text
+npm notice 2.4kB src/looks/warm/primitives.css
+npm notice Tarball Details
+npm notice name: @gpellicciotta/support.webapp
+npm notice version: 0.1.0-pre
+npm notice filename: gpellicciotta-support.webapp-0.1.0-pre.tgz
+npm notice package size: 899.5 kB
+npm notice unpacked size: 1.0 MB
+npm notice shasum: 41cec77fe06ea71866ae038d66f88a59ff27872b
+npm notice integrity: sha512-sm0ylrwrfRAOH[...]5+OphRmHnLSCw==
+npm notice total files: 56
+npm notice
+gpellicciotta-support.webapp-0.1.0-pre.tgz
+```
+
+### Review rework: visual comparison and failing regressions
+The first visual inspection missed duplicate tile dimensions and low-visibility dark portraits.
+Round-one `after-*` captures remain the before evidence for this rework.
+Revised `review2-*` captures show distinct tile sizes and gray portraits on light and dark surfaces.
+
+- [Before tiles](after-card-neutral-cards-tiles-and-avatars-desktop-dark-neutral-icon-tile.png)
+- [Revised tiles](review2-card-neutral-cards-tiles-and-avatars-desktop-dark-neutral-icon-tile.png)
+- [Before portrait](after-card-warm-cards-tiles-and-avatars-desktop-dark-warm-avatar.png)
+- [Revised portrait](review2-card-warm-cards-tiles-and-avatars-desktop-dark-warm-avatar.png)
+
+Command: `npx playwright test tests/e2e/card.spec.js --project desktop-light`
+Exit code: 1
+
+```text
+✘  2 [desktop-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars (6.8s)
+
+
+  1) [desktop-light] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars ──────────────
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 44
+    Received:   44
+
+      12 |             tileWidths.push(box.width);
+      13 |         }
+    > 14 |         expect(tileWidths[0]).toBeLessThan(tileWidths[1]);
+         |                               ^
+      15 |         expect(tileWidths[1]).toBeLessThan(tileWidths[2]);
+      16 |         const card = page.locator('#card a.card').first();
+      17 |         await expect(card).toBeVisible();
+        at C:\Dev-Projects\support.webapp\.plan\work\T0018-extract-the-card-tile-and-avatar-components-from\tests\e2e\card.spec.js:14:31
+
+    Error Context: test-results\card-neutral-cards-tiles-and-avatars-desktop-light\error-context.md
+
+  2) [desktop-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars ─────────────────
+
+    Error: expect(locator).toHaveCSS(expected) failed
+
+    Locator:  locator('.avatar-stack .avatar').first()
+    Expected: "48px"
+    Received: "104px"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCSS" locator('.avatar-stack .avatar').first() with timeout 5000ms
+      - waiting for locator('.avatar-stack .avatar').first()
+        14 × locator resolved to <img src="avatar.svg" alt="Sample portrait" class="avatar avatar--sm"/>
+           - unexpected value "104px"
+```
+
+```text
+
+
+      38 |                 element.className = `avatar avatar--${modifier}`;
+      39 |             }, size);
+    > 40 |             await expect(stack.nth(0)).toHaveCSS('width', `${pixels}px`);
+         |                                        ^
+      41 |         }
+      42 |         await page.locator('style').last().evaluate(element => element.remove());
+      43 |         await page.emulateMedia({ reducedMotion: 'reduce', forcedColors: 'active' });
+        at C:\Dev-Projects\support.webapp\.plan\work\T0018-extract-the-card-tile-and-avatar-components-from\tests\e2e\card.spec.js:40:40
+
+    Error Context: test-results\card-warm-cards-tiles-and-avatars-desktop-light\error-context.md
+
+  2 failed
+    [desktop-light] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars ───────────────
+    [desktop-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars ──────────────────
+```
+
 
 Command: `python scripts/devops.py check`
 Exit code: 0

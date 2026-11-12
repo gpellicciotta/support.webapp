@@ -13,8 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 2, duration_s: 847.2, input: 170812, output: 24426, cache_read: 4091904, cache_write: 0}
-review_status: pending
+  review: {turns: 2, duration_s: 382.4, input: 100, output: 19586, cache_read: 2905010, cache_write: 127644}
+review_status: rejected
 review_round: 1
+reviewed_by: "@claude"
+work_duration: 633.9
 ---
 # T0018: Extract the card, tile, and avatar components from family-portal
 
@@ -66,4 +69,32 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @claude: Rejected.
+  - Findings: [review-findings-1.md](T0018-extract-the-card-tile-and-avatar-components-from/review-findings-1.md).
+
+- [2026-11-12] **[Decided]**
+  Addressed all review findings. Tiles use 32/48/64 pixel spacing sizes. Explicit avatar sizes override stack defaults. Placeholder portraits use fixed gray artwork. Static card buttons retain natural stretching; applications own alignment under component isolation rules.
+
+- [2026-11-12] **[Verify]**
+  Regression tests reproduced both defects: neutral tile widths were 44/44 pixels, and a small warm stack avatar rendered at 104 pixels. Recorded verbatim failures. Updated CSS; all eight affected browser scenarios then passed.
+
+- [2026-11-12] **[Visual]**
+  Re-inspected revised captures: neutral tiles show three distinct sizes; gray portraits remain visible on dark card and avatar surfaces. Retained round-one captures as before evidence. New review2 captures cover both looks, themes, and widths.
+
+- [2026-11-12] **[Verify]**
+  Running python scripts/devops.py check synchronously through tool session 77568. Full output is retained in review2-check.log. Reused unchanged baseline screenshots and captured all revised component sections before the final run.
+
+- [2026-11-12] **[Doc]**
+  Documented distinct decorative tile sizes, explicit stack size precedence, visible placeholder artwork, and deliberate static card button stretching. Updated the existing changelog bullet and retained original review evidence.
+
+- [2026-11-12] **[Verify]**
+  Updated task size against the original base after review rework. Added files remain excluded from counted size.
+  - Files touched: 5.
+  - Lines touched: 88.
+  - Reopenings: 0.
+
+- [2026-11-12] **[Verify]**
+  Final review-rework check passed: 1458 unit tests, 172 browser tests, 4 integration tests, 3 Python tests, lint, and package dry run. Stored full output and revised screenshots. Confirmed Playwright stopped its server.
 

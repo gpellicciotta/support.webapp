@@ -5,6 +5,10 @@ Follow ADR-0001, ADR-0003, ADR-0007, and the catalog.
 **[Decided]** Author initials or icon fallback markup; consuming applications handle failed image requests.
 **[Decided]** Keep the catalog's `.avatar-stack` companion block in avatar.css, explicitly allowed by ownership tests.
 **[Decided]** Use the shared outline and keep nested actions in static cards only.
+**[Decided]** Tiles use space tokens for distinct 32, 48, and 64 pixel sizes, independent of controls.
+**[Decided]** Explicit avatar size modifiers override responsive stack defaults.
+**[Decided]** Static card buttons retain natural flex stretching; applications own action alignment without cross-component selectors.
+**[Decided]** The placeholder portrait uses a fixed mid-gray illustration fill, independent of the embedding document's theme.
 
 ---
 
@@ -30,6 +34,7 @@ Size estimate: 5 files, 240 lines
 - Unit: Check component imports, sizes, tone fallbacks, stack ownership, and avatar alternatives before implementation.
 - Integration: Test both looks, themes, and viewport sizes; check card keyboard focus, hover, press, images, and overflow.
 - Integration: Check reduced motion, forced colors, console errors, and failed requests with the browser verifier.
+- Integration: Assert strictly increasing tile widths in both looks and explicit small, medium, and large stack member sizes.
 - Visual: Capture the gallery before extraction and component sections afterward; inspect screenshots.
 
 Completion check: `python scripts/devops.py check`, exit code 0
