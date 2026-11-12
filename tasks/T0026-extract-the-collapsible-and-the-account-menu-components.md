@@ -5,17 +5,20 @@ session: claude-20261112-2c0d25
 needs: []
 branch: task/T0026-extract-the-collapsible-and-the-account-menu-components
 worktree: .plan/work/T0026-extract-the-collapsible-and-the-account-menu-components
-status: active
+status: completed
 started_at: "2026-11-12T17:13:30Z"
-ended_at: —
+ended_at: "2026-11-12T18:42:06Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 3172.4, input: 372, output: 118956, cache_read: 27664842, cache_write: 743170}
-work_duration: 1548.0
-review_status: pending
+  review: {turns: 2, duration_s: 200.8, input: 130896, output: 4688, cache_read: 928256, cache_write: 0}
+work_duration: 5316.2
+review_status: approved
 review_round: 1
+reviewed_by: "@codex"
+completion-commit: 48e2ed5576f5c5bf9eb09e721450f18b2a85a61d
 ---
 # T0026: Extract the collapsible and the account menu components from todos.webapp
 
@@ -33,7 +36,7 @@ See the technical specification for files, tests, and the completion check.
 - [x] **[Verify]**    Run the unit tests and the browser test until they pass.
 - [x] **[Visual]**    Capture the new gallery sections per theme at 390 and 1440 px.
 - [x] **[Doc]**       Update the style guide and CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-11] **[Doc]**
@@ -80,4 +83,11 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 approved by @codex: [Decided]** Approved.
+  - Findings: [review-findings-1.md](T0026-extract-the-collapsible-and-the-account-menu-components/review-findings-1.md).
+
+- [2026-11-12] **[Complete]**
+  Task completed successfully.
 

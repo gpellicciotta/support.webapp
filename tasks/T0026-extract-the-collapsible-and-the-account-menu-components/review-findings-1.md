@@ -3,7 +3,7 @@ task: T0026
 round: 1
 verdict: approved
 reviewer: "@codex"
-reviewed_at: 2026-11-12T18:41:45Z
+reviewed_at: 2026-11-12T18:42:05Z
 reviewed_commit: "c15d3ef"
 base_commit: "964b203"
 branch: task/T0026-extract-the-collapsible-and-the-account-menu-components
