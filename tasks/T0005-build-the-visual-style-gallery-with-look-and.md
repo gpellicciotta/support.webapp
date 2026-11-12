@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1906.6, input: 300, output: 120958, cache_read: 18691626, cache_write: 325552}
+review_status: pending
+review_round: 1
 ---
 # T0005: Build the visual style gallery with look and theme switchers, token specimens, and the browser verifier
 
@@ -75,4 +79,7 @@ See the technical specification for files, tests, and the completion check.
   Linked before screenshots: base commit 10f2d73 had no gallery, only the unstyled landing page.
   - [Before 390](T0005-build-the-visual-style-gallery-with-look-and/before-landing-page-390.png).
   - [Before 1440](T0005-build-the-visual-style-gallery-with-look-and/before-landing-page-1440.png).
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
