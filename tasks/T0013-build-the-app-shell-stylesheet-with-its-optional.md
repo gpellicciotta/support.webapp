@@ -12,12 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 8, duration_s: 6518.6, input: 512, output: 153588, cache_read: 43330136, cache_write: 445572}
+  worker: {turns: 10, duration_s: 8689.8, input: 588, output: 172264, cache_read: 53372612, cache_write: 483086}
   review: {turns: 6, duration_s: 1305.8, input: 226270, output: 15178, cache_read: 4242440, cache_write: 4012}
-review_status: rejected
-review_round: 3
+review_status: pending
+review_round: 4
 work_duration: 6136.1
-reviewed_by: "@codex"
 ---
 # T0013: Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages
 
@@ -137,4 +136,7 @@ See the technical specification for files, tests, and the completion check.
   - Files touched: 16 (8 counted).
   - Lines touched: 1168 (92 counted).
   - Reopenings: 0.
+
+- [2026-11-12] **[Review]**
+  Round 4 requested (mode: agent).
 
