@@ -20,7 +20,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0011 Extract the menu and popover modules from todos.webapp as they are, with keyboard support and anchoring.
 - [x] T0010 Extract the toast and live region modules from todos.webapp, including Undo and modal holding.
 - [x] T0012 Switch the popover and menu modules to the native popover attribute, keeping the anchoring code.
-- [ ] T0026 Extract the collapsible and the account menu components from todos.webapp.
+- [!] T0026 [reason: completion validation failed; fix turn 1 of 2 not dispatched: no eligible configured agent] [owner: @claude] Extract the collapsible and the account menu components from todos.webapp.
 - [ ] T0013 Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
 - [ ] T0028 [needs: T0013] Extract the floating action button from todos.webapp into the overlay layer of the shell.
 - [ ] T0020 Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons.
