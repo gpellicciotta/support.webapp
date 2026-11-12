@@ -3,7 +3,7 @@ task: T0017
 round: 2
 verdict: approved
 reviewer: "@claude"
-reviewed_at: 2026-11-12T13:51:30Z
+reviewed_at: 2026-11-12T13:54:37Z
 reviewed_commit: "4c03f4f"
 base_commit: "bb0e69c"
 branch: task/T0017-add-the-family-portal-look-with-its-seasons

@@ -12,10 +12,10 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0006 Extract the icon sprite format, the icon class, and the createIcon builder, with the neutral glyph set.
 - [x] T0007 Extract the button, icon button, banner, chip, and segmented control components from todos.webapp.
 - [x] T0016 Extract the empty state and the row base components from todos.webapp.
-- [ ] T0017 Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
-- [ ] T0018 [needs: T0017] Extract the card, tile, and avatar components from family-portal.
+- [x] T0017 Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
+- [ ] T0018 Extract the card, tile, and avatar components from family-portal.
 - [ ] T0008 Extract fields, checkboxes, radios, and createField from todos.webapp, adding forms, validation states, help toggles, and error summaries.
-- [ ] T0023 [needs: T0017] Add the bright look from meteo with its accent variant and AA contrast on every accent.
+- [ ] T0023 Add the bright look from meteo with its accent variant and AA contrast on every accent.
 - [ ] T0009 [needs: T0008] Extract the dialog component and its three confirmation tiers from todos.webapp.
 - [ ] T0011 [needs: T0009] Extract the menu and popover modules from todos.webapp as they are, with keyboard support and anchoring.
 - [ ] T0010 [needs: T0008] Extract the toast and live region modules from todos.webapp, including Undo and modal holding.
@@ -31,7 +31,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0029 Add the badge component for non-interactive counts and status labels, based on meteo's badges.
 - [ ] T0032 [needs: T0020] Add the progress bar and spinner components, static under reduced motion.
 - [ ] T0033 [needs: T0008] Design and add multi-select with checkbox rows, range selection, and a bulk action bar.
-- [ ] T0022 [needs: T0013, T0017] Build the Python generate-app devops action and the starter app template.
+- [ ] T0022 [needs: T0013] Build the Python generate-app devops action and the starter app template.
 - [ ] T0025 [needs: T0022, T0023, T0024] Plan the redesign of auth and counters on the design system.
 - [ ] T0027 [needs: T0010] Add the theme switch and service worker update modules, and document the shared patterns.
 - [x] T0002 Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks.
