@@ -3,7 +3,7 @@ task: T0021
 round: 1
 verdict: rejected
 reviewer: "@claude"
-reviewed_at: 2026-11-12T09:48:39Z
+reviewed_at: 2026-11-12T09:50:58Z
 reviewed_commit: "1d1ee2d"
 base_commit: "c84a2f4"
 branch: task/T0021-add-the-i18n-module-with-the-data-i18n

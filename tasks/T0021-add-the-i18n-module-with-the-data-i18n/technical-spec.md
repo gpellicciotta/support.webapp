@@ -15,6 +15,7 @@ This utility adds no persistent visual specimen; browser tests exercise consumer
 - tests/e2e/i18n.spec.js
 - docs/specs/i18n.md
 - docs/specs/naming.md
+- docs/index.md
 - CHANGELOG.md
 
 ### Tests
@@ -23,7 +24,7 @@ This utility adds no persistent visual specimen; browser tests exercise consumer
 
 Completion check: python scripts/devops.py check and npx playwright test tests/e2e/i18n.spec.js.
 
-Size estimate: 1 files, 10 lines
+Size estimate: 2 files, 25 lines
 Added files and CHANGELOG.md are excluded from counted size.
 
 ## Source

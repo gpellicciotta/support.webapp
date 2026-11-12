@@ -13,8 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 2, duration_s: 552.2, input: 111308, output: 15278, cache_read: 1281536, cache_write: 0}
-review_status: pending
+  review: {turns: 2, duration_s: 258.0, input: 16, output: 3588, cache_read: 378696, cache_write: 5246}
+review_status: rejected
 review_round: 1
+reviewed_by: "@claude"
+work_duration: 429.6
 ---
 # T0021: Add the i18n module with the data-i18n attributes and the catalog format
 
@@ -60,4 +63,20 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @claude: The module meets the ADR-0003 contract and is correct.
+  - Findings: [review-findings-1.md](T0021-add-the-i18n-module-with-the-data-i18n/review-findings-1.md).
+
+- [2026-11-12] **[Doc]**
+  Addressed review round one: indexed the i18n guide and documented setCatalog in the utility exports table. Added docs/index.md to declared files; no product behavior changed.
+
+- [2026-11-12] **[Verify]**
+  Review rework passed the full check: linting, three Python tests, 454 unit tests, eight browser tests, and packaging. Recorded verbatim evidence. Earlier log entries described completed activities retrospectively; validation proof preserves the actual TDD order.
+
+- [2026-11-12] **[Size]**
+  Review rework added the declared documentation index. Cumulative counted changes remain below the typical threshold.
+  - Files touched: 2.
+  - Lines touched: 15.
+  - Reopenings: 0.
 
