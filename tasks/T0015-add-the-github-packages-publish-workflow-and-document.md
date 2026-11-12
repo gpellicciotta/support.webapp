@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 722.8, input: 196, output: 41588, cache_read: 7552786, cache_write: 164200}
+review_status: pending
+review_round: 1
 ---
 # T0015: Add the GitHub Packages publish workflow and document the release flow of the package
 
@@ -57,4 +61,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Doc]**
   Documented publishing, registry token setup, and per-app backlog tasks in devops.md; updated README.md and CHANGELOG.md.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
