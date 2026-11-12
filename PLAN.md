@@ -2,6 +2,7 @@
 An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
+- [ ] T0036 Fix the gallery specs that read styles before a look switch settles, seen failing under load in bright and card.
 - [x] T0034 Add the link button component from family-portal, with its gallery section and browser spec.
 - [x] T0003 Set up the repository tooling: package manifest, linters, unit and browser test runners, devops scripts, and CI.
 - [x] T0004 Extract the shared base tokens, the contract file, and the neutral look from todos.webapp, with the static token test.
@@ -22,11 +23,11 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0012 Switch the popover and menu modules to the native popover attribute, keeping the anchoring code.
 - [x] T0026 Extract the collapsible and the account menu components from todos.webapp.
 - [x] T0013 Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
-- [ ] T0028 Extract the floating action button from todos.webapp into the overlay layer of the shell.
+- [x] T0028 Extract the floating action button from todos.webapp into the overlay layer of the shell.
 - [x] T0020 Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons.
 - [x] T0019 Design and add an accessible switch component.
 - [x] T0030 Design and add the tabs component with tablist roles and arrow-key navigation.
-- [~] T0031 [owner: @codex] Design and add the list and data table components on native list and table elements.
+- [!] T0031 [reason: waiting for T0036 to fix the Warm card gallery spec flake before the full check] [owner: @codex] Design and add the list and data table components on native list and table elements.
 - [ ] T0024 Add the tooltip component after a screen reader check of meteo's tooltips.
 - [ ] T0029 Add the badge component for non-interactive counts and status labels, based on meteo's badges.
 - [ ] T0032 Add the progress bar and spinner components, static under reduced motion.
@@ -38,5 +39,4 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0001 Compare the UI design of todos.webapp, family-portal, meteo, auth, and counters, from tokens to app shells.
 
 ## Backlog
-- [ ] T0036 Fix the gallery specs that read styles before a look switch settles, seen failing under load in bright and card.
 - [ ] T0035 Move field and form announcements to the shared live region module, so each page has one polite region.

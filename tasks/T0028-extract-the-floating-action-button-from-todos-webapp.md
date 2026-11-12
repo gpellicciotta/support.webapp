@@ -5,17 +5,20 @@ session: codex-20261112-8121f7
 needs: []
 branch: task/T0028-extract-the-floating-action-button-from-todos-webapp
 worktree: .plan/work/T0028-extract-the-floating-action-button-from-todos-webapp
-status: active
+status: completed
 started_at: "2026-11-12T21:18:06Z"
-ended_at: —
+ended_at: "2026-11-12T23:50:12Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 1370.4, input: 234686, output: 29044, cache_read: 10331392, cache_write: 0}
-work_duration: 239.4
-review_status: pending
+  review: {turns: 2, duration_s: 207.4, input: 113144, output: 4160, cache_read: 1217024, cache_write: 0}
+work_duration: 9127.0
+review_status: approved
 review_round: 1
+reviewed_by: "@codex-2"
+completion-commit: 49e113ffbfdbeb74ffbdc34c07e960275dc40996
 ---
 # T0028: Extract the floating action button from todos.webapp into the overlay layer of the shell
 
@@ -33,7 +36,7 @@ See the technical specification for files, tests, and the completion check.
 - [x] **[Verify]**    Run the named tests and the gallery verifier until both pass.
 - [x] **[Visual]**    Capture the new gallery sections per theme at 390 and 1440 px.
 - [x] **[Doc]**       Update the style guide, components.md, and CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Visual Verification
 Before captures show the adjacent icon-button section; the fab section did not exist.
@@ -87,4 +90,11 @@ Before captures show the adjacent icon-button section; the fab section did not e
 
 - [2026-11-13] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-13] **[Review]**
+  Round 1 approved by @codex-2: [Decided]** Approved commit 1e4ced8 after inspecting the task, specifications, execution evidence, source extraction, and complete branch diff.
+  - Findings: [review-findings-1.md](T0028-extract-the-floating-action-button-from-todos-webapp/review-findings-1.md).
+
+- [2026-11-13] **[Complete]**
+  Task completed successfully.
 
