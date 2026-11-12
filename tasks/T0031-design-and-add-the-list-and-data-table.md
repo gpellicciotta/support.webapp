@@ -1,11 +1,12 @@
 ---
 id: T0031
-owner: ~
-needs: [T0016]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@codex"
+session: codex-20261112-605570
+needs: []
+branch: task/T0031-design-and-add-the-list-and-data-table
+worktree: .plan/work/T0031-design-and-add-the-list-and-data-table
+status: suspended
+started_at: "2026-11-12T20:02:57Z"
 ended_at: —
 review: agent
 preview: none
@@ -19,7 +20,7 @@ They build on the row base of T0016, and data tables keep header cells and capti
 See the technical specification for files, tests, and the completion check.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read ADR-0003, components.md, naming.md, and the WAI-ARIA pattern the component follows.
+- [x] **[Read]**      Read ADR-0003, components.md, naming.md, and the WAI-ARIA pattern the component follows.
 - [ ] **[Decide]**    Record the markup skeleton, keyboard model, and states in components.md for user approval.
 - [ ] **[Implement]** Write the failing tests named in the technical specification.
 - [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
@@ -32,3 +33,13 @@ See the technical specification for files, tests, and the completion check.
 ## Execution Log
 - [2026-11-11] **[Doc]**
   Created by T0002 round 2 from the review findings F18 to F20.
+
+- [2026-11-12] **[Decide]**
+  Prepared native list/table markup, keyboard behavior, states, and scroll-region proposal in components.md. User approval remains required before implementation.
+
+- [2026-11-12] **[Verify]**
+  Offline Markdown lint passed. Online link checks received W3C HTTP 403 responses. Completion validation remains unsuccessful; implementation awaits design approval. Evidence: companion validation-proof.md.
+
+- [2026-11-12] **[Decide]**
+  Committed proposal as 4ccf95d. Approve the proposed native markup, static keyboard model, and focusable table scroll region before implementation.
+
