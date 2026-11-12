@@ -17,6 +17,7 @@ Extract the empty state and the row base components from todos.webapp.
 - `tests/e2e/empty-state.spec.js`
 - `tests/e2e/row.spec.js`
 - `docs/specs/visual-style-guide.md`
+- `docs/specs/components.md` (added during execution to document the row-owned size container)
 - `CHANGELOG.md`
 
 Size estimate: 8 files, 370 lines
@@ -24,5 +25,7 @@ Size estimate: 8 files, 370 lines
 ### Tests
 - Unit test: none (CSS-only components without modules; the static token test covers their tokens)
 - Integration: `row.spec.js` and `empty-state.spec.js` check the row layout at narrow and wide container widths and the two-action limit.
+- Row cases: 320, 575, 576, and 800 px container widths within a desktop viewport; actions remain focusable and contained.
+- Empty-state cases: zero, one, and two actions, visible headings and text, decorative icons, and full-size button targets.
 
 Completion check: `npx playwright test tests/e2e/empty-state.spec.js tests/e2e/row.spec.js`, exit code 0
