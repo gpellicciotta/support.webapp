@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1970.6, input: 252, output: 105962, cache_read: 16159144, cache_write: 290046}
+review_status: pending
+review_round: 1
 ---
 # T0012: Switch the popover and menu modules to the native popover attribute, keeping the anchoring code
 
@@ -62,4 +66,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Doc]**
   Updated the style guide, the menu skeleton in components.md, and CHANGELOG.md. Evidence: [before](T0012-switch-the-popover-and-menu-modules-to-the/before-menu-neutral-desktop-light.png), [after](T0012-switch-the-popover-and-menu-modules-to-the/after-menu-neutral-desktop-light.png).
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
