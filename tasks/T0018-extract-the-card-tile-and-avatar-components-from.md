@@ -12,11 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 847.2, input: 170812, output: 24426, cache_read: 4091904, cache_write: 0}
+  worker: {turns: 4, duration_s: 1333.4, input: 207960, output: 38310, cache_read: 7936256, cache_write: 0}
   review: {turns: 2, duration_s: 382.4, input: 100, output: 19586, cache_read: 2905010, cache_write: 127644}
-review_status: rejected
-review_round: 1
-reviewed_by: "@claude"
+review_status: pending
+review_round: 2
 work_duration: 633.9
 ---
 # T0018: Extract the card, tile, and avatar components from family-portal
@@ -97,4 +96,7 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Verify]**
   Final review-rework check passed: 1458 unit tests, 172 browser tests, 4 integration tests, 3 Python tests, lint, and package dry run. Stored full output and revised screenshots. Confirmed Playwright stopped its server.
+
+- [2026-11-12] **[Review]**
+  Round 2 requested (mode: agent).
 
