@@ -18,7 +18,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0023 Add the bright look from meteo with its accent variant and AA contrast on every accent.
 - [x] T0009 Extract the dialog component and its three confirmation tiers from todos.webapp.
 - [x] T0011 Extract the menu and popover modules from todos.webapp as they are, with keyboard support and anchoring.
-- [ ] T0010 Extract the toast and live region modules from todos.webapp, including Undo and modal holding.
+- [x] T0010 Extract the toast and live region modules from todos.webapp, including Undo and modal holding.
 - [ ] T0012 Switch the popover and menu modules to the native popover attribute, keeping the anchoring code.
 - [ ] T0026 [needs: T0012] Extract the collapsible and the account menu components from todos.webapp.
 - [ ] T0013 Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
@@ -33,9 +33,9 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0033 Design and add multi-select with checkbox rows, range selection, and a bulk action bar.
 - [ ] T0022 [needs: T0013] Build the Python generate-app devops action and the starter app template.
 - [ ] T0025 [needs: T0022, T0024] Plan the redesign of auth and counters on the design system.
-- [ ] T0027 [needs: T0010] Add the theme switch and service worker update modules, and document the shared patterns.
+- [ ] T0027 Add the theme switch and service worker update modules, and document the shared patterns.
 - [x] T0002 Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks.
 - [x] T0001 Compare the UI design of todos.webapp, family-portal, meteo, auth, and counters, from tokens to app shells.
 
 ## Backlog
-*(Currently no tasks)*
+- [ ] T0035 Move field and form announcements to the shared live region module, so each page has one polite region.
