@@ -13,10 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 6, duration_s: 4053.6, input: 428, output: 137622, cache_read: 33050722, cache_write: 402226}
-  review: {turns: 2, duration_s: 672.6, input: 20, output: 2650, cache_read: 890120, cache_write: 4012}
-review_status: pending
+  review: {turns: 4, duration_s: 941.0, input: 90556, output: 7862, cache_read: 2182920, cache_write: 4012}
+review_status: rejected
 review_round: 2
-work_duration: 2338.1
+work_duration: 4684.8
+reviewed_by: "@codex"
 ---
 # T0013: Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages
 
@@ -97,4 +98,16 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 2 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 2 rejected by @codex: [Decided]** Rejected because the supplied worktree contains an unfinished rebase with unresolved conflicts.
+  - Findings: [review-findings-2.md](T0013-build-the-app-shell-stylesheet-with-its-optional/review-findings-2.md).
+
+- [2026-11-12] **[Implement]**
+  Resolved the two documentation conflicts of the rebase onto eb7645d by keeping both sides, and finished the rebase on the task branch.
+  - Commits now 2bf091c, 5470d89, f4f3993; no unmerged paths.
+
+- [2026-11-12] **[Verify]**
+  Shell spec passed 110; full browser suite passed 490; two check runs each hit one load-dependent gallery flake, tracked by T0036.
+  - Evidence in validation-proof.md.
 

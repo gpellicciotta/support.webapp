@@ -167,3 +167,67 @@ Command: "{{nodejs}}\npm.CMD" run lint
 > @gpellicciotta/support.webapp@0.1.0-pre lint
 > eslint .
 ```
+
+## Review Round 2 Rework
+
+### Rebase onto main
+The orchestrator's rebase onto `eb7645d` (T0020 and T0026) had stopped on two documentation conflicts.
+Both conflicts kept both sides: the new CHANGELOG bullets and the new Verification bullets of main and this task.
+The rebase then replayed the round-one fixes and the counters decision, giving `2bf091c`, `5470d89`, and `f4f3993`.
+Commands: `git diff --check main...HEAD` printed nothing, and `git ls-files -u` listed no unmerged path.
+
+### Shell tests on the rebased branch
+Command: `npx playwright test tests/e2e/shell.spec.js --reporter=line`, exit code 0.
+
+```text
+[... 110 progress lines omitted ...]
+[111/112] [mobile-dark] › tests\e2e\shell.spec.js:268:1 › the gallery links to every shell demo page
+[112/112] [mobile-dark] › tests\e2e\shell.spec.js:278:1 › only shell.css sets fixed or sticky positions and pads bars with safe-area insets
+  2 skipped
+  110 passed (28.0s)
+```
+
+### Full check on the rebased branch
+Command: `python scripts/devops.py check`, run twice, exit code 1 both times, with one different gallery spec failing each time.
+Each failing spec read styles right after a look switch; pytest took 52 s instead of 2 s, so the machine was loaded.
+
+```text
+ Test Files  23 passed (23)
+      Tests  2044 passed (2044)
+[... 771 lines omitted ...]
+  1) [mobile-dark] › tests\e2e\bright.spec.js:47:1 › bright accents work on roots and wrappers and reset when switching looks 
+    Error: expect(locator).toHaveCSS(expected) failed
+    Locator:  locator('#accents [data-accent="blue"] .button').first()
+    Expected: "rgb(0, 0, 0)"
+    Received: "rgb(96, 165, 250)"
+[... 15 lines omitted ...]
+  1 failed
+    [mobile-dark] › tests\e2e\bright.spec.js:47:1 › bright accents work on roots and wrappers and reset when switching looks 
+  2 skipped
+  489 passed (4.7m)
+[... second run ...]
+  1) [mobile-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars ──────────────────
+    Error: expect(received).toBe(expected) // Object.is equality
+    Expected: 300
+    Received: 17
+[... 9 lines omitted ...]
+  1 failed
+    [mobile-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars ───────────────────
+  2 skipped
+  489 passed (4.0m)
+```
+
+Both specs passed in isolation, and the whole browser suite passed on the same revision:
+
+```text
+$ npx playwright test tests/e2e/bright.spec.js --repeat-each 5 --reporter=line  (exit code 0)
+  40 passed (1.3m)
+$ npx playwright test tests/e2e/card.spec.js --repeat-each 5 --reporter=line  (exit code 0)
+  40 passed (35.9s)
+$ npx playwright test --reporter=line  (exit code 0)
+  2 skipped
+  490 passed (5.1m)
+```
+
+The specs come from T0023 and T0018, not from this task; backlog task T0036 tracks the look-switch race.
+Markdown lint, Ruff, pytest, Vitest (2044 tests), and the integration suite passed in both check runs.
