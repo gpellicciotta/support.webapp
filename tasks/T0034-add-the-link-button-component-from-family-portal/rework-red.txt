@@ -1,0 +1,50 @@
+[WebServer] (node:54496) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:8616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [desktop-light] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (930ms)
+
+
+  1) [desktop-light] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 22
+    Received: 20
+
+       6 |     await expect(page.locator('#link-button h2')).toHaveText('Link button');
+       7 |     const order = await page.locator('main > section').evaluateAll(sections => sections.map(section => section.id));
+    >  8 |     expect.soft(order.indexOf('link-button')).toBe(order.indexOf('icon-button') + 1);
+         |                                               ^
+       9 |     for (const state of STATES) {
+      10 |         await expect(page.locator(`#link-button button.link-button${state}`)).toHaveCount(1);
+      11 |     }
+        at C:\Dev-Projects\support.webapp\.plan\work\T0034-add-the-link-button-component-from-family-portal\tests\e2e\link-button.spec.js:8:47
+
+    Error: expect(received).toBeCloseTo(expected)
+
+    Expected: 3.2
+    Received: NaN
+
+    Expected precision:    2
+    Expected difference: < 0.005
+    Received difference:   NaN
+
+      16 |         expect(style).toEqual({ 'text-decoration-line': 'underline', 'background-color': 'rgba(0, 0, 0, 0)', 'border-top-width': '0px' });
+      17 |         const typography = await styles(button, ['text-underline-offset', 'font-size']);
+    > 18 |         expect(parseFloat(typography['text-underline-offset'])).toBeCloseTo(parseFloat(typography['font-size']) * 0.2);
+         |                                                                 ^
+      19 |     }
+      20 |     expect(problems).toEqual([]);
+      21 | });
+        at C:\Dev-Projects\support.webapp\.plan\work\T0034-add-the-link-button-component-from-family-portal\tests\e2e\link-button.spec.js:18:65
+
+    Error Context: test-results\link-button-link-buttons-s-49ee6-ith-native-button-semantics-desktop-light\error-context.md
+
+  1 failed
+    [desktop-light] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics 

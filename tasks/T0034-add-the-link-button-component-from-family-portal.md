@@ -13,8 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 2, duration_s: 812.4, input: 160234, output: 17104, cache_read: 3955200, cache_write: 0}
-review_status: pending
+  review: {turns: 2, duration_s: 165.4, input: 40, output: 9180, cache_read: 883936, cache_write: 83390}
+review_status: rejected
 review_round: 1
+reviewed_by: "@claude"
+work_duration: 502.1
 ---
 # T0034: Add the link button component from family-portal, with its gallery section and browser spec
 
@@ -61,4 +64,23 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @claude: The link button partial, gallery section, browser spec, catalog, style guide, and changelog entry are in place.
+  - Findings: [review-findings-1.md](T0034-add-the-link-button-component-from-family-portal/review-findings-1.md).
+
+- [2026-11-12] **[Implement]**
+  Addressed both review defects with failing-first browser assertions. Moved Link button after Icon button and restored family-portal's 0.2em underline offset. The previous offset omission was accidental; the documented radius and minimum-width divergences remain intentional.
+
+- [2026-11-12] **[Verify]**
+  Refreshed and inspected four after screenshots; preserved earlier captures as before-rework images. All 28 affected browser and capture checks passed. Full check runs under session 60249; rework-check.txt records command lines and child PIDs.
+
+- [2026-11-12] **[Verify]**
+  Review fixes passed the full check: 549 fast tests, 148 browser tests, four integration tests, lint, and package validation. Updated validation-proof.md with failing-first output, browser completion output, refreshed screenshots, and full-check evidence.
+
+- [2026-11-12] **[Verify]**
+  Recorded review rework outcomes. Both review findings are resolved; the orchestrator owns the next review.
+  - Files touched: 5.
+  - Lines touched: 30.
+  - Reopenings: 1.
 

@@ -1,0 +1,103 @@
+[WebServer] (node:76616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 28 tests using 4 workers
+
+(node:75900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:71132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23548) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:64604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:75900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:71132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23548) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:64604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 [desktop-light] › tests\e2e\task-visual.spec.js:4:1 › capture revised visual evidence (1.2s)
+  ✓   1 [desktop-light] › tests\e2e\link-button.spec.js:23:1 › real and specimen interactions use link colors and preserve disabled behavior (1.4s)
+  ✓   2 [desktop-light] › tests\e2e\link-button.spec.js:50:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (1.3s)
+  ✓   4 [desktop-light] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (1.3s)
+(node:61932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:61932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 [desktop-light] › tests\e2e\verify-ui.spec.js:377:1 › reports unresolved sprite references (960ms)
+  ✓   6 [desktop-light] › tests\e2e\verify-ui.spec.js:351:1 › reports injected overflow, contrast, target, and focus violations (1.3s)
+(node:66868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[neutral system 1440px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+(node:66868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 [desktop-dark] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (1.2s)
+  ✓   9 [desktop-dark] › tests\e2e\link-button.spec.js:23:1 › real and specimen interactions use link colors and preserve disabled behavior (1.1s)
+  ✓  11 [desktop-dark] › tests\e2e\task-visual.spec.js:4:1 › capture revised visual evidence (967ms)
+[neutral dark 1440px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+  ✓  10 [desktop-dark] › tests\e2e\link-button.spec.js:50:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (1.1s)
+  ✓   5 [desktop-light] › tests\e2e\verify-ui.spec.js:320:9 › gallery passes every verifier check in the neutral look (3.7s)
+(node:81316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:81316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  14 [desktop-dark] › tests\e2e\verify-ui.spec.js:377:1 › reports unresolved sprite references (878ms)
+  ✓  13 [desktop-dark] › tests\e2e\verify-ui.spec.js:351:1 › reports injected overflow, contrast, target, and focus violations (1.2s)
+[neutral system 1440px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+(node:77484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:77484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  15 [mobile-light] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (1.2s)
+  ✓  18 [mobile-light] › tests\e2e\task-visual.spec.js:4:1 › capture revised visual evidence (1.0s)
+[neutral light 1440px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+  ✓  16 [mobile-light] › tests\e2e\link-button.spec.js:23:1 › real and specimen interactions use link colors and preserve disabled behavior (1.2s)
+  ✓  12 [desktop-dark] › tests\e2e\verify-ui.spec.js:320:9 › gallery passes every verifier check in the neutral look (3.7s)
+  ✓  17 [mobile-light] › tests\e2e\link-button.spec.js:50:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (1.2s)
+(node:84392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:86308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:84392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:86308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  20 [mobile-light] › tests\e2e\verify-ui.spec.js:351:1 › reports injected overflow, contrast, target, and focus violations (1.3s)
+[neutral system 390px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+(node:77384) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:77384) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  21 [mobile-light] › tests\e2e\verify-ui.spec.js:377:1 › reports unresolved sprite references (1.1s)
+  ✓  22 [mobile-dark] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (1.1s)
+(node:9388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[neutral dark 390px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+  ✓  19 [mobile-light] › tests\e2e\verify-ui.spec.js:320:9 › gallery passes every verifier check in the neutral look (3.4s)
+  ✓  24 [mobile-dark] › tests\e2e\task-visual.spec.js:4:1 › capture revised visual evidence (1.0s)
+  ✓  23 [mobile-dark] › tests\e2e\link-button.spec.js:23:1 › real and specimen interactions use link colors and preserve disabled behavior (1.2s)
+(node:78580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:78580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  25 [mobile-dark] › tests\e2e\link-button.spec.js:50:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (1.0s)
+  ✓  27 [mobile-dark] › tests\e2e\verify-ui.spec.js:377:1 › reports unresolved sprite references (850ms)
+  ✓  26 [mobile-dark] › tests\e2e\verify-ui.spec.js:351:1 › reports injected overflow, contrast, target, and focus violations (1.2s)
+[neutral system 390px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+[neutral light 390px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+  ✓  28 [mobile-dark] › tests\e2e\verify-ui.spec.js:320:9 › gallery passes every verifier check in the neutral look (3.1s)
+
+  28 passed (18.0s)

@@ -3,7 +3,7 @@ task: T0034
 round: 1
 verdict: rejected
 reviewer: "@claude"
-reviewed_at: 2026-11-12T13:19:04Z
+reviewed_at: 2026-11-12T13:20:30Z
 reviewed_commit: "36e12d6"
 base_commit: "5143742"
 branch: task/T0034-add-the-link-button-component-from-family-portal
