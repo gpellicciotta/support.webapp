@@ -7,8 +7,8 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0021 Add the i18n module with the data-i18n attributes and the catalog format.
 - [x] T0014 Add the vendor and check commands of the command line tool, with the package manifest.
 - [x] T0015 Add the GitHub Packages publish workflow and document the release flow of the package.
-- [ ] T0005 Build the visual style gallery with look and theme switchers, token specimens, and the browser verifier.
-- [ ] T0006 [needs: T0005] Extract the icon sprite format, the icon class, and the createIcon builder, with the neutral glyph set.
+- [x] T0005 Build the visual style gallery with look and theme switchers, token specimens, and the browser verifier.
+- [ ] T0006 Extract the icon sprite format, the icon class, and the createIcon builder, with the neutral glyph set.
 - [ ] T0007 [needs: T0006] Extract the button, icon button, banner, chip, and segmented control components from todos.webapp.
 - [ ] T0016 [needs: T0007] Extract the empty state and the row base components from todos.webapp.
 - [ ] T0017 [needs: T0006] Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
@@ -20,7 +20,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0010 [needs: T0008] Extract the toast and live region modules from todos.webapp, including Undo and modal holding.
 - [ ] T0012 [needs: T0011] Switch the popover and menu modules to the native popover attribute, keeping the anchoring code.
 - [ ] T0026 [needs: T0012] Extract the collapsible and the account menu components from todos.webapp.
-- [ ] T0013 [needs: T0005] Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
+- [ ] T0013 Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
 - [ ] T0028 [needs: T0007, T0013] Extract the floating action button from todos.webapp into the overlay layer of the shell.
 - [ ] T0020 [needs: T0007] Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons.
 - [ ] T0019 [needs: T0007] Design and add an accessible switch component.
