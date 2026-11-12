@@ -12,8 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 197.4, input: 92324, output: 5492, cache_read: 739072, cache_write: 0}
+  worker: {turns: 4, duration_s: 1618.0, input: 227160, output: 37596, cache_read: 9796096, cache_write: 0}
 work_duration: 114.5
+review_status: pending
+review_round: 1
 ---
 # T0030: Design and add the tabs component with tablist roles and arrow-key navigation
 
@@ -83,4 +85,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Verify]**
   Committed implementation as dcb70b8. Completion validation passed after excluding a literal screenshot template from unrelated failure output. All spawned test servers exited; working tree is clean. Agent review remains pending.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
