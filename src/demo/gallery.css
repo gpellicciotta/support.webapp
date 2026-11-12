@@ -15,6 +15,27 @@
   z-index: auto;
 }
 
+.toast-specimens {
+  align-items: start;
+}
+
+.toast-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Layout containment makes the frame the containing block of the fixed toast region, so toasts stay inside it.
+ * The frame has room for three single-line toasts, the most a toaster shows by default. */
+.toast-frame {
+  contain: layout;
+  min-block-size: calc(5 * var(--target-min));
+  margin-block-start: var(--space-4);
+  border: var(--border-width) dashed var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface-sunken);
+}
+
 .season-grid {
   display: flex;
   flex-wrap: wrap;

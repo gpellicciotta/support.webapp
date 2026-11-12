@@ -69,7 +69,7 @@ test('a live field announces its error on blur and clears it once fixed', async 
     await expect(error).toBeVisible();
     const message = (await error.textContent()).trim();
     expect(message).not.toBe('');
-    await expect(page.locator('[aria-live="polite"]')).toHaveText(message);
+    await expect(page.locator('.field__live')).toHaveText(message);
     await control.fill('Steps');
     await expect(counter).toHaveText(/^5 \/ \d+$/);
     await expect(control).not.toHaveAttribute('aria-invalid', 'true');

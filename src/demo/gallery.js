@@ -3,10 +3,12 @@
 import { attachField } from '../js/field.js';
 import { attachForm } from '../js/form.js';
 import { setSpriteUrl } from '../js/icon.js';
-import { confirmDialog } from '../js/dialog.js';
+import { confirmDialog, openDialog } from '../js/dialog.js';
 import { attachInlineConfirm } from '../js/inline-confirm.js';
 import { attachMenu } from '../js/menu.js';
 import { attachPopover } from '../js/popover.js';
+import { createLiveRegion } from '../js/live-region.js';
+import { createToast } from '../js/toast.js';
 
 // Add each new look here and as an option of the look select.
 export const looks = ['neutral', 'warm', 'bright'];
@@ -240,4 +242,31 @@ if (typeof document !== 'undefined') {
         }
         showFilter();
     });
+    const toaster = createToast({
+        region: document.getElementById('toast-demo-region'),
+        liveRegion: createLiveRegion(),
+        undoShortcut: true
+    });
+    const toastResult = document.querySelector('[data-toast-result]');
+    const deleteSample = () => {
+        toastResult.textContent = 'Sample task deleted.';
+        toaster.show('Sample task moved to the recycle bin.', {
+            onAction: () => {
+                toastResult.textContent = 'Sample task restored.';
+            }
+        });
+    };
+    document.getElementById('toast-demo-delete').addEventListener('click', deleteSample);
+    document.getElementById('toast-demo-update').addEventListener('click', () => {
+        toaster.show('A new version is ready.', {
+            actionLabel: 'Reload',
+            persistent: true,
+            onAction: () => {
+                toastResult.textContent = 'Reload chosen.';
+            }
+        });
+    });
+    const toastModal = document.getElementById('toast-modal');
+    document.getElementById('toast-demo-modal').addEventListener('click', () => openDialog(toastModal));
+    toastModal.querySelector('[data-toast-modal-delete]').addEventListener('click', deleteSample);
 }

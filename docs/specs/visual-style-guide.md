@@ -103,6 +103,40 @@ It places the panel below the trigger, or above it when room runs out, inside th
 Its alignment mirrors for right-to-left text.
 Closed panels carry the `hidden` attribute until the native `popover` attribute replaces it.
 
+### Notifications and toasts
+Notifications follow three tiers, after the counters notification ADR:
+- Tier 1, banner: a lasting or urgent state, such as offline, an outage, or an account problem.
+  Show the most severe banner only; danger banners alone use `role="alert"`.
+- Tier 2, toast: brief feedback on the user's own action, with Undo when the action can be reversed.
+- Tier 3, inbox: durable messages, such as broadcasts and finished exports; inboxes stay app-local.
+- Toasts never enter the inbox, and banners never rotate on their own (WCAG 2.2.2).
+
+Use the [Toast section](../../src/demo/visual-style-gallery.html#toast) for the toast specimens and a working toaster.
+- Place one `.toast-region` with `role="region"` and `aria-label="Notifications"` in the shell overlay layer.
+- Keep the message to one short sentence that names the object, such as "Task moved to the recycle bin."
+- Offer at most one action, as a `.button--quiet`; Undo is the default label.
+- Use a persistent toast only when the user must choose the moment, such as Reload for a new version.
+
+Import `createToast(options)` from [toast.js](../../src/js/toast.js); `createToaster` is a deprecated alias.
+- Options are `document`, `region`, `liveRegion`, `duration` (default 8000 ms), `max` (default 3), and `undoShortcut`.
+- `show(message, settings)` returns a dismiss function.
+  Settings are `onAction`, `actionLabel`, `persistent`, `undo`, and `onDismiss(reason)`.
+- Reasons are `action`, `timeout`, `escape`, `overflow`, `dismiss`, and `destroy`.
+- Expiry pauses while the pointer or focus is on the toast; Escape dismisses it, and focus returns.
+- Toasts raised while a modal dialog is open wait until it closes, since the page behind is inert.
+- With `undoShortcut`, Ctrl+Z or Cmd+Z outside text fields and modals runs the newest Undo.
+  Other actions answer it only with `undo: true`; `undoLatest()` does the same from code.
+- Action buttons carry `data-toast-action`: `undo` for Undo actions and `other` for the rest.
+- For the counters rule of one toast at a time, pass `max: 1`, so a new toast replaces the old one.
+
+**[Decided]** The defaults keep todos.webapp's 8 seconds for every toast and up to three at once.
+- Counters' 4 seconds for plain feedback: rejected as a default, because short timeouts hinder slow readers.
+
+Import `createLiveRegion(options)` from [live-region.js](../../src/js/live-region.js) once, at page load.
+- It adds a polite `role="status"` region and an assertive `role="alert"` region, both `.visually-hidden`.
+- `announce(message, { politeness })` clears the region first, so a repeated message is read again.
+- Use the assertive region only for blocking errors; pass the announcer to `createToast` as `liveRegion`.
+
 ### Icons
 Each look ships one sprite, `looks/{{look}}/icons.svg`, with one 24-unit `<symbol>` per glyph ([ADR-0002](../adrs/ADR-0002-looks.md#icons)).
 Every sprite provides the core ids that `icons` in [contract.json](../../src/contract.json) lists.
@@ -284,6 +318,8 @@ The app shell task adds its areas, scroll modes, and demo pages here ([ADR-0004]
 - [icon.test.js](../../tests/unit/icon.test.js) checks `createIcon`, the icon class, and that every look sprite holds the core ids.
 - [field.test.js](../../tests/unit/field.test.js) and [form.test.js](../../tests/unit/form.test.js) check the field and form modules in happy-dom.
 - [field.spec.js](../../tests/e2e/field.spec.js) and [form.spec.js](../../tests/e2e/form.spec.js) drive the gallery fields and form by keyboard.
+- [toast.test.js](../../tests/unit/toast.test.js) and [live-region.test.js](../../tests/unit/live-region.test.js) check Undo, expiry, Ctrl+Z, modal holding, and announcements.
+- [toast.spec.js](../../tests/e2e/toast.spec.js) raises gallery toasts and checks Undo by pointer and keyboard.
 - [verify-ui.spec.js](../../tests/e2e/verify-ui.spec.js) is the browser verifier, ported from family-portal's `verify-ui.py`.
 
 The verifier runs each look at 390 and 1440 px, with system and explicit themes:
