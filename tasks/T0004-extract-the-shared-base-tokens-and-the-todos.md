@@ -1,11 +1,12 @@
 ---
 id: T0004
-owner: ~
-needs: [T0003]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@codex"
+session: codex-20261112-0f070d
+needs: []
+branch: task/T0004-extract-the-shared-base-tokens-and-the-todos
+worktree: .plan/work/T0004-extract-the-shared-base-tokens-and-the-todos
+status: active
+started_at: "2026-11-12T09:23:39Z"
 ended_at: —
 review: agent
 preview: none
@@ -21,14 +22,36 @@ Copy the Inter woff2 files unchanged, and record the todos.webapp commit read.
 See the technical specification for files, tests, and the completion check.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read ADR-0001, ADR-0002, and the todos.webapp token files and token test at a recorded commit.
-- [ ] **[Implement]** Write the failing tests named in the technical specification.
-- [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
-- [ ] **[Implement]** Write the base files, the contract file, and the neutral look with its fonts, filling contract gaps from its primitives.
-- [ ] **[Verify]**    Run the token test and the completion check until both pass.
-- [ ] **[Doc]**       Write the neutral look page with its gap tokens, and update CHANGELOG.md.
+- [x] **[Read]**      Read ADR-0001, ADR-0002, and the todos.webapp token files and token test at a recorded commit.
+- [x] **[Implement]** Write the failing tests named in the technical specification.
+- [x] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
+- [x] **[Implement]** Write the base files, the contract file, and the neutral look with its fonts, filling contract gaps from its primitives.
+- [x] **[Verify]**    Run the token test and the completion check until both pass.
+- [x] **[Doc]**       Write the neutral look page with its gap tokens, and update CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-11] **[Doc]**
   Created by T0002 from the design system roadmap.
+
+- [2026-11-12] **[Implement]**
+  Extracted todos.webapp 0cf4981 and shared family-portal 1953f75 values. Added unchanged Inter assets and documented gap roles. Additional edits repair contract links in seven existing documents; no rendered page changed.
+
+- [2026-11-12] **[Doc]**
+  Documented gap token sources and unchanged rendering. Added documentation index entry. Repaired newly resolvable contract references in seven documents; these eight additional documentation files contain only links.
+
+- [2026-11-12] **[Implement]**
+  Added .gitattributes to preserve copied font and license bytes across Windows checkouts. Font checksum tests confirm both files match todos.webapp.
+
+- [2026-11-12] **[Verify]**
+  Passed completion test, full devops check, and final Markdown lint. Recorded verbatim evidence. Counted modified files exclude additions and changelog under sizing rules.
+  - Files touched: 8.
+  - Lines touched: 27.
+  - Reopenings: 0.
+
+- [2026-11-12] **[Read]**
+  Read ADR-0001, ADR-0002, source token styles, font definitions, and the static token test at todos.webapp 0cf4981. Read family-portal 1953f75 for base scale extensions.
+
+- [2026-11-12] **[Verify]**
+  Committed verified work as 0312db4. All execution steps except orchestrator-owned review are checked. Completion validation passed; review settings remain unchanged.
+
