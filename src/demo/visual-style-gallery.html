@@ -21,10 +21,11 @@
                     <select id="look-select" name="look">
                         <option value="neutral">Neutral</option>
                         <option value="warm">Warm</option>
+                        <option value="bright">Bright</option>
                     </select>
                 </div>
                 <div class="gallery-controls__look">
-                    <label for="accent-select">Season</label>
+                    <label for="accent-select">Accent</label>
                     <select id="accent-select" name="accent" disabled>
                         <option value="">None</option>
                         <option value="spring">Spring</option>
@@ -815,6 +816,28 @@
                 <img class="avatar" src="avatar.svg" alt="Sample portrait">
                 <span class="avatar avatar--initials avatar--tone-2" role="img" aria-label="Alex North">AN</span>
                 <span class="avatar avatar--tone-3" role="img" aria-label="Unknown person"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg></span>
+            </div>
+        </section>
+        <section id="accents" class="gallery-section" aria-labelledby="accents-title">
+            <h2 id="accents-title">Bright accents</h2>
+            <p>Bright changes action fills and labels through wrapper accents. Other looks retain their own actions.</p>
+            <div data-accent="blue">
+                <h3>Blue</h3>
+                <button class="button" type="button">Default</button>
+                <button class="button is-hover" type="button">Hover</button>
+                <button class="button is-active" type="button">Active</button>
+            </div>
+            <div data-accent="yellow">
+                <h3>Yellow</h3>
+                <button class="button" type="button">Default</button>
+                <button class="button is-hover" type="button">Hover</button>
+                <button class="button is-active" type="button">Active</button>
+            </div>
+            <div data-accent="red">
+                <h3>Red</h3>
+                <button class="button" type="button">Default</button>
+                <button class="button is-hover" type="button">Hover</button>
+                <button class="button is-active" type="button">Active</button>
             </div>
         </section>
         <section id="seasons" class="gallery-section" aria-labelledby="seasons-title">

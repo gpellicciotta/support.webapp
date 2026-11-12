@@ -130,7 +130,7 @@ Variant attribute:
 - Every look multiplies the test matrix: looks, themes, and widths.
 - meteo's yellow accent fails AA with white text: 2.94:1 on `#ca8a04` in light, and 3.19:1 on `#d97706` in dark.
 - **[Decided]** with the user on 2026-11-12: `bright` pairs yellow with dark text, such as `#111827` at 6.04:1 and 5.57:1.
-- meteo keeps white text through one app override, listed in its style guide as a deliberate AA exception:
+- Meteo may keep white yellow labels through an app override, listed as a deliberate AA exception:
 
   ```css
   :root[data-accent="yellow"] {
@@ -138,7 +138,13 @@ Variant attribute:
   }
   ```
 
-- White passes AA on the light-theme blue `#1a56db` at 6.18:1 and red `#dc2626` at 4.83:1; T0023 checks the dark values.
+- White passes AA on light blue `#1a56db` at 6.18:1 and red `#dc2626` at 4.83:1.
+- **[Decided]** Implementation adjustment: light yellow uses `#b88000`, giving pressed icons 3:1 contrast against shared grounds.
+- **[Decided]** Dark blue uses `#60a5fa`, and dark red uses `#f87171`, with dark labels for shared icon contrast.
+  These implementation choices satisfy the shared contract; they are not additional user-approved palette decisions.
+- Meteo's lossless adoption must assess action fills, hover and active fills, labels, links, focus, and shared grounds separately.
+  Restoring source colors needs several documented app overrides, including light yellow and dark blue and red action roles.
+  Keeping package values instead requires listing those visual changes explicitly in the adoption proof.
 - The look template and the token test make a new look a checklist task, not a design system change.
 - Seasons and accents stay look features; a look without variants defines none.
 - family-portal renames `data-season` to `data-accent` in `portal.mjs`, `tokens.css`, its season sky styles, and its gallery.

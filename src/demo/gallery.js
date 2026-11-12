@@ -5,8 +5,22 @@ import { attachForm } from '../js/form.js';
 import { setSpriteUrl } from '../js/icon.js';
 
 // Add each new look here and as an option of the look select.
-export const looks = ['neutral', 'warm'];
+export const looks = ['neutral', 'warm', 'bright'];
 export const themes = ['light', 'dark', 'system'];
+
+const accents = { warm: ['spring', 'summer', 'autumn', 'winter'], bright: ['blue', 'yellow', 'red'] };
+
+function configureAccents(doc, look) {
+    const select = doc.getElementById('accent-select');
+    const values = accents[look] || [];
+    select.disabled = values.length === 0;
+    select.replaceChildren(...['', ...values].map(value => {
+        const option = doc.createElement('option');
+        option.value = value;
+        option.textContent = value ? value[0].toUpperCase() + value.slice(1) : 'Default';
+        return option;
+    }));
+}
 
 /**
  * Return the gallery-relative entry stylesheet of a look.
@@ -40,7 +54,7 @@ export function applyLook(doc, look) {
     doc.documentElement.removeAttribute('data-accent');
     const accent = doc.getElementById('accent-select');
     if (accent) {
-        accent.disabled = look !== 'warm';
+        configureAccents(doc, look);
         accent.value = '';
     }
     for (const use of doc.querySelectorAll('svg.icon use')) {
@@ -152,7 +166,7 @@ export function initGallery(doc, view) {
         refresh();
     });
     if (accent) {
-        accent.disabled = select.value !== 'warm';
+        configureAccents(doc, select.value);
     }
     for (const radio of doc.querySelectorAll('input[name="theme"]')) {
         radio.addEventListener('change', (event) => {

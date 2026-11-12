@@ -8,7 +8,7 @@ import { categories, contrastPairs, readContract } from './contract.js';
 const root = fileURLToPath(new URL('../../src/', import.meta.url));
 const clean = (css) => css.replace(/\/\*[\s\S]*?\*\//g, '');
 const declarations = (css) => new Map([...css.matchAll(/(--[\w-]+)\s*:\s*([^;{}]+);/g)].map((match) => [match[1], match[2].trim()]));
-const rootDeclarations = (css) => new Map([...css.matchAll(/(?:^|})\s*:root\s*{([^{}]*)}/g)].flatMap((match) => [...declarations(match[1])]));
+const rootDeclarations = (css) => new Map([...css.matchAll(/(?:^|})\s*:root(?:,\s*:root\[data-theme\])?\s*{([^{}]*)}/g)].flatMap((match) => [...declarations(match[1])]));
 
 function chain(path, visited = new Set()) {
     if (visited.has(path)) {
@@ -148,7 +148,7 @@ describe('token contract', () => {
             beforeAll(() => {
                 sheets = chain(join(root, 'looks', look.name, 'index.css'));
                 tokens = new Map(sheets.flatMap(({ css }) => [...rootDeclarations(css.split('@supports')[0].split('@media')[0])]));
-                fallback = new Map(sheets.flatMap(({ css }) => [...declarations(css.split('@supports')[1] || '')]));
+                fallback = new Map(sheets.flatMap(({ css }) => [...rootDeclarations((css.split('@supports')[1] || '').replace(/^[^{]+{/, ''))]));
             });
 
             it('resolves the complete import chain with base first', () => {
@@ -189,6 +189,25 @@ describe('token contract', () => {
 
             for (const theme of ['light', 'dark']) {
                 describe(theme, () => {
+                    if (look.name === 'bright') {
+                        for (const accent of ['blue', 'yellow', 'red']) {
+                            it(`${accent} satisfies every applicable contrast pair and light fallback`, () => {
+                                const css = sheets.find(sheet => sheet.path.endsWith('look.css')).css;
+                                const variant = part => declarations(part.match(new RegExp(`\\[data-accent="${accent}"\\]\\s*{([^}]+)}`))[1]);
+                                const values = new Map([...tokens, ...variant(css.split('@supports')[0])]);
+                                for (const [foreground, background, minimum] of contrastPairs) {
+                                    expect(contrast(resolve(values, `--color-${foreground}`, theme), resolve(values, `--color-${background}`, theme)), `${accent}: ${foreground} on ${background}`).toBeGreaterThanOrEqual(minimum);
+                                }
+                                for (const [name, value] of variant(css.split('@supports')[1])) {
+                                    expect(resolveRaw(tokens, value, 'light')).toBe(resolveRaw(values, name, 'light'));
+                                }
+                                const lightFallback = new Map([...tokens, ...fallback, ...variant(css.split('@supports')[1])]);
+                                for (const [foreground, background, minimum] of contrastPairs) {
+                                    expect(contrast(resolve(lightFallback, `--color-${foreground}`, 'light'), resolve(lightFallback, `--color-${background}`, 'light')), `fallback ${accent}: ${foreground} on ${background}`).toBeGreaterThanOrEqual(minimum);
+                                }
+                            });
+                        }
+                    }
                     for (const [foreground, background, minimum] of contrastPairs) {
                         it(`${foreground} on ${background} reaches ${minimum}:1`, () => {
                             expect(contrast(resolve(tokens, `--color-${foreground}`, theme), resolve(tokens, `--color-${background}`, theme))).toBeGreaterThanOrEqual(minimum);

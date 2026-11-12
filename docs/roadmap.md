@@ -108,11 +108,13 @@ Work in meteo, as backlog tasks created there once the phase's tasks in this rep
 - Vendor the release and move the three screens into the shell with `app--scroll-page` and `app--width-narrow`.
 - Measure meteo's main column against `--width-narrow` first, and propose a smaller width if needed.
 - Gain reduced-motion handling and visible focus rings through the shared components.
-- Rename `data-theme-color` to `data-accent`, and keep white text on yellow through one listed override.
+- Rename `data-theme-color` to `data-accent`, and document every override needed to preserve the source action palettes.
+- Assess light yellow and dark blue/red fills, interaction states, labels, links, focus, and grounds against ADR-0002's AA adjustments.
 
 Exit criteria:
 - meteo passes the conformance check and the lossless switch proof, apart from listed deliberate changes.
-- meteo's style guide lists its override of `--color-on-primary` on the yellow accent.
+- Meteo's style guide lists every palette override and deliberate AA exception, including white labels on yellow.
+- The adoption proof lists any retained package palette changes instead of assuming one override preserves meteo's appearance.
 
 ---
 

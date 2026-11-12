@@ -4,7 +4,7 @@ Principles, token groups, patterns, and the shell of the shared design system, w
 - Style sheet: [style.css](../../src/css/style.css), imported by each look's `index.css`.
 - Gallery: [visual-style-gallery.html](../../src/demo/visual-style-gallery.html), served by `python scripts/devops.py serve`.
 - Component catalog: [components.md](components.md).
-- Looks: [neutral](looks/neutral.md), [warm](looks/warm.md), and the [look template](../../src/looks/_template/README.md).
+- Looks: [neutral](looks/neutral.md), [warm](looks/warm.md), [bright](looks/bright.md), and the [look template](../../src/looks/_template/README.md).
 
 ---
 
@@ -12,6 +12,8 @@ Principles, token groups, patterns, and the shell of the shared design system, w
 - One system serves every sibling app; apps vendor it instead of copying files ([ADR-0005](../adrs/ADR-0005-distribution-and-versioning.md)).
 - Components and pages use semantic role tokens only; primitives stay private to their look.
 - Light and dark themes redefine semantic tokens only; `data-theme` overrides the system preference.
+- Primary fills require 4.5:1 label contrast; primary icons and borders require 3:1 against their grounds.
+- Use link tokens for text; primary is an action fill and icon role, without a universal text contrast guarantee.
 - Every text pair reaches WCAG 2.2 AA, every target reaches 44 px, and every control shows its focus.
 - A look holds palette, fonts, shapes, and icons; its variants redefine semantic tokens only ([ADR-0002](../adrs/ADR-0002-looks.md)).
 

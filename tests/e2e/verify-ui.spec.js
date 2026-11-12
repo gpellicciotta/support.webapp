@@ -317,8 +317,8 @@ async function check(page) {
 }
 
 for (const target of pages) {
-    for (const look of looks) {
-        test(`${target.name} passes every verifier check in the ${look} look`, async ({ context }, testInfo) => {
+    for (const { look, accent } of looks.flatMap(look => (look === 'bright' ? ['blue', 'yellow', 'red'] : ['']).map(accent => ({ look, accent })))) {
+        test(`${target.name} passes every verifier check in the ${look} look${accent ? ` ${accent}` : ''}`, async ({ context }, testInfo) => {
             const { colorScheme, viewport } = testInfo.project.use;
             const opposite = colorScheme === 'dark' ? 'light' : 'dark';
             // The system choice follows the emulated preference; the explicit choice must override it.
@@ -327,6 +327,9 @@ for (const target of pages) {
                     const page = await context.newPage();
                     const errors = watchErrors(page);
                     const response = await open(page, target.path, look, theme);
+                    if (accent) {
+                        await page.locator('#accent-select').selectOption(accent);
+                    }
                     expect(response.status()).toBe(200);
                     await page.screenshot({ path: testInfo.outputPath(`${target.name}-${look}-${effective}-${viewport.width}-${theme === 'system' ? 'system' : 'explicit'}.png`), fullPage: true });
                     const data = await check(page);
