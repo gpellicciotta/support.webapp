@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1285.8, input: 200020, output: 27904, cache_read: 7681024, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0023: Add the bright look from meteo with its accent variant and AA contrast on every accent.
 
@@ -56,4 +60,7 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Verify]**
   Committed verified implementation as f6b935d. Completion validation passed; only the orchestrator-owned Review step remains unchecked.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
