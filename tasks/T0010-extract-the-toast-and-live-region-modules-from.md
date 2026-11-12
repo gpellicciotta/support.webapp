@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 2255.6, input: 352, output: 100358, cache_read: 24967712, cache_write: 330366}
+review_status: pending
+review_round: 1
 ---
 # T0010: Extract the toast and live region modules from todos.webapp, including Undo and modal holding
 
@@ -64,4 +68,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Doc]**
   Added the notification tiers, toast, and live region guidance to the style guide, plus CHANGELOG.md bullets.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
