@@ -5,19 +5,21 @@ session: claude-20261112-511d4d
 needs: []
 branch: task/T0011-extract-the-menu-and-popover-modules-from-todos
 worktree: .plan/work/T0011-extract-the-menu-and-popover-modules-from-todos
-status: active
+status: completed
 started_at: "2026-11-12T15:56:30Z"
-ended_at: —
+ended_at: "2026-11-12T16:27:20Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 6, duration_s: 2765.6, input: 440, output: 116770, cache_read: 33366206, cache_write: 423412}
-  review: {turns: 2, duration_s: 437.2, input: 84, output: 19292, cache_read: 3305676, cache_write: 167472}
-work_duration: 1295.0
+  review: {turns: 4, duration_s: 832.4, input: 100, output: 22794, cache_read: 3957538, cache_write: 175078}
+work_duration: 1849.8
 contributors: "@codex"
-review_status: pending
+review_status: approved
 review_round: 2
+reviewed_by: "@claude-2"
+completion-commit: b81a316c1b0b7a5dcbfef36fd890403f469eeaa9
 ---
 # T0011: Extract the menu and popover modules from todos.webapp as they are, with keyboard support and anchoring
 
@@ -39,7 +41,7 @@ See the technical specification for files, tests, and the completion check.
 - [x] **[Verify]**    Record the failing topmost assertion in validation-proof.md.
 - [x] **[Implement]** Keep static overlay specimens below open panels and at natural height.
 - [x] **[Verify]**    Rerun the specs and the check, then recapture and inspect all screenshots.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-11] **[Doc]**
@@ -93,4 +95,11 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 2 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 2 approved by @claude-2: Commit `c2b6161` resolves all round 1 findings, and the module extraction from round 1 is unchanged.
+  - Findings: [review-findings-2.md](T0011-extract-the-menu-and-popover-modules-from-todos/review-findings-2.md).
+
+- [2026-11-12] **[Complete]**
+  Task completed successfully.
 
