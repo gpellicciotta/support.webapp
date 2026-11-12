@@ -1,11 +1,12 @@
 ---
 id: T0014
-owner: ~
-needs: [T0004]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@codex"
+session: codex-20261112-4a6203
+needs: []
+branch: task/T0014-add-the-vendor-and-check-commands-of-the
+worktree: .plan/work/T0014-add-the-vendor-and-check-commands-of-the
+status: active
+started_at: "2026-11-12T09:55:58Z"
 ended_at: —
 review: agent
 preview: none
@@ -21,9 +22,9 @@ The tool runs on Node.js without dependencies.
 See the technical specification for files, tests, and the completion check.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read ADR-0005, ADR-0007, and the cli-guidelines.
-- [ ] **[Implement]** Write the failing tests named in the technical specification.
-- [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
+- [x] **[Read]**      Read ADR-0005, ADR-0007, and the cli-guidelines.
+- [x] **[Implement]** Write the failing tests named in the technical specification.
+- [x] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
 - [ ] **[Implement]** Write the command line tool, manifest builder, vendor and check commands, and package fields.
 - [ ] **[Verify]**    Run the unit tests and the pack-and-vendor integration test until they pass.
 - [ ] **[Doc]**       Update devops.md and CHANGELOG.md.
