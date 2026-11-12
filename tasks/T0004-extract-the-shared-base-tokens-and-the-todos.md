@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1120.4, input: 151540, output: 30662, cache_read: 4428032, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0004: Extract the shared base tokens, the contract file, and the neutral look from todos.webapp, with the static token test.
 
@@ -54,4 +58,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Verify]**
   Committed verified work as 0312db4. All execution steps except orchestrator-owned review are checked. Completion validation passed; review settings remain unchanged.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
