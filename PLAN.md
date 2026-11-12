@@ -16,8 +16,8 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0018 Extract the card, tile, and avatar components from family-portal.
 - [x] T0008 Extract fields, checkboxes, radios, and createField from todos.webapp, adding forms, validation states, help toggles, and error summaries.
 - [x] T0023 Add the bright look from meteo with its accent variant and AA contrast on every accent.
-- [ ] T0009 Extract the dialog component and its three confirmation tiers from todos.webapp.
-- [ ] T0011 [needs: T0009] Extract the menu and popover modules from todos.webapp as they are, with keyboard support and anchoring.
+- [x] T0009 Extract the dialog component and its three confirmation tiers from todos.webapp.
+- [ ] T0011 Extract the menu and popover modules from todos.webapp as they are, with keyboard support and anchoring.
 - [ ] T0010 Extract the toast and live region modules from todos.webapp, including Undo and modal holding.
 - [ ] T0012 [needs: T0011] Switch the popover and menu modules to the native popover attribute, keeping the anchoring code.
 - [ ] T0026 [needs: T0012] Extract the collapsible and the account menu components from todos.webapp.
