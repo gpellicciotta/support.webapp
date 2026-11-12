@@ -88,12 +88,12 @@ What the rule makes of it:
 ## Utility Modules
 Modules without a component key hold shared helpers and never style anything:
 
-| Module           | Exports                     | Used by                     |
-| :--------------- | :-------------------------- | :-------------------------- |
-| `focus.js`       | focus trap and focus return | dialog, menu, popover       |
-| `anchor.js`      | `anchorPanel`               | menu, popover, account menu |
-| `live-region.js` | `createLiveRegion`          | toast, field, form, loading |
-| `i18n.js`        | `applyTranslations`, `t`    | every app                   |
+| Module           | Exports                                 | Used by                     |
+| :--------------- | :-------------------------------------- | :-------------------------- |
+| `focus.js`       | focus trap and focus return             | dialog, menu, popover       |
+| `anchor.js`      | `anchorPanel`                           | menu, popover, account menu |
+| `live-region.js` | `createLiveRegion`                      | toast, field, form, loading |
+| `i18n.js`        | `setCatalog`, `applyTranslations`, `t`  | every app                   |
 
 - A utility module imports no component module.
 - A new utility module needs an entry in this table.
@@ -120,6 +120,8 @@ Some attributes belong to the whole page, not to one component:
 | `data-i18n-aria` | a translation key                | any element      | `i18n.js`    |
 
 `data-i18n-tooltip` and `data-i18n-placeholder` follow the same pattern as `data-i18n-aria`.
+
+See [i18n.md](i18n.md) for catalog loading, interpolation, attribute mappings, and the `setCatalog` API.
 
 ---
 
