@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1248.6, input: 189356, output: 29724, cache_read: 6376960, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0019: Design and add an accessible switch component
 
@@ -65,4 +69,7 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Verify]**
   Committed implementation as 2a46ccf. Completion validation passed. Every execution step except Review is checked; the orchestrator owns review and integration. Process inventory confirmed no test server or browser processes remained.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
