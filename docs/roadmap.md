@@ -24,7 +24,7 @@ Entry criteria:
 
 Work in this repository, in the Next Milestone section of [PLAN.md](../PLAN.md):
 - T0003: repository tooling, devops scripts, and CI.
-- T0004: shared base tokens, `src/contract.json`, the `neutral` look, and the static token test.
+- T0004: shared base tokens, [contract.json](../src/contract.json), the `neutral` look, and the static token test.
 - T0005: the gallery with look and theme switchers, and the browser verifier.
 - T0006: the icon sprite format, the icon class, and the `createIcon` builder.
 - T0007: buttons, icon buttons, banners, chips, and the segmented control.

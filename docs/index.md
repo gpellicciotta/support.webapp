@@ -11,6 +11,7 @@ Overview of all documentation for the `support.webapp` project.
 - [requirements.md](requirements.md): Goals, scope, and constraints of the design system.
 - [components.md](specs/components.md): Component catalog with markup skeletons, statuses, and owning tasks.
 - [naming.md](specs/naming.md): Naming conventions linking tokens, HTML classes, CSS files, modules, and tests.
+- [neutral.md](specs/looks/neutral.md): Neutral look provenance, usage, and contract gap values.
 - [devops.md](devops.md): Tool setup, documentation checks, versioning, releasing, plan store, and task workflow.
 - [roadmap.md](roadmap.md): Phases, entry and exit criteria, and adoption order.
 

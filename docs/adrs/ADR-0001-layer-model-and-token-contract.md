@@ -44,7 +44,7 @@ Defines the token tiers, the contract file, the shared names and vocabulary, val
   The underscore marks them private; they are outside the contract and may change in any release.
 
 ### Contract file
-- `src/contract.json` is the single machine-readable list of the contract, and it ships in the package.
+- [contract.json](../../src/contract.json) is the single machine-readable list of the contract, and it ships in the package.
 - It lists every contract token with its category, group, owner (`base` or `look`), and whether it is required.
 - It also lists the themes, the core icon ids of [ADR-0002](ADR-0002-looks.md), and the component keys of the catalog.
 - The token test, the conformance check, the gallery, and the style guide all read it ([ADR-0007](ADR-0007-documentation-and-verification.md)).
@@ -71,7 +71,7 @@ Shape of the file, as a sketch for the extraction task:
 - The two sets never overlap: a look that redefines a base token fails the token test.
 
 ### Contract categories
-An initial list, which the extraction tasks confirm against real use and record in `src/contract.json`:
+An initial list, which the extraction tasks confirm against real use and record in [contract.json](../../src/contract.json):
 - Grounds: `--color-bg`, `--color-surface`, `--color-surface-sunken`, `--color-surface-hover`, `--color-surface-active`, `--color-surface-selected`.
 - Text: `--color-text`, `--color-text-muted`, `--color-text-disabled`, `--color-link`, `--color-link-hover`.
 - Lines and focus: `--color-border`, `--color-border-strong`, `--color-focus`.
@@ -166,7 +166,7 @@ As todos.webapp and family-portal do it today:
 ### Deprecation path
 - A rename adds the new name in a minor release and keeps the old name as an alias.
 - Aliases live in one `deprecated.css` partial, each with the version that removes it.
-- `src/contract.json` marks each deprecated name with its replacement.
+- [contract.json](../../src/contract.json) marks each deprecated name with its replacement.
 - The conformance check of [ADR-0007](ADR-0007-documentation-and-verification.md) warns on deprecated names.
 - The next major release removes them; while the major version is 0, a minor release marked breaking does.
 
@@ -192,7 +192,7 @@ Main action name:
 - `--color-signal`: rejected, because only todos.webapp uses it; a mechanical rename replaces it there.
 
 Contract source:
-- **[Chosen]** One `src/contract.json` read by tests, tools, and docs: one list, no drift.
+- **[Chosen]** One [contract.json](../../src/contract.json) read by tests, tools, and docs: one list, no drift.
 - The list in this ADR only: rejected, because the token test and the conformance check cannot read prose.
 - Names defined by the token test's own code: rejected, because docs and the conformance check would need a copy.
 
@@ -219,7 +219,7 @@ family-portal changes:
 - Its dialog layer moves from 110 to 200.
 
 Other consequences:
-- Every contract change edits `src/contract.json` first; the token test then shows what each look must add.
+- Every contract change edits [contract.json](../../src/contract.json) first; the token test then shows what each look must add.
 - The width values come from family-portal; todos.webapp's `--width-main` of 45rem keeps its own token.
 - Breakpoints cannot be tokens, because custom properties do not work in media queries ([MDN][mdn-custom-properties]).
   [ADR-0004](ADR-0004-app-shell.md) fixes the layout breakpoint as a documented constant.

@@ -33,7 +33,7 @@ A look is one folder, `src/looks/{{look}}/`:
 - `look.css`: maps every look-owned contract token of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) to primitives, in both themes.
 - `fonts.css` and `fonts/`: self-hosted woff2 files with `font-display: swap`, plus their license file.
   A system font look needs neither.
-- `icons.svg`: the look's sprite, which provides every core icon id listed in `src/contract.json`.
+- `icons.svg`: the look's sprite, which provides every core icon id listed in [contract.json](../../src/contract.json).
 - `index.css`: the look's entry point, importing the look-neutral `style.css`, then the look's own files.
 
 ### Look names
@@ -72,7 +72,7 @@ Looks are named after their character, so several apps can share one.
 
 ### Icons
 - Components name their icons by id, `icon-{{name}}`, such as `icon-close`, `icon-more`, and `icon-undo`.
-- `src/contract.json` lists the core ids; the icon extraction task fixes the list from the shared components' needs.
+- [contract.json](../../src/contract.json) lists the core ids; the icon extraction task fixes the list from the shared components' needs.
 - The core list includes the validation icons `icon-alert`, `icon-check`, and `icon-help`.
 - A look may add glyphs beyond the core set; apps may add local glyphs in their own sprite.
 - The token test fails when a look's sprite misses a core id.

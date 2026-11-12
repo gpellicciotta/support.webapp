@@ -40,7 +40,7 @@ Rule and example for the key `dialog`:
 - `{{Key}}` is the key in PascalCase: `dialog` gives `Dialog`, `icon-button` gives `IconButton`.
 - A component without JavaScript, such as the badge, has no module.
   It still has its class, CSS file, gallery section, and tests.
-- Keys come from `src/contract.json`; the token test checks that each key has a CSS partial, a gallery section, and a catalog skeleton.
+- Keys come from [contract.json](../../src/contract.json); the token test checks that each key has a CSS partial, a gallery section, and a catalog skeleton.
 
 ### Why Each Choice
 In Java and Python terms:
@@ -125,7 +125,7 @@ Some attributes belong to the whole page, not to one component:
 
 ## Other Names
 - Shell classes use the key `app`: `.app`, `.app__top-bar`, `.app--scroll-main`, as [ADR-0004](../adrs/ADR-0004-app-shell.md) shows.
-- Icon ids: `icon-{{name}}` in kebab-case, such as `icon-close`; core ids live in `src/contract.json`.
+- Icon ids: `icon-{{name}}` in kebab-case, such as `icon-close`; core ids live in [contract.json](../../src/contract.json).
 - Gallery-only state classes: `.is-hover`, `.is-active`, and `.is-focus`, never used in app markup.
 - Files and folders: kebab-case, such as `css/components/icon-button.css`.
 - Look folders: `src/looks/{{look}}/`, with a character name such as `neutral`.

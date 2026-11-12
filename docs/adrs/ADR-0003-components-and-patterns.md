@@ -28,7 +28,7 @@ Defines the markup contract, naming link, JavaScript approach, modularity, shari
 - For each component it gives the HTML skeleton, variants and states, and the accessibility minimum.
 - The skeleton is normative: CSS, JavaScript, server templates, and the generator all build on it.
 - The four adopter setups of the app shell of [ADR-0004](ADR-0004-app-shell.md) have skeletons there too.
-- The gallery and the token test iterate over the component keys in `src/contract.json`.
+- The gallery and the token test iterate over the component keys in [contract.json](../../src/contract.json).
 
 First set, by category; the catalog holds the detail:
 - Controls: button, icon button, link button, floating action button, field, checkbox, radio, switch, chip, segmented control, and badge.

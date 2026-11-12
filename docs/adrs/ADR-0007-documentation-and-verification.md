@@ -33,7 +33,7 @@ Style guide:
 
 Checks in this repository, all on Vitest and Playwright Test, as in todos.webapp:
 - Static token test, ported from todos.webapp, run for every look and theme:
-  - Every required token listed in `src/contract.json` is defined.
+  - Every required token listed in [contract.json](../../src/contract.json) is defined.
   - Text pairs reach 4.5:1; icons, focus rings, and control borders reach 3:1.
   - No raw colors appear outside token files, and no primitive appears outside its look.
   - The `@supports` fallback defines the same names as the main theme.

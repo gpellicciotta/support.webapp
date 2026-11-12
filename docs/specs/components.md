@@ -16,7 +16,7 @@ Every component the design system provides, with its key, source, owning task, H
 - The skeletons are normative: CSS, JavaScript, server templates, and the generator all build on them.
 - Each skeleton heading is the component key, so `components.md#dialog` links to the dialog.
 - Every component gets a gallery section, `id="{{key}}"`, before its task ends.
-- `src/contract.json` lists the keys; the token test checks that each has a CSS partial, a gallery section, and a skeleton here.
+- [contract.json](../../src/contract.json) lists the keys; the token test checks that each has a CSS partial, a gallery section, and a skeleton here.
 - `icons.svg` in a skeleton stands for the path of the app's vendored look sprite.
 
 ## Starter App Minimum

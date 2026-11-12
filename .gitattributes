@@ -1,0 +1,2 @@
+# Preserve vendored font and license bytes across platform checkouts.
+src/looks/*/fonts/* -text
