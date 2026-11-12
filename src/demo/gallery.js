@@ -3,6 +3,8 @@
 import { attachField } from '../js/field.js';
 import { attachForm } from '../js/form.js';
 import { setSpriteUrl } from '../js/icon.js';
+import { attachAccountMenu } from '../js/account-menu.js';
+import { attachCollapsible } from '../js/collapsible.js';
 import { confirmDialog, openDialog } from '../js/dialog.js';
 import { attachInlineConfirm } from '../js/inline-confirm.js';
 import { attachMenu } from '../js/menu.js';
@@ -225,6 +227,30 @@ if (typeof document !== 'undefined') {
     attachMenu(document.getElementById('menu-demo-trigger'), document.getElementById('menu-demo'), {
         onSelect: (item) => {
             menuResult.textContent = `Last action: ${item.textContent.trim()}`;
+        }
+    });
+    for (const collapsible of document.querySelectorAll('[data-collapsible]')) {
+        attachCollapsible(collapsible);
+    }
+    const accountResult = document.querySelector('[data-account-menu-result]');
+    const session = document.querySelector('[data-account-menu-demo-session]');
+    const sample = { name: 'Alex North' };
+    const accountMenu = attachAccountMenu(document.getElementById('account-menu-demo-root'), {
+        account: sample,
+        route: '#/bin',
+        onSelect: (item, event) => {
+            if (item.hasAttribute('href')) {
+                // The sample routes stay on the gallery page.
+                event.preventDefault();
+                const route = item.getAttribute('href');
+                accountMenu.setRoute(route);
+                accountResult.textContent = `Route: ${route}`;
+            }
+            else if (item === session) {
+                const signedIn = session.textContent === 'Sign out';
+                accountMenu.setAccount(signedIn ? null : sample);
+                session.textContent = signedIn ? 'Sign in' : 'Sign out';
+            }
         }
     });
     const filter = document.getElementById('popover-demo-trigger');

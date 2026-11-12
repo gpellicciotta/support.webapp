@@ -8,6 +8,8 @@ All notable changes to this project are documented here.
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- Components: Added the collapsible and the account menu, with initials or person icon, current route mark, and gallery sections.
+- Modules: Added `attachCollapsible` in `collapsible.js`, `attachAccountMenu` and `initialsOf` in `account-menu.js`, and `align` to `attachMenu`.
 - Components: Added toasts with Undo, persistent toasts, Ctrl+Z, modal holding, and a gallery section with a working toaster.
 - Modules: Added `createToast` in `toast.js`, with a deprecated `createToaster` alias, and `createLiveRegion` in `live-region.js`.
 - Components: Added menus and popovers with gallery sections, roving focus, type-ahead, and light dismiss.

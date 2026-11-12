@@ -28,13 +28,14 @@ function isEnabled(item) {
  * @param {(item: HTMLElement, event: Event) => void} [options.onSelect] called after an item is selected
  *   and the menu has closed; radio items are checked and checkbox items toggled before the call
  * @param {boolean} [options.anchor] position the menu at the trigger, true by default
+ * @param {'start'|'end'} [options.align] the inline edge of the menu that lines up with the trigger's, `start` by default
  * @param {() => void} [options.onOpen] called after the menu opens
  * @param {(reason: string) => void} [options.onClose] called after the menu closes, as for popovers
  * @returns {{open: (at?: 'first'|'last') => void, close: (reason?: string) => void, isOpen: () => boolean, destroy: () => void}}
  *   the controller
  */
 export function attachMenu(trigger, menu, options = {}) {
-    const { onSelect, anchor = true, onOpen, onClose } = options;
+    const { onSelect, anchor = true, align, onOpen, onClose } = options;
 
     /**
      * List the menu's enabled items in order.
@@ -58,7 +59,7 @@ export function attachMenu(trigger, menu, options = {}) {
     }
 
     // Trigger clicks toggle the popover, which then focuses the first enabled item.
-    const popover = attachPopover(trigger, menu, { anchor, initialFocus: () => entryItem('first'), onOpen, onClose });
+    const popover = attachPopover(trigger, menu, { anchor, align, initialFocus: () => entryItem('first'), onOpen, onClose });
 
     /**
      * Open the menu with focus on its first or last enabled item.

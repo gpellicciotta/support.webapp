@@ -110,6 +110,26 @@ Menus and popovers use the native `popover` attribute, so open panels sit in the
 - The modules keep `anchorPanel` for placement and take over trigger clicks to manage focus.
 - Closed panels no longer use `hidden`; the modules remove it, and the styles still hide it.
 
+### Account menu
+Use [the account menu](../../src/demo/visual-style-gallery.html#account-menu) at the end of the top bar ([ADR-0004](../adrs/ADR-0004-app-shell.md)).
+- `.account-menu` holds a round `.account-menu__button` and a `.menu.account-menu__panel` with `popover`.
+- The button shows an `.avatar--sm` face: initials when signed in, the `icon-user` glyph when signed out.
+- The button's `title` and accessible name carry the user name, or `Not signed in`.
+- An optional `.account-menu__name` line with `data-account-menu-name` and an id names the menu.
+  Hide it with `aria-hidden="true"`; the menu's `aria-labelledby` still reads it.
+- Items are links or buttons with `role="menuitem"`; the current route link carries `aria-current="page"`.
+
+Import `attachAccountMenu(root, options)` from [account-menu.js](../../src/js/account-menu.js); it builds on `attachMenu`.
+Options are `account` (`{name}` or nothing), `route`, `signedOutLabel`, `onSelect(item, event)`, `anchor`, `onOpen`, and `onClose`.
+The controller adds `setAccount(account)` and `setRoute(route)` to the menu methods.
+`setRoute` marks the item whose `href` attribute equals the route, so apps call it on navigation.
+A link chosen by keyboard is followed through a click, which reaches `onSelect` once and can be cancelled.
+`initialsOf(name)` returns the first letters of the first and last words.
+
+**[Decided]** The menu aligns its end edge with the button, so `attachMenu` gained an `align` option.
+**[Decided]** The name line sits inside the menu hidden from assistive technology, since a menu owns only items.
+**[Decided]** The avatar image waits for the family-portal phase; the face shows initials or the person icon.
+
 ### Notifications and toasts
 Notifications follow three tiers, after the counters notification ADR:
 - Tier 1, banner: a lasting or urgent state, such as offline, an outage, or an account problem.
@@ -270,6 +290,20 @@ Long content wraps without truncation; action buttons retain their existing focu
 Task status, drag handles, selection, navigation, and row interactions remain app-local.
 Use a table when columns need shared alignment across rows.
 
+### Collapsible
+Use [the collapsible](../../src/demo/visual-style-gallery.html#collapsible) to show and hide a secondary group, such as done tasks.
+- `.collapsible` holds a `.collapsible__toggle` button and the `.collapsible__panel` it names in `aria-controls`.
+- The toggle carries `aria-expanded`; an optional `.collapsible__icon` chevron turns while expanded.
+- Mark a collapsed panel `hidden`, or `hidden="until-found"` so find in page can reveal it.
+- Render panels with essential content expanded, since collapsed panels stay closed without JavaScript.
+
+Import `attachCollapsible(root, options)` from [collapsible.js](../../src/js/collapsible.js).
+The toggle is a native button, so a click, Enter, or Space toggles it.
+The option `onToggle(expanded)` runs after each change, such as to keep one row of a group open.
+The controller returns `expand`, `collapse`, `toggle`, `isExpanded`, and `destroy`.
+
+**[Decided]** The package ships single collapsibles; apps build todos.webapp's one-open accordion with `onToggle`.
+
 ### Cards, icon tiles, and avatars
 Use [cards](../../src/demo/visual-style-gallery.html#card) for grouped content or one linked destination.
 Compose `.card__media`, `.card__body`, `.card__title`, and `.card__text`; select headings appropriate to the page hierarchy.
@@ -327,6 +361,8 @@ The app shell task adds its areas, scroll modes, and demo pages here ([ADR-0004]
 - [field.spec.js](../../tests/e2e/field.spec.js) and [form.spec.js](../../tests/e2e/form.spec.js) drive the gallery fields and form by keyboard.
 - [toast.test.js](../../tests/unit/toast.test.js) and [live-region.test.js](../../tests/unit/live-region.test.js) check Undo, expiry, Ctrl+Z, modal holding, and announcements.
 - [toast.spec.js](../../tests/e2e/toast.spec.js) raises gallery toasts and checks Undo by pointer and keyboard.
+- [collapsible.test.js](../../tests/unit/collapsible.test.js) and [account-menu.test.js](../../tests/unit/account-menu.test.js) check both modules in happy-dom.
+- [collapsible.spec.js](../../tests/e2e/collapsible.spec.js) and [account-menu.spec.js](../../tests/e2e/account-menu.spec.js) drive both by pointer and keyboard.
 - [verify-ui.spec.js](../../tests/e2e/verify-ui.spec.js) is the browser verifier, ported from family-portal's `verify-ui.py`.
 
 The verifier runs each look at 390 and 1440 px, with system and explicit themes:

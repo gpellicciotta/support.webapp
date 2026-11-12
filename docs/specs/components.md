@@ -483,10 +483,13 @@ Account menu.
 
 ```html
 <div class="account-menu" data-account-menu>
-  <button class="account-menu__button" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Account">
+  <button class="account-menu__button" type="button" popovertarget="account" aria-label="Alex North">
     <span class="avatar avatar--sm avatar--initials" aria-hidden="true">AN</span>
   </button>
-  <div class="menu" role="menu" aria-label="Account" popover>...</div>
+  <div class="menu account-menu__panel" id="account" role="menu" aria-labelledby="account-name" popover>
+    <p class="account-menu__name" id="account-name" data-account-menu-name aria-hidden="true">Alex North</p>
+    <a class="menu__item" role="menuitem" href="#/settings" aria-current="page">Settings</a>
+  </div>
 </div>
 ```
 

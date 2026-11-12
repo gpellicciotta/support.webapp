@@ -794,6 +794,41 @@
                 <span class="icon-tile icon-tile--lg icon-tile--tone-4" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg></span>
             </div>
         </section>
+        <section id="collapsible" class="gallery-section" aria-labelledby="collapsible-title">
+            <h2 id="collapsible-title">Collapsible</h2>
+            <p>A row button with aria-expanded shows and hides the panel it controls. The chevron turns while expanded.</p>
+            <ul class="states">
+                <li class="state"><button class="collapsible__toggle" type="button" aria-expanded="false">Done (3)<svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button><span class="state__label">Collapsed</span></li>
+                <li class="state"><button class="collapsible__toggle is-hover" type="button" aria-expanded="false">Done (3)<svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button><span class="state__label">Hover</span></li>
+                <li class="state"><button class="collapsible__toggle is-focus" type="button" aria-expanded="false">Done (3)<svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button><span class="state__label">Focus-visible</span></li>
+                <li class="state"><button class="collapsible__toggle is-active" type="button" aria-expanded="false">Done (3)<svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button><span class="state__label">Active</span></li>
+                <li class="state"><button class="collapsible__toggle" type="button" aria-expanded="true">Done (3)<svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button><span class="state__label">Expanded</span></li>
+            </ul>
+            <h3 id="collapsible-demo-title">Working collapsibles</h3>
+            <p>A click, Enter, or Space toggles a row. Find in page opens a panel hidden until found.</p>
+            <div class="collapsible" id="collapsible-demo" data-collapsible>
+                <button class="collapsible__toggle" id="collapsible-demo-toggle" type="button" aria-expanded="false" aria-controls="collapsible-demo-panel">Done (3)<svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button>
+                <div class="collapsible__panel" id="collapsible-demo-panel" hidden>
+                    <ul>
+                        <li><a href="#collapsible">Water the plants</a></li>
+                        <li><a href="#collapsible">Buy oat milk</a></li>
+                        <li><a href="#collapsible">Call the bank</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="collapsible" data-collapsible>
+                <button class="collapsible__toggle" id="collapsible-found-toggle" type="button" aria-expanded="false" aria-controls="collapsible-found-panel">Archived notes<svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button>
+                <div class="collapsible__panel" id="collapsible-found-panel" hidden="until-found">
+                    <p>The archived packing list for the summer trip.</p>
+                </div>
+            </div>
+            <div class="collapsible" data-collapsible>
+                <button class="collapsible__toggle" id="collapsible-expanded-toggle" type="button" aria-expanded="true" aria-controls="collapsible-expanded-panel">Notes<svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button>
+                <div class="collapsible__panel" id="collapsible-expanded-panel">
+                    <p>An expanded panel renders open, so it reads without JavaScript.</p>
+                </div>
+            </div>
+        </section>
         <section id="dialog" class="gallery-section" aria-labelledby="dialog-section-title">
             <h2 id="dialog-section-title">Dialog</h2>
             <p>Use a modal for consequential actions. Require a word for irreversible bulk operations.</p>
@@ -951,6 +986,44 @@
                 <span class="avatar avatar--initials avatar--tone-2" role="img" aria-label="Alex North">AN</span>
                 <span class="avatar avatar--tone-3" role="img" aria-label="Unknown person"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg></span>
             </div>
+        </section>
+        <section id="account-menu" class="gallery-section" aria-labelledby="account-menu-title">
+            <h2 id="account-menu-title">Account menu</h2>
+            <p>The round account button at the end of the top bar. It shows the initials, or the person icon when signed out.</p>
+            <ul class="states">
+                <li class="state"><button class="account-menu__button" type="button" aria-label="Alex North" title="Alex North"><span class="avatar avatar--sm avatar--initials" aria-hidden="true">AN</span></button><span class="state__label">Signed in</span></li>
+                <li class="state"><button class="account-menu__button" type="button" aria-label="Not signed in" title="Not signed in"><span class="avatar avatar--sm" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg></span></button><span class="state__label">Signed out</span></li>
+                <li class="state"><button class="account-menu__button is-hover" type="button" aria-label="Alex North"><span class="avatar avatar--sm avatar--initials" aria-hidden="true">AN</span></button><span class="state__label">Hover</span></li>
+                <li class="state"><button class="account-menu__button is-focus" type="button" aria-label="Alex North"><span class="avatar avatar--sm avatar--initials" aria-hidden="true">AN</span></button><span class="state__label">Focus-visible</span></li>
+                <li class="state"><button class="account-menu__button" type="button" aria-label="Alex North" aria-expanded="true"><span class="avatar avatar--sm avatar--initials" aria-hidden="true">AN</span></button><span class="state__label">Menu open</span></li>
+            </ul>
+            <div class="card-specimens overlay-specimens">
+                <div class="menu account-menu__panel" role="menu" aria-labelledby="account-menu-specimen-name">
+                    <p class="account-menu__name" id="account-menu-specimen-name" aria-hidden="true">Alex North</p>
+                    <a class="menu__item" role="menuitem" href="#account-menu" aria-current="page" tabindex="-1"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bin"/></svg>Recycle bin (current)</a>
+                    <a class="menu__item is-hover" role="menuitem" href="#account-menu" tabindex="-1"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-settings"/></svg>Settings (hover)</a>
+                    <a class="menu__item" role="menuitem" href="#account-menu" tabindex="-1"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-help"/></svg>Help</a>
+                    <div class="menu__separator" role="separator"></div>
+                    <button class="menu__item" type="button" role="menuitem" tabindex="-1">Sign out</button>
+                </div>
+            </div>
+            <h3 id="account-menu-demo-title">Working account menu</h3>
+            <p>A click, Enter, Space, or an arrow key opens it. The item of the current route carries aria-current="page".</p>
+            <div class="top-bar-frame">
+                <span class="top-bar-frame__title">Sample app</span>
+                <div class="account-menu" id="account-menu-demo-root" data-account-menu>
+                    <button class="account-menu__button" id="account-menu-demo-button" type="button" popovertarget="account-menu-demo" aria-label="Alex North" title="Alex North"><span class="avatar avatar--sm avatar--initials" aria-hidden="true">AN</span></button>
+                    <div class="menu account-menu__panel" id="account-menu-demo" role="menu" popover>
+                        <p class="account-menu__name" id="account-menu-demo-name" data-account-menu-name aria-hidden="true">Alex North</p>
+                        <a class="menu__item" role="menuitem" href="#/bin" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bin"/></svg>Recycle bin</a>
+                        <a class="menu__item" role="menuitem" href="#/settings"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-settings"/></svg>Settings</a>
+                        <a class="menu__item" role="menuitem" href="#/help"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-help"/></svg>Help</a>
+                        <div class="menu__separator" role="separator"></div>
+                        <button class="menu__item" type="button" role="menuitem" data-account-menu-demo-session>Sign out</button>
+                    </div>
+                </div>
+            </div>
+            <p id="account-menu-demo-result" data-account-menu-result role="status">Route: #/bin</p>
         </section>
         <section id="accents" class="gallery-section" aria-labelledby="accents-title">
             <h2 id="accents-title">Bright accents</h2>
