@@ -13,6 +13,7 @@ Add the GitHub Packages publish workflow and document the release flow of the pa
 - `.github/workflows/publish.yml`
 - `package.json`
 - `tests/integration/pack.test.js`
+- `vitest.integration.config.js`: runs the two packing tests one at a time, since both rewrite `manifest.json`.
 - `docs/devops.md`
 - `README.md`
 - `CHANGELOG.md`
@@ -23,4 +24,5 @@ Size estimate: 6 files, 200 lines
 - Unit test: none (workflow configuration; the pack test covers the shipped file list)
 - Integration: `pack.test.js` asserts that the packed file list matches the layout of ADR-0008 and excludes the gallery.
 
-Completion check: `npx vitest run tests/integration/pack.test.js`, exit code 0
+Completion check: `npx vitest run --config vitest.integration.config.js tests/integration/pack.test.js`, exit code 0
+The default config includes only `tests/unit/`, so the check names the integration config.
