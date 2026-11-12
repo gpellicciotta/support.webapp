@@ -3,8 +3,10 @@
 import { expect, test } from '@playwright/test';
 import { lookHref, looks } from '../../src/demo/gallery.js';
 
-// Shell demos join this list when they exist.
-const pages = [{ name: 'gallery', path: '/demo/visual-style-gallery.html' }];
+const pages = [
+    { name: 'gallery', path: '/demo/visual-style-gallery.html' },
+    ...['todos', 'counters', 'meteo', 'family-portal'].map((name) => ({ name: `shell-${name}`, path: `/demo/shell-${name}.html` }))
+];
 const NORMAL_TEXT_RATIO = 4.5;
 const LARGE_TEXT_RATIO = 3;
 const NON_TEXT_RATIO = 3;
@@ -330,6 +332,8 @@ for (const target of pages) {
                     if (accent) {
                         await page.locator('#accent-select').selectOption(accent);
                     }
+                    // Short pages reach the checks before color transitions end, so wait for every transition.
+                    await page.evaluate(() => Promise.all(document.getAnimations().filter((animation) => animation instanceof CSSTransition).map((transition) => transition.finished.catch(() => null))));
                     expect(response.status()).toBe(200);
                     await page.screenshot({ path: testInfo.outputPath(`${target.name}-${look}-${effective}-${viewport.width}-${theme === 'system' ? 'system' : 'explicit'}.png`), fullPage: true });
                     const data = await check(page);

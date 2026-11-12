@@ -12,6 +12,10 @@ All notable changes to this project are documented here.
 - Components: Added loading feedback with polite status, busy content regions, and static skeleton rows for slow lists.
 - Components: Added the collapsible and the account menu, with initials or person icon, current route mark, and gallery sections.
 - Modules: Added `attachCollapsible` in `collapsible.js`, `attachAccountMenu` and `initialsOf` in `account-menu.js`, and `align` to `attachMenu`.
+- Shell: Added `shell.css` with optional areas, both scroll modes, width options, safe-area padding, and a skip link.
+- Shell: Added demo pages for the todos.webapp, counters, meteo, and family-portal setups, linked from the gallery.
+- Components: Moved the fixed position of the toast region into `shell.css`, the only stylesheet with fixed or sticky positions.
+- DevEx: The browser verifier checks the shell demo pages and waits for color transitions before measuring contrast.
 - Components: Added toasts with Undo, persistent toasts, Ctrl+Z, modal holding, and a gallery section with a working toaster.
 - Modules: Added `createToast` in `toast.js`, with a deprecated `createToaster` alias, and `createLiveRegion` in `live-region.js`.
 - Components: Added menus and popovers with gallery sections, roving focus, type-ahead, and light dismiss.

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="icon" href="data:,">
+    <title>family-portal shell demo · support.webapp</title>
+    <link id="look-stylesheet" rel="stylesheet" href="../looks/neutral/index.css">
+    <link rel="stylesheet" href="gallery.css">
+    <script type="module" src="shell-demo.js"></script>
+</head>
+<body class="app app--scroll-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="app__top-bar">
+        <a class="app__brand" href="#main">Family</a>
+        <nav class="app__breadcrumb" aria-label="Breadcrumb">
+            <ol><li><a href="#main">Home</a></li><li><a href="#main" aria-current="page">Calendar</a></li></ol>
+        </nav>
+        <div class="app__top-actions">
+            <a class="icon-button" href="#main" aria-label="Help"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-help"/></svg></a>
+            <button class="icon-button" type="button" aria-label="Account"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg></button>
+        </div>
+    </header>
+    <div class="app__banners"></div>
+    <main class="app__main" id="main" tabindex="-1">
+        <section class="gallery-section" aria-labelledby="demo-settings-title">
+            <h2 id="demo-settings-title">Demo settings</h2>
+            <p>Return to the <a href="visual-style-gallery.html#shell">visual style gallery</a> for the other shell demos.</p>
+            <form class="gallery-controls" aria-label="Demo settings">
+                <div class="gallery-controls__look">
+                    <label for="look-select">Look</label>
+                    <select id="look-select" name="look">
+                        <option value="neutral">Neutral</option>
+                        <option value="warm">Warm</option>
+                        <option value="bright">Bright</option>
+                    </select>
+                </div>
+                <div class="gallery-controls__look">
+                    <label for="accent-select">Accent</label>
+                    <select id="accent-select" name="accent" disabled>
+                        <option value="">Default</option>
+                    </select>
+                </div>
+                <fieldset class="gallery-controls__theme">
+                    <legend>Theme</legend>
+                    <label><input type="radio" name="theme" value="system" checked> System</label>
+                    <label><input type="radio" name="theme" value="light"> Light</label>
+                    <label><input type="radio" name="theme" value="dark"> Dark</label>
+                </fieldset>
+            </form>
+        </section>
+        <section class="gallery-section" aria-labelledby="sample-calendar-title">
+            <h2 id="sample-calendar-title">Sample calendar</h2>
+            <p>One server template partial renders this top bar; the footer moves from a fixed position into the action bar.</p>
+            <div class="toast-demo-actions">
+                <button class="button button--secondary" type="button" data-demo-toast="Sample event saved.">Show a sample toast</button>
+            </div>
+        </section>
+    </main>
+    <footer class="app__action-bar">
+        <p class="shell-demo-footer">Placeholder footer of a sample family portal.</p>
+    </footer>
+    <div class="app__overlays"><div class="toast-region" role="region" aria-label="Notifications"></div></div>
+</body>
+</html>

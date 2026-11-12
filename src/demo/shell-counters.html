@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="icon" href="data:,">
+    <title>counters shell demo · support.webapp</title>
+    <link id="look-stylesheet" rel="stylesheet" href="../looks/neutral/index.css">
+    <link rel="stylesheet" href="gallery.css">
+    <script type="module" src="shell-demo.js"></script>
+</head>
+<body class="app app--scroll-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="app__top-bar">
+        <button class="app__menu-button icon-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Menu">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-more"/></svg>
+        </button>
+        <div class="menu" id="counters-menu" aria-label="Menu" data-demo-menu>
+            <button class="menu__item" type="button" role="menuitem">Sort counters</button>
+            <button class="menu__item" type="button" role="menuitem">Settings</button>
+        </div>
+        <h1 class="app__title">Counters</h1>
+    </header>
+    <div class="app__banners">
+        <div class="banner" role="status">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bell"/></svg>
+            <p class="banner__text">A sample status banner above the content.</p>
+        </div>
+    </div>
+    <main class="app__main" id="main" tabindex="-1">
+        <section class="gallery-section" aria-labelledby="demo-settings-title">
+            <h2 id="demo-settings-title">Demo settings</h2>
+            <p>Return to the <a href="visual-style-gallery.html#shell">visual style gallery</a> for the other shell demos.</p>
+            <form class="gallery-controls" aria-label="Demo settings">
+                <div class="gallery-controls__look">
+                    <label for="look-select">Look</label>
+                    <select id="look-select" name="look">
+                        <option value="neutral">Neutral</option>
+                        <option value="warm">Warm</option>
+                        <option value="bright">Bright</option>
+                    </select>
+                </div>
+                <div class="gallery-controls__look">
+                    <label for="accent-select">Accent</label>
+                    <select id="accent-select" name="accent" disabled>
+                        <option value="">Default</option>
+                    </select>
+                </div>
+                <fieldset class="gallery-controls__theme">
+                    <legend>Theme</legend>
+                    <label><input type="radio" name="theme" value="system" checked> System</label>
+                    <label><input type="radio" name="theme" value="light"> Light</label>
+                    <label><input type="radio" name="theme" value="dark"> Dark</label>
+                </fieldset>
+            </form>
+        </section>
+        <section class="gallery-section" aria-labelledby="sample-counters-title">
+            <h2 id="sample-counters-title">Sample counters</h2>
+            <p>The top bar holds a menu button and the title; the page scrolls under the sticky top bar and action bar.</p>
+            <p>On wide screens the support.js layout moves these actions into the top bar; that move stays app-local.</p>
+        </section>
+    </main>
+    <div class="app__action-bar">
+        <button class="button" type="button" data-demo-toast="Sample counter added.">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg>
+            Add a counter
+        </button>
+    </div>
+    <div class="app__overlays"><div class="toast-region" role="region" aria-label="Notifications"></div></div>
+</body>
+</html>

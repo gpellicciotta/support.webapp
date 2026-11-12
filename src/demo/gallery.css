@@ -449,3 +449,27 @@ h3 {
   display: grid;
   gap: var(--space-4);
 }
+
+/* Shell demo pages: content of the side panel and the footer only; shell.css lays out every area. */
+.shell-demo-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-block-end: var(--border-width) solid var(--color-border);
+}
+
+.shell-demo-panel__header h2 {
+  margin: 0;
+}
+
+.shell-demo-panel__body {
+  padding: var(--space-4);
+}
+
+.shell-demo-footer {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}

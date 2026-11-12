@@ -530,6 +530,7 @@ Theme switch. System removes `data-theme`; Light and Dark set it on the root ele
 The shell has the key `app`, and [ADR-0004](../adrs/ADR-0004-app-shell.md) defines its areas and options.
 Each adopter setup below keeps only the areas and options that adopter uses.
 The top bar parts `app__title`, `app__brand`, `app__menu-button`, `app__breadcrumb`, and `app__top-actions` come from ADR-0004.
+The sidebar and the bottom bar hold an `app__nav-list` of `app__nav-item` links, as the [demo pages](../../src/demo/visual-style-gallery.html#shell) show.
 
 ### todos.webapp setup
 Every area; sidebar and bottom bar; the main column scrolls. The add bar becomes the action bar, and the editor the side panel.

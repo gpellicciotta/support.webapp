@@ -190,7 +190,8 @@ export function initGallery(doc, view) {
     refresh();
 }
 
-if (typeof document !== 'undefined') {
+// The shell demo pages import the switchers from here and skip the gallery specimens.
+if (typeof document !== 'undefined' && document.querySelector('.gallery-main')) {
     initGallery(document, window);
     initSpecimens(document, window);
     for (const opener of document.querySelectorAll('[data-dialog-open]')) {

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="icon" href="data:,">
+    <title>todos.webapp shell demo · support.webapp</title>
+    <link id="look-stylesheet" rel="stylesheet" href="../looks/neutral/index.css">
+    <link rel="stylesheet" href="gallery.css">
+    <script type="module" src="shell-demo.js"></script>
+</head>
+<body class="app app--scroll-main">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="app__top-bar">
+        <h1 class="app__title">Todos</h1>
+        <div class="app__top-actions">
+            <button class="icon-button" type="button" aria-label="Account">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg>
+            </button>
+        </div>
+    </header>
+    <nav class="app__sidebar" aria-label="Main">
+        <ul class="app__nav-list">
+            <li><a class="app__nav-item" href="#main" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-tasks"/></svg>Tasks</a></li>
+            <li><a class="app__nav-item" href="#sample-lists"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-lists"/></svg>Lists</a></li>
+            <li><a class="app__nav-item" href="#demo-settings-title"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-settings"/></svg>Settings</a></li>
+        </ul>
+    </nav>
+    <div class="app__banners">
+        <div class="banner banner--warning" role="status">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg>
+            <p class="banner__text">You are offline. Changes sync later.</p>
+        </div>
+    </div>
+    <main class="app__main" id="main" tabindex="-1">
+        <section class="gallery-section" aria-labelledby="demo-settings-title">
+            <h2 id="demo-settings-title">Demo settings</h2>
+            <p>Return to the <a href="visual-style-gallery.html#shell">visual style gallery</a> for the other shell demos.</p>
+            <form class="gallery-controls" aria-label="Demo settings">
+                <div class="gallery-controls__look">
+                    <label for="look-select">Look</label>
+                    <select id="look-select" name="look">
+                        <option value="neutral">Neutral</option>
+                        <option value="warm">Warm</option>
+                        <option value="bright">Bright</option>
+                    </select>
+                </div>
+                <div class="gallery-controls__look">
+                    <label for="accent-select">Accent</label>
+                    <select id="accent-select" name="accent" disabled>
+                        <option value="">Default</option>
+                    </select>
+                </div>
+                <fieldset class="gallery-controls__theme">
+                    <legend>Theme</legend>
+                    <label><input type="radio" name="theme" value="system" checked> System</label>
+                    <label><input type="radio" name="theme" value="light"> Light</label>
+                    <label><input type="radio" name="theme" value="dark"> Dark</label>
+                </fieldset>
+            </form>
+        </section>
+        <section class="gallery-section" aria-labelledby="sample-tasks-title">
+            <h2 id="sample-tasks-title">Sample tasks</h2>
+            <p>Every area of the shell is present: the main area scrolls between the bars, and the editor opens as the side panel.</p>
+            <div class="toast-demo-actions">
+                <button class="button button--secondary" type="button" data-demo-panel-open>Edit a sample task</button>
+                <button class="button button--secondary" type="button" data-demo-toast="Sample task moved to the recycle bin.">Show a sample toast</button>
+            </div>
+        </section>
+        <section class="gallery-section" id="sample-lists" aria-labelledby="sample-lists-title">
+            <h2 id="sample-lists-title">Sample lists</h2>
+            <p>Placeholder text for a list overview. Lists, filters, and views stay app-local; the shell only places them.</p>
+        </section>
+    </main>
+    <aside class="app__side-panel" aria-labelledby="sample-editor-title" hidden>
+        <div class="shell-demo-panel__header">
+            <h2 id="sample-editor-title">Sample task</h2>
+            <button class="icon-button" type="button" aria-label="Close" data-demo-panel-close>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-close"/></svg>
+            </button>
+        </div>
+        <div class="shell-demo-panel__body">
+            <p>Placeholder editor content. Beside the main column on wide screens, a full-window sheet on narrow screens.</p>
+        </div>
+    </aside>
+    <div class="app__action-bar">
+        <button class="button" type="button" data-demo-panel-open>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg>
+            Add a task
+        </button>
+    </div>
+    <nav class="app__bottom-nav" aria-label="Main">
+        <ul class="app__nav-list">
+            <li><a class="app__nav-item" href="#main" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-tasks"/></svg>Tasks</a></li>
+            <li><a class="app__nav-item" href="#sample-lists"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-lists"/></svg>Lists</a></li>
+            <li><a class="app__nav-item" href="#demo-settings-title"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-settings"/></svg>Settings</a></li>
+        </ul>
+    </nav>
+    <div class="app__overlays"><div class="toast-region" role="region" aria-label="Notifications"></div></div>
+</body>
+</html>

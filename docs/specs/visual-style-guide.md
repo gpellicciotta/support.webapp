@@ -350,7 +350,40 @@ Each pattern task adds its intent, when to use it, when not to, and a gallery li
 ---
 
 ## Shell
-The app shell task adds its areas, scroll modes, and demo pages here ([ADR-0004](../adrs/ADR-0004-app-shell.md)).
+[shell.css](../../src/css/shell.css) lays out the app shell of [ADR-0004](../adrs/ADR-0004-app-shell.md).
+Copy an adopter skeleton from [components.md](components.md#app-shell) and keep only the areas you use.
+Open the four demo pages from the [App shell section](../../src/demo/visual-style-gallery.html#shell) of the gallery.
+
+Areas are direct children of `<body class="app">`; only `app__main` is required:
+- `app__top-bar`, with `app__title` or `app__brand`, `app__menu-button` or `app__breadcrumb`, and `app__top-actions`.
+- `app__sidebar` and `app__bottom-nav`, both `<nav aria-label="Main">`, with `app__nav-list` and `app__nav-item` links.
+- `app__banners`, which takes no room while every banner inside it is hidden.
+- `app__main`, with `id="main"` and `tabindex="-1"` as the skip link target.
+- `app__action-bar`, the screen's main actions or a footer, at the bottom in both scroll modes.
+- `app__side-panel`, shown by removing `hidden`.
+- `app__overlays`, which holds the `.toast-region` and has no box of its own.
+
+Layout rules:
+- The grid drops the tracks of absent areas through `:has()`, so no class names the present areas.
+- Below 64rem the sidebar hides, the bottom bar shows, and the side panel covers the window as a sheet.
+- From 64rem the sidebar and the side panel sit beside the main column, and the bottom bar hides.
+- Media queries cannot read custom properties, so 64rem is a constant; components use container queries instead.
+- `app--scroll-main`, the default without a scroll class, makes the main area the scroll container between the bars.
+- `app--scroll-page` scrolls the document; the top bar, the action bar, and the bottom bar stick.
+- `app--width-reading`, `app--width-narrow`, and `app--width-content` center the banners, main area, and action bar.
+- The toast region sits above the action bar and the bottom bar.
+- Mark the current navigation entry, and the last breadcrumb link, with `aria-current="page"`.
+- Add `viewport-fit=cover` to the viewport meta tag, so bars pad with the safe-area insets of phones.
+
+`shell.css` is the only package stylesheet with fixed or sticky positions; it also pins the toast region.
+The `.skip-link` sits above the top edge until focused, keeping its 44 px target.
+
+**[Decided]** The width options center the banners and action bar with the main area, so their content lines up.
+- Centering the main area alone: rejected, because meteo's actions would then span the full window.
+
+**[Decided]** Counters moves its wide-screen actions into `app__top-actions` in its own code; the shell adds no option.
+- ADR-0004 describes that move as counters' behavior, not as a shell feature, so the counters demo keeps the action bar.
+- A shell option for the move: rejected, because ADR-0004 defines no such option and only counters needs it.
 
 ---
 
@@ -379,9 +412,10 @@ The app shell task adds its areas, scroll modes, and demo pages here ([ADR-0004]
 - [toast.spec.js](../../tests/e2e/toast.spec.js) raises gallery toasts and checks Undo by pointer and keyboard.
 - [collapsible.test.js](../../tests/unit/collapsible.test.js) and [account-menu.test.js](../../tests/unit/account-menu.test.js) check both modules in happy-dom.
 - [collapsible.spec.js](../../tests/e2e/collapsible.spec.js) and [account-menu.spec.js](../../tests/e2e/account-menu.spec.js) drive both by pointer and keyboard.
+- [shell.spec.js](../../tests/e2e/shell.spec.js) checks areas, scroll owners, sticky bars, widths, and the side panel on each demo page.
 - [verify-ui.spec.js](../../tests/e2e/verify-ui.spec.js) is the browser verifier, ported from family-portal's `verify-ui.py`.
 
-The verifier runs each look at 390 and 1440 px, with system and explicit themes:
+The verifier runs the gallery and each shell demo page in each look at 390 and 1440 px, with system and explicit themes:
 - HTTP 200, every stylesheet and import loaded, no font errors, no console errors, and no failed requests.
 - No horizontal scroll.
 - Every `<use>` reference resolves to a symbol in a loaded sprite file.

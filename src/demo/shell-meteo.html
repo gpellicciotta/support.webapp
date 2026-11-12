@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="icon" href="data:,">
+    <title>meteo shell demo · support.webapp</title>
+    <link id="look-stylesheet" rel="stylesheet" href="../looks/neutral/index.css">
+    <link rel="stylesheet" href="gallery.css">
+    <script type="module" src="shell-demo.js"></script>
+</head>
+<body class="app app--scroll-page app--width-narrow">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="app__top-bar"><h1 class="app__title">Meteo</h1></header>
+    <div class="app__banners">
+        <div class="banner banner--warning" role="status" hidden>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg>
+            <p class="banner__text">You are offline.</p>
+        </div>
+    </div>
+    <main class="app__main" id="main" tabindex="-1">
+        <section data-screen="start">
+            <h2>Start</h2>
+            <p>The three screens stay sections of the main area, toggled by the app's own code, in a narrow centered column.</p>
+            <div class="toast-demo-actions">
+                <button class="button button--secondary" type="button" data-demo-toast="Sample place saved.">Show a sample toast</button>
+            </div>
+            <h3 id="demo-settings-title">Demo settings</h3>
+            <p>Return to the <a href="visual-style-gallery.html#shell">visual style gallery</a> for the other shell demos.</p>
+            <form class="gallery-controls" aria-label="Demo settings">
+                <div class="gallery-controls__look">
+                    <label for="look-select">Look</label>
+                    <select id="look-select" name="look">
+                        <option value="neutral">Neutral</option>
+                        <option value="warm">Warm</option>
+                        <option value="bright">Bright</option>
+                    </select>
+                </div>
+                <div class="gallery-controls__look">
+                    <label for="accent-select">Accent</label>
+                    <select id="accent-select" name="accent" disabled>
+                        <option value="">Default</option>
+                    </select>
+                </div>
+                <fieldset class="gallery-controls__theme">
+                    <legend>Theme</legend>
+                    <label><input type="radio" name="theme" value="system" checked> System</label>
+                    <label><input type="radio" name="theme" value="light"> Light</label>
+                    <label><input type="radio" name="theme" value="dark"> Dark</label>
+                </fieldset>
+            </form>
+        </section>
+        <section data-screen="forecast" hidden>
+            <h2>Forecast</h2>
+            <p>Placeholder forecast content for a sample place.</p>
+        </section>
+        <section data-screen="settings" hidden>
+            <h2>Settings</h2>
+            <p>Placeholder settings content for units and places.</p>
+        </section>
+    </main>
+    <div class="app__action-bar">
+        <button class="button button--secondary" type="button" aria-pressed="true" data-demo-screen="start">Start</button>
+        <button class="button button--secondary" type="button" aria-pressed="false" data-demo-screen="forecast">Forecast</button>
+        <button class="button button--secondary" type="button" aria-pressed="false" data-demo-screen="settings">Settings</button>
+    </div>
+    <div class="app__overlays"><div class="toast-region" role="region" aria-label="Notifications"></div></div>
+</body>
+</html>
