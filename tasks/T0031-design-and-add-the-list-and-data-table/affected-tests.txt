@@ -1,0 +1,275 @@
+
+[WebServer] (node:55972) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 56 tests using 4 workers
+
+(node:9168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:76300) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:80924) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:63852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:76300) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:63852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:80924) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1/56] [desktop-light] › tests\e2e\list.spec.js:5:5 › bright lists retain semantics, wrap content, and preserve action focus
+[2/56] [desktop-light] › tests\e2e\list.spec.js:5:5 › neutral lists retain semantics, wrap content, and preserve action focus
+[3/56] [desktop-light] › tests\e2e\list.spec.js:5:5 › warm lists retain semantics, wrap content, and preserve action focus
+[4/56] [desktop-light] › tests\e2e\row.spec.js:4:1 › rows respond to their container and preserve keyboard actions
+[5/56] [desktop-light] › tests\e2e\table.spec.js:5:5 › neutral tables preserve headers and captions with keyboard scroll containment
+[6/56] [desktop-light] › tests\e2e\table.spec.js:5:5 › warm tables preserve headers and captions with keyboard scroll containment
+[7/56] [desktop-light] › tests\e2e\table.spec.js:5:5 › bright tables preserve headers and captions with keyboard scroll containment
+[8/56] [desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[9/56] [desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+[10/56] [desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[11/56] [desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[neutral system 1440px] 38 stylesheets, 812 texts, 202 targets, 202 focus records, 129 sprite references, overflow 0px, errors 0
+
+[desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+[warm system 1440px] 38 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[bright system 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[bright system 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[neutral dark 1440px] 38 stylesheets, 812 texts, 202 targets, 202 focus records, 129 sprite references, overflow 0px, errors 0
+
+[12/56] [desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red
+[desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+[warm dark 1440px] 38 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[13/56] [desktop-light] › tests\e2e\verify-ui.spec.js:355:1 › reports injected overflow, contrast, target, and focus violations
+[desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[bright dark 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[14/56] [desktop-light] › tests\e2e\verify-ui.spec.js:381:1 › reports unresolved sprite references
+[desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[bright dark 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+
+(node:75808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:75808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[15/56] [desktop-dark] › tests\e2e\list.spec.js:5:5 › neutral lists retain semantics, wrap content, and preserve action focus
+[desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red
+[bright system 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+
+(node:15352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:15352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[16/56] [desktop-dark] › tests\e2e\list.spec.js:5:5 › warm lists retain semantics, wrap content, and preserve action focus
+
+(node:61232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:61232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[17/56] [desktop-dark] › tests\e2e\list.spec.js:5:5 › bright lists retain semantics, wrap content, and preserve action focus
+[18/56] [desktop-dark] › tests\e2e\row.spec.js:4:1 › rows respond to their container and preserve keyboard actions
+[19/56] [desktop-dark] › tests\e2e\table.spec.js:5:5 › neutral tables preserve headers and captions with keyboard scroll containment
+[20/56] [desktop-dark] › tests\e2e\table.spec.js:5:5 › warm tables preserve headers and captions with keyboard scroll containment
+[21/56] [desktop-dark] › tests\e2e\table.spec.js:5:5 › bright tables preserve headers and captions with keyboard scroll containment
+[bright dark 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[22/56] [desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+
+(node:88264) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:88264) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[23/56] [desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[24/56] [desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[25/56] [desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+[warm system 1440px] 38 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[bright system 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[neutral system 1440px] 38 stylesheets, 812 texts, 202 targets, 202 focus records, 129 sprite references, overflow 0px, errors 0
+
+[desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[bright system 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+[warm light 1440px] 38 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[26/56] [desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red
+[desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[neutral light 1440px] 38 stylesheets, 812 texts, 202 targets, 202 focus records, 129 sprite references, overflow 0px, errors 0
+
+[27/56] [desktop-dark] › tests\e2e\verify-ui.spec.js:355:1 › reports injected overflow, contrast, target, and focus violations
+[desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[bright light 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[28/56] [desktop-dark] › tests\e2e\verify-ui.spec.js:381:1 › reports unresolved sprite references
+[desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[bright light 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+
+(node:10740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:10740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[29/56] [mobile-light] › tests\e2e\list.spec.js:5:5 › neutral lists retain semantics, wrap content, and preserve action focus
+
+(node:61332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red
+[bright system 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+
+(node:61332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[30/56] [mobile-light] › tests\e2e\list.spec.js:5:5 › warm lists retain semantics, wrap content, and preserve action focus
+
+(node:72328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:72328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[31/56] [mobile-light] › tests\e2e\list.spec.js:5:5 › bright lists retain semantics, wrap content, and preserve action focus
+[32/56] [mobile-light] › tests\e2e\row.spec.js:4:1 › rows respond to their container and preserve keyboard actions
+[33/56] [mobile-light] › tests\e2e\table.spec.js:5:5 › neutral tables preserve headers and captions with keyboard scroll containment
+[34/56] [mobile-light] › tests\e2e\table.spec.js:5:5 › warm tables preserve headers and captions with keyboard scroll containment
+[35/56] [mobile-light] › tests\e2e\table.spec.js:5:5 › bright tables preserve headers and captions with keyboard scroll containment
+[bright light 1440px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[36/56] [mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+
+(node:78312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:78312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[37/56] [mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[38/56] [mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[39/56] [mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+[warm system 390px] 38 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[bright system 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[bright system 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[neutral system 390px] 38 stylesheets, 812 texts, 202 targets, 202 focus records, 129 sprite references, overflow 0px, errors 0
+
+[mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+[warm dark 390px] 38 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[40/56] [mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red
+[mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[bright dark 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[41/56] [mobile-light] › tests\e2e\verify-ui.spec.js:355:1 › reports injected overflow, contrast, target, and focus violations
+[mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[bright dark 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[neutral dark 390px] 38 stylesheets, 812 texts, 202 targets, 202 focus records, 129 sprite references, overflow 0px, errors 0
+
+[42/56] [mobile-light] › tests\e2e\verify-ui.spec.js:381:1 › reports unresolved sprite references
+
+(node:78672) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:78672) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[43/56] [mobile-dark] › tests\e2e\list.spec.js:5:5 › neutral lists retain semantics, wrap content, and preserve action focus
+[mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red
+[bright system 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+
+(node:17156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:17156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:12280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[44/56] [mobile-dark] › tests\e2e\list.spec.js:5:5 › warm lists retain semantics, wrap content, and preserve action focus
+
+(node:12280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[45/56] [mobile-dark] › tests\e2e\list.spec.js:5:5 › bright lists retain semantics, wrap content, and preserve action focus
+[46/56] [mobile-dark] › tests\e2e\row.spec.js:4:1 › rows respond to their container and preserve keyboard actions
+[47/56] [mobile-dark] › tests\e2e\table.spec.js:5:5 › neutral tables preserve headers and captions with keyboard scroll containment
+[48/56] [mobile-dark] › tests\e2e\table.spec.js:5:5 › warm tables preserve headers and captions with keyboard scroll containment
+[49/56] [mobile-dark] › tests\e2e\table.spec.js:5:5 › bright tables preserve headers and captions with keyboard scroll containment
+[bright dark 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+
+(node:82180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:82180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[50/56] [mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+[51/56] [mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[52/56] [mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[53/56] [mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+[warm system 390px] 38 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[neutral system 390px] 38 stylesheets, 812 texts, 202 targets, 202 focus records, 129 sprite references, overflow 0px, errors 0
+
+[mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[bright system 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[bright system 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look
+[warm light 390px] 38 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[54/56] [mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red
+[mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look
+[neutral light 390px] 38 stylesheets, 812 texts, 202 targets, 202 focus records, 129 sprite references, overflow 0px, errors 0
+
+[55/56] [mobile-dark] › tests\e2e\verify-ui.spec.js:355:1 › reports injected overflow, contrast, target, and focus violations
+[mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue
+[bright light 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[56/56] [mobile-dark] › tests\e2e\verify-ui.spec.js:381:1 › reports unresolved sprite references
+[mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow
+[bright light 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red
+[bright system 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+[bright light 390px] 37 stylesheets, 813 texts, 203 targets, 203 focus records, 129 sprite references, overflow 0px, errors 0
+
+  56 passed (52.0s)

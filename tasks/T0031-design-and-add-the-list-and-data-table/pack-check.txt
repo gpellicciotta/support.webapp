@@ -1,0 +1,112 @@
+
+> @gpellicciotta/support.webapp@0.1.0-pre prepack
+> node bin/manifest.mjs
+
+
+> @gpellicciotta/support.webapp@0.1.0-pre postpack
+> node bin/manifest.mjs --remove
+
+npm notice
+npm notice 📦  @gpellicciotta/support.webapp@0.1.0-pre
+npm notice Tarball Contents
+npm notice 5.8kB CHANGELOG.md
+npm notice 1.1kB LICENSE.md
+npm notice 1.2kB README.md
+npm notice 10.0kB bin/check.mjs
+npm notice 2.7kB bin/cli.mjs
+npm notice 2.5kB bin/manifest.mjs
+npm notice 3.0kB bin/vendor.mjs
+npm notice 12.1kB manifest.json
+npm notice 1.2kB package.json
+npm notice 19.4kB src/contract.json
+npm notice 1.2kB src/css/base.css
+npm notice 1.8kB src/css/components/account-menu.css
+npm notice 2.1kB src/css/components/avatar.css
+npm notice 1.6kB src/css/components/banner.css
+npm notice 3.7kB src/css/components/button.css
+npm notice 1.4kB src/css/components/card.css
+npm notice 1.1kB src/css/components/checkbox.css
+npm notice 3.1kB src/css/components/chip.css
+npm notice 1.5kB src/css/components/collapsible.css
+npm notice 1.5kB src/css/components/dialog.css
+npm notice 661B src/css/components/empty-state.css
+npm notice 1.5kB src/css/components/error-summary.css
+npm notice 1.4kB src/css/components/field-group.css
+npm notice 5.1kB src/css/components/field.css
+npm notice 557B src/css/components/form.css
+npm notice 2.1kB src/css/components/icon-button.css
+npm notice 1.2kB src/css/components/icon-tile.css
+npm notice 878B src/css/components/icon.css
+npm notice 554B src/css/components/inline-confirm.css
+npm notice 873B src/css/components/link-button.css
+npm notice 1.2kB src/css/components/list.css
+npm notice 603B src/css/components/loading.css
+npm notice 2.7kB src/css/components/menu.css
+npm notice 986B src/css/components/popover.css
+npm notice 912B src/css/components/radio.css
+npm notice 970B src/css/components/row.css
+npm notice 2.9kB src/css/components/segmented.css
+npm notice 2.8kB src/css/components/switch.css
+npm notice 1.1kB src/css/components/table.css
+npm notice 1.1kB src/css/components/toast.css
+npm notice 230B src/css/deprecated.css
+npm notice 860B src/css/reset.css
+npm notice 1.3kB src/css/style.css
+npm notice 5.4kB src/js/account-menu.js
+npm notice 1.9kB src/js/anchor.js
+npm notice 2.7kB src/js/collapsible.js
+npm notice 5.2kB src/js/dialog.js
+npm notice 14.0kB src/js/field.js
+npm notice 1.2kB src/js/focus.js
+npm notice 7.9kB src/js/form.js
+npm notice 2.1kB src/js/i18n.js
+npm notice 3.0kB src/js/icon.js
+npm notice 2.0kB src/js/inline-confirm.js
+npm notice 3.3kB src/js/live-region.js
+npm notice 8.5kB src/js/menu.js
+npm notice 7.0kB src/js/popover.js
+npm notice 12.0kB src/js/toast.js
+npm notice 447B src/looks/_template/fonts.css
+npm notice 352.2kB src/looks/_template/fonts/InterVariable.woff2
+npm notice 4.4kB src/looks/_template/fonts/OFL.txt
+npm notice 5.8kB src/looks/_template/icons.svg
+npm notice 184B src/looks/_template/index.css
+npm notice 6.1kB src/looks/_template/look.css
+npm notice 1.5kB src/looks/_template/primitives.css
+npm notice 1.9kB src/looks/_template/README.md
+npm notice 6.1kB src/looks/bright/icons.svg
+npm notice 157B src/looks/bright/index.css
+npm notice 1.1kB src/looks/bright/LICENSE.txt
+npm notice 6.0kB src/looks/bright/look.css
+npm notice 1.2kB src/looks/bright/primitives.css
+npm notice 447B src/looks/neutral/fonts.css
+npm notice 352.2kB src/looks/neutral/fonts/InterVariable.woff2
+npm notice 4.4kB src/looks/neutral/fonts/OFL.txt
+npm notice 5.8kB src/looks/neutral/icons.svg
+npm notice 184B src/looks/neutral/index.css
+npm notice 4.9kB src/looks/neutral/look.css
+npm notice 1.3kB src/looks/neutral/primitives.css
+npm notice 3.1kB src/looks/warm/fonts.css
+npm notice 20.8kB src/looks/warm/fonts/dm-sans/dm-sans-latin-ext-wght-italic.woff2
+npm notice 18.2kB src/looks/warm/fonts/dm-sans/dm-sans-latin-ext-wght-normal.woff2
+npm notice 39.7kB src/looks/warm/fonts/dm-sans/dm-sans-latin-wght-italic.woff2
+npm notice 36.9kB src/looks/warm/fonts/dm-sans/dm-sans-latin-wght-normal.woff2
+npm notice 4.6kB src/looks/warm/fonts/dm-sans/OFL.txt
+npm notice 4.5kB src/looks/warm/fonts/outfit/OFL.txt
+npm notice 14.8kB src/looks/warm/fonts/outfit/outfit-latin-ext-wght-normal.woff2
+npm notice 32.3kB src/looks/warm/fonts/outfit/outfit-latin-wght-normal.woff2
+npm notice 7.6kB src/looks/warm/icons.svg
+npm notice 184B src/looks/warm/index.css
+npm notice 7.2kB src/looks/warm/look.css
+npm notice 2.4kB src/looks/warm/primitives.css
+npm notice Tarball Details
+npm notice name: @gpellicciotta/support.webapp
+npm notice version: 0.1.0-pre
+npm notice filename: gpellicciotta-support.webapp-0.1.0-pre.tgz
+npm notice package size: 927.6 kB
+npm notice unpacked size: 1.1 MB
+npm notice shasum: b43aada4251f8fc21e560fdf7d40a923a37b56b9
+npm notice integrity: sha512-EBFL1yXX8M9rT[...]91kiDFk/KgNmg==
+npm notice total files: 90
+npm notice
+gpellicciotta-support.webapp-0.1.0-pre.tgz

@@ -1,0 +1,135 @@
+
+[WebServer] (node:82888) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 32 tests using 4 workers
+
+
+(node:83248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:82232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:73720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:82232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:83248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:5988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:73720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1/32] [desktop-light] › tests\e2e\list.spec.js:5:5 › warm lists retain semantics, wrap content, and preserve action focus
+[2/32] [desktop-light] › tests\e2e\list.spec.js:5:5 › bright lists retain semantics, wrap content, and preserve action focus
+[3/32] [desktop-light] › tests\e2e\list.spec.js:47:1 › ordered lists preserve visible sequence markers
+[4/32] [desktop-light] › tests\e2e\list.spec.js:5:5 › neutral lists retain semantics, wrap content, and preserve action focus
+[5/32] [desktop-light] › tests\e2e\table.spec.js:5:5 › neutral tables preserve headers and captions with keyboard scroll containment
+[6/32] [desktop-light] › tests\e2e\table.spec.js:5:5 › warm tables preserve headers and captions with keyboard scroll containment
+[7/32] [desktop-light] › tests\e2e\table.spec.js:5:5 › bright tables preserve headers and captions with keyboard scroll containment
+[8/32] [desktop-light] › tests\e2e\table.spec.js:45:1 › dense tables reduce cell padding while preserving native headers
+(node:88160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:88160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:62236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:84372) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[9/32] [desktop-dark] › tests\e2e\list.spec.js:5:5 › neutral lists retain semantics, wrap content, and preserve action focus
+
+(node:76432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:62236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:84372) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:76432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[10/32] [desktop-dark] › tests\e2e\list.spec.js:5:5 › bright lists retain semantics, wrap content, and preserve action focus
+[11/32] [desktop-dark] › tests\e2e\list.spec.js:5:5 › warm lists retain semantics, wrap content, and preserve action focus
+[12/32] [desktop-dark] › tests\e2e\list.spec.js:47:1 › ordered lists preserve visible sequence markers
+[13/32] [desktop-dark] › tests\e2e\table.spec.js:5:5 › neutral tables preserve headers and captions with keyboard scroll containment
+[14/32] [desktop-dark] › tests\e2e\table.spec.js:5:5 › warm tables preserve headers and captions with keyboard scroll containment
+[15/32] [desktop-dark] › tests\e2e\table.spec.js:5:5 › bright tables preserve headers and captions with keyboard scroll containment
+[16/32] [desktop-dark] › tests\e2e\table.spec.js:45:1 › dense tables reduce cell padding while preserving native headers
+(node:83056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:83056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[17/32] [mobile-light] › tests\e2e\list.spec.js:5:5 › neutral lists retain semantics, wrap content, and preserve action focus
+
+(node:83868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:56328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:83868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:56328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:4104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[18/32] [mobile-light] › tests\e2e\list.spec.js:5:5 › warm lists retain semantics, wrap content, and preserve action focus
+[19/32] [mobile-light] › tests\e2e\list.spec.js:5:5 › bright lists retain semantics, wrap content, and preserve action focus
+(node:4104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[20/32] [mobile-light] › tests\e2e\list.spec.js:47:1 › ordered lists preserve visible sequence markers
+[21/32] [mobile-light] › tests\e2e\table.spec.js:5:5 › neutral tables preserve headers and captions with keyboard scroll containment
+[22/32] [mobile-light] › tests\e2e\table.spec.js:5:5 › warm tables preserve headers and captions with keyboard scroll containment
+[23/32] [mobile-light] › tests\e2e\table.spec.js:5:5 › bright tables preserve headers and captions with keyboard scroll containment
+[24/32] [mobile-light] › tests\e2e\table.spec.js:45:1 › dense tables reduce cell padding while preserving native headers
+(node:71488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:71488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+[25/32] [mobile-dark] › tests\e2e\list.spec.js:5:5 › neutral lists retain semantics, wrap content, and preserve action focus
+(node:31000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:59580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:64320) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+[26/32] [mobile-dark] › tests\e2e\list.spec.js:5:5 › warm lists retain semantics, wrap content, and preserve action focus
+(node:59580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:64320) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+[27/32] [mobile-dark] › tests\e2e\list.spec.js:47:1 › ordered lists preserve visible sequence markers
+[28/32] [mobile-dark] › tests\e2e\list.spec.js:5:5 › bright lists retain semantics, wrap content, and preserve action focus
+[29/32] [mobile-dark] › tests\e2e\table.spec.js:5:5 › neutral tables preserve headers and captions with keyboard scroll containment
+[30/32] [mobile-dark] › tests\e2e\table.spec.js:5:5 › warm tables preserve headers and captions with keyboard scroll containment
+[31/32] [mobile-dark] › tests\e2e\table.spec.js:5:5 › bright tables preserve headers and captions with keyboard scroll containment
+[32/32] [mobile-dark] › tests\e2e\table.spec.js:45:1 › dense tables reduce cell padding while preserving native headers
+  32 passed (17.5s)

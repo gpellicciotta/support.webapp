@@ -1,0 +1,13 @@
+
+> @gpellicciotta/support.webapp@0.1.0-pre test:integration
+> vitest run --config vitest.integration.config.js
+
+
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0031-design-and-add-the-list-and-data-table
+
+
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+   Start at  22:15:11
+   Duration  4.61s (tests 98%, transform 1%, import 1%)
+

@@ -1,0 +1,68 @@
+
+[WebServer] (node:82220) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 16 tests using 1 worker
+
+
+(node:60632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:60632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1/16] [desktop-light] › tests\e2e\bright.spec.js:5:1 › forced fallback preserves root accents and every contrast pair
+[2/16] [desktop-light] › tests\e2e\bright.spec.js:47:1 › bright accents work on roots and wrappers and reset when switching looks
+[3/16] [desktop-light] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars
+[4/16] [desktop-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars
+(node:87972) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:87972) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[5/16] [desktop-dark] › tests\e2e\bright.spec.js:5:1 › forced fallback preserves root accents and every contrast pair
+[6/16] [desktop-dark] › tests\e2e\bright.spec.js:47:1 › bright accents work on roots and wrappers and reset when switching looks
+[7/16] [desktop-dark] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars
+[8/16] [desktop-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars
+  1) [desktop-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars ──────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 300
+    Received: 17
+
+      16 |         for (const size of ['sm', 'md', 'lg']) {
+      17 |             const box = await page.locator(`#icon-tile .icon-tile--${size}`).first().boundingBox();
+    > 18 |             expect(box.height).toBe(box.width);
+         |                                ^
+      19 |             tileWidths.push(box.width);
+      20 |         }
+      21 |         expect(tileWidths[0]).toBeLessThan(tileWidths[1]);
+        at C:\Dev-Projects\support.webapp\.plan\work\T0031-design-and-add-the-list-and-data-table\tests\e2e\card.spec.js:18:32
+
+    Error Context: test-results\card-warm-cards-tiles-and-avatars-desktop-dark\error-context.md
+
+
+
+(node:56400) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:56400) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[9/16] [mobile-light] › tests\e2e\bright.spec.js:5:1 › forced fallback preserves root accents and every contrast pair
+[10/16] [mobile-light] › tests\e2e\bright.spec.js:47:1 › bright accents work on roots and wrappers and reset when switching looks
+[11/16] [mobile-light] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars
+[12/16] [mobile-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars
+
+(node:19108) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:19108) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[13/16] [mobile-dark] › tests\e2e\bright.spec.js:5:1 › forced fallback preserves root accents and every contrast pair
+[14/16] [mobile-dark] › tests\e2e\bright.spec.js:47:1 › bright accents work on roots and wrappers and reset when switching looks
+[15/16] [mobile-dark] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars
+[16/16] [mobile-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars
+  1 failed
+    [desktop-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars ───────────────────
+  15 passed (1.2m)

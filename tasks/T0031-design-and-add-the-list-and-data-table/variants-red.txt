@@ -1,0 +1,75 @@
+
+[WebServer] (node:74396) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 2 workers
+
+
+(node:78588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:72160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:78588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:72160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/2] [desktop-light] › tests\e2e\table.spec.js:45:1 › dense tables reduce cell padding while preserving native headers
+[2/2] [desktop-light] › tests\e2e\list.spec.js:47:1 › ordered lists preserve visible sequence markers
+  1) [desktop-light] › tests\e2e\table.spec.js:45:1 › dense tables reduce cell padding while preserving native headers 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#table').getByRole('table', { name: 'Summary totals' })
+    Expected: visible
+    Timeout: 1000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('#table').getByRole('table', { name: 'Summary totals' }) with timeout 1000ms
+      - waiting for locator('#table').getByRole('table', { name: 'Summary totals' })
+
+
+      46 |     const problems = await openGallery(page);
+      47 |     const dense = page.locator('#table').getByRole('table', { name: 'Summary totals' });
+    > 48 |     await expect(dense).toBeVisible({ timeout: 1000 });
+         |                         ^
+      49 |     await expect(dense.getByRole('columnheader')).toHaveCount(2);
+      50 |     await expect(dense.getByRole('rowheader')).toHaveCount(2);
+      51 |     const padding = await dense.locator('td').first().evaluate(element => parseFloat(getComputedStyle(element).paddingTop));
+        at C:\Dev-Projects\support.webapp\.plan\work\T0031-design-and-add-the-list-and-data-table\tests\e2e\table.spec.js:48:25
+
+    Error Context: test-results\table-dense-tables-reduce--d270d-e-preserving-native-headers-desktop-light\error-context.md
+
+
+  2) [desktop-light] › tests\e2e\list.spec.js:47:1 › ordered lists preserve visible sequence markers 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#list').getByRole('list', { name: 'Preparation steps' })
+    Expected: visible
+    Timeout: 1000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('#list').getByRole('list', { name: 'Preparation steps' }) with timeout 1000ms
+      - waiting for locator('#list').getByRole('list', { name: 'Preparation steps' })
+
+
+      48 |     const problems = await openGallery(page);
+      49 |     const ordered = page.locator('#list').getByRole('list', { name: 'Preparation steps' });
+    > 50 |     await expect(ordered).toBeVisible({ timeout: 1000 });
+         |                           ^
+      51 |     await expect(ordered).toHaveCSS('list-style-type', 'decimal');
+      52 |     await expect(ordered.getByRole('listitem')).toHaveCount(2);
+      53 |     expect(await ordered.evaluate(element => element.tagName)).toBe('OL');
+        at C:\Dev-Projects\support.webapp\.plan\work\T0031-design-and-add-the-list-and-data-table\tests\e2e\list.spec.js:50:27
+
+    Error Context: test-results\list-ordered-lists-preserve-visible-sequence-markers-desktop-light\error-context.md
+
+
+  2 failed
+    [desktop-light] › tests\e2e\list.spec.js:47:1 › ordered lists preserve visible sequence markers 
+    [desktop-light] › tests\e2e\table.spec.js:45:1 › dense tables reduce cell padding while preserving native headers 
