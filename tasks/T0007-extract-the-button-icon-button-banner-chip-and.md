@@ -12,8 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 4, duration_s: 4484.6, input: 108, output: 18770, cache_read: 11829288, cache_write: 67488}
+  worker: {turns: 6, duration_s: 4661.0, input: 136, output: 26800, cache_read: 15098796, cache_write: 580958}
 work_duration: 2278.5
+review_status: pending
+review_round: 1
 ---
 # T0007: Extract the button, icon button, banner, chip, and segmented control components from todos.webapp
 
@@ -69,4 +71,7 @@ See the technical specification for files, tests, and the completion check.
   - Files touched: 8.
   - Lines touched: 363.
   - Reopenings: 0.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
