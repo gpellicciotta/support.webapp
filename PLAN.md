@@ -21,17 +21,17 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0010 Extract the toast and live region modules from todos.webapp, including Undo and modal holding.
 - [x] T0012 Switch the popover and menu modules to the native popover attribute, keeping the anchoring code.
 - [x] T0026 Extract the collapsible and the account menu components from todos.webapp.
-- [!] T0013 [reason: circuit breaker: 3 consecutive review rejections; inspect review findings before resuming] [owner: @claude] Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
-- [ ] T0028 [needs: T0013] Extract the floating action button from todos.webapp into the overlay layer of the shell.
+- [x] T0013 Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
+- [ ] T0028 Extract the floating action button from todos.webapp into the overlay layer of the shell.
 - [x] T0020 Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons.
 - [x] T0019 Design and add an accessible switch component.
-- [ ] T0030 Design and add the tabs component with tablist roles and arrow-key navigation.
-- [ ] T0031 Design and add the list and data table components on native list and table elements.
+- [~] T0030 [owner: @codex] Design and add the tabs component with tablist roles and arrow-key navigation.
+- [!] T0031 [reason: needs review: approve list/table markup, keyboard model, and states proposed in components.md at 4ccf95d] [owner: @codex] Design and add the list and data table components on native list and table elements.
 - [ ] T0024 Add the tooltip component after a screen reader check of meteo's tooltips.
 - [ ] T0029 Add the badge component for non-interactive counts and status labels, based on meteo's badges.
 - [ ] T0032 Add the progress bar and spinner components, static under reduced motion.
 - [ ] T0033 Design and add multi-select with checkbox rows, range selection, and a bulk action bar.
-- [ ] T0022 [needs: T0013] Build the Python generate-app devops action and the starter app template.
+- [ ] T0022 Build the Python generate-app devops action and the starter app template.
 - [ ] T0025 [needs: T0022, T0024] Plan the redesign of auth and counters on the design system.
 - [ ] T0027 Add the theme switch and service worker update modules, and document the shared patterns.
 - [x] T0002 Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks.
