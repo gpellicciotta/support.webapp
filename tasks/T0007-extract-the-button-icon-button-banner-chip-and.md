@@ -1,11 +1,12 @@
 ---
 id: T0007
-owner: ~
-needs: [T0006]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@claude"
+session: claude-20261112-855208
+needs: []
+branch: task/T0007-extract-the-button-icon-button-banner-chip-and
+worktree: .plan/work/T0007-extract-the-button-icon-button-banner-chip-and
+status: active
+started_at: "2026-11-12T11:03:09Z"
 ended_at: —
 review: agent
 preview: none
@@ -21,7 +22,7 @@ Show every variant and state in the gallery.
 See the technical specification for files, tests, and the completion check.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read ADR-0003 and the todos.webapp controls stylesheet and gallery tests at a recorded commit.
+- [x] **[Read]**      Read ADR-0003 and the todos.webapp controls stylesheet and gallery tests at a recorded commit.
 - [ ] **[Implement]** Write the failing tests named in the technical specification.
 - [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
 - [ ] **[Implement]** Add the button, banner, chip, and segmented control partials and their gallery sections.
@@ -33,3 +34,7 @@ See the technical specification for files, tests, and the completion check.
 ## Execution Log
 - [2026-11-11] **[Doc]**
   Created by T0002 from the design system roadmap.
+
+- [2026-11-12] **[Read]**
+  Read ADR-0003, the catalog, and todos.webapp controls.css, gallery, and gallery-controls and gallery-danger specs at commit 0cf4981.
+
