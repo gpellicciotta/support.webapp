@@ -3,7 +3,7 @@ task: T0012
 round: 1
 verdict: approved
 reviewer: "@claude-2"
-reviewed_at: 2026-11-12T17:08:25Z
+reviewed_at: 2026-11-12T17:13:06Z
 reviewed_commit: "0ed9d48"
 base_commit: "6cdeeaa"
 branch: task/T0012-switch-the-popover-and-menu-modules-to-the

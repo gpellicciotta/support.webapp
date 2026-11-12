@@ -19,15 +19,15 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0009 Extract the dialog component and its three confirmation tiers from todos.webapp.
 - [x] T0011 Extract the menu and popover modules from todos.webapp as they are, with keyboard support and anchoring.
 - [x] T0010 Extract the toast and live region modules from todos.webapp, including Undo and modal holding.
-- [ ] T0012 Switch the popover and menu modules to the native popover attribute, keeping the anchoring code.
-- [ ] T0026 [needs: T0012] Extract the collapsible and the account menu components from todos.webapp.
+- [x] T0012 Switch the popover and menu modules to the native popover attribute, keeping the anchoring code.
+- [ ] T0026 Extract the collapsible and the account menu components from todos.webapp.
 - [ ] T0013 Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
 - [ ] T0028 [needs: T0013] Extract the floating action button from todos.webapp into the overlay layer of the shell.
 - [ ] T0020 Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons.
 - [ ] T0019 Design and add an accessible switch component.
 - [ ] T0030 Design and add the tabs component with tablist roles and arrow-key navigation.
 - [ ] T0031 Design and add the list and data table components on native list and table elements.
-- [ ] T0024 [needs: T0012] Add the tooltip component after a screen reader check of meteo's tooltips.
+- [ ] T0024 Add the tooltip component after a screen reader check of meteo's tooltips.
 - [ ] T0029 Add the badge component for non-interactive counts and status labels, based on meteo's badges.
 - [ ] T0032 [needs: T0020] Add the progress bar and spinner components, static under reduced motion.
 - [ ] T0033 Design and add multi-select with checkbox rows, range selection, and a bulk action bar.
