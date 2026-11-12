@@ -13,10 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 6, duration_s: 3832.2, input: 448, output: 179608, cache_read: 37836084, cache_write: 523088}
-  review: {turns: 2, duration_s: 225.6, input: 116276, output: 5950, cache_read: 786432, cache_write: 0}
-work_duration: 157.7
-review_status: pending
+  review: {turns: 4, duration_s: 421.8, input: 234026, output: 10434, cache_read: 1588992, cache_write: 0}
+work_duration: 437.5
+review_status: rejected
 review_round: 2
+reviewed_by: "@codex"
 ---
 # T0008: Extract fields, checkboxes, radios, and createField from todos.webapp, adding forms, validation states, help toggles, and error summaries.
 
@@ -39,6 +40,10 @@ See the technical specification for files, tests, and the completion check.
 - [x] **[Implement]** Write failing regression tests for review round 1 defects D1 to D3.
 - [x] **[Verify]**    Run the regression tests and record their failure output in validation-proof.md.
 - [x] **[Implement]** Guard whole submits, add the created status line, and invalidate pending checks on edits.
+- [x] **[Verify]**    Rerun unit tests, affected browser tests, and the full check, and record the output.
+- [x] **[Implement]** Write failing tests for review round 2: an edit to a checked field during submit.
+- [x] **[Verify]**    Run the round 2 tests and record their failure output in validation-proof.md.
+- [x] **[Implement]** Revalidate when any value changed during validation, and capture data without awaiting.
 - [x] **[Verify]**    Rerun unit tests, affected browser tests, and the full check, and record the output.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
@@ -100,4 +105,21 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 2 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 2 rejected by @codex: [Decided]** Rejected because submission can still send values that changed after their validation completed.
+  - Findings: [review-findings-2.md](T0008-extract-the-field-checkbox-and-radio-components-with/review-findings-2.md).
+
+- [2026-11-12] **[Verify]**
+  Recorded red output for review round 2: both form unit regressions and the browser scenario fail before the fix.
+
+- [2026-11-12] **[Implement]**
+  Fixed review round 2: submit revalidates until no value changed, then reads the data without awaiting.
+  - Added two form unit regressions and a browser scenario.
+
+- [2026-11-12] **[Verify]**
+  Verified unit, field and form browser tests, and the full check; recorded outcomes.
+  - Files touched: 10.
+  - Lines touched: 315.
+  - Reopenings: 0.
 

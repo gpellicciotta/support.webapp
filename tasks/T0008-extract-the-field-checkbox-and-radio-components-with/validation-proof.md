@@ -164,3 +164,63 @@ All checks passed!
  Test Files  2 passed (2)
       Tests  4 passed (4)
 ```
+
+### Review round 2 rework: red phase
+`npx vitest run tests/unit/form.test.js`, exit code 1, before any production change:
+
+```text
+     × D1: an edit to a checked field while another check runs is revalidated before sending 14ms
+     × D1: a valid edit during validation is checked again, and the sent data matches it 16ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/unit/form.test.js > review round 2 regressions > D1: an edit to a checked field while another check runs is revalidated before sending
+AssertionError: expected true to be false // Object.is equality
+ FAIL  tests/unit/form.test.js > review round 2 regressions > D1: a valid edit during validation is checked again, and the sent data matches it
+AssertionError: expected [ 'Steps' ] to deeply equal [ 'Steps', 'Steps' ]
+ Test Files  1 failed (1)
+      Tests  2 failed | 9 passed (11)
+   Start at  16:11:13
+```
+
+`npx playwright test tests/e2e/form.spec.js --project desktop-light -g "clearing the address" --reporter=line`, exit code 1:
+
+```text
+  1) [desktop-light] › tests\e2e\form.spec.js:98:1 › clearing the address while the name check runs during submit blocks the send 
+    Error: expect(locator).toBeFocused() failed
+    Expected: focused
+    Received: inactive
+  1 failed
+```
+
+### Review round 2 rework: green phase
+`npx vitest run tests/unit/field.test.js tests/unit/form.test.js`, exit code 0:
+
+```text
+ RUN  v5.1.0 {{project-root}}/.plan/work/T0008-extract-the-field-checkbox-and-radio-components-with
+ Test Files  2 passed (2)
+      Tests  28 passed (28)
+   Start at  16:12:20
+   Duration  2.00s (import 80%, tests 16%, transform 3%, worker 1%)
+```
+
+`npx playwright test tests/e2e/form.spec.js tests/e2e/field.spec.js --reporter=line`, exit code 0:
+
+```text
+[47/48] [mobile-dark] › tests\e2e\form.spec.js:68:1 › the error summary section shows a filled summary with links to fields
+[48/48] [mobile-dark] › tests\e2e\form.spec.js:98:1 › clearing the address while the name check runs during submit blocks the send
+  48 passed (27.6s)
+```
+
+Full suite: `{{plan-venv}}/Scripts/python.exe scripts/devops.py check`, exit code 0:
+
+```text
+All 24 markdown files passed linting.
+All checks passed!
+============================== 3 passed in 1.72s ==============================
+ Test Files  13 passed (13)
+      Tests  1504 passed (1504)
+[... 309 lines omitted ...]
+  220 passed (1.3m)
+[... 5 lines omitted ...]
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+```
