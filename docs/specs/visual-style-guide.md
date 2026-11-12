@@ -83,6 +83,7 @@ Buttons, chips, and segmented controls keep a 44 px target in every variant, inc
 | :------------ | :------------------------------------------------------------ | :----------------------------------------------- | :---------------------------------------------------------------------- |
 | `button`      | One action with a text label; the default marks the main one. | Navigation, which is a link.                     | [Button](../../src/demo/visual-style-gallery.html#button)               |
 | `icon-button` | A frequent action whose icon is clear; toggles add a state.   | Rare or ambiguous actions, which need a label.   | [Icon button](../../src/demo/visual-style-gallery.html#icon-button)     |
+| `link-button` | A secondary action with an underlined text label.             | Navigation, which needs an anchor.               | [Link button](../../src/demo/visual-style-gallery.html#link-button)     |
 | `chip`        | Short metadata, removable values, and filter toggles.         | Actions, which are buttons.                      | [Chip](../../src/demo/visual-style-gallery.html#chip)                   |
 | `segmented`   | One choice among 2 to 5 short options, all visible.           | Longer lists, which use a select or radio group. | [Segmented control](../../src/demo/visual-style-gallery.html#segmented) |
 | `banner`      | A lasting state of the page, above its content.               | Short confirmations, which are toasts.           | [Banner](../../src/demo/visual-style-gallery.html#banner)               |
@@ -93,6 +94,9 @@ Buttons, chips, and segmented controls keep a 44 px target in every variant, inc
 - `--inverse` uses `--color-inverse`, or the text color when the look leaves it undefined.
   A look that defines `--color-inverse` must give it 4.5:1 against `--color-surface`.
 - Icon buttons need an `aria-label` naming the action and its object, such as "Delete Groceries".
+- Link buttons keep family-portal's underlined label, transparent background, and link colors, with a 44 px target.
+  The underline offset stays at `0.2em`, matching the source component.
+  Hover and active share `--color-link-hover`; focus uses the global outline, and native `disabled` prevents activation.
 - Toggles set `aria-pressed`; pressed toggles take the selected ground and a primary border.
 - Static chips are spans and never tab stops; filter chips are buttons with `aria-pressed`.
 - Overdue chips pair the danger color with an alert icon and a word, never color alone.

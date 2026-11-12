@@ -32,7 +32,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | :------------ | :----------------------------- | :------------------ | :--------------------------------------- | :-------------------------------------------------------------------------------- | :-------------------------------------------------------- | :-------- |
 | `button`      | Button                         | todos.webapp        | none                                     | default, secondary, danger, quiet, inverse, small; hover, active, focus, disabled | native button; visible focus; 44 px target                | T0007     |
 | `icon-button` | Icon button                    | todos.webapp        | none                                     | default, danger; pressed toggle                                                   | native button; `aria-label`; `aria-pressed` for toggles   | T0007     |
-| `link-button` | Link button                    | family-portal       | none                                     | default; hover, focus                                                             | native button that looks like a link                      | T0034     |
+| `link-button` | Link button                    | family-portal       | none                                     | default; hover, focus-visible, active, disabled                                   | native button; visible focus; 44 px target                | T0034     |
 | `fab`         | Floating action button         | todos.webapp        | none                                     | one per screen, in the shell's overlay layer                                      | native button; `aria-label`; 44 px target                 | to create |
 | `field`       | Field: input, textarea, select | todos.webapp, meteo | `field.js`: `createField`, `attachField` | hint, counter, help, status, error; invalid, pending, disabled, read-only         | label for the control; `aria-invalid`; `aria-describedby` | T0008     |
 | `checkbox`    | Checkbox                       | todos.webapp        | none                                     | checked, indeterminate, disabled, invalid                                         | native input inside its label                             | T0008     |
@@ -124,7 +124,10 @@ Icon button. A toggle carries `aria-pressed`; a plain action omits it.
 ```
 
 ### link-button
-Link button.
+Use a link button for a secondary action, such as showing details; use an anchor for navigation.
+It stays underlined with a transparent background and keeps a 44 px target in both dimensions.
+Hover and active use the link hover color; focus uses the global ring, and native `disabled` blocks activation.
+See every state in the [gallery](../../src/demo/visual-style-gallery.html#link-button).
 
 ```html
 <button class="link-button" type="button">Show details</button>

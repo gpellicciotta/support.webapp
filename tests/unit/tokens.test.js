@@ -264,7 +264,7 @@ describe('component partials', () => {
     const catalog = readFileSync(fileURLToPath(new URL('../../docs/specs/components.md', import.meta.url)), 'utf8');
 
     it('ships a partial for every delivered component key', () => {
-        expect(partials).toEqual(expect.arrayContaining(['icon', 'button', 'icon-button', 'chip', 'segmented', 'banner']));
+        expect(partials).toEqual(expect.arrayContaining(['icon', 'button', 'icon-button', 'link-button', 'chip', 'segmented', 'banner']));
     });
 
     for (const key of partials) {
