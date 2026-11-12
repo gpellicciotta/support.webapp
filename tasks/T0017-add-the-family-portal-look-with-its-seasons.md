@@ -1,11 +1,12 @@
 ---
 id: T0017
-owner: ~
-needs: [T0006]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@codex"
+session: codex-20261112-067376
+needs: []
+branch: task/T0017-add-the-family-portal-look-with-its-seasons
+worktree: .plan/work/T0017-add-the-family-portal-look-with-its-seasons
+status: active
+started_at: "2026-11-12T13:35:17Z"
 ended_at: —
 review: agent
 preview: none
@@ -19,15 +20,37 @@ Follow [ADR-0001](../../docs/adrs/ADR-0001-layer-model-and-token-contract.md) an
 Refine declared files, size estimate, and tests in the technical specification before starting.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read the named ADRs and the source app at a recorded commit.
-- [ ] **[Decide]**    Write declared files, size estimate, tests, and the completion check into the technical specification.
-- [ ] **[Implement]** Write the failing tests named in the technical specification.
-- [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
-- [ ] **[Implement]** Implement the component or look and its gallery specimens.
-- [ ] **[Verify]**    Run the tests, the verifier, and the completion check until they pass.
-- [ ] **[Doc]**       Update the style guide and CHANGELOG.md.
+- [x] **[Read]**      Read the named ADRs and the source app at a recorded commit.
+- [x] **[Decide]**    Write declared files, size estimate, tests, and the completion check into the technical specification.
+- [x] **[Implement]** Write the failing tests named in the technical specification.
+- [x] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
+- [x] **[Implement]** Implement the component or look and its gallery specimens.
+- [x] **[Verify]**    Run the tests, the verifier, and the completion check until they pass.
+- [x] **[Doc]**       Update the style guide and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-11] **[Doc]**
   Created by T0002 from the design system roadmap.
+
+- [2026-11-12] **[Read]**
+  Read ADRs, roadmap, and family-portal at 1953f75484a2fe65aa3444730b3a9f459ae21cb4. Baseline verifier passed 12 checks; new warm tests failed as expected.
+
+- [2026-11-12] **[Decided]**
+  Preserved source warm values and seasonal mappings. Added optional shadow roles, documented neutral glyph supplements, and used sunken selected grounds. Declared contract, gallery test, and documentation index additions; seven counted files remain within the estimate.
+
+- [2026-11-12] **[Verify]**
+  Full devops check passed: 3 Python, 1003 unit, 164 browser, and 4 integration tests; packaging passed. Inspected eight screenshots linked in validation-proof.md. Test servers exited with their runners.
+
+- [2026-11-12] **[Implement]**
+  Added failing warm registration, seasonal mapping, template tests, and browser switching tests before their implementations. Captured expected failures in validation-proof.md.
+
+- [2026-11-12] **[Doc]**
+  Documented source provenance, MIT glyph supplements, SIL font licenses, contract gaps, seasonal usage, and template instructions. Updated the guide, index, and existing pre-release changelog.
+
+- [2026-11-12] **[Verify]**
+  Recorded outcomes and screenshots in [validation-proof.md](T0017-add-the-family-portal-look-with-its-seasons/validation-proof.md). Counted modified text files exclude new files, CHANGELOG.md, and the plan store.
+  - Files touched: 7.
+  - Lines touched: 80.
+  - Reopenings: 0.
+
