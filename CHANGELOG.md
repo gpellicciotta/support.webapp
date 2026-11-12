@@ -8,6 +8,7 @@ All notable changes to this project are documented here.
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- Components: Added cards, distinct tile sizes, and avatars with fallbacks, stacks honoring explicit sizes, and gallery specimens.
 - Looks: Added warm with seasonal accents, self-hosted fonts, its glyph sprite, gallery controls, and a complete look template.
 - Template: Added optional role mappings, variant examples, and complete token and core glyph contract checks.
 - Components: Added empty states with up to two actions and container-responsive row layouts with keyboard-accessible trailing actions.

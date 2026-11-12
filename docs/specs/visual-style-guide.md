@@ -133,6 +133,29 @@ Long content wraps without truncation; action buttons retain their existing focu
 Task status, drag handles, selection, navigation, and row interactions remain app-local.
 Use a table when columns need shared alignment across rows.
 
+### Cards, icon tiles, and avatars
+Use [cards](../../src/demo/visual-style-gallery.html#card) for grouped content or one linked destination.
+Compose `.card__media`, `.card__body`, `.card__title`, and `.card__text`; select headings appropriate to the page hierarchy.
+Link cards must not contain nested controls; static cards may contain buttons.
+Use rows instead for dense collections.
+Use [icon tiles](../../src/demo/visual-style-gallery.html#icon-tile) as decorative containers, never standalone controls.
+Sizes are `--sm`, `--md` (default), and `--lg`; tones are `--tone-1` through `--tone-4`.
+Tile sizes use spacing tokens, independent of controls, with distinct 32, 48, and 64 pixel dimensions in every look.
+Hide decorative icons with `aria-hidden="true"`.
+Use [avatars](../../src/demo/visual-style-gallery.html#avatar) for identity, with the same size and tone modifiers.
+Use an image with meaningful alt text, authored initials with `.avatar--initials`, or the `icon-user` fallback.
+Give standalone fallback spans `role="img"` and an accessible name; hide decorative avatars beside visible names.
+Applications choose fallback markup when images are absent or fail; CSS does not detect broken image requests.
+Use `.avatar-stack` to overlap portraits, with an optional named group and individually named members.
+Unmodified stack members use responsive sizing; explicit `avatar--sm`, `avatar--md`, and `avatar--lg` modifiers preserve their normal dimensions.
+Avoid stacks for large rosters, where a list provides clearer navigation.
+
+**[Decided]** Avatar sizes preserve family-portal dimensions through existing space tokens; stacks preserve its responsive size and ground rings.
+**[Decided]** Optional tones fall back to sunken surfaces and text; shared radius roles replace source primitive radii.
+**[Decided]** Cards use the global focus outline; initials and icon fallbacks extend the source to satisfy the catalog.
+**[Decided]** Static card buttons stretch with their flex container; applications own action alignment instead of cross-component package selectors.
+**[Decided]** The placeholder portrait uses a fixed mid-gray fill for visibility in light and dark themes.
+
 ## Patterns
 No pattern is built yet.
 Each pattern task adds its intent, when to use it, when not to, and a gallery link here.

@@ -287,7 +287,8 @@ describe('component partials', () => {
 
             it('styles only its own block and the gallery state classes', () => {
                 const blocks = new Set([...css.matchAll(/\.([a-z][\w-]*?)(?:__[\w-]+|--[\w-]+)?(?![\w-])/g)].map((match) => match[1]));
-                expect([...blocks].filter((block) => block !== key && !['is-hover', 'is-focus', 'is-active', 'icon'].includes(block))).toEqual([]);
+                const companions = key === 'avatar' ? ['avatar-stack'] : [];
+                expect([...blocks].filter((block) => block !== key && !companions.includes(block) && !['is-hover', 'is-focus', 'is-active', 'icon'].includes(block))).toEqual([]);
             });
         });
     }

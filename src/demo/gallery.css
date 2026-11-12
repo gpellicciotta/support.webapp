@@ -1,4 +1,10 @@
 /* Specimen layout of the visual style gallery. Only semantic tokens; apps never load this file. */
+.card-specimens {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--width-menu)), 1fr));
+  gap: var(--space-4);
+}
+
 .season-grid {
   display: flex;
   flex-wrap: wrap;
