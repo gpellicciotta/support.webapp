@@ -1,0 +1,324 @@
+Command: C:\Dev-Projects\plan\.venv\Scripts\lint-markdown.EXE check --offline
+Process ID: 84084
+All 22 markdown files passed linting.
+Command: C:\Dev-Projects\plan\.venv\Scripts\python.exe -m ruff check scripts tests
+Process ID: 9668
+All checks passed!
+Command: C:\Dev-Projects\plan\.venv\Scripts\python.exe -m ruff format --check scripts tests
+Process ID: 15828
+4 files already formatted
+Command: "C:\Program Files\nodejs\npm.CMD" run lint
+Process ID: 84856
+> @gpellicciotta/support.webapp@0.1.0-pre lint
+> eslint .
+Command: C:\Dev-Projects\plan\.venv\Scripts\python.exe -m pytest
+Process ID: 70476
+============================= test session starts =============================
+platform win32 -- Python 3.12.8, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Dev-Projects\support.webapp\.plan\work\T0034-add-the-link-button-component-from-family-portal
+configfile: pyproject.toml
+testpaths: tests
+plugins: timeout-2.4.0, xdist-3.8.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+created: 8/8 workers
+8 workers [3 items]
+...                                                                      [100%]
+============================== 3 passed in 2.64s ==============================
+Command: "C:\Program Files\nodejs\npm.CMD" test
+Process ID: 78560
+> @gpellicciotta/support.webapp@0.1.0-pre test
+> vitest run
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0034-add-the-link-button-component-from-family-portal
+ Test Files  7 passed (7)
+      Tests  546 passed (546)
+   Start at  14:16:28
+   Duration  867ms (transform 35%, import 32%, tests 29%, worker 5%)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:slow
+Process ID: 2956
+> @gpellicciotta/support.webapp@0.1.0-pre test:slow
+> playwright test
+[WebServer] (node:17188) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+Running 148 tests using 4 workers
+(node:43652) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:80936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:82484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43652) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:82484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:80936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    2 [desktop-light] › tests\e2e\button.spec.js:53:1 › danger buttons fill or outline in the danger color (1.1s)
+  ✓    1 [desktop-light] › tests\e2e\button.spec.js:38:1 › disabled buttons use the disabled text color and ignore hover (1.4s)
+  ✓    4 [desktop-light] › tests\e2e\button.spec.js:14:1 › the button section shows every variant in every state (1.2s)
+  ✓    3 [desktop-light] › tests\e2e\button.spec.js:27:1 › hover and active change the ground of every button variant (1.4s)
+  ✓    5 [desktop-light] › tests\e2e\button.spec.js:65:1 › buttons take the button radius role (921ms)
+  ✓    6 [desktop-light] › tests\e2e\button.spec.js:73:1 › every button, including the small variant, is at least 44 by 44 px (919ms)
+  ✓    8 [desktop-light] › tests\e2e\button.spec.js:93:1 › the focus ring stays an outline in forced colors mode (960ms)
+  ✓    7 [desktop-light] › tests\e2e\button.spec.js:80:1 › focus draws the focus ring, and danger buttons draw it in the danger color (1.2s)
+  ✓    9 [desktop-light] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, removable, and filter chips in every state (801ms)
+  ✓   10 [desktop-light] › tests\e2e\chip.spec.js:23:1 › static chips are not focusable, and interactive chip parts are 44 px targets (892ms)
+  ✓   11 [desktop-light] › tests\e2e\chip.spec.js:40:1 › chips take the chip radius role (824ms)
+  ✓   12 [desktop-light] › tests\e2e\chip.spec.js:48:1 › overdue chips carry the danger color and an icon, never color alone (803ms)
+  ✓   13 [desktop-light] › tests\e2e\chip.spec.js:56:1 › pressed filter chips differ from plain ones and keep distinct hover and active grounds (802ms)
+  ✓   14 [desktop-light] › tests\e2e\chip.spec.js:69:1 › pressed filter chips stay distinct in forced colors mode (803ms)
+  ✓   15 [desktop-light] › tests\e2e\chip.spec.js:76:1 › disabled filter chips use the disabled text color (790ms)
+  ✓   18 [desktop-light] › tests\e2e\i18n.spec.js:3:1 › translates scoped markup and switches catalogs safely (105ms)
+  ✓   16 [desktop-light] › tests\e2e\chip.spec.js:86:1 › filter chips and remove buttons draw the focus ring (867ms)
+  ✓   17 [desktop-light] › tests\e2e\chip.spec.js:95:1 › the remove button shows hover and active grounds distinct from its sunken chip (835ms)
+  ✓   19 [desktop-light] › tests\e2e\icon-button.spec.js:8:1 › the icon button section shows the plain, pressed, and danger buttons in every state (855ms)
+  ✓   20 [desktop-light] › tests\e2e\icon-button.spec.js:23:1 › every icon button has a label, one decorative icon, and a 44 px square target (983ms)
+  ✓   21 [desktop-light] › tests\e2e\icon-button.spec.js:36:1 › pressed toggles differ from plain ones and keep distinct hover and active grounds (855ms)
+  ✓   22 [desktop-light] › tests\e2e\icon-button.spec.js:49:1 › disabled icon buttons use the disabled text color (831ms)
+  ✓   23 [desktop-light] › tests\e2e\icon-button.spec.js:59:1 › danger icon buttons use the danger color and the danger focus ring (833ms)
+  ✓   24 [desktop-light] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (894ms)
+  ✓   25 [desktop-light] › tests\e2e\link-button.spec.js:19:1 › real and specimen interactions use link colors and preserve disabled behavior (949ms)
+  ✓   26 [desktop-light] › tests\e2e\link-button.spec.js:46:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (912ms)
+  ✓   27 [desktop-light] › tests\e2e\segmented.spec.js:4:1 › the segmented section shows fieldsets of native radios with legends and every state (842ms)
+  ✓   28 [desktop-light] › tests\e2e\segmented.spec.js:25:1 › every segmented option is at least 44 by 44 px (802ms)
+  ✓   29 [desktop-light] › tests\e2e\segmented.spec.js:32:1 › arrow keys move the selection, and the focused option draws the focus ring (888ms)
+  ✓   30 [desktop-light] › tests\e2e\segmented.spec.js:61:1 › the checked option stands out by ground, outline, and weight, also in forced colors mode (852ms)
+  ✓   34 [desktop-light] › tests\e2e\smoke.spec.js:3:1 › serves the landing page without browser errors (154ms)
+  ✓   31 [desktop-light] › tests\e2e\segmented.spec.js:76:1 › the forced state specimens and the disabled group render their states (822ms)
+  ✓   32 [desktop-light] › tests\e2e\segmented.spec.js:92:1 › options wrap inside the section without horizontal overflow (790ms)
+  ✓   33 [desktop-light] › tests\e2e\segmented.spec.js:98:1 › a single disabled radio dims its option in an enabled group and ignores hover (821ms)
+  ✓   37 [desktop-light] › tests\e2e\verify-ui.spec.js:377:1 › reports unresolved sprite references (841ms)
+(node:45180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   36 [desktop-light] › tests\e2e\verify-ui.spec.js:351:1 › reports injected overflow, contrast, target, and focus violations (1.2s)
+(node:45180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[neutral system 1440px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+(node:66212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:66212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:80236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:80236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   38 [desktop-dark] › tests\e2e\button.spec.js:14:1 › the button section shows every variant in every state (1.3s)
+  ✓   39 [desktop-dark] › tests\e2e\button.spec.js:27:1 › hover and active change the ground of every button variant (1.2s)
+[neutral dark 1440px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+  ✓   35 [desktop-light] › tests\e2e\verify-ui.spec.js:320:9 › gallery passes every verifier check in the neutral look (3.8s)
+  ✓   41 [desktop-dark] › tests\e2e\button.spec.js:53:1 › danger buttons fill or outline in the danger color (909ms)
+  ✓   40 [desktop-dark] › tests\e2e\button.spec.js:38:1 › disabled buttons use the disabled text color and ignore hover (1.3s)
+(node:64308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:64308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   42 [desktop-dark] › tests\e2e\button.spec.js:65:1 › buttons take the button radius role (908ms)
+  ✓   44 [desktop-dark] › tests\e2e\button.spec.js:93:1 › the focus ring stays an outline in forced colors mode (883ms)
+  ✓   43 [desktop-dark] › tests\e2e\button.spec.js:80:1 › focus draws the focus ring, and danger buttons draw it in the danger color (1.2s)
+  ✓   45 [desktop-dark] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, removable, and filter chips in every state (854ms)
+  ✓   46 [desktop-dark] › tests\e2e\button.spec.js:73:1 › every button, including the small variant, is at least 44 by 44 px (899ms)
+  ✓   47 [desktop-dark] › tests\e2e\chip.spec.js:23:1 › static chips are not focusable, and interactive chip parts are 44 px targets (936ms)
+  ✓   48 [desktop-dark] › tests\e2e\chip.spec.js:40:1 › chips take the chip radius role (822ms)
+  ✓   49 [desktop-dark] › tests\e2e\chip.spec.js:48:1 › overdue chips carry the danger color and an icon, never color alone (750ms)
+  ✓   51 [desktop-dark] › tests\e2e\chip.spec.js:69:1 › pressed filter chips stay distinct in forced colors mode (846ms)
+  ✓   50 [desktop-dark] › tests\e2e\chip.spec.js:56:1 › pressed filter chips differ from plain ones and keep distinct hover and active grounds (868ms)
+  ✓   52 [desktop-dark] › tests\e2e\chip.spec.js:76:1 › disabled filter chips use the disabled text color (820ms)
+  ✓   55 [desktop-dark] › tests\e2e\i18n.spec.js:3:1 › translates scoped markup and switches catalogs safely (127ms)
+  ✓   53 [desktop-dark] › tests\e2e\chip.spec.js:86:1 › filter chips and remove buttons draw the focus ring (866ms)
+  ✓   54 [desktop-dark] › tests\e2e\chip.spec.js:95:1 › the remove button shows hover and active grounds distinct from its sunken chip (840ms)
+  ✓   56 [desktop-dark] › tests\e2e\icon-button.spec.js:8:1 › the icon button section shows the plain, pressed, and danger buttons in every state (881ms)
+  ✓   57 [desktop-dark] › tests\e2e\icon-button.spec.js:23:1 › every icon button has a label, one decorative icon, and a 44 px square target (1.0s)
+  ✓   58 [desktop-dark] › tests\e2e\icon-button.spec.js:36:1 › pressed toggles differ from plain ones and keep distinct hover and active grounds (843ms)
+  ✓   59 [desktop-dark] › tests\e2e\icon-button.spec.js:49:1 › disabled icon buttons use the disabled text color (804ms)
+  ✓   60 [desktop-dark] › tests\e2e\icon-button.spec.js:59:1 › danger icon buttons use the danger color and the danger focus ring (910ms)
+  ✓   61 [desktop-dark] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (959ms)
+  ✓   62 [desktop-dark] › tests\e2e\link-button.spec.js:19:1 › real and specimen interactions use link colors and preserve disabled behavior (989ms)
+  ✓   63 [desktop-dark] › tests\e2e\link-button.spec.js:46:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (995ms)
+  ✓   65 [desktop-dark] › tests\e2e\segmented.spec.js:25:1 › every segmented option is at least 44 by 44 px (969ms)
+  ✓   64 [desktop-dark] › tests\e2e\segmented.spec.js:4:1 › the segmented section shows fieldsets of native radios with legends and every state (1.3s)
+  ✓   69 [desktop-dark] › tests\e2e\segmented.spec.js:92:1 › options wrap inside the section without horizontal overflow (4.1s)
+  ✓   67 [desktop-dark] › tests\e2e\segmented.spec.js:61:1 › the checked option stands out by ground, outline, and weight, also in forced colors mode (5.0s)
+  ✓   66 [desktop-dark] › tests\e2e\segmented.spec.js:32:1 › arrow keys move the selection, and the focused option draws the focus ring (7.0s)
+  ✓   68 [desktop-dark] › tests\e2e\segmented.spec.js:76:1 › the forced state specimens and the disabled group render their states (7.0s)
+  ✓   70 [desktop-dark] › tests\e2e\segmented.spec.js:98:1 › a single disabled radio dims its option in an enabled group and ignores hover (9.0s)
+  ✓   71 [desktop-dark] › tests\e2e\smoke.spec.js:3:1 › serves the landing page without browser errors (7.4s)
+  ✓   73 [desktop-dark] › tests\e2e\verify-ui.spec.js:351:1 › reports injected overflow, contrast, target, and focus violations (9.6s)
+  ✓   74 [desktop-dark] › tests\e2e\verify-ui.spec.js:377:1 › reports unresolved sprite references (12.6s)
+[neutral system 1440px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+(node:69956) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:77592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:69956) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:77592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[neutral light 1440px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+  ✓   72 [desktop-dark] › tests\e2e\verify-ui.spec.js:320:9 › gallery passes every verifier check in the neutral look (23.3s)
+(node:72820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   76 [mobile-light] › tests\e2e\button.spec.js:14:1 › the button section shows every variant in every state (1.4s)
+  ✓   77 [mobile-light] › tests\e2e\button.spec.js:38:1 › disabled buttons use the disabled text color and ignore hover (1.4s)
+  ✓   75 [mobile-light] › tests\e2e\button.spec.js:27:1 › hover and active change the ground of every button variant (1.5s)
+(node:72820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   79 [mobile-light] › tests\e2e\button.spec.js:73:1 › every button, including the small variant, is at least 44 by 44 px (925ms)
+  ✓   78 [mobile-light] › tests\e2e\button.spec.js:65:1 › buttons take the button radius role (1.1s)
+  ✓   80 [mobile-light] › tests\e2e\button.spec.js:80:1 › focus draws the focus ring, and danger buttons draw it in the danger color (1.2s)
+  ✓   81 [mobile-light] › tests\e2e\button.spec.js:53:1 › danger buttons fill or outline in the danger color (1.0s)
+  ✓   82 [mobile-light] › tests\e2e\button.spec.js:93:1 › the focus ring stays an outline in forced colors mode (934ms)
+  ✓   83 [mobile-light] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, removable, and filter chips in every state (899ms)
+  ✓   84 [mobile-light] › tests\e2e\chip.spec.js:23:1 › static chips are not focusable, and interactive chip parts are 44 px targets (953ms)
+  ✓   85 [mobile-light] › tests\e2e\chip.spec.js:40:1 › chips take the chip radius role (876ms)
+  ✓   86 [mobile-light] › tests\e2e\chip.spec.js:48:1 › overdue chips carry the danger color and an icon, never color alone (843ms)
+  ✓   87 [mobile-light] › tests\e2e\chip.spec.js:56:1 › pressed filter chips differ from plain ones and keep distinct hover and active grounds (904ms)
+  ✓   88 [mobile-light] › tests\e2e\chip.spec.js:69:1 › pressed filter chips stay distinct in forced colors mode (885ms)
+  ✓   89 [mobile-light] › tests\e2e\chip.spec.js:76:1 › disabled filter chips use the disabled text color (880ms)
+  ✓   92 [mobile-light] › tests\e2e\i18n.spec.js:3:1 › translates scoped markup and switches catalogs safely (146ms)
+  ✓   90 [mobile-light] › tests\e2e\chip.spec.js:86:1 › filter chips and remove buttons draw the focus ring (933ms)
+  ✓   91 [mobile-light] › tests\e2e\chip.spec.js:95:1 › the remove button shows hover and active grounds distinct from its sunken chip (910ms)
+  ✓   93 [mobile-light] › tests\e2e\icon-button.spec.js:8:1 › the icon button section shows the plain, pressed, and danger buttons in every state (928ms)
+  ✓   94 [mobile-light] › tests\e2e\icon-button.spec.js:23:1 › every icon button has a label, one decorative icon, and a 44 px square target (1.1s)
+  ✓   95 [mobile-light] › tests\e2e\icon-button.spec.js:36:1 › pressed toggles differ from plain ones and keep distinct hover and active grounds (966ms)
+  ✓   96 [mobile-light] › tests\e2e\icon-button.spec.js:49:1 › disabled icon buttons use the disabled text color (909ms)
+  ✓   97 [mobile-light] › tests\e2e\icon-button.spec.js:59:1 › danger icon buttons use the danger color and the danger focus ring (972ms)
+  ✓   98 [mobile-light] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (1.0s)
+  ✓   99 [mobile-light] › tests\e2e\link-button.spec.js:19:1 › real and specimen interactions use link colors and preserve disabled behavior (1.1s)
+  ✓  100 [mobile-light] › tests\e2e\link-button.spec.js:46:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (1.1s)
+  ✓  101 [mobile-light] › tests\e2e\segmented.spec.js:4:1 › the segmented section shows fieldsets of native radios with legends and every state (1.0s)
+  ✓  102 [mobile-light] › tests\e2e\segmented.spec.js:25:1 › every segmented option is at least 44 by 44 px (878ms)
+  ✓  104 [mobile-light] › tests\e2e\segmented.spec.js:61:1 › the checked option stands out by ground, outline, and weight, also in forced colors mode (957ms)
+  ✓  103 [mobile-light] › tests\e2e\segmented.spec.js:32:1 › arrow keys move the selection, and the focused option draws the focus ring (994ms)
+  ✓  108 [mobile-light] › tests\e2e\smoke.spec.js:3:1 › serves the landing page without browser errors (144ms)
+  ✓  106 [mobile-light] › tests\e2e\segmented.spec.js:92:1 › options wrap inside the section without horizontal overflow (976ms)
+  ✓  105 [mobile-light] › tests\e2e\segmented.spec.js:76:1 › the forced state specimens and the disabled group render their states (1.1s)
+  ✓  107 [mobile-light] › tests\e2e\segmented.spec.js:98:1 › a single disabled radio dims its option in an enabled group and ignores hover (912ms)
+  ✓  111 [mobile-light] › tests\e2e\verify-ui.spec.js:377:1 › reports unresolved sprite references (947ms)
+(node:83296) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  110 [mobile-light] › tests\e2e\verify-ui.spec.js:351:1 › reports injected overflow, contrast, target, and focus violations (1.3s)
+[neutral system 390px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+(node:83296) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:79656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:79656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:87028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:87028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  112 [mobile-dark] › tests\e2e\button.spec.js:14:1 › the button section shows every variant in every state (1.2s)
+[neutral dark 390px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+  ✓  109 [mobile-light] › tests\e2e\verify-ui.spec.js:320:9 › gallery passes every verifier check in the neutral look (3.9s)
+  ✓  113 [mobile-dark] › tests\e2e\button.spec.js:27:1 › hover and active change the ground of every button variant (1.3s)
+  ✓  115 [mobile-dark] › tests\e2e\button.spec.js:53:1 › danger buttons fill or outline in the danger color (1.1s)
+  ✓  114 [mobile-dark] › tests\e2e\button.spec.js:38:1 › disabled buttons use the disabled text color and ignore hover (1.4s)
+(node:7244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  116 [mobile-dark] › tests\e2e\button.spec.js:73:1 › every button, including the small variant, is at least 44 by 44 px (935ms)
+(node:7244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  118 [mobile-dark] › tests\e2e\button.spec.js:93:1 › the focus ring stays an outline in forced colors mode (1.0s)
+  ✓  119 [mobile-dark] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, removable, and filter chips in every state (954ms)
+  ✓  117 [mobile-dark] › tests\e2e\button.spec.js:80:1 › focus draws the focus ring, and danger buttons draw it in the danger color (1.5s)
+  ✓  120 [mobile-dark] › tests\e2e\button.spec.js:65:1 › buttons take the button radius role (1.1s)
+  ✓  121 [mobile-dark] › tests\e2e\chip.spec.js:23:1 › static chips are not focusable, and interactive chip parts are 44 px targets (1.1s)
+  ✓  122 [mobile-dark] › tests\e2e\chip.spec.js:40:1 › chips take the chip radius role (934ms)
+  ✓  123 [mobile-dark] › tests\e2e\chip.spec.js:48:1 › overdue chips carry the danger color and an icon, never color alone (881ms)
+  ✓  124 [mobile-dark] › tests\e2e\chip.spec.js:56:1 › pressed filter chips differ from plain ones and keep distinct hover and active grounds (890ms)
+  ✓  125 [mobile-dark] › tests\e2e\chip.spec.js:69:1 › pressed filter chips stay distinct in forced colors mode (902ms)
+  ✓  129 [mobile-dark] › tests\e2e\i18n.spec.js:3:1 › translates scoped markup and switches catalogs safely (84ms)
+  ✓  126 [mobile-dark] › tests\e2e\chip.spec.js:76:1 › disabled filter chips use the disabled text color (854ms)
+  ✓  127 [mobile-dark] › tests\e2e\chip.spec.js:86:1 › filter chips and remove buttons draw the focus ring (914ms)
+  ✓  128 [mobile-dark] › tests\e2e\chip.spec.js:95:1 › the remove button shows hover and active grounds distinct from its sunken chip (837ms)
+  ✓  130 [mobile-dark] › tests\e2e\icon-button.spec.js:8:1 › the icon button section shows the plain, pressed, and danger buttons in every state (881ms)
+  ✓  132 [mobile-dark] › tests\e2e\icon-button.spec.js:36:1 › pressed toggles differ from plain ones and keep distinct hover and active grounds (863ms)
+  ✓  131 [mobile-dark] › tests\e2e\icon-button.spec.js:23:1 › every icon button has a label, one decorative icon, and a 44 px square target (995ms)
+  ✓  133 [mobile-dark] › tests\e2e\icon-button.spec.js:49:1 › disabled icon buttons use the disabled text color (802ms)
+  ✓  134 [mobile-dark] › tests\e2e\icon-button.spec.js:59:1 › danger icon buttons use the danger color and the danger focus ring (871ms)
+  ✓  135 [mobile-dark] › tests\e2e\link-button.spec.js:19:1 › real and specimen interactions use link colors and preserve disabled behavior (936ms)
+  ✓  136 [mobile-dark] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (941ms)
+  ✓  137 [mobile-dark] › tests\e2e\link-button.spec.js:46:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (917ms)
+  ✓  138 [mobile-dark] › tests\e2e\segmented.spec.js:4:1 › the segmented section shows fieldsets of native radios with legends and every state (891ms)
+  ✓  139 [mobile-dark] › tests\e2e\segmented.spec.js:25:1 › every segmented option is at least 44 by 44 px (873ms)
+  ✓  140 [mobile-dark] › tests\e2e\segmented.spec.js:32:1 › arrow keys move the selection, and the focused option draws the focus ring (1.0s)
+  ✓  141 [mobile-dark] › tests\e2e\segmented.spec.js:61:1 › the checked option stands out by ground, outline, and weight, also in forced colors mode (949ms)
+  ✓  145 [mobile-dark] › tests\e2e\smoke.spec.js:3:1 › serves the landing page without browser errors (130ms)
+  ✓  142 [mobile-dark] › tests\e2e\segmented.spec.js:76:1 › the forced state specimens and the disabled group render their states (811ms)
+  ✓  143 [mobile-dark] › tests\e2e\segmented.spec.js:92:1 › options wrap inside the section without horizontal overflow (811ms)
+  ✓  144 [mobile-dark] › tests\e2e\segmented.spec.js:98:1 › a single disabled radio dims its option in an enabled group and ignores hover (849ms)
+  ✓  147 [mobile-dark] › tests\e2e\verify-ui.spec.js:351:1 › reports injected overflow, contrast, target, and focus violations (1.0s)
+  ✓  148 [mobile-dark] › tests\e2e\verify-ui.spec.js:377:1 › reports unresolved sprite references (800ms)
+[neutral system 390px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+[neutral light 390px] 16 stylesheets, 521 texts, 89 targets, 89 focus records, 64 sprite references, overflow 0px, errors 0
+  ✓  146 [mobile-dark] › tests\e2e\verify-ui.spec.js:320:9 › gallery passes every verifier check in the neutral look (2.9s)
+  148 passed (1.2m)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:integration
+Process ID: 68368
+> @gpellicciotta/support.webapp@0.1.0-pre test:integration
+> vitest run --config vitest.integration.config.js
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0034-add-the-link-button-component-from-family-portal
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+   Start at  14:17:45
+   Duration  4.45s (tests 98%, transform 1%, import 1%)
+Command: "C:\Program Files\nodejs\npm.CMD" pack --dry-run
+Process ID: 9384
+> @gpellicciotta/support.webapp@0.1.0-pre prepack
+> node bin/manifest.mjs
+> @gpellicciotta/support.webapp@0.1.0-pre postpack
+> node bin/manifest.mjs --remove
+npm notice
+npm notice 📦  @gpellicciotta/support.webapp@0.1.0-pre
+npm notice Tarball Contents
+npm notice 3.0kB CHANGELOG.md
+npm notice 1.1kB LICENSE.md
+npm notice 1.2kB README.md
+npm notice 10.0kB bin/check.mjs
+npm notice 2.7kB bin/cli.mjs
+npm notice 2.5kB bin/manifest.mjs
+npm notice 3.0kB bin/vendor.mjs
+npm notice 3.2kB manifest.json
+npm notice 1.2kB package.json
+npm notice 19.1kB src/contract.json
+npm notice 1.2kB src/css/base.css
+npm notice 1.5kB src/css/components/banner.css
+npm notice 3.7kB src/css/components/button.css
+npm notice 3.1kB src/css/components/chip.css
+npm notice 2.1kB src/css/components/icon-button.css
+npm notice 878B src/css/components/icon.css
+npm notice 812B src/css/components/link-button.css
+npm notice 2.9kB src/css/components/segmented.css
+npm notice 230B src/css/deprecated.css
+npm notice 558B src/css/reset.css
+npm notice 447B src/css/style.css
+npm notice 2.1kB src/js/i18n.js
+npm notice 3.0kB src/js/icon.js
+npm notice 447B src/looks/neutral/fonts.css
+npm notice 352.2kB src/looks/neutral/fonts/InterVariable.woff2
+npm notice 4.4kB src/looks/neutral/fonts/OFL.txt
+npm notice 5.8kB src/looks/neutral/icons.svg
+npm notice 184B src/looks/neutral/index.css
+npm notice 4.9kB src/looks/neutral/look.css
+npm notice 1.3kB src/looks/neutral/primitives.css
+npm notice Tarball Details
+npm notice name: @gpellicciotta/support.webapp
+npm notice version: 0.1.0-pre
+npm notice filename: gpellicciotta-support.webapp-0.1.0-pre.tgz
+npm notice package size: 374.7 kB
+npm notice unpacked size: 438.8 kB
+npm notice shasum: f7ad336490ac690e9cca6f050dddd4e9179e9539
+npm notice integrity: sha512-Iea9VyVEuU3lZ[...]ZTGdfilNoMqMw==
+npm notice total files: 30
+npm notice
+gpellicciotta-support.webapp-0.1.0-pre.tgz
