@@ -12,11 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 1120.4, input: 151540, output: 30662, cache_read: 4428032, cache_write: 0}
+  worker: {turns: 4, duration_s: 1702.2, input: 196056, output: 48010, cache_read: 6938368, cache_write: 0}
   review: {turns: 2, duration_s: 354.4, input: 76, output: 25742, cache_read: 2493108, cache_write: 154118}
-review_status: rejected
-review_round: 1
-reviewed_by: "@claude"
+review_status: pending
+review_round: 2
 work_duration: 768.4
 ---
 # T0004: Extract the shared base tokens, the contract file, and the neutral look from todos.webapp, with the static token test.
@@ -80,4 +79,7 @@ See the technical specification for files, tests, and the completion check.
   - Files touched: 8.
   - Lines touched: 27.
   - Reopenings: 0.
+
+- [2026-11-12] **[Review]**
+  Round 2 requested (mode: agent).
 
