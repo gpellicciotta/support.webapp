@@ -13,10 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 8, duration_s: 6518.6, input: 512, output: 153588, cache_read: 43330136, cache_write: 445572}
-  review: {turns: 4, duration_s: 941.0, input: 90556, output: 7862, cache_read: 2182920, cache_write: 4012}
-review_status: pending
+  review: {turns: 6, duration_s: 1305.8, input: 226270, output: 15178, cache_read: 4242440, cache_write: 4012}
+review_status: rejected
 review_round: 3
-work_duration: 4684.8
+work_duration: 6136.1
+reviewed_by: "@codex"
 ---
 # T0013: Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages
 
@@ -112,4 +113,28 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 3 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 3 rejected by @codex: [Decided]** Rejected for the missing default scroll behavior required by ADR-0004.
+  - Findings: [review-findings-3.md](T0013-build-the-app-shell-stylesheet-with-its-optional/review-findings-3.md).
+
+- [2026-11-12] **[Suspended]**
+  Suspended after 3 consecutive review rejections. Inspect review findings before lifecycle resume.
+
+- [2026-11-12] **[Decided]**
+  Orchestrator resumed after the circuit breaker: each round found a distinct real defect. Apply main-scroll rules to .app:not(.app--scroll-page) so the bare shell defaults to main scroll.
+
+- [2026-11-12] **[Implement]**
+  Applied the main scroll mode to a shell without a scroll modifier, after a failing default-scroll test at both widths.
+  - Commit 89cb9d8.
+
+- [2026-11-12] **[Verify]**
+  Shell and verifier passed 222; full browser suite passed 494; two checks failed only on the T0036 card flake.
+  - Evidence in validation-proof.md.
+
+- [2026-11-12] **[Verify]**
+  Recorded corrected task outcomes from the complete branch diff against eb7645d.
+  - Files touched: 16 (8 counted).
+  - Lines touched: 1168 (92 counted).
+  - Reopenings: 0.
 

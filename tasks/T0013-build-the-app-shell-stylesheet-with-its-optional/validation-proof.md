@@ -231,3 +231,80 @@ $ npx playwright test --reporter=line  (exit code 0)
 
 The specs come from T0023 and T0018, not from this task; backlog task T0036 tracks the look-switch race.
 Markdown lint, Ruff, pytest, Vitest (2044 tests), and the integration suite passed in both check runs.
+
+## Review Round 3 Rework
+
+### Failing default-scroll test before the fix
+Command: `npx playwright test tests/e2e/shell.spec.js -g "without a scroll modifier" --reporter=line`, exit code 1.
+
+```text
+  1) [mobile-dark] › tests\e2e\shell.spec.js:224:1 › a shell without a scroll modifier scrolls the main area, as the default app--scroll-main does 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 4
+    + Received  + 4
+
+      Object {
+    -   "body": 844,
+    -   "main": true,
+    -   "overflow": "auto",
+    -   "page": false,
+  2) [desktop-light] › tests\e2e\shell.spec.js:224:1 › a shell without a scroll modifier scrolls the main area, as the default app--scroll-main does 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 4
+    + Received  + 4
+
+      Object {
+    -   "body": 900,
+    -   "main": true,
+    -   "overflow": "auto",
+    -   "page": false,
+[... 2 similar failure reports omitted ...]
+  4 failed
+```
+
+### Shell and verifier tests after the fix
+Command: `npx playwright test tests/e2e/shell.spec.js tests/e2e/verify-ui.spec.js --reporter=line`, exit code 0.
+
+```text
+  2 skipped
+  222 passed (2.1m)
+```
+
+### Full check after the fix
+Command: `python scripts/devops.py check`, run twice, exit code 1 both times, from the T0036 gallery flake alone.
+Two other task worktrees, T0030 and T0031, were active on the machine during these runs.
+
+```text
+ Test Files  23 passed (23)
+      Tests  2044 passed (2044)
+[... 775 lines omitted ...]
+  1) [mobile-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars ──────────────────
+    Error: expect(received).toBe(expected) // Object.is equality
+    Expected: 300
+    Received: 17
+[... 9 lines omitted ...]
+  1 failed
+    [mobile-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars ───────────────────
+  2 skipped
+  493 passed (3.9m)
+```
+
+The first run failed the same `card.spec.js` test the same way, with `493 passed (3.8m)`.
+Markdown lint, Ruff, pytest, Vitest, and the integration suite passed in both runs.
+A targeted repro, `card.spec.js` with `verify-ui.spec.js` at `--repeat-each 3` on mobile-light, passed 87 of 87.
+The whole browser suite passed on the same revision:
+
+```text
+$ npx playwright test --reporter=line  (exit code 0)
+  2 skipped
+  494 passed (3.8m)
+```
+
+### Outcome counts
+Command: `git diff --numstat eb7645d...HEAD`, on the complete branch diff.
+- All files: 16 files, 1168 changed lines, including 8 added files.
+- Counted by the sizing rules: 8 modified files and 92 lines, excluding added files and CHANGELOG.md.
