@@ -12,8 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 3077.8, input: 344, output: 114582, cache_read: 24978446, cache_write: 359668}
+  worker: {turns: 4, duration_s: 3172.4, input: 372, output: 118956, cache_read: 27664842, cache_write: 743170}
 work_duration: 1548.0
+review_status: pending
+review_round: 1
 ---
 # T0026: Extract the collapsible and the account menu components from todos.webapp
 
@@ -75,4 +77,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Suspended]**
   Validation fix turn 1 was not dispatched; inspect the suspension reason.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
