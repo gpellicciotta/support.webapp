@@ -12,8 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 453.8}
+  worker: {turns: 4, duration_s: 1370.4, input: 234686, output: 29044, cache_read: 10331392, cache_write: 0}
 work_duration: 239.4
+review_status: pending
+review_round: 1
 ---
 # T0028: Extract the floating action button from todos.webapp into the overlay layer of the shell
 
@@ -82,4 +84,7 @@ Before captures show the adjacent icon-button section; the fab section did not e
 
 - [2026-11-13] **[Review]**
   Committed implementation as 1e4ced8. All non-review steps are checked, completion validation passed, and no test servers remain. Awaiting orchestrator-managed agent review.
+
+- [2026-11-13] **[Review]**
+  Round 1 requested (mode: agent).
 
