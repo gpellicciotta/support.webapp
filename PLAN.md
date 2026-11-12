@@ -13,7 +13,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0007 Extract the button, icon button, banner, chip, and segmented control components from todos.webapp.
 - [x] T0016 Extract the empty state and the row base components from todos.webapp.
 - [x] T0017 Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
-- [ ] T0018 Extract the card, tile, and avatar components from family-portal.
+- [x] T0018 Extract the card, tile, and avatar components from family-portal.
 - [ ] T0008 Extract fields, checkboxes, radios, and createField from todos.webapp, adding forms, validation states, help toggles, and error summaries.
 - [ ] T0023 Add the bright look from meteo with its accent variant and AA contrast on every accent.
 - [ ] T0009 [needs: T0008] Extract the dialog component and its three confirmation tiers from todos.webapp.
