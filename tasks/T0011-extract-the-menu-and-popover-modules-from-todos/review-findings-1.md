@@ -3,7 +3,7 @@ task: T0011
 round: 1
 verdict: rejected
 reviewer: "@claude-2"
-reviewed_at: 2026-11-12T16:14:21Z
+reviewed_at: 2026-11-12T16:18:04Z
 reviewed_commit: "574cd31"
 base_commit: "cb19d61"
 branch: task/T0011-extract-the-menu-and-popover-modules-from-todos

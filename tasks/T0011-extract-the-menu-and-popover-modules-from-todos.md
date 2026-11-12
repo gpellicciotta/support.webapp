@@ -13,10 +13,12 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 2112.0, input: 344, output: 91796, cache_read: 22977506, cache_write: 317470}
-work_duration: 8.2
+  review: {turns: 2, duration_s: 437.2, input: 84, output: 19292, cache_read: 3305676, cache_write: 167472}
+work_duration: 1295.0
 contributors: "@codex"
-review_status: pending
+review_status: rejected
 review_round: 1
+reviewed_by: "@claude-2"
 ---
 # T0011: Extract the menu and popover modules from todos.webapp as they are, with keyboard support and anchoring
 
@@ -34,6 +36,10 @@ See the technical specification for files, tests, and the completion check.
 - [x] **[Verify]**    Run the menu and popover tests and the verifier until they pass.
 - [x] **[Visual]**    Capture the gallery menu sections per theme at 390 and 1440 px.
 - [x] **[Doc]**       Update the style guide and CHANGELOG.md.
+- [x] **[Implement]** Add an e2e assertion that open menus and popovers paint above gallery specimens.
+- [x] **[Verify]**    Record the failing topmost assertion in validation-proof.md.
+- [x] **[Implement]** Keep static overlay specimens below open panels and at natural height.
+- [x] **[Verify]**    Rerun the specs and the check, then recapture and inspect all screenshots.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -66,4 +72,23 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @claude-2: The module extraction is faithful.
+  - Findings: [review-findings-1.md](T0011-extract-the-menu-and-popover-modules-from-todos/review-findings-1.md).
+
+- [2026-11-12] **[Verify]**
+  Added expectOnTop with elementFromPoint; desktop menu runs failed because the static popover specimen covered the open menu.
+
+- [2026-11-12] **[Implement]**
+  Added an overlay-specimens gallery class with z-index auto and align-items start; component CSS stays unchanged.
+
+- [2026-11-12] **[Visual]**
+  Inspected all 24 recaptured screenshots; open panels paint on top and specimens keep natural height. Evidence: [before](T0011-extract-the-menu-and-popover-modules-from-todos/before-desktop-light.png), [after](T0011-extract-the-menu-and-popover-modules-from-todos/after-menu-bright-desktop-light.png).
+
+- [2026-11-12] **[Verify]**
+  Completion check and devops check passed after rework.
+  - Files touched: 7.
+  - Lines touched: 154.
+  - Reopenings: 0.
 
