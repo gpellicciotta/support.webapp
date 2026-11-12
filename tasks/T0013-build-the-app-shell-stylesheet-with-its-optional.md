@@ -5,19 +5,19 @@ session: claude-20261112-5d5f71
 needs: []
 branch: task/T0013-build-the-app-shell-stylesheet-with-its-optional
 worktree: .plan/work/T0013-build-the-app-shell-stylesheet-with-its-optional
-status: suspended
+status: active
 started_at: "2026-11-12T18:00:13Z"
 ended_at: —
 review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 2886.2, input: 324, output: 115778, cache_read: 21761282, cache_write: 335266}
+  worker: {turns: 4, duration_s: 3910.6, input: 392, output: 131126, cache_read: 28961852, cache_write: 378464}
   review: {turns: 2, duration_s: 672.6, input: 20, output: 2650, cache_read: 890120, cache_write: 4012}
 review_status: rejected
 review_round: 1
 reviewed_by: "@claude-2"
-work_duration: 1792.7
+work_duration: 2338.1
 ---
 # T0013: Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages
 
@@ -89,4 +89,10 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   [Feedback Needed] Confirm counters keeps actions in the action bar on wide screens, leaving the top-bar move app-local, despite ADR-0004 listing it.
+
+- [2026-11-12] **[Decided]**
+  Orchestrator decided under the user's standing authority: counters moves its wide-screen actions into app__top-actions in its own code. The shell adds no option; ADR-0004 describes counters' behavior, not a shell feature.
+
+- [2026-11-12] **[Doc]**
+  Replaced the style guide question with the recorded decision: counters moves wide-screen actions into app__top-actions in its own code; lint exited 0.
 

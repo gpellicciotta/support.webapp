@@ -151,3 +151,19 @@ All checks passed!
       Tests  4 passed (4)
 [... 30 npm pack lines omitted ...]
 ```
+
+### Counters decision recorded
+The style guide now records the orchestrator decision: counters moves its wide-screen actions in its own code.
+Command: `python scripts/devops.py lint`, exit code 0.
+
+```text
+Command: {{python-home}}\Scripts\lint-markdown.EXE check --offline
+All 25 markdown files passed linting.
+Command: {{python-home}}\python.exe -m ruff check scripts tests
+All checks passed!
+Command: {{python-home}}\python.exe -m ruff format --check scripts tests
+4 files already formatted
+Command: "{{nodejs}}\npm.CMD" run lint
+> @gpellicciotta/support.webapp@0.1.0-pre lint
+> eslint .
+```
