@@ -12,12 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 6, duration_s: 3832.2, input: 448, output: 179608, cache_read: 37836084, cache_write: 523088}
+  worker: {turns: 8, duration_s: 4425.2, input: 488, output: 193708, cache_read: 43599182, cache_write: 553254}
   review: {turns: 4, duration_s: 421.8, input: 234026, output: 10434, cache_read: 1588992, cache_write: 0}
 work_duration: 437.5
-review_status: rejected
-review_round: 2
-reviewed_by: "@codex"
+review_status: pending
+review_round: 3
 ---
 # T0008: Extract fields, checkboxes, radios, and createField from todos.webapp, adding forms, validation states, help toggles, and error summaries.
 
@@ -122,4 +121,7 @@ See the technical specification for files, tests, and the completion check.
   - Files touched: 10.
   - Lines touched: 315.
   - Reopenings: 0.
+
+- [2026-11-12] **[Review]**
+  Round 3 requested (mode: agent).
 
