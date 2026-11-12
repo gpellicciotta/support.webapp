@@ -1,11 +1,12 @@
 ---
 id: T0005
-owner: ~
-needs: [T0004]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@claude"
+session: claude-20261112-6afe82
+needs: []
+branch: task/T0005-build-the-visual-style-gallery-with-look-and
+worktree: .plan/work/T0005-build-the-visual-style-gallery-with-look-and
+status: active
+started_at: "2026-11-12T10:31:00Z"
 ended_at: —
 review: agent
 preview: none
@@ -21,15 +22,57 @@ Capture gallery screenshots per look and theme at 390 and 1440 px.
 See the technical specification for files, tests, and the completion check.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read ADR-0007, the ui-guidelines gallery rules, and family-portal's verifier at a recorded commit.
-- [ ] **[Implement]** Write the failing tests named in the technical specification.
-- [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
-- [ ] **[Implement]** Build the gallery page, its stylesheet and switcher script, and the browser verifier.
-- [ ] **[Verify]**    Run the switcher unit test and the verifier until both pass.
-- [ ] **[Visual]**    Capture gallery screenshots per look and theme at 390 and 1440 px.
-- [ ] **[Doc]**       Write the style guide skeleton, and update index.md and CHANGELOG.md.
+- [x] **[Read]**      Read ADR-0007, the ui-guidelines gallery rules, and family-portal's verifier at a recorded commit.
+- [x] **[Implement]** Write the failing tests named in the technical specification.
+- [x] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
+- [x] **[Implement]** Build the gallery page, its stylesheet and switcher script, and the browser verifier.
+- [x] **[Verify]**    Run the switcher unit test and the verifier until both pass.
+- [x] **[Visual]**    Capture gallery screenshots per look and theme at 390 and 1440 px.
+- [x] **[Doc]**       Write the style guide skeleton, and update index.md and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-11] **[Doc]**
   Created by T0002 from the design system roadmap.
+
+- [2026-11-12] **[Read]**
+  Read ADR-0007, the ui-guidelines gallery rules, and family-portal verify-ui.py at commit 1953f75.
+  - Ported checks: status, errors, overflow, fonts, contrast, targets, focus.
+  - Raw color scan stays in the static token test.
+
+- [2026-11-12] **[Verify]**
+  Recorded red-phase failures of the unit test and the verifier in validation-proof.md.
+
+- [2026-11-12] **[Decided]**
+  Widened the desktop Playwright projects from 1280 to 1440 px, matching ADR-0007; playwright.config.js is an undeclared file.
+
+- [2026-11-12] **[Implement]**
+  Built the gallery, its stylesheet with one specimen rule per token, the switcher script, and the Playwright verifier.
+  - Verifier self-test injects overflow, contrast, target, and focus faults.
+
+- [2026-11-12] **[Verify]**
+  Gallery unit test and verifier pass; python scripts/devops.py check exits 0.
+  - Evidence in validation-proof.md.
+
+- [2026-11-12] **[Visual]**
+  Captured system-theme gallery screenshots at 390 and 1440 px; the new page has no before state.
+  - [After, light 390](T0005-build-the-visual-style-gallery-with-look-and/gallery-neutral-light-390.png).
+  - [After, dark 390](T0005-build-the-visual-style-gallery-with-look-and/gallery-neutral-dark-390.png).
+  - [After, light 1440](T0005-build-the-visual-style-gallery-with-look-and/gallery-neutral-light-1440.png).
+  - [After, dark 1440](T0005-build-the-visual-style-gallery-with-look-and/gallery-neutral-dark-1440.png).
+
+- [2026-11-12] **[Doc]**
+  Wrote the style guide skeleton; linked it from index.md and two ADRs, as lint-markdown requires for existing files.
+  - Undeclared files: playwright.config.js, ADR-0006, ADR-0007.
+
+- [2026-11-12] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 4.
+  - Lines touched: 9.
+  - Reopenings: 0.
+
+- [2026-11-12] **[Visual]**
+  Linked before screenshots: base commit 10f2d73 had no gallery, only the unstyled landing page.
+  - [Before 390](T0005-build-the-visual-style-gallery-with-look-and/before-landing-page-390.png).
+  - [Before 1440](T0005-build-the-visual-style-gallery-with-look-and/before-landing-page-1440.png).
+
