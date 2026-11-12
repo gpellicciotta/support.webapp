@@ -1,8 +1,76 @@
 # T0028 Validation Proof
 
+Command: `plan tasks validate T0028 --completion --verbose`
+
+Exit code: 0.
+
+```text
+Resolved worktree root: C:\Dev-Projects\support.webapp\.plan
+Task files being validated:
+- **    OK** [T0028-extract-the-floating-action-button-from-todos-webapp.md]
+
+All 1 task file passed validation.
+```
+
+## Final Verification
+Command: `python scripts/devops.py check`
+
+Exit code: 0.
+The environment set `FAB_EVIDENCE_DIR` to the companion directory for screenshots.
+Output excerpt follows, preserving terminal summaries and fab test results.
+
+```text
+[... 2 lines omitted ...]
+All 25 markdown files passed linting.
+[... 2 lines omitted ...]
+All checks passed!
+[... 2 lines omitted ...]
+4 files already formatted
+[... 18 lines omitted ...]
+============================== 3 passed in 1.87s ==============================
+[... 5 lines omitted ...]
+ Test Files  25 passed (25)
+      Tests  2062 passed (2062)
+[... 1 lines omitted ...]
+   Duration  4.94s (environment 54%, import 30%, tests 13%, worker 1%, transform 1%)
+[... 53 lines omitted ...]
+  ok  31 [desktop-light] › tests\e2e\fab.spec.js:5:1 › fab specimens expose every state, labels, targets, and a keyboard focus ring (1.4s)
+  ok  30 [desktop-light] › tests\e2e\fab.spec.js:30:1 › the shell keeps the overlay fab visible above navigation while content scrolls (1.9s)
+[... 197 lines omitted ...]
+  ok 163 [desktop-dark] › tests\e2e\fab.spec.js:5:1 › fab specimens expose every state, labels, targets, and a keyboard focus ring (1.5s)
+  ok 164 [desktop-dark] › tests\e2e\fab.spec.js:30:1 › the shell keeps the overlay fab visible above navigation while content scrolls (1.9s)
+[... 197 lines omitted ...]
+  ok 296 [mobile-light] › tests\e2e\fab.spec.js:5:1 › fab specimens expose every state, labels, targets, and a keyboard focus ring (1.4s)
+  ok 297 [mobile-light] › tests\e2e\fab.spec.js:30:1 › the shell keeps the overlay fab visible above navigation while content scrolls (1.9s)
+[... 197 lines omitted ...]
+  ok 429 [mobile-dark] › tests\e2e\fab.spec.js:5:1 › fab specimens expose every state, labels, targets, and a keyboard focus ring (1.3s)
+[... 1 lines omitted ...]
+  ok 430 [mobile-dark] › tests\e2e\fab.spec.js:30:1 › the shell keeps the overlay fab visible above navigation while content scrolls (1.6s)
+[... 152 lines omitted ...]
+  2 skipped
+  530 passed (3.9m)
+[... 5 lines omitted ...]
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+[... 1 lines omitted ...]
+   Duration  7.48s (tests 98%, import 1%, transform 1%)
+[... 102 lines omitted ...]
+npm notice name: @gpellicciotta/support.webapp
+npm notice version: 0.1.0-pre
+npm notice filename: gpellicciotta-support.webapp-0.1.0-pre.tgz
+npm notice package size: 931.0 kB
+npm notice unpacked size: 1.2 MB
+npm notice shasum: 6e858b26482789de187cf3de5d54b4fde02e642b
+npm notice integrity: sha512-4hf9869lnKMud[...]9VFJzIevvhOBw==
+npm notice total files: 92
+npm notice
+gpellicciotta-support.webapp-0.1.0-pre.tgz
+```
+
+
 ## Walkthrough & Validation
 
-Command: `$env:FAB_EVIDENCE_DIR='{{companion-directory}}'; npx playwright test tests/e2e/fab.spec.js --workers 2`
+Command: `npx playwright test tests/e2e/fab.spec.js --workers 2`
 
 Exit code: 1. Before screenshots show the adjacent icon-button section before the fab existed.
 

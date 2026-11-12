@@ -14,8 +14,10 @@ Extract the floating action button from todos.webapp into the overlay layer of t
 - `src/css/shell.css`
 - `src/css/style.css`
 - `src/demo/visual-style-gallery.html`
+- `src/demo/shell-todos.html`
 - `tests/e2e/fab.spec.js`
 - `docs/specs/visual-style-guide.md`
+- `docs/specs/components.md`
 - `CHANGELOG.md`
 
 Size estimate: 7 files, 250 lines
