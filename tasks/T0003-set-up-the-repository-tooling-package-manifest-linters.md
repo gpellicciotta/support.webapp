@@ -13,8 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 2, duration_s: 1532.8, input: 166752, output: 36810, cache_read: 5764352, cache_write: 0}
-review_status: pending
+  review: {turns: 2, duration_s: 503.0, input: 96, output: 26084, cache_read: 3141294, cache_write: 151458}
+review_status: rejected
 review_round: 1
+reviewed_by: "@claude"
+work_duration: 1037.2
 ---
 # T0003: Set up the repository tooling: package manifest, linters, unit and browser test runners, devops scripts, and CI
 
@@ -69,4 +72,26 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @claude: The work meets nearly every goal and is well built; one test-isolation defect blocks approval.
+  - Findings: [review-findings-1.md](T0003-set-up-the-repository-tooling-package-manifest-linters/review-findings-1.md).
+
+- [2026-11-12] **[Verify]**
+  Reproduced review port collision using python scripts/devops.py serve --port 4173; developer server PID 82988.
+
+- [2026-11-12] **[Decided]**
+  Allocated an OS-selected free port per Playwright runner and propagated it to workers. Concurrent browser runs passed with developer port 4173 occupied.
+
+- [2026-11-12] **[Doc]**
+  Publish-task follow-up: replace dry-run package validation with tarball creation and release assets. Current build intentionally produces no release archive.
+
+- [2026-11-12] **[Verify]**
+  Full check passed while developer server PID 82988 held port 4173. Two concurrent browser runs each passed four cases. Stopped the server using processes kill 82988 --yes.
+
+- [2026-11-12] **[Verify]**
+  Updated counted changes against the task base after review rework.
+  - Files touched: 7.
+  - Lines touched: 141.
+  - Reopenings: 0.
 

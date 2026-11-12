@@ -45,6 +45,8 @@ Size note: Configuration files are short and only work together; a split would l
 - Unit: Python link tests preserve failures for missing internal and root-relative files while permitting external workspace evidence.
 - Integration: `tests/e2e/smoke.spec.js` starts `scripts/serve.mjs`, loads `src/index.html`, and asserts HTTP 200 with no console errors.
 - Integration: Repeat browser checks in desktop/mobile viewports and light/dark preferences; bootstrap and devops commands run unchanged entry points.
+- Integration: With the developer server holding port 4173, reproduce the collision, then pass the corrected full check.
+- Integration: Run two browser suites concurrently with separate output directories and independently allocated ports.
 
 Mechanical command: `python -m ruff format scripts tests`
 
