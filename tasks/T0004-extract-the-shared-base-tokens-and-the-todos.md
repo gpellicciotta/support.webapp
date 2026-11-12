@@ -13,8 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 2, duration_s: 1120.4, input: 151540, output: 30662, cache_read: 4428032, cache_write: 0}
-review_status: pending
+  review: {turns: 2, duration_s: 354.4, input: 76, output: 25742, cache_read: 2493108, cache_write: 154118}
+review_status: rejected
 review_round: 1
+reviewed_by: "@claude"
+work_duration: 768.4
 ---
 # T0004: Extract the shared base tokens, the contract file, and the neutral look from todos.webapp, with the static token test.
 
@@ -61,4 +64,20 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @claude: Rejected.
+  - Findings: [review-findings-1.md](T0004-extract-the-shared-base-tokens-and-the-todos/review-findings-1.md).
+
+- [2026-11-12] **[Implement]**
+  Reproduced three review defects before fixes. Corrected filled success/warning foregrounds, ADR categories, and optional source-token entries. Contract metadata now drives status checks for every look; separate tests report individual token and contrast failures.
+
+- [2026-11-12] **[Doc]**
+  Addressed every round-one finding. Documented optional source roles and metadata, filled-role foreground usage, and six app-only tokens retained during adoption. Ordered spacing numerically in base and contract.
+
+- [2026-11-12] **[Verify]**
+  Recorded failing-first regressions and full passing checks: 445 unit tests, four browser tests, three Python tests, linting, and packaging. Task-base counted outcomes remain unchanged.
+  - Files touched: 8.
+  - Lines touched: 27.
+  - Reopenings: 0.
 

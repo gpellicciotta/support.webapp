@@ -34,6 +34,8 @@ Size estimate: 13 files, 850 lines
 Size note: The token files and their test form one verifiable unit; neither merges usefully alone.
 
 ### Tests
+- Unit: Reject non-ADR categories and public look tokens missing from the contract; validate filled success and warning foreground contrast.
+- Unit: Read optional status roles and distinctness metadata from the contract, reporting each look, theme, and contrast pair independently.
 - Unit: `tokens.test.js` reads the required tokens from `src/contract.json`, fails while any is missing, then checks contrast pairs in light and dark.
 - Integration: `tokens.test.js` resolves the full import chain of `src/looks/neutral/index.css` and fails on a missing file.
 

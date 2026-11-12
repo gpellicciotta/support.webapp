@@ -3,7 +3,7 @@ task: T0004
 round: 1
 verdict: rejected
 reviewer: "@claude"
-reviewed_at: 2026-11-12T09:33:08Z
+reviewed_at: 2026-11-12T09:36:26Z
 reviewed_commit: "0312db4"
 base_commit: "083e9a5"
 branch: task/T0004-extract-the-shared-base-tokens-and-the-todos
