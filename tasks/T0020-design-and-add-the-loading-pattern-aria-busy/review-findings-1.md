@@ -3,7 +3,7 @@ task: T0020
 round: 1
 verdict: approved
 reviewer: "@claude"
-reviewed_at: 2026-11-12T18:54:33Z
+reviewed_at: 2026-11-12T19:00:34Z
 reviewed_commit: "4b65515"
 base_commit: "48e2ed5"
 branch: task/T0020-design-and-add-the-loading-pattern-aria-busy

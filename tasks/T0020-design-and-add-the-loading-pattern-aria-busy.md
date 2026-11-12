@@ -5,16 +5,20 @@ session: codex-20261112-9374b6
 needs: []
 branch: task/T0020-design-and-add-the-loading-pattern-aria-busy
 worktree: .plan/work/T0020-design-and-add-the-loading-pattern-aria-busy
-status: active
+status: completed
 started_at: "2026-11-12T18:42:28Z"
-ended_at: —
+ended_at: "2026-11-12T19:00:37Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 2, duration_s: 1436.8, input: 184732, output: 28778, cache_read: 9102336, cache_write: 0}
-review_status: pending
+  review: {turns: 2, duration_s: 696.8, input: 52, output: 12758, cache_read: 1794748, cache_write: 117700}
+review_status: approved
 review_round: 1
+reviewed_by: "@claude"
+work_duration: 1088.2
+completion-commit: eb7645da38b4e21b1adfae4e1be20111126df066
 ---
 # T0020: Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons
 
@@ -31,7 +35,7 @@ Refine declared files, size estimate, and tests in the technical specification b
 - [x] **[Implement]** Implement the component or look and its gallery specimens.
 - [x] **[Verify]**    Run the tests, the verifier, and the completion check until they pass.
 - [x] **[Doc]**       Update the style guide and CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-11] **[Doc]**
@@ -78,4 +82,11 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 approved by @claude: Approved.
+  - Findings: [review-findings-1.md](T0020-design-and-add-the-loading-pattern-aria-busy/review-findings-1.md).
+
+- [2026-11-12] **[Complete]**
+  Task completed successfully.
 

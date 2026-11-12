@@ -23,13 +23,13 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0026 Extract the collapsible and the account menu components from todos.webapp.
 - [!] T0013 [reason: needs review: confirm counters keeps its actions in the action bar on wide screens, deviating from ADR-0004] [owner: @claude] Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
 - [ ] T0028 [needs: T0013] Extract the floating action button from todos.webapp into the overlay layer of the shell.
-- [ ] T0020 Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons.
+- [x] T0020 Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons.
 - [ ] T0019 Design and add an accessible switch component.
 - [ ] T0030 Design and add the tabs component with tablist roles and arrow-key navigation.
 - [ ] T0031 Design and add the list and data table components on native list and table elements.
 - [ ] T0024 Add the tooltip component after a screen reader check of meteo's tooltips.
 - [ ] T0029 Add the badge component for non-interactive counts and status labels, based on meteo's badges.
-- [ ] T0032 [needs: T0020] Add the progress bar and spinner components, static under reduced motion.
+- [ ] T0032 Add the progress bar and spinner components, static under reduced motion.
 - [ ] T0033 Design and add multi-select with checkbox rows, range selection, and a bulk action bar.
 - [ ] T0022 [needs: T0013] Build the Python generate-app devops action and the starter app template.
 - [ ] T0025 [needs: T0022, T0024] Plan the redesign of auth and counters on the design system.
