@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 847.2, input: 170812, output: 24426, cache_read: 4091904, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0018: Extract the card, tile, and avatar components from family-portal
 
@@ -59,4 +63,7 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Verify]**
   Committed the verified implementation on the task branch. All execution steps except orchestrator-owned agent review are checked. Task completion validation passed; review settings remain unchanged.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
