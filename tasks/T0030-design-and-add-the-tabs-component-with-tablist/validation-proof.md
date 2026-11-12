@@ -1,6 +1,18 @@
 # T0030 Validation Proof
 
 ## Walkthrough & Validation
+Final required command: `python scripts/devops.py check *> 'C:/Dev-Projects/support.webapp/.plan/tasks/T0030-design-and-add-the-tabs-component-with-tablist/review-rework-final-check.log'; exit $LASTEXITCODE`.
+Exit code: 0. Browser summary excerpt:
+
+```text
+[... 834 lines omitted ...]
+  2 skipped
+  522 passed (3.6m)
+[... 120 lines omitted ...]
+```
+
+See [review-rework-proof.md](review-rework-proof.md) for P1 investigation, baseline comparisons, and readiness tests.
+
 Command: `npx playwright test tests/e2e/bright.spec.js --project=mobile-dark --grep "bright accents"`; exit code: 0.
 
 ```text

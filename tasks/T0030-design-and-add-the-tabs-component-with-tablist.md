@@ -13,9 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 1618.0, input: 227160, output: 37596, cache_read: 9796096, cache_write: 0}
-work_duration: 114.5
-review_status: pending
+  review: {turns: 2, duration_s: 137.2, input: 76670, output: 3600, cache_read: 516096, cache_write: 0}
+work_duration: 2401.9
+review_status: rejected
 review_round: 1
+reviewed_by: "@codex-2"
 ---
 # T0030: Design and add the tabs component with tablist roles and arrow-key navigation
 
@@ -88,4 +90,44 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @codex-2: [Decided]** Rejected for unresolved required verification, rather than a demonstrated tabs implementation defect.
+  - Findings: [review-findings-1.md](T0030-design-and-add-the-tabs-component-with-tablist/review-findings-1.md).
+
+- [2026-11-12] **[Verify]**
+  Investigated review P1 using delayed imported CSS against pre-task commit 884af86. Command: npx playwright test tests/e2e/look-loading.spec.js --project=desktop-dark --workers=1. Session 78719; server PID 4544. Results pending.
+
+- [2026-11-12] **[Verify]**
+  Delayed-import probe passed both baseline cases, so it did not reproduce prior failures. Running 40 unchanged baseline cases with normal caching: baseline-reproduction.log, session 14258, server PID 15892.
+
+- [2026-11-12] **[Verify]**
+  Forty baseline repetitions passed. Running complete baseline browser suite using npx playwright test --config=work/playwright.baseline.config.js, session 37435, server PID 64044. Baseline source is archived from 884af86; tabs tests are excluded.
+
+- [2026-11-12] **[Implement]**
+  Addressed P1 observation timing with selectGalleryLook, awaiting stylesheet load and font readiness. Added held-import browser tests and retained card/color assertions. Baseline passed 40 focused cases and 506 full-suite cases, with two skips; earlier failures remain unreproduced.
+
+- [2026-11-12] **[Verify]**
+  Running python scripts/devops.py check with output in review-rework-check.log, session 55258. Markdown and Ruff passed. The baseline full run completed successfully and its server exited.
+
+- [2026-11-12] **[Verify]**
+  Stopped check session 55258 intentionally after catching an unchanged second bright-test path. Graceful wrapper termination failed; forced termination and verified descendant cleanup used processes kill. Corrected both bright cases before restarting verification.
+
+- [2026-11-12] **[Verify]**
+  Started final python scripts/devops.py check after correcting both bright paths. Session 3925; output review-rework-final-check.log. Baseline experiments and inferred synchronization risk are documented in review-rework-proof.md without claiming a confirmed flake.
+
+- [2026-11-12] **[Verify]**
+  Final check session 3925 uses server PID 60592. Desktop projects passed, including all tabs, held-import, card, bright-accent, and gallery-verifier cases so far. Source changes are limited to test synchronization and its changelog entry.
+
+- [2026-11-12] **[Verify]**
+  Required python scripts/devops.py check passed with exit code 0. Recorded full output and excerpts in review-rework-final-check.log and review-rework-proof.md. Baseline comparisons and held-import tests remain documented. All existing assertions are preserved.
+
+- [2026-11-12] **[Verify]**
+  Recorded revised outcomes after review round one.
+  - Files touched: 14.
+  - Lines touched: 447.
+  - Reopenings: 1.
+
+- [2026-11-12] **[Verify]**
+  Completion validation and companion Markdown lint passed. Final browser server PID 60592 exited. Committed the verification rework; review remains pending. Required full check passed 2059 unit tests, 522 browser cases, and four package integration cases.
 
