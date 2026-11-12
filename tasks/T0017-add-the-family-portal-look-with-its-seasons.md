@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1031.0, input: 235350, output: 27726, cache_read: 5657344, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0017: Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
 
@@ -53,4 +57,7 @@ Refine declared files, size estimate, and tests in the technical specification b
   - Files touched: 7.
   - Lines touched: 80.
   - Reopenings: 0.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
