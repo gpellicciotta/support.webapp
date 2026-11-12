@@ -24,7 +24,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [!] T0013 [reason: circuit breaker: 3 consecutive review rejections; inspect review findings before resuming] [owner: @claude] Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
 - [ ] T0028 [needs: T0013] Extract the floating action button from todos.webapp into the overlay layer of the shell.
 - [x] T0020 Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons.
-- [~] T0019 [owner: @codex] Design and add an accessible switch component.
+- [x] T0019 Design and add an accessible switch component.
 - [ ] T0030 Design and add the tabs component with tablist roles and arrow-key navigation.
 - [ ] T0031 Design and add the list and data table components on native list and table elements.
 - [ ] T0024 Add the tooltip component after a screen reader check of meteo's tooltips.
