@@ -32,7 +32,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | :------------ | :----------------------------- | :------------------ | :--------------------------------------- | :-------------------------------------------------------------------------------- | :-------------------------------------------------------- | :-------- |
 | `button`      | Button                         | todos.webapp        | none                                     | default, secondary, danger, quiet, inverse, small; hover, active, focus, disabled | native button; visible focus; 44 px target                | T0007     |
 | `icon-button` | Icon button                    | todos.webapp        | none                                     | default, danger; pressed toggle                                                   | native button; `aria-label`; `aria-pressed` for toggles   | T0007     |
-| `link-button` | Link button                    | family-portal       | none                                     | default; hover, focus                                                             | native button that looks like a link                      | T0007     |
+| `link-button` | Link button                    | family-portal       | none                                     | default; hover, focus                                                             | native button that looks like a link                      | T0034     |
 | `fab`         | Floating action button         | todos.webapp        | none                                     | one per screen, in the shell's overlay layer                                      | native button; `aria-label`; 44 px target                 | to create |
 | `field`       | Field: input, textarea, select | todos.webapp, meteo | `field.js`: `createField`, `attachField` | hint, counter, help, status, error; invalid, pending, disabled, read-only         | label for the control; `aria-invalid`; `aria-describedby` | T0008     |
 | `checkbox`    | Checkbox                       | todos.webapp        | none                                     | checked, indeterminate, disabled, invalid                                         | native input inside its label                             | T0008     |
@@ -69,7 +69,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | :------------ | :-------------- | :----------- | :----------------------------------- | :------------------------------------------- | :----------------------------------------------------------- | :-------- |
 | `toast`       | Toast           | todos.webapp | `toast.js`: `createToast`            | message, with Undo, persistent; three tiers  | announced by the live region; holds while a modal is open    | T0010     |
 | none, utility | Live region     | todos.webapp | `live-region.js`: `createLiveRegion` | polite, assertive                            | present at page load; text changes are announced             | T0010     |
-| `banner`      | Banner          | todos.webapp | none                                 | info, success, warning, error                | `role="status"`, or `role="alert"` for errors                | T0007     |
+| `banner`      | Banner          | todos.webapp | none                                 | info, success, warning, danger               | `role="status"`, or `role="alert"` for danger                | T0007     |
 | `loading`     | Loading pattern | new design   | none                                 | busy region, status line, slow-list skeleton | `aria-busy`; polite status text; static under reduced motion | T0020     |
 | `progress`    | Progress bar    | support.js   | none                                 | determinate, indeterminate                   | native `progress` with a label                               | to create |
 | `spinner`     | Spinner         | support.js   | none                                 | sizes sm, md                                 | label in the status line; static under reduced motion        | to create |
@@ -198,13 +198,16 @@ Chip. A static chip is a `span`; a filter or removable chip uses buttons.
 ```
 
 ### segmented
-Segmented control.
+Segmented control. The options wrapper draws the track, so the legend stays a real legend.
+`disabled` on one radio disables its option; on the fieldset it disables every option.
 
 ```html
 <fieldset class="segmented">
   <legend class="segmented__legend">View</legend>
-  <label class="segmented__option"><input type="radio" name="view" value="list" checked>List</label>
-  <label class="segmented__option"><input type="radio" name="view" value="board">Board</label>
+  <div class="segmented__options">
+    <label class="segmented__option"><input type="radio" name="view" value="list" checked>List</label>
+    <label class="segmented__option"><input type="radio" name="view" value="board">Board</label>
+  </div>
 </fieldset>
 ```
 
@@ -371,7 +374,7 @@ Live region. A utility, not a component: `createLiveRegion` adds it once, at pag
 ```
 
 ### banner
-Banner.
+Banner. Variants add `banner--success`, `banner--warning`, or `banner--danger`; only danger banners use `role="alert"`.
 
 ```html
 <div class="banner banner--warning" role="status">

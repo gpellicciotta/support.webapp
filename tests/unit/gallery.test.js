@@ -179,3 +179,27 @@ describe('gallery page', () => {
         expect(html).not.toMatch(/\sstyle=|<style/i);
     });
 });
+
+describe('banner specimens', () => {
+    const html = read('visual-style-gallery.html');
+    const banners = [...html.matchAll(/<div class="banner(?: banner--(\w+))?" role="(\w+)">/g)].map((match) => ({ variant: match[1] ?? 'info', role: match[2] }));
+
+    it('shows the info, success, warning, and danger banners', () => {
+        expect([...new Set(banners.map(({ variant }) => variant))].sort()).toEqual(['danger', 'info', 'success', 'warning']);
+    });
+
+    it('marks danger banners as alerts and every other banner as a status', () => {
+        for (const { variant, role } of banners) {
+            expect(role, variant).toBe(variant === 'danger' ? 'alert' : 'status');
+        }
+    });
+
+    it('gives every banner an icon and a text part', () => {
+        const blocks = [...html.matchAll(/<div class="banner[^"]*" role="\w+">([\s\S]*?)<\/div>/g)].map((match) => match[1]);
+        expect(blocks.length).toBe(banners.length);
+        for (const block of blocks) {
+            expect(block).toMatch(/<svg class="icon" aria-hidden="true"/);
+            expect(block).toMatch(/<p class="banner__text">\S/);
+        }
+    });
+});

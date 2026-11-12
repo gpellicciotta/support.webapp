@@ -80,7 +80,8 @@ function collect() {
             continue;
         }
         const ownText = [...el.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE).map((node) => node.textContent).join('').trim();
-        if (!ownText || !visible(el) || el.closest('[disabled], [aria-disabled="true"]')) {
+        // Inactive controls are exempt from contrast (WCAG 1.4.3), including the label of a disabled control.
+        if (!ownText || !visible(el) || el.closest('[disabled], [aria-disabled="true"]') || el.closest('label')?.control?.disabled) {
             continue;
         }
         const style = getComputedStyle(el);
@@ -355,18 +356,22 @@ test('reports injected overflow, contrast, target, and focus violations', async 
             <p id="faint">Faint placeholder text</p>
             <button id="tiny" type="button">x</button>
             <button id="unringed" type="button">Placeholder action</button>
-            <div id="wide">Wide placeholder</div></div>`);
+            <div id="wide">Wide placeholder</div>
+            <label id="inactive"><input type="radio" disabled>Inactive placeholder</label></div>`);
         const ground = getComputedStyle(document.body).backgroundColor;
         Object.assign(document.getElementById('faint').style, { color: ground });
         Object.assign(document.getElementById('tiny').style, { width: '10px', height: '10px', padding: '0' });
         Object.assign(document.getElementById('unringed').style, { outline: 'none', minHeight: '3rem', minWidth: '3rem' });
         Object.assign(document.getElementById('wide').style, { width: '300vw' });
+        Object.assign(document.getElementById('inactive').style, { color: ground });
     });
     const problems = summarize(await check(page));
     expect(problems.filter((problem) => problem.startsWith('horizontal overflow'))).toHaveLength(1);
     expect(problems.some((problem) => problem.startsWith('p#faint') && problem.includes('contrast'))).toBe(true);
     expect(problems.some((problem) => problem.startsWith('button#tiny: target 10x10px'))).toBe(true);
     expect(problems).toContain('button#unringed: no visible focus indicator');
+    // WCAG exempts the text of inactive controls, so a label of a disabled control is not checked.
+    expect(problems.filter((problem) => problem.startsWith('label#inactive'))).toEqual([]);
 });
 
 test('reports unresolved sprite references', async ({ page }) => {

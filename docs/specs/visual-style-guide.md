@@ -70,6 +70,46 @@ Components reference only core ids; apps may add local glyphs in their own sprit
 
 **[Decided]** The core list adds `icon-chevron-down` for disclosure toggles, such as the collapsible and select menus.
 
+### Focus
+- One global `:focus-visible` outline in `--color-focus` marks focus, from [reset.css](../../src/css/reset.css).
+- Danger buttons and danger icon buttons draw the ring in `--color-danger`.
+- The ring is an outline, so it stays visible in forced colors mode, where shadows disappear.
+- `.is-hover`, `.is-focus`, and `.is-active` force a state on gallery specimens only; apps never set them.
+
+### Controls
+Buttons, chips, and segmented controls keep a 44 px target in every variant, including the small button.
+
+| Key           | Use it for                                                    | Avoid it for                                     | Gallery                                                                 |
+| :------------ | :------------------------------------------------------------ | :----------------------------------------------- | :---------------------------------------------------------------------- |
+| `button`      | One action with a text label; the default marks the main one. | Navigation, which is a link.                     | [Button](../../src/demo/visual-style-gallery.html#button)               |
+| `icon-button` | A frequent action whose icon is clear; toggles add a state.   | Rare or ambiguous actions, which need a label.   | [Icon button](../../src/demo/visual-style-gallery.html#icon-button)     |
+| `chip`        | Short metadata, removable values, and filter toggles.         | Actions, which are buttons.                      | [Chip](../../src/demo/visual-style-gallery.html#chip)                   |
+| `segmented`   | One choice among 2 to 5 short options, all visible.           | Longer lists, which use a select or radio group. | [Segmented control](../../src/demo/visual-style-gallery.html#segmented) |
+| `banner`      | A lasting state of the page, above its content.               | Short confirmations, which are toasts.           | [Banner](../../src/demo/visual-style-gallery.html#banner)               |
+
+- Button variants: default, `--secondary`, `--danger`, the `--secondary.button--danger` outline, `--quiet`, `--inverse`, and `--small`.
+- A filled danger button confirms a delete; the danger outline starts one.
+- `aria-disabled="true"` keeps a disabled button focusable, for example to explain why it is disabled.
+- `--inverse` uses `--color-inverse`, or the text color when the look leaves it undefined.
+  A look that defines `--color-inverse` must give it 4.5:1 against `--color-surface`.
+- Icon buttons need an `aria-label` naming the action and its object, such as "Delete Groceries".
+- Toggles set `aria-pressed`; pressed toggles take the selected ground and a primary border.
+- Static chips are spans and never tab stops; filter chips are buttons with `aria-pressed`.
+- Overdue chips pair the danger color with an alert icon and a word, never color alone.
+- A segmented control is a `fieldset` of native radios, so arrow keys move the choice.
+  Disable one option with `disabled` on its radio, or the whole control with `disabled` on the fieldset.
+- Banners come in info, success, warning, and danger; only danger banners use `role="alert"`.
+- Forced colors mode drops shadows, so pressed chips and toggles thicken their border, and checked options gain one.
+
+**[Decided]** One partial per key, so the icon button gets `icon-button.css` beside `button.css`.
+- One shared controls file: rejected, because the naming link of ADR-0003 maps each key to its own file.
+
+**[Decided]** The segmented control keeps todos.webapp's `segmented__options` wrapper, and the catalog skeleton gains it.
+- Grid on the fieldset itself: rejected, because the rendered legend would sit inside the sunken track.
+
+**[Decided]** The banner error variant is `banner--danger`, matching `button--danger` and the danger tokens.
+- `banner--error`, as in todos.webapp: rejected, because two names would mean the same role.
+
 ---
 
 ## Patterns

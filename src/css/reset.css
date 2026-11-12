@@ -1,4 +1,12 @@
-/* Shared box model and browser text-size normalization. */
+/* Shared box model, browser text-size normalization, and the one focus ring. */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; }
+
+/* Focus: one outline for every control; outlines survive forced colors mode, where shadows disappear.
+ * `.is-focus` forces the ring on a static gallery specimen; app markup never uses it. */
+:focus-visible,
+.is-focus {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+}

@@ -254,3 +254,40 @@ describe('token contract', () => {
         }
     });
 });
+
+describe('component partials', () => {
+    const contract = readContract();
+    const tokenNames = new Set(contract.tokens.map(({ name }) => name));
+    const partials = readdirSync(join(root, 'css', 'components')).filter((name) => name.endsWith('.css')).map((name) => name.slice(0, -4));
+    const style = clean(readFileSync(join(root, 'css', 'style.css'), 'utf8'));
+    const gallery = readFileSync(join(root, 'demo', 'visual-style-gallery.html'), 'utf8');
+    const catalog = readFileSync(fileURLToPath(new URL('../../docs/specs/components.md', import.meta.url)), 'utf8');
+
+    it('ships a partial for every delivered component key', () => {
+        expect(partials).toEqual(expect.arrayContaining(['icon', 'button', 'icon-button', 'chip', 'segmented', 'banner']));
+    });
+
+    for (const key of partials) {
+        describe(key, () => {
+            const css = clean(readFileSync(join(root, 'css', 'components', `${key}.css`), 'utf8'));
+
+            it('is a contract component key with a catalog skeleton, a gallery section, and a style.css import', () => {
+                expect(contract.components).toContain(key);
+                expect(catalog).toMatch(new RegExp(`^### ${key}$`, 'm'));
+                expect(gallery).toContain(`<section id="${key}"`);
+                expect(style).toContain(`@import url('components/${key}.css');`);
+            });
+
+            it('uses only contract tokens and its own private tokens', () => {
+                const used = new Set([...css.matchAll(/(?<![\w-])--[\w-]+/g)].map((match) => match[0]));
+                const foreign = [...used].filter((name) => !tokenNames.has(name) && !name.startsWith(`--_${key}-`));
+                expect(foreign).toEqual([]);
+            });
+
+            it('styles only its own block and the gallery state classes', () => {
+                const blocks = new Set([...css.matchAll(/\.([a-z][\w-]*?)(?:__[\w-]+|--[\w-]+)?(?![\w-])/g)].map((match) => match[1]));
+                expect([...blocks].filter((block) => block !== key && !['is-hover', 'is-focus', 'is-active', 'icon'].includes(block))).toEqual([]);
+            });
+        });
+    }
+});
