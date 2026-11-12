@@ -2,7 +2,7 @@
 An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
-- [ ] T0034 Add the link button component from family-portal, with its gallery section and browser spec.
+- [x] T0034 Add the link button component from family-portal, with its gallery section and browser spec.
 - [x] T0003 Set up the repository tooling: package manifest, linters, unit and browser test runners, devops scripts, and CI.
 - [x] T0004 Extract the shared base tokens, the contract file, and the neutral look from todos.webapp, with the static token test.
 - [x] T0021 Add the i18n module with the data-i18n attributes and the catalog format.
