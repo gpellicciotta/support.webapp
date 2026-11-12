@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 3600.6, input: 4, output: 8}
+work_duration: 1810.3
 ---
 # T0007: Extract the button, icon button, banner, chip, and segmented control components from todos.webapp
 
@@ -23,8 +26,8 @@ See the technical specification for files, tests, and the completion check.
 
 ## Task Execution Steps
 - [x] **[Read]**      Read ADR-0003 and the todos.webapp controls stylesheet and gallery tests at a recorded commit.
-- [ ] **[Implement]** Write the failing tests named in the technical specification.
-- [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
+- [x] **[Implement]** Write the failing tests named in the technical specification.
+- [x] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
 - [ ] **[Implement]** Add the button, banner, chip, and segmented control partials and their gallery sections.
 - [ ] **[Verify]**    Run the control tests and the verifier until both pass.
 - [ ] **[Visual]**    Capture the gallery control sections per theme at 390 and 1440 px.
@@ -37,4 +40,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Read]**
   Read ADR-0003, the catalog, and todos.webapp controls.css, gallery, and gallery-controls and gallery-danger specs at commit 0cf4981.
+
+- [2026-11-12] **[Verify]**
+  Recorded red-phase failures: 27 browser tests and 2 static tests fail before the partials exist.
 
