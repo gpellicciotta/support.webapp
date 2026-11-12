@@ -810,6 +810,30 @@
                 <span class="icon-tile icon-tile--lg icon-tile--tone-4" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg></span>
             </div>
         </section>
+        <section id="tabs" class="gallery-section" aria-labelledby="tabs-title">
+            <h2 id="tabs-title">Tabs</h2>
+            <p>Arrow keys, Home, and End select preloaded panels. Disabled tabs are skipped.</p>
+            <div class="tabs" data-tabs-root>
+                <div class="tabs__list" data-tabs-list role="tablist" aria-label="Settings">
+                    <button type="button" class="tabs__tab" data-tabs-tab role="tab" id="tabs-general" aria-controls="tabs-general-panel" aria-selected="true" tabindex="0">General</button>
+                    <button type="button" class="tabs__tab" data-tabs-tab role="tab" id="tabs-unavailable" aria-controls="tabs-unavailable-panel" aria-selected="false" tabindex="-1" disabled>Unavailable</button>
+                    <button type="button" class="tabs__tab" data-tabs-tab role="tab" id="tabs-sharing" aria-controls="tabs-sharing-panel" aria-selected="false" tabindex="-1">Sharing</button>
+                </div>
+                <div class="tabs__panel" data-tabs-panel role="tabpanel" id="tabs-general-panel" aria-labelledby="tabs-general" tabindex="0">General settings are ready to edit.</div>
+                <div class="tabs__panel" data-tabs-panel role="tabpanel" id="tabs-unavailable-panel" aria-labelledby="tabs-unavailable" tabindex="0">These settings are currently unavailable.</div>
+                <div class="tabs__panel" data-tabs-panel role="tabpanel" id="tabs-sharing-panel" aria-labelledby="tabs-sharing" tabindex="0">Choose who can access this workspace.</div>
+            </div>
+            <h3>States</h3>
+            <ul class="states">
+                <li class="state"><button type="button" class="tabs__tab">Default</button></li>
+                <li class="state"><button type="button" class="tabs__tab is-hover">Hover</button></li>
+                <li class="state"><button type="button" class="tabs__tab is-focus">Focus-visible</button></li>
+                <li class="state"><button type="button" class="tabs__tab is-active">Active</button></li>
+                <li class="state"><button type="button" class="tabs__tab" aria-selected="true">Selected</button></li>
+                <li class="state"><button type="button" class="tabs__tab" disabled>Disabled</button></li>
+            </ul>
+        </section>
+
         <section id="collapsible" class="gallery-section" aria-labelledby="collapsible-title">
             <h2 id="collapsible-title">Collapsible</h2>
             <p>A row button with aria-expanded shows and hides the panel it controls. The chevron turns while expanded.</p>

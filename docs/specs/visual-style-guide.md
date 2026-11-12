@@ -426,6 +426,24 @@ The verifier runs the gallery and each shell demo page in each look at 390 and 1
 
 Run it with `npx playwright test tests/e2e/verify-ui.spec.js`.
 
+## Tabs
+Use [tabs](../../src/demo/visual-style-gallery.html#tabs) for related, preloaded panels, such as settings categories.
+Use links for navigation between pages; use a collapsible for independently expandable sections.
+
+Import `attachTabs(root)` from [tabs.js](../../src/js/tabs.js) after rendering the [catalog skeleton](components.md#tabs).
+The root, list, buttons, and panels carry `data-tabs-root`, `data-tabs-list`, `data-tabs-tab`, and `data-tabs-panel`.
+Keep IDs unique across the page, label the tablist, and connect tabs and panels through ARIA references.
+Only the selected enabled tab participates in the tab order.
+Left and Right wrap across enabled tabs; Home and End select the first and last enabled tabs.
+Focus automatically selects a preloaded panel; Tab then leaves the tablist.
+Native button activation supports pointer, Enter, and Space.
+The selected underline and bold label distinguish selection from the global focus outline.
+Disabled tabs use native `disabled`; narrow lists scroll horizontally without widening the page.
+No animation is applied, including under reduced motion.
+For script-free pages, omit panel `hidden` attributes so every panel remains readable.
+The controller's `destroy()` removes listeners and restores authored selection, tab order, and panel visibility.
+Destroy before replacing tab markup; reattach after changing the tab or panel collection.
+
 ## Loading
 Use the [loading specimens](../../src/demo/visual-style-gallery.html#loading) for ordinary loads, slow lists, and completed content.
 **[Decided]** Keep the polite status outside the busy content, preventing busy-state suppression of progress announcements.

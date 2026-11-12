@@ -6,6 +6,40 @@ export const MIN_TARGET = 44;
 export const STATES = [':not(.is-hover, .is-focus, .is-active, :disabled, [aria-disabled="true"])', '.is-hover', '.is-focus', '.is-active', ':disabled'];
 
 /**
+ * Select a look and wait for stylesheet imports and fonts before reading styles.
+ * @param {import('@playwright/test').Page} page gallery page
+ * @param {string} look look option value
+ */
+export async function selectGalleryLook(page, look) {
+    await page.evaluate(async selectedLook => {
+        const link = document.getElementById('look-stylesheet');
+        const select = document.getElementById('look-select');
+        if (select.value !== selectedLook) {
+            await new Promise((resolve, reject) => {
+                const cleanup = () => {
+                    link.removeEventListener('load', loaded);
+                    link.removeEventListener('error', failed);
+                };
+                const loaded = () => {
+                    cleanup();
+                    resolve();
+                };
+                const failed = () => {
+                    cleanup();
+                    reject(new Error(`Failed to load the ${selectedLook} look stylesheet.`));
+                };
+                // Register before changing href; cached stylesheets may load immediately.
+                link.addEventListener('load', loaded);
+                link.addEventListener('error', failed);
+                select.value = selectedLook;
+                select.dispatchEvent(new Event('change', { bubbles: true }));
+            });
+        }
+        await document.fonts.ready;
+    }, look);
+}
+
+/**
  * Open the gallery, fail on console, page, and HTTP errors, and stop transitions so states compute at once.
  * @param {import('@playwright/test').Page} page page to drive
  * @returns {Promise<string[]>} live problem list

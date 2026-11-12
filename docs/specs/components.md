@@ -352,16 +352,43 @@ Data table.
 ### tabs
 Tabs. Arrow keys move between tabs; only the selected tab is in the tab order.
 
+#### Contract
+**[Decided]** Horizontal tabs automatically activate preloaded panels when focus changes.
+It follows the [WAI-ARIA tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
+
+- Use horizontal tabs for switching between related, preloaded content panels.
+- Keep `.tabs`, `.tabs__list`, `.tabs__tab`, and `.tabs__panel` as the styling contract.
+- Use `data-tabs-root`, `data-tabs-list`, `data-tabs-tab`, and `data-tabs-panel` as behavior hooks.
+- Give every tab a unique ID and `aria-controls`; give its panel the matching `aria-labelledby`.
+- Label the tablist with `aria-label` or `aria-labelledby`.
+- Use native buttons with `type="button"` and `role="tab"`.
+- Initialize exactly one enabled tab with `aria-selected="true"` and `tabindex="0"`.
+- Set other tabs to `aria-selected="false"` and `tabindex="-1"`; hide their panels with `hidden`.
+- Make text-first panels focusable with `tabindex="0"`.
+- Left and Right move focus and selection, wrapping and skipping disabled tabs.
+- Home and End focus and select the first and last enabled tabs.
+- Pointer activation and native Enter or Space activation select the corresponding panel.
+- Tab leaves the tablist; Up and Down retain native scrolling.
+- Automatic activation requires preloaded panels without noticeable loading latency.
+- Native `disabled` tabs remain visible but cannot receive focus or activate.
+- Show default, hover, focus-visible, selected, and disabled states with semantic tokens.
+- Mark selection with an underline and text emphasis; preserve a separate visible focus outline.
+- Keep targets at least 44 pixels tall; let the tablist scroll horizontally on narrow screens.
+- Expose `attachTabs(element)` returning `{ destroy() }`; destruction removes listeners and restores authored attributes.
+- Scope behavior to the owning root so nested tabsets operate independently.
+- For pages without JavaScript, authors show all panels and omit `hidden` until enhancement runs.
+
 ```html
-<div class="tabs" data-tabs>
-  <div class="tabs__list" role="tablist" aria-label="Settings">
-    <button class="tabs__tab" role="tab" id="tab-general" aria-selected="true" aria-controls="panel-general">General</button>
-    <button class="tabs__tab" role="tab" id="tab-sharing" aria-selected="false" aria-controls="panel-sharing" tabindex="-1">Sharing</button>
+<div class="tabs" data-tabs-root>
+  <div class="tabs__list" data-tabs-list role="tablist" aria-label="Settings">
+    <button type="button" class="tabs__tab" data-tabs-tab role="tab" id="tab-general" aria-selected="true" aria-controls="panel-general" tabindex="0">General</button>
+    <button type="button" class="tabs__tab" data-tabs-tab role="tab" id="tab-sharing" aria-selected="false" aria-controls="panel-sharing" tabindex="-1">Sharing</button>
   </div>
-  <div class="tabs__panel" role="tabpanel" id="panel-general" aria-labelledby="tab-general">...</div>
-  <div class="tabs__panel" role="tabpanel" id="panel-sharing" aria-labelledby="tab-sharing" hidden>...</div>
+  <div class="tabs__panel" data-tabs-panel role="tabpanel" id="panel-general" aria-labelledby="tab-general" tabindex="0">General settings</div>
+  <div class="tabs__panel" data-tabs-panel role="tabpanel" id="panel-sharing" aria-labelledby="tab-sharing" tabindex="0" hidden>Sharing settings</div>
 </div>
 ```
+The skeleton shows enhanced state; remove `hidden` for the readable, script-free baseline.
 
 ### toast
 Toast. The toast region sits in the shell's overlay layer; the live region announces the text.

@@ -5,6 +5,7 @@ import { attachForm } from '../js/form.js';
 import { setSpriteUrl } from '../js/icon.js';
 import { attachAccountMenu } from '../js/account-menu.js';
 import { attachCollapsible } from '../js/collapsible.js';
+import { attachTabs } from '../js/tabs.js';
 import { confirmDialog, openDialog } from '../js/dialog.js';
 import { attachInlineConfirm } from '../js/inline-confirm.js';
 import { attachMenu } from '../js/menu.js';
@@ -232,6 +233,9 @@ if (typeof document !== 'undefined' && document.querySelector('.gallery-main')) 
     });
     for (const collapsible of document.querySelectorAll('[data-collapsible]')) {
         attachCollapsible(collapsible);
+    }
+    for (const tabs of document.querySelectorAll('[data-tabs-root]')) {
+        attachTabs(tabs);
     }
     const accountResult = document.querySelector('[data-account-menu-result]');
     const session = document.querySelector('[data-account-menu-demo-session]');

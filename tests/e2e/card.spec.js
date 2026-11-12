@@ -1,17 +1,11 @@
 import { expect, test } from '@playwright/test';
-import { openGallery, ring, expectRing, tokenColor } from './gallery-helpers.js';
+import { openGallery, selectGalleryLook, ring, expectRing, tokenColor } from './gallery-helpers.js';
 
 for (const look of ['neutral', 'warm']) {
     test(`${look} cards, tiles, and avatars`, async ({ page }, testInfo) => {
         const problems = await openGallery(page);
         page.on('requestfailed', request => problems.push(request.url()));
-        await page.locator('#look-select').selectOption(look);
-        await page.waitForFunction((selectedLook) => {
-            const sheet = document.getElementById('look-stylesheet').sheet;
-            return sheet?.href.endsWith(`/looks/${selectedLook}/index.css`) && sheet.cssRules.length > 0;
-        }, look);
-        await page.waitForLoadState('networkidle');
-        await page.evaluate(() => document.fonts.ready.then(() => true));
+        await selectGalleryLook(page, look);
         const tileWidths = [];
         for (const size of ['sm', 'md', 'lg']) {
             const box = await page.locator(`#icon-tile .icon-tile--${size}`).first().boundingBox();

@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { openGallery, tokenColor } from './gallery-helpers.js';
+import { openGallery, selectGalleryLook, tokenColor } from './gallery-helpers.js';
 import { contrastPairs } from '../unit/contract.js';
 
 test('forced fallback preserves root accents and every contrast pair', async ({ page }) => {
@@ -10,8 +10,7 @@ test('forced fallback preserves root accents and every contrast pair', async ({ 
     });
     const errors = await openGallery(page);
     page.on('requestfailed', request => errors.push(request.url()));
-    await page.locator('#look-select').selectOption('bright');
-    await page.waitForLoadState('networkidle');
+    await selectGalleryLook(page, 'bright');
     for (const theme of ['light', 'dark']) {
         await page.locator(`input[name="theme"][value="${theme}"]`).check();
         for (const accent of ['blue', 'yellow', 'red']) {
@@ -52,8 +51,7 @@ test('bright accents work on roots and wrappers and reset when switching looks',
         expect(errors).toEqual([]);
         return;
     }
-    await page.locator('#look-select').selectOption('bright');
-    await page.waitForLoadState('networkidle');
+    await selectGalleryLook(page, 'bright');
     for (const accent of ['blue', 'yellow', 'red']) {
         await page.locator('#accent-select').selectOption(accent);
         await expect(page.locator('html')).toHaveAttribute('data-accent', accent);
@@ -65,7 +63,7 @@ test('bright accents work on roots and wrappers and reset when switching looks',
     }
     await expect(page.locator('body')).toHaveCSS('font-family', /system-ui/);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    await page.locator('#look-select').selectOption('warm');
+    await selectGalleryLook(page, 'warm');
     await expect(page.locator('html')).not.toHaveAttribute('data-accent');
     await expect(page.locator('#accent-select option[value="yellow"]')).toHaveCount(0);
     expect(errors).toEqual([]);
