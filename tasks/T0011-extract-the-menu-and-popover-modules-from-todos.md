@@ -12,13 +12,12 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 4, duration_s: 2112.0, input: 344, output: 91796, cache_read: 22977506, cache_write: 317470}
+  worker: {turns: 6, duration_s: 2765.6, input: 440, output: 116770, cache_read: 33366206, cache_write: 423412}
   review: {turns: 2, duration_s: 437.2, input: 84, output: 19292, cache_read: 3305676, cache_write: 167472}
 work_duration: 1295.0
 contributors: "@codex"
-review_status: rejected
-review_round: 1
-reviewed_by: "@claude-2"
+review_status: pending
+review_round: 2
 ---
 # T0011: Extract the menu and popover modules from todos.webapp as they are, with keyboard support and anchoring
 
@@ -91,4 +90,7 @@ See the technical specification for files, tests, and the completion check.
   - Files touched: 7.
   - Lines touched: 154.
   - Reopenings: 0.
+
+- [2026-11-12] **[Review]**
+  Round 2 requested (mode: agent).
 
