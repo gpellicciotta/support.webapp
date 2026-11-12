@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 2886.2, input: 324, output: 115778, cache_read: 21761282, cache_write: 335266}
+review_status: pending
+review_round: 1
 ---
 # T0013: Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages
 
@@ -65,4 +69,7 @@ See the technical specification for files, tests, and the completion check.
   Captured gallery screenshots before and after the new App shell section.
   - Before: [gallery-before.png](T0013-build-the-app-shell-stylesheet-with-its-optional/screenshots/gallery-before.png).
   - After: [gallery-after.png](T0013-build-the-app-shell-stylesheet-with-its-optional/screenshots/gallery-after.png).
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
