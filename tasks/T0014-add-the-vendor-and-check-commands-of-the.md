@@ -13,10 +13,12 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 1864.2, input: 208, output: 66412, cache_read: 9150268, cache_write: 214460}
-work_duration: 280.1
+  review: {turns: 2, duration_s: 342.0, input: 64, output: 23236, cache_read: 1719744, cache_write: 117788}
+work_duration: 1142.9
 contributors: "@codex"
-review_status: pending
+review_status: rejected
 review_round: 1
+reviewed_by: "@claude-2"
 ---
 # T0014: Add the vendor and check commands of the command line tool, with the package manifest
 
@@ -67,4 +69,25 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @claude-2: The work covers the ADR-0005 and ADR-0007 scope: `vendor`, `check`, the hashed manifest, the pin, and re-vendoring.
+  - Findings: [review-findings-1.md](T0014-add-the-vendor-and-check-commands-of-the/review-findings-1.md).
+
+- [2026-11-12] **[Implement]**
+  Fixed round 1 findings: symlink-safe main guards, vendored copy skipped in conformance, missing styles folders reported, and BEM selectors ignored.
+
+- [2026-11-12] **[Decided]**
+  Kept package.json engines unchanged; it already requires Node.js 22.13 or later, matching ADR-0005.
+
+- [2026-11-12] **[Verify]**
+  Captured red runs for the four new tests, then full check and reviewer scenarios passed; output is in validation-proof.md.
+  - python scripts/devops.py check: exit 0.
+  - 472 unit, 1 integration, 8 browser tests passed.
+
+- [2026-11-12] **[Verify]**
+  Recorded task outcomes, correcting the earlier entry, which reported counted files only.
+  - Files touched: 14, of which 4 count for sizing.
+  - Lines touched: 605, of which 47 count for sizing.
+  - Reopenings: 0.
 

@@ -24,11 +24,13 @@ Add the vendor and check commands of the command line tool, with the package man
 - `vitest.integration.config.js`
 - `scripts/devops.py`
 - `.gitignore`
+- `package-lock.json`
 - `docs/devops.md`
 - `CHANGELOG.md`
 
 Size estimate: 10 files, 750 lines
 Size note: `vendor` and `check` share the manifest format, and the integration test needs all three parts.
+Mechanical command: `npm install` regenerates the `package-lock.json` change from the `bin` field.
 
 ### Tests
 - Unit: `manifest.test.js` and `check.test.js` cover hashing, pin mismatch, edited files, and each token rule.
