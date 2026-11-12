@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 3096.6, input: 352, output: 147734, cache_read: 25203924, cache_write: 416614}
+work_duration: 2142.5
 ---
 # T0008: Extract fields, checkboxes, radios, and createField from todos.webapp, adding forms, validation states, help toggles, and error summaries.
 
@@ -61,4 +64,9 @@ See the technical specification for files, tests, and the completion check.
   - Files touched: 10.
   - Lines touched: 311.
   - Reopenings: 0.
+
+- [2026-11-12] **[Verify]**
+  Size note: the loop measures 11 files and 423 lines, counting package-lock.json for happy-dom.
+  - Without the lock file: 10 files, 311 lines.
+  - Both stay under the 950-line estimate and the large line.
 
