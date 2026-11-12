@@ -1,11 +1,12 @@
 ---
 id: T0011
-owner: ~
-needs: ['T0009']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@codex"
+session: codex-20261112-bdbb20
+needs: []
+branch: task/T0011-extract-the-menu-and-popover-modules-from-todos
+worktree: .plan/work/T0011-extract-the-menu-and-popover-modules-from-todos
+status: active
+started_at: "2026-11-12T15:56:30Z"
 ended_at: —
 review: agent
 preview: none
