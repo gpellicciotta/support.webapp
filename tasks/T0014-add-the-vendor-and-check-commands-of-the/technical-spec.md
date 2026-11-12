@@ -21,6 +21,9 @@ Add the vendor and check commands of the command line tool, with the package man
 - `tests/unit/manifest.test.js`
 - `tests/unit/check.test.js`
 - `tests/integration/vendor.test.js`
+- `vitest.integration.config.js`
+- `scripts/devops.py`
+- `.gitignore`
 - `docs/devops.md`
 - `CHANGELOG.md`
 
@@ -31,4 +34,7 @@ Size note: `vendor` and `check` share the manifest format, and the integration t
 - Unit: `manifest.test.js` and `check.test.js` cover hashing, pin mismatch, edited files, and each token rule.
 - Integration: `vendor.test.js` packs the package, vendors the neutral look into a temporary app, and runs `check` there.
 
-Completion check: `npx vitest run tests/integration/vendor.test.js`, exit code 0
+Completion check: `npx vitest run --config vitest.integration.config.js`, exit code 0
+
+The fast suite holds only unit tests, so the integration test has its own config.
+`python scripts/devops.py check` runs it after the browser tests.
