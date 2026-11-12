@@ -12,12 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 4, duration_s: 1618.0, input: 227160, output: 37596, cache_read: 9796096, cache_write: 0}
+  worker: {turns: 6, duration_s: 3755.0, input: 294574, output: 83548, cache_read: 28877568, cache_write: 0}
   review: {turns: 2, duration_s: 137.2, input: 76670, output: 3600, cache_read: 516096, cache_write: 0}
 work_duration: 2401.9
-review_status: rejected
-review_round: 1
-reviewed_by: "@codex-2"
+review_status: pending
+review_round: 2
 ---
 # T0030: Design and add the tabs component with tablist roles and arrow-key navigation
 
@@ -130,4 +129,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Verify]**
   Completion validation and companion Markdown lint passed. Final browser server PID 60592 exited. Committed the verification rework; review remains pending. Required full check passed 2059 unit tests, 522 browser cases, and four package integration cases.
+
+- [2026-11-12] **[Review]**
+  Round 2 requested (mode: agent).
 
