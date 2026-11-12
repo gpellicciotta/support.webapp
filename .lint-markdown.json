@@ -1,3 +1,6 @@
 {
-  "exclude": ["CHANGELOG.md"]
+  "exclude": ["CHANGELOG.md"],
+  "disable": ["MD014"],
+  "enable": ["SW001"],
+  "plugins": ["scripts/markdown-links.py"]
 }

@@ -4,12 +4,15 @@ Change `PLAN.md` and task frontmatter only through `plan` commands.
 
 # support.webapp
 A shared visual design system and app starter for the sibling web apps.
-The project is in its planning phase and holds documentation only.
+The repository serves package sources directly and validates them with Vitest, Playwright, ESLint, Ruff, and Markdown lint.
 
 See [README.md](README.md), [requirements.md](docs/requirements.md), and [devops.md](docs/devops.md).
 
 ## Commands
 - Install the tools: see [Setup](docs/devops.md#setup).
+- Bootstrap: `python scripts/bootstrap-dev-environment.py`.
+- Run fast tests: `python scripts/devops.py tests`.
+- Start the server: `python scripts/devops.py serve --port 4173`.
 - Run all checks before completing a task:
   ```bash
   python scripts/devops.py check
@@ -17,6 +20,8 @@ See [README.md](README.md), [requirements.md](docs/requirements.md), and [devops
 - Release from a clean `main`: `python scripts/devops.py release --yes`.
 
 ## Architecture
+- [src/](src/): the package web root, served directly without a build step.
+- [tests/](tests/): fast unit tests and slow browser checks.
 - [scripts/](scripts/): the devops script, with its pinned support.python requirement.
 - [docs/adrs/](docs/adrs/): architecture decision records of the design system.
 - [docs/analysis/](docs/analysis/): the UI design comparison of the sibling apps.
@@ -28,4 +33,4 @@ See [README.md](README.md), [requirements.md](docs/requirements.md), and [devops
 - Pin support.python at `v3.1.0` in [requirements.txt](scripts/requirements.txt).
 
 ## Boundaries
-- Never add a `scripts/` directory before the tooling task creates it.
+- Keep package sources under `src/`; do not add a copy step without a build requirement.

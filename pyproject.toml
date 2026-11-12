@@ -1,0 +1,11 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-n auto --timeout=30 -m 'not slow'"
+markers = ["slow: integration, browser, or build tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py315"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

@@ -5,6 +5,7 @@ All notable changes to this project are documented here.
 > for the versioning and changelog conventions used across projects.
 
 ## v0.1.0-pre
+- DevEx: Added npm tooling, isolated tests with automatic browser-server ports, a static server, bootstrap automation, and continuous integration.
 - Docs: Accepted the ADRs, roadmap, and specifications after review round 2, renaming three ground tokens.
 - Docs: Recorded the decisions on look names, `data-accent` variants, per-look sprites, shape details, and the copy step in the ADRs.
 - Docs: Revised the eight ADRs and the [roadmap](docs/roadmap.md) after review round 1, and added the [component catalog](docs/specs/components.md) and [naming conventions](docs/specs/naming.md).

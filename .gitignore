@@ -3,6 +3,8 @@
 
 # Ignore installed dependencies
 node_modules/
+.venv/
+dist/
 
 # Ignore plan related files
 work/

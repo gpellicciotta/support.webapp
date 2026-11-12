@@ -7,27 +7,40 @@ Development environment, versioning, planning workflow, and operational procedur
 ### Prerequisites
 - Git, with access to the `gpellicciotta/support.webapp` GitHub repository.
 - Python 3.15 or later, to install the tools below.
+- Node.js 22.13 or later, with npm.
 - The [plan](https://github.com/gpellicciotta/plan) CLI, for tasks and the plan store.
-- [support.python](https://github.com/gpellicciotta/support.python) v3.1.0 or later, which provides `lint-markdown`.
-
-Build and test tooling arrives with the first code task.
+- [support.python](https://github.com/gpellicciotta/support.python) v3.1.0, installed by the bootstrap script.
 
 ### Setup
-Install the tools, preferably into a virtual environment:
+Bootstrap the checkout:
 
 ```bash
-python -m pip install "git+https://github.com/gpellicciotta/plan.git" -r scripts/requirements.txt
+python scripts/bootstrap-dev-environment.py
 ```
 
-The support.python pin lives only in [requirements.txt](../scripts/requirements.txt).
+The script creates `.venv`, installs Python tools, runs `npm ci`, installs Chromium, and runs all checks.
+Linux hosts also need `npx playwright install --with-deps chromium` for browser system libraries.
+The support.python pin lives in [requirements.txt](../scripts/requirements.txt); npm versions live in [package.json](../package.json).
+The devops runner automatically uses `.venv` when present.
 
-Check the documentation before completing a task:
+Run fast tests, all checks, or the local server:
 
 ```bash
+python scripts/devops.py tests
 python scripts/devops.py check
+python scripts/devops.py serve --port 4173
 ```
 
-The check runs `lint-markdown check --offline`, which skips external link checks, since links to private repositories fail without credentials.
+`tests` runs pytest and Vitest; `test --slow` runs Playwright in desktop/mobile viewports and light/dark modes.
+`check` runs Markdown lint, Ruff, ESLint, both test suites, and `npm pack --dry-run`.
+The package ships source files directly; no compilation or copy step runs.
+The server binds to localhost and serves `src/` with explicit JavaScript and CSS media types.
+Playwright starts and stops its own server; CI runs `tests` and `check` on pushes and pull requests.
+Each Playwright run allocates a free localhost port, allowing checks while the developer server runs on port 4173.
+
+Markdown lint runs offline because private repository links require credentials.
+The `SW001` plugin replaces `MD014`, preserving internal links while treating sibling paths and ignored plan artifacts as external evidence.
+Those artifacts are optional in source-only checkouts and CI.
 [.lint-markdown.json](../.lint-markdown.json) excludes `CHANGELOG.md`, which is never linted.
 Run `python scripts/devops.py format` to repair formatting, and `lint-markdown help --verbose` for the rule list.
 
@@ -35,7 +48,8 @@ Run `python scripts/devops.py format` to repair formatting, and `lint-markdown h
 
 ## Versioning and Releasing
 ### Updating Versions
-- The top `## v{{version}}-pre` heading in [CHANGELOG.md](../CHANGELOG.md) is the only version source until the package manifest arrives.
+- [package.json](../package.json) owns the version, which must match the top heading in [CHANGELOG.md](../CHANGELOG.md).
+- Run `python scripts/devops.py versions` to check agreement.
 - `plan tasks stop {{task-id}} --status completed` raises the patch number for every completed task.
 - Never edit the patch number yourself.
 - Rename the heading to bump the minor or major version, as the change management guidelines require.
@@ -50,11 +64,9 @@ python scripts/devops.py release --yes
 ```
 
 Without `--yes`, the script asks you to type `release v{{version}}`.
-It stops before changing anything when the tree is dirty, `main` is behind `origin`, the tag exists, or the lint fails.
-The release then:
-1. Replaces the `-pre` suffix of the top heading with `[released: {{yyyy-mm-dd}}]` and commits it as `Released v{{version}}.`.
-2. Tags the commit as `v{{version}}`, and pushes `main` and the tag together.
-3. Adds a `## v{{next-patch-version}}-pre` heading, commits it as `Started v{{next-patch-version}}-pre.`, and pushes `main`.
+The shared support.python release pipeline checks repository state, runs the full check, freezes versions, tags, and publishes a GitHub release.
+It then opens the next development version.
+Review `python scripts/devops.py help --verbose` before releasing; publishing requires explicit authorization.
 
 Publishing the package arrives with the publish workflow task.
 

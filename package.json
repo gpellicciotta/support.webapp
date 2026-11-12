@@ -1,0 +1,29 @@
+{
+  "name": "@gpellicciotta/support.webapp",
+  "version": "0.1.0-pre",
+  "description": "Shared visual design system and app starter",
+  "type": "module",
+  "engines": {
+    "node": "^22.13.0 || ^24.0.0 || >=26.0.0"
+  },
+  "files": [
+    "src/",
+    "!src/demo/",
+    "bin/",
+    "LICENSE.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "format": "eslint . --fix",
+    "test": "vitest run",
+    "test:slow": "playwright test",
+    "serve": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^9.39.5",
+    "vitest": "^5.1.0"
+  }
+}

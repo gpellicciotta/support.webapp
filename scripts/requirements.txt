@@ -1,2 +1,6 @@
 # Shared support library of the devops script; install with: python -m pip install -r scripts/requirements.txt
 support-python @ git+https://github.com/gpellicciotta/support.python.git@v3.1.0
+pytest>=9.1.1,<10
+pytest-xdist>=3.8,<4
+pytest-timeout>=2.4,<3
+ruff>=0.17,<0.18

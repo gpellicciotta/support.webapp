@@ -11,7 +11,7 @@ Defines the folder structure of this repository for tokens, looks, components, s
 - The ui-guidelines place the style sheet at `{{web-root}}/css/style.css` and the gallery at `{{web-root}}/demo/`.
 - The package ships its files as they are ([ADR-0005](ADR-0005-distribution-and-versioning.md)), so the source layout is the shipped layout.
 - Browsers run CSS, JavaScript, and HTML directly, so a copy of `src/` is a valid package without compiling.
-- The project-setup guidelines expect `scripts/bootstrap-dev-environment.py` and [devops.py](../../scripts/devops.py).
+- The project-setup guidelines expect [bootstrap-dev-environment.py](../../scripts/bootstrap-dev-environment.py) and [devops.py](../../scripts/devops.py).
 - todos.webapp uses `src/` as its web root, with one stylesheet per layer and modules under `src/js/ui/`.
 - Each component has one key that names its class, partial, module, gallery section, and tests ([naming.md](../specs/naming.md)).
 
