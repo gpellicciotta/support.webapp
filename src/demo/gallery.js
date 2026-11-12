@@ -1,7 +1,7 @@
 /* Look and theme switchers and live token values of the visual style gallery. */
 
 // Add each new look here and as an option of the look select.
-export const looks = ['neutral'];
+export const looks = ['neutral', 'warm'];
 export const themes = ['light', 'dark', 'system'];
 
 /**
@@ -32,6 +32,12 @@ export function applyLook(doc, look) {
         throw new RangeError(`Unknown look: ${look}`);
     }
     doc.getElementById('look-stylesheet').setAttribute('href', lookHref(look));
+    doc.documentElement.removeAttribute('data-accent');
+    const accent = doc.getElementById('accent-select');
+    if (accent) {
+        accent.disabled = look !== 'warm';
+        accent.value = '';
+    }
     for (const use of doc.querySelectorAll('svg.icon use')) {
         use.setAttribute('href', `${spriteHref(look)}#${use.getAttribute('href').split('#')[1]}`);
     }
@@ -79,6 +85,19 @@ export function initGallery(doc, view) {
     const refresh = () => showTokenValues(doc, view);
     link.addEventListener('load', refresh);
     select.addEventListener('change', (event) => applyLook(doc, event.target.value));
+    const accent = doc.getElementById('accent-select');
+    accent?.addEventListener('change', (event) => {
+        if (event.target.value) {
+            doc.documentElement.setAttribute('data-accent', event.target.value);
+        }
+        else {
+            doc.documentElement.removeAttribute('data-accent');
+        }
+        refresh();
+    });
+    if (accent) {
+        accent.disabled = select.value !== 'warm';
+    }
     for (const radio of doc.querySelectorAll('input[name="theme"]')) {
         radio.addEventListener('change', (event) => {
             applyTheme(doc, event.target.value);

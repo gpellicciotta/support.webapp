@@ -391,6 +391,20 @@
       "required": true
     },
     {
+      "name": "--color-shadow-soft",
+      "category": "Overlay",
+      "group": "color",
+      "owner": "look",
+      "required": false
+    },
+    {
+      "name": "--color-shadow-strong",
+      "category": "Overlay",
+      "group": "color",
+      "owner": "look",
+      "required": false
+    },
+    {
       "name": "--color-backdrop",
       "category": "Overlay",
       "group": "color",

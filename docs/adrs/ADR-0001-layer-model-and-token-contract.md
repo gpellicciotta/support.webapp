@@ -78,7 +78,7 @@ An initial list, which the extraction tasks confirm against real use and record 
 - Main action: `--color-primary`, `--color-primary-hover`, `--color-primary-active`, `--color-on-primary`.
 - Danger: `--color-danger`, `--color-danger-hover`, `--color-danger-active`, `--color-danger-bg`, `--color-on-danger`.
 - Success and warning: `--color-success` and `--color-warning`, each with a `-bg` and an `--color-on-` token.
-- Overlay: `--color-backdrop` and `--color-shadow`.
+- Overlay: `--color-backdrop` and `--color-shadow`; optional `--color-shadow-soft` and `--color-shadow-strong` preserve multi-tint elevations.
 - Optional per look: `--color-accent`, `--color-accent-bg`, `--color-inverse`, and four tones with matching `--color-on-tone-` tokens.
 - Fonts: `--font-body`, `--font-heading`, `--font-mono`, and `--weight-regular` to `--weight-bold`.
 - Type: `--text-xs`, `-sm`, `-base`, `-md`, `-lg`, `-xl`, `-2xl`, `-3xl`, three `--leading-` and two `--tracking-` steps.

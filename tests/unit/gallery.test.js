@@ -155,7 +155,8 @@ describe('gallery page', () => {
     const css = read('gallery.css');
 
     it('lists every look and theme in the switchers', () => {
-        expect([...html.matchAll(/<option value="([^"]+)"/g)].map((match) => match[1])).toEqual(looks);
+        const select = html.match(/<select id="look-select"[\s\S]*?<\/select>/)[0];
+        expect([...select.matchAll(/<option value="([^"]+)"/g)].map((match) => match[1])).toEqual(looks);
         expect([...html.matchAll(/name="theme" value="([^"]+)"/g)].map((match) => match[1]).sort()).toEqual([...readContract().themes].sort());
         expect(themes).toEqual(readContract().themes);
         expect(html).toContain(`<link id="look-stylesheet" rel="stylesheet" href="${lookHref(looks[0])}">`);

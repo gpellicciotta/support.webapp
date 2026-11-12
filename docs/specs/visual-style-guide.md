@@ -4,7 +4,7 @@ Principles, token groups, patterns, and the shell of the shared design system, w
 - Style sheet: [style.css](../../src/css/style.css), imported by each look's `index.css`.
 - Gallery: [visual-style-gallery.html](../../src/demo/visual-style-gallery.html), served by `python scripts/devops.py serve`.
 - Component catalog: [components.md](components.md).
-- Looks: [neutral](looks/neutral.md).
+- Looks: [neutral](looks/neutral.md), [warm](looks/warm.md), and the [look template](../../src/looks/_template/README.md).
 
 ---
 

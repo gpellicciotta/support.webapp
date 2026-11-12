@@ -1,0 +1,172 @@
+/* Warm semantic mappings and decorative seasonal accents. */
+:root {
+  --color-bg: light-dark(var(--ivory-100), var(--navy-950));
+  --color-surface: light-dark(var(--white), var(--navy-925));
+  --color-surface-sunken: light-dark(var(--ivory-200), var(--navy-850));
+  --color-surface-hover: var(--color-surface-sunken);
+  --color-surface-selected: var(--color-surface-sunken);
+  --color-surface-active: var(--color-surface-sunken);
+  --color-text: light-dark(var(--navy-900), var(--ivory-150));
+  --color-text-muted: light-dark(var(--slate-700), var(--slate-300));
+  --color-text-disabled: light-dark(var(--slate-400), var(--slate-600));
+  --color-border: light-dark(var(--ivory-300), var(--navy-800));
+  --color-border-strong: light-dark(var(--slate-600), var(--slate-600));
+  --color-primary: light-dark(var(--navy-875), var(--ivory-150));
+  --color-primary-hover: light-dark(var(--navy-725), var(--ivory-400));
+  --color-primary-active: var(--color-primary-hover);
+  --color-on-primary: light-dark(var(--white), var(--navy-950));
+  --color-link: light-dark(var(--navy-750), var(--saffron-400));
+  --color-focus: light-dark(var(--navy-500), var(--saffron-400));
+  --color-danger: light-dark(var(--brick-700), var(--brick-300));
+  --color-danger-hover: light-dark(var(--brick-750), var(--brick-200));
+  --color-danger-active: light-dark(var(--brick-800), var(--brick-100));
+  --color-on-danger: light-dark(var(--white), var(--navy-950));
+  --color-shadow: light-dark(var(--shadow-navy), var(--shadow-black));
+  --color-backdrop: light-dark(var(--warm-scrim-light), var(--warm-scrim-dark));
+  --font-body: "DM Sans Variable", "DM Sans", system-ui, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.625rem;
+  --leading-tight: 1.05;
+  --leading-normal: 1.6;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --radius-round: 50%;
+  --border-width: 1px;
+  --border-width-strong: 1.5px;
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+  --focus-ring-offset-inset: -2px;
+  --icon-md: 1.5rem;
+  --icon-stroke: 2;
+  --icon-lg: 2.5rem;
+  --color-shadow-soft: light-dark(var(--shadow-navy-soft), var(--shadow-black-soft));
+  --color-shadow-strong: light-dark(var(--shadow-navy-strong), var(--shadow-black-strong));
+  --elevation-1: 0 1px 2px var(--color-shadow-soft), 0 8px 24px var(--color-shadow);
+  --elevation-2: 0 2px 4px var(--color-shadow-soft), 0 14px 32px var(--color-shadow-strong);
+  --font-heading: "Outfit Variable", "Outfit", system-ui, sans-serif;
+  --color-link-hover: light-dark(var(--navy-900), var(--saffron-100));
+  --color-danger-bg: light-dark(var(--brick-50), var(--brick-900));
+  --color-success: light-dark(var(--navy-750), var(--navy-150));
+  --color-success-bg: light-dark(var(--navy-100), var(--navy-775));
+  --color-on-success: light-dark(var(--white), var(--navy-950));
+  --color-warning: light-dark(var(--saffron-850), var(--saffron-100));
+  --color-warning-bg: light-dark(var(--saffron-150), var(--saffron-900));
+  --color-on-warning: light-dark(var(--white), var(--navy-950));
+  --text-md: 1.125rem;
+  --text-2xl: clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem);
+  --text-3xl: clamp(2.5rem, 1.4rem + 4vw, 4.5rem);
+  --leading-relaxed: var(--leading-normal);
+  --tracking-normal: 0;
+  --tracking-tight: -0.03em;
+  --weight-bold: 700;
+  --radius-control: var(--radius-md);
+  --radius-button: var(--radius-pill);
+  --radius-chip: var(--radius-pill);
+  --radius-card: var(--radius-lg);
+  --radius-dialog: var(--radius-xl);
+  --control-height: 3rem;
+  --icon-sm: 1.125rem;
+  --color-accent: transparent;
+  --color-accent-bg: transparent;
+  --color-inverse: light-dark(var(--navy-900), var(--ivory-150));
+  --color-tone-1: light-dark(var(--navy-200), var(--navy-700));
+  --color-on-tone-1: light-dark(var(--navy-750), var(--navy-150));
+  --color-tone-2: light-dark(var(--saffron-150), var(--saffron-800));
+  --color-on-tone-2: light-dark(var(--saffron-850), var(--saffron-100));
+  --color-tone-3: light-dark(var(--brick-150), var(--brick-800));
+  --color-on-tone-3: light-dark(var(--brick-750), var(--brick-100));
+  --color-tone-4: light-dark(var(--navy-125), var(--navy-800));
+  --color-on-tone-4: light-dark(var(--navy-900), var(--ivory-150));
+  --focus-ring: var(--focus-ring-width) solid var(--color-focus);
+}
+
+[data-accent="spring"] {
+  --color-accent: light-dark(var(--sprout-600), var(--sprout-300));
+  --color-accent-bg: light-dark(var(--sprout-50), var(--sprout-900));
+}
+
+[data-accent="summer"] {
+  --color-accent: light-dark(var(--saffron-600), var(--saffron-400));
+  --color-accent-bg: light-dark(var(--saffron-50), var(--saffron-950));
+}
+
+[data-accent="autumn"] {
+  --color-accent: light-dark(var(--rust-600), var(--rust-300));
+  --color-accent-bg: light-dark(var(--rust-50), var(--rust-900));
+}
+
+[data-accent="winter"] {
+  --color-accent: light-dark(var(--frost-600), var(--frost-300));
+  --color-accent-bg: light-dark(var(--frost-50), var(--frost-900));
+}
+
+
+@supports not (color: light-dark(#000000, #ffffff)) {
+:root, :root[data-theme] {
+  color-scheme: light;
+  --color-shadow-soft: var(--shadow-navy-soft);
+  --color-shadow-strong: var(--shadow-navy-strong);
+  --color-bg: var(--ivory-100);
+  --color-surface: var(--white);
+  --color-surface-sunken: var(--ivory-200);
+  --color-text: var(--navy-900);
+  --color-text-muted: var(--slate-700);
+  --color-text-disabled: var(--slate-400);
+  --color-border: var(--ivory-300);
+  --color-border-strong: var(--slate-600);
+  --color-primary: var(--navy-875);
+  --color-primary-hover: var(--navy-725);
+  --color-on-primary: var(--white);
+  --color-link: var(--navy-750);
+  --color-focus: var(--navy-500);
+  --color-danger: var(--brick-700);
+  --color-danger-hover: var(--brick-750);
+  --color-danger-active: var(--brick-800);
+  --color-on-danger: var(--white);
+  --color-shadow: var(--shadow-navy);
+  --color-backdrop: var(--warm-scrim-light);
+  --color-link-hover: var(--navy-900);
+  --color-danger-bg: var(--brick-50);
+  --color-success: var(--navy-750);
+  --color-success-bg: var(--navy-100);
+  --color-on-success: var(--white);
+  --color-warning: var(--saffron-850);
+  --color-warning-bg: var(--saffron-150);
+  --color-on-warning: var(--white);
+  --color-inverse: var(--navy-900);
+  --color-tone-1: var(--navy-200);
+  --color-on-tone-1: var(--navy-750);
+  --color-tone-2: var(--saffron-150);
+  --color-on-tone-2: var(--saffron-850);
+  --color-tone-3: var(--brick-150);
+  --color-on-tone-3: var(--brick-750);
+  --color-tone-4: var(--navy-125);
+  --color-on-tone-4: var(--navy-900);
+}
+[data-accent="spring"] {
+  --color-accent: var(--sprout-600);
+  --color-accent-bg: var(--sprout-50);
+}
+
+[data-accent="summer"] {
+  --color-accent: var(--saffron-600);
+  --color-accent-bg: var(--saffron-50);
+}
+
+[data-accent="autumn"] {
+  --color-accent: var(--rust-600);
+  --color-accent-bg: var(--rust-50);
+}
+
+[data-accent="winter"] {
+  --color-accent: var(--frost-600);
+  --color-accent-bg: var(--frost-50);
+}
+
+
+}

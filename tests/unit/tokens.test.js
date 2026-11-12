@@ -132,7 +132,8 @@ describe('token contract', () => {
     });
 
     const contract = readContract();
-    const looks = readdirSync(join(root, 'looks'), { withFileTypes: true }).filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'));
+    // Validate the copyable template too; other private folders remain excluded.
+    const looks = readdirSync(join(root, 'looks'), { withFileTypes: true }).filter((entry) => entry.isDirectory() && (!entry.name.startsWith('_') || entry.name === '_template'));
     it('defines unique tokens, supported themes, and at least one look', () => {
         expect(contract.themes).toEqual(['light', 'dark', 'system']);
         expect(new Set(contract.tokens.map(({ name }) => name)).size).toBe(contract.tokens.length);

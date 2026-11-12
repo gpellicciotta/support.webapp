@@ -1,4 +1,20 @@
 /* Specimen layout of the visual style gallery. Only semantic tokens; apps never load this file. */
+.season-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.token--color-shadow-soft { --specimen: var(--color-shadow-soft); }
+.token--color-shadow-strong { --specimen: var(--color-shadow-strong); }
+
+.season {
+  padding: var(--space-4);
+  border-block-start: var(--space-1) solid var(--color-accent, var(--color-border));
+  border-radius: var(--radius-card);
+  background-color: var(--color-accent-bg, var(--color-surface));
+  color: var(--color-text);
+}
 
 /* Page: the base text and ground, until the package ships element styles. */
 body {

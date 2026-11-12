@@ -20,6 +20,17 @@
                     <label for="look-select">Look</label>
                     <select id="look-select" name="look">
                         <option value="neutral">Neutral</option>
+                        <option value="warm">Warm</option>
+                    </select>
+                </div>
+                <div class="gallery-controls__look">
+                    <label for="accent-select">Season</label>
+                    <select id="accent-select" name="accent" disabled>
+                        <option value="">None</option>
+                        <option value="spring">Spring</option>
+                        <option value="summer">Summer</option>
+                        <option value="autumn">Autumn</option>
+                        <option value="winter">Winter</option>
                     </select>
                 </div>
                 <fieldset class="gallery-controls__theme">
@@ -130,6 +141,8 @@
             <h2 id="tokens-overlay-title">Overlay</h2>
             <p>Shadow tint and the backdrop behind dialogs.</p>
             <ul class="token-grid">
+                <li class="token token--color-shadow-soft" data-token="--color-shadow-soft"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-shadow-soft</code><span class="token__value"></span></li>
+                <li class="token token--color-shadow-strong" data-token="--color-shadow-strong"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-shadow-strong</code><span class="token__value"></span></li>
                 <li class="token token--color-shadow" data-token="--color-shadow"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-shadow</code><span class="token__value"></span></li>
                 <li class="token token--color-backdrop" data-token="--color-backdrop"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-backdrop</code><span class="token__value"></span></li>
             </ul>
@@ -573,6 +586,16 @@
                 </li>
                 <li class="row"><span class="row__main">A row without actions</span></li>
             </ul>
+        </section>
+        <section id="seasons" class="gallery-section" aria-labelledby="seasons-title">
+            <h2 id="seasons-title">Seasonal accents</h2>
+            <p>Warm uses decorative accents independently of actions and feedback. Neutral has no seasonal palette.</p>
+            <div class="season-grid">
+                <div class="season" data-accent="spring">Spring</div>
+                <div class="season" data-accent="summer">Summer</div>
+                <div class="season" data-accent="autumn">Autumn</div>
+                <div class="season" data-accent="winter">Winter</div>
+            </div>
         </section>
     </main>
 </body>

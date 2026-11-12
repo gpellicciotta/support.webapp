@@ -1,0 +1,88 @@
+/* Family-portal palette and shape scale; private to warm. */
+:root {
+  /* Navy ramp: ink, chrome, links, and dark-mode surfaces */
+  --navy-950: #0F1724;
+  --navy-925: #172234;
+  --navy-900: #1B2433;
+  --navy-875: #1E2A47;
+  --navy-850: #1F2C42;
+  --navy-800: #25344C;
+  --navy-775: #22385A;
+  --navy-750: #1F3A5F;
+  --navy-725: #2A3A60;
+  --navy-700: #2C4A73;
+  --navy-500: #3D6CA8;
+  --navy-200: #C9D8EC;
+  --navy-150: #D6E3F5;
+  --navy-125: #DCE3EC;
+  --navy-100: #DCE6F2;
+
+  /* Slate ramp: muted text, strong borders, disabled states */
+  --slate-700: #56606E;
+  --slate-600: #6F7786;
+  --slate-400: #8A919C;
+  --slate-300: #A9B1BE;
+
+  /* Ivory ramp: warm light-mode grounds and dark-mode text */
+  --white: #FFFFFF;
+  --ivory-500: #C9BFAE;
+  --ivory-400: #DCD5C8;
+  --ivory-300: #E2D9C8;
+  --ivory-200: #ECE5D8;
+  --ivory-150: #EEE8DD;
+  --ivory-100: #F7F3EC;
+
+  /* Saffron ramp: accent, highlights, and warnings */
+  --saffron-900: #4A3A14;
+  --saffron-850: #6B4E00;
+  --saffron-800: #6B5520;
+  --saffron-500: #E8B53A;
+  --saffron-400: #F0C24B;
+  --saffron-150: #F6E2A8;
+  --saffron-100: #FBE6A6;
+
+  /* Brick ramp: danger, errors, and warm tones */
+  --brick-900: #3A1F22;
+  --brick-800: #6E2F2A;
+  --brick-750: #8E2B21;
+  --brick-700: #9E2F24;
+  --brick-300: #FF7B6B;
+  --brick-200: #FFB3A7;
+  --brick-150: #F2C4BA;
+  --brick-100: #FFD0C7;
+  --brick-50: #FBE7E2;
+
+  /* Season ramps: the season tokens below use them; --sprout-700 is the brand heart's green */
+  --sprout-700: #3F7D3A;
+  --sprout-600: #5E8C4A;
+  --sprout-300: #8FC27A;
+  --sprout-900: #1E2A1C;
+  --sprout-50: #EEF5E8;
+  --saffron-950: #2B2516;
+  --saffron-600: #D99A1E;
+  --saffron-50: #FDF4DC;
+  --rust-600: #A65A2A;
+  --rust-300: #E39A5F;
+  --rust-900: #2C1F17;
+  --rust-50: #F8EADF;
+  --frost-600: #4A7BA6;
+  --frost-300: #9EC3E6;
+  --frost-900: #19222C;
+  --frost-50: #EAF2F9;
+
+  /* Shadow tints */
+  --shadow-navy-soft: rgb(27 36 51 / 0.06);
+  --shadow-navy: rgb(27 36 51 / 0.08);
+  --shadow-navy-strong: rgb(27 36 51 / 0.12);
+  --shadow-black-soft: rgb(0 0 0 / 0.40);
+  --shadow-black: rgb(0 0 0 / 0.35);
+  --shadow-black-strong: rgb(0 0 0 / 0.50);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.75rem;
+  --radius-pill: 999px;
+  --warm-scrim-light: rgb(27 36 51 / 40%);
+  --warm-scrim-dark: rgb(0 0 0 / 65%);
+}

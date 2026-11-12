@@ -7,7 +7,7 @@ import { readContract } from './contract.js';
 
 const root = fileURLToPath(new URL('../../src/', import.meta.url));
 const SVG = 'http://www.w3.org/2000/svg';
-const looks = readdirSync(join(root, 'looks'), { withFileTypes: true }).filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'));
+const looks = readdirSync(join(root, 'looks'), { withFileTypes: true }).filter((entry) => entry.isDirectory() && (!entry.name.startsWith('_') || entry.name === '_template'));
 const symbols = (svg) => [...svg.matchAll(/<symbol\b([^>]*)>([\s\S]*?)<\/symbol>/g)].map((match) => ({
     id: match[1].match(/\bid="([^"]+)"/)?.[1],
     viewBox: match[1].match(/\bviewBox="([^"]+)"/)?.[1],
