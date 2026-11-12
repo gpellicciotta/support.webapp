@@ -78,6 +78,17 @@ Confirmation restores the row before invoking `onConfirm`; the caller performs t
 Call the returned controller's `destroy()` to restore content and remove listeners.
 Typed confirmation remains caller-owned: check the exact word again in the action handler before executing an irreversible operation.
 
+### Floating action button
+Use the [Floating action button section](../../src/demo/visual-style-gallery.html#fab) for one primary action per screen.
+Place a native `button.fab` directly inside `.app__overlays`, with `type="button"` and an action-specific `aria-label`.
+Its icon is decorative; set `aria-hidden="true"` and `focusable="false"`.
+Use `disabled` for unavailable actions and `hidden` while the action does not apply.
+Prefer a labeled button when the icon cannot clearly convey the action.
+The partial uses primary colors, a round shape, elevation, and the global focus outline.
+The shell owns fixed positioning, bottom-bar offsets, safe-area spacing, and trailing content clearance.
+Gallery specimens remain in flow; [shell-todos.html](../../src/demo/shell-todos.html) demonstrates overlay placement.
+The extraction preserves todos.webapp's geometry and maps its signal tokens to the shared primary roles.
+
 ### Menus and popovers
 Use the [Menu section](../../src/demo/visual-style-gallery.html#menu) for a short list of actions or one choice.
 Use the [Popover section](../../src/demo/visual-style-gallery.html#popover) for a small panel, such as filter choices.

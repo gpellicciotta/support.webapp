@@ -64,6 +64,7 @@
                     <li><a href="#icon">Icon</a></li>
                     <li><a href="#button">Button</a></li>
                     <li><a href="#icon-button">Icon button</a></li>
+                    <li><a href="#fab">Floating action button</a></li>
                     <li><a href="#link-button">Link button</a></li>
                     <li><a href="#chip">Chip</a></li>
                     <li><a href="#segmented">Segmented control</a></li>
@@ -416,6 +417,19 @@
                 <li class="state"><button class="button button--small is-focus" type="button">Apply</button><span class="state__label">Focus-visible</span></li>
                 <li class="state"><button class="button button--small is-active" type="button">Apply</button><span class="state__label">Active</span></li>
                 <li class="state"><button class="button button--small" type="button" disabled>Apply</button><span class="state__label">Disabled</span></li>
+            </ul>
+        </section>
+        <section id="fab" class="gallery-section" aria-labelledby="fab-title">
+            <h2 id="fab-title">Floating action button</h2>
+            <p>One primary action per screen, named by its accessible label. The shell positions it in the overlay layer.</p>
+            <p>These specimens stay in flow; the <a href="shell-todos.html">Todos shell demo</a> shows fixed placement above navigation.</p>
+            <ul class="states">
+                <li class="state"><button class="fab" type="button" aria-label="Add task"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg></button><span class="state__label">Default</span></li>
+                <li class="state"><button class="fab is-hover" type="button" aria-label="Add task"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg></button><span class="state__label">Hover</span></li>
+                <li class="state"><button class="fab is-active" type="button" aria-label="Add task"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg></button><span class="state__label">Active</span></li>
+                <li class="state"><button class="fab is-focus" type="button" aria-label="Add task"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg></button><span class="state__label">Focus-visible</span></li>
+                <li class="state"><button class="fab" type="button" aria-label="Add task" disabled><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg></button><span class="state__label">Disabled</span></li>
+                <li class="state"><button class="fab" type="button" aria-label="Add task" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg></button><span class="state__label">Hidden</span></li>
             </ul>
         </section>
         <section id="icon-button" class="gallery-section" aria-labelledby="icon-button-title">

@@ -297,6 +297,19 @@
   display: contents;
 }
 
+/* The one floating action stays above the shell's bottom bars and phone safe areas. */
+.app__overlays > .fab {
+  position: fixed;
+  z-index: var(--layer-float);
+  inset-inline-end: max(var(--space-4), env(safe-area-inset-right));
+  inset-block-end: calc(var(--space-4) + var(--_app-action-offset) + var(--_app-nav-offset) + env(safe-area-inset-bottom));
+}
+
+/* Content can scroll clear of the control in either scroll mode. */
+.app:has(> .app__overlays > .fab:not([hidden])) > .app__main {
+  padding-block-end: calc(var(--target-min) + var(--space-3) + var(--space-7));
+}
+
 .toast-region {
   position: fixed;
   inset-inline: var(--space-4);

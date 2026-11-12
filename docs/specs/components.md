@@ -33,7 +33,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `button`      | Button                         | todos.webapp        | none                                     | default, secondary, danger, quiet, inverse, small; hover, active, focus, disabled | native button; visible focus; 44 px target                | T0007     |
 | `icon-button` | Icon button                    | todos.webapp        | none                                     | default, danger; pressed toggle                                                   | native button; `aria-label`; `aria-pressed` for toggles   | T0007     |
 | `link-button` | Link button                    | family-portal       | none                                     | default; hover, focus-visible, active, disabled                                   | native button; visible focus; 44 px target                | T0034     |
-| `fab`         | Floating action button         | todos.webapp        | none                                     | one per screen, in the shell's overlay layer                                      | native button; `aria-label`; 44 px target                 | to create |
+| `fab`         | Floating action button         | todos.webapp        | none                                     | one per screen, in the shell's overlay layer                                      | native button; `aria-label`; 44 px target                 | T0028     |
 | `field`       | Field: input, textarea, select | todos.webapp, meteo | `field.js`: `createField`, `attachField` | hint, counter, help, status, error; invalid, pending, disabled, read-only         | label for the control; `aria-invalid`; `aria-describedby` | T0008     |
 | `checkbox`    | Checkbox                       | todos.webapp        | none                                     | checked, indeterminate, disabled, invalid                                         | native input inside its label                             | T0008     |
 | `radio`       | Radio                          | todos.webapp        | none                                     | checked, disabled                                                                 | native radios inside a field group                        | T0008     |
@@ -135,10 +135,14 @@ See every state in the [gallery](../../src/demo/visual-style-gallery.html#link-b
 
 ### fab
 Floating action button. It lives in the shell's overlay layer, never inside a component.
+Implemented in [fab.css](../../src/css/components/fab.css), with [gallery specimens](../../src/demo/visual-style-gallery.html#fab).
+Use one native button per screen, with an action label and one decorative icon.
+States are default, hover, active, focus-visible, disabled, and hidden.
+The shell fixes it above bottom navigation and action bars, with safe-area spacing.
 
 ```html
 <button class="fab" type="button" aria-label="Add task">
-  <svg class="icon" aria-hidden="true"><use href="icons.svg#icon-add"/></svg>
+  <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#icon-plus"/></svg>
 </button>
 ```
 
