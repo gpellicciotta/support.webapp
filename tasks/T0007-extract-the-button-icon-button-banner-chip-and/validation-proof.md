@@ -57,3 +57,60 @@ The 5 passed only because their loops found no elements; count guards now make t
     Error: element(s) not found
   27 failed
 ```
+
+### Green phase
+
+Command: `npx playwright test tests/e2e/button.spec.js tests/e2e/icon-button.spec.js tests/e2e/chip.spec.js tests/e2e/segmented.spec.js --timeout 30000 --reporter=list`, exit code 0 (completion check, all four projects).
+
+```text
+  ✓    4 [desktop-light] › tests\e2e\button.spec.js:53:1 › danger buttons fill or outline in the danger color (1.0s)
+  ✓    1 [desktop-light] › tests\e2e\button.spec.js:14:1 › the button section shows every variant in every state (1.4s)
+  ✓    2 [desktop-light] › tests\e2e\button.spec.js:38:1 › disabled buttons use the disabled text color and ignore hover (1.4s)
+  ✓    3 [desktop-light] › tests\e2e\button.spec.js:27:1 › hover and active change the ground of every button variant (1.4s)
+  ✓    5 [desktop-light] › tests\e2e\button.spec.js:65:1 › buttons take the button radius role (936ms)
+  ✓    6 [desktop-light] › tests\e2e\button.spec.js:73:1 › every button, including the small variant, is at least 44 by 44 px (821ms)
+[... 102 passing lines omitted ...]
+  108 passed (32.5s)
+```
+
+A light-theme review of the screenshots found invisible hover grounds on sunken tracks.
+Two regression tests failed first (3 failed, 1 passed), then passed after the fix:
+
+Command: `npx playwright test tests/e2e/chip.spec.js tests/e2e/segmented.spec.js --project desktop-light --project mobile-dark -g "remove button shows|forced state specimens" --reporter=line`, exit code 0.
+
+```text
+  4 passed (2.8s)
+```
+
+Command: `python scripts/devops.py check`, exit code 0, after the final code change.
+
+```text
+All 22 markdown files passed linting.
+All checks passed!
+============================== 3 passed in 1.95s ==============================
+ Test Files  7 passed (7)
+      Tests  543 passed (543)
+[neutral system 1440px] 15 stylesheets, 506 texts, 84 targets, 84 focus records, 64 sprite references, overflow 0px, errors 0
+[neutral dark 1440px] 15 stylesheets, 506 texts, 84 targets, 84 focus records, 64 sprite references, overflow 0px, errors 0
+[neutral system 1440px] 15 stylesheets, 506 texts, 84 targets, 84 focus records, 64 sprite references, overflow 0px, errors 0
+[neutral light 1440px] 15 stylesheets, 506 texts, 84 targets, 84 focus records, 64 sprite references, overflow 0px, errors 0
+[neutral system 390px] 15 stylesheets, 506 texts, 84 targets, 84 focus records, 64 sprite references, overflow 0px, errors 0
+[neutral dark 390px] 15 stylesheets, 506 texts, 84 targets, 84 focus records, 64 sprite references, overflow 0px, errors 0
+[neutral system 390px] 15 stylesheets, 506 texts, 84 targets, 84 focus records, 64 sprite references, overflow 0px, errors 0
+[neutral light 390px] 15 stylesheets, 506 texts, 84 targets, 84 focus records, 64 sprite references, overflow 0px, errors 0
+  132 passed (46.9s)
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+[... npm pack listing omitted ...]
+```
+
+### Visual verification
+
+Command: `node capture.mjs {{worktree}} before|after`, exit code 0; every page returned HTTP 200 with no console, page, or HTTP errors.
+
+| Theme | Width   | Before                                              | After                                             |
+| :---- | :------ | :-------------------------------------------------- | :------------------------------------------------ |
+| light | 390 px  | [before](before-controls-light-390.png)             | [after](after-controls-light-390.png)             |
+| dark  | 390 px  | [before](before-controls-dark-390.png)              | [after](after-controls-dark-390.png)              |
+| light | 1440 px | [before](before-controls-light-1440.png)            | [after](after-controls-light-1440.png)            |
+| dark  | 1440 px | [before](before-controls-dark-1440.png)             | [after](after-controls-dark-1440.png)             |

@@ -12,8 +12,8 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 3600.6, input: 4, output: 8}
-work_duration: 1810.3
+  worker: {turns: 4, duration_s: 4484.6, input: 108, output: 18770, cache_read: 11829288, cache_write: 67488}
+work_duration: 2278.5
 ---
 # T0007: Extract the button, icon button, banner, chip, and segmented control components from todos.webapp
 
@@ -28,10 +28,10 @@ See the technical specification for files, tests, and the completion check.
 - [x] **[Read]**      Read ADR-0003 and the todos.webapp controls stylesheet and gallery tests at a recorded commit.
 - [x] **[Implement]** Write the failing tests named in the technical specification.
 - [x] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
-- [ ] **[Implement]** Add the button, banner, chip, and segmented control partials and their gallery sections.
-- [ ] **[Verify]**    Run the control tests and the verifier until both pass.
-- [ ] **[Visual]**    Capture the gallery control sections per theme at 390 and 1440 px.
-- [ ] **[Doc]**       Update the style guide and CHANGELOG.md.
+- [x] **[Implement]** Add the button, banner, chip, and segmented control partials and their gallery sections.
+- [x] **[Verify]**    Run the control tests and the verifier until both pass.
+- [x] **[Visual]**    Capture the gallery control sections per theme at 390 and 1440 px.
+- [x] **[Doc]**       Update the style guide and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -43,4 +43,30 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Verify]**
   Recorded red-phase failures: 27 browser tests and 2 static tests fail before the partials exist.
+
+- [2026-11-12] **[Implement]**
+  Added five partials, the global focus ring in reset.css, gallery sections, and a sunken-ground hover fix with regression tests.
+  - Undeclared: icon-button.css, gallery-helpers.js, reset.css, gallery.css.
+  - Undeclared: tokens.test.js, gallery.test.js, components.md.
+
+- [2026-11-12] **[Decided]**
+  Deferred the link button, which the catalog assigned here but the title, roadmap, and spec omit, to new task T0034.
+  - Banner error variant is banner--danger, matching the danger tokens.
+  - Segmented keeps the segmented__options wrapper; the catalog skeleton gained it.
+
+- [2026-11-12] **[Verify]**
+  The completion check passed 108 tests; devops check passed 543 unit, 132 browser, and 4 integration tests.
+
+- [2026-11-12] **[Visual]**
+  Captured the control sections per theme at 390 and 1440 px; see validation-proof.md.
+  - [after light 1440](T0007-extract-the-button-icon-button-banner-chip-and/after-controls-light-1440.png).
+  - [after dark 1440](T0007-extract-the-button-icon-button-banner-chip-and/after-controls-dark-1440.png).
+  - [after light 390](T0007-extract-the-button-icon-button-banner-chip-and/after-controls-light-390.png).
+  - [after dark 390](T0007-extract-the-button-icon-button-banner-chip-and/after-controls-dark-390.png).
+
+- [2026-11-12] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 8.
+  - Lines touched: 363.
+  - Reopenings: 0.
 
