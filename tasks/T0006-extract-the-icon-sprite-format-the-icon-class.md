@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1187.2, input: 220, output: 73660, cache_read: 11516618, cache_write: 280216}
+review_status: pending
+review_round: 1
 ---
 # T0006: Extract the icon sprite format, the icon class, and the createIcon builder, with the neutral glyph set.
 
@@ -61,4 +65,7 @@ See the technical specification for files, tests, and the completion check.
   - Files touched: 9.
   - Lines touched: 189.
   - Reopenings: 0.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
