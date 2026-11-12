@@ -94,6 +94,7 @@ Options are `onSelect(item, event)`, `anchor` (default `true`), `onOpen`, and `o
 
 Import `attachPopover(trigger, panel, options)` from [popover.js](../../src/js/popover.js).
 Escape, an outside click, or focus leaving the panel closes it.
+The platform's light dismiss handles outside clicks and reports them to `onClose` as `outside`.
 Closing returns focus to the trigger unless another control took it.
 Options are `anchor`, `align` (`start` or `end`), `initialFocus`, `onOpen`, and `onClose(reason)`.
 Both controllers return `open`, `close`, `isOpen`, and `destroy`; `attachMenu` builds on `attachPopover`.
@@ -101,7 +102,13 @@ Both controllers return `open`, `close`, `isOpen`, and `destroy`; `attachMenu` b
 Import `anchorPanel(panel, trigger, gap, align)` from [anchor.js](../../src/js/anchor.js).
 It places the panel below the trigger, or above it when room runs out, inside the viewport.
 Its alignment mirrors for right-to-left text.
-Closed panels carry the `hidden` attribute until the native `popover` attribute replaces it.
+
+Menus and popovers use the native `popover` attribute, so open panels sit in the top layer above sticky bars.
+- Give the panel `popover` and an `id`, and give its trigger button `popovertarget` with that `id`.
+- Without JavaScript, the trigger still opens the panel, and a click outside or Escape closes it.
+- Both modules add `popover="auto"` and link the trigger as invoker when the markup lacks them.
+- The modules keep `anchorPanel` for placement and take over trigger clicks to manage focus.
+- Closed panels no longer use `hidden`; the modules remove it, and the styles still hide it.
 
 ### Notifications and toasts
 Notifications follow three tiers, after the counters notification ADR:

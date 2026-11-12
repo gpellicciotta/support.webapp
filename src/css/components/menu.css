@@ -1,10 +1,9 @@
 /*
- * Menu: an anchored list of actions at --elevation-1.
+ * Menu: an anchored list of actions at --elevation-1, opening in the top layer through the `popover` attribute.
  * Items: `role="menuitem"`, or `role="menuitemradio"` with aria-checked for a choice such as status.
  * Disabled items set aria-disabled="true"; separators use role="separator".
  */
 .menu {
-  z-index: var(--layer-popover);
   display: grid;
   min-inline-size: var(--width-menu);
   max-inline-size: min(100%, var(--width-side-panel));
@@ -16,8 +15,8 @@
   box-shadow: var(--elevation-1);
 }
 
-/* Closed menus set `hidden`, which the display rule would otherwise override. */
-.menu[hidden] {
+/* The display rule would otherwise show closed menus, and menus that still set `hidden`. */
+.menu:is([hidden], [popover]:not(:popover-open)) {
   display: none;
 }
 

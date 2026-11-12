@@ -12,6 +12,8 @@ All notable changes to this project are documented here.
 - Modules: Added `createToast` in `toast.js`, with a deprecated `createToaster` alias, and `createLiveRegion` in `live-region.js`.
 - Components: Added menus and popovers with gallery sections, roving focus, type-ahead, and light dismiss.
 - Modules: Added `attachMenu` in `menu.js`, `attachPopover` in `popover.js`, and RTL-aware `anchorPanel` in `anchor.js`.
+- Components: Moved menus and popovers from `hidden` to the native `popover` attribute, with top layer and light dismiss.
+- Modules: `attachPopover` and `attachMenu` add `popover="auto"` and the trigger link, keeping `anchorPanel` placement.
 - Components: Added native dialogs, responsive sheets, inline confirmations, and typed-word gallery examples with keyboard and focus management.
 - Looks: Added bright with accessible accents, cascade-tested light fallbacks, system fonts, attributed glyphs, and gallery controls.
 - Components: Added fields, checkboxes, radios, field groups, forms, and error summaries, with help toggles, validation states, and gallery sections.

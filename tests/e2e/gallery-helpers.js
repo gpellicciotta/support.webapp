@@ -163,3 +163,26 @@ export async function expectOnTop(target) {
     });
     expect(hit, 'covered by another element').toBe(true);
 }
+
+/**
+ * Check that an open panel paints above a sticky bar at the highest z-index, as only the top layer can.
+ * The bar covers the viewport, so the trigger, which stays in the page, must fall under it.
+ * @param {import('@playwright/test').Locator} trigger trigger that opened the panel
+ * @param {import('@playwright/test').Locator} target element inside the open panel
+ */
+export async function expectAboveStickyBar(trigger, target) {
+    const hits = await target.evaluate((element, opener) => {
+        const bar = document.createElement('div');
+        bar.style.cssText = 'position: sticky; inset-block-start: 0; z-index: 2147483647; block-size: 100vh; margin-block-end: -100vh; background: gray';
+        document.body.prepend(bar);
+        const center = (node) => {
+            const box = node.getBoundingClientRect();
+            return document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2);
+        };
+        const result = { trigger: center(opener) === bar, panel: element.contains(center(element)) };
+        bar.remove();
+        return result;
+    }, await trigger.elementHandle());
+    expect(hits.trigger, 'the sticky bar covers the trigger').toBe(true);
+    expect(hits.panel, 'the panel paints above the sticky bar').toBe(true);
+}

@@ -3,6 +3,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { anchorPanel } from '../../src/js/anchor.js';
 import { attachPopover } from '../../src/js/popover.js';
+import { installPopoverShim, isShowing, lightDismiss, nextTask } from './popover-shim.js';
 
 /**
  * Dispatch a keyboard event on an element.
@@ -32,9 +33,10 @@ describe('attachPopover', () => {
     let controller;
 
     beforeEach(() => {
+        installPopoverShim();
         document.body.innerHTML = `
             <button id="trigger" type="button">Status</button>
-            <div id="panel" class="popover" role="group">
+            <div id="panel" class="popover" role="group" hidden>
                 <label><input id="first" type="checkbox"> To do</label>
                 <button id="clear" type="button">Clear</button>
             </div>
@@ -50,10 +52,34 @@ describe('attachPopover', () => {
         controller.destroy();
     });
 
-    it('opens on a trigger click and focuses the first control', () => {
-        expect(panel.hidden).toBe(true);
-        click(trigger);
+    it('turns the panel into a closed auto popover invoked by the trigger', () => {
+        expect(panel.getAttribute('popover')).toBe('auto');
         expect(panel.hidden).toBe(false);
+        expect(isShowing(panel)).toBe(false);
+        expect(trigger.popoverTargetElement).toBe(panel);
+    });
+
+    it('keeps a popover value and a popovertarget link from the markup', () => {
+        controller.destroy();
+        document.body.innerHTML = `
+            <button id="trigger" type="button" popovertarget="panel">Status</button>
+            <div id="panel" class="popover" popover="manual"><button type="button">Clear</button></div>`;
+        trigger = document.getElementById('trigger');
+        panel = document.getElementById('panel');
+        controller = attachPopover(trigger, panel, { anchor: false });
+        expect(panel.getAttribute('popover')).toBe('manual');
+        expect(trigger.popoverTargetElement).toBeNull();
+        controller.destroy();
+        expect(trigger.getAttribute('popovertarget')).toBe('panel');
+        expect(panel.getAttribute('popover')).toBe('manual');
+    });
+
+    it('opens on a trigger click and focuses the first control', () => {
+        expect(isShowing(panel)).toBe(false);
+        const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+        trigger.dispatchEvent(event);
+        expect(event.defaultPrevented).toBe(true);
+        expect(isShowing(panel)).toBe(true);
         expect(trigger.getAttribute('aria-expanded')).toBe('true');
         expect(document.activeElement).toBe(document.getElementById('first'));
     });
@@ -62,31 +88,45 @@ describe('attachPopover', () => {
         click(trigger);
         click(document.getElementById('clear'));
         expect(controller.isOpen()).toBe(true);
+        expect(isShowing(panel)).toBe(true);
     });
 
     it('closes on Escape and returns focus to the trigger', () => {
         click(trigger);
-        press(document.getElementById('first'), 'Escape');
-        expect(panel.hidden).toBe(true);
+        const event = press(document.getElementById('first'), 'Escape');
+        expect(event.defaultPrevented).toBe(true);
+        expect(isShowing(panel)).toBe(false);
         expect(trigger.getAttribute('aria-expanded')).toBe('false');
         expect(document.activeElement).toBe(trigger);
         expect(onClose).toHaveBeenCalledWith('escape');
     });
 
-    it('closes on an outside click and returns focus to the trigger', () => {
+    it('follows a light dismiss of the platform and returns focus to the trigger', async () => {
         click(trigger);
         document.activeElement.blur();
-        click(document.getElementById('text'));
-        expect(panel.hidden).toBe(true);
+        lightDismiss(panel);
+        await nextTask();
+        expect(controller.isOpen()).toBe(false);
+        expect(trigger.getAttribute('aria-expanded')).toBe('false');
         expect(document.activeElement).toBe(trigger);
         expect(onClose).toHaveBeenCalledWith('outside');
+    });
+
+    it('ignores the toggle events of its own changes', async () => {
+        click(trigger);
+        click(trigger);
+        click(trigger);
+        await nextTask();
+        expect(controller.isOpen()).toBe(true);
+        expect(isShowing(panel)).toBe(true);
+        expect(onClose).toHaveBeenCalledTimes(1);
     });
 
     it('links the trigger to the panel and toggles on trigger clicks', () => {
         expect(trigger.getAttribute('aria-controls')).toBe('panel');
         click(trigger);
         click(trigger);
-        expect(panel.hidden).toBe(true);
+        expect(isShowing(panel)).toBe(false);
         expect(onClose).toHaveBeenCalledWith('toggle');
     });
 
@@ -96,7 +136,7 @@ describe('attachPopover', () => {
         text.tabIndex = 0;
         panel.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: text }));
         text.focus();
-        expect(panel.hidden).toBe(true);
+        expect(isShowing(panel)).toBe(false);
         expect(document.activeElement).toBe(text);
         expect(onClose).toHaveBeenCalledWith('blur');
     });
@@ -107,12 +147,30 @@ describe('attachPopover', () => {
         expect(document.activeElement).toBe(document.getElementById('clear'));
     });
 
-    it('removes its attributes and listeners on destroy', () => {
+    it('anchors the open popover at its trigger', () => {
+        controller.destroy();
+        controller = attachPopover(trigger, panel);
+        trigger.getBoundingClientRect = () => ({ left: 16, right: 60, top: 16, bottom: 60, width: 44, height: 44 });
+        panel.getBoundingClientRect = () => ({ width: 192, height: 100 });
+        click(trigger);
+        expect(isShowing(panel)).toBe(true);
+        expect(panel.style.position).toBe('fixed');
+        expect(panel.style.right).toBe('auto');
+        expect(panel.style.bottom).toBe('auto');
+        expect(Number.parseFloat(panel.style.top)).toBe(64);
+        expect(Number.parseFloat(panel.style.left)).toBe(16);
+        expect(panel.style.right).toBe('auto');
+        expect(panel.style.bottom).toBe('auto');
+    });
+
+    it('removes its attributes and listeners on destroy, leaving the panel a closed popover', () => {
         controller.destroy();
         expect(trigger.hasAttribute('aria-expanded')).toBe(false);
         expect(trigger.hasAttribute('aria-controls')).toBe(false);
+        expect(trigger.popoverTargetElement).toBeNull();
+        expect(panel.hasAttribute('popover')).toBe(true);
         click(trigger);
-        expect(panel.hidden).toBe(true);
+        expect(isShowing(panel)).toBe(false);
     });
 });
 
@@ -162,6 +220,8 @@ describe('anchorPanel', () => {
         trigger.getBoundingClientRect = () => ({ left: 16, right: 60, top: 16, bottom: 60, width: 44, height: 44 });
         anchorPanel(panel, trigger);
         expect(panel.style.position).toBe('fixed');
+        expect(panel.style.right).toBe('auto');
+        expect(panel.style.bottom).toBe('auto');
         expect(Number.parseFloat(panel.style.top)).toBe(64);
         const bottom = window.innerHeight - 10;
         trigger.getBoundingClientRect = () => ({ left: 16, right: 60, top: bottom - 44, bottom, width: 44, height: 44 });

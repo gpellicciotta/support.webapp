@@ -23,7 +23,7 @@ function isEnabled(item) {
 /**
  * Attach menu behavior to a trigger button and its menu.
  * @param {HTMLElement} trigger button that opens the menu
- * @param {HTMLElement} menu container of the items; it gets `role="menu"` and starts hidden
+ * @param {HTMLElement} menu container of the items; it gets `role="menu"` and becomes a closed popover
  * @param {object} [options] behavior options
  * @param {(item: HTMLElement, event: Event) => void} [options.onSelect] called after an item is selected
  *   and the menu has closed; radio items are checked and checkbox items toggled before the call

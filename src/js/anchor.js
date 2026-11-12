@@ -14,8 +14,11 @@ export function anchorPanel(panel, trigger, gap = 4, align = 'start') {
     const view = trigger.ownerDocument.defaultView;
     // Take the panel out of the flow and pin it to the corner first, so it never shifts the trigger being measured
     // and its shrink-to-fit width does not depend on where it happened to sit before.
+    // Clearing the right and bottom insets undoes the `inset: 0` of popovers, which right-to-left pages would honor.
     panel.style.position = 'fixed';
     panel.style.margin = '0';
+    panel.style.right = 'auto';
+    panel.style.bottom = 'auto';
     panel.style.left = '0px';
     panel.style.top = '0px';
     const box = trigger.getBoundingClientRect();

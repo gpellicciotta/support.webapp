@@ -2,6 +2,7 @@
 // Ported from todos.webapp tests/unit/menu.test.js at commit 0cf4981.
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attachMenu } from '../../src/js/menu.js';
+import { installPopoverShim, isShowing, lightDismiss, nextTask } from './popover-shim.js';
 
 /**
  * Dispatch a keyboard event on an element.
@@ -32,6 +33,7 @@ describe('attachMenu', () => {
     let controller;
 
     beforeEach(() => {
+        installPopoverShim();
         document.body.innerHTML = `
             <button id="trigger" type="button">Status</button>
             <div id="menu" class="menu">
@@ -59,14 +61,16 @@ describe('attachMenu', () => {
         expect(trigger.getAttribute('aria-expanded')).toBe('false');
         expect(trigger.getAttribute('aria-controls')).toBe('menu');
         expect(menu.getAttribute('role')).toBe('menu');
-        expect(menu.hidden).toBe(true);
+        expect(menu.getAttribute('popover')).toBe('auto');
+        expect(trigger.popoverTargetElement).toBe(menu);
+        expect(isShowing(menu)).toBe(false);
         expect(items.every((item) => item.getAttribute('tabindex') === '-1')).toBe(true);
     });
 
     it.each(['Enter', ' ', 'ArrowDown'])('opens on %j and focuses the first item', (key) => {
         const event = press(trigger, key);
         expect(event.defaultPrevented).toBe(true);
-        expect(menu.hidden).toBe(false);
+        expect(isShowing(menu)).toBe(true);
         expect(trigger.getAttribute('aria-expanded')).toBe('true');
         expect(document.activeElement).toBe(items[0]);
     });
@@ -82,7 +86,7 @@ describe('attachMenu', () => {
         expect(document.activeElement).toBe(items[0]);
         click(trigger);
         expect(controller.isOpen()).toBe(false);
-        expect(menu.hidden).toBe(true);
+        expect(isShowing(menu)).toBe(false);
     });
 
     it('moves down with ArrowDown, skips disabled items, and wraps to the first item', () => {
@@ -125,7 +129,7 @@ describe('attachMenu', () => {
         expect(event.defaultPrevented).toBe(true);
         expect(onSelect).toHaveBeenCalledTimes(1);
         expect(onSelect.mock.calls[0][0]).toBe(items[1]);
-        expect(menu.hidden).toBe(true);
+        expect(isShowing(menu)).toBe(false);
         expect(trigger.getAttribute('aria-expanded')).toBe('false');
         expect(document.activeElement).toBe(trigger);
     });
@@ -156,17 +160,20 @@ describe('attachMenu', () => {
         press(items[0], 'ArrowDown');
         const event = press(items[1], 'Escape');
         expect(event.defaultPrevented).toBe(true);
-        expect(menu.hidden).toBe(true);
+        expect(isShowing(menu)).toBe(false);
         expect(document.activeElement).toBe(trigger);
         expect(onSelect).not.toHaveBeenCalled();
     });
 
-    it('closes on an outside click and returns focus to the trigger', () => {
+    it('follows a light dismiss of the platform and returns focus to the trigger', async () => {
         press(trigger, 'Enter');
         document.activeElement.blur();
-        click(document.getElementById('text'));
-        expect(menu.hidden).toBe(true);
+        lightDismiss(menu);
+        await nextTask();
+        expect(controller.isOpen()).toBe(false);
+        expect(trigger.getAttribute('aria-expanded')).toBe('false');
         expect(document.activeElement).toBe(trigger);
+        expect(onSelect).not.toHaveBeenCalled();
     });
 
     it('keeps focus on an outside control that took it', () => {
@@ -174,7 +181,7 @@ describe('attachMenu', () => {
         const outside = document.getElementById('outside');
         outside.focus();
         click(outside);
-        expect(menu.hidden).toBe(true);
+        expect(isShowing(menu)).toBe(false);
         expect(document.activeElement).toBe(outside);
     });
 
@@ -182,15 +189,15 @@ describe('attachMenu', () => {
         press(trigger, 'Enter');
         const event = press(items[0], 'Tab');
         expect(event.defaultPrevented).toBe(false);
-        expect(menu.hidden).toBe(true);
+        expect(isShowing(menu)).toBe(false);
         expect(document.activeElement).toBe(trigger);
     });
 
     it('stops reacting after destroy', () => {
         controller.destroy();
         press(trigger, 'Enter');
-        expect(menu.hidden).toBe(true);
+        expect(isShowing(menu)).toBe(false);
         click(trigger);
-        expect(menu.hidden).toBe(true);
+        expect(isShowing(menu)).toBe(false);
     });
 });

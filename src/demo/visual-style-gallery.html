@@ -862,8 +862,8 @@
             </div>
             <h3 id="menu-demo-title">Working menu</h3>
             <p>Enter, Space, or an arrow key opens it. Escape, Tab, or a click outside closes it.</p>
-            <button class="button button--secondary" type="button" id="menu-demo-trigger">Actions for Buy oat milk</button>
-            <div class="menu" id="menu-demo" aria-label="Actions for Buy oat milk" hidden>
+            <button class="button button--secondary" type="button" id="menu-demo-trigger" popovertarget="menu-demo">Actions for Buy oat milk</button>
+            <div class="menu" id="menu-demo" aria-label="Actions for Buy oat milk" popover>
                 <button class="menu__item" type="button" role="menuitem"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg>Add to list</button>
                 <button class="menu__item" type="button" role="menuitem"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-close"/></svg>Remove from this list</button>
                 <div class="menu__separator" role="separator"></div>
@@ -889,8 +889,8 @@
             </div>
             <h3 id="popover-demo-title">Working popover</h3>
             <p>The Status button opens the panel. Escape, a click outside, or tabbing away closes it.</p>
-            <button class="button button--secondary" type="button" id="popover-demo-trigger"><span>Status<span data-popover-value></span></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button>
-            <div class="popover" id="popover-demo" role="group" aria-labelledby="popover-demo-panel-title" hidden>
+            <button class="button button--secondary" type="button" id="popover-demo-trigger" popovertarget="popover-demo"><span>Status<span data-popover-value></span></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button>
+            <div class="popover" id="popover-demo" role="group" aria-labelledby="popover-demo-panel-title" popover>
                 <h4 class="popover__title" id="popover-demo-panel-title">Status</h4>
                 <div>
                     <label class="checkbox"><input class="checkbox__control" type="checkbox" value="To do"><span class="checkbox__label">To do</span></label>

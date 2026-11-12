@@ -445,8 +445,8 @@ Inline confirmation. The second confirmation tier; the third is a dialog asking 
 Menu. `attachMenu` sets `aria-expanded`, roving focus, and type-ahead, and builds on `attachPopover` of `popover.js`.
 
 ```html
-<button class="icon-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="More actions for Buy milk">...</button>
-<div class="menu" role="menu" aria-label="Actions for Buy milk" popover>
+<button class="icon-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="More actions for Buy milk" popovertarget="actions">...</button>
+<div class="menu" id="actions" role="menu" aria-label="Actions for Buy milk" popover>
   <button class="menu__item" type="button" role="menuitem">Add to list</button>
   <div class="menu__separator" role="separator"></div>
   <button class="menu__item menu__item--danger" type="button" role="menuitem">Delete</button>
