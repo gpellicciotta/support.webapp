@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1532.8, input: 166752, output: 36810, cache_read: 5764352, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0003: Set up the repository tooling: package manifest, linters, unit and browser test runners, devops scripts, and CI
 
@@ -62,4 +66,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Verify]**
   Committed implementation as 0148064. Completion validation passed; execution steps 1-6 are checked. Review remains for the orchestrator.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
