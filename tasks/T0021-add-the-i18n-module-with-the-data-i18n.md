@@ -12,11 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 552.2, input: 111308, output: 15278, cache_read: 1281536, cache_write: 0}
+  worker: {turns: 4, duration_s: 791.4, input: 135876, output: 19650, cache_read: 2831360, cache_write: 0}
   review: {turns: 2, duration_s: 258.0, input: 16, output: 3588, cache_read: 378696, cache_write: 5246}
-review_status: rejected
-review_round: 1
-reviewed_by: "@claude"
+review_status: pending
+review_round: 2
 work_duration: 429.6
 ---
 # T0021: Add the i18n module with the data-i18n attributes and the catalog format
@@ -79,4 +78,7 @@ Refine declared files, size estimate, and tests in the technical specification b
   - Files touched: 2.
   - Lines touched: 15.
   - Reopenings: 0.
+
+- [2026-11-12] **[Review]**
+  Round 2 requested (mode: agent).
 
