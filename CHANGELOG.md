@@ -3,8 +3,12 @@ All notable changes to this project are documented here.
 
 > See [change management guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/change-management-guidelines.md)
 > for the versioning and changelog conventions used across projects.
+>
+> Areas: `Tokens`, `Looks`, `Components`, `Shell`, `Modules`, `CLI`, and `Template` for the package,
+> plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- DevEx: Added the GitHub Packages publish workflow for published releases, documented the release flow, and declared the changelog areas.
 - CLI: Added `vendor` and `check` commands, with a hashed package manifest, the `design.json` pin, and integrity and conformance checks.
 - FrontEnd: Added flat translation catalogs, parameter interpolation, and scoped translation of text, accessibility labels, tooltips, and placeholders.
 - FrontEnd: Added shared base tokens, a machine-readable contract, the neutral look, self-hosted Inter, and contrast and conformance checks.

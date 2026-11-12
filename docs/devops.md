@@ -32,7 +32,7 @@ python scripts/devops.py serve --port 4173
 ```
 
 `tests` runs pytest and Vitest; `test --slow` runs Playwright in desktop/mobile viewports and light/dark modes.
-Without a selection, `test --slow` also runs the pack-and-vendor integration test, `npm run test:integration`.
+Without a selection, `test --slow` also runs the pack and pack-and-vendor integration tests, `npm run test:integration`.
 `check` runs Markdown lint, Ruff, ESLint, the unit, browser, and integration tests, and `npm pack --dry-run`.
 The package ships source files directly; no compilation or copy step runs.
 The server binds to localhost and serves `src/` with explicit JavaScript and CSS media types.
@@ -94,7 +94,43 @@ The shared support.python release pipeline checks repository state, runs the ful
 It then opens the next development version.
 Review `python scripts/devops.py help --verbose` before releasing; publishing requires explicit authorization.
 
-Publishing the package arrives with the publish workflow task.
+### Publishing the Package
+Publishing the GitHub release triggers [publish.yml](../.github/workflows/publish.yml), as [ADR-0005](adrs/ADR-0005-distribution-and-versioning.md) decides.
+The workflow reruns `check`, then publishes `@gpellicciotta/support.webapp` to GitHub Packages.
+It fails when the release tag differs from `v` plus the `version` of [package.json](../package.json).
+The workflow's own `GITHUB_TOKEN` authenticates the upload, so no publish secret exists.
+A manual run from the Actions tab only rehearses the upload with `npm publish --dry-run`.
+Watch the run after each release:
+
+```bash
+gh run list --workflow=publish.yml --limit 5
+gh run watch {{run-id}}
+```
+
+`publishConfig` in [package.json](../package.json) points npm at `https://npm.pkg.github.com`.
+`files` ships `src/` without the gallery and landing page, plus `bin/`, the manifest, and the project files.
+[pack.test.js](../tests/integration/pack.test.js) checks that file list and these release settings.
+
+### Installing from the Registry
+GitHub Packages requires a token even for public packages.
+Developers who run `vendor` from the registry add a classic token with `read:packages` to their user `.npmrc`:
+
+```text
+@gpellicciotta:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken={{github-token}}
+```
+
+App builds and hosting need no token, because each app commits its vendored copy.
+
+### Reaching the Apps
+After the user approves a release, create one backlog task per consuming app:
+
+```bash
+plan tasks create --project ../{{app}} --section Backlog "Vendor support.webapp v{{version}} and compare the screenshots."
+```
+
+Each task runs `vendor`, the app's checks, and the screenshot comparison of [ADR-0007](adrs/ADR-0007-documentation-and-verification.md).
+[roadmap.md](roadmap.md) lists the consuming apps and when each adopts the system.
 
 ---
 

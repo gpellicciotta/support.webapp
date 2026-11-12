@@ -9,6 +9,7 @@
   "files": [
     "src/",
     "!src/demo/",
+    "!src/index.html",
     "bin/",
     "LICENSE.md",
     "CHANGELOG.md",
@@ -33,5 +34,12 @@
   "bin": {
     "support-webapp": "bin/cli.mjs"
   },
-  "copyright": "Copyright (c) Giovanni Pellicciotta"
+  "copyright": "Copyright (c) Giovanni Pellicciotta",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gpellicciotta/support.webapp.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }

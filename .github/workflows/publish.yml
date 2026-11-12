@@ -1,0 +1,56 @@
+name: Publish package
+
+# A published GitHub Release publishes the package; a manual run only rehearses it with --dry-run.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.15'
+      - run: python -m pip install -r scripts/requirements.txt
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: python scripts/devops.py check
+
+  publish-to-github-packages:
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@gpellicciotta"
+      - name: Match the release tag to the package version
+        if: github.event_name == 'release'
+        run: test "$TAG" = "v$(node -p "require('./package.json').version")"
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+      - name: Rehearse the publication
+        if: github.event_name != 'release'
+        run: npm publish --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish to GitHub Packages
+        if: github.event_name == 'release'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
