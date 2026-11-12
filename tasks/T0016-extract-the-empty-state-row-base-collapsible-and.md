@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 933.4, input: 174780, output: 23122, cache_read: 4709632, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0016: Extract the empty state and the row base components from todos.webapp
 
@@ -63,4 +67,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Verify]**
   Counted four modified files and 62 changed lines, excluding added files and CHANGELOG.md. Nine files changed overall. Reopenings: zero. Committed c112aa8; all implementation steps are checked, with orchestrator review pending.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
