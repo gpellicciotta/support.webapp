@@ -89,7 +89,7 @@ npm notice total files: 86
 ```
 
 ### Screenshots
-New sections, so no before images exist; each theme at 1440 px (desktop) and 390 px (mobile).
+After images of the new sections, per theme at 1440 px (desktop) and 390 px (mobile); before images follow the table.
 
 | View                       | Light                                                                                                                         | Dark                                                                                                                        |
 | :------------------------- | :---------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
@@ -101,5 +101,9 @@ New sections, so no before images exist; each theme at 1440 px (desktop) and 390
 | Open account menu, 390 px  | [open-account-menu-mobile-light.png](screenshots/open-account-menu-mobile-light.png)                                           | [open-account-menu-mobile-dark.png](screenshots/open-account-menu-mobile-dark.png)                                           |
 
 Before images show the base commit `964b203` gallery at both insertion points, per theme and width:
-- `before-collapsible-{desktop,mobile}-{light,dark}.png`: the icon tile runs straight into the dialog section.
-- `before-account-menu-{desktop,mobile}-{light,dark}.png`: the avatar runs straight into the accents section.
+- Collapsible insertion point, where the icon tile runs straight into the dialog section:
+  [desktop light](screenshots/before-collapsible-desktop-light.png), [desktop dark](screenshots/before-collapsible-desktop-dark.png),
+  [mobile light](screenshots/before-collapsible-mobile-light.png), [mobile dark](screenshots/before-collapsible-mobile-dark.png).
+- Account menu insertion point, where the avatar runs straight into the accents section:
+  [desktop light](screenshots/before-account-menu-desktop-light.png), [desktop dark](screenshots/before-account-menu-desktop-dark.png),
+  [mobile light](screenshots/before-account-menu-mobile-light.png), [mobile dark](screenshots/before-account-menu-mobile-dark.png).

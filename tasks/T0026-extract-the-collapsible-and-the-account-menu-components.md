@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 3077.8, input: 344, output: 114582, cache_read: 24978446, cache_write: 359668}
+work_duration: 1548.0
 ---
 # T0026: Extract the collapsible and the account menu components from todos.webapp
 
@@ -65,4 +68,11 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Visual]**
   Captured before images of the base gallery where both sections now sit. Evidence: [before](T0026-extract-the-collapsible-and-the-account-menu-components/screenshots/before-account-menu-desktop-light.png), [after](T0026-extract-the-collapsible-and-the-account-menu-components/screenshots/open-account-menu-desktop-light.png).
+
+- [2026-11-12] **[Verify]**
+  Completion validation found 2 errors; pending fix turn 1 of 2.
+  - TF017.
+
+- [2026-11-12] **[Suspended]**
+  Validation fix turn 1 was not dispatched; inspect the suspension reason.
 
