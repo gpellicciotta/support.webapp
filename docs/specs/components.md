@@ -45,7 +45,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 ### Forms and Selection
 | Key             | Component                      | Source                 | Module and functions                             | Variants and states                                             | Accessibility minimum                                                            | Task                    |
 | :-------------- | :----------------------------- | :--------------------- | :----------------------------------------------- | :-------------------------------------------------------------- | :------------------------------------------------------------------------------- | :---------------------- |
-| `form`          | Form                           | counters, todos.webapp | `form.js`: `attachForm`                          | idle, busy, failed submit; actions row                          | native form; Enter submits; busy state announced                                 | T0008                   |
+| `form`          | Form                           | counters, todos.webapp | `form.js`: `attachForm`, using `field.js`        | idle, busy, failed submit; actions row                          | native form; Enter submits; busy state announced                                 | T0008                   |
 | `field`         | Field help toggle              | counters, new design   | `field.js`: `attachField`                        | collapsed, expanded                                             | button with `aria-expanded` and `aria-controls`; help text in `aria-describedby` | T0008                   |
 | `field`         | Validation states              | counters, todos.webapp | `field.js`: `setError`, `setValid`, `setPending` | valid, invalid, pending; icon and text, never color alone       | `aria-invalid`; `aria-busy` while pending; message in the live region            | T0008                   |
 | `error-summary` | Error summary                  | new design             | filled by `attachForm`                           | hidden; shown after a failed submit, one link per invalid field | focus moves to it; links jump to the fields                                      | T0008                   |
@@ -144,6 +144,7 @@ Floating action button. It lives in the shell's overlay layer, never inside a co
 
 ### field
 Field. Every part except the label and the control is optional. The help text stays in `aria-describedby` while collapsed.
+`attachField` orders `aria-describedby` as hint, help, counter, status, and error, naming only visible status and error lines.
 
 ```html
 <div class="field" data-field>
@@ -152,9 +153,9 @@ Field. Every part except the label and the control is optional. The help text st
     <svg class="icon" aria-hidden="true"><use href="icons.svg#icon-help"/></svg>
   </button>
   <p class="field__help" id="name-help" hidden>The counter name, shown on every screen.</p>
-  <input class="field__control" id="name" name="name" aria-describedby="name-hint name-help name-error" aria-invalid="true">
+  <input class="field__control" id="name" name="name" maxlength="40" aria-describedby="name-hint name-help name-counter name-error" aria-invalid="true">
   <p class="field__hint" id="name-hint">Up to 40 characters.</p>
-  <p class="field__counter" aria-hidden="true">12 / 40</p>
+  <p class="field__counter" id="name-counter">12 / 40</p>
   <p class="field__status" id="name-status"><svg class="icon" aria-hidden="true"><use href="icons.svg#icon-check"/></svg>Name is free.</p>
   <p class="field__error" id="name-error"><svg class="icon" aria-hidden="true"><use href="icons.svg#icon-alert"/></svg>Enter a name.</p>
 </div>
@@ -251,13 +252,15 @@ Error summary. Focus moves to the summary after a failed submit; each link jumps
 ```
 
 ### field-group
-Field group.
+Field group. `field-group--row` sets related fields side by side; the hint and error lines are optional.
 
 ```html
-<fieldset class="field-group">
+<fieldset class="field-group" aria-describedby="notify-hint">
   <legend class="field-group__legend">Notify me</legend>
   <label class="checkbox">...</label>
   <label class="checkbox">...</label>
+  <p class="field-group__hint" id="notify-hint">...</p>
+  <p class="field-group__error" id="notify-error" hidden>...</p>
 </fieldset>
 ```
 

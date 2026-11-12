@@ -15,7 +15,8 @@ test('warm seasons preserve source accents on roots and specimen wrappers', asyn
     };
     for (const [season, color] of Object.entries(colors)) {
         await page.locator('#accent-select').selectOption(season);
-        expect(await tokenColor(page, '--color-accent')).toBe(color);
+        // The look stylesheet loads asynchronously, and networkidle has already fired once, so poll the token.
+        await expect.poll(() => tokenColor(page, '--color-accent')).toBe(color);
         await expect(page.locator(`.season[data-accent="${season}"]`)).toHaveCSS('border-top-color', color);
     }
     await page.evaluate(() => document.fonts.ready);

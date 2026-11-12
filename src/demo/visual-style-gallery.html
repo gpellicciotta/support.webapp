@@ -66,6 +66,12 @@
                     <li><a href="#link-button">Link button</a></li>
                     <li><a href="#chip">Chip</a></li>
                     <li><a href="#segmented">Segmented control</a></li>
+                    <li><a href="#field">Field</a></li>
+                    <li><a href="#checkbox">Checkbox</a></li>
+                    <li><a href="#radio">Radio</a></li>
+                    <li><a href="#field-group">Field group</a></li>
+                    <li><a href="#form">Form</a></li>
+                    <li><a href="#error-summary">Error summary</a></li>
                     <li><a href="#banner">Banner</a></li>
                 </ul>
             </nav>
@@ -517,6 +523,177 @@
                         <label class="segmented__option"><input type="radio" name="status-disabled" value="cancelled">Cancelled</label>
                     </div>
                 </fieldset>
+            </div>
+        </section>
+        <section id="field" class="gallery-section" aria-labelledby="field-title">
+            <h2 id="field-title">Field</h2>
+            <p>A label, one control, and optional hint, help, counter, status, and error parts.
+                Icon, text, and color carry each validation state together.</p>
+            <p>The first field is live: its help toggle opens the help text, and leaving it empty shows its error.</p>
+            <div class="field-specimens">
+                <div class="field" data-field>
+                    <label class="field__label" for="field-live">Name</label>
+                    <button class="field__help-toggle" type="button" aria-expanded="false" aria-controls="field-live-help" aria-label="Help for Name"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-help"/></svg></button>
+                    <p class="field__help" id="field-live-help" hidden>The name appears on every screen and in shared links.</p>
+                    <input class="field__control" id="field-live" name="name" maxlength="40" required aria-describedby="field-live-hint field-live-help">
+                    <p class="field__hint" id="field-live-hint">Up to 40 characters.</p>
+                    <p class="field__counter" id="field-live-counter"></p>
+                    <p class="field__error" id="field-live-error" hidden></p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="field-hover">Hover</label>
+                    <input class="field__control is-hover" id="field-hover" name="hover" value="Weekly review">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="field-focus">Focus</label>
+                    <input class="field__control is-focus" id="field-focus" name="focus" placeholder="Search items">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="field-invalid">Invalid</label>
+                    <input class="field__control" id="field-invalid" name="invalid" aria-invalid="true" aria-describedby="field-invalid-error">
+                    <p class="field__error" id="field-invalid-error"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg>Enter a name.</p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="field-valid">Valid</label>
+                    <input class="field__control" id="field-valid" name="valid" value="Steps" aria-describedby="field-valid-status">
+                    <p class="field__status" id="field-valid-status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>Name is free.</p>
+                </div>
+                <div class="field" aria-busy="true">
+                    <label class="field__label" for="field-pending">Pending</label>
+                    <input class="field__control" id="field-pending" name="pending" value="Steps" aria-describedby="field-pending-status">
+                    <p class="field__status" id="field-pending-status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-more"/></svg>Checking the name.</p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="field-disabled">Disabled</label>
+                    <input class="field__control" id="field-disabled" name="disabled" value="Archived" disabled>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="field-read-only">Read-only</label>
+                    <input class="field__control" id="field-read-only" name="read-only" value="Created by the owner" readonly>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="field-textarea">Description</label>
+                    <textarea class="field__control" id="field-textarea" name="description" maxlength="200" aria-describedby="field-textarea-counter">A short description.</textarea>
+                    <p class="field__counter" id="field-textarea-counter">20 / 200</p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="field-select">Repeat</label>
+                    <select class="field__control" id="field-select" name="repeat">
+                        <option>Never</option>
+                        <option>Every day</option>
+                        <option>Every week</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        <section id="checkbox" class="gallery-section" aria-labelledby="checkbox-title">
+            <h2 id="checkbox-title">Checkbox</h2>
+            <p>A native checkbox inside its label, in the primary accent color; the whole row is the target.</p>
+            <ul class="states">
+                <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-default"><span class="checkbox__label">Remind me</span></label><span class="state__label">Default</span></li>
+                <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-checked" checked><span class="checkbox__label">Remind me</span></label><span class="state__label">Checked</span></li>
+                <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-mixed" data-gallery-indeterminate><span class="checkbox__label">All lists</span></label><span class="state__label">Indeterminate</span></li>
+                <li class="state"><label class="checkbox is-hover"><input class="checkbox__control" type="checkbox" name="checkbox-hover"><span class="checkbox__label">Remind me</span></label><span class="state__label">Hover</span></li>
+                <li class="state"><label class="checkbox"><input class="checkbox__control is-focus" type="checkbox" name="checkbox-focus"><span class="checkbox__label">Remind me</span></label><span class="state__label">Focus-visible</span></li>
+                <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-disabled" disabled><span class="checkbox__label">Remind me</span></label><span class="state__label">Disabled</span></li>
+                <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-disabled-checked" checked disabled><span class="checkbox__label">Remind me</span></label><span class="state__label">Disabled, checked</span></li>
+                <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-invalid" aria-invalid="true"><span class="checkbox__label">I accept the terms</span></label><span class="state__label">Invalid</span></li>
+            </ul>
+        </section>
+        <section id="radio" class="gallery-section" aria-labelledby="radio-title">
+            <h2 id="radio-title">Radio</h2>
+            <p>Native radios inside a field group; arrow keys move the choice. Large shows hover and Medium shows focus-visible.</p>
+            <div class="stack">
+                <fieldset class="field-group">
+                    <legend class="field-group__legend">Size</legend>
+                    <label class="radio"><input class="radio__control" type="radio" name="radio-size" value="small" checked><span class="radio__label">Small</span></label>
+                    <label class="radio"><input class="radio__control is-focus" type="radio" name="radio-size" value="medium"><span class="radio__label">Medium</span></label>
+                    <label class="radio is-hover"><input class="radio__control" type="radio" name="radio-size" value="large"><span class="radio__label">Large</span></label>
+                    <label class="radio"><input class="radio__control" type="radio" name="radio-size" value="x-large" disabled><span class="radio__label">X-large, disabled</span></label>
+                </fieldset>
+                <fieldset class="field-group" disabled>
+                    <legend class="field-group__legend">Size, disabled</legend>
+                    <label class="radio"><input class="radio__control" type="radio" name="radio-size-disabled" value="small"><span class="radio__label">Small</span></label>
+                    <label class="radio"><input class="radio__control" type="radio" name="radio-size-disabled" value="medium" checked><span class="radio__label">Medium</span></label>
+                </fieldset>
+            </div>
+        </section>
+        <section id="field-group" class="gallery-section" aria-labelledby="field-group-title">
+            <h2 id="field-group-title">Field group</h2>
+            <p>A fieldset and legend around checkboxes, radios, or related fields; the row variant wraps on narrow screens.</p>
+            <div class="stack">
+                <fieldset class="field-group" aria-describedby="field-group-notify-hint">
+                    <legend class="field-group__legend">Notify me</legend>
+                    <label class="checkbox"><input class="checkbox__control" type="checkbox" name="notify" value="email" checked><span class="checkbox__label">By email</span></label>
+                    <label class="checkbox"><input class="checkbox__control" type="checkbox" name="notify" value="push"><span class="checkbox__label">By push notification</span></label>
+                    <p class="field-group__hint" id="field-group-notify-hint">You can change this later in the settings.</p>
+                </fieldset>
+                <fieldset class="field-group" aria-describedby="field-group-plan-error">
+                    <legend class="field-group__legend">Plan</legend>
+                    <label class="radio"><input class="radio__control" id="field-group-plan-free" type="radio" name="plan" value="free" aria-invalid="true"><span class="radio__label">Free</span></label>
+                    <label class="radio"><input class="radio__control" type="radio" name="plan" value="family" aria-invalid="true"><span class="radio__label">Family</span></label>
+                    <p class="field-group__error" id="field-group-plan-error"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg>Choose a plan.</p>
+                </fieldset>
+                <fieldset class="field-group field-group--row">
+                    <legend class="field-group__legend">Due</legend>
+                    <div class="field">
+                        <label class="field__label" for="field-group-date">Date</label>
+                        <input class="field__control" id="field-group-date" name="due-date" type="date" value="2026-11-20">
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="field-group-time">Time</label>
+                        <input class="field__control" id="field-group-time" name="due-time" type="time" value="18:00">
+                    </div>
+                </fieldset>
+            </div>
+        </section>
+        <section id="form" class="gallery-section" aria-labelledby="form-title">
+            <h2 id="form-title">Form</h2>
+            <p>A live form: submitting it empty shows the error summary, and the name <code>taken</code> fails its check.
+                A valid submit shows the busy state, then a confirmation.</p>
+            <form class="form" data-form novalidate aria-labelledby="form-title">
+                <div class="error-summary" tabindex="-1" hidden></div>
+                <div class="banner banner--success" role="status" hidden>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>
+                    <p class="banner__text">Saved. The form shows the confirmation after its busy state.</p>
+                </div>
+                <div class="field" data-field>
+                    <label class="field__label" for="form-name">Name</label>
+                    <button class="field__help-toggle" type="button" aria-expanded="false" aria-controls="form-name-help" aria-label="Help for Name"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-help"/></svg></button>
+                    <p class="field__help" id="form-name-help" hidden>The name must be unique; the check runs when you leave the field.</p>
+                    <input class="field__control" id="form-name" name="name" maxlength="40" required autocomplete="off" aria-describedby="form-name-hint form-name-help">
+                    <p class="field__hint" id="form-name-hint">Up to 40 characters.</p>
+                    <p class="field__counter" id="form-name-counter"></p>
+                    <p class="field__status" id="form-name-status" hidden></p>
+                    <p class="field__error" id="form-name-error" hidden></p>
+                </div>
+                <div class="field" data-field>
+                    <label class="field__label" for="form-url">Address</label>
+                    <input class="field__control" id="form-url" name="url" type="url" required autocomplete="off" aria-describedby="form-url-hint">
+                    <p class="field__hint" id="form-url-hint">Starts with https://.</p>
+                    <p class="field__error" id="form-url-error" hidden></p>
+                </div>
+                <fieldset class="field-group">
+                    <legend class="field-group__legend">Visibility</legend>
+                    <label class="radio"><input class="radio__control" type="radio" name="visibility" value="private" checked><span class="radio__label">Only me</span></label>
+                    <label class="radio"><input class="radio__control" type="radio" name="visibility" value="shared"><span class="radio__label">Everyone with the link</span></label>
+                </fieldset>
+                <label class="checkbox"><input class="checkbox__control" type="checkbox" name="notify"><span class="checkbox__label">Notify me of changes</span></label>
+                <div class="form__actions">
+                    <button class="button button--secondary" type="reset">Cancel</button>
+                    <button class="button" type="submit">Save</button>
+                </div>
+            </form>
+        </section>
+        <section id="error-summary" class="gallery-section" aria-labelledby="error-summary-title">
+            <h2 id="error-summary-title">Error summary</h2>
+            <p>Shown after a failed submit, with one link per invalid field; the links below jump to the field specimens.</p>
+            <div class="error-summary" tabindex="-1" aria-labelledby="error-summary-specimen-title">
+                <h3 class="error-summary__title" id="error-summary-specimen-title">Fix 2 fields</h3>
+                <ul class="error-summary__list">
+                    <li><a class="error-summary__link" href="#field-invalid">Enter a name.</a></li>
+                    <li><a class="error-summary__link" href="#field-group-plan-free">Choose a plan.</a></li>
+                </ul>
             </div>
         </section>
         <section id="banner" class="gallery-section" aria-labelledby="banner-title">

@@ -93,7 +93,8 @@ function collect() {
             size: parseFloat(style.fontSize), weight: parseInt(style.fontWeight, 10) || 400, layers: layers(el) });
     }
     for (const el of document.querySelectorAll(interactive)) {
-        if (!visible(el) || el.disabled) {
+        // :disabled also covers controls inside a disabled fieldset, whose own disabled property stays false.
+        if (!visible(el) || el.matches(':disabled')) {
             continue;
         }
         let box = el.getBoundingClientRect();

@@ -8,6 +8,10 @@ All notable changes to this project are documented here.
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- Components: Added fields, checkboxes, radios, field groups, forms, and error summaries, with help toggles, validation states, and gallery sections.
+- Modules: Added `createField` and `attachField` in `field.js`, and `attachForm` in `form.js`, with error summaries and busy states.
+- Components: Fixed hidden banners, which their flex display showed.
+- DevEx: Made the verifier skip controls in disabled fieldsets, and the warm season check wait for the look stylesheet.
 - Components: Added cards, distinct tile sizes, and avatars with fallbacks, stacks honoring explicit sizes, and gallery specimens.
 - Looks: Added warm with seasonal accents, self-hosted fonts, its glyph sprite, gallery controls, and a complete look template.
 - Template: Added optional role mappings, variant examples, and complete token and core glyph contract checks.

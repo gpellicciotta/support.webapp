@@ -1,4 +1,8 @@
-/* Look and theme switchers and live token values of the visual style gallery. */
+/* Look and theme switchers, live token values, and live field and form specimens of the visual style gallery. */
+
+import { attachField } from '../js/field.js';
+import { attachForm } from '../js/form.js';
+import { setSpriteUrl } from '../js/icon.js';
 
 // Add each new look here and as an option of the look select.
 export const looks = ['neutral', 'warm'];
@@ -32,6 +36,7 @@ export function applyLook(doc, look) {
         throw new RangeError(`Unknown look: ${look}`);
     }
     doc.getElementById('look-stylesheet').setAttribute('href', lookHref(look));
+    setSpriteUrl(spriteHref(look));
     doc.documentElement.removeAttribute('data-accent');
     const accent = doc.getElementById('accent-select');
     if (accent) {
@@ -75,6 +80,57 @@ export function showTokenValues(doc, view) {
 }
 
 /**
+ * Attach the live field and form specimens, and set the states that markup cannot express.
+ * The form fakes a unique-name check and a slow save, so its pending and busy states stay visible.
+ * @param {Document} doc gallery document
+ * @param {Window} view window whose timers the fake checks use
+ */
+export function initSpecimens(doc, view) {
+    for (const input of doc.querySelectorAll('[data-gallery-indeterminate]')) {
+        input.indeterminate = true;
+    }
+    for (const element of doc.querySelectorAll('#field [data-field]')) {
+        attachField(element, { document: doc, messages: { valueMissing: 'Enter a name.' } });
+    }
+    const form = doc.querySelector('#form form[data-form]');
+    if (!form) {
+        return;
+    }
+    const wait = (ms) => new Promise((resolve) => view.setTimeout(resolve, ms));
+    const saved = form.querySelector('.banner--success');
+    const controller = attachForm(form, {
+        document: doc,
+        busyMessage: 'Saving.',
+        fields: {
+            name: {
+                messages: { valueMissing: 'Enter a name.' },
+                pendingMessage: 'Checking the name.',
+                validMessage: 'Name is free.',
+                validate: async (value) => {
+                    await wait(600);
+                    return value.trim().toLowerCase() === 'taken' ? 'That name is taken.' : null;
+                }
+            },
+            url: { messages: { valueMissing: 'Enter an address.', typeMismatch: 'Enter an address that starts with https://.' } }
+        },
+        onSubmit: async () => {
+            saved.hidden = true;
+            await wait(800);
+            saved.hidden = false;
+        }
+    });
+    // The browser resets the values after the reset event, so the counters refresh on the next task.
+    form.addEventListener('reset', () => view.setTimeout(() => {
+        for (const field of controller.fields.values()) {
+            field.clear();
+            field.control.dispatchEvent(new view.Event('input'));
+        }
+        controller.setErrors({});
+        saved.hidden = true;
+    }));
+}
+
+/**
  * Wire the switchers and apply the choices the browser restored into the controls.
  * @param {Document} doc gallery document
  * @param {Window} view window that computes styles
@@ -104,6 +160,7 @@ export function initGallery(doc, view) {
             refresh();
         });
     }
+    setSpriteUrl(spriteHref(select.value));
     if (link.getAttribute('href') !== lookHref(select.value)) {
         applyLook(doc, select.value);
     }
@@ -113,4 +170,5 @@ export function initGallery(doc, view) {
 
 if (typeof document !== 'undefined') {
     initGallery(document, window);
+    initSpecimens(document, window);
 }

@@ -114,6 +114,48 @@ Buttons, chips, and segmented controls keep a 44 px target in every variant, inc
 **[Decided]** The banner error variant is `banner--danger`, matching `button--danger` and the danger tokens.
 - `banner--error`, as in todos.webapp: rejected, because two names would mean the same role.
 
+### Fields and forms
+Fields, choices, and forms follow todos.webapp's field contract, extended with counters' help and validation states.
+
+| Key             | Use it for                                                        | Avoid it for                                       | Gallery                                                                 |
+| :-------------- | :---------------------------------------------------------------- | :------------------------------------------------- | :---------------------------------------------------------------------- |
+| `field`         | One labeled text input, textarea, or select with its messages.    | Choices among a few options, which are radios.     | [Field](../../src/demo/visual-style-gallery.html#field)                 |
+| `checkbox`      | An independent yes or no choice, alone or in a group.             | Settings that apply at once, which are switches.   | [Checkbox](../../src/demo/visual-style-gallery.html#checkbox)           |
+| `radio`         | One choice among options that need a full label each.             | Two to five short options, which are segmented.    | [Radio](../../src/demo/visual-style-gallery.html#radio)                 |
+| `field-group`   | Checkbox groups, radio groups, and related fields under a legend. | A single control, which needs no fieldset.         | [Field group](../../src/demo/visual-style-gallery.html#field-group)     |
+| `form`          | Data the user submits, validated on blur and on submit.           | Filters that apply at once, which need no submit.  | [Form](../../src/demo/visual-style-gallery.html#form)                   |
+| `error-summary` | The list of invalid fields after a failed submit.                 | A single field error, which stays on the field.    | [Error summary](../../src/demo/visual-style-gallery.html#error-summary) |
+
+- `createField(doc, options)` builds the skeleton; `attachField(element, options)` enhances server-rendered markup.
+- `createField` keeps todos.webapp's `{element, control, setError}` result, so its adoption stays lossless.
+- The help toggle is a real button with `aria-expanded` and `aria-controls`; collapsed help stays described.
+- The counter shows the length against `maxlength` and joins `aria-describedby`.
+- Invalid: `aria-invalid` on the control, a danger border, and an error line with the alert icon.
+- Pending: `aria-busy` on the field, and a muted status line with the more icon.
+- Valid: a success border, and a status line with the check icon and a message.
+- An edit discards a pending or valid state; an overtaken check then checks the current value instead.
+- `createField` always adds the hidden status line, so created fields show pending and valid states too.
+- Field messages reach screen readers through one shared polite live region per document.
+- Checkboxes and radios keep the native input, with `accent-color` in the primary color and the global focus ring.
+- Their label row is the 44 px target; an invalid checkbox draws a danger outline beside the group's error text.
+- `attachForm` sets `aria-busy` on the form and `aria-disabled` on its submit buttons while sending.
+- One submit runs at a time, from validation through sending, so a double submit never sends twice.
+- A value edited while a submit validates triggers another validation, so every sent value was checked.
+- After a failed submit, the error summary takes `role="alert"` and focus, and each link focuses its field.
+- The static error summary specimen omits `role="alert"`, so the gallery announces nothing on load.
+
+**[Decided]** The pending state uses the `icon-more` glyph, because the core glyph contract has no progress glyph.
+- A new required glyph: rejected, because every look and the look template would need it first.
+
+**[Decided]** The counter joins `aria-describedby`, as in todos.webapp, so the catalog skeleton drops its `aria-hidden`.
+- A hidden counter: rejected, because the task goal names counters among the described parts.
+
+**[Decided]** The valid state needs no attribute: a visible status line on a field without `aria-busy` styles it.
+- A `data-field-state` attribute: rejected, because ADR-0003 keeps state in native and ARIA attributes.
+
+**[Decided]** Unit tests use happy-dom as their simulated DOM, as todos.webapp does.
+- A hand-written fake DOM: rejected, because forms need events, focus, validity, and `FormData`.
+
 ---
 
 ### Empty state
@@ -186,6 +228,8 @@ The app shell task adds its areas, scroll modes, and demo pages here ([ADR-0004]
 - [tokens.test.js](../../tests/unit/tokens.test.js) checks the contract, contrast pairs, fallbacks, and raw colors statically.
 - [gallery.test.js](../../tests/unit/gallery.test.js) checks the switchers and that the gallery covers every token.
 - [icon.test.js](../../tests/unit/icon.test.js) checks `createIcon`, the icon class, and that every look sprite holds the core ids.
+- [field.test.js](../../tests/unit/field.test.js) and [form.test.js](../../tests/unit/form.test.js) check the field and form modules in happy-dom.
+- [field.spec.js](../../tests/e2e/field.spec.js) and [form.spec.js](../../tests/e2e/form.spec.js) drive the gallery fields and form by keyboard.
 - [verify-ui.spec.js](../../tests/e2e/verify-ui.spec.js) is the browser verifier, ported from family-portal's `verify-ui.py`.
 
 The verifier runs each look at 390 and 1440 px, with system and explicit themes:

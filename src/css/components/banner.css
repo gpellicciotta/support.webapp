@@ -15,6 +15,11 @@
   color: var(--color-text);
 }
 
+/* The flex display would override the hidden attribute, which hides a banner until its state applies. */
+.banner[hidden] {
+  display: none;
+}
+
 .banner > .icon {
   color: var(--color-text-muted);
 }
