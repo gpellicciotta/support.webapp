@@ -1,11 +1,12 @@
 ---
 id: T0006
-owner: ~
-needs: [T0005]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@claude"
+session: claude-20261112-6cbc6f
+needs: []
+branch: task/T0006-extract-the-icon-sprite-format-the-icon-class
+worktree: .plan/work/T0006-extract-the-icon-sprite-format-the-icon-class
+status: active
+started_at: "2026-11-12T10:49:45Z"
 ended_at: —
 review: agent
 preview: none
@@ -21,15 +22,43 @@ Show every glyph in the gallery and check every sprite reference in the browser.
 See the technical specification for files, tests, and the completion check.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read ADR-0002, ADR-0003, and the todos.webapp sprite and builder at a recorded commit.
-- [ ] **[Implement]** Write the failing tests named in the technical specification.
-- [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
-- [ ] **[Implement]** Add the icon class, builder module, todos sprite, core id list, and gallery section.
-- [ ] **[Verify]**    Run the icon tests and the verifier until both pass.
-- [ ] **[Visual]**    Capture the gallery icon section per theme at 390 and 1440 px.
-- [ ] **[Doc]**       Update the style guide and CHANGELOG.md.
+- [x] **[Read]**      Read ADR-0002, ADR-0003, and the todos.webapp sprite and builder at a recorded commit.
+- [x] **[Implement]** Write the failing tests named in the technical specification.
+- [x] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
+- [x] **[Implement]** Add the icon class, builder module, todos sprite, core id list, and gallery section.
+- [x] **[Verify]**    Run the icon tests and the verifier until both pass.
+- [x] **[Visual]**    Capture the gallery icon section per theme at 390 and 1440 px.
+- [x] **[Doc]**       Update the style guide and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-11] **[Doc]**
   Created by T0002 from the design system roadmap.
+
+- [2026-11-12] **[Read]**
+  Read ADR-0002, ADR-0003, and todos.webapp sprite and spriteIcon at commit 0cf4981; todos ids lack the icon- prefix and no help glyph exists.
+
+- [2026-11-12] **[Verify]**
+  Recorded failing icon unit tests, the gallery sprite swap test, and the verifier sprite checks in validation-proof.md.
+
+- [2026-11-12] **[Implement]**
+  Added the icon class, createIcon with setSpriteUrl and the spriteIcon alias, the neutral sprite with icon-help, icon-chevron-down as a core id, and the gallery Icon section.
+
+- [2026-11-12] **[Decided]**
+  createIcon throws until setSpriteUrl runs, since a default path renders blank or wrong-look icons silently; the core list adds icon-chevron-down for disclosure toggles.
+
+- [2026-11-12] **[Verify]**
+  Icon unit tests, the verifier, and python scripts/devops.py check pass; output is in validation-proof.md.
+
+- [2026-11-12] **[Visual]**
+  Captured the gallery before and after per theme at 390 and 1440 px; see validation-proof.md.
+
+- [2026-11-12] **[Doc]**
+  Size note: 9 counted files and 189 lines cross the typical line by one file; technical-spec.md records why the task stays whole.
+
+- [2026-11-12] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 9.
+  - Lines touched: 189.
+  - Reopenings: 0.
+

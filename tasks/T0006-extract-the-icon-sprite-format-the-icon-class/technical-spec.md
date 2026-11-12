@@ -23,6 +23,11 @@ Extract the icon sprite format, the icon class, and the createIcon builder, with
 
 Size estimate: 8 files, 350 lines
 
+Size note: the work touched 9 counted files and 189 lines, one file above the typical line.
+The extra files are `src/contract.json`, `src/demo/gallery.js`, `src/demo/gallery.css`, `tests/unit/gallery.test.js`, and `docs/specs/looks/neutral.md`.
+A split would leave the gallery icon section or the neutral glyph provenance unmergeable on its own.
+Mechanical command: `sed -E 's/<symbol id="/<symbol id="icon-/' {{todos-webapp}}/src/img/icons.svg > src/looks/neutral/icons.svg`, before the hand-written help glyph.
+
 ### Tests
 - Unit: `icon.test.js` checks the markup `createIcon` builds and that the neutral sprite holds every core id.
 - Integration: `verify-ui.spec.js` loads the gallery icon section and fails on any unresolved sprite reference.
