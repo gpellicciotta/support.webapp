@@ -12,9 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 526.6}
+  worker: {turns: 4, duration_s: 1864.2, input: 208, output: 66412, cache_read: 9150268, cache_write: 214460}
 work_duration: 280.1
 contributors: "@codex"
+review_status: pending
+review_round: 1
 ---
 # T0014: Add the vendor and check commands of the command line tool, with the package manifest
 
@@ -62,4 +64,7 @@ See the technical specification for files, tests, and the completion check.
   - Files touched: 4.
   - Lines touched: 44.
   - Reopenings: 0.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
