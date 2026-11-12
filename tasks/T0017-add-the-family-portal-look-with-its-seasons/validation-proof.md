@@ -1,5 +1,75 @@
 # T0017 Validation Proof
 
+## Round One Rework
+Command: `python scripts/devops.py check`
+Exit code: 0. Selected verbatim summary lines follow; intervening output is omitted.
+
+```text
+All 24 markdown files passed linting.
+[... intervening output omitted ...]
+All checks passed!
+[... intervening output omitted ...]
+4 files already formatted
+[... intervening output omitted ...]
+============================== 3 passed in 1.65s ==============================
+[... intervening output omitted ...]
+ Test Files  8 passed (8)
+[... intervening output omitted ...]
+      Tests  1446 passed (1446)
+[... intervening output omitted ...]
+  164 passed (55.6s)
+[... intervening output omitted ...]
+ Test Files  2 passed (2)
+[... intervening output omitted ...]
+      Tests  4 passed (4)
+[... intervening output omitted ...]
+npm notice total files: 53
+```
+
+The runner supervised server PID 77804 and shut it down after the browser suite.
+
+Command: `npx vitest run tests/unit/warm.test.js tests/unit/tokens.test.js tests/unit/icon.test.js --no-color`
+Exit code: 1 before template changes, then 0 after implementation.
+
+```text
+
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0017-add-the-family-portal-look-with-its-seasons
+
+ ❯ tests/unit/warm.test.js (4 tests | 1 failed) 23ms
+   × documents every optional warm role and the variant pattern inside the template 15ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/warm.test.js > documents every optional warm role and the variant pattern inside the template
+AssertionError: --color-shadow-soft: expected '/* Neutral semantic roles. Existing v…' to contain '--color-shadow-soft:'
+
+[... 120 lines omitted ...]
+     34|         }
+     35|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 1392 passed (1393)
+   Start at  14:48:16
+   Duration  548ms (tests 47%, transform 28%, import 21%, worker 4%)
+```
+
+```text
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0017-add-the-family-portal-look-with-its-seasons
+
+
+ Test Files  3 passed (3)
+      Tests  1393 passed (1393)
+   Start at  14:49:23
+   Duration  1.18s (tests 68%, import 21%, transform 5%, worker 5%)
+```
+
+Template validation now uses the shared import-chain, token ownership, theme resolution, light-fallback, contrast, and core-sprite checks.
+Optional warm roles and both commented variant patterns receive dedicated regression coverage.
+This rework changes the excluded template and contract documentation; existing rendered gallery screenshots remain applicable.
+
 ## Walkthrough & Validation
 Command: `npx vitest run tests/unit/warm.test.js --no-color`
 Exit code: 1, before implementation.

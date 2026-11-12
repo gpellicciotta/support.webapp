@@ -13,8 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 2, duration_s: 1031.0, input: 235350, output: 27726, cache_read: 5657344, cache_write: 0}
-review_status: pending
+  review: {turns: 2, duration_s: 395.0, input: 68, output: 18134, cache_read: 1908798, cache_write: 140538}
+review_status: rejected
 review_round: 1
+reviewed_by: "@claude"
+work_duration: 727.2
 ---
 # T0017: Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
 
@@ -43,11 +46,11 @@ Refine declared files, size estimate, and tests in the technical specification b
 - [2026-11-12] **[Decided]**
   Preserved source warm values and seasonal mappings. Added optional shadow roles, documented neutral glyph supplements, and used sunken selected grounds. Declared contract, gallery test, and documentation index additions; seven counted files remain within the estimate.
 
-- [2026-11-12] **[Verify]**
-  Full devops check passed: 3 Python, 1003 unit, 164 browser, and 4 integration tests; packaging passed. Inspected eight screenshots linked in validation-proof.md. Test servers exited with their runners.
-
 - [2026-11-12] **[Implement]**
   Added failing warm registration, seasonal mapping, template tests, and browser switching tests before their implementations. Captured expected failures in validation-proof.md.
+
+- [2026-11-12] **[Verify]**
+  Full devops check passed: 3 Python, 1003 unit, 164 browser, and 4 integration tests; packaging passed. Inspected eight screenshots linked in validation-proof.md. Test servers exited with their runners.
 
 - [2026-11-12] **[Doc]**
   Documented source provenance, MIT glyph supplements, SIL font licenses, contract gaps, seasonal usage, and template instructions. Updated the guide, index, and existing pre-release changelog.
@@ -60,4 +63,26 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @claude: The warm look itself is solid.
+  - Findings: [review-findings-1.md](T0017-add-the-family-portal-look-with-its-seasons/review-findings-1.md).
+
+- [2026-11-12] **[Implement]**
+  Round 1 rework adds template optional mappings and commented variant fallbacks. Added failing regression coverage, then validated template tokens and core sprites with the shared checks. Corrected the prior log ordering.
+
+- [2026-11-12] **[Decided]**
+  Size note: Review adds ADR-0001, token tests, and icon tests. Ten counted files remain below the large line; template contract checks and the shadow documentation correction belong to this extraction.
+
+- [2026-11-12] **[Doc]**
+  Updated ADR-0001 Overlay roles and grouped optional shadows beside color-shadow in contract.json. Template README now explains its combined neutral and warm patterns. Existing screenshots remain applicable because gallery rendering did not change.
+
+- [2026-11-12] **[Verify]**
+  Review fixes passed the full devops check: 3 Python, 1446 unit, 164 browser, and 4 integration tests, plus lint and packaging. Recorded red and green evidence in validation-proof.md.
+
+- [2026-11-12] **[Verify]**
+  Recorded revised outcomes against bb0e69c. Added files, CHANGELOG.md, and the plan store remain excluded from counted scope.
+  - Files touched: 10.
+  - Lines touched: 87.
+  - Reopenings: 0.
 
