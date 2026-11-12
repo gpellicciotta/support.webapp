@@ -1025,6 +1025,33 @@
             </div>
             <p id="account-menu-demo-result" data-account-menu-result role="status">Route: #/bin</p>
         </section>
+        <section id="loading" class="gallery-section" aria-labelledby="loading-title">
+            <h2 id="loading-title">Loading</h2>
+            <p>Status stays outside the busy content. Only slow lists show decorative, static skeleton rows.</p>
+            <h3>Ordinary load</h3>
+            <section class="loading" aria-label="Ordinary load">
+                <p class="loading__status" role="status" aria-live="polite" aria-atomic="true">Loading summary...</p>
+                <div class="loading__content" aria-busy="true"></div>
+            </section>
+            <h3>Slow list</h3>
+            <section class="loading" aria-label="Slow list">
+                <p class="loading__status" role="status" aria-live="polite" aria-atomic="true">Loading tasks...</p>
+                <div class="loading__content" aria-busy="true">
+                    <div class="loading__skeleton" aria-hidden="true">
+                        <div class="loading__placeholder"></div>
+                        <div class="loading__placeholder"></div>
+                        <div class="loading__placeholder"></div>
+                    </div>
+                </div>
+            </section>
+            <h3>Completed list</h3>
+            <section class="loading" aria-label="Completed list">
+                <p class="loading__status" role="status" aria-live="polite" aria-atomic="true">Loaded 2 tasks.</p>
+                <div class="loading__content" aria-busy="false">
+                    <ul><li>Review sample notes</li><li>Plan sample meeting</li></ul>
+                </div>
+            </section>
+        </section>
         <section id="accents" class="gallery-section" aria-labelledby="accents-title">
             <h2 id="accents-title">Bright accents</h2>
             <p>Bright changes action fills and labels through wrapper accents. Other looks retain their own actions.</p>

@@ -375,3 +375,15 @@ The verifier runs each look at 390 and 1440 px, with system and explicit themes:
 - A screenshot per look, theme, and width in the Playwright output folder.
 
 Run it with `npx playwright test tests/e2e/verify-ui.spec.js`.
+
+## Loading
+Use the [loading specimens](../../src/demo/visual-style-gallery.html#loading) for ordinary loads, slow lists, and completed content.
+**[Decided]** Keep the polite status outside the busy content, preventing busy-state suppression of progress announcements.
+**[Decided]** Skeleton rows stay static for every motion preference; they communicate layout without requiring motion.
+Use skeletons only for slow list requests; ordinary loads need only a visible status and busy content region.
+Applications choose the slow threshold from their request behavior; the package supplies no timer or request wrapper.
+Mount an empty status before a request, then update its localized text without replacing the live region.
+Set content to aria-busy=true during updates; preserve useful existing content during refresh.
+Replace placeholders with results, an empty state, or an error, then clear busy and update the status.
+Never put controls inside aria-hidden skeletons. Preserve focus, and avoid repeated announcements for each placeholder.
+See [components.md](components.md#loading) for the markup contract.

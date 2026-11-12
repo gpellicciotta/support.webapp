@@ -393,11 +393,23 @@ Banner. Variants add `banner--success`, `banner--warning`, or `banner--danger`; 
 Loading pattern. New design; the skeleton appears only for slow lists and never moves under reduced motion.
 
 ```html
-<section class="loading" aria-busy="true">
-  <p class="loading__status" role="status">Loading tasks...</p>
-  <div class="loading__skeleton" aria-hidden="true">...</div>
+<section class="loading" aria-label="Tasks">
+  <p class="loading__status" role="status" aria-live="polite" aria-atomic="true">Loading tasks...</p>
+  <div class="loading__content" aria-busy="true">
+    <div class="loading__skeleton" aria-hidden="true">
+      <div class="loading__placeholder"></div>
+      <div class="loading__placeholder"></div>
+      <div class="loading__placeholder"></div>
+    </div>
+  </div>
 </section>
 ```
+
+Keep the status outside the busy region, so loading announcements are not deferred until completion.
+Omit skeletons for ordinary loads; use them only when the application identifies a slow list request.
+Skeletons are static under every motion preference and contain no focusable elements.
+Applications replace placeholders, set `aria-busy="false"`, and update the existing status on success, empty results, or failure.
+Create the status before starting requests; keep focus stable and localize its messages.
 
 ### progress
 Progress bar.

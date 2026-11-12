@@ -16,6 +16,7 @@
 @import url('components/error-summary.css');
 @import url('components/banner.css');
 @import url('components/empty-state.css');
+@import url('components/loading.css');
 @import url('components/row.css');
 @import url('components/card.css');
 @import url('components/icon-tile.css');
