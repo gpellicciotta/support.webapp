@@ -12,11 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 4, duration_s: 3910.6, input: 392, output: 131126, cache_read: 28961852, cache_write: 378464}
+  worker: {turns: 6, duration_s: 4053.6, input: 428, output: 137622, cache_read: 33050722, cache_write: 402226}
   review: {turns: 2, duration_s: 672.6, input: 20, output: 2650, cache_read: 890120, cache_write: 4012}
-review_status: rejected
-review_round: 1
-reviewed_by: "@claude-2"
+review_status: pending
+review_round: 2
 work_duration: 2338.1
 ---
 # T0013: Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages
@@ -95,4 +94,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Doc]**
   Replaced the style guide question with the recorded decision: counters moves wide-screen actions into app__top-actions in its own code; lint exited 0.
+
+- [2026-11-12] **[Review]**
+  Round 2 requested (mode: agent).
 
