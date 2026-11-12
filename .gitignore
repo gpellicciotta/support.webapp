@@ -5,6 +5,7 @@
 node_modules/
 .venv/
 dist/
+/manifest.json
 
 # Ignore plan related files
 work/

@@ -50,6 +50,10 @@ class WebProject(NodeProject):
         """Run the Python tooling tests and the selected JavaScript unit tests."""
         return self.run_command([sys.executable, "-m", "pytest"]) and super().test(selection)
 
+    def test_slow(self, selection=()) -> bool:
+        """Run the browser tests, then the pack-and-vendor integration test unless a selection is given."""
+        return super().test_slow(selection) and (bool(selection) or self._npm_script("test:integration"))
+
     def markdown(self, action: str) -> bool:
         """Run the shared Markdown tool without external link requests."""
         return self.run_command([resolve_executable("lint-markdown") or "lint-markdown", action, "--offline"])

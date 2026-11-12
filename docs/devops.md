@@ -32,7 +32,8 @@ python scripts/devops.py serve --port 4173
 ```
 
 `tests` runs pytest and Vitest; `test --slow` runs Playwright in desktop/mobile viewports and light/dark modes.
-`check` runs Markdown lint, Ruff, ESLint, both test suites, and `npm pack --dry-run`.
+Without a selection, `test --slow` also runs the pack-and-vendor integration test, `npm run test:integration`.
+`check` runs Markdown lint, Ruff, ESLint, the unit, browser, and integration tests, and `npm pack --dry-run`.
 The package ships source files directly; no compilation or copy step runs.
 The server binds to localhost and serves `src/` with explicit JavaScript and CSS media types.
 Playwright starts and stops its own server; CI runs `tests` and `check` on pushes and pull requests.
@@ -43,6 +44,31 @@ The `SW001` plugin replaces `MD014`, preserving internal links while treating si
 Those artifacts are optional in source-only checkouts and CI.
 [.lint-markdown.json](../.lint-markdown.json) excludes `CHANGELOG.md`, which is never linted.
 Run `python scripts/devops.py format` to repair formatting, and `lint-markdown help --verbose` for the rule list.
+
+---
+
+## Command Line Tool
+[cli.mjs](../bin/cli.mjs) vendors the package into an app and checks the copy, as [ADR-0005](adrs/ADR-0005-distribution-and-versioning.md) defines.
+It runs on Node.js without dependencies; run it from the app root:
+
+```bash
+npx @gpellicciotta/support.webapp@{{version}} vendor --look {{look}} --to {{web-root}}/vendor/design --styles {{styles-folder}}
+node {{support-webapp-checkout}}/bin/cli.mjs vendor --look {{look}} --to {{web-root}}/vendor/design --dry-run
+node {{web-root}}/vendor/design/bin/check.mjs --format json
+```
+
+- `vendor` copies the look-neutral files, one look, `contract.json`, `manifest.json`, and `bin/check.mjs`.
+- It writes the pin, `design.json`, with `version`, `look`, `target`, and `styles`.
+- Rerun `vendor` to upgrade or repair a copy; it replaces only folders whose files its manifest lists.
+- `--styles` repeats once per app stylesheet folder; a rerun without it keeps the pinned folders.
+- `check` reports two jobs: integrity of the copy against its manifest and pin, and conformance of app styles.
+- Conformance fails on raw colors outside token files and on primitive or `--_` private package tokens.
+- It warns on deprecated tokens and on fixed or sticky positions outside shell styles.
+- It skips the vendored copy inside a `styles` folder, and fails on a missing `styles` folder.
+- Exit codes: 0 success, 1 operational or check failure, 2 invalid arguments.
+
+The `prepack` script writes `manifest.json` with each file's look and SHA-256 hash; `postpack` removes it.
+`vendor` refuses a package whose files differ from its `manifest.json`.
 
 ---
 

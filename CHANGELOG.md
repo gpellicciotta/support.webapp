@@ -5,6 +5,7 @@ All notable changes to this project are documented here.
 > for the versioning and changelog conventions used across projects.
 
 ## v0.1.0-pre
+- CLI: Added `vendor` and `check` commands, with a hashed package manifest, the `design.json` pin, and integrity and conformance checks.
 - FrontEnd: Added flat translation catalogs, parameter interpolation, and scoped translation of text, accessibility labels, tooltips, and placeholders.
 - FrontEnd: Added shared base tokens, a machine-readable contract, the neutral look, self-hosted Inter, and contrast and conformance checks.
 - DevEx: Added npm tooling, isolated tests with automatic browser-server ports, a static server, bootstrap automation, and continuous integration.
