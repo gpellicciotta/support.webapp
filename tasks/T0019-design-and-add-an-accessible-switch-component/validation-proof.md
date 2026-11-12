@@ -1,6 +1,169 @@
 # Switch Validation Proof
 
 ## Walkthrough & Validation
+
+### Review Rework Completion Check
+Command: `python scripts/devops.py check 2>&1 | Tee-Object -FilePath 'C:/Dev-Projects/support.webapp/.plan/tasks/T0019-design-and-add-an-accessible-switch-component/review-check-output.txt'; exit $LASTEXITCODE`; exit code 0.
+The [complete output](review-check-output.txt) includes all child commands and process identifiers.
+
+```text
+[... 2 lines omitted ...]
+All 25 markdown files passed linting.
+[... 2 lines omitted ...]
+All checks passed!
+[... 2 lines omitted ...]
+4 files already formatted
+[... 18 lines omitted ...]
+============================== 3 passed in 1.62s ==============================
+[... 5 lines omitted ...]
+ Test Files  24 passed (24)
+      Tests  2049 passed (2049)
+[... 1 lines omitted ...]
+   Duration  5.37s (environment 52%, import 33%, tests 12%, worker 2%, transform 1%)
+[... 425 lines omitted ...]
+  312 passed (3.3m)
+[... 5 lines omitted ...]
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+[... 1 lines omitted ...]
+   Duration  5.37s (tests 99%, import 1%)
+Command: "C:\Program Files\nodejs\npm.CMD" pack --dry-run
+[... 104 lines omitted ...]
+npm notice total files: 88
+[... 1 lines omitted ...]
+gpellicciotta-support.webapp-0.1.0-pre.tgz
+```
+
+
+### Review Rework Green Tests
+Command: `npx playwright test tests/e2e/switch.spec.js --workers=2`; exit code 0. Final output chunk:
+
+```text
+(node:86964) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  7 [mobile-light] › tests\e2e\switch.spec.js:4:1 › native switch supports pointer, keyboard, forms, reset, and disabled states (1.4s)
+  ok  8 [mobile-light] › tests\e2e\switch.spec.js:36:1 › switch targets, thumb position, invalid state, and RTL remain visible (1.5s)
+(node:4108) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4108) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  9 [mobile-light] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline (1.2s)
+(node:86968) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:86968) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 10 [mobile-dark] › tests\e2e\switch.spec.js:4:1 › native switch supports pointer, keyboard, forms, reset, and disabled states (1.2s)
+  ok 11 [mobile-dark] › tests\e2e\switch.spec.js:36:1 › switch targets, thumb position, invalid state, and RTL remain visible (1.2s)
+  ok 12 [mobile-dark] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline (1.1s)
+
+  12 passed (12.1s)
+```
+
+### Forced-Color Visual Verification
+Inspected all eight review captures. System focus colors and dashed invalid outlines remain visible in both palettes.
+The regression verifies HTTP 200, browser console errors, exceptions, and network failures.
+
+- [Before desktop-light](review-before-desktop-light.png), [after desktop-light](review-after-desktop-light.png).
+- [Before desktop-dark](review-before-desktop-dark.png), [after desktop-dark](review-after-desktop-dark.png).
+- [Before mobile-light](review-before-mobile-light.png), [after mobile-light](review-after-mobile-light.png).
+- [Before mobile-dark](review-before-mobile-dark.png), [after mobile-dark](review-after-mobile-dark.png).
+
+
+### Regression Failure 1
+Command: `npx playwright test tests/e2e/switch.spec.js --grep 'system palette|RTL' --workers=2`; exit code 1.
+
+```text
+  1) [desktop-light] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline 
+
+    Error: expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "rgb(30, 64, 175)"
+
+      82 |     const focused = await ring(control);
+      83 |     await page.locator('#switch').screenshot({ path: testInfo.outputPath('switch-forced-colors.png') });
+    > 84 |     expect(focused.color).not.toBe(authorFocus);
+         |                               ^
+      85 |     expectRing(focused, system.focus, 'forced colors switch');
+      86 |     const invalid = page.locator('#switch [aria-invalid="true"]');
+      87 |     expect(await invalid.evaluate(input => ({ color: getComputedStyle(input).outlineColor, style: getComputedStyle(input).outlineStyle })))
+        at C:\Dev-Projects\support.webapp\.plan\work\T0019-design-and-add-an-accessible-switch-component\tests\e2e\switch.spec.js:84:31
+
+    Error Context: test-results\switch-forced-colors-use-t-baba7--a-distinct-invalid-outline-desktop-light\error-context.md
+```
+
+### Regression Failure 2
+Command: `npx playwright test tests/e2e/switch.spec.js --grep 'system palette|RTL' --workers=2`; exit code 1.
+
+```text
+  2) [desktop-dark] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline 
+
+    Error: expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "rgb(143, 168, 240)"
+
+      82 |     const focused = await ring(control);
+      83 |     await page.locator('#switch').screenshot({ path: testInfo.outputPath('switch-forced-colors.png') });
+    > 84 |     expect(focused.color).not.toBe(authorFocus);
+         |                               ^
+      85 |     expectRing(focused, system.focus, 'forced colors switch');
+      86 |     const invalid = page.locator('#switch [aria-invalid="true"]');
+      87 |     expect(await invalid.evaluate(input => ({ color: getComputedStyle(input).outlineColor, style: getComputedStyle(input).outlineStyle })))
+        at C:\Dev-Projects\support.webapp\.plan\work\T0019-design-and-add-an-accessible-switch-component\tests\e2e\switch.spec.js:84:31
+
+    Error Context: test-results\switch-forced-colors-use-t-baba7--a-distinct-invalid-outline-desktop-dark\error-context.md
+```
+
+### Regression Failure 3
+Command: `npx playwright test tests/e2e/switch.spec.js --grep 'system palette|RTL' --workers=2`; exit code 1.
+
+```text
+  3) [mobile-light] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline 
+
+    Error: expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "rgb(30, 64, 175)"
+
+      82 |     const focused = await ring(control);
+      83 |     await page.locator('#switch').screenshot({ path: testInfo.outputPath('switch-forced-colors.png') });
+    > 84 |     expect(focused.color).not.toBe(authorFocus);
+         |                               ^
+      85 |     expectRing(focused, system.focus, 'forced colors switch');
+      86 |     const invalid = page.locator('#switch [aria-invalid="true"]');
+      87 |     expect(await invalid.evaluate(input => ({ color: getComputedStyle(input).outlineColor, style: getComputedStyle(input).outlineStyle })))
+        at C:\Dev-Projects\support.webapp\.plan\work\T0019-design-and-add-an-accessible-switch-component\tests\e2e\switch.spec.js:84:31
+
+    Error Context: test-results\switch-forced-colors-use-t-baba7--a-distinct-invalid-outline-mobile-light\error-context.md
+```
+
+### Regression Failure 4
+Command: `npx playwright test tests/e2e/switch.spec.js --grep 'system palette|RTL' --workers=2`; exit code 1.
+
+```text
+  4) [mobile-dark] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline 
+
+    Error: expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "rgb(143, 168, 240)"
+
+      82 |     const focused = await ring(control);
+      83 |     await page.locator('#switch').screenshot({ path: testInfo.outputPath('switch-forced-colors.png') });
+    > 84 |     expect(focused.color).not.toBe(authorFocus);
+         |                               ^
+      85 |     expectRing(focused, system.focus, 'forced colors switch');
+      86 |     const invalid = page.locator('#switch [aria-invalid="true"]');
+      87 |     expect(await invalid.evaluate(input => ({ color: getComputedStyle(input).outlineColor, style: getComputedStyle(input).outlineStyle })))
+        at C:\Dev-Projects\support.webapp\.plan\work\T0019-design-and-add-an-accessible-switch-component\tests\e2e\switch.spec.js:84:31
+
+    Error Context: test-results\switch-forced-colors-use-t-baba7--a-distinct-invalid-outline-mobile-dark\error-context.md
+
+  4 failed
+    [desktop-light] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline 
+    [desktop-dark] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline 
+    [mobile-light] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline 
+    [mobile-dark] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline 
+  4 passed (11.5s)
+```
+
 Command: `python scripts/devops.py check`; exit code 0. Unit stage excerpt:
 
 ```text

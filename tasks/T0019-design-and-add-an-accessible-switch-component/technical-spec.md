@@ -8,11 +8,12 @@ Design and add an accessible switch component.
 - src/css/style.css
 - src/demo/visual-style-gallery.html
 - docs/specs/visual-style-guide.md
+- docs/specs/components.md
 - CHANGELOG.md
 - tests/unit/switch.test.js
 - tests/e2e/switch.spec.js
 
-Size estimate: 7 files, 300 lines.
+Size estimate: 8 files, 350 lines.
 **[Estimation]** Based on existing native controls; newly added files are excluded from counted size.
 
 **[Decided]** Use the catalog's native checkbox skeleton, with no JavaScript module or duplicated checked ARIA.
@@ -24,6 +25,7 @@ Associate invalid state with error text. Avoid animation; preserve native form, 
 - Unit: gallery skeleton, stable labels, state coverage, stylesheet import, and existing token conformance tests.
 - Integration: click and Space toggle; disabled controls resist activation; form submission and reset remain native.
 - Integration: targets, focus, thumb position, forced colors, RTL, associated errors, and overflow.
+- Integration: compare system-palette focus and invalid outlines; use actual pseudo-element boxes for RTL thumb placement.
 - Integration: gallery verifier across looks, light/dark themes, and 390/1440 px viewports; inspect before/after screenshots.
 
 Completion check: `python scripts/devops.py check`, exit code 0

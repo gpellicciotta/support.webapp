@@ -1,0 +1,580 @@
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\Scripts\lint-markdown.EXE check --offline
+Process ID: 33832
+All 25 markdown files passed linting.
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m ruff check scripts tests
+Process ID: 85132
+All checks passed!
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m ruff format --check scripts tests
+Process ID: 65680
+4 files already formatted
+Command: "C:\Program Files\nodejs\npm.CMD" run lint
+Process ID: 80756
+> @gpellicciotta/support.webapp@0.1.0-pre lint
+> eslint .
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m pytest
+Process ID: 69208
+============================= test session starts =============================
+platform win32 -- Python 3.15.2, pytest-9.2.0, pluggy-1.7.0
+rootdir: C:\Dev-Projects\support.webapp\.plan\work\T0019-design-and-add-an-accessible-switch-component
+configfile: pyproject.toml
+testpaths: tests
+plugins: timeout-2.4.0, xdist-3.8.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+created: 8/8 workers
+8 workers [3 items]
+...                                                                      [100%]
+============================== 3 passed in 1.62s ==============================
+Command: "C:\Program Files\nodejs\npm.CMD" test
+Process ID: 50076
+> @gpellicciotta/support.webapp@0.1.0-pre test
+> vitest run
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0019-design-and-add-an-accessible-switch-component
+ Test Files  24 passed (24)
+      Tests  2049 passed (2049)
+   Start at  20:45:36
+   Duration  5.37s (environment 52%, import 33%, tests 12%, worker 2%, transform 1%)
+    Isolate  24 workers spawned · ~952ms startup each (spawn + environment, per file)
+             at least ~2.31s faster with isolate: false — reuses workers across files instead of one per file
+Command: "C:\Program Files\nodejs\npm.CMD" run test:slow
+Process ID: 5300
+> @gpellicciotta/support.webapp@0.1.0-pre test:slow
+> playwright test
+[WebServer] (node:83460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+Running 312 tests using 4 workers
+(node:84892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:77212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:70292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:74612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:84892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:77212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:74612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:70292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok   3 [desktop-light] › tests\e2e\account-menu.spec.js:95:5 › without JavaScript › account menu opens through popovertarget (1.3s)
+  ok   2 [desktop-light] › tests\e2e\account-menu.spec.js:55:1 › account menu works by keyboard and signs out to the person icon (1.5s)
+  ok   4 [desktop-light] › tests\e2e\account-menu.spec.js:7:1 › account menu opens by pointer at the end of the top bar and marks the current route (1.8s)
+  ok   1 [desktop-light] › tests\e2e\bright.spec.js:5:1 › forced fallback preserves root accents and every contrast pair (2.3s)
+  ok   6 [desktop-light] › tests\e2e\button.spec.js:14:1 › the button section shows every variant in every state (1.3s)
+  ok   5 [desktop-light] › tests\e2e\bright.spec.js:47:1 › bright accents work on roots and wrappers and reset when switching looks (1.5s)
+  ok   7 [desktop-light] › tests\e2e\button.spec.js:27:1 › hover and active change the ground of every button variant (1.3s)
+  ok   8 [desktop-light] › tests\e2e\button.spec.js:38:1 › disabled buttons use the disabled text color and ignore hover (1.2s)
+  ok   9 [desktop-light] › tests\e2e\button.spec.js:53:1 › danger buttons fill or outline in the danger color (1.0s)
+  ok  10 [desktop-light] › tests\e2e\button.spec.js:65:1 › buttons take the button radius role (1.1s)
+  ok  11 [desktop-light] › tests\e2e\button.spec.js:73:1 › every button, including the small variant, is at least 44 by 44 px (975ms)
+  ok  12 [desktop-light] › tests\e2e\button.spec.js:80:1 › focus draws the focus ring, and danger buttons draw it in the danger color (1.3s)
+  ok  13 [desktop-light] › tests\e2e\button.spec.js:93:1 › the focus ring stays an outline in forced colors mode (1.0s)
+  ok  14 [desktop-light] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars (1.7s)
+  ok  16 [desktop-light] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, removable, and filter chips in every state (1.1s)
+  ok  17 [desktop-light] › tests\e2e\chip.spec.js:23:1 › static chips are not focusable, and interactive chip parts are 44 px targets (1.2s)
+  ok  15 [desktop-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars (2.1s)
+  ok  18 [desktop-light] › tests\e2e\chip.spec.js:48:1 › overdue chips carry the danger color and an icon, never color alone (1.0s)
+  ok  19 [desktop-light] › tests\e2e\chip.spec.js:40:1 › chips take the chip radius role (1.1s)
+  ok  20 [desktop-light] › tests\e2e\chip.spec.js:56:1 › pressed filter chips differ from plain ones and keep distinct hover and active grounds (1.1s)
+  ok  21 [desktop-light] › tests\e2e\chip.spec.js:69:1 › pressed filter chips stay distinct in forced colors mode (1.0s)
+  ok  22 [desktop-light] › tests\e2e\chip.spec.js:76:1 › disabled filter chips use the disabled text color (973ms)
+  ok  23 [desktop-light] › tests\e2e\chip.spec.js:86:1 › filter chips and remove buttons draw the focus ring (1.1s)
+  ok  24 [desktop-light] › tests\e2e\chip.spec.js:95:1 › the remove button shows hover and active grounds distinct from its sunken chip (1.1s)
+  ok  25 [desktop-light] › tests\e2e\collapsible.spec.js:7:1 › collapsible opens and closes by pointer and keyboard (1.2s)
+  ok  26 [desktop-light] › tests\e2e\collapsible.spec.js:47:1 › find in page reveals a collapsed panel hidden until found (967ms)
+  ok  27 [desktop-light] › tests\e2e\collapsible.spec.js:62:5 › without JavaScript › collapsed panels stay hidden until found and expanded ones stay readable (877ms)
+  ok  29 [desktop-light] › tests\e2e\empty-state.spec.js:4:1 › empty states offer zero, one, or two actions with readable content (1.2s)
+  ok  31 [desktop-light] › tests\e2e\field.spec.js:41:1 › the help toggle works by keyboard and keeps the help text described (1.1s)
+  ok  30 [desktop-light] › tests\e2e\field.spec.js:7:1 › the field section shows every field state with its icon, text, and color (1.2s)
+  ok  28 [desktop-light] › tests\e2e\dialog.spec.js:7:1 › dialog confirmation tiers (2.3s)
+  ok  32 [desktop-light] › tests\e2e\field.spec.js:60:1 › a live field announces its error on blur and clears it once fixed (1.2s)
+  ok  34 [desktop-light] › tests\e2e\field.spec.js:102:1 › field groups are fieldsets with legends, and the field sections never overflow (1.1s)
+  ok  33 [desktop-light] › tests\e2e\field.spec.js:80:1 › checkboxes and radios use the primary accent, show focus, and keep 44 px rows (1.2s)
+  ok  35 [desktop-light] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it (1.1s)
+  ok  36 [desktop-light] › tests\e2e\form.spec.js:23:1 › each summary link moves focus to its field (1.2s)
+  ok  39 [desktop-light] › tests\e2e\form.spec.js:68:1 › the error summary section shows a filled summary with links to fields (972ms)
+  ok  37 [desktop-light] › tests\e2e\form.spec.js:37:1 › an async check shows the pending state, then its error (3.0s)
+  ok  38 [desktop-light] › tests\e2e\form.spec.js:53:1 › a valid submit sets the busy state, then confirms the save (3.0s)
+  ok  42 [desktop-light] › tests\e2e\i18n.spec.js:3:1 › translates scoped markup and switches catalogs safely (452ms)
+  ok  40 [desktop-light] › tests\e2e\form.spec.js:79:1 › an edit during a pending check discards the old result and checks the new value (2.5s)
+  ok  41 [desktop-light] › tests\e2e\form.spec.js:98:1 › clearing the address while the name check runs during submit blocks the send (2.7s)
+  ok  43 [desktop-light] › tests\e2e\icon-button.spec.js:8:1 › the icon button section shows the plain, pressed, and danger buttons in every state (1.4s)
+  ok  44 [desktop-light] › tests\e2e\icon-button.spec.js:36:1 › pressed toggles differ from plain ones and keep distinct hover and active grounds (1.5s)
+  ok  47 [desktop-light] › tests\e2e\icon-button.spec.js:49:1 › disabled icon buttons use the disabled text color (1.6s)
+  ok  46 [desktop-light] › tests\e2e\icon-button.spec.js:59:1 › danger icon buttons use the danger color and the danger focus ring (1.8s)
+  ok  45 [desktop-light] › tests\e2e\icon-button.spec.js:23:1 › every icon button has a label, one decorative icon, and a 44 px square target (2.6s)
+  ok  48 [desktop-light] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (2.1s)
+  ok  50 [desktop-light] › tests\e2e\link-button.spec.js:50:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (1.5s)
+  ok  49 [desktop-light] › tests\e2e\link-button.spec.js:23:1 › real and specimen interactions use link colors and preserve disabled behavior (1.7s)
+  ok  53 [desktop-light] › tests\e2e\menu.spec.js:77:5 › without JavaScript › menu opens through popovertarget (1.6s)
+  ok  51 [desktop-light] › tests\e2e\loading.spec.js:5:1 › loading status and slow-list placeholders render across looks and motion preferences (3.6s)
+  ok  54 [desktop-light] › tests\e2e\menu.spec.js:52:1 › menu light dismiss and top layer (2.1s)
+  ok  52 [desktop-light] › tests\e2e\menu.spec.js:7:1 › menu keyboard and anchoring (3.5s)
+  ok  57 [desktop-light] › tests\e2e\popover.spec.js:73:5 › without JavaScript › popover opens through popovertarget (1.9s)
+  ok  58 [desktop-light] › tests\e2e\row.spec.js:4:1 › rows respond to their container and preserve keyboard actions (2.3s)
+  ok  56 [desktop-light] › tests\e2e\popover.spec.js:48:1 › popover light dismiss and top layer (3.4s)
+  ok  55 [desktop-light] › tests\e2e\popover.spec.js:7:1 › popover focus and anchoring (3.9s)
+  ok  59 [desktop-light] › tests\e2e\segmented.spec.js:4:1 › the segmented section shows fieldsets of native radios with legends and every state (2.0s)
+  ok  60 [desktop-light] › tests\e2e\segmented.spec.js:25:1 › every segmented option is at least 44 by 44 px (1.5s)
+  ok  62 [desktop-light] › tests\e2e\segmented.spec.js:61:1 › the checked option stands out by ground, outline, and weight, also in forced colors mode (2.0s)
+  ok  61 [desktop-light] › tests\e2e\segmented.spec.js:32:1 › arrow keys move the selection, and the focused option draws the focus ring (2.6s)
+  ok  63 [desktop-light] › tests\e2e\segmented.spec.js:76:1 › the forced state specimens and the disabled group render their states (2.0s)
+  ok  64 [desktop-light] › tests\e2e\segmented.spec.js:92:1 › options wrap inside the section without horizontal overflow (1.8s)
+  ok  66 [desktop-light] › tests\e2e\smoke.spec.js:3:1 › serves the landing page without browser errors (1.1s)
+  ok  65 [desktop-light] › tests\e2e\segmented.spec.js:98:1 › a single disabled radio dims its option in an enabled group and ignores hover (1.7s)
+  ok  67 [desktop-light] › tests\e2e\switch.spec.js:4:1 › native switch supports pointer, keyboard, forms, reset, and disabled states (2.6s)
+  ok  68 [desktop-light] › tests\e2e\switch.spec.js:36:1 › switch targets, thumb position, invalid state, and RTL remain visible (2.5s)
+  ok  69 [desktop-light] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline (3.6s)
+  ok  70 [desktop-light] › tests\e2e\toast.spec.js:21:1 › toast Undo, Ctrl+Z, expiry, and modal holding (3.4s)
+[neutral system 1440px] 36 stylesheets, 775 texts, 197 targets, 197 focus records, 129 sprite references, overflow 0px, errors 0
+[warm system 1440px] 36 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[bright system 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[bright system 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[neutral dark 1440px] 36 stylesheets, 775 texts, 197 targets, 197 focus records, 129 sprite references, overflow 0px, errors 0
+  ok  71 [desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look (8.8s)
+[warm dark 1440px] 36 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok  72 [desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look (8.6s)
+[bright dark 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok  73 [desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue (8.2s)
+[bright dark 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok  74 [desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow (7.8s)
+  ok  77 [desktop-light] › tests\e2e\verify-ui.spec.js:381:1 › reports unresolved sprite references (1.8s)
+  ok  76 [desktop-light] › tests\e2e\verify-ui.spec.js:355:1 › reports injected overflow, contrast, target, and focus violations (2.1s)
+[bright system 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok  78 [desktop-light] › tests\e2e\warm.spec.js:4:1 › warm seasons preserve source accents on roots and specimen wrappers (3.4s)
+[bright dark 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok  75 [desktop-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red (7.5s)
+(node:61420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:61420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  79 [desktop-dark] › tests\e2e\account-menu.spec.js:55:1 › account menu works by keyboard and signs out to the person icon (1.7s)
+(node:4604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  81 [desktop-dark] › tests\e2e\bright.spec.js:5:1 › forced fallback preserves root accents and every contrast pair (2.7s)
+  ok  80 [desktop-dark] › tests\e2e\bright.spec.js:47:1 › bright accents work on roots and wrappers and reset when switching looks (5.5s)
+(node:84500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  82 [desktop-dark] › tests\e2e\button.spec.js:14:1 › the button section shows every variant in every state (2.0s)
+(node:84500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  83 [desktop-dark] › tests\e2e\button.spec.js:27:1 › hover and active change the ground of every button variant (3.2s)
+  ok  84 [desktop-dark] › tests\e2e\button.spec.js:38:1 › disabled buttons use the disabled text color and ignore hover (2.6s)
+  ok  86 [desktop-dark] › tests\e2e\button.spec.js:53:1 › danger buttons fill or outline in the danger color (1.6s)
+  ok  85 [desktop-dark] › tests\e2e\account-menu.spec.js:95:5 › without JavaScript › account menu opens through popovertarget (1.3s)
+  ok  88 [desktop-dark] › tests\e2e\button.spec.js:73:1 › every button, including the small variant, is at least 44 by 44 px (1.4s)
+  ok  87 [desktop-dark] › tests\e2e\button.spec.js:65:1 › buttons take the button radius role (1.9s)
+(node:77292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:77292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  89 [desktop-dark] › tests\e2e\button.spec.js:80:1 › focus draws the focus ring, and danger buttons draw it in the danger color (1.8s)
+  ok  90 [desktop-dark] › tests\e2e\button.spec.js:93:1 › the focus ring stays an outline in forced colors mode (1.4s)
+  ok  93 [desktop-dark] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, removable, and filter chips in every state (1.6s)
+  ok  92 [desktop-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars (2.5s)
+  ok  91 [desktop-dark] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars (4.1s)
+  ok  96 [desktop-dark] › tests\e2e\chip.spec.js:40:1 › chips take the chip radius role (1.3s)
+  ok  95 [desktop-dark] › tests\e2e\chip.spec.js:23:1 › static chips are not focusable, and interactive chip parts are 44 px targets (1.9s)
+  ok  94 [desktop-dark] › tests\e2e\account-menu.spec.js:7:1 › account menu opens by pointer at the end of the top bar and marks the current route (3.4s)
+  ok  97 [desktop-dark] › tests\e2e\chip.spec.js:48:1 › overdue chips carry the danger color and an icon, never color alone (1.4s)
+  ok  98 [desktop-dark] › tests\e2e\chip.spec.js:56:1 › pressed filter chips differ from plain ones and keep distinct hover and active grounds (1.4s)
+  ok  99 [desktop-dark] › tests\e2e\chip.spec.js:69:1 › pressed filter chips stay distinct in forced colors mode (1.6s)
+  ok 100 [desktop-dark] › tests\e2e\chip.spec.js:76:1 › disabled filter chips use the disabled text color (1.7s)
+  ok 102 [desktop-dark] › tests\e2e\chip.spec.js:95:1 › the remove button shows hover and active grounds distinct from its sunken chip (1.3s)
+  ok 101 [desktop-dark] › tests\e2e\chip.spec.js:86:1 › filter chips and remove buttons draw the focus ring (2.3s)
+  ok 104 [desktop-dark] › tests\e2e\collapsible.spec.js:47:1 › find in page reveals a collapsed panel hidden until found (1.6s)
+  ok 105 [desktop-dark] › tests\e2e\collapsible.spec.js:62:5 › without JavaScript › collapsed panels stay hidden until found and expanded ones stay readable (1.2s)
+  ok 103 [desktop-dark] › tests\e2e\collapsible.spec.js:7:1 › collapsible opens and closes by pointer and keyboard (2.7s)
+  ok 107 [desktop-dark] › tests\e2e\field.spec.js:7:1 › the field section shows every field state with its icon, text, and color (1.5s)
+  ok 108 [desktop-dark] › tests\e2e\empty-state.spec.js:4:1 › empty states offer zero, one, or two actions with readable content (2.1s)
+  ok 109 [desktop-dark] › tests\e2e\field.spec.js:41:1 › the help toggle works by keyboard and keeps the help text described (1.9s)
+  ok 110 [desktop-dark] › tests\e2e\field.spec.js:60:1 › a live field announces its error on blur and clears it once fixed (1.7s)
+  ok 112 [desktop-dark] › tests\e2e\field.spec.js:102:1 › field groups are fieldsets with legends, and the field sections never overflow (1.8s)
+  ok 111 [desktop-dark] › tests\e2e\field.spec.js:80:1 › checkboxes and radios use the primary accent, show focus, and keep 44 px rows (1.9s)
+  ok 106 [desktop-dark] › tests\e2e\dialog.spec.js:7:1 › dialog confirmation tiers (5.2s)
+  ok 113 [desktop-dark] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it (1.4s)
+  ok 114 [desktop-dark] › tests\e2e\form.spec.js:23:1 › each summary link moves focus to its field (1.7s)
+  ok 117 [desktop-dark] › tests\e2e\form.spec.js:68:1 › the error summary section shows a filled summary with links to fields (1.4s)
+  ok 115 [desktop-dark] › tests\e2e\form.spec.js:37:1 › an async check shows the pending state, then its error (3.4s)
+  ok 116 [desktop-dark] › tests\e2e\form.spec.js:53:1 › a valid submit sets the busy state, then confirms the save (3.5s)
+  ok 120 [desktop-dark] › tests\e2e\i18n.spec.js:3:1 › translates scoped markup and switches catalogs safely (361ms)
+  ok 119 [desktop-dark] › tests\e2e\form.spec.js:98:1 › clearing the address while the name check runs during submit blocks the send (2.7s)
+  ok 118 [desktop-dark] › tests\e2e\form.spec.js:79:1 › an edit during a pending check discards the old result and checks the new value (2.9s)
+  ok 121 [desktop-dark] › tests\e2e\icon-button.spec.js:8:1 › the icon button section shows the plain, pressed, and danger buttons in every state (1.5s)
+  ok 123 [desktop-dark] › tests\e2e\icon-button.spec.js:36:1 › pressed toggles differ from plain ones and keep distinct hover and active grounds (1.3s)
+  ok 122 [desktop-dark] › tests\e2e\icon-button.spec.js:23:1 › every icon button has a label, one decorative icon, and a 44 px square target (1.8s)
+  ok 124 [desktop-dark] › tests\e2e\icon-button.spec.js:49:1 › disabled icon buttons use the disabled text color (1.4s)
+  ok 125 [desktop-dark] › tests\e2e\icon-button.spec.js:59:1 › danger icon buttons use the danger color and the danger focus ring (1.6s)
+  ok 126 [desktop-dark] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (1.4s)
+  ok 127 [desktop-dark] › tests\e2e\link-button.spec.js:23:1 › real and specimen interactions use link colors and preserve disabled behavior (1.8s)
+  ok 128 [desktop-dark] › tests\e2e\link-button.spec.js:50:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (1.9s)
+  ok 130 [desktop-dark] › tests\e2e\menu.spec.js:7:1 › menu keyboard and anchoring (2.8s)
+  ok 129 [desktop-dark] › tests\e2e\loading.spec.js:5:1 › loading status and slow-list placeholders render across looks and motion preferences (3.0s)
+  ok 132 [desktop-dark] › tests\e2e\menu.spec.js:77:5 › without JavaScript › menu opens through popovertarget (1.9s)
+  ok 131 [desktop-dark] › tests\e2e\menu.spec.js:52:1 › menu light dismiss and top layer (2.4s)
+  ok 135 [desktop-dark] › tests\e2e\popover.spec.js:73:5 › without JavaScript › popover opens through popovertarget (2.3s)
+  ok 134 [desktop-dark] › tests\e2e\popover.spec.js:48:1 › popover light dismiss and top layer (2.5s)
+  ok 133 [desktop-dark] › tests\e2e\popover.spec.js:7:1 › popover focus and anchoring (2.7s)
+  ok 136 [desktop-dark] › tests\e2e\row.spec.js:4:1 › rows respond to their container and preserve keyboard actions (3.4s)
+  ok 138 [desktop-dark] › tests\e2e\segmented.spec.js:25:1 › every segmented option is at least 44 by 44 px (1.4s)
+  ok 139 [desktop-dark] › tests\e2e\segmented.spec.js:32:1 › arrow keys move the selection, and the focused option draws the focus ring (1.5s)
+  ok 137 [desktop-dark] › tests\e2e\segmented.spec.js:4:1 › the segmented section shows fieldsets of native radios with legends and every state (1.9s)
+  ok 140 [desktop-dark] › tests\e2e\segmented.spec.js:61:1 › the checked option stands out by ground, outline, and weight, also in forced colors mode (1.8s)
+  ok 142 [desktop-dark] › tests\e2e\segmented.spec.js:92:1 › options wrap inside the section without horizontal overflow (1.2s)
+  ok 141 [desktop-dark] › tests\e2e\segmented.spec.js:76:1 › the forced state specimens and the disabled group render their states (1.9s)
+  ok 144 [desktop-dark] › tests\e2e\smoke.spec.js:3:1 › serves the landing page without browser errors (433ms)
+  ok 143 [desktop-dark] › tests\e2e\segmented.spec.js:98:1 › a single disabled radio dims its option in an enabled group and ignores hover (1.7s)
+  ok 145 [desktop-dark] › tests\e2e\switch.spec.js:4:1 › native switch supports pointer, keyboard, forms, reset, and disabled states (1.6s)
+  ok 147 [desktop-dark] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline (2.2s)
+  ok 146 [desktop-dark] › tests\e2e\switch.spec.js:36:1 › switch targets, thumb position, invalid state, and RTL remain visible (2.5s)
+[neutral system 1440px] 36 stylesheets, 775 texts, 197 targets, 197 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 148 [desktop-dark] › tests\e2e\toast.spec.js:21:1 › toast Undo, Ctrl+Z, expiry, and modal holding (4.9s)
+[warm system 1440px] 36 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[bright system 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[neutral light 1440px] 36 stylesheets, 775 texts, 197 targets, 197 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 149 [desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look (7.4s)
+[bright system 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[bright system 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[warm light 1440px] 36 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[bright light 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 150 [desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look (11.3s)
+  ok 151 [desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue (11.2s)
+  ok 155 [desktop-dark] › tests\e2e\verify-ui.spec.js:381:1 › reports unresolved sprite references (2.4s)
+[bright light 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 152 [desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow (11.0s)
+  ok 154 [desktop-dark] › tests\e2e\verify-ui.spec.js:355:1 › reports injected overflow, contrast, target, and focus violations (2.8s)
+[bright light 1440px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 153 [desktop-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red (8.5s)
+  ok 156 [desktop-dark] › tests\e2e\warm.spec.js:4:1 › warm seasons preserve source accents on roots and specimen wrappers (3.7s)
+(node:50148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:50148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 157 [mobile-light] › tests\e2e\account-menu.spec.js:55:1 › account menu works by keyboard and signs out to the person icon (1.7s)
+(node:81448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:81448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 158 [mobile-light] › tests\e2e\bright.spec.js:5:1 › forced fallback preserves root accents and every contrast pair (2.5s)
+  ok 159 [mobile-light] › tests\e2e\bright.spec.js:47:1 › bright accents work on roots and wrappers and reset when switching looks (1.8s)
+  ok 160 [mobile-light] › tests\e2e\button.spec.js:14:1 › the button section shows every variant in every state (1.4s)
+  ok 161 [mobile-light] › tests\e2e\account-menu.spec.js:95:5 › without JavaScript › account menu opens through popovertarget (1.3s)
+  ok 162 [mobile-light] › tests\e2e\button.spec.js:27:1 › hover and active change the ground of every button variant (1.8s)
+  ok 163 [mobile-light] › tests\e2e\button.spec.js:38:1 › disabled buttons use the disabled text color and ignore hover (1.6s)
+  ok 164 [mobile-light] › tests\e2e\button.spec.js:53:1 › danger buttons fill or outline in the danger color (1.5s)
+  ok 167 [mobile-light] › tests\e2e\button.spec.js:80:1 › focus draws the focus ring, and danger buttons draw it in the danger color (1.7s)
+  ok 168 [mobile-light] › tests\e2e\button.spec.js:93:1 › the focus ring stays an outline in forced colors mode (1.2s)
+  ok 166 [mobile-light] › tests\e2e\button.spec.js:73:1 › every button, including the small variant, is at least 44 by 44 px (5.6s)
+(node:9576) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9576) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 169 [mobile-light] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars (2.5s)
+  ok 172 [mobile-light] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, removable, and filter chips in every state (1.3s)
+  ok 170 [mobile-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars (2.4s)
+  ok 171 [mobile-light] › tests\e2e\account-menu.spec.js:7:1 › account menu opens by pointer at the end of the top bar and marks the current route (2.1s)
+  ok 174 [mobile-light] › tests\e2e\chip.spec.js:40:1 › chips take the chip radius role (1.3s)
+  ok 173 [mobile-light] › tests\e2e\chip.spec.js:23:1 › static chips are not focusable, and interactive chip parts are 44 px targets (1.7s)
+  ok 175 [mobile-light] › tests\e2e\chip.spec.js:48:1 › overdue chips carry the danger color and an icon, never color alone (1.2s)
+  ok 177 [mobile-light] › tests\e2e\chip.spec.js:69:1 › pressed filter chips stay distinct in forced colors mode (1.3s)
+  ok 178 [mobile-light] › tests\e2e\chip.spec.js:76:1 › disabled filter chips use the disabled text color (1.1s)
+  ok 179 [mobile-light] › tests\e2e\chip.spec.js:86:1 › filter chips and remove buttons draw the focus ring (1.2s)
+  ok 176 [mobile-light] › tests\e2e\chip.spec.js:56:1 › pressed filter chips differ from plain ones and keep distinct hover and active grounds (3.3s)
+  ok 180 [mobile-light] › tests\e2e\chip.spec.js:95:1 › the remove button shows hover and active grounds distinct from its sunken chip (1.2s)
+  ok 165 [mobile-light] › tests\e2e\button.spec.js:65:1 › buttons take the button radius role (13.2s)
+  ok 183 [mobile-light] › tests\e2e\collapsible.spec.js:62:5 › without JavaScript › collapsed panels stay hidden until found and expanded ones stay readable (986ms)
+  ok 181 [mobile-light] › tests\e2e\collapsible.spec.js:7:1 › collapsible opens and closes by pointer and keyboard (1.5s)
+  ok 182 [mobile-light] › tests\e2e\collapsible.spec.js:47:1 › find in page reveals a collapsed panel hidden until found (1.1s)
+  ok 185 [mobile-light] › tests\e2e\empty-state.spec.js:4:1 › empty states offer zero, one, or two actions with readable content (1.3s)
+  ok 187 [mobile-light] › tests\e2e\field.spec.js:41:1 › the help toggle works by keyboard and keeps the help text described (1.3s)
+  ok 186 [mobile-light] › tests\e2e\field.spec.js:7:1 › the field section shows every field state with its icon, text, and color (1.4s)
+  ok 184 [mobile-light] › tests\e2e\dialog.spec.js:7:1 › dialog confirmation tiers (2.8s)
+  ok 188 [mobile-light] › tests\e2e\field.spec.js:60:1 › a live field announces its error on blur and clears it once fixed (1.3s)
+  ok 190 [mobile-light] › tests\e2e\field.spec.js:102:1 › field groups are fieldsets with legends, and the field sections never overflow (1.3s)
+  ok 189 [mobile-light] › tests\e2e\field.spec.js:80:1 › checkboxes and radios use the primary accent, show focus, and keep 44 px rows (1.3s)
+  ok 191 [mobile-light] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it (1.1s)
+  ok 192 [mobile-light] › tests\e2e\form.spec.js:23:1 › each summary link moves focus to its field (1.2s)
+  ok 195 [mobile-light] › tests\e2e\form.spec.js:68:1 › the error summary section shows a filled summary with links to fields (937ms)
+  ok 193 [mobile-light] › tests\e2e\form.spec.js:37:1 › an async check shows the pending state, then its error (2.8s)
+  ok 194 [mobile-light] › tests\e2e\form.spec.js:53:1 › a valid submit sets the busy state, then confirms the save (2.9s)
+  ok 198 [mobile-light] › tests\e2e\i18n.spec.js:3:1 › translates scoped markup and switches catalogs safely (180ms)
+  ok 196 [mobile-light] › tests\e2e\form.spec.js:79:1 › an edit during a pending check discards the old result and checks the new value (2.7s)
+  ok 197 [mobile-light] › tests\e2e\form.spec.js:98:1 › clearing the address while the name check runs during submit blocks the send (2.4s)
+  ok 199 [mobile-light] › tests\e2e\icon-button.spec.js:8:1 › the icon button section shows the plain, pressed, and danger buttons in every state (1.2s)
+  ok 200 [mobile-light] › tests\e2e\icon-button.spec.js:23:1 › every icon button has a label, one decorative icon, and a 44 px square target (1.4s)
+  ok 201 [mobile-light] › tests\e2e\icon-button.spec.js:36:1 › pressed toggles differ from plain ones and keep distinct hover and active grounds (1.1s)
+  ok 202 [mobile-light] › tests\e2e\icon-button.spec.js:49:1 › disabled icon buttons use the disabled text color (1.1s)
+  ok 203 [mobile-light] › tests\e2e\icon-button.spec.js:59:1 › danger icon buttons use the danger color and the danger focus ring (1.1s)
+  ok 204 [mobile-light] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (1.1s)
+  ok 205 [mobile-light] › tests\e2e\link-button.spec.js:23:1 › real and specimen interactions use link colors and preserve disabled behavior (1.1s)
+  ok 206 [mobile-light] › tests\e2e\link-button.spec.js:50:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (1.1s)
+  ok 207 [mobile-light] › tests\e2e\loading.spec.js:5:1 › loading status and slow-list placeholders render across looks and motion preferences (1.8s)
+  ok 209 [mobile-light] › tests\e2e\menu.spec.js:52:1 › menu light dismiss and top layer (1.3s)
+  ok 210 [mobile-light] › tests\e2e\menu.spec.js:77:5 › without JavaScript › menu opens through popovertarget (1.1s)
+  ok 208 [mobile-light] › tests\e2e\menu.spec.js:7:1 › menu keyboard and anchoring (2.4s)
+  ok 213 [mobile-light] › tests\e2e\popover.spec.js:73:5 › without JavaScript › popover opens through popovertarget (1.4s)
+  ok 212 [mobile-light] › tests\e2e\popover.spec.js:48:1 › popover light dismiss and top layer (1.5s)
+  ok 214 [mobile-light] › tests\e2e\row.spec.js:4:1 › rows respond to their container and preserve keyboard actions (1.7s)
+  ok 211 [mobile-light] › tests\e2e\popover.spec.js:7:1 › popover focus and anchoring (2.7s)
+  ok 216 [mobile-light] › tests\e2e\segmented.spec.js:25:1 › every segmented option is at least 44 by 44 px (1.1s)
+  ok 215 [mobile-light] › tests\e2e\segmented.spec.js:4:1 › the segmented section shows fieldsets of native radios with legends and every state (1.3s)
+  ok 217 [mobile-light] › tests\e2e\segmented.spec.js:32:1 › arrow keys move the selection, and the focused option draws the focus ring (1.1s)
+  ok 218 [mobile-light] › tests\e2e\segmented.spec.js:61:1 › the checked option stands out by ground, outline, and weight, also in forced colors mode (1.2s)
+  ok 220 [mobile-light] › tests\e2e\segmented.spec.js:92:1 › options wrap inside the section without horizontal overflow (997ms)
+  ok 219 [mobile-light] › tests\e2e\segmented.spec.js:76:1 › the forced state specimens and the disabled group render their states (1.1s)
+  ok 222 [mobile-light] › tests\e2e\smoke.spec.js:3:1 › serves the landing page without browser errors (238ms)
+  ok 221 [mobile-light] › tests\e2e\segmented.spec.js:98:1 › a single disabled radio dims its option in an enabled group and ignores hover (1.1s)
+  ok 223 [mobile-light] › tests\e2e\switch.spec.js:4:1 › native switch supports pointer, keyboard, forms, reset, and disabled states (1.4s)
+  ok 224 [mobile-light] › tests\e2e\switch.spec.js:36:1 › switch targets, thumb position, invalid state, and RTL remain visible (1.4s)
+  ok 225 [mobile-light] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline (1.3s)
+  ok 226 [mobile-light] › tests\e2e\toast.spec.js:21:1 › toast Undo, Ctrl+Z, expiry, and modal holding (3.2s)
+[neutral system 390px] 36 stylesheets, 775 texts, 197 targets, 197 focus records, 129 sprite references, overflow 0px, errors 0
+[bright system 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[warm system 390px] 36 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[bright system 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[neutral dark 390px] 36 stylesheets, 775 texts, 197 targets, 197 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 227 [mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look (5.8s)
+[bright dark 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 229 [mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue (6.0s)
+[warm dark 390px] 36 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 228 [mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look (6.3s)
+  ok 233 [mobile-light] › tests\e2e\verify-ui.spec.js:381:1 › reports unresolved sprite references (935ms)
+  ok 232 [mobile-light] › tests\e2e\verify-ui.spec.js:355:1 › reports injected overflow, contrast, target, and focus violations (1.5s)
+[bright dark 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 230 [mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow (5.5s)
+[bright system 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+(node:80764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:80764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:76396) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:76396) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 234 [mobile-light] › tests\e2e\warm.spec.js:4:1 › warm seasons preserve source accents on roots and specimen wrappers (2.6s)
+  ok 235 [mobile-dark] › tests\e2e\account-menu.spec.js:7:1 › account menu opens by pointer at the end of the top bar and marks the current route (1.5s)
+(node:79428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:79428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[bright dark 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 231 [mobile-light] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red (5.2s)
+  ok 236 [mobile-dark] › tests\e2e\account-menu.spec.js:55:1 › account menu works by keyboard and signs out to the person icon (1.3s)
+(node:67212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:67212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 238 [mobile-dark] › tests\e2e\account-menu.spec.js:95:5 › without JavaScript › account menu opens through popovertarget (1.0s)
+  ok 237 [mobile-dark] › tests\e2e\bright.spec.js:5:1 › forced fallback preserves root accents and every contrast pair (1.7s)
+  ok 239 [mobile-dark] › tests\e2e\button.spec.js:14:1 › the button section shows every variant in every state (1.3s)
+  ok 242 [mobile-dark] › tests\e2e\button.spec.js:53:1 › danger buttons fill or outline in the danger color (1.1s)
+  ok 241 [mobile-dark] › tests\e2e\button.spec.js:27:1 › hover and active change the ground of every button variant (1.4s)
+  ok 243 [mobile-dark] › tests\e2e\button.spec.js:38:1 › disabled buttons use the disabled text color and ignore hover (1.3s)
+  ok 240 [mobile-dark] › tests\e2e\bright.spec.js:47:1 › bright accents work on roots and wrappers and reset when switching looks (1.5s)
+  ok 244 [mobile-dark] › tests\e2e\button.spec.js:65:1 › buttons take the button radius role (1.0s)
+  ok 245 [mobile-dark] › tests\e2e\button.spec.js:73:1 › every button, including the small variant, is at least 44 by 44 px (958ms)
+  ok 247 [mobile-dark] › tests\e2e\button.spec.js:93:1 › the focus ring stays an outline in forced colors mode (1.1s)
+  ok 246 [mobile-dark] › tests\e2e\button.spec.js:80:1 › focus draws the focus ring, and danger buttons draw it in the danger color (1.3s)
+  ok 250 [mobile-dark] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, removable, and filter chips in every state (1.0s)
+  ok 251 [mobile-dark] › tests\e2e\chip.spec.js:23:1 › static chips are not focusable, and interactive chip parts are 44 px targets (1.1s)
+  ok 248 [mobile-dark] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars (1.7s)
+  ok 249 [mobile-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars (1.9s)
+  ok 252 [mobile-dark] › tests\e2e\chip.spec.js:40:1 › chips take the chip radius role (1.0s)
+  ok 253 [mobile-dark] › tests\e2e\chip.spec.js:48:1 › overdue chips carry the danger color and an icon, never color alone (1.1s)
+  ok 254 [mobile-dark] › tests\e2e\chip.spec.js:56:1 › pressed filter chips differ from plain ones and keep distinct hover and active grounds (990ms)
+  ok 255 [mobile-dark] › tests\e2e\chip.spec.js:69:1 › pressed filter chips stay distinct in forced colors mode (968ms)
+  ok 256 [mobile-dark] › tests\e2e\chip.spec.js:76:1 › disabled filter chips use the disabled text color (1.1s)
+  ok 257 [mobile-dark] › tests\e2e\chip.spec.js:86:1 › filter chips and remove buttons draw the focus ring (1.1s)
+  ok 258 [mobile-dark] › tests\e2e\chip.spec.js:95:1 › the remove button shows hover and active grounds distinct from its sunken chip (1.0s)
+  ok 259 [mobile-dark] › tests\e2e\collapsible.spec.js:7:1 › collapsible opens and closes by pointer and keyboard (1.1s)
+  ok 260 [mobile-dark] › tests\e2e\collapsible.spec.js:47:1 › find in page reveals a collapsed panel hidden until found (926ms)
+  ok 261 [mobile-dark] › tests\e2e\collapsible.spec.js:62:5 › without JavaScript › collapsed panels stay hidden until found and expanded ones stay readable (845ms)
+  ok 263 [mobile-dark] › tests\e2e\empty-state.spec.js:4:1 › empty states offer zero, one, or two actions with readable content (1.0s)
+  ok 264 [mobile-dark] › tests\e2e\field.spec.js:7:1 › the field section shows every field state with its icon, text, and color (1.1s)
+  ok 265 [mobile-dark] › tests\e2e\field.spec.js:41:1 › the help toggle works by keyboard and keeps the help text described (1.0s)
+  ok 262 [mobile-dark] › tests\e2e\dialog.spec.js:7:1 › dialog confirmation tiers (2.1s)
+  ok 266 [mobile-dark] › tests\e2e\field.spec.js:60:1 › a live field announces its error on blur and clears it once fixed (1.1s)
+  ok 267 [mobile-dark] › tests\e2e\field.spec.js:80:1 › checkboxes and radios use the primary accent, show focus, and keep 44 px rows (1.1s)
+  ok 268 [mobile-dark] › tests\e2e\field.spec.js:102:1 › field groups are fieldsets with legends, and the field sections never overflow (987ms)
+  ok 269 [mobile-dark] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it (957ms)
+  ok 270 [mobile-dark] › tests\e2e\form.spec.js:23:1 › each summary link moves focus to its field (995ms)
+  ok 273 [mobile-dark] › tests\e2e\form.spec.js:68:1 › the error summary section shows a filled summary with links to fields (921ms)
+  ok 271 [mobile-dark] › tests\e2e\form.spec.js:37:1 › an async check shows the pending state, then its error (2.7s)
+  ok 272 [mobile-dark] › tests\e2e\form.spec.js:53:1 › a valid submit sets the busy state, then confirms the save (2.7s)
+  ok 276 [mobile-dark] › tests\e2e\i18n.spec.js:3:1 › translates scoped markup and switches catalogs safely (125ms)
+  ok 274 [mobile-dark] › tests\e2e\form.spec.js:79:1 › an edit during a pending check discards the old result and checks the new value (2.2s)
+  ok 277 [mobile-dark] › tests\e2e\icon-button.spec.js:8:1 › the icon button section shows the plain, pressed, and danger buttons in every state (988ms)
+  ok 275 [mobile-dark] › tests\e2e\form.spec.js:98:1 › clearing the address while the name check runs during submit blocks the send (2.7s)
+  ok 279 [mobile-dark] › tests\e2e\icon-button.spec.js:36:1 › pressed toggles differ from plain ones and keep distinct hover and active grounds (964ms)
+  ok 278 [mobile-dark] › tests\e2e\icon-button.spec.js:23:1 › every icon button has a label, one decorative icon, and a 44 px square target (1.1s)
+  ok 280 [mobile-dark] › tests\e2e\icon-button.spec.js:49:1 › disabled icon buttons use the disabled text color (1.0s)
+  ok 281 [mobile-dark] › tests\e2e\icon-button.spec.js:59:1 › danger icon buttons use the danger color and the danger focus ring (1.1s)
+  ok 282 [mobile-dark] › tests\e2e\link-button.spec.js:4:1 › link buttons show every state with native button semantics (1.2s)
+  ok 283 [mobile-dark] › tests\e2e\link-button.spec.js:23:1 › real and specimen interactions use link colors and preserve disabled behavior (1.1s)
+  ok 284 [mobile-dark] › tests\e2e\link-button.spec.js:50:1 › link buttons keep 44 px targets, including short labels, and the global focus ring (1.2s)
+  ok 287 [mobile-dark] › tests\e2e\menu.spec.js:52:1 › menu light dismiss and top layer (1.3s)
+  ok 288 [mobile-dark] › tests\e2e\menu.spec.js:77:5 › without JavaScript › menu opens through popovertarget (1.3s)
+  ok 285 [mobile-dark] › tests\e2e\loading.spec.js:5:1 › loading status and slow-list placeholders render across looks and motion preferences (2.4s)
+  ok 286 [mobile-dark] › tests\e2e\menu.spec.js:7:1 › menu keyboard and anchoring (2.6s)
+  ok 291 [mobile-dark] › tests\e2e\popover.spec.js:73:5 › without JavaScript › popover opens through popovertarget (1.2s)
+  ok 290 [mobile-dark] › tests\e2e\popover.spec.js:48:1 › popover light dismiss and top layer (1.4s)
+  ok 289 [mobile-dark] › tests\e2e\popover.spec.js:7:1 › popover focus and anchoring (2.4s)
+  ok 292 [mobile-dark] › tests\e2e\row.spec.js:4:1 › rows respond to their container and preserve keyboard actions (1.5s)
+  ok 294 [mobile-dark] › tests\e2e\segmented.spec.js:25:1 › every segmented option is at least 44 by 44 px (1.1s)
+  ok 293 [mobile-dark] › tests\e2e\segmented.spec.js:4:1 › the segmented section shows fieldsets of native radios with legends and every state (1.3s)
+  ok 295 [mobile-dark] › tests\e2e\segmented.spec.js:32:1 › arrow keys move the selection, and the focused option draws the focus ring (1.2s)
+  ok 296 [mobile-dark] › tests\e2e\segmented.spec.js:61:1 › the checked option stands out by ground, outline, and weight, also in forced colors mode (1.2s)
+  ok 300 [mobile-dark] › tests\e2e\smoke.spec.js:3:1 › serves the landing page without browser errors (174ms)
+  ok 297 [mobile-dark] › tests\e2e\segmented.spec.js:76:1 › the forced state specimens and the disabled group render their states (1.1s)
+  ok 298 [mobile-dark] › tests\e2e\segmented.spec.js:92:1 › options wrap inside the section without horizontal overflow (1.0s)
+  ok 299 [mobile-dark] › tests\e2e\segmented.spec.js:98:1 › a single disabled radio dims its option in an enabled group and ignores hover (1.2s)
+  ok 301 [mobile-dark] › tests\e2e\switch.spec.js:4:1 › native switch supports pointer, keyboard, forms, reset, and disabled states (1.2s)
+  ok 303 [mobile-dark] › tests\e2e\switch.spec.js:67:1 › forced colors use the system palette for focus and a distinct invalid outline (1.2s)
+  ok 302 [mobile-dark] › tests\e2e\switch.spec.js:36:1 › switch targets, thumb position, invalid state, and RTL remain visible (1.3s)
+  ok 304 [mobile-dark] › tests\e2e\toast.spec.js:21:1 › toast Undo, Ctrl+Z, expiry, and modal holding (1.6s)
+[neutral system 390px] 36 stylesheets, 775 texts, 197 targets, 197 focus records, 129 sprite references, overflow 0px, errors 0
+[bright system 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[warm system 390px] 36 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[bright system 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+[neutral light 390px] 36 stylesheets, 775 texts, 197 targets, 197 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 305 [mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the neutral look (4.8s)
+[bright light 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 307 [mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look blue (5.1s)
+[warm light 390px] 36 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 306 [mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the warm look (5.5s)
+[bright light 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 308 [mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look yellow (5.2s)
+  ok 311 [mobile-dark] › tests\e2e\verify-ui.spec.js:381:1 › reports unresolved sprite references (1.2s)
+  ok 310 [mobile-dark] › tests\e2e\verify-ui.spec.js:355:1 › reports injected overflow, contrast, target, and focus violations (1.7s)
+[bright system 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 312 [mobile-dark] › tests\e2e\warm.spec.js:4:1 › warm seasons preserve source accents on roots and specimen wrappers (2.3s)
+[bright light 390px] 35 stylesheets, 776 texts, 198 targets, 198 focus records, 129 sprite references, overflow 0px, errors 0
+  ok 309 [mobile-dark] › tests\e2e\verify-ui.spec.js:321:9 › gallery passes every verifier check in the bright look red (4.8s)
+  312 passed (3.3m)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:integration
+Process ID: 67312
+> @gpellicciotta/support.webapp@0.1.0-pre test:integration
+> vitest run --config vitest.integration.config.js
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0019-design-and-add-an-accessible-switch-component
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+   Start at  20:49:04
+   Duration  5.37s (tests 99%, import 1%)
+Command: "C:\Program Files\nodejs\npm.CMD" pack --dry-run
+Process ID: 82528
+> @gpellicciotta/support.webapp@0.1.0-pre prepack
+> node bin/manifest.mjs
+> @gpellicciotta/support.webapp@0.1.0-pre postpack
+> node bin/manifest.mjs --remove
+npm notice
+npm notice 📦  @gpellicciotta/support.webapp@0.1.0-pre
+npm notice Tarball Contents
+npm notice 5.6kB CHANGELOG.md
+npm notice 1.1kB LICENSE.md
+npm notice 1.2kB README.md
+npm notice 10.0kB bin/check.mjs
+npm notice 2.7kB bin/cli.mjs
+npm notice 2.5kB bin/manifest.mjs
+npm notice 3.0kB bin/vendor.mjs
+npm notice 11.8kB manifest.json
+npm notice 1.2kB package.json
+npm notice 19.4kB src/contract.json
+npm notice 1.2kB src/css/base.css
+npm notice 1.8kB src/css/components/account-menu.css
+npm notice 2.1kB src/css/components/avatar.css
+npm notice 1.6kB src/css/components/banner.css
+npm notice 3.7kB src/css/components/button.css
+npm notice 1.4kB src/css/components/card.css
+npm notice 1.1kB src/css/components/checkbox.css
+npm notice 3.1kB src/css/components/chip.css
+npm notice 1.5kB src/css/components/collapsible.css
+npm notice 1.5kB src/css/components/dialog.css
+npm notice 661B src/css/components/empty-state.css
+npm notice 1.5kB src/css/components/error-summary.css
+npm notice 1.4kB src/css/components/field-group.css
+npm notice 5.1kB src/css/components/field.css
+npm notice 557B src/css/components/form.css
+npm notice 2.1kB src/css/components/icon-button.css
+npm notice 1.2kB src/css/components/icon-tile.css
+npm notice 878B src/css/components/icon.css
+npm notice 554B src/css/components/inline-confirm.css
+npm notice 873B src/css/components/link-button.css
+npm notice 603B src/css/components/loading.css
+npm notice 2.7kB src/css/components/menu.css
+npm notice 986B src/css/components/popover.css
+npm notice 912B src/css/components/radio.css
+npm notice 970B src/css/components/row.css
+npm notice 2.9kB src/css/components/segmented.css
+npm notice 2.7kB src/css/components/switch.css
+npm notice 1.1kB src/css/components/toast.css
+npm notice 230B src/css/deprecated.css
+npm notice 860B src/css/reset.css
+npm notice 1.3kB src/css/style.css
+npm notice 5.4kB src/js/account-menu.js
+npm notice 1.9kB src/js/anchor.js
+npm notice 2.7kB src/js/collapsible.js
+npm notice 5.2kB src/js/dialog.js
+npm notice 14.0kB src/js/field.js
+npm notice 1.2kB src/js/focus.js
+npm notice 7.9kB src/js/form.js
+npm notice 2.1kB src/js/i18n.js
+npm notice 3.0kB src/js/icon.js
+npm notice 2.0kB src/js/inline-confirm.js
+npm notice 3.3kB src/js/live-region.js
+npm notice 8.5kB src/js/menu.js
+npm notice 7.0kB src/js/popover.js
+npm notice 12.0kB src/js/toast.js
+npm notice 447B src/looks/_template/fonts.css
+npm notice 352.2kB src/looks/_template/fonts/InterVariable.woff2
+npm notice 4.4kB src/looks/_template/fonts/OFL.txt
+npm notice 5.8kB src/looks/_template/icons.svg
+npm notice 184B src/looks/_template/index.css
+npm notice 6.1kB src/looks/_template/look.css
+npm notice 1.5kB src/looks/_template/primitives.css
+npm notice 1.9kB src/looks/_template/README.md
+npm notice 6.1kB src/looks/bright/icons.svg
+npm notice 157B src/looks/bright/index.css
+npm notice 1.1kB src/looks/bright/LICENSE.txt
+npm notice 6.0kB src/looks/bright/look.css
+npm notice 1.2kB src/looks/bright/primitives.css
+npm notice 447B src/looks/neutral/fonts.css
+npm notice 352.2kB src/looks/neutral/fonts/InterVariable.woff2
+npm notice 4.4kB src/looks/neutral/fonts/OFL.txt
+npm notice 5.8kB src/looks/neutral/icons.svg
+npm notice 184B src/looks/neutral/index.css
+npm notice 4.9kB src/looks/neutral/look.css
+npm notice 1.3kB src/looks/neutral/primitives.css
+npm notice 3.1kB src/looks/warm/fonts.css
+npm notice 20.8kB src/looks/warm/fonts/dm-sans/dm-sans-latin-ext-wght-italic.woff2
+npm notice 18.2kB src/looks/warm/fonts/dm-sans/dm-sans-latin-ext-wght-normal.woff2
+npm notice 39.7kB src/looks/warm/fonts/dm-sans/dm-sans-latin-wght-italic.woff2
+npm notice 36.9kB src/looks/warm/fonts/dm-sans/dm-sans-latin-wght-normal.woff2
+npm notice 4.6kB src/looks/warm/fonts/dm-sans/OFL.txt
+npm notice 4.5kB src/looks/warm/fonts/outfit/OFL.txt
+npm notice 14.8kB src/looks/warm/fonts/outfit/outfit-latin-ext-wght-normal.woff2
+npm notice 32.3kB src/looks/warm/fonts/outfit/outfit-latin-wght-normal.woff2
+npm notice 7.6kB src/looks/warm/icons.svg
+npm notice 184B src/looks/warm/index.css
+npm notice 7.2kB src/looks/warm/look.css
+npm notice 2.4kB src/looks/warm/primitives.css
+npm notice Tarball Details
+npm notice name: @gpellicciotta/support.webapp
+npm notice version: 0.1.0-pre
+npm notice filename: gpellicciotta-support.webapp-0.1.0-pre.tgz
+npm notice package size: 926.9 kB
+npm notice unpacked size: 1.1 MB
+npm notice shasum: 0134c966eec54f56530762231a07745817e21ae4
+npm notice integrity: sha512-Vfa/aEpu096MK[...]HrNzsL4wDnp0g==
+npm notice total files: 88
+npm notice
+gpellicciotta-support.webapp-0.1.0-pre.tgz
