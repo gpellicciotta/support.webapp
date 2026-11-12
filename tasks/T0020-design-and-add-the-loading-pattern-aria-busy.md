@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1436.8, input: 184732, output: 28778, cache_read: 9102336, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0020: Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons
 
@@ -71,4 +75,7 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Verify]**
   Committed implementation as 4b65515. Completion validation passed; all execution steps except orchestrator-owned Review are checked.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
