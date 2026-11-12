@@ -13,9 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 3169.6, input: 372, output: 150836, cache_read: 27628582, cache_write: 462900}
-work_duration: 2142.5
-review_status: pending
+  review: {turns: 2, duration_s: 225.6, input: 116276, output: 5950, cache_read: 786432, cache_write: 0}
+work_duration: 157.7
+review_status: rejected
 review_round: 1
+reviewed_by: "@codex"
 ---
 # T0008: Extract fields, checkboxes, radios, and createField from todos.webapp, adding forms, validation states, help toggles, and error summaries.
 
@@ -35,6 +37,10 @@ See the technical specification for files, tests, and the completion check.
 - [x] **[Verify]**    Run the field tests and the verifier until both pass.
 - [x] **[Visual]**    Capture the gallery field sections per theme at 390 and 1440 px.
 - [x] **[Doc]**       Update the style guide and CHANGELOG.md.
+- [x] **[Implement]** Write failing regression tests for review round 1 defects D1 to D3.
+- [x] **[Verify]**    Run the regression tests and record their failure output in validation-proof.md.
+- [x] **[Implement]** Guard whole submits, add the created status line, and invalidate pending checks on edits.
+- [x] **[Verify]**    Rerun unit tests, affected browser tests, and the full check, and record the output.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -74,4 +80,22 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @codex: [Decided]** Rejected because three reproduced defects affect the public field and form controllers.
+  - Findings: [review-findings-1.md](T0008-extract-the-field-checkbox-and-radio-components-with/review-findings-1.md).
+
+- [2026-11-12] **[Verify]**
+  Recorded red output for review round 1 regressions: D1, D2, and both D3 tests fail before the fixes.
+
+- [2026-11-12] **[Implement]**
+  Fixed review round 1: whole-submit guard, created status line, and edits that discard pending or valid states.
+  - Overtaken checks now settle with the current value's result.
+  - Added an edit-during-pending browser test to form.spec.js.
+
+- [2026-11-12] **[Verify]**
+  Verified unit, field and form browser tests, and the full check with the plan venv's Ruff; recorded outcomes.
+  - Files touched: 10.
+  - Lines touched: 314.
+  - Reopenings: 0.
 

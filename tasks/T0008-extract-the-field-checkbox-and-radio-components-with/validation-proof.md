@@ -101,3 +101,66 @@ Before and after captures of the gallery region where the sections are inserted,
 - After: [light 1440](after-light-1440.png), [dark 1440](after-dark-1440.png), [light 390](after-light-390.png), [dark 390](after-dark-390.png).
 - The capture failed on console errors, page errors, and HTTP 400 or higher; none occurred.
 - The first after capture showed the hidden form confirmation banner; `banner.css` now honors `hidden`, and `form.spec.js` checks it.
+
+### Review round 1 rework: red phase
+`npx vitest run tests/unit/field.test.js tests/unit/form.test.js`, exit code 1, before any production change:
+
+```text
+     × D2: a created field shows the pending and valid states in its status line 15ms
+     × D3: an edit during a pending check discards the old result and checks the current value 9ms
+     × D3: an edit after a passing check drops the stale valid status 4ms
+     × D1: a second submit during async validation never sends twice 25ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/unit/field.test.js > review round 1 regressions > D2: a created field shows the pending and valid states in its status line
+AssertionError: expected null not to be null // Object.is equality
+ FAIL  tests/unit/field.test.js > review round 1 regressions > D3: an edit during a pending check discards the old result and checks the current value
+AssertionError: expected true to be false // Object.is equality
+ FAIL  tests/unit/field.test.js > review round 1 regressions > D3: an edit after a passing check drops the stale valid status
+AssertionError: expected false to be true // Object.is equality
+ FAIL  tests/unit/form.test.js > review round 1 regressions > D1: a second submit during async validation never sends twice
+AssertionError: expected true to be false // Object.is equality
+ Test Files  2 failed (2)
+      Tests  4 failed | 22 passed (26)
+   Start at  16:03:57
+```
+
+The D1 throw-path test passes before the fix; it guards the release of the new submit guard.
+
+### Review round 1 rework: green phase
+`npx vitest run tests/unit/field.test.js tests/unit/form.test.js`, exit code 0:
+
+```text
+ RUN  v5.1.0 {{project-root}}/.plan/work/T0008-extract-the-field-checkbox-and-radio-components-with
+
+
+ Test Files  2 passed (2)
+      Tests  26 passed (26)
+   Start at  16:07:46
+   Duration  1.34s (import 74%, tests 24%, transform 1%, worker 1%)
+```
+
+`npx playwright test tests/e2e/form.spec.js tests/e2e/field.spec.js --reporter=line`, exit code 0:
+
+```text
+[43/44] [mobile-dark] › tests\e2e\form.spec.js:68:1 › the error summary section shows a filled summary with links to fields
+[44/44] [mobile-dark] › tests\e2e\form.spec.js:79:1 › an edit during a pending check discards the old result and checks the new value
+  44 passed (22.9s)
+```
+
+Full suite with Ruff available: `{{plan-venv}}/Scripts/python.exe scripts/devops.py check`, exit code 0.
+The default `python` on this machine now lacks Ruff, as the reviewer saw; the plan venv interpreter has it.
+
+```text
+Command: {{plan-venv}}\Scripts\lint-markdown.EXE check --offline
+All 24 markdown files passed linting.
+Command: {{plan-venv}}\Scripts\python.exe -m ruff check scripts tests
+All checks passed!
+============================== 3 passed in 2.67s ==============================
+ Test Files  13 passed (13)
+      Tests  1502 passed (1502)
+[... 307 lines omitted ...]
+  216 passed (1.3m)
+[... 5 lines omitted ...]
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+```

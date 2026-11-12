@@ -3,7 +3,7 @@ task: T0008
 round: 1
 verdict: rejected
 reviewer: "@codex"
-reviewed_at: 2026-11-12T15:00:10Z
+reviewed_at: 2026-11-12T15:02:04Z
 reviewed_commit: "a201d4f"
 base_commit: "81bed64"
 branch: task/T0008-extract-the-field-checkbox-and-radio-components-with
