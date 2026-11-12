@@ -51,6 +51,33 @@ The gallery shows each group in the selected look and theme, with computed value
 [components.md](components.md) is the catalog: keys, markup skeletons, variants, states, and accessibility minimums.
 Each component gains a gallery section `id="{{key}}"` in the task that builds it.
 
+### Dialogs and confirmations
+Use the [Dialog section](../../src/demo/visual-style-gallery.html#dialog) for consequential actions and irreversible bulk operations.
+- Modal: use a native `dialog.dialog` with a labeled title, body, and actions, following the catalog skeleton.
+- In-place: use the [Inline confirmation section](../../src/demo/visual-style-gallery.html#inline-confirm) for a single item's question.
+- Typed word: reuse `.field` inside the dialog; enable confirmation only when the input exactly matches the required word.
+- Offer a backup before irreversible bulk deletion; explain what disappears and whether recovery exists.
+- Prefer recycle-bin deletion with Undo when recovery is possible.
+
+Import `openDialog` and `confirmDialog` from [dialog.js](../../src/js/dialog.js).
+`openDialog(dialog, options)` returns a close function accepting a return value.
+Options include `opener`, `initialFocus`, `modal` (default `true`), and `onClose(returnValue)`.
+The element's owner document supplies focus management, including for injected test documents.
+Escape and native cancellation return `cancel`; closing restores focus to a connected opener and removes listeners.
+`confirmDialog` resolves `false` for `cancel` or an empty value, and `true` for any other value.
+Use `data-dialog-close` buttons or a native `form method="dialog"` to return values.
+Nested components can prevent their keyboard event to retain control of Escape.
+Modal dialogs trap Tab; `modal: false` opens non-modally without trapping Tab.
+Below 64rem, the modal becomes a full-height sheet; desktop dialogs remain centered.
+
+Import `attachInlineConfirm(row, { onConfirm, onCancel })` from [inline-confirm.js](../../src/js/inline-confirm.js).
+The row contains `data-inline-confirm-content`, its `data-inline-confirm-trigger`, and a hidden `data-inline-confirm` question group.
+Label the group and use `data-inline-confirm-answer="yes"` and `data-inline-confirm-answer="no"` buttons.
+Opening focuses the question; Keep or Escape restores the row and trigger focus.
+Confirmation restores the row before invoking `onConfirm`; the caller performs the actual operation.
+Call the returned controller's `destroy()` to restore content and remove listeners.
+Typed confirmation remains caller-owned: check the exact word again in the action handler before executing an irreversible operation.
+
 ### Icons
 Each look ships one sprite, `looks/{{look}}/icons.svg`, with one 24-unit `<symbol>` per glyph ([ADR-0002](../adrs/ADR-0002-looks.md#icons)).
 Every sprite provides the core ids that `icons` in [contract.json](../../src/contract.json) lists.

@@ -3,6 +3,8 @@
 import { attachField } from '../js/field.js';
 import { attachForm } from '../js/form.js';
 import { setSpriteUrl } from '../js/icon.js';
+import { confirmDialog } from '../js/dialog.js';
+import { attachInlineConfirm } from '../js/inline-confirm.js';
 
 // Add each new look here and as an option of the look select.
 export const looks = ['neutral', 'warm', 'bright'];
@@ -185,4 +187,34 @@ export function initGallery(doc, view) {
 if (typeof document !== 'undefined') {
     initGallery(document, window);
     initSpecimens(document, window);
+    for (const opener of document.querySelectorAll('[data-dialog-open]')) {
+        opener.addEventListener('click', async () => {
+            const dialog = document.getElementById(opener.dataset.dialogOpen);
+            const input = dialog.querySelector('[data-dialog-word]');
+            const action = dialog.querySelector('[data-dialog-typed]');
+            if (input) {
+                input.value = '';
+                action.disabled = true;
+            }
+            const accepted = await confirmDialog(dialog, { opener, initialFocus: input ?? undefined });
+            document.querySelector('[data-dialog-result]').textContent = accepted ? 'Sample action confirmed.' : 'Kept unchanged.';
+        });
+    }
+    const typed = document.querySelector('[data-dialog-typed]');
+    const word = document.querySelector('[data-dialog-word]');
+    word?.addEventListener('input', () => {
+        typed.disabled = word.value !== 'DELETE';
+    });
+    typed?.addEventListener('click', () => {
+        if (word.value === 'DELETE') {
+            typed.closest('dialog').close('erase');
+        }
+    });
+    for (const row of document.querySelectorAll('[data-inline-confirm-row]')) {
+        attachInlineConfirm(row, {
+            onConfirm: () => {
+                document.querySelector('[data-inline-confirm-result]').textContent = 'Sample note deletion confirmed.';
+            }
+        });
+    }
 }

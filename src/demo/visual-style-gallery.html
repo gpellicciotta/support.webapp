@@ -794,6 +794,51 @@
                 <span class="icon-tile icon-tile--lg icon-tile--tone-4" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg></span>
             </div>
         </section>
+        <section id="dialog" class="gallery-section" aria-labelledby="dialog-section-title">
+            <h2 id="dialog-section-title">Dialog</h2>
+            <p>Use a modal for consequential actions. Require a word for irreversible bulk operations.</p>
+            <button class="button button--secondary" type="button" data-dialog-open="confirm-list">Delete a list</button>
+            <button class="button button--danger" type="button" data-dialog-open="confirm-data">Erase sample data</button>
+            <p data-dialog-result role="status">No action taken.</p>
+            <dialog class="dialog" id="confirm-list" aria-labelledby="confirm-list-title">
+                <div class="dialog__header"><h3 class="dialog__title" id="confirm-list-title">Delete the list Groceries?</h3></div>
+                <div class="dialog__body"><p>The list will move to the recycle bin.</p></div>
+                <div class="dialog__actions">
+                    <button class="button button--secondary" type="button" data-dialog-close="cancel">Keep</button>
+                    <button class="button button--danger" type="button" data-dialog-close="delete">Delete list</button>
+                </div>
+            </dialog>
+            <dialog class="dialog" id="confirm-data" aria-labelledby="confirm-data-title">
+                <div class="dialog__header"><h3 class="dialog__title" id="confirm-data-title">Erase all sample data?</h3></div>
+                <div class="dialog__body">
+                    <p>This cannot be undone. Export a backup first.</p>
+                    <div class="field">
+                        <label class="field__label" for="confirm-word">Type DELETE to continue</label>
+                        <input class="field__control" id="confirm-word" data-dialog-word autocomplete="off" spellcheck="false">
+                    </div>
+                </div>
+                <div class="dialog__actions">
+                    <button class="button button--secondary" type="button" data-dialog-close="cancel">Cancel</button>
+                    <button class="button button--danger" type="button" data-dialog-typed disabled>Erase data</button>
+                </div>
+            </dialog>
+        </section>
+        <section id="inline-confirm" class="gallery-section" aria-labelledby="inline-confirm-title">
+            <h2 id="inline-confirm-title">Inline confirmation</h2>
+            <p>Ask in place for a single item. Keep restores the original row.</p>
+            <div data-inline-confirm-row>
+                <div data-inline-confirm-content>
+                    <p>A sample note</p>
+                    <button class="button button--danger" type="button" data-inline-confirm-trigger>Delete note</button>
+                </div>
+                <div class="inline-confirm" data-inline-confirm hidden role="group" aria-label="Confirm note deletion" tabindex="-1">
+                    <p class="inline-confirm__question">Delete this note forever?</p>
+                    <button class="button button--danger" type="button" data-inline-confirm-answer="yes">Delete forever</button>
+                    <button class="button button--secondary" type="button" data-inline-confirm-answer="no">Keep note</button>
+                </div>
+            </div>
+            <p data-inline-confirm-result role="status">No action taken.</p>
+        </section>
         <section id="avatar" class="gallery-section" aria-labelledby="avatar-title">
             <h2 id="avatar-title">Avatar</h2>
             <p>Image, initials, and icon alternatives. Decorative portraits beside a visible name use empty alt or aria-hidden.</p>

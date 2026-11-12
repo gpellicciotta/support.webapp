@@ -20,22 +20,22 @@ The rule in one sentence: each component has one kebab-case key, such as `dialog
 ## Component Key Rule
 Rule and example for the key `dialog`:
 
-| Artifact          | Rule                                                 | Example                     |
-| :---------------- | :--------------------------------------------------- | :-------------------------- |
-| HTML root class   | `.{{key}}`                                           | `.dialog`                   |
-| HTML parts        | `.{{key}}__{{part}}`                                 | `.dialog__title`            |
-| HTML variants     | `.{{key}}--{{variant}}`                              | `.dialog--sheet`            |
-| JavaScript hooks  | `data-{{key}}-{{name}}` attributes, never classes    | `data-dialog-close`         |
-| State             | native states and ARIA, never JavaScript-set classes | `[open]`, `[aria-expanded]` |
-| CSS file          | `css/components/{{key}}.css`                         | `css/components/dialog.css` |
-| Private tokens    | `--_{{key}}-{{name}}`                                | `--_dialog-bg`              |
-| JavaScript module | `js/{{key}}.js`                                      | `js/dialog.js`              |
-| Exported function | `open{{Key}}`, `attach{{Key}}`, or `create{{Key}}`   | `openDialog`                |
-| Gallery section   | `id="{{key}}"` in the gallery                        | `#dialog`                   |
-| Catalog entry     | heading `{{key}}` in [components.md](components.md)  | `components.md#dialog`      |
-| Unit test         | `tests/unit/{{key}}.test.js`                         | `tests/unit/dialog.test.js` |
-| Browser test      | `tests/e2e/{{key}}.spec.js`                          | `tests/e2e/dialog.spec.js`  |
-| Translation keys  | `{{key}}.{{name}}`                                   | `dialog.cancel`             |
+| Artifact          | Rule                                                 | Example                                           |
+| :---------------- | :--------------------------------------------------- | :------------------------------------------------ |
+| HTML root class   | `.{{key}}`                                           | `.dialog`                                         |
+| HTML parts        | `.{{key}}__{{part}}`                                 | `.dialog__title`                                  |
+| HTML variants     | `.{{key}}--{{variant}}`                              | `.dialog--sheet`                                  |
+| JavaScript hooks  | `data-{{key}}-{{name}}` attributes, never classes    | `data-dialog-close`                               |
+| State             | native states and ARIA, never JavaScript-set classes | `[open]`, `[aria-expanded]`                       |
+| CSS file          | `css/components/{{key}}.css`                         | `css/components/dialog.css`                       |
+| Private tokens    | `--_{{key}}-{{name}}`                                | `--_dialog-bg`                                    |
+| JavaScript module | `js/{{key}}.js`                                      | `js/dialog.js`                                    |
+| Exported function | `open{{Key}}`, `attach{{Key}}`, or `create{{Key}}`   | `openDialog`                                      |
+| Gallery section   | `id="{{key}}"` in the gallery                        | `#dialog`                                         |
+| Catalog entry     | heading `{{key}}` in [components.md](components.md)  | `components.md#dialog`                            |
+| Unit test         | `tests/unit/{{key}}.test.js`                         | [dialog.test.js](../../tests/unit/dialog.test.js) |
+| Browser test      | `tests/e2e/{{key}}.spec.js`                          | [dialog.spec.js](../../tests/e2e/dialog.spec.js)  |
+| Translation keys  | `{{key}}.{{name}}`                                   | `dialog.cancel`                                   |
 
 - `{{Key}}` is the key in PascalCase: `dialog` gives `Dialog`, `icon-button` gives `IconButton`.
 - A component without JavaScript, such as the badge, has no module.
@@ -88,12 +88,12 @@ What the rule makes of it:
 ## Utility Modules
 Modules without a component key hold shared helpers and never style anything:
 
-| Module           | Exports                                 | Used by                     |
-| :--------------- | :-------------------------------------- | :-------------------------- |
-| `focus.js`       | focus trap and focus return             | dialog, menu, popover       |
-| `anchor.js`      | `anchorPanel`                           | menu, popover, account menu |
-| `live-region.js` | `createLiveRegion`                      | toast, field, form, loading |
-| `i18n.js`        | `setCatalog`, `applyTranslations`, `t`  | every app                   |
+| Module           | Exports                                | Used by                     |
+| :--------------- | :------------------------------------- | :-------------------------- |
+| `focus.js`       | `tabbableIn`                           | dialog, menu, popover       |
+| `anchor.js`      | `anchorPanel`                          | menu, popover, account menu |
+| `live-region.js` | `createLiveRegion`                     | toast, field, form, loading |
+| `i18n.js`        | `setCatalog`, `applyTranslations`, `t` | every app                   |
 
 - A utility module imports no component module.
 - A new utility module needs an entry in this table.
