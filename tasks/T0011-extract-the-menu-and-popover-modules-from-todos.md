@@ -12,9 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 5.0}
+  worker: {turns: 4, duration_s: 2112.0, input: 344, output: 91796, cache_read: 22977506, cache_write: 317470}
 work_duration: 8.2
 contributors: "@codex"
+review_status: pending
+review_round: 1
 ---
 # T0011: Extract the menu and popover modules from todos.webapp as they are, with keyboard support and anchoring
 
@@ -61,4 +63,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Visual]**
   Menus and popovers anchor inside the viewport, flipping above near the bottom. Evidence: [before](T0011-extract-the-menu-and-popover-modules-from-todos/before-desktop-light.png), [menu](T0011-extract-the-menu-and-popover-modules-from-todos/after-menu-neutral-mobile-light.png), [after](T0011-extract-the-menu-and-popover-modules-from-todos/after-popover-bright-mobile-dark.png).
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
