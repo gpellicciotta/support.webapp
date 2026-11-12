@@ -5,18 +5,20 @@ session: codex-20261112-0f070d
 needs: []
 branch: task/T0004-extract-the-shared-base-tokens-and-the-todos
 worktree: .plan/work/T0004-extract-the-shared-base-tokens-and-the-todos
-status: active
+status: completed
 started_at: "2026-11-12T09:23:39Z"
-ended_at: —
+ended_at: "2026-11-12T09:43:29Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 1702.2, input: 196056, output: 48010, cache_read: 6938368, cache_write: 0}
-  review: {turns: 2, duration_s: 354.4, input: 76, output: 25742, cache_read: 2493108, cache_write: 154118}
-review_status: pending
+  review: {turns: 4, duration_s: 539.2, input: 120, output: 38178, cache_read: 3600256, cache_write: 260562}
+review_status: approved
 review_round: 2
-work_duration: 768.4
+work_duration: 1189.3
+reviewed_by: "@claude"
+completion-commit: c84a2f4dca4c4444a2ca6ca12435538f2e25b922
 ---
 # T0004: Extract the shared base tokens, the contract file, and the neutral look from todos.webapp, with the static token test.
 
@@ -34,7 +36,7 @@ See the technical specification for files, tests, and the completion check.
 - [x] **[Implement]** Write the base files, the contract file, and the neutral look with its fonts, filling contract gaps from its primitives.
 - [x] **[Verify]**    Run the token test and the completion check until both pass.
 - [x] **[Doc]**       Write the neutral look page with its gap tokens, and update CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-11] **[Doc]**
@@ -82,4 +84,11 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 2 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 2 approved by @claude: Approved.
+  - Findings: [review-findings-2.md](T0004-extract-the-shared-base-tokens-and-the-todos/review-findings-2.md).
+
+- [2026-11-12] **[Complete]**
+  Task completed successfully.
 
