@@ -69,6 +69,7 @@
                     <li><a href="#segmented">Segmented control</a></li>
                     <li><a href="#field">Field</a></li>
                     <li><a href="#checkbox">Checkbox</a></li>
+                    <li><a href="#switch">Switch</a></li>
                     <li><a href="#radio">Radio</a></li>
                     <li><a href="#field-group">Field group</a></li>
                     <li><a href="#form">Form</a></li>
@@ -599,6 +600,20 @@
                 <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-disabled" disabled><span class="checkbox__label">Remind me</span></label><span class="state__label">Disabled</span></li>
                 <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-disabled-checked" checked disabled><span class="checkbox__label">Remind me</span></label><span class="state__label">Disabled, checked</span></li>
                 <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-invalid" aria-invalid="true"><span class="checkbox__label">I accept the terms</span></label><span class="state__label">Invalid</span></li>
+            </ul>
+        </section>
+        <section id="switch" class="gallery-section" aria-labelledby="switch-title">
+            <h2 id="switch-title">Switch</h2>
+            <p>Settings that apply immediately; the thumb position shows off or on. The label stays constant.</p>
+            <ul class="states">
+                <li class="state"><label class="switch"><input class="switch__control" type="checkbox" role="switch" name="notifications"><span class="switch__label">Notifications</span></label><span class="state__label">Off</span></li>
+                <li class="state"><label class="switch"><input class="switch__control" type="checkbox" role="switch" checked><span class="switch__label">Notifications</span></label><span class="state__label">On</span></li>
+                <li class="state"><label class="switch is-hover"><input class="switch__control" type="checkbox" role="switch"><span class="switch__label">Notifications</span></label><span class="state__label">Hover</span></li>
+                <li class="state"><label class="switch"><input class="switch__control is-focus" type="checkbox" role="switch"><span class="switch__label">Notifications</span></label><span class="state__label">Focus-visible</span></li>
+                <li class="state"><label class="switch is-active"><input class="switch__control" type="checkbox" role="switch" checked><span class="switch__label">Notifications</span></label><span class="state__label">Active</span></li>
+                <li class="state"><label class="switch"><input class="switch__control" type="checkbox" role="switch" disabled><span class="switch__label">Notifications</span></label><span class="state__label">Disabled, off</span></li>
+                <li class="state"><label class="switch"><input class="switch__control" type="checkbox" role="switch" disabled checked><span class="switch__label">Notifications</span></label><span class="state__label">Disabled, on</span></li>
+                <li class="state"><label class="switch"><input class="switch__control" type="checkbox" role="switch" aria-invalid="true" aria-describedby="switch-error"><span class="switch__label">Notifications</span></label><span class="state__label">Invalid</span><p id="switch-error" class="field__error">Enable notifications to receive alerts.</p></li>
             </ul>
         </section>
         <section id="radio" class="gallery-section" aria-labelledby="radio-title">

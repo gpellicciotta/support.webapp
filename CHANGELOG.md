@@ -8,6 +8,7 @@ All notable changes to this project are documented here.
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- Components: Added accessible native switches with keyboard support, system-palette focus, disabled and invalid states, and position-based state cues.
 - Components: Added loading feedback with polite status, busy content regions, and static skeleton rows for slow lists.
 - Components: Added the collapsible and the account menu, with initials or person icon, current route mark, and gallery sections.
 - Modules: Added `attachCollapsible` in `collapsible.js`, `attachAccountMenu` and `initialsOf` in `account-menu.js`, and `align` to `attachMenu`.

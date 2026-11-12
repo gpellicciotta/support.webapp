@@ -194,14 +194,15 @@ Components reference only core ids; apps may add local glyphs in their own sprit
 ### Controls
 Buttons, chips, and segmented controls keep a 44 px target in every variant, including the small button.
 
-| Key           | Use it for                                                    | Avoid it for                                     | Gallery                                                                 |
-| :------------ | :------------------------------------------------------------ | :----------------------------------------------- | :---------------------------------------------------------------------- |
-| `button`      | One action with a text label; the default marks the main one. | Navigation, which is a link.                     | [Button](../../src/demo/visual-style-gallery.html#button)               |
-| `icon-button` | A frequent action whose icon is clear; toggles add a state.   | Rare or ambiguous actions, which need a label.   | [Icon button](../../src/demo/visual-style-gallery.html#icon-button)     |
-| `link-button` | A secondary action with an underlined text label.             | Navigation, which needs an anchor.               | [Link button](../../src/demo/visual-style-gallery.html#link-button)     |
-| `chip`        | Short metadata, removable values, and filter toggles.         | Actions, which are buttons.                      | [Chip](../../src/demo/visual-style-gallery.html#chip)                   |
-| `segmented`   | One choice among 2 to 5 short options, all visible.           | Longer lists, which use a select or radio group. | [Segmented control](../../src/demo/visual-style-gallery.html#segmented) |
-| `banner`      | A lasting state of the page, above its content.               | Short confirmations, which are toasts.           | [Banner](../../src/demo/visual-style-gallery.html#banner)               |
+| Key           | Use it for                                                    | Avoid it for                                      | Gallery                                                                 |
+| :------------ | :------------------------------------------------------------ | :------------------------------------------------ | :---------------------------------------------------------------------- |
+| `button`      | One action with a text label; the default marks the main one. | Navigation, which is a link.                      | [Button](../../src/demo/visual-style-gallery.html#button)               |
+| `icon-button` | A frequent action whose icon is clear; toggles add a state.   | Rare or ambiguous actions, which need a label.    | [Icon button](../../src/demo/visual-style-gallery.html#icon-button)     |
+| `link-button` | A secondary action with an underlined text label.             | Navigation, which needs an anchor.                | [Link button](../../src/demo/visual-style-gallery.html#link-button)     |
+| `chip`        | Short metadata, removable values, and filter toggles.         | Actions, which are buttons.                       | [Chip](../../src/demo/visual-style-gallery.html#chip)                   |
+| `segmented`   | One choice among 2 to 5 short options, all visible.           | Longer lists, which use a select or radio group.  | [Segmented control](../../src/demo/visual-style-gallery.html#segmented) |
+| `banner`      | A lasting state of the page, above its content.               | Short confirmations, which are toasts.            | [Banner](../../src/demo/visual-style-gallery.html#banner)               |
+| `switch`      | A binary setting that applies immediately.                    | Choices submitted together, which use checkboxes. | [Switch](../../src/demo/visual-style-gallery.html#switch)               |
 
 - Button variants: default, `--secondary`, `--danger`, the `--secondary.button--danger` outline, `--quiet`, `--inverse`, and `--small`.
 - A filled danger button confirms a delete; the danger outline starts one.
@@ -229,17 +230,32 @@ Buttons, chips, and segmented controls keep a 44 px target in every variant, inc
 **[Decided]** The banner error variant is `banner--danger`, matching `button--danger` and the danger tokens.
 - `banner--error`, as in todos.webapp: rejected, because two names would mean the same role.
 
+### Switch
+Use a [switch](../../src/demo/visual-style-gallery.html#switch) for a binary setting that applies immediately.
+Use a checkbox for choices submitted together. Keep the label unchanged when toggling.
+
+**[Decided]** The catalog's native checkbox retains keyboard, form submission, and reset behavior without JavaScript.
+Apply `role="switch"` to the input. Native `checked` owns the state; do not duplicate it with `aria-checked`.
+Listen for the native `change` event when applying a setting.
+The thumb changes position, so color alone never conveys the state.
+Logical properties support RTL. No animation is used.
+
+The label provides a 44 px target. Hover, active, focus, disabled, and invalid specimens use semantic tokens.
+Use native `disabled`, including disabled fieldsets. Connect invalid controls to visible error text with `aria-describedby`.
+Keyboard focus overrides the danger outline. Forced colors preserve the track, thumb, and focus outline.
+Forced colors use `Highlight` for focus and a dashed `CanvasText` outline for invalid controls.
+
 ### Fields and forms
 Fields, choices, and forms follow todos.webapp's field contract, extended with counters' help and validation states.
 
-| Key             | Use it for                                                        | Avoid it for                                       | Gallery                                                                 |
-| :-------------- | :---------------------------------------------------------------- | :------------------------------------------------- | :---------------------------------------------------------------------- |
-| `field`         | One labeled text input, textarea, or select with its messages.    | Choices among a few options, which are radios.     | [Field](../../src/demo/visual-style-gallery.html#field)                 |
-| `checkbox`      | An independent yes or no choice, alone or in a group.             | Settings that apply at once, which are switches.   | [Checkbox](../../src/demo/visual-style-gallery.html#checkbox)           |
-| `radio`         | One choice among options that need a full label each.             | Two to five short options, which are segmented.    | [Radio](../../src/demo/visual-style-gallery.html#radio)                 |
-| `field-group`   | Checkbox groups, radio groups, and related fields under a legend. | A single control, which needs no fieldset.         | [Field group](../../src/demo/visual-style-gallery.html#field-group)     |
-| `form`          | Data the user submits, validated on blur and on submit.           | Filters that apply at once, which need no submit.  | [Form](../../src/demo/visual-style-gallery.html#form)                   |
-| `error-summary` | The list of invalid fields after a failed submit.                 | A single field error, which stays on the field.    | [Error summary](../../src/demo/visual-style-gallery.html#error-summary) |
+| Key             | Use it for                                                        | Avoid it for                                      | Gallery                                                                 |
+| :-------------- | :---------------------------------------------------------------- | :------------------------------------------------ | :---------------------------------------------------------------------- |
+| `field`         | One labeled text input, textarea, or select with its messages.    | Choices among a few options, which are radios.    | [Field](../../src/demo/visual-style-gallery.html#field)                 |
+| `checkbox`      | An independent yes or no choice, alone or in a group.             | Settings that apply at once, which are switches.  | [Checkbox](../../src/demo/visual-style-gallery.html#checkbox)           |
+| `radio`         | One choice among options that need a full label each.             | Two to five short options, which are segmented.   | [Radio](../../src/demo/visual-style-gallery.html#radio)                 |
+| `field-group`   | Checkbox groups, radio groups, and related fields under a legend. | A single control, which needs no fieldset.        | [Field group](../../src/demo/visual-style-gallery.html#field-group)     |
+| `form`          | Data the user submits, validated on blur and on submit.           | Filters that apply at once, which need no submit. | [Form](../../src/demo/visual-style-gallery.html#form)                   |
+| `error-summary` | The list of invalid fields after a failed submit.                 | A single field error, which stays on the field.   | [Error summary](../../src/demo/visual-style-gallery.html#error-summary) |
 
 - `createField(doc, options)` builds the skeleton; `attachField(element, options)` enhances server-rendered markup.
 - `createField` keeps todos.webapp's `{element, control, setError}` result, so its adoption stays lossless.
