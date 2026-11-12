@@ -90,3 +90,64 @@ Inspected captures show the expected areas, the sticky bars, the bottom bar at 3
 | family-portal | [png](screenshots/shell-family-portal-neutral-light-390-system.png)  | [png](screenshots/shell-family-portal-neutral-dark-390-system.png)  | [png](screenshots/shell-family-portal-neutral-light-1440-system.png)   | [png](screenshots/shell-family-portal-neutral-dark-1440-system.png)   |
 
 Gallery bottom at 1440 px, light theme: [before](screenshots/gallery-before.png) and [after](screenshots/gallery-after.png) the App shell section.
+
+## Review Round 1 Rework
+
+### Failing tests before the fixes
+Command: `npx playwright test tests/e2e/shell.spec.js -g "full viewport height|sample menu|both sides" --reporter=line`, exit code 1.
+
+```text
+  1) [desktop-light] › tests\e2e\shell.spec.js:257:1 › the action bar pads both sides with their own safe-area insets
+    Error: expect(received).toContain(expected) // indexOf
+    Received has value: undefined
+  2) [desktop-light] › tests\e2e\shell.spec.js:224:1 › the page scroll mode keeps the sidebar and side panel at the full viewport height on wide screens
+    Error: sidebar
+    Expected: 900
+    Received: 140
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   760
+[... 3 similar failure reports omitted ...]
+  6) [desktop-light] › tests\e2e\shell.spec.js:242:1 › the counters menu button opens its sample menu
+    Error: expect(locator).toHaveAttribute(expected) failed
+    Expected: "true"
+    Received: "false"
+[... 4 similar failure reports omitted ...]
+  10 failed
+  2 skipped
+```
+
+The 2 skipped runs are the viewport-height check at 390 px, where the wide layout does not apply.
+
+### Shell tests after the fixes
+Command: `npx playwright test tests/e2e/shell.spec.js --reporter=line`, exit code 0.
+
+```text
+[... 110 progress lines omitted ...]
+[111/112] [mobile-dark] › tests\e2e\shell.spec.js:268:1 › the gallery links to every shell demo page
+[112/112] [mobile-dark] › tests\e2e\shell.spec.js:278:1 › only shell.css sets fixed or sticky positions and pads bars with safe-area insets
+  2 skipped
+  110 passed (55.9s)
+```
+
+### Full check after the fixes
+Command: `python scripts/devops.py check`, exit code 0.
+
+```text
+All 25 markdown files passed linting.
+All checks passed!
+[... 21 lines omitted ...]
+============================== 3 passed in 4.25s ==============================
+[... 5 lines omitted ...]
+ Test Files  20 passed (20)
+      Tests  2013 passed (2013)
+[... 737 lines omitted ...]
+  ok 461 [mobile-dark] › tests\e2e\verify-ui.spec.js:323:9 › shell-family-portal passes every verifier check in the bright look red (2.4s)
+  ok 464 [mobile-dark] › tests\e2e\warm.spec.js:4:1 › warm seasons preserve source accents on roots and specimen wrappers (2.1s)
+  2 skipped
+  462 passed (3.4m)
+[... 5 lines omitted ...]
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+[... 30 npm pack lines omitted ...]
+```
