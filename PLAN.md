@@ -5,8 +5,8 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0003 Set up the repository tooling: package manifest, linters, unit and browser test runners, devops scripts, and CI.
 - [x] T0004 Extract the shared base tokens, the contract file, and the neutral look from todos.webapp, with the static token test.
 - [x] T0021 Add the i18n module with the data-i18n attributes and the catalog format.
-- [ ] T0014 Add the vendor and check commands of the command line tool, with the package manifest.
-- [ ] T0015 [needs: T0014] Add the GitHub Packages publish workflow and document the release flow of the package.
+- [x] T0014 Add the vendor and check commands of the command line tool, with the package manifest.
+- [ ] T0015 Add the GitHub Packages publish workflow and document the release flow of the package.
 - [ ] T0005 Build the visual style gallery with look and theme switchers, token specimens, and the browser verifier.
 - [ ] T0006 [needs: T0005] Extract the icon sprite format, the icon class, and the createIcon builder, with the neutral glyph set.
 - [ ] T0007 [needs: T0006] Extract the button, icon button, banner, chip, and segmented control components from todos.webapp.
@@ -30,7 +30,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0029 [needs: T0007] Add the badge component for non-interactive counts and status labels, based on meteo's badges.
 - [ ] T0032 [needs: T0020] Add the progress bar and spinner components, static under reduced motion.
 - [ ] T0033 [needs: T0008, T0016] Design and add multi-select with checkbox rows, range selection, and a bulk action bar.
-- [ ] T0022 [needs: T0013, T0014, T0017] Build the Python generate-app devops action and the starter app template.
+- [ ] T0022 [needs: T0013, T0017] Build the Python generate-app devops action and the starter app template.
 - [ ] T0025 [needs: T0022, T0023, T0024] Plan the redesign of auth and counters on the design system.
 - [ ] T0027 [needs: T0010] Add the theme switch and service worker update modules, and document the shared patterns.
 - [x] T0002 Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks.
