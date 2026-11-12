@@ -21,10 +21,10 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0010 Extract the toast and live region modules from todos.webapp, including Undo and modal holding.
 - [x] T0012 Switch the popover and menu modules to the native popover attribute, keeping the anchoring code.
 - [x] T0026 Extract the collapsible and the account menu components from todos.webapp.
-- [!] T0013 [reason: needs review: confirm counters keeps its actions in the action bar on wide screens, deviating from ADR-0004] [owner: @claude] Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
+- [!] T0013 [reason: circuit breaker: 3 consecutive review rejections; inspect review findings before resuming] [owner: @claude] Build the app shell stylesheet with its optional areas, scroll modes, width options, and demo pages.
 - [ ] T0028 [needs: T0013] Extract the floating action button from todos.webapp into the overlay layer of the shell.
 - [x] T0020 Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons.
-- [ ] T0019 Design and add an accessible switch component.
+- [~] T0019 [owner: @codex] Design and add an accessible switch component.
 - [ ] T0030 Design and add the tabs component with tablist roles and arrow-key navigation.
 - [ ] T0031 Design and add the list and data table components on native list and table elements.
 - [ ] T0024 Add the tooltip component after a screen reader check of meteo's tooltips.
@@ -38,4 +38,5 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0001 Compare the UI design of todos.webapp, family-portal, meteo, auth, and counters, from tokens to app shells.
 
 ## Backlog
+- [ ] T0036 Fix the gallery specs that read styles before a look switch settles, seen failing under load in bright and card.
 - [ ] T0035 Move field and form announcements to the shared live region module, so each page has one polite region.
