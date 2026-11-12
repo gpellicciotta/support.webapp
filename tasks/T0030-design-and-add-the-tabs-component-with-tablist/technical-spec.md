@@ -14,13 +14,14 @@ Design and add the tabs component with tablist roles and arrow-key navigation
 - `src/js/tabs.js`
 - `src/css/style.css`
 - `src/demo/visual-style-gallery.html`
+- `src/demo/gallery.js`
 - `tests/unit/tabs.test.js`
 - `tests/e2e/tabs.spec.js`
 - `docs/specs/visual-style-guide.md`
 - `docs/specs/components.md`
 - `CHANGELOG.md`
 
-Size estimate: 9 files, 500 lines
+Size estimate: 10 files, 500 lines
 Size note: The tabs styles, module, and tests form one component; splitting them leaves an untested half.
 
 ### Tests
