@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1054.6, input: 229948, output: 31464, cache_read: 5165312, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0009: Extract the dialog component and its three confirmation tiers from todos.webapp
 
@@ -66,4 +70,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Verify]**
   Committed the verified implementation as 54aed5e. All execution steps except Review are checked; agent review remains orchestrator-owned. No push or mainline integration was performed.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
