@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 552.2, input: 111308, output: 15278, cache_read: 1281536, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0021: Add the i18n module with the data-i18n attributes and the catalog format
 
@@ -53,4 +57,7 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Doc]**
   Added the internationalization usage specification, linked the naming contract, and updated the active changelog heading. The utility introduces no style changes.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
