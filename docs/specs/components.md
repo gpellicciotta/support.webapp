@@ -294,10 +294,10 @@ Icon tile.
 ```
 
 ### row
-Row base. The list is a size container, so rows adapt to their column width.
+Row base. The `.row__list` list is a size container, so rows adapt to their column width.
 
 ```html
-<ul class="list">
+<ul class="list row__list">
   <li class="row">
     <span class="row__main">Buy milk</span>
     <span class="row__actions"><button class="icon-button" type="button" aria-label="More actions for Buy milk">...</button></span>

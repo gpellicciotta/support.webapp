@@ -8,6 +8,7 @@ All notable changes to this project are documented here.
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- Components: Added empty states with up to two actions and container-responsive row layouts with keyboard-accessible trailing actions.
 - Components: Added the link button with five states, accessible targets, source underline spacing, gallery specimens, and browser coverage.
 - Components: Added the button, icon button, chip, segmented control, and banner, with the global focus ring and gallery sections.
 - Components: Added the `.icon` class with three sizes, the `createIcon` builder, the neutral sprite, and sprite checks in the tests and verifier.

@@ -116,6 +116,23 @@ Buttons, chips, and segmented controls keep a 44 px target in every variant, inc
 
 ---
 
+### Empty state
+Use [the empty state](../../src/demo/visual-style-gallery.html#empty-state) when a view has no content or search results.
+Compose `.empty-state` with an optional decorative `.icon.icon--lg`, `.empty-state__title`, `.empty-state__text`, and optional `.empty-state__actions`.
+Choose the heading level for the surrounding page hierarchy; hide decorative icons from assistive technology.
+Provide zero, one, or two actions using existing button components.
+The two-action maximum is an authoring contract; CSS never hides extra controls.
+Use a banner for errors or loading feedback instead.
+
+### Row base
+Use [the row base](../../src/demo/visual-style-gallery.html#row) for dense items with optional trailing actions.
+Use native list markup: `.list.row__list` contains `.row`, with `.row__main` and optional `.row__actions`.
+The `.row__list` class establishes the `row-list` size container and removes default list spacing and markers.
+Below 36rem of container width, actions wrap below the content and remain keyboard reachable.
+Long content wraps without truncation; action buttons retain their existing focus, disabled, and touch-target behavior.
+Task status, drag handles, selection, navigation, and row interactions remain app-local.
+Use a table when columns need shared alignment across rows.
+
 ## Patterns
 No pattern is built yet.
 Each pattern task adds its intent, when to use it, when not to, and a gallery link here.

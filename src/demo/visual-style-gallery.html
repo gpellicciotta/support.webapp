@@ -535,6 +535,45 @@
                 </div>
             </div>
         </section>
+        <section id="empty-state" class="gallery-section" aria-labelledby="empty-state-title">
+            <h2 id="empty-state-title">Empty state</h2>
+            <p>Use a short heading and explanation, with zero, one, or two actions.</p>
+            <div class="empty-state">
+                <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-note"/></svg>
+                <h3 class="empty-state__title">Nothing to display</h3>
+                <p class="empty-state__text">Items shared with you will appear here.</p>
+            </div>
+            <div class="empty-state">
+                <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-note"/></svg>
+                <h3 class="empty-state__title">No items yet</h3>
+                <p class="empty-state__text">Create an item to get started.</p>
+                <div class="empty-state__actions"><button class="button" type="button">Create item</button></div>
+            </div>
+            <div class="empty-state">
+                <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-note"/></svg>
+                <h3 class="empty-state__title">No matching items</h3>
+                <p class="empty-state__text">Try a different search or clear your filters.</p>
+                <div class="empty-state__actions">
+                    <button class="button" type="button">Clear filters</button>
+                    <button class="button button--secondary" type="button">Search again</button>
+                </div>
+            </div>
+        </section>
+        <section id="row" class="gallery-section" aria-labelledby="row-title">
+            <h2 id="row-title">Row base</h2>
+            <p>Rows respond to their list width. Below 36rem, actions wrap below the content and remain keyboard accessible.</p>
+            <ul class="list row__list">
+                <li class="row">
+                    <span class="row__main">Shared collection</span>
+                    <span class="row__actions"><button class="icon-button" type="button" aria-label="More actions for Shared collection"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-more"/></svg></button></span>
+                </li>
+                <li class="row">
+                    <span class="row__main">A longer collection name that wraps within its column without displacing the trailing actions</span>
+                    <span class="row__actions"><button class="button button--secondary" type="button">Open collection</button></span>
+                </li>
+                <li class="row"><span class="row__main">A row without actions</span></li>
+            </ul>
+        </section>
     </main>
 </body>
 </html>
