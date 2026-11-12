@@ -11,7 +11,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0005 Build the visual style gallery with look and theme switchers, token specimens, and the browser verifier.
 - [x] T0006 Extract the icon sprite format, the icon class, and the createIcon builder, with the neutral glyph set.
 - [x] T0007 Extract the button, icon button, banner, chip, and segmented control components from todos.webapp.
-- [ ] T0016 Extract the empty state and the row base components from todos.webapp.
+- [x] T0016 Extract the empty state and the row base components from todos.webapp.
 - [ ] T0017 Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
 - [ ] T0018 [needs: T0017] Extract the card, tile, and avatar components from family-portal.
 - [ ] T0008 Extract fields, checkboxes, radios, and createField from todos.webapp, adding forms, validation states, help toggles, and error summaries.
@@ -26,11 +26,11 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0020 Design and add the loading pattern: aria-busy, a polite status line, and slow-list skeletons.
 - [ ] T0019 Design and add an accessible switch component.
 - [ ] T0030 Design and add the tabs component with tablist roles and arrow-key navigation.
-- [ ] T0031 [needs: T0016] Design and add the list and data table components on native list and table elements.
+- [ ] T0031 Design and add the list and data table components on native list and table elements.
 - [ ] T0024 [needs: T0012] Add the tooltip component after a screen reader check of meteo's tooltips.
 - [ ] T0029 Add the badge component for non-interactive counts and status labels, based on meteo's badges.
 - [ ] T0032 [needs: T0020] Add the progress bar and spinner components, static under reduced motion.
-- [ ] T0033 [needs: T0008, T0016] Design and add multi-select with checkbox rows, range selection, and a bulk action bar.
+- [ ] T0033 [needs: T0008] Design and add multi-select with checkbox rows, range selection, and a bulk action bar.
 - [ ] T0022 [needs: T0013, T0017] Build the Python generate-app devops action and the starter app template.
 - [ ] T0025 [needs: T0022, T0023, T0024] Plan the redesign of auth and counters on the design system.
 - [ ] T0027 [needs: T0010] Add the theme switch and service worker update modules, and document the shared patterns.
