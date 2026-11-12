@@ -8,6 +8,8 @@ All notable changes to this project are documented here.
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- FrontEnd: Added the visual style gallery with look and theme switchers, specimens of every token group, and the [visual style guide](docs/specs/visual-style-guide.md).
+- DevEx: Added the browser verifier for status, loading, errors, overflow, contrast, targets, and focus, and widened desktop tests to 1440 px.
 - DevEx: Added the GitHub Packages publish workflow for published releases, documented the release flow, and declared the changelog areas.
 - CLI: Added `vendor` and `check` commands, with a hashed package manifest, the `design.json` pin, and integrity and conformance checks.
 - FrontEnd: Added flat translation catalogs, parameter interpolation, and scoped translation of text, accessibility labels, tooltips, and placeholders.

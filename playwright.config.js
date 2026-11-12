@@ -29,8 +29,8 @@ export default defineConfig({
     timeout: 120_000,
     use: { baseURL, browserName: 'chromium' },
     projects: [
-        { name: 'desktop-light', use: { viewport: { width: 1280, height: 800 }, colorScheme: 'light' } },
-        { name: 'desktop-dark', use: { viewport: { width: 1280, height: 800 }, colorScheme: 'dark' } },
+        { name: 'desktop-light', use: { viewport: { width: 1440, height: 900 }, colorScheme: 'light' } },
+        { name: 'desktop-dark', use: { viewport: { width: 1440, height: 900 }, colorScheme: 'dark' } },
         { name: 'mobile-light', use: { viewport: { width: 390, height: 844 }, colorScheme: 'light' } },
         { name: 'mobile-dark', use: { viewport: { width: 390, height: 844 }, colorScheme: 'dark' } }
     ],

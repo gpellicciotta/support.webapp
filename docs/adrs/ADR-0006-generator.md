@@ -71,7 +71,7 @@ Generated app, web root:
 - `src/index.html` with the shell markup for the chosen options.
 - `src/css/style.css`, which imports the vendored look entry and holds the app's own partials.
 - `src/js/main.js`, a web manifest, a service worker that precaches the vendored entry points, and an offline page.
-- `src/demo/visual-style-gallery.html` for local components, and `docs/specs/visual-style-guide.md`.
+- `src/demo/visual-style-gallery.html` for local components, and the app's own visual style guide in `docs/specs/`.
   The guide names the shared system, its version, and every local addition, as the ui-guidelines require.
 
 Generated app, project files from the project-setup guidelines:

@@ -26,7 +26,7 @@ Gallery:
 - Each component has one section with `id="{{key}}"`, as [naming.md](../specs/naming.md) defines.
 
 Style guide:
-- `docs/specs/visual-style-guide.md` covers principles, token groups, patterns, and the shell.
+- [visual-style-guide.md](../specs/visual-style-guide.md) covers principles, token groups, patterns, and the shell.
 - [components.md](../specs/components.md) is the component catalog: each component's key, markup skeleton, variants, states, and accessibility minimum.
 - Each component and pattern links to its gallery section and states when to use it and when not to.
 - One page per look under `docs/specs/looks/` covers palette intent, fonts, variants, glyph origin and license, and look decisions.

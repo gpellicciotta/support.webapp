@@ -9,6 +9,7 @@ Overview of all documentation for the `support.webapp` project.
 - [PLAN.md](../PLAN.md): Task index for planned, active, and backlog work.
 - [LICENSE.md](../LICENSE.md): MIT License.
 - [requirements.md](requirements.md): Goals, scope, and constraints of the design system.
+- [visual-style-guide.md](specs/visual-style-guide.md): Principles, token groups, gallery, and the browser verifier.
 - [components.md](specs/components.md): Component catalog with markup skeletons, statuses, and owning tasks.
 - [naming.md](specs/naming.md): Naming conventions linking tokens, HTML classes, CSS files, modules, and tests.
 - [i18n.md](specs/i18n.md): Translation catalogs, interpolation, markup attributes, and application lifecycle.

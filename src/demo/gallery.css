@@ -1,0 +1,326 @@
+/* Specimen layout of the visual style gallery. Only semantic tokens; apps never load this file. */
+
+/* Page: the base text and ground, until the package ships element styles. */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+h1, h2 {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-xl); }
+p { margin: 0 0 var(--space-4); }
+code { font-family: var(--font-mono); font-size: var(--text-sm); }
+a { color: var(--color-link); }
+a:hover { color: var(--color-link-hover); }
+
+:where(a, button, input, select, summary):focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Header and main column. */
+.gallery-header {
+  background-color: var(--color-surface);
+  border-block-end: var(--border-width) solid var(--color-border);
+}
+
+.gallery-header__inner, .gallery-main {
+  max-inline-size: var(--width-content);
+  margin-inline: auto;
+  padding: var(--space-6) var(--gutter);
+}
+
+/* Look and theme switchers. */
+.gallery-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-4) var(--space-7);
+  margin-block-end: var(--space-4);
+}
+
+.gallery-controls__look {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.gallery-controls label, .gallery-controls legend { font-weight: var(--weight-medium); }
+
+.gallery-controls select {
+  min-block-size: var(--control-height);
+  min-inline-size: var(--width-menu);
+  padding-inline: var(--space-3);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.gallery-controls__theme {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.gallery-controls__theme legend {
+  float: inline-start;
+  inline-size: 100%;
+  margin-block-end: var(--space-1);
+  padding: 0;
+}
+
+.gallery-controls__theme label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: var(--target-min);
+  min-inline-size: var(--target-min);
+  padding-inline: var(--space-3);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface);
+  cursor: pointer;
+}
+
+.gallery-controls__theme label:has(:checked) { background-color: var(--color-surface-selected); }
+
+.gallery-controls__theme input {
+  margin: 0;
+  accent-color: var(--color-primary);
+}
+
+/* Section navigation: standalone links with full-size targets. */
+.gallery-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--target-min);
+  min-inline-size: var(--target-min);
+  padding-inline: var(--space-2);
+}
+
+/* Token group sections and specimen cards. */
+.gallery-section {
+  margin-block-end: var(--space-9);
+  scroll-margin-block-start: var(--space-4);
+}
+
+.token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-sidebar)), 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.token {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-inline-size: 0;
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+}
+
+.token__name {
+  font-weight: var(--weight-medium);
+  overflow-wrap: anywhere;
+}
+
+.token__value {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  overflow-wrap: anywhere;
+}
+
+.token.is-undefined .token__value { font-family: var(--font-body); font-style: italic; }
+.token.is-undefined .token__sample { border-style: dashed; }
+
+/* Specimen kinds; each reads the token its card maps to --specimen. */
+.token__sample { display: block; }
+
+.token__sample--swatch {
+  block-size: var(--space-11);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-control);
+  background-color: var(--specimen);
+}
+
+.token__sample--bar {
+  inline-size: var(--specimen);
+  max-inline-size: 100%;
+  block-size: var(--space-3);
+  background-color: var(--color-primary);
+}
+
+.token__sample--square {
+  inline-size: var(--specimen);
+  block-size: var(--specimen);
+  background-color: var(--color-text);
+}
+
+.token__sample--radius, .token__sample--shadow, .token__sample--ring {
+  inline-size: var(--space-11);
+  block-size: var(--space-11);
+  margin: var(--space-2);
+  border: var(--border-width) solid var(--color-border-strong);
+  background-color: var(--color-surface-sunken);
+}
+
+.token__sample--radius { border-radius: var(--specimen); }
+.token__sample--shadow { border-color: var(--color-border); background-color: var(--color-surface); box-shadow: var(--specimen); }
+.token__sample--ring { outline: var(--specimen); outline-offset: var(--focus-ring-offset); }
+.token__sample--line { block-size: 0; border-block-start: var(--specimen) solid var(--color-text); }
+.token__sample--size { font-size: var(--specimen); line-height: var(--leading-tight); }
+.token__sample--leading { max-inline-size: var(--width-menu); line-height: var(--specimen); }
+.token__sample--tracking { letter-spacing: var(--specimen); }
+.token__sample--weight { font-weight: var(--specimen); }
+.token__sample--font { font-family: var(--specimen); }
+
+/* Token mappings: one rule per contract token, in section order. */
+.token--color-bg { --specimen: var(--color-bg); }
+.token--color-surface { --specimen: var(--color-surface); }
+.token--color-surface-sunken { --specimen: var(--color-surface-sunken); }
+.token--color-surface-hover { --specimen: var(--color-surface-hover); }
+.token--color-surface-selected { --specimen: var(--color-surface-selected); }
+.token--color-surface-active { --specimen: var(--color-surface-active); }
+.token--color-text { --specimen: var(--color-text); }
+.token--color-text-muted { --specimen: var(--color-text-muted); }
+.token--color-text-disabled { --specimen: var(--color-text-disabled); }
+.token--color-link { --specimen: var(--color-link); }
+.token--color-link-hover { --specimen: var(--color-link-hover); }
+.token--color-border { --specimen: var(--color-border); }
+.token--color-border-strong { --specimen: var(--color-border-strong); }
+.token--color-focus { --specimen: var(--color-focus); }
+.token--color-primary { --specimen: var(--color-primary); }
+.token--color-primary-hover { --specimen: var(--color-primary-hover); }
+.token--color-primary-active { --specimen: var(--color-primary-active); }
+.token--color-on-primary { --specimen: var(--color-on-primary); }
+.token--color-danger { --specimen: var(--color-danger); }
+.token--color-danger-hover { --specimen: var(--color-danger-hover); }
+.token--color-danger-active { --specimen: var(--color-danger-active); }
+.token--color-on-danger { --specimen: var(--color-on-danger); }
+.token--color-danger-bg { --specimen: var(--color-danger-bg); }
+.token--color-success { --specimen: var(--color-success); }
+.token--color-success-bg { --specimen: var(--color-success-bg); }
+.token--color-on-success { --specimen: var(--color-on-success); }
+.token--color-warning { --specimen: var(--color-warning); }
+.token--color-warning-bg { --specimen: var(--color-warning-bg); }
+.token--color-on-warning { --specimen: var(--color-on-warning); }
+.token--color-shadow { --specimen: var(--color-shadow); }
+.token--color-backdrop { --specimen: var(--color-backdrop); }
+.token--color-accent { --specimen: var(--color-accent); }
+.token--color-accent-bg { --specimen: var(--color-accent-bg); }
+.token--color-inverse { --specimen: var(--color-inverse); }
+.token--color-tone-1 { --specimen: var(--color-tone-1); }
+.token--color-on-tone-1 { --specimen: var(--color-on-tone-1); }
+.token--color-tone-2 { --specimen: var(--color-tone-2); }
+.token--color-on-tone-2 { --specimen: var(--color-on-tone-2); }
+.token--color-tone-3 { --specimen: var(--color-tone-3); }
+.token--color-on-tone-3 { --specimen: var(--color-on-tone-3); }
+.token--color-tone-4 { --specimen: var(--color-tone-4); }
+.token--color-on-tone-4 { --specimen: var(--color-on-tone-4); }
+.token--color-status-in-progress { --specimen: var(--color-status-in-progress); }
+.token--color-status-completed { --specimen: var(--color-status-completed); }
+.token--color-status-cancelled { --specimen: var(--color-status-cancelled); }
+.token--font-body { --specimen: var(--font-body); }
+.token--font-mono { --specimen: var(--font-mono); }
+.token--weight-regular { --specimen: var(--weight-regular); }
+.token--weight-medium { --specimen: var(--weight-medium); }
+.token--weight-semibold { --specimen: var(--weight-semibold); }
+.token--font-heading { --specimen: var(--font-heading); }
+.token--weight-bold { --specimen: var(--weight-bold); }
+.token--text-xs { --specimen: var(--text-xs); }
+.token--text-sm { --specimen: var(--text-sm); }
+.token--text-base { --specimen: var(--text-base); }
+.token--text-lg { --specimen: var(--text-lg); }
+.token--text-xl { --specimen: var(--text-xl); }
+.token--leading-tight { --specimen: var(--leading-tight); }
+.token--leading-normal { --specimen: var(--leading-normal); }
+.token--text-md { --specimen: var(--text-md); }
+.token--text-2xl { --specimen: var(--text-2xl); }
+.token--text-3xl { --specimen: var(--text-3xl); }
+.token--leading-relaxed { --specimen: var(--leading-relaxed); }
+.token--tracking-normal { --specimen: var(--tracking-normal); }
+.token--tracking-tight { --specimen: var(--tracking-tight); }
+.token--space-1 { --specimen: var(--space-1); }
+.token--space-2 { --specimen: var(--space-2); }
+.token--space-3 { --specimen: var(--space-3); }
+.token--space-4 { --specimen: var(--space-4); }
+.token--space-5 { --specimen: var(--space-5); }
+.token--space-6 { --specimen: var(--space-6); }
+.token--space-7 { --specimen: var(--space-7); }
+.token--space-8 { --specimen: var(--space-8); }
+.token--space-9 { --specimen: var(--space-9); }
+.token--space-10 { --specimen: var(--space-10); }
+.token--space-11 { --specimen: var(--space-11); }
+.token--space-12 { --specimen: var(--space-12); }
+.token--radius-round { --specimen: var(--radius-round); }
+.token--radius-control { --specimen: var(--radius-control); }
+.token--radius-button { --specimen: var(--radius-button); }
+.token--radius-chip { --specimen: var(--radius-chip); }
+.token--radius-card { --specimen: var(--radius-card); }
+.token--radius-dialog { --specimen: var(--radius-dialog); }
+.token--border-width { --specimen: var(--border-width); }
+.token--border-width-strong { --specimen: var(--border-width-strong); }
+.token--focus-ring-width { --specimen: var(--focus-ring-width); }
+.token--focus-ring-offset { --specimen: var(--focus-ring-offset); }
+.token--focus-ring-offset-inset { --specimen: var(--focus-ring-offset-inset); }
+.token--focus-ring { --specimen: var(--focus-ring); }
+.token--elevation-1 { --specimen: var(--elevation-1); }
+.token--elevation-2 { --specimen: var(--elevation-2); }
+.token--layer-base { --specimen: var(--layer-base); }
+.token--layer-sticky { --specimen: var(--layer-sticky); }
+.token--layer-float { --specimen: var(--layer-float); }
+.token--layer-popover { --specimen: var(--layer-popover); }
+.token--layer-dialog { --specimen: var(--layer-dialog); }
+.token--layer-toast { --specimen: var(--layer-toast); }
+.token--duration-fast { --specimen: var(--duration-fast); }
+.token--duration-base { --specimen: var(--duration-base); }
+.token--duration-spin { --specimen: var(--duration-spin); }
+.token--ease-standard { --specimen: var(--ease-standard); }
+.token--offset-press { --specimen: var(--offset-press); }
+.token--offset-lift { --specimen: var(--offset-lift); }
+.token--target-min { --specimen: var(--target-min); }
+.token--icon-md { --specimen: var(--icon-md); }
+.token--icon-stroke { --specimen: var(--icon-stroke); }
+.token--icon-lg { --specimen: var(--icon-lg); }
+.token--control-height { --specimen: var(--control-height); }
+.token--icon-sm { --specimen: var(--icon-sm); }
+.token--icon-stroke-thin { --specimen: var(--icon-stroke-thin); }
+.token--width-main { --specimen: var(--width-main); }
+.token--width-sidebar { --specimen: var(--width-sidebar); }
+.token--width-side-panel { --specimen: var(--width-side-panel); }
+.token--width-menu { --specimen: var(--width-menu); }
+.token--width-content { --specimen: var(--width-content); }
+.token--width-narrow { --specimen: var(--width-narrow); }
+.token--width-reading { --specimen: var(--width-reading); }
+.token--gutter { --specimen: var(--gutter); }

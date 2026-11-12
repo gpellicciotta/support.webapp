@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,">
+    <title>Visual style gallery · support.webapp</title>
+    <link id="look-stylesheet" rel="stylesheet" href="../looks/neutral/index.css">
+    <link rel="stylesheet" href="gallery.css">
+    <script type="module" src="gallery.js"></script>
+</head>
+<body>
+    <header class="gallery-header">
+        <div class="gallery-header__inner">
+            <h1>Visual style gallery</h1>
+            <p>Every token group of the selected look, in the selected theme, with placeholder content only.
+                The visual style guide, <code>docs/specs/visual-style-guide.md</code>, explains when to use each group.</p>
+            <form class="gallery-controls" aria-label="Gallery settings">
+                <div class="gallery-controls__look">
+                    <label for="look-select">Look</label>
+                    <select id="look-select" name="look">
+                        <option value="neutral">Neutral</option>
+                    </select>
+                </div>
+                <fieldset class="gallery-controls__theme">
+                    <legend>Theme</legend>
+                    <label><input type="radio" name="theme" value="system" checked> System</label>
+                    <label><input type="radio" name="theme" value="light"> Light</label>
+                    <label><input type="radio" name="theme" value="dark"> Dark</label>
+                </fieldset>
+            </form>
+            <nav aria-label="Token groups">
+                <ul class="gallery-nav">
+                    <li><a href="#tokens-grounds">Grounds</a></li>
+                    <li><a href="#tokens-text">Text</a></li>
+                    <li><a href="#tokens-lines-and-focus">Lines and focus</a></li>
+                    <li><a href="#tokens-main-action">Main action</a></li>
+                    <li><a href="#tokens-danger">Danger</a></li>
+                    <li><a href="#tokens-success-and-warning">Success and warning</a></li>
+                    <li><a href="#tokens-overlay">Overlay</a></li>
+                    <li><a href="#tokens-optional-per-look">Optional per look</a></li>
+                    <li><a href="#tokens-fonts">Fonts</a></li>
+                    <li><a href="#tokens-type">Type</a></li>
+                    <li><a href="#tokens-space">Space</a></li>
+                    <li><a href="#tokens-radius-roles">Radius roles</a></li>
+                    <li><a href="#tokens-lines">Lines</a></li>
+                    <li><a href="#tokens-elevation">Elevation</a></li>
+                    <li><a href="#tokens-layers">Layers</a></li>
+                    <li><a href="#tokens-motion">Motion</a></li>
+                    <li><a href="#tokens-sizes">Sizes</a></li>
+                    <li><a href="#tokens-widths">Widths</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="gallery-main">
+        <section id="tokens-grounds" class="gallery-section" aria-labelledby="tokens-grounds-title">
+            <h2 id="tokens-grounds-title">Grounds</h2>
+            <p>Page and surface backgrounds, from the page ground to the selected and active surfaces.</p>
+            <ul class="token-grid">
+                <li class="token token--color-bg" data-token="--color-bg"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-bg</code><span class="token__value"></span></li>
+                <li class="token token--color-surface" data-token="--color-surface"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-surface</code><span class="token__value"></span></li>
+                <li class="token token--color-surface-sunken" data-token="--color-surface-sunken"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-surface-sunken</code><span class="token__value"></span></li>
+                <li class="token token--color-surface-hover" data-token="--color-surface-hover"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-surface-hover</code><span class="token__value"></span></li>
+                <li class="token token--color-surface-selected" data-token="--color-surface-selected"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-surface-selected</code><span class="token__value"></span></li>
+                <li class="token token--color-surface-active" data-token="--color-surface-active"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-surface-active</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-text" class="gallery-section" aria-labelledby="tokens-text-title">
+            <h2 id="tokens-text-title">Text</h2>
+            <p>Body, muted, and disabled text, and link colors.</p>
+            <ul class="token-grid">
+                <li class="token token--color-text" data-token="--color-text"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-text</code><span class="token__value"></span></li>
+                <li class="token token--color-text-muted" data-token="--color-text-muted"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-text-muted</code><span class="token__value"></span></li>
+                <li class="token token--color-text-disabled" data-token="--color-text-disabled"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-text-disabled</code><span class="token__value"></span></li>
+                <li class="token token--color-link" data-token="--color-link"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-link</code><span class="token__value"></span></li>
+                <li class="token token--color-link-hover" data-token="--color-link-hover"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-link-hover</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-lines-and-focus" class="gallery-section" aria-labelledby="tokens-lines-and-focus-title">
+            <h2 id="tokens-lines-and-focus-title">Lines and focus</h2>
+            <p>Borders, strong control borders, and the focus ring color.</p>
+            <ul class="token-grid">
+                <li class="token token--color-border" data-token="--color-border"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-border</code><span class="token__value"></span></li>
+                <li class="token token--color-border-strong" data-token="--color-border-strong"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-border-strong</code><span class="token__value"></span></li>
+                <li class="token token--color-focus" data-token="--color-focus"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-focus</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-main-action" class="gallery-section" aria-labelledby="tokens-main-action-title">
+            <h2 id="tokens-main-action-title">Main action</h2>
+            <p>The primary action color, its hover and active states, and the text on it.</p>
+            <ul class="token-grid">
+                <li class="token token--color-primary" data-token="--color-primary"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-primary</code><span class="token__value"></span></li>
+                <li class="token token--color-primary-hover" data-token="--color-primary-hover"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-primary-hover</code><span class="token__value"></span></li>
+                <li class="token token--color-primary-active" data-token="--color-primary-active"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-primary-active</code><span class="token__value"></span></li>
+                <li class="token token--color-on-primary" data-token="--color-on-primary"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-on-primary</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-danger" class="gallery-section" aria-labelledby="tokens-danger-title">
+            <h2 id="tokens-danger-title">Danger</h2>
+            <p>Destructive actions and errors, with their states, text on them, and the danger ground.</p>
+            <ul class="token-grid">
+                <li class="token token--color-danger" data-token="--color-danger"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-danger</code><span class="token__value"></span></li>
+                <li class="token token--color-danger-hover" data-token="--color-danger-hover"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-danger-hover</code><span class="token__value"></span></li>
+                <li class="token token--color-danger-active" data-token="--color-danger-active"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-danger-active</code><span class="token__value"></span></li>
+                <li class="token token--color-on-danger" data-token="--color-on-danger"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-on-danger</code><span class="token__value"></span></li>
+                <li class="token token--color-danger-bg" data-token="--color-danger-bg"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-danger-bg</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-success-and-warning" class="gallery-section" aria-labelledby="tokens-success-and-warning-title">
+            <h2 id="tokens-success-and-warning-title">Success and warning</h2>
+            <p>Success and warning roles, the text on them, and their grounds.</p>
+            <ul class="token-grid">
+                <li class="token token--color-success" data-token="--color-success"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-success</code><span class="token__value"></span></li>
+                <li class="token token--color-success-bg" data-token="--color-success-bg"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-success-bg</code><span class="token__value"></span></li>
+                <li class="token token--color-on-success" data-token="--color-on-success"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-on-success</code><span class="token__value"></span></li>
+                <li class="token token--color-warning" data-token="--color-warning"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-warning</code><span class="token__value"></span></li>
+                <li class="token token--color-warning-bg" data-token="--color-warning-bg"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-warning-bg</code><span class="token__value"></span></li>
+                <li class="token token--color-on-warning" data-token="--color-on-warning"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-on-warning</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-overlay" class="gallery-section" aria-labelledby="tokens-overlay-title">
+            <h2 id="tokens-overlay-title">Overlay</h2>
+            <p>Shadow tint and the backdrop behind dialogs.</p>
+            <ul class="token-grid">
+                <li class="token token--color-shadow" data-token="--color-shadow"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-shadow</code><span class="token__value"></span></li>
+                <li class="token token--color-backdrop" data-token="--color-backdrop"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-backdrop</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-optional-per-look" class="gallery-section" aria-labelledby="tokens-optional-per-look-title">
+            <h2 id="tokens-optional-per-look-title">Optional per look</h2>
+            <p>Roles a look may define; this look leaves some undefined.</p>
+            <ul class="token-grid">
+                <li class="token token--color-accent" data-token="--color-accent"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-accent</code><span class="token__value"></span></li>
+                <li class="token token--color-accent-bg" data-token="--color-accent-bg"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-accent-bg</code><span class="token__value"></span></li>
+                <li class="token token--color-inverse" data-token="--color-inverse"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-inverse</code><span class="token__value"></span></li>
+                <li class="token token--color-tone-1" data-token="--color-tone-1"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-tone-1</code><span class="token__value"></span></li>
+                <li class="token token--color-on-tone-1" data-token="--color-on-tone-1"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-on-tone-1</code><span class="token__value"></span></li>
+                <li class="token token--color-tone-2" data-token="--color-tone-2"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-tone-2</code><span class="token__value"></span></li>
+                <li class="token token--color-on-tone-2" data-token="--color-on-tone-2"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-on-tone-2</code><span class="token__value"></span></li>
+                <li class="token token--color-tone-3" data-token="--color-tone-3"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-tone-3</code><span class="token__value"></span></li>
+                <li class="token token--color-on-tone-3" data-token="--color-on-tone-3"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-on-tone-3</code><span class="token__value"></span></li>
+                <li class="token token--color-tone-4" data-token="--color-tone-4"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-tone-4</code><span class="token__value"></span></li>
+                <li class="token token--color-on-tone-4" data-token="--color-on-tone-4"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-on-tone-4</code><span class="token__value"></span></li>
+                <li class="token token--color-status-in-progress" data-token="--color-status-in-progress"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-status-in-progress</code><span class="token__value"></span></li>
+                <li class="token token--color-status-completed" data-token="--color-status-completed"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-status-completed</code><span class="token__value"></span></li>
+                <li class="token token--color-status-cancelled" data-token="--color-status-cancelled"><span class="token__sample token__sample--swatch" aria-hidden="true"></span><code class="token__name">--color-status-cancelled</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-fonts" class="gallery-section" aria-labelledby="tokens-fonts-title">
+            <h2 id="tokens-fonts-title">Fonts</h2>
+            <p>Font stacks and weights.</p>
+            <ul class="token-grid">
+                <li class="token token--font-body" data-token="--font-body"><span class="token__sample token__sample--font" aria-hidden="true">Placeholder text 0123</span><code class="token__name">--font-body</code><span class="token__value"></span></li>
+                <li class="token token--font-mono" data-token="--font-mono"><span class="token__sample token__sample--font" aria-hidden="true">Placeholder text 0123</span><code class="token__name">--font-mono</code><span class="token__value"></span></li>
+                <li class="token token--weight-regular" data-token="--weight-regular"><span class="token__sample token__sample--weight" aria-hidden="true">Placeholder text</span><code class="token__name">--weight-regular</code><span class="token__value"></span></li>
+                <li class="token token--weight-medium" data-token="--weight-medium"><span class="token__sample token__sample--weight" aria-hidden="true">Placeholder text</span><code class="token__name">--weight-medium</code><span class="token__value"></span></li>
+                <li class="token token--weight-semibold" data-token="--weight-semibold"><span class="token__sample token__sample--weight" aria-hidden="true">Placeholder text</span><code class="token__name">--weight-semibold</code><span class="token__value"></span></li>
+                <li class="token token--font-heading" data-token="--font-heading"><span class="token__sample token__sample--font" aria-hidden="true">Placeholder text 0123</span><code class="token__name">--font-heading</code><span class="token__value"></span></li>
+                <li class="token token--weight-bold" data-token="--weight-bold"><span class="token__sample token__sample--weight" aria-hidden="true">Placeholder text</span><code class="token__name">--weight-bold</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-type" class="gallery-section" aria-labelledby="tokens-type-title">
+            <h2 id="tokens-type-title">Type</h2>
+            <p>The type scale, line heights, and letter spacing.</p>
+            <ul class="token-grid">
+                <li class="token token--text-xs" data-token="--text-xs"><span class="token__sample token__sample--size" aria-hidden="true">Aa</span><code class="token__name">--text-xs</code><span class="token__value"></span></li>
+                <li class="token token--text-sm" data-token="--text-sm"><span class="token__sample token__sample--size" aria-hidden="true">Aa</span><code class="token__name">--text-sm</code><span class="token__value"></span></li>
+                <li class="token token--text-base" data-token="--text-base"><span class="token__sample token__sample--size" aria-hidden="true">Aa</span><code class="token__name">--text-base</code><span class="token__value"></span></li>
+                <li class="token token--text-lg" data-token="--text-lg"><span class="token__sample token__sample--size" aria-hidden="true">Aa</span><code class="token__name">--text-lg</code><span class="token__value"></span></li>
+                <li class="token token--text-xl" data-token="--text-xl"><span class="token__sample token__sample--size" aria-hidden="true">Aa</span><code class="token__name">--text-xl</code><span class="token__value"></span></li>
+                <li class="token token--leading-tight" data-token="--leading-tight"><span class="token__sample token__sample--leading" aria-hidden="true">Placeholder text that wraps onto a second line.</span><code class="token__name">--leading-tight</code><span class="token__value"></span></li>
+                <li class="token token--leading-normal" data-token="--leading-normal"><span class="token__sample token__sample--leading" aria-hidden="true">Placeholder text that wraps onto a second line.</span><code class="token__name">--leading-normal</code><span class="token__value"></span></li>
+                <li class="token token--text-md" data-token="--text-md"><span class="token__sample token__sample--size" aria-hidden="true">Aa</span><code class="token__name">--text-md</code><span class="token__value"></span></li>
+                <li class="token token--text-2xl" data-token="--text-2xl"><span class="token__sample token__sample--size" aria-hidden="true">Aa</span><code class="token__name">--text-2xl</code><span class="token__value"></span></li>
+                <li class="token token--text-3xl" data-token="--text-3xl"><span class="token__sample token__sample--size" aria-hidden="true">Aa</span><code class="token__name">--text-3xl</code><span class="token__value"></span></li>
+                <li class="token token--leading-relaxed" data-token="--leading-relaxed"><span class="token__sample token__sample--leading" aria-hidden="true">Placeholder text that wraps onto a second line.</span><code class="token__name">--leading-relaxed</code><span class="token__value"></span></li>
+                <li class="token token--tracking-normal" data-token="--tracking-normal"><span class="token__sample token__sample--tracking" aria-hidden="true">Placeholder text</span><code class="token__name">--tracking-normal</code><span class="token__value"></span></li>
+                <li class="token token--tracking-tight" data-token="--tracking-tight"><span class="token__sample token__sample--tracking" aria-hidden="true">Placeholder text</span><code class="token__name">--tracking-tight</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-space" class="gallery-section" aria-labelledby="tokens-space-title">
+            <h2 id="tokens-space-title">Space</h2>
+            <p>The spacing scale for gaps, padding, and margins.</p>
+            <ul class="token-grid">
+                <li class="token token--space-1" data-token="--space-1"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-1</code><span class="token__value"></span></li>
+                <li class="token token--space-2" data-token="--space-2"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-2</code><span class="token__value"></span></li>
+                <li class="token token--space-3" data-token="--space-3"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-3</code><span class="token__value"></span></li>
+                <li class="token token--space-4" data-token="--space-4"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-4</code><span class="token__value"></span></li>
+                <li class="token token--space-5" data-token="--space-5"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-5</code><span class="token__value"></span></li>
+                <li class="token token--space-6" data-token="--space-6"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-6</code><span class="token__value"></span></li>
+                <li class="token token--space-7" data-token="--space-7"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-7</code><span class="token__value"></span></li>
+                <li class="token token--space-8" data-token="--space-8"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-8</code><span class="token__value"></span></li>
+                <li class="token token--space-9" data-token="--space-9"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-9</code><span class="token__value"></span></li>
+                <li class="token token--space-10" data-token="--space-10"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-10</code><span class="token__value"></span></li>
+                <li class="token token--space-11" data-token="--space-11"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-11</code><span class="token__value"></span></li>
+                <li class="token token--space-12" data-token="--space-12"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--space-12</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-radius-roles" class="gallery-section" aria-labelledby="tokens-radius-roles-title">
+            <h2 id="tokens-radius-roles-title">Radius roles</h2>
+            <p>Corner radii by role.</p>
+            <ul class="token-grid">
+                <li class="token token--radius-round" data-token="--radius-round"><span class="token__sample token__sample--radius" aria-hidden="true"></span><code class="token__name">--radius-round</code><span class="token__value"></span></li>
+                <li class="token token--radius-control" data-token="--radius-control"><span class="token__sample token__sample--radius" aria-hidden="true"></span><code class="token__name">--radius-control</code><span class="token__value"></span></li>
+                <li class="token token--radius-button" data-token="--radius-button"><span class="token__sample token__sample--radius" aria-hidden="true"></span><code class="token__name">--radius-button</code><span class="token__value"></span></li>
+                <li class="token token--radius-chip" data-token="--radius-chip"><span class="token__sample token__sample--radius" aria-hidden="true"></span><code class="token__name">--radius-chip</code><span class="token__value"></span></li>
+                <li class="token token--radius-card" data-token="--radius-card"><span class="token__sample token__sample--radius" aria-hidden="true"></span><code class="token__name">--radius-card</code><span class="token__value"></span></li>
+                <li class="token token--radius-dialog" data-token="--radius-dialog"><span class="token__sample token__sample--radius" aria-hidden="true"></span><code class="token__name">--radius-dialog</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-lines" class="gallery-section" aria-labelledby="tokens-lines-title">
+            <h2 id="tokens-lines-title">Lines</h2>
+            <p>Border widths and the focus ring geometry.</p>
+            <ul class="token-grid">
+                <li class="token token--border-width" data-token="--border-width"><span class="token__sample token__sample--line" aria-hidden="true"></span><code class="token__name">--border-width</code><span class="token__value"></span></li>
+                <li class="token token--border-width-strong" data-token="--border-width-strong"><span class="token__sample token__sample--line" aria-hidden="true"></span><code class="token__name">--border-width-strong</code><span class="token__value"></span></li>
+                <li class="token token--focus-ring-width" data-token="--focus-ring-width"><span class="token__sample token__sample--line" aria-hidden="true"></span><code class="token__name">--focus-ring-width</code><span class="token__value"></span></li>
+                <li class="token token--focus-ring-offset" data-token="--focus-ring-offset"><code class="token__name">--focus-ring-offset</code><span class="token__value"></span></li>
+                <li class="token token--focus-ring-offset-inset" data-token="--focus-ring-offset-inset"><code class="token__name">--focus-ring-offset-inset</code><span class="token__value"></span></li>
+                <li class="token token--focus-ring" data-token="--focus-ring"><span class="token__sample token__sample--ring" aria-hidden="true"></span><code class="token__name">--focus-ring</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-elevation" class="gallery-section" aria-labelledby="tokens-elevation-title">
+            <h2 id="tokens-elevation-title">Elevation</h2>
+            <p>Shadows for raised surfaces and overlays.</p>
+            <ul class="token-grid">
+                <li class="token token--elevation-1" data-token="--elevation-1"><span class="token__sample token__sample--shadow" aria-hidden="true"></span><code class="token__name">--elevation-1</code><span class="token__value"></span></li>
+                <li class="token token--elevation-2" data-token="--elevation-2"><span class="token__sample token__sample--shadow" aria-hidden="true"></span><code class="token__name">--elevation-2</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-layers" class="gallery-section" aria-labelledby="tokens-layers-title">
+            <h2 id="tokens-layers-title">Layers</h2>
+            <p>Stacking order of sticky, floating, popover, dialog, and toast layers.</p>
+            <ul class="token-grid">
+                <li class="token token--layer-base" data-token="--layer-base"><code class="token__name">--layer-base</code><span class="token__value"></span></li>
+                <li class="token token--layer-sticky" data-token="--layer-sticky"><code class="token__name">--layer-sticky</code><span class="token__value"></span></li>
+                <li class="token token--layer-float" data-token="--layer-float"><code class="token__name">--layer-float</code><span class="token__value"></span></li>
+                <li class="token token--layer-popover" data-token="--layer-popover"><code class="token__name">--layer-popover</code><span class="token__value"></span></li>
+                <li class="token token--layer-dialog" data-token="--layer-dialog"><code class="token__name">--layer-dialog</code><span class="token__value"></span></li>
+                <li class="token token--layer-toast" data-token="--layer-toast"><code class="token__name">--layer-toast</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-motion" class="gallery-section" aria-labelledby="tokens-motion-title">
+            <h2 id="tokens-motion-title">Motion</h2>
+            <p>Durations, easing, and press and lift offsets.</p>
+            <ul class="token-grid">
+                <li class="token token--duration-fast" data-token="--duration-fast"><code class="token__name">--duration-fast</code><span class="token__value"></span></li>
+                <li class="token token--duration-base" data-token="--duration-base"><code class="token__name">--duration-base</code><span class="token__value"></span></li>
+                <li class="token token--duration-spin" data-token="--duration-spin"><code class="token__name">--duration-spin</code><span class="token__value"></span></li>
+                <li class="token token--ease-standard" data-token="--ease-standard"><code class="token__name">--ease-standard</code><span class="token__value"></span></li>
+                <li class="token token--offset-press" data-token="--offset-press"><code class="token__name">--offset-press</code><span class="token__value"></span></li>
+                <li class="token token--offset-lift" data-token="--offset-lift"><code class="token__name">--offset-lift</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-sizes" class="gallery-section" aria-labelledby="tokens-sizes-title">
+            <h2 id="tokens-sizes-title">Sizes</h2>
+            <p>Touch targets, control heights, and icon sizes.</p>
+            <ul class="token-grid">
+                <li class="token token--target-min" data-token="--target-min"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--target-min</code><span class="token__value"></span></li>
+                <li class="token token--icon-md" data-token="--icon-md"><span class="token__sample token__sample--square" aria-hidden="true"></span><code class="token__name">--icon-md</code><span class="token__value"></span></li>
+                <li class="token token--icon-stroke" data-token="--icon-stroke"><code class="token__name">--icon-stroke</code><span class="token__value"></span></li>
+                <li class="token token--icon-lg" data-token="--icon-lg"><span class="token__sample token__sample--square" aria-hidden="true"></span><code class="token__name">--icon-lg</code><span class="token__value"></span></li>
+                <li class="token token--control-height" data-token="--control-height"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--control-height</code><span class="token__value"></span></li>
+                <li class="token token--icon-sm" data-token="--icon-sm"><span class="token__sample token__sample--square" aria-hidden="true"></span><code class="token__name">--icon-sm</code><span class="token__value"></span></li>
+                <li class="token token--icon-stroke-thin" data-token="--icon-stroke-thin"><code class="token__name">--icon-stroke-thin</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+        <section id="tokens-widths" class="gallery-section" aria-labelledby="tokens-widths-title">
+            <h2 id="tokens-widths-title">Widths</h2>
+            <p>Content, column, and panel widths, and the page gutter.</p>
+            <ul class="token-grid">
+                <li class="token token--width-main" data-token="--width-main"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--width-main</code><span class="token__value"></span></li>
+                <li class="token token--width-sidebar" data-token="--width-sidebar"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--width-sidebar</code><span class="token__value"></span></li>
+                <li class="token token--width-side-panel" data-token="--width-side-panel"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--width-side-panel</code><span class="token__value"></span></li>
+                <li class="token token--width-menu" data-token="--width-menu"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--width-menu</code><span class="token__value"></span></li>
+                <li class="token token--width-content" data-token="--width-content"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--width-content</code><span class="token__value"></span></li>
+                <li class="token token--width-narrow" data-token="--width-narrow"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--width-narrow</code><span class="token__value"></span></li>
+                <li class="token token--width-reading" data-token="--width-reading"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--width-reading</code><span class="token__value"></span></li>
+                <li class="token token--gutter" data-token="--gutter"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--gutter</code><span class="token__value"></span></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
