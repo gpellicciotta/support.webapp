@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 812.4, input: 160234, output: 17104, cache_read: 3955200, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0034: Add the link button component from family-portal, with its gallery section and browser spec
 
@@ -54,4 +58,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Verify]**
   Committed implementation as 36e12d6. Completion validation passed. All execution steps except Review are checked; the orchestrator owns review and integration.
+
+- [2026-11-12] **[Review]**
+  Round 1 requested (mode: agent).
 
