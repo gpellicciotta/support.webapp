@@ -114,3 +114,47 @@ Command: `node capture.mjs {{worktree}} before|after`, exit code 0; every page r
 | dark  | 390 px  | [before](before-controls-dark-390.png)              | [after](after-controls-dark-390.png)              |
 | light | 1440 px | [before](before-controls-light-1440.png)            | [after](after-controls-light-1440.png)            |
 | dark  | 1440 px | [before](before-controls-dark-1440.png)             | [after](after-controls-dark-1440.png)             |
+
+### Review round 1 rework
+
+Red: `npx playwright test tests/e2e/segmented.spec.js tests/e2e/verify-ui.spec.js --project desktop-light -g "single disabled radio|reports injected" --timeout 15000 --reporter=line`, exit code 1.
+
+```text
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+    Expected: >= 2
+    Received:    0
+    Error: expect(received).toEqual(expected) // deep equality
+    +   "label#inactive 'Inactive placeholder': contrast 1.00 < 4.5",
+    > 373 |     expect(problems.filter((problem) => problem.startsWith('label#inactive'))).toEqual([]);
+  2 failed
+```
+
+Green: the same command after the fix, exit code 0.
+
+```text
+  2 passed (9.0s)
+```
+
+Completion check: `npx playwright test tests/e2e/button.spec.js tests/e2e/icon-button.spec.js tests/e2e/chip.spec.js tests/e2e/segmented.spec.js --reporter=list`, exit code 0.
+
+```text
+  116 passed (51.3s)
+```
+
+Command: `python scripts/devops.py check`, exit code 0.
+
+```text
+All 22 markdown files passed linting.
+All checks passed!
+============================== 3 passed in 1.59s ==============================
+ Test Files  7 passed (7)
+      Tests  543 passed (543)
+  136 passed (41.2s)
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+[neutral system 1440px] 15 stylesheets, 509 texts, 84 targets, 84 focus records, 64 sprite references, overflow 0px, errors 0
+[neutral dark 1440px] 15 stylesheets, 509 texts, 84 targets, 84 focus records, 64 sprite references, overflow 0px, errors 0
+[... per-test lines and npm pack listing omitted ...]
+```
+
+The after screenshots were recaptured with the Size specimen; every page returned HTTP 200 without errors.

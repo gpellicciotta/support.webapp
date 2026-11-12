@@ -13,9 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 6, duration_s: 4661.0, input: 136, output: 26800, cache_read: 15098796, cache_write: 580958}
-work_duration: 2278.5
-review_status: pending
+  review: {turns: 2, duration_s: 371.4, input: 76, output: 23942, cache_read: 2372544, cache_write: 153346}
+work_duration: 7321.5
+review_status: rejected
 review_round: 1
+reviewed_by: "@claude-2"
 ---
 # T0007: Extract the button, icon button, banner, chip, and segmented control components from todos.webapp
 
@@ -74,4 +76,21 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 1 rejected by @claude-2: The work is high quality and nearly complete.
+  - Findings: [review-findings-1.md](T0007-extract-the-button-icon-button-banner-chip-and/review-findings-1.md).
+
+- [2026-11-12] **[Implement]**
+  Addressed review round 1: single disabled radios now dim their option, with a gallery specimen, a regression test, and updated catalog and guide lines.
+  - Undeclared: verify-ui.spec.js skips labels of disabled controls, per WCAG 1.4.3.
+
+- [2026-11-12] **[Verify]**
+  Size note: the rework touched verify-ui.spec.js, the ninth counted file; splitting one skip rule would not merge alone.
+
+- [2026-11-12] **[Verify]**
+  Rework verified: 2 tests failed first, then the completion check passed 116 and devops check passed 543, 136, and 4.
+  - Files touched: 9.
+  - Lines touched: 382.
+  - Reopenings: 0.
 
