@@ -3,7 +3,7 @@ task: T0003
 round: 2
 verdict: approved
 reviewer: "@claude"
-reviewed_at: 2026-11-12T09:21:25Z
+reviewed_at: 2026-11-12T09:23:16Z
 reviewed_commit: "89a7e69"
 base_commit: "324603b"
 branch: task/T0003-set-up-the-repository-tooling-package-manifest-linters
