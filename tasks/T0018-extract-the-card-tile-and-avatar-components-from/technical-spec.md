@@ -35,6 +35,7 @@ Size estimate: 5 files, 240 lines
 - Integration: Test both looks, themes, and viewport sizes; check card keyboard focus, hover, press, images, and overflow.
 - Integration: Check reduced motion, forced colors, console errors, and failed requests with the browser verifier.
 - Integration: Assert strictly increasing tile widths in both looks and explicit small, medium, and large stack member sizes.
+- Integration: Await look stylesheet loading before measurements; run component scenarios five times across all browser projects.
 - Visual: Capture the gallery before extraction and component sections afterward; inspect screenshots.
 
 Completion check: `python scripts/devops.py check`, exit code 0

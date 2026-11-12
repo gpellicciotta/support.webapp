@@ -1,5 +1,138 @@
 ## Walkthrough & Validation
 
+### Review three: full completion check
+Command: `python scripts/devops.py check`
+Exit code: 0
+Full output: [review3-check.log](review3-check.log).
+
+```text
+Command: C:\Dev-Projects\plan\.venv\Scripts\lint-markdown.EXE check --offline
+Process ID: 4112
+All 24 markdown files passed linting.
+Command: C:\Dev-Projects\plan\.venv\Scripts\python.exe -m ruff check scripts tests
+Process ID: 8572
+All checks passed!
+Command: C:\Dev-Projects\plan\.venv\Scripts\python.exe -m ruff format --check scripts tests
+Process ID: 69400
+4 files already formatted
+Command: "C:\Program Files\nodejs\npm.CMD" run lint
+Process ID: 43400
+> @gpellicciotta/support.webapp@0.1.0-pre lint
+> eslint .
+Command: C:\Dev-Projects\plan\.venv\Scripts\python.exe -m pytest
+Process ID: 81256
+============================= test session starts =============================
+platform win32 -- Python 3.12.8, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Dev-Projects\support.webapp\.plan\work\T0018-extract-the-card-tile-and-avatar-components-from
+configfile: pyproject.toml
+testpaths: tests
+plugins: timeout-2.4.0, xdist-3.8.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+created: 8/8 workers
+8 workers [3 items]
+...                                                                      [100%]
+============================== 3 passed in 1.66s ==============================
+Command: "C:\Program Files\nodejs\npm.CMD" test
+Process ID: 85052
+> @gpellicciotta/support.webapp@0.1.0-pre test
+> vitest run
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0018-extract-the-card-tile-and-avatar-components-from
+ Test Files  11 passed (11)
+      Tests  1458 passed (1458)
+   Start at  15:16:05
+   Duration  1.41s (tests 49%, import 37%, worker 8%, transform 5%)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:slow
+Process ID: 78104
+> @gpellicciotta/support.webapp@0.1.0-pre test:slow
+[... 256 lines omitted ...]
+```
+
+```text
+  172 passed (1.8m)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:integration
+Process ID: 9572
+> @gpellicciotta/support.webapp@0.1.0-pre test:integration
+> vitest run --config vitest.integration.config.js
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0018-extract-the-card-tile-and-avatar-components-from
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+   Start at  15:18:00
+   Duration  7.54s (tests 98%, import 1%)
+Command: "C:\Program Files\nodejs\npm.CMD" pack --dry-run
+[... 63 lines omitted ...]
+```
+
+```text
+npm notice 2.4kB src/looks/warm/primitives.css
+npm notice Tarball Details
+npm notice name: @gpellicciotta/support.webapp
+npm notice version: 0.1.0-pre
+npm notice filename: gpellicciotta-support.webapp-0.1.0-pre.tgz
+npm notice package size: 899.5 kB
+npm notice unpacked size: 1.0 MB
+npm notice shasum: 41cec77fe06ea71866ae038d66f88a59ff27872b
+npm notice integrity: sha512-sm0ylrwrfRAOH[...]5+OphRmHnLSCw==
+npm notice total files: 56
+npm notice
+gpellicciotta-support.webapp-0.1.0-pre.tgz
+```
+
+### Review three: repeated verification
+Command: `npx playwright test tests/e2e/card.spec.js --repeat-each 5`
+Exit code: 0
+Full output: [review3-repeat-fixed.log](review3-repeat-fixed.log).
+
+```text
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  36 [mobile-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars (2.2s)
+  ✓  37 [mobile-dark] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars (1.9s)
+(node:10816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  38 [mobile-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars (2.1s)
+  ✓  39 [mobile-dark] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars (2.0s)
+  ✓  40 [mobile-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars (1.9s)
+
+  40 passed (37.3s)
+```
+
+### Review three: reproduced stylesheet race
+Command: `npx playwright test tests/e2e/card.spec.js --repeat-each 5`
+Exit code: 1
+Network idle alone reproduced the race; the fix now waits for the selected stylesheet before network idle.
+
+```text
+  ✓  38 [mobile-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars (2.1s)
+  ✓  39 [mobile-dark] › tests\e2e\card.spec.js:5:5 › neutral cards, tiles, and avatars (1.8s)
+  ✓  40 [mobile-dark] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars (1.6s)
+
+
+  1) [mobile-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars ──────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 300
+    Received: 17
+
+      11 |         for (const size of ['sm', 'md', 'lg']) {
+      12 |             const box = await page.locator(`#icon-tile .icon-tile--${size}`).first().boundingBox();
+    > 13 |             expect(box.height).toBe(box.width);
+         |                                ^
+      14 |             tileWidths.push(box.width);
+      15 |         }
+      16 |         expect(tileWidths[0]).toBeLessThan(tileWidths[1]);
+        at C:\Dev-Projects\support.webapp\.plan\work\T0018-extract-the-card-tile-and-avatar-components-from\tests\e2e\card.spec.js:13:32
+
+    Error Context: test-results\card-warm-cards-tiles-and-avatars-mobile-light-repeat1\error-context.md
+
+  1 failed
+    [mobile-light] › tests\e2e\card.spec.js:5:5 › warm cards, tiles, and avatars ───────────────────
+  39 passed (36.6s)
+```
+
 ### Review rework: final verification
 Command: `plan tasks validate T0018 --completion`
 Exit code: 0

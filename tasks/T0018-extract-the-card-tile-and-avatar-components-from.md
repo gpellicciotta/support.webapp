@@ -13,10 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 1333.4, input: 207960, output: 38310, cache_read: 7936256, cache_write: 0}
-  review: {turns: 2, duration_s: 382.4, input: 100, output: 19586, cache_read: 2905010, cache_write: 127644}
-review_status: pending
+  review: {turns: 4, duration_s: 756.0, input: 196, output: 36820, cache_read: 5370616, cache_write: 243366}
+review_status: rejected
 review_round: 2
-work_duration: 633.9
+work_duration: 1093.6
+reviewed_by: "@claude"
 ---
 # T0018: Extract the card, tile, and avatar components from family-portal
 
@@ -99,4 +100,26 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-12] **[Review]**
   Round 2 requested (mode: agent).
+
+- [2026-11-12] **[Review]**
+  Round 2 rejected by @claude: Rejected, but only for one small test fix.
+  - Findings: [review-findings-2.md](T0018-extract-the-card-tile-and-avatar-components-from/review-findings-2.md).
+
+- [2026-11-12] **[Decided]**
+  Fixed the reviewer-observed stylesheet race by awaiting network idle after selecting a look, matching warm.spec.js. Removed the default card's trailing class space. No rendered behavior changed; existing component documentation and changelog remain accurate.
+
+- [2026-11-12] **[Verify]**
+  Running npx playwright test tests/e2e/card.spec.js --repeat-each 5 through tool session 88171. Preserved the reviewer's failure in review-findings-2.md; it identifies unstyled tile measurement during the stylesheet swap.
+
+- [2026-11-12] **[Verify]**
+  Network idle alone reproduced the race: 39 passed, one unstyled warm tile failed. Added the verifier's selected-sheet readiness check before network idle and font readiness. Repeating forty scenarios through session 4715; output: review3-repeat-fixed.log.
+
+- [2026-11-12] **[Verify]**
+  All forty repeated browser scenarios passed with the selected-sheet readiness check. Running python scripts/devops.py check; output: review3-check.log. Existing screenshots remain applicable because only test synchronization and a trailing class space changed.
+
+- [2026-11-12] **[Verify]**
+  Full completion check is supervised through session 29331. Counted size remains five modified files and 88 lines against the original task base; new files and CHANGELOG.md remain excluded. No production styling changed in this review round.
+
+- [2026-11-12] **[Verify]**
+  Final check passed: lint, 1458 unit tests, 172 browser tests, 4 integration tests, 3 Python tests, and packaging. Recorded repeat-run and completion output. Awaiting orchestrator-managed review; no production component behavior changed.
 
