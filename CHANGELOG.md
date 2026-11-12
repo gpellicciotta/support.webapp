@@ -8,6 +8,8 @@ All notable changes to this project are documented here.
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- Components: Added menus and popovers with gallery sections, roving focus, type-ahead, and light dismiss.
+- Modules: Added `attachMenu` in `menu.js`, `attachPopover` in `popover.js`, and RTL-aware `anchorPanel` in `anchor.js`.
 - Components: Added native dialogs, responsive sheets, inline confirmations, and typed-word gallery examples with keyboard and focus management.
 - Looks: Added bright with accessible accents, cascade-tested light fallbacks, system fonts, attributed glyphs, and gallery controls.
 - Components: Added fields, checkboxes, radios, field groups, forms, and error summaries, with help toggles, validation states, and gallery sections.

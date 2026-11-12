@@ -78,6 +78,31 @@ Confirmation restores the row before invoking `onConfirm`; the caller performs t
 Call the returned controller's `destroy()` to restore content and remove listeners.
 Typed confirmation remains caller-owned: check the exact word again in the action handler before executing an irreversible operation.
 
+### Menus and popovers
+Use the [Menu section](../../src/demo/visual-style-gallery.html#menu) for a short list of actions or one choice.
+Use the [Popover section](../../src/demo/visual-style-gallery.html#popover) for a small panel, such as filter choices.
+- Menu items are buttons with `role="menuitem"`, or `role="menuitemradio"` and `aria-checked` for a choice.
+- Mark disabled items with `aria-disabled="true"`, and destructive items with `.menu__item--danger`.
+- Separate item groups with `.menu__separator` and `role="separator"`.
+- Give a popover a `.popover__title` and end it with `.popover__actions`.
+
+Import `attachMenu(trigger, menu, options)` from [menu.js](../../src/js/menu.js).
+Enter, Space, ArrowDown, or a click open the menu at its first item; ArrowUp opens it at the last.
+Arrows move with wrap, Home and End jump, and a letter jumps to the next item starting with it.
+Enter, Space, or a click select an item; Escape, Tab, or an outside click close the menu.
+Options are `onSelect(item, event)`, `anchor` (default `true`), `onOpen`, and `onClose(reason)`.
+
+Import `attachPopover(trigger, panel, options)` from [popover.js](../../src/js/popover.js).
+Escape, an outside click, or focus leaving the panel closes it.
+Closing returns focus to the trigger unless another control took it.
+Options are `anchor`, `align` (`start` or `end`), `initialFocus`, `onOpen`, and `onClose(reason)`.
+Both controllers return `open`, `close`, `isOpen`, and `destroy`; `attachMenu` builds on `attachPopover`.
+
+Import `anchorPanel(panel, trigger, gap, align)` from [anchor.js](../../src/js/anchor.js).
+It places the panel below the trigger, or above it when room runs out, inside the viewport.
+Its alignment mirrors for right-to-left text.
+Closed panels carry the `hidden` attribute until the native `popover` attribute replaces it.
+
 ### Icons
 Each look ships one sprite, `looks/{{look}}/icons.svg`, with one 24-unit `<symbol>` per glyph ([ADR-0002](../adrs/ADR-0002-looks.md#icons)).
 Every sprite provides the core ids that `icons` in [contract.json](../../src/contract.json) lists.

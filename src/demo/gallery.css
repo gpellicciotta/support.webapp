@@ -6,6 +6,15 @@
   gap: var(--space-4);
 }
 
+/* Static menus and popovers stay in the flow at their natural height, below open anchored panels. */
+.overlay-specimens {
+  align-items: start;
+}
+
+.overlay-specimens > :is(.menu, .popover) {
+  z-index: auto;
+}
+
 .season-grid {
   display: flex;
   flex-wrap: wrap;

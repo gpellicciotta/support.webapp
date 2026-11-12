@@ -131,3 +131,35 @@ export function expectRing(actual, color, label) {
     expect(actual.width, `${label}: outline width`).toBeGreaterThanOrEqual(2);
     expect(actual.color, `${label}: outline color`).toBe(color);
 }
+
+/**
+ * Check that an open panel sits inside the viewport, just below or above its trigger.
+ * @param {import('@playwright/test').Page} page page to probe
+ * @param {import('@playwright/test').Locator} trigger trigger that opened the panel
+ * @param {import('@playwright/test').Locator} panel open panel
+ */
+export async function expectAnchored(page, trigger, panel) {
+    const { width, height } = page.viewportSize();
+    const box = await panel.boundingBox();
+    const anchor = await trigger.boundingBox();
+    expect(box.x).toBeGreaterThanOrEqual(0);
+    expect(box.y).toBeGreaterThanOrEqual(0);
+    expect(box.x + box.width).toBeLessThanOrEqual(width);
+    expect(box.y + box.height).toBeLessThanOrEqual(height);
+    const below = Math.abs(box.y - (anchor.y + anchor.height + 4));
+    const above = Math.abs(box.y + box.height - (anchor.y - 4));
+    expect(Math.min(below, above)).toBeLessThan(1);
+}
+
+/**
+ * Check that an element of an open panel paints on top, so no specimen covers its center.
+ * @param {import('@playwright/test').Locator} target element inside the open panel
+ */
+export async function expectOnTop(target) {
+    const hit = await target.evaluate((element) => {
+        const box = element.getBoundingClientRect();
+        const top = document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2);
+        return element.contains(top);
+    });
+    expect(hit, 'covered by another element').toBe(true);
+}

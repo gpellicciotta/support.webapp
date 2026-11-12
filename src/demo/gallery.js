@@ -5,6 +5,8 @@ import { attachForm } from '../js/form.js';
 import { setSpriteUrl } from '../js/icon.js';
 import { confirmDialog } from '../js/dialog.js';
 import { attachInlineConfirm } from '../js/inline-confirm.js';
+import { attachMenu } from '../js/menu.js';
+import { attachPopover } from '../js/popover.js';
 
 // Add each new look here and as an option of the look select.
 export const looks = ['neutral', 'warm', 'bright'];
@@ -217,4 +219,25 @@ if (typeof document !== 'undefined') {
             }
         });
     }
+    const menuResult = document.querySelector('[data-menu-result]');
+    attachMenu(document.getElementById('menu-demo-trigger'), document.getElementById('menu-demo'), {
+        onSelect: (item) => {
+            menuResult.textContent = `Last action: ${item.textContent.trim()}`;
+        }
+    });
+    const filter = document.getElementById('popover-demo-trigger');
+    const panel = document.getElementById('popover-demo');
+    const boxes = [...panel.querySelectorAll('input[type="checkbox"]')];
+    const showFilter = () => {
+        const checked = boxes.filter((box) => box.checked).map((box) => box.value);
+        filter.querySelector('[data-popover-value]').textContent = checked.length > 0 ? `: ${checked.join(', ')}` : '';
+    };
+    attachPopover(filter, panel);
+    panel.addEventListener('change', showFilter);
+    panel.querySelector('[data-popover-clear]').addEventListener('click', () => {
+        for (const box of boxes) {
+            box.checked = false;
+        }
+        showFilter();
+    });
 }

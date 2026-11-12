@@ -442,7 +442,7 @@ Inline confirmation. The second confirmation tier; the third is a dialog asking 
 ```
 
 ### menu
-Menu. `attachMenu` sets `aria-expanded`, roving focus, and type-ahead.
+Menu. `attachMenu` sets `aria-expanded`, roving focus, and type-ahead, and builds on `attachPopover` of `popover.js`.
 
 ```html
 <button class="icon-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="More actions for Buy milk">...</button>
