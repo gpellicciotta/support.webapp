@@ -25,12 +25,32 @@ Set up the repository tooling: package manifest, linters, unit and browser test 
 - `tests/e2e/smoke.spec.js`
 - `docs/devops.md`
 - `CHANGELOG.md`
+- `package-lock.json`
+- `.gitignore`
+- `.lint-markdown.json`
+- `AGENTS.md`
+- `docs/adrs/ADR-0008-repository-layout.md`
+- `scripts/requirements.txt`
+- `scripts/docs_project.py` (removed after replacing the documentation-only adapter)
+- `scripts/markdown-links.py`
+- `tests/test_markdown_links.py`
+- `pyproject.toml`
 
 Size estimate: 13 files, 550 lines
 Size note: Configuration files are short and only work together; a split would leave runners without a devops or CI entry point.
 
 ### Tests
 - Unit: `tests/unit/smoke.test.js` imports an ES module and fails until the Vitest configuration exists.
+- Unit: Verify traversal rejection, malformed URL rejection, JavaScript/CSS media types, and fast-suite configuration.
+- Unit: Python link tests preserve failures for missing internal and root-relative files while permitting external workspace evidence.
 - Integration: `tests/e2e/smoke.spec.js` starts `scripts/serve.mjs`, loads `src/index.html`, and asserts HTTP 200 with no console errors.
+- Integration: Repeat browser checks in desktop/mobile viewports and light/dark preferences; bootstrap and devops commands run unchanged entry points.
+
+Mechanical command: `python -m ruff format scripts tests`
+
+The source checkout omits sibling repositories and the ignored plan store.
+The `SW001` plugin delegates internal link checks to support.python and treats those external artifacts as offline evidence.
+ESLint 9.39.5 avoids the dependency advisory reported for ESLint 10.14.0; npm marks this older major unsupported.
+Python scripts remain tooling rather than a separately packaged Python product; their metadata stays in the npm manifest.
 
 Completion check: `python scripts/devops.py check`, exit code 0
