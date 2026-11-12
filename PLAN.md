@@ -8,10 +8,10 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0014 Add the vendor and check commands of the command line tool, with the package manifest.
 - [x] T0015 Add the GitHub Packages publish workflow and document the release flow of the package.
 - [x] T0005 Build the visual style gallery with look and theme switchers, token specimens, and the browser verifier.
-- [ ] T0006 Extract the icon sprite format, the icon class, and the createIcon builder, with the neutral glyph set.
-- [ ] T0007 [needs: T0006] Extract the button, icon button, banner, chip, and segmented control components from todos.webapp.
+- [x] T0006 Extract the icon sprite format, the icon class, and the createIcon builder, with the neutral glyph set.
+- [ ] T0007 Extract the button, icon button, banner, chip, and segmented control components from todos.webapp.
 - [ ] T0016 [needs: T0007] Extract the empty state and the row base components from todos.webapp.
-- [ ] T0017 [needs: T0006] Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
+- [ ] T0017 Add the warm look from family-portal with its seasons variant, glyph set, and the look template.
 - [ ] T0018 [needs: T0017] Extract the card, tile, and avatar components from family-portal.
 - [ ] T0008 [needs: T0007] Extract fields, checkboxes, radios, and createField from todos.webapp, adding forms, validation states, help toggles, and error summaries.
 - [ ] T0023 [needs: T0017] Add the bright look from meteo with its accent variant and AA contrast on every accent.
