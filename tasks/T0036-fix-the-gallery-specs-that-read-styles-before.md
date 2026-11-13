@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1803.8, input: 106840, output: 14400, cache_read: 5953792, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0036: Fix the gallery specs that read styles before a look switch settles, seen failing under load in bright and card
 
@@ -59,4 +63,7 @@ Size estimate: 3 files, 40 lines
 
 - [2026-11-13] **[Verify]**
   Completion validation passed. Committed 9d81716 on the task branch. Implementation, verification, and documentation steps are checked; the orchestrator must open agent review.
+
+- [2026-11-13] **[Review]**
+  Round 1 requested (mode: agent).
 
