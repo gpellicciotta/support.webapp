@@ -13,9 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 1698.0, input: 161524, output: 27572, cache_read: 6977024, cache_write: 0}
-work_duration: 495.0
-review_status: pending
+  review: {turns: 2, duration_s: 153.6, input: 92126, output: 4412, cache_read: 621824, cache_write: 0}
+work_duration: 11399.4
+review_status: rejected
 review_round: 1
+reviewed_by: "@codex-2"
 ---
 # T0027: Add the theme switch and service worker update modules, and document the shared patterns
 
@@ -68,4 +70,20 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-13] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-13] **[Review]**
+  Round 1 rejected by @codex-2: Rejected for one service worker update lifecycle defect.
+  - Findings: [review-findings-1.md](T0027-add-the-theme-switch-and-service-worker-update/review-findings-1.md).
+
+- [2026-11-13] **[Implement]**
+  Reproduced review finding with waiting=null after external activation. Replaced stale Update with explicit Reload, invalidated old callbacks, and ensured reload occurs once. All 36 affected unit tests passed.
+
+- [2026-11-13] **[Verify]**
+  Full rework check runs as session 45393, browser runner PID 66844. The fast suite passed 2104 tests. Updated the technical specification with the external-activation regression.
+
+- [2026-11-13] **[Verify]**
+  Full rework check passed: 2104 unit tests, 614 browser tests, four integration tests, three Python tests, linting, and packaging. Two existing browser cases skipped. No test servers remained. Evidence records red and green regression results.
+
+- [2026-11-13] **[Verify]**
+  Addressed round-one finding and committed the rework. Worktree is clean. Final counted scope is three modified text files and 92 changed lines; added files are excluded. Reopenings: zero. Review remains pending for the orchestrator.
 

@@ -24,6 +24,7 @@ Size estimate: 8 files, 450 lines
 Size note: Two small modules plus pattern documentation; the documentation carries no code to split off.
 
 ### Tests
+- Unit: External activation clears waiting, invalidates stale Update, and offers an explicit Reload that runs once.
 - Unit: `theme-switch.test.js` and `sw-update.test.js` check stored choices, the System default, and the reload on request.
 - Integration: `theme-switch.spec.js` switches the gallery theme, reloads, and checks the stored choice at 390 and 1440 px.
 
