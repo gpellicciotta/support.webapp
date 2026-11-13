@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 850.4, input: 168792, output: 19682, cache_read: 4762368, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0035: Move field and form announcements to the shared live region module, so each page has one polite region
 
@@ -50,4 +54,7 @@ Browser scenarios validate field errors and form submissions alongside the page 
 
 - [2026-11-13] **[Verify]**
   Committed 69f234d on the assigned task branch. Completion validation passed. Implementation, verification, and documentation steps are checked; Review remains pending for the orchestrator. Evidence: [validation-proof.md](T0035-move-field-and-form-announcements-to-the-shared/validation-proof.md).
+
+- [2026-11-13] **[Review]**
+  Round 1 requested (mode: agent).
 
