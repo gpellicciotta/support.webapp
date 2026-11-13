@@ -5,17 +5,20 @@ session: codex-20261112-605570
 needs: []
 branch: task/T0031-design-and-add-the-list-and-data-table
 worktree: .plan/work/T0031-design-and-add-the-list-and-data-table
-status: active
+status: completed
 started_at: "2026-11-12T20:02:57Z"
-ended_at: —
+ended_at: "2026-11-13T00:16:32Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 6, duration_s: 3060.4, input: 312270, output: 67854, cache_read: 26680576, cache_write: 0}
-work_duration: 1157.5
-review_status: pending
+  review: {turns: 2, duration_s: 149.6, input: 82882, output: 3370, cache_read: 776704, cache_write: 0}
+work_duration: 1232.3
+review_status: approved
 review_round: 1
+reviewed_by: "@codex-2"
+completion-commit: f1250cd013ec23f58b687a944aebc3ad72264261
 ---
 # T0031: Design and add the list and data table components on native list and table elements
 
@@ -34,7 +37,7 @@ See the technical specification for files, tests, and the completion check.
 - [x] **[Visual]**    Capture the new gallery sections per theme at 390 and 1440 px.
 - [x] **[Doc]**       Update the style guide, components.md, and CHANGELOG.md.
 - [x] **[Verify]**    Pass the complete repository check without Warm card or accent readiness failures.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-12] **[Visual]**
@@ -117,4 +120,11 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-13] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-13] **[Review]**
+  Round 1 approved by @codex-2: [Decided]** Approved commit c85c0a9 against main b272882.
+  - Findings: [review-findings-1.md](T0031-design-and-add-the-list-and-data-table/review-findings-1.md).
+
+- [2026-11-13] **[Complete]**
+  Task completed successfully.
 
