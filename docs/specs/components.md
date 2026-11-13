@@ -40,7 +40,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `switch`      | Switch                         | new design          | none                                     | off, on, disabled, invalid                                                        | native checkbox with `role="switch"`                      | T0019     |
 | `chip`        | Chip                           | todos.webapp        | none                                     | static, removable, filter toggle; overdue tone                                    | button when interactive; the remove button has a label    | T0007     |
 | `segmented`   | Segmented control              | todos.webapp        | none                                     | 2 to 5 options; selected, disabled                                                | fieldset of native radios with a legend                   | T0007     |
-| `badge`       | Badge                          | meteo               | none                                     | neutral, count, success, warning, danger                                          | text, never color alone                                   | to create |
+| `badge`       | Badge                          | meteo               | none                                     | neutral, count, success, warning, danger                                          | text, never color alone                                   | T0029     |
 
 ### Forms and Selection
 | Key             | Component                      | Source                 | Module and functions                             | Variants and states                                             | Accessibility minimum                                                            | Task                    |
@@ -221,6 +221,10 @@ Segmented control. The options wrapper draws the track, so the legend stays a re
 
 ### badge
 Badge. A count badge carries its meaning in text, such as a visually hidden word.
+Delivered in T0029: neutral `.badge`, `--count`, `--success`, `--warning`, and `--danger` variants.
+Use a span without `tabindex`, event handlers, or interactive descendants; use a chip for interactive labels.
+Labels name each status, including when forced colors removes tone differences.
+See the [gallery](../../src/demo/visual-style-gallery.html#badge) for all variants.
 
 ```html
 <span class="badge badge--warning">Overdue</span>

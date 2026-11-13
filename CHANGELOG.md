@@ -8,6 +8,7 @@ All notable changes to this project are documented here.
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- Components: Added non-interactive badges for counts and labeled statuses, with neutral, success, warning, and danger tones.
 - Components: Added native lists, description pairs, and captioned data tables with scoped headers and contained keyboard-accessible scrolling.
 - Components: Added the floating action button with accessible states, gallery specimens, and shell overlay placement above bottom bars.
 - DevEx: Synchronized gallery look checks with stylesheet loading and color transitions before measuring dimensions and accent colors.

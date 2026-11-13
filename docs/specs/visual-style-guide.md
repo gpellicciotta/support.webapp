@@ -205,6 +205,15 @@ Components reference only core ids; apps may add local glyphs in their own sprit
 ### Controls
 Buttons, chips, and segmented controls keep a 44 px target in every variant, including the small button.
 
+### Badge
+Use [badges](../../src/demo/visual-style-gallery.html#badge) for non-interactive counts and status labels.
+The neutral `.badge` and `--count`, `--success`, `--warning`, and `--danger` variants always carry meaningful text.
+Add context to numeric counts with visible text or a `.visually-hidden` word, such as “unread”.
+Use spans without keyboard focus or actions; use chips for interactive labels and banners for notices.
+**[Decided]** Adapt meteo's bordered badges with filled semantic tones and paired text tokens to meet contrast requirements.
+Explicit status labels preserve meaning when tones coincide or forced colors replaces them.
+
+### Controls and notices
 | Key           | Use it for                                                    | Avoid it for                                      | Gallery                                                                 |
 | :------------ | :------------------------------------------------------------ | :------------------------------------------------ | :---------------------------------------------------------------------- |
 | `button`      | One action with a text label; the default marks the main one. | Navigation, which is a link.                      | [Button](../../src/demo/visual-style-gallery.html#button)               |
