@@ -506,3 +506,18 @@ Set content to aria-busy=true during updates; preserve useful existing content d
 Replace placeholders with results, an empty state, or an error, then clear busy and update the status.
 Never put controls inside aria-hidden skeletons. Preserve focus, and avoid repeated announcements for each placeholder.
 See [components.md](components.md#loading) for the markup contract.
+
+## Tooltip
+Use the [tooltip specimen](../../src/demo/visual-style-gallery.html#tooltip) for short, supplementary descriptions of focusable controls.
+Keep essential instructions visible; use a popover or dialog for interactive content.
+Use the [catalog skeleton](components.md#tooltip) and enhance it with `attachTooltip` from [tooltip.js](../../src/js/tooltip.js).
+**[Decided]** Explicit text and `aria-describedby` replace meteo's generated-content tooltip and duplicate native title.
+Keep an independent accessible name on the trigger and unique IDs on descriptions.
+Keyboard focus and mouse hover reveal the tooltip; Escape closes it while focus stays on the trigger.
+Hover persists over the tooltip, and scrolling or resizing repositions the open panel.
+Native mode requires both popover methods; otherwise, attachment removes `popover` and uses hidden-state positioning.
+The tooltip uses surface, text, border, spacing, and elevation tokens across every look and theme.
+No animation is applied under any motion preference.
+For translations, apply `data-i18n` to the tooltip text; avoid the legacy `data-i18n-tooltip` title hook.
+Destroy the controller before removing its trigger or replacing its text element.
+Without JavaScript, keep description markup visible; do not add `hidden` or `popover` to the authored skeleton.

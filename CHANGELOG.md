@@ -8,6 +8,7 @@ All notable changes to this project are documented here.
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- Components: Added accessible tooltips with focus, hover, Escape dismissal, reversible controllers, and a fallback for unavailable popover methods.
 - Components: Added labeled native progress bars and decorative status spinners that stay static under reduced motion.
 - Components: Added non-interactive badges for counts and labeled statuses, with neutral, success, warning, and danger tones.
 - Components: Added native lists, description pairs, and captioned data tables with scoped headers and contained keyboard-accessible scrolling.

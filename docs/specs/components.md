@@ -81,7 +81,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `inline-confirm` | Inline confirmation | todos.webapp | `inline-confirm.js`: `attachInlineConfirm` | asking, confirmed, cancelled              | focus moves to the question and back               | T0009        |
 | `menu`           | Menu                | todos.webapp | `menu.js`: `attachMenu`                    | items, separators, danger item            | menu roles; roving focus; type-ahead; Escape       | T0011, T0012 |
 | `popover`        | Popover             | todos.webapp | `popover.js`: `attachPopover`              | anchored panel; light dismiss             | native `popover` attribute; focus returns on close | T0011, T0012 |
-| `tooltip`        | Tooltip             | meteo        | none                                       | shown on focus and on fine-pointer hover  | text in `aria-describedby`; exposure checked first | T0024        |
+| `tooltip`        | Tooltip             | meteo        | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                | T0024        |
 
 ### Identity and Foundations
 | Key            | Component    | Source        | Module and functions                                    | Variants and states                                     | Accessibility minimum                              | Task  |
@@ -553,12 +553,24 @@ Popover.
 ```
 
 ### tooltip
-Tooltip. Provisional until the screen reader check of T0024.
+Tooltip. Explicit text supplies the accessible description; the trigger retains its independent accessible name.
 
 ```html
 <button class="icon-button" type="button" aria-label="Refresh" aria-describedby="refresh-tip">...</button>
 <span class="tooltip" id="refresh-tip" role="tooltip">Refresh the forecast</span>
 ```
+
+Import `attachTooltip(trigger, element)` or `createTooltip(doc, { trigger, text })` from [tooltip.js](../../src/js/tooltip.js).
+Controllers expose `element`, `open()`, `close()`, `isOpen()`, and `destroy()`.
+Attachment preserves existing descriptions, removes the native title, and restores authored attributes on destruction.
+The builder inserts plain text and removes its generated element on destruction.
+Focus and mouse hover open the tooltip; Escape dismisses it without changing focus.
+Hover remains open over either element, with a short exit grace period for crossing between them.
+Touch users receive no hover behavior; essential instructions must remain visible elsewhere.
+Use text only, without focusable content, explicit tooltip names, or live regions.
+Without enhancement, the description stays visible and readable.
+Chromium accessibility-tree evidence replaced the initial live screen reader gate by orchestrator decision.
+Manual Narrator or NVDA verification remains tracked separately; no spoken announcement has been verified.
 
 ### avatar
 Avatar. The fallback shows initials, or the person icon when no name is known.

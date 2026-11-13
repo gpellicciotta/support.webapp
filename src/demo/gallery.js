@@ -10,6 +10,7 @@ import { confirmDialog, openDialog } from '../js/dialog.js';
 import { attachInlineConfirm } from '../js/inline-confirm.js';
 import { attachMenu } from '../js/menu.js';
 import { attachPopover } from '../js/popover.js';
+import { attachTooltip } from '../js/tooltip.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { createToast } from '../js/toast.js';
 
@@ -258,6 +259,7 @@ if (typeof document !== 'undefined' && document.querySelector('.gallery-main')) 
             }
         }
     });
+    attachTooltip(document.getElementById('tooltip-demo-trigger'), document.getElementById('tooltip-demo'));
     const filter = document.getElementById('popover-demo-trigger');
     const panel = document.getElementById('popover-demo');
     const boxes = [...panel.querySelectorAll('input[type="checkbox"]')];
