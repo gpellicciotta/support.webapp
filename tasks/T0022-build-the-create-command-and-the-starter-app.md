@@ -2,7 +2,7 @@
 id: T0022
 owner: "@codex"
 session: codex-20261113-c0618e
-needs: []
+needs: ['T0038']
 branch: task/T0022-build-the-create-command-and-the-starter-app
 worktree: .plan/work/T0022-build-the-create-command-and-the-starter-app
 status: suspended
