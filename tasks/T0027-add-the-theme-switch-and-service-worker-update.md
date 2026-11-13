@@ -12,12 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 4, duration_s: 1698.0, input: 161524, output: 27572, cache_read: 6977024, cache_write: 0}
+  worker: {turns: 6, duration_s: 2449.4, input: 183360, output: 36394, cache_read: 11348992, cache_write: 0}
   review: {turns: 2, duration_s: 153.6, input: 92126, output: 4412, cache_read: 621824, cache_write: 0}
 work_duration: 11399.4
-review_status: rejected
-review_round: 1
-reviewed_by: "@codex-2"
+review_status: pending
+review_round: 2
 ---
 # T0027: Add the theme switch and service worker update modules, and document the shared patterns
 
@@ -86,4 +85,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-13] **[Verify]**
   Addressed round-one finding and committed the rework. Worktree is clean. Final counted scope is three modified text files and 92 changed lines; added files are excluded. Reopenings: zero. Review remains pending for the orchestrator.
+
+- [2026-11-13] **[Review]**
+  Round 2 requested (mode: agent).
 
