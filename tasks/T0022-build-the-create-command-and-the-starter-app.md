@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 206.4, input: 85304, output: 5820, cache_read: 1023232, cache_write: 0}
+work_duration: 110.4
 ---
 # T0022: Build the Python generate-app devops action and the starter app template.
 

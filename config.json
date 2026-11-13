@@ -1,0 +1,11 @@
+{
+  "plan-version": "3.1.38-pre",
+  "work-max-usage": "week=82%",
+  "work-agents": [
+    "codex",
+    "claude"
+  ],
+  "work-agent-max-usage": {
+    "codex": "week=100%"
+  }
+}
