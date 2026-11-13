@@ -1,11 +1,12 @@
 ---
 id: T0022
-owner: ~
-needs: [T0013, T0014, T0017]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@codex"
+session: codex-20261113-c0618e
+needs: []
+branch: task/T0022-build-the-create-command-and-the-starter-app
+worktree: .plan/work/T0022-build-the-create-command-and-the-starter-app
+status: suspended
+started_at: "2026-11-13T01:36:17Z"
 ended_at: —
 review: agent
 preview: none
@@ -32,3 +33,19 @@ Refine declared files, size estimate, and tests in the technical specification b
 ## Execution Log
 - [2026-11-11] **[Doc]**
   Created by T0002 from the design system roadmap.
+
+- [2026-11-13] **[Read]**
+  Read ADR-0004, ADR-0006, and roadmap Phase 3. Inspected todos.webapp at 0cf4981f2fa235a4d48d143b83db24e1f46bd48a and family-portal at 1953f75484a2fe65aa3444730b3a9f459ae21cb4. Neither tracked vendor tree exists; stylesheets import local partials.
+
+- [2026-11-13] **[Decided]**
+  Blocked: Phase 3 requires two completed adoptions. Current source commits cannot supply the required adopted markup. Resume after both apps vendor a release and record conformance and lossless-switch proofs. No implementation or tests ran.
+
+- [2026-11-13] **[Verify]**
+  Recorded prerequisite inspection in validation-proof.md. No product files changed; no completed implementation exists to commit.
+  - Files touched: 0.
+  - Lines touched: 0.
+  - Reopenings: 0.
+
+- [2026-11-13] **[Verify]**
+  Completion validation exited 1 with eight lint issues. Task remains incomplete; execution steps remain unchecked. Recorded verbatim output in validation-proof.md.
+
