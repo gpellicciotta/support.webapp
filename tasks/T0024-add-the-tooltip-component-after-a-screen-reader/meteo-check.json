@@ -1,0 +1,47 @@
+{
+  "browser": "158.0.8127.18",
+  "results": [
+    {
+      "locale": "authored",
+      "mode": "focus",
+      "name": "Open settings",
+      "description": null,
+      "generated": "\"Settings\""
+    },
+    {
+      "locale": "authored",
+      "mode": "hover",
+      "name": "Open settings",
+      "description": null,
+      "generated": "\"Settings\""
+    },
+    {
+      "locale": "en",
+      "mode": "focus",
+      "name": "Open settings",
+      "description": "Settings",
+      "generated": "\"Settings\""
+    },
+    {
+      "locale": "en",
+      "mode": "hover",
+      "name": "Open settings",
+      "description": "Settings",
+      "generated": "\"Settings\""
+    },
+    {
+      "locale": "nl",
+      "mode": "focus",
+      "name": "Open instellingen",
+      "description": "Instellingen",
+      "generated": "\"Instellingen\""
+    },
+    {
+      "locale": "nl",
+      "mode": "hover",
+      "name": "Open instellingen",
+      "description": "Instellingen",
+      "generated": "\"Instellingen\""
+    }
+  ]
+}

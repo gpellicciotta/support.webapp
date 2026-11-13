@@ -1,0 +1,82 @@
+[
+  {
+    "nodeId": "2",
+    "ignored": false,
+    "role": {
+      "type": "role",
+      "value": "button"
+    },
+    "chromeRole": {
+      "type": "internalRole",
+      "value": 9
+    },
+    "name": {
+      "type": "computedString",
+      "value": "Open settings",
+      "sources": [
+        {
+          "type": "relatedElement",
+          "attribute": "aria-labelledby"
+        },
+        {
+          "type": "attribute",
+          "value": {
+            "type": "computedString",
+            "value": "Open settings"
+          },
+          "attribute": "aria-label",
+          "attributeValue": {
+            "type": "string",
+            "value": "Open settings"
+          }
+        },
+        {
+          "type": "relatedElement",
+          "superseded": true,
+          "nativeSource": "label"
+        },
+        {
+          "type": "contents",
+          "value": {
+            "type": "computedString",
+            "value": "Settings"
+          },
+          "superseded": true
+        },
+        {
+          "type": "attribute",
+          "attribute": "title",
+          "superseded": true
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "invalid",
+        "value": {
+          "type": "token",
+          "value": "false"
+        }
+      },
+      {
+        "name": "focusable",
+        "value": {
+          "type": "booleanOrUndefined",
+          "value": true
+        }
+      },
+      {
+        "name": "focused",
+        "value": {
+          "type": "booleanOrUndefined",
+          "value": true
+        }
+      }
+    ],
+    "parentId": "4",
+    "childIds": [
+      "6"
+    ],
+    "backendDOMNodeId": 2
+  }
+]

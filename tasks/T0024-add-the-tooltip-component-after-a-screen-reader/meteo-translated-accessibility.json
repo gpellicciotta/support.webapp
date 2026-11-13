@@ -1,0 +1,230 @@
+[
+  {
+    "locale": "en",
+    "mode": "focus",
+    "name": {
+      "type": "computedString",
+      "value": "Open settings",
+      "sources": [
+        {
+          "type": "relatedElement",
+          "attribute": "aria-labelledby"
+        },
+        {
+          "type": "attribute",
+          "value": {
+            "type": "computedString",
+            "value": "Open settings"
+          },
+          "attribute": "aria-label",
+          "attributeValue": {
+            "type": "string",
+            "value": "Open settings"
+          }
+        },
+        {
+          "type": "relatedElement",
+          "superseded": true,
+          "nativeSource": "label"
+        },
+        {
+          "type": "contents",
+          "value": {
+            "type": "computedString",
+            "value": "Settings"
+          },
+          "superseded": true
+        },
+        {
+          "type": "attribute",
+          "value": {
+            "type": "computedString",
+            "value": "Settings"
+          },
+          "attribute": "title",
+          "attributeValue": {
+            "type": "string",
+            "value": "Settings"
+          },
+          "superseded": true
+        }
+      ]
+    },
+    "description": {
+      "type": "computedString",
+      "value": "Settings"
+    },
+    "generated": "\"Settings\""
+  },
+  {
+    "locale": "en",
+    "mode": "hover",
+    "name": {
+      "type": "computedString",
+      "value": "Open settings",
+      "sources": [
+        {
+          "type": "relatedElement",
+          "attribute": "aria-labelledby"
+        },
+        {
+          "type": "attribute",
+          "value": {
+            "type": "computedString",
+            "value": "Open settings"
+          },
+          "attribute": "aria-label",
+          "attributeValue": {
+            "type": "string",
+            "value": "Open settings"
+          }
+        },
+        {
+          "type": "relatedElement",
+          "superseded": true,
+          "nativeSource": "label"
+        },
+        {
+          "type": "contents",
+          "value": {
+            "type": "computedString",
+            "value": "Settings"
+          },
+          "superseded": true
+        },
+        {
+          "type": "attribute",
+          "value": {
+            "type": "computedString",
+            "value": "Settings"
+          },
+          "attribute": "title",
+          "attributeValue": {
+            "type": "string",
+            "value": "Settings"
+          },
+          "superseded": true
+        }
+      ]
+    },
+    "description": {
+      "type": "computedString",
+      "value": "Settings"
+    },
+    "generated": "\"Settings\""
+  },
+  {
+    "locale": "nl",
+    "mode": "focus",
+    "name": {
+      "type": "computedString",
+      "value": "Open instellingen",
+      "sources": [
+        {
+          "type": "relatedElement",
+          "attribute": "aria-labelledby"
+        },
+        {
+          "type": "attribute",
+          "value": {
+            "type": "computedString",
+            "value": "Open instellingen"
+          },
+          "attribute": "aria-label",
+          "attributeValue": {
+            "type": "string",
+            "value": "Open instellingen"
+          }
+        },
+        {
+          "type": "relatedElement",
+          "superseded": true,
+          "nativeSource": "label"
+        },
+        {
+          "type": "contents",
+          "value": {
+            "type": "computedString",
+            "value": "Instellingen"
+          },
+          "superseded": true
+        },
+        {
+          "type": "attribute",
+          "value": {
+            "type": "computedString",
+            "value": "Instellingen"
+          },
+          "attribute": "title",
+          "attributeValue": {
+            "type": "string",
+            "value": "Instellingen"
+          },
+          "superseded": true
+        }
+      ]
+    },
+    "description": {
+      "type": "computedString",
+      "value": "Instellingen"
+    },
+    "generated": "\"Instellingen\""
+  },
+  {
+    "locale": "nl",
+    "mode": "hover",
+    "name": {
+      "type": "computedString",
+      "value": "Open instellingen",
+      "sources": [
+        {
+          "type": "relatedElement",
+          "attribute": "aria-labelledby"
+        },
+        {
+          "type": "attribute",
+          "value": {
+            "type": "computedString",
+            "value": "Open instellingen"
+          },
+          "attribute": "aria-label",
+          "attributeValue": {
+            "type": "string",
+            "value": "Open instellingen"
+          }
+        },
+        {
+          "type": "relatedElement",
+          "superseded": true,
+          "nativeSource": "label"
+        },
+        {
+          "type": "contents",
+          "value": {
+            "type": "computedString",
+            "value": "Instellingen"
+          },
+          "superseded": true
+        },
+        {
+          "type": "attribute",
+          "value": {
+            "type": "computedString",
+            "value": "Instellingen"
+          },
+          "attribute": "title",
+          "attributeValue": {
+            "type": "string",
+            "value": "Instellingen"
+          },
+          "superseded": true
+        }
+      ]
+    },
+    "description": {
+      "type": "computedString",
+      "value": "Instellingen"
+    },
+    "generated": "\"Instellingen\""
+  }
+]
