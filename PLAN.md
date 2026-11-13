@@ -37,7 +37,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0027 Add the theme switch and service worker update modules, and document the shared patterns.
 - [x] T0002 Plan the design system from the comparison: architecture decisions, adoption roadmap, and first implementation tasks.
 - [x] T0001 Compare the UI design of todos.webapp, family-portal, meteo, auth, and counters, from tokens to app shells.
-- [ ] T0035 Move field and form announcements to the shared live region module, so each page has one polite region.
+- [x] T0035 Move field and form announcements to the shared live region module, so each page has one polite region.
 
 ## Backlog
 - [ ] T0037 [protocol: adhoc] Check the tooltip component and meteo's tooltips with Narrator or NVDA by hand, recording what each announces.

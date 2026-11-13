@@ -5,16 +5,20 @@ session: codex-20261113-d9f0fb
 needs: []
 branch: task/T0035-move-field-and-form-announcements-to-the-shared
 worktree: .plan/work/T0035-move-field-and-form-announcements-to-the-shared
-status: active
+status: completed
 started_at: "2026-11-13T04:56:18Z"
-ended_at: —
+ended_at: "2026-11-13T05:04:27Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 2, duration_s: 850.4, input: 168792, output: 19682, cache_read: 4762368, cache_write: 0}
-review_status: pending
+  review: {turns: 2, duration_s: 108.2, input: 93130, output: 2594, cache_read: 372480, cache_write: 0}
+review_status: approved
 review_round: 1
+reviewed_by: "@codex-2"
+work_duration: 488.5
+completion-commit: 568781b09948424963dc7355f66345b0cd2998ca
 ---
 # T0035: Move field and form announcements to the shared live region module, so each page has one polite region
 
@@ -31,7 +35,7 @@ Browser scenarios validate field errors and form submissions alongside the page 
 - [x] **[Implement]** Implement required changes for T0035.
 - [x] **[Verify]**    Verify implementation with automated test suites.
 - [x] **[Doc]**       Update documentation and CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-12] **[Doc]**
@@ -57,4 +61,11 @@ Browser scenarios validate field errors and form submissions alongside the page 
 
 - [2026-11-13] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-13] **[Review]**
+  Round 1 approved by @codex-2: [Decided]** Approved commit 69f234d after reviewing the task, execution log, implementation diff, and validation evidence.
+  - Findings: [review-findings-1.md](T0035-move-field-and-form-announcements-to-the-shared/review-findings-1.md).
+
+- [2026-11-13] **[Complete]**
+  Task completed successfully.
 
