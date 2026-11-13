@@ -7,6 +7,10 @@ All notable changes to this project are documented here.
 > Areas: `Tokens`, `Looks`, `Components`, `Shell`, `Modules`, `CLI`, and `Template` for the package,
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
+---
+
+## v0.1.1-pre
+
 ## v0.1.0 [released: 2026-11-13]
 - Modules: Shared field, form, and toast announcements through one polite live region per document.
 - Modules: Added app-scoped theme preferences and user-controlled worker updates, including reload prompts after activation in another tab.
