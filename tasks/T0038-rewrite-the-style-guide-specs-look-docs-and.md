@@ -4,15 +4,18 @@ owner: "@codex"
 needs: []
 branch: —
 worktree: —
-status: active
+status: completed
 started_at: "2026-11-13T17:14:23Z"
-ended_at: —
+ended_at: "2026-11-13T17:38:18Z"
 review: agent
 preview: none
 protocol: standard
-review_status: pending
+review_status: approved
 review_round: 1
 review_requested_at: "2026-11-13T17:22:46Z"
+reviewed_by: "@claude-code"
+review_session: claude-20261113-f672e3
+completion-commit: 5f4237a47298fd2a3ea8cfc0cda9fb3a5987931e
 ---
 # T0038: Rewrite the style guide, specs, look docs, and README for readers who do not know the sibling apps
 
@@ -38,7 +41,7 @@ Size estimate: 8 files, 350 lines
 - [x] **[Doc]**       Rewrite each mention as a generic rationale, keeping ADR links for provenance.
 - [x] **[Verify]**    Run the Markdown linter and the app-name search, recording output in validation-proof.md.
 - [x] **[Doc]**       Update CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-13] **[Doc]**
@@ -73,4 +76,17 @@ Size estimate: 8 files, 350 lines
 
 - [2026-11-13] **[Verify]**
   Normalized all nine edited Markdown files to UTF-8 with LF line endings after the reviewer's inspection. Full repository check previously passed; only line endings changed afterward.
+
+- [2026-11-13] **[Review]**
+  Managed reviewer timed out without a verdict; its closed session could not resume. Started a fresh claude-code review using existing evidence, tool session 55649, with a 300-second limit and no test reruns.
+
+- [2026-11-13] **[Review]**
+  Fresh reviewer PID 17400 uses session claude-20261113-f672e3. The exact plan agents run command is recorded in this chat; its task-bound session stores review identity.
+
+- [2026-11-13] **[Review]**
+  Round 1 approved by @claude-code.
+  - Findings: [review-findings-1.md](T0038-rewrite-the-style-guide-specs-look-docs-and/review-findings-1.md).
+
+- [2026-11-13] **[Complete]**
+  Task completed successfully.
 
