@@ -1,5 +1,97 @@
 # T0031 Validation Proof
 
+
+## Latest Rebased Validation
+This successful run supersedes the historical blocked checkpoints below.
+
+Command: `plan tasks validate T0031 --completion` (exit code 0).
+
+```text
+All 1 task file passed validation.
+```
+
+Rebased onto main b272882 and adopted T0036's stylesheet-ready selection helper in the list/table specs.
+Refreshed section captures were inspected in light/dark themes at desktop and phone widths.
+
+Command: `$env:LIST_TABLE_PROOF = 'C:/Dev-Projects/support.webapp/.plan/tasks/T0031-design-and-add-the-list-and-data-table'; python scripts/devops.py check` (exit code 0).
+
+Full output: [rebased-check.txt](rebased-check.txt).
+
+```text
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\Scripts\lint-markdown.EXE check --offline
+Process ID: 82168
+All 25 markdown files passed linting.
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m ruff check scripts tests
+Process ID: 66888
+All checks passed!
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m ruff format --check scripts tests
+Process ID: 9580
+4 files already formatted
+Command: "C:\Program Files\nodejs\npm.CMD" run lint
+Process ID: 82852
+> @gpellicciotta/support.webapp@0.1.0-pre lint
+> eslint .
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m pytest
+Process ID: 76828
+============================= test session starts =============================
+platform win32 -- Python 3.15.2, pytest-9.2.0, pluggy-1.7.0
+rootdir: C:\Dev-Projects\support.webapp\.plan\work\T0031-design-and-add-the-list-and-data-table
+configfile: pyproject.toml
+testpaths: tests
+plugins: timeout-2.4.0, xdist-3.8.0
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+created: 8/8 workers
+8 workers [3 items]
+...                                                                      [100%]
+============================== 3 passed in 1.74s ==============================
+Command: "C:\Program Files\nodejs\npm.CMD" test
+Process ID: 43028
+> @gpellicciotta/support.webapp@0.1.0-pre test
+> vitest run
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0031-design-and-add-the-list-and-data-table
+ Test Files  25 passed (25)
+      Tests  2068 passed (2068)
+   Start at  01:09:53
+   Duration  5.08s (environment 54%, import 30%, tests 13%, transform 1%, worker 1%)
+    Isolate  25 workers spawned · ~863ms startup each (spawn + environment, per file)
+             at least ~2.22s faster with isolate: false — reuses workers across files instead of one per file
+[... 840 lines omitted ...]
+```
+
+```text
+  566 passed (3.8m)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:integration
+Process ID: 73076
+> @gpellicciotta/support.webapp@0.1.0-pre test:integration
+> vitest run --config vitest.integration.config.js
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0031-design-and-add-the-list-and-data-table
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+   Start at  01:13:49
+   Duration  5.65s (tests 99%, import 1%)
+[... 100 lines omitted ...]
+```
+
+```text
+npm notice 184B src/looks/warm/index.css
+npm notice 7.2kB src/looks/warm/look.css
+npm notice 2.4kB src/looks/warm/primitives.css
+npm notice Tarball Details
+npm notice name: @gpellicciotta/support.webapp
+npm notice version: 0.1.0-pre
+npm notice filename: gpellicciotta-support.webapp-0.1.0-pre.tgz
+npm notice package size: 931.6 kB
+npm notice unpacked size: 1.2 MB
+npm notice shasum: ac104627373edce89362dca7230d2cf73dddeb31
+npm notice integrity: sha512-xAK1pqMkaATDh[...]PzSAk927m67Lw==
+npm notice total files: 94
+npm notice
+gpellicciotta-support.webapp-0.1.0-pre.tgz
+```
+
+
 ## Completion Gate Result
 Command: `plan tasks validate T0031 --completion` (exit code 1).
 

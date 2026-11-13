@@ -5,15 +5,15 @@ session: codex-20261112-605570
 needs: []
 branch: task/T0031-design-and-add-the-list-and-data-table
 worktree: .plan/work/T0031-design-and-add-the-list-and-data-table
-status: suspended
+status: active
 started_at: "2026-11-12T20:02:57Z"
 ended_at: —
 review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 275.6, input: 86540, output: 6744, cache_read: 1047552, cache_write: 0}
-work_duration: 144.7
+  worker: {turns: 4, duration_s: 2315.0, input: 273072, output: 57440, cache_read: 17522432, cache_write: 0}
+work_duration: 1157.5
 ---
 # T0031: Design and add the list and data table components on native list and table elements
 
@@ -31,7 +31,7 @@ See the technical specification for files, tests, and the completion check.
 - [x] **[Verify]**    Run the named tests and the gallery verifier until both pass.
 - [x] **[Visual]**    Capture the new gallery sections per theme at 390 and 1440 px.
 - [x] **[Doc]**       Update the style guide, components.md, and CHANGELOG.md.
-- [ ] **[Verify]**    Pass the complete repository check without Warm card or accent readiness failures.
+- [x] **[Verify]**    Pass the complete repository check without Warm card or accent readiness failures.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -94,4 +94,22 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-12] **[Decide]**
   Committed implementation as e303c22; worktree is clean. Review must resolve Warm card validation failures before the full-check gate can pass. See final-check.txt, style-readiness-check.txt, and validation-proof.md for exact failures and evidence.
+
+- [2026-11-12] **[Decided]**
+  Orchestrator traced the Warm card failures to the existing flake tracked by T0036, moved T0036 to the top of the milestone, and will resume T0031 once it completes.
+
+- [2026-11-13] **[Decided]**
+  Orchestrator resumed T0031: T0036 fixed the Warm card spec flake on main. Rebase on main, rerun the full check, and check the full-check gate.
+
+- [2026-11-13] **[Implement]**
+  Rebased onto main b272882, preserving both sides of changelog and gallery navigation conflicts. Updated list/table browser specs to use T0036 stylesheet-ready look selection. Prior failing evidence covers the synchronization defect; no component behavior changed.
+
+- [2026-11-13] **[Verify]**
+  Started full check in session 45964 with LIST_TABLE_PROOF set to the companion directory. Command: python scripts/devops.py check. Rebased-check.txt records exact subprocess commands, process IDs, and output.
+
+- [2026-11-13] **[Verify]**
+  Full check passed after rebase: 566 browser tests, 2068 JavaScript unit tests, three Python tests, four integration tests, lint, and packaging. Refreshed screenshots inspected; validation-proof.md contains verbatim evidence. All execution steps except Review are checked.
+
+- [2026-11-13] **[Verify]**
+  Committed synchronization update as c85c0a9; worktree is clean. Completion validation passed. Final task delta: nine files, 348 changed lines; four counted files, 140 counted lines; zero reopenings. No test server remains. Awaiting orchestrator-managed agent review.
 
