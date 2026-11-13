@@ -13,9 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 1744.8, input: 277876, output: 49380, cache_read: 10112512, cache_write: 0}
-work_duration: 78.2
-review_status: pending
+  review: {turns: 2, duration_s: 161.2, input: 121630, output: 4286, cache_read: 528640, cache_write: 0}
+work_duration: 3349.2
+review_status: rejected
 review_round: 1
+reviewed_by: "@codex-2"
 ---
 # T0024: Add the tooltip component after a screen reader check of meteo's tooltips
 
@@ -94,4 +96,29 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-13] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-13] **[Review]**
+  Round 1 rejected by @codex-2: [Decided]** Rejected for a broken documented fallback and an unfinished rebase.
+  - Findings: [review-findings-1.md](T0024-add-the-tooltip-component-after-a-screen-reader/review-findings-1.md).
+
+- [2026-11-13] **[Implement]**
+  Resolved the changelog conflict while preserving all entries and finished the interrupted rebase at 0d2baf1. Added browser regressions for absent showPopover, hidePopover, and both methods, covering visibility, closure, and reversible cleanup.
+
+- [2026-11-13] **[Implement]**
+  Native mode now requires both popover methods. Fallback removes popover before opening and avoids native selectors and methods during closure. Destruction restores authored attributes. Browser regressions verified the original failure before implementation.
+
+- [2026-11-13] **[Verify]**
+  Committed fallback fix as 92024b3. Full check started in session 92006, with output redirected to review-check-output.txt.
+
+- [2026-11-13] **[Visual]**
+  Inspected fallback screenshots at 390 and 1440 pixels in light and dark themes. Descriptions remain visible with clear focus outlines. Original appearance remains unchanged; missing popover APIs now use the same styling.
+
+- [2026-11-13] **[Verify]**
+  Measured the final range against fd786b3: five counted files, 42 changed lines. Added files remain excluded by sizing rules. No reopening occurred; this is review rework.
+  - Files touched: 5.
+  - Lines touched: 42.
+  - Reopenings: 0.
+
+- [2026-11-13] **[Verify]**
+  Full check passed on commit 92024b3 after rebase completion. Regressions cover missing popover methods, computed visibility, closure, and cleanup. Evidence is in validation-proof.md and review-check-output.txt; the orchestrator owns the next review.
 

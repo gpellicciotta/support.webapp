@@ -159,3 +159,195 @@ Exit code: 0
 ```text
 All 1 task file passed validation.
 ```
+
+## Review Round One Rework
+The changelog conflict was resolved, preserving every release bullet. The rebase completed at `0d2baf1`.
+The fallback repair is committed as `92024b3`; final verification runs against that commit.
+
+### Regression failure before implementation
+Command: `npx playwright test tests/e2e/tooltip.spec.js --grep 'hidden-state fallback' --project desktop-light`
+
+Exit code: 1
+
+```text
+[WebServer] (node:79604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 3 workers
+
+(node:51364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:79692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:55568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:51364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:79692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:55568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  3 [desktop-light] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without both (6.4s)
+  x  2 [desktop-light] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without hidePopover (6.5s)
+  x  1 [desktop-light] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without showPopover (6.6s)
+
+
+  1) [desktop-light] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without showPopover ──
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('#tooltip-demo')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('#tooltip-demo') with timeout 5000ms
+      - waiting for locator('#tooltip-demo')
+        12 × locator resolved to <span role="tooltip" class="tooltip" popover="manual" id="tooltip-demo">Get the latest forecast for this location.</span>
+           - unexpected value "hidden"
+
+
+      66 |         const tip = page.locator('#tooltip-demo');
+      67 |         await trigger.focus();
+```
+
+```text
+    > 68 |         await expect(tip).toBeVisible();
+         |                           ^
+      69 |         await expect(tip).not.toHaveAttribute('popover');
+      70 |         await expect(tip).not.toHaveCSS('display', 'none');
+      71 |         await expect(trigger).toHaveAccessibleDescription('Get the latest forecast for this location.');
+        at C:\Dev-Projects\support.webapp\.plan\work\T0024-add-the-tooltip-component-after-a-screen-reader\tests\e2e\tooltip.spec.js:68:27
+
+    Error Context: test-results\tooltip-hidden-state-fallback-without-showPopover-desktop-light\error-context.md
+
+  2) [desktop-light] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without hidePopover ──
+
+    Error: expect(locator).not.toHaveAttribute() failed
+
+    Locator:  locator('#tooltip-demo')
+    Expected: not have attribute
+    Received: have attribute
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toHaveAttribute" locator('#tooltip-demo') with timeout 5000ms
+      - waiting for locator('#tooltip-demo')
+        14 × locator resolved to <span role="tooltip" class="tooltip" popover="manual" id="tooltip-demo">Get the latest forecast for this location.</span>
+           - unexpected value "attribute present"
+
+
+      67 |         await trigger.focus();
+      68 |         await expect(tip).toBeVisible();
+    > 69 |         await expect(tip).not.toHaveAttribute('popover');
+         |                               ^
+      70 |         await expect(tip).not.toHaveCSS('display', 'none');
+      71 |         await expect(trigger).toHaveAccessibleDescription('Get the latest forecast for this location.');
+      72 |         if (process.env.TOOLTIP_EVIDENCE) {
+        at C:\Dev-Projects\support.webapp\.plan\work\T0024-add-the-tooltip-component-after-a-screen-reader\tests\e2e\tooltip.spec.js:69:31
+
+    Error Context: test-results\tooltip-hidden-state-fallback-without-hidePopover-desktop-light\error-context.md
+
+  3) [desktop-light] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without both ─────────
+
+    Error: expect(locator).toBeVisible() failed
+
+```
+
+```text
+    Locator:  locator('#tooltip-demo')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('#tooltip-demo') with timeout 5000ms
+      - waiting for locator('#tooltip-demo')
+        12 × locator resolved to <span role="tooltip" class="tooltip" popover="manual" id="tooltip-demo">Get the latest forecast for this location.</span>
+           - unexpected value "hidden"
+
+
+      66 |         const tip = page.locator('#tooltip-demo');
+      67 |         await trigger.focus();
+    > 68 |         await expect(tip).toBeVisible();
+         |                           ^
+      69 |         await expect(tip).not.toHaveAttribute('popover');
+      70 |         await expect(tip).not.toHaveCSS('display', 'none');
+      71 |         await expect(trigger).toHaveAccessibleDescription('Get the latest forecast for this location.');
+        at C:\Dev-Projects\support.webapp\.plan\work\T0024-add-the-tooltip-component-after-a-screen-reader\tests\e2e\tooltip.spec.js:68:27
+
+    Error Context: test-results\tooltip-hidden-state-fallback-without-both-desktop-light\error-context.md
+
+  3 failed
+    [desktop-light] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without showPopover ───
+    [desktop-light] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without hidePopover ───
+    [desktop-light] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without both ──────────
+```
+
+### Passing affected browser checks
+Command: `$env:TOOLTIP_EVIDENCE='C:/Dev-Projects/support.webapp/.plan/tasks/T0024-add-the-tooltip-component-after-a-screen-reader'; npx playwright test tests/e2e/tooltip.spec.js`
+
+Exit code: 0
+
+```text
+[... 77 lines omitted ...]
+(node:20148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 20 [mobile-dark] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without showPopover (1.4s)
+  ok 21 [mobile-dark] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without both (1.3s)
+(node:85284) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:85284) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 19 [mobile-dark] › tests\e2e\tooltip.spec.js:5:1 › tooltip focus, description, dismissal, hover and viewport (3.5s)
+  ok 22 [mobile-dark] › tests\e2e\tooltip.spec.js:106:5 › without JavaScript › authored description remains readable (696ms)
+  ok 23 [mobile-dark] › tests\e2e\tooltip.spec.js:39:1 › description updates, reduced motion, and forced colors (1.4s)
+(node:78788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:78788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 24 [mobile-dark] › tests\e2e\tooltip.spec.js:57:5 › hidden-state fallback without hidePopover (1.2s)
+
+  24 passed (49.4s)
+```
+
+Fallback evidence: [desktop light](fallback-both-desktop-light.png), [desktop dark](fallback-both-desktop-dark.png), [mobile light](fallback-both-mobile-light.png), [mobile dark](fallback-both-mobile-dark.png).
+
+### Full verification on the final commit
+Commit: `92024b3`.
+
+Command: `python scripts/devops.py check *> 'C:/Dev-Projects/support.webapp/.plan/tasks/T0024-add-the-tooltip-component-after-a-screen-reader/review-check-output.txt'`
+
+Exit code: 0
+
+Selected output, retaining original summary lines and omission counts:
+
+```text
+[... 2 lines omitted ...]
+All 25 markdown files passed linting.
+[... 2 lines omitted ...]
+All checks passed!
+[... 21 lines omitted ...]
+============================== 3 passed in 2.84s ==============================
+[... 5 lines omitted ...]
+ Test Files  26 passed (26)
+      Tests  2084 passed (2084)
+[... 879 lines omitted ...]
+  2 skipped
+  602 passed (5.1m)
+[... 5 lines omitted ...]
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+[... 121 lines omitted ...]
+```
+
+Full output: [review-check-output.txt](review-check-output.txt).
+
+Command: `plan tasks validate T0024 --completion`
+
+Exit code: 0
+
+```text
+All 1 task file passed validation.
+```

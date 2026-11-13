@@ -23,5 +23,6 @@ Without JavaScript, explicit descriptive text remains readable.
 ### Tests
 - Unit: preserve descriptions; restore attributes; focus, blur, Escape, pointer transitions, touch exclusion, plain-text builder, cleanup.
 - Integration: Chromium description assertions, hover persistence, focus retention, Escape, viewport containment, and gallery screenshots across looks and themes.
+- Integration: Remove each popover method and both methods; verify computed visibility, closure, and authored-attribute restoration.
 
 Completion check: `python scripts/devops.py check`, exit code 0
