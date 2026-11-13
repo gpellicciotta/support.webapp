@@ -448,6 +448,11 @@ Use `aria-selected` for tabs and other selection widgets, rather than page navig
 ## Shell
 [shell.css](../../src/css/shell.css) lays out the app shell of [ADR-0004](../adrs/ADR-0004-app-shell.md).
 Copy a layout skeleton from [components.md](components.md#app-shell) and keep only the areas you use.
+The runnable examples demonstrate these combinations:
+- [List editor](../../src/demo/shell-list-editor.html): sidebar, bottom navigation, side panel, and a scrolling main area.
+- [Toolbar](../../src/demo/shell-toolbar.html): menu navigation with sticky bars and page scrolling.
+- [Single screen](../../src/demo/shell-single-screen.html): narrow content with no navigation and app-owned screen toggles.
+- [Portal](../../src/demo/shell-portal.html): breadcrumbs, account actions, and a footer in the action bar.
 Open the four demo pages from the [App shell section](../../src/demo/visual-style-gallery.html#shell) of the gallery.
 
 Areas are direct children of `<body class="app">`; only `app__main` is required:

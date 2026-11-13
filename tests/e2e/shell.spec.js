@@ -1,4 +1,4 @@
-// Browser checks of the app shell (ADR-0004): one demo page per adopter's settings, at the viewport of each project.
+// Browser checks of the app shell (ADR-0004): generic layout examples at each configured viewport.
 import { expect, test } from '@playwright/test';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -13,13 +13,13 @@ const SIDE_PANEL = 400;
 const NARROW = 880;
 
 const demos = [
-    { name: 'todos', path: '/demo/shell-todos.html', scroll: 'main', width: null,
+    { name: 'list-editor', title: 'List editor', path: '/demo/shell-list-editor.html', scroll: 'main', width: null,
         areas: ['top-bar', 'sidebar', 'banners', 'main', 'side-panel', 'action-bar', 'bottom-nav', 'overlays'] },
-    { name: 'counters', path: '/demo/shell-counters.html', scroll: 'page', width: null,
+    { name: 'toolbar', title: 'Toolbar', path: '/demo/shell-toolbar.html', scroll: 'page', width: null,
         areas: ['top-bar', 'banners', 'main', 'action-bar', 'overlays'] },
-    { name: 'meteo', path: '/demo/shell-meteo.html', scroll: 'page', width: NARROW,
+    { name: 'single-screen', title: 'Single screen', path: '/demo/shell-single-screen.html', scroll: 'page', width: NARROW,
         areas: ['top-bar', 'banners', 'main', 'action-bar', 'overlays'] },
-    { name: 'family-portal', path: '/demo/shell-family-portal.html', scroll: 'page', width: null,
+    { name: 'portal', title: 'Portal', path: '/demo/shell-portal.html', scroll: 'page', width: null,
         areas: ['top-bar', 'banners', 'main', 'action-bar', 'overlays'] }
 ];
 
@@ -71,6 +71,7 @@ for (const demo of demos) {
     test.describe(`${demo.name} shell demo`, () => {
         test('renders its areas and drops the absent ones', async ({ page }) => {
             const problems = await openDemo(page, demo.path);
+            await expect(page).toHaveTitle(`${demo.title} shell demo · support.webapp`);
             const { width } = page.viewportSize();
             const wide = width >= BREAKPOINT;
             await expect(page.locator('body')).toHaveClass(new RegExp(`\\bapp--scroll-${demo.scroll}\\b`));
@@ -173,7 +174,7 @@ for (const demo of demos) {
     });
 }
 
-test('meteo centers its main column at the narrow width', async ({ page }) => {
+test('single-screen centers its main column at the narrow width', async ({ page }) => {
     await openDemo(page, demos[2].path);
     const { width } = page.viewportSize();
     const column = await page.locator('.app__main > section:not([hidden])').first().boundingBox();
@@ -187,7 +188,7 @@ test('meteo centers its main column at the narrow width', async ({ page }) => {
     }
 });
 
-test('meteo hides its banners area while every banner is hidden', async ({ page }) => {
+test('single-screen hides its banners area while every banner is hidden', async ({ page }) => {
     await openDemo(page, demos[2].path);
     expect(await areaBox(page, 'banners')).toBeNull();
     await page.locator('.app__banners > .banner').evaluate((banner) => {
@@ -197,7 +198,19 @@ test('meteo hides its banners area while every banner is hidden', async ({ page 
     expect(banners.height).toBeGreaterThan(0);
 });
 
-test('todos opens its side panel beside the main column or as a full-window sheet', async ({ page }) => {
+test('single-screen switches between generic start, details, and settings views', async ({ page }) => {
+    const problems = await openDemo(page, demos[2].path);
+    const details = page.getByRole('button', { name: 'Details', exact: true });
+    await expect(details).toHaveCount(1);
+    for (const name of ['Details', 'Settings', 'Start']) {
+        await page.getByRole('button', { name, exact: true }).click();
+        await expect(page.locator('.app__main > section:visible')).toHaveCount(1);
+        await expect(page.locator('.app__main > section:visible h2')).toHaveText(name);
+    }
+    expect(problems).toEqual([]);
+});
+
+test('list-editor opens its side panel beside the main column or as a full-window sheet', async ({ page }) => {
     const problems = await openDemo(page, demos[0].path);
     const { width, height } = page.viewportSize();
     const panel = page.locator('.app__side-panel');
@@ -265,10 +278,10 @@ test('the page scroll mode keeps the sidebar and side panel at the full viewport
     expect(problems).toEqual([]);
 });
 
-test('the counters menu button opens its sample menu', async ({ page }) => {
+test('the toolbar menu button opens its sample menu', async ({ page }) => {
     const problems = await openDemo(page, demos[1].path);
     const button = page.locator('.app__menu-button');
-    const menu = page.locator('#counters-menu');
+    const menu = page.locator('#toolbar-menu');
     await expect(button).toHaveAttribute('aria-haspopup', 'menu');
     await button.click();
     await expect(button).toHaveAttribute('aria-expanded', 'true');
@@ -296,6 +309,7 @@ test('the gallery links to every shell demo page', async ({ page }) => {
     for (const demo of demos) {
         const link = page.locator(`#shell a[href="${demo.path.replace('/demo/', '')}"]`);
         await expect(link, demo.name).toHaveCount(1);
+        await expect(link.locator('.card__title')).toHaveText(`${demo.title} layout`);
         const response = await page.request.get(demo.path);
         expect(response.status(), demo.name).toBe(200);
     }

@@ -2,11 +2,11 @@
 // The static token test covers raw colors, so this verifier checks only rendered pages.
 import { expect, test } from '@playwright/test';
 import { lookHref, looks } from '../../src/demo/gallery.js';
-import { settleGalleryStyles } from './gallery-helpers.js';
+import { selectGalleryLook, settleGalleryStyles } from './gallery-helpers.js';
 
 const pages = [
     { name: 'gallery', path: '/demo/visual-style-gallery.html' },
-    ...['todos', 'counters', 'meteo', 'family-portal'].map((name) => ({ name: `shell-${name}`, path: `/demo/shell-${name}.html` }))
+    ...['list-editor', 'toolbar', 'single-screen', 'portal'].map((name) => ({ name: `shell-${name}`, path: `/demo/shell-${name}.html` }))
 ];
 const NORMAL_TEXT_RATIO = 4.5;
 const LARGE_TEXT_RATIO = 3;
@@ -302,14 +302,9 @@ function watchErrors(page) {
 
 async function open(page, path, look, theme) {
     const response = await page.goto(path, { waitUntil: 'networkidle' });
-    await page.locator('#look-select').selectOption(look);
+    await selectGalleryLook(page, look);
     await page.locator(`input[name="theme"][value="${theme}"]`).check();
-    await page.waitForFunction((href) => {
-        const sheet = document.getElementById('look-stylesheet').sheet;
-        return sheet?.href.endsWith(href.replace(/^(\.\.\/)+/, '/')) && sheet.cssRules.length > 0;
-    }, lookHref(look));
     await page.waitForLoadState('networkidle');
-    await page.evaluate(() => document.fonts.ready.then(() => true));
     return response;
 }
 
@@ -318,6 +313,40 @@ async function check(page) {
     await page.keyboard.press('Tab');
     return page.evaluate(collect);
 }
+
+test('verifier waits for delayed look imports before inspecting the page', async ({ page }) => {
+    const errors = watchErrors(page);
+    let release;
+    let requested;
+    const held = new Promise(resolve => {
+        release = resolve;
+    });
+    const started = new Promise(resolve => {
+        requested = resolve;
+    });
+    await page.route('**/looks/warm/look.css', async route => {
+        requested();
+        await held;
+        await route.continue();
+    });
+    const opening = open(page, pages[4].path, 'warm', 'system');
+    try {
+        await started;
+        const state = await Promise.race([
+            opening.then(() => 'ready'),
+            new Promise(resolve => setTimeout(() => resolve('loading'), 2000))
+        ]);
+        expect(state).toBe('loading');
+    }
+    finally {
+        release();
+        await opening;
+    }
+    await settleGalleryStyles(page);
+    const data = await check(page);
+    expect(summarize(data)).toEqual([]);
+    expect(errors).toEqual([]);
+});
 
 for (const target of pages) {
     for (const { look, accent } of looks.flatMap(look => (look === 'bright' ? ['blue', 'yellow', 'red'] : ['']).map(accent => ({ look, accent })))) {

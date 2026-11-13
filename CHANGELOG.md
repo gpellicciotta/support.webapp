@@ -10,6 +10,8 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- DevEx: Made browser verification wait for complete look stylesheet loads before inspecting rendered pages.
+- Shell: Renamed demos to list editor, toolbar, single screen, and portal examples, with descriptive gallery links.
 - Docs: Explained component purposes, look choices, and shell layouts without requiring knowledge of existing applications.
 
 ## v0.1.0 [released: 2026-11-13]

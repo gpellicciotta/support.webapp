@@ -29,7 +29,7 @@ test('fab specimens expose every state, labels, targets, and a keyboard focus ri
 
 test('the shell keeps the overlay fab visible above navigation while content scrolls', async ({ page }) => {
     const problems = await openGallery(page);
-    await page.goto('/demo/shell-todos.html', { waitUntil: 'networkidle' });
+    await page.goto('/demo/shell-list-editor.html', { waitUntil: 'networkidle' });
     const button = page.locator('.app__overlays > .fab');
     await expect(button).toHaveAccessibleName('Add task');
     const before = await button.boundingBox();
