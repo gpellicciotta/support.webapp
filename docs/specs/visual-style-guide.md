@@ -174,6 +174,11 @@ Import `createLiveRegion(options)` from [live-region.js](../../src/js/live-regio
 - It adds a polite `role="status"` region and an assertive `role="alert"` region, both `.visually-hidden`.
 - `announce(message, { politeness })` clears the region first, so a repeated message is read again.
 - Use the assertive region only for blocking errors; pass the announcer to `createToast` as `liveRegion`.
+- Field and form defaults share these regions, creating them lazily if the page has no announcer yet.
+- Repeated `createLiveRegion` calls share one pair per document; the first caller supplies placement and timer options.
+- Each handle's `destroy()` releases ownership; the last release removes both regions and cancels pending messages.
+- Custom field and form `announce` callbacks remain supported.
+- Import document-level `announce(document, message)` from [live-region.js](../../src/js/live-region.js); the existing field export remains compatible.
 
 ### Icons
 Each look ships one sprite, `looks/{{look}}/icons.svg`, with one 24-unit `<symbol>` per glyph ([ADR-0002](../adrs/ADR-0002-looks.md#icons)).

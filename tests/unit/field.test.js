@@ -2,6 +2,7 @@ import { Window } from 'happy-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attachField, createField } from '../../src/js/field.js';
 import { setSpriteUrl } from '../../src/js/icon.js';
+import { createLiveRegion } from '../../src/js/live-region.js';
 
 let window;
 let doc;
@@ -106,6 +107,7 @@ describe('createField', () => {
     it('announces through a shared polite live region when no announcer is given', () => {
         vi.useFakeTimers();
         try {
+            const liveRegion = createLiveRegion({ document: doc });
             const first = createField(doc, { label: 'A', name: 'a' });
             const second = createField(doc, { label: 'B', name: 'b' });
             doc.body.append(first.element, second.element);
@@ -115,6 +117,11 @@ describe('createField', () => {
             const regions = doc.querySelectorAll('[aria-live="polite"]');
             expect(regions).toHaveLength(1);
             expect(regions[0].textContent).toBe('Enter B.');
+            expect(regions[0].dataset.liveRegion).toBe('polite');
+            liveRegion.announce('Toast.');
+            vi.runAllTimers();
+            expect(regions[0].textContent).toBe('Toast.');
+            liveRegion.destroy();
         }
         finally {
             vi.useRealTimers();

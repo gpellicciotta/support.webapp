@@ -7,7 +7,8 @@
  * Uses `field.js`, the module of the fields it holds.
  */
 
-import { announce as announceInRegion, attachField } from './field.js';
+import { attachField } from './field.js';
+import { announce as announceInRegion } from './live-region.js';
 
 let instances = 0;
 

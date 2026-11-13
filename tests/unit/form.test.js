@@ -2,6 +2,7 @@ import { Window } from 'happy-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attachForm } from '../../src/js/form.js';
 import { setSpriteUrl } from '../../src/js/icon.js';
+import { createLiveRegion } from '../../src/js/live-region.js';
 
 let window;
 let doc;
@@ -52,6 +53,21 @@ const fields = { name: { messages: messages.name }, url: { messages: messages.ur
 const submitEvent = () => new window.Event('submit', { bubbles: true, cancelable: true });
 
 describe('attachForm', () => {
+    it('shares field errors and busy messages with the page announcer', async () => {
+        const { form, name, url } = mount();
+        const liveRegion = createLiveRegion({ document: doc });
+        const controller = attachForm(form, { document: doc, fields });
+        expect(await controller.submit()).toBe(false);
+        expect(doc.querySelectorAll('[aria-live="polite"]')).toHaveLength(1);
+        name.value = 'Steps';
+        url.value = 'Address';
+        expect(await controller.submit()).toBe(true);
+        await new Promise(resolve => setTimeout(resolve, 120));
+        expect(doc.querySelector('[data-live-region="polite"]').textContent).toBe('Sending.');
+        controller.destroy();
+        liveRegion.destroy();
+    });
+
     it('fills the error summary after a failed submit, focuses it, and skips onSubmit', async () => {
         const { form, summary, name, url } = mount();
         const onSubmit = vi.fn();

@@ -15,6 +15,8 @@ test('a failed submit by Enter fills the error summary, announces it, and focuse
     await expect(links).toHaveCount(2);
     expect(await links.evaluateAll((items) => items.map((link) => link.getAttribute('href')))).toEqual(['#form-name', '#form-url']);
     await expect(form.locator('[aria-invalid="true"]')).toHaveCount(2);
+    await expect(page.locator('[data-live-region="polite"]')).toHaveCount(1);
+    await expect(page.locator('.field__live')).toHaveCount(0);
     expectRing(await forcedRing(summary), await tokenColor(page, '--color-focus'), 'focused summary');
     expect((await styles(summary, ['border-inline-start-color']))['border-inline-start-color']).toBe(await tokenColor(page, '--color-danger'));
     expect(problems).toEqual([]);
@@ -58,6 +60,8 @@ test('a valid submit sets the busy state, then confirms the save', async ({ page
     await form.locator('#form-url').fill('https://example.test');
     await form.getByRole('button', { name: 'Save' }).click();
     await expect(form).toHaveAttribute('aria-busy', 'true');
+    await expect(page.locator('[data-live-region="polite"]')).toHaveCount(1);
+    await expect(page.locator('[data-live-region="polite"]')).toHaveText('Saving.');
     await expect(form.getByRole('button', { name: 'Save' })).toHaveAttribute('aria-disabled', 'true');
     await expect(form).not.toHaveAttribute('aria-busy', 'true');
     await expect(page.locator('#form .banner--success')).toBeVisible();

@@ -33,7 +33,7 @@ function createRegion(doc, politeness) {
  * @returns {{announce: (message: string, options?: {politeness?: 'polite'|'assertive'}) => void, destroy: () => void}}
  *   the announcer; `announce` clears the region first, so a repeated message is read again
  */
-export function createLiveRegion(options = {}) {
+function createController(options = {}) {
     const doc = options.document ?? globalThis.document;
     const parent = options.parent ?? doc.body;
     const delay = options.delay ?? 100;
@@ -77,4 +77,61 @@ export function createLiveRegion(options = {}) {
     }
 
     return { announce, destroy };
+}
+
+const documents = new WeakMap();
+
+/**
+ * Resolve the document's shared regions. The first caller supplies placement and timer options.
+ * @param {object} options region options
+ * @returns {object} shared entry
+ */
+function sharedEntry(options) {
+    const doc = options.document ?? globalThis.document;
+    let entry = documents.get(doc);
+    if (!entry) {
+        entry = { controller: createController(options), owners: 0 };
+        documents.set(doc, entry);
+    }
+    return entry;
+}
+
+/**
+ * Acquire the document's shared announcer; destroy releases only this caller's ownership.
+ * The final owner removes the regions. Later default announcements recreate them when needed.
+ * @param {object} [options] region options; the first caller's options apply
+ * @returns {{announce: Function, destroy: Function}} announcer handle
+ */
+export function createLiveRegion(options = {}) {
+    const doc = options.document ?? globalThis.document;
+    const entry = sharedEntry(options);
+    entry.owners += 1;
+    let destroyed = false;
+    return {
+        announce(message, settings) {
+            if (!destroyed) {
+                entry.controller.announce(message, settings);
+            }
+        },
+        destroy() {
+            if (destroyed) {
+                return;
+            }
+            destroyed = true;
+            entry.owners -= 1;
+            if (entry.owners === 0) {
+                entry.controller.destroy();
+                documents.delete(doc);
+            }
+        }
+    };
+}
+
+/**
+ * Announce through the document's shared polite region, creating it lazily when needed.
+ * @param {Document} doc owning document
+ * @param {string} message text to announce
+ */
+export function announce(doc, message) {
+    sharedEntry({ document: doc }).controller.announce(message);
 }

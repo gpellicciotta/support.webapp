@@ -10,14 +10,13 @@
  */
 
 import { createIcon } from './icon.js';
+import { announce } from './live-region.js';
 
 const PARTS = ['hint', 'help', 'counter', 'status', 'error'];
 const VALIDITY_KEYS = ['valueMissing', 'typeMismatch', 'patternMismatch', 'tooLong', 'tooShort', 'rangeUnderflow', 'rangeOverflow',
     'stepMismatch', 'badInput', 'customError'];
-const ANNOUNCE_DELAY = 100;
 // A cleared or destroyed field settles its overtaken checks as not passed, so no unchecked value is sent.
 const SETTLED_FALSE = Promise.resolve(false);
-const regions = new WeakMap();
 let instances = 0;
 
 /**
@@ -26,23 +25,7 @@ let instances = 0;
  * @param {Document} doc the document
  * @param {string} message the message
  */
-export function announce(doc, message) {
-    let entry = regions.get(doc);
-    if (!entry?.region.isConnected) {
-        const region = doc.createElement('div');
-        region.className = 'field__live';
-        region.setAttribute('aria-live', 'polite');
-        region.setAttribute('aria-atomic', 'true');
-        doc.body.append(region);
-        entry = { region, timer: null };
-        regions.set(doc, entry);
-    }
-    entry.region.textContent = '';
-    clearTimeout(entry.timer);
-    entry.timer = setTimeout(() => {
-        entry.region.textContent = message;
-    }, ANNOUNCE_DELAY);
-}
+export { announce } from './live-region.js';
 
 /**
  * Return the first failing native constraint of a control, such as `valueMissing`, or null.

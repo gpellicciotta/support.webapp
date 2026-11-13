@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createLiveRegion } from '../../src/js/live-region.js';
+import { announce, createLiveRegion } from '../../src/js/live-region.js';
 
 describe('createLiveRegion', () => {
     let liveRegion;
@@ -70,5 +70,44 @@ describe('createLiveRegion', () => {
         liveRegion.announce('Later.');
         vi.runAllTimers();
         expect(document.body.textContent).toBe('');
+    });
+
+    it('shares ownership and timers without letting one handle destroy another', () => {
+        const second = createLiveRegion();
+        expect(document.querySelectorAll('[aria-live="polite"]')).toHaveLength(1);
+        liveRegion.announce('Overtaken.');
+        second.announce('Latest.');
+        liveRegion.destroy();
+        liveRegion.destroy();
+        liveRegion.announce('Ignored.');
+        vi.runAllTimers();
+        expect(document.querySelector('[data-live-region="polite"]').textContent).toBe('Latest.');
+        second.destroy();
+        expect(document.querySelector('[aria-live]')).toBeNull();
+    });
+
+    it('recreates lazy defaults after destruction and cancels the old pending message', () => {
+        announce(document, 'Old.');
+        liveRegion.destroy();
+        announce(document, 'New.');
+        liveRegion = createLiveRegion();
+        vi.runAllTimers();
+        expect(document.querySelectorAll('[aria-live="polite"]')).toHaveLength(1);
+        expect(document.querySelector('[data-live-region="polite"]').textContent).toBe('New.');
+        announce(document, 'New.');
+        expect(document.querySelector('[data-live-region="polite"]').textContent).toBe('');
+        vi.runAllTimers();
+        expect(document.querySelector('[data-live-region="polite"]').textContent).toBe('New.');
+    });
+
+    it('keeps documents isolated', () => {
+        const other = document.implementation.createHTMLDocument();
+        const second = createLiveRegion({ document: other });
+        announce(document, 'First.');
+        announce(other, 'Second.');
+        vi.runAllTimers();
+        expect(document.querySelector('[data-live-region="polite"]').textContent).toBe('First.');
+        expect(other.querySelector('[data-live-region="polite"]').textContent).toBe('Second.');
+        second.destroy();
     });
 });
