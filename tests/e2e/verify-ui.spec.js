@@ -2,6 +2,7 @@
 // The static token test covers raw colors, so this verifier checks only rendered pages.
 import { expect, test } from '@playwright/test';
 import { lookHref, looks } from '../../src/demo/gallery.js';
+import { settleGalleryStyles } from './gallery-helpers.js';
 
 const pages = [
     { name: 'gallery', path: '/demo/visual-style-gallery.html' },
@@ -333,7 +334,7 @@ for (const target of pages) {
                         await page.locator('#accent-select').selectOption(accent);
                     }
                     // Short pages reach the checks before color transitions end, so wait for every transition.
-                    await page.evaluate(() => Promise.all(document.getAnimations().filter((animation) => animation instanceof CSSTransition).map((transition) => transition.finished.catch(() => null))));
+                    await settleGalleryStyles(page);
                     expect(response.status()).toBe(200);
                     await page.screenshot({ path: testInfo.outputPath(`${target.name}-${look}-${effective}-${viewport.width}-${theme === 'system' ? 'system' : 'explicit'}.png`), fullPage: true });
                     const data = await check(page);

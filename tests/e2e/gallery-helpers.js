@@ -6,7 +6,17 @@ export const MIN_TARGET = 44;
 export const STATES = [':not(.is-hover, .is-focus, .is-active, :disabled, [aria-disabled="true"])', '.is-hover', '.is-focus', '.is-active', ':disabled'];
 
 /**
- * Select a look and wait for stylesheet imports and fonts before reading styles.
+ * Wait for pending color transitions before reading computed styles.
+ * @param {import('@playwright/test').Page} page page to settle
+ */
+export async function settleGalleryStyles(page) {
+    await page.evaluate(() => Promise.all(document.getAnimations()
+        .filter(animation => animation instanceof CSSTransition)
+        .map(transition => transition.finished.catch(() => null))));
+}
+
+/**
+ * Select a look and wait for stylesheet imports, fonts, and transitions before reading styles.
  * @param {import('@playwright/test').Page} page gallery page
  * @param {string} look look option value
  */
@@ -37,6 +47,7 @@ export async function selectGalleryLook(page, look) {
         }
         await document.fonts.ready;
     }, look);
+    await settleGalleryStyles(page);
 }
 
 /**

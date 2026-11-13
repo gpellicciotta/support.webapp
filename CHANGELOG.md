@@ -9,7 +9,7 @@ All notable changes to this project are documented here.
 
 ## v0.1.0-pre
 - Components: Added the floating action button with accessible states, gallery specimens, and shell overlay placement above bottom bars.
-- DevEx: Synchronized gallery look checks with stylesheet loading before measuring card dimensions and accent colors.
+- DevEx: Synchronized gallery look checks with stylesheet loading and color transitions before measuring dimensions and accent colors.
 - Components: Added accessible tabs with automatic activation, arrow navigation, disabled states, reversible enhancement, and responsive gallery specimens.
 - Components: Added accessible native switches with keyboard support, system-palette focus, disabled and invalid states, and position-based state cues.
 - Components: Added loading feedback with polite status, busy content regions, and static skeleton rows for slow lists.

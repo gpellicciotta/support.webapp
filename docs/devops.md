@@ -37,6 +37,7 @@ Without a selection, `test --slow` also runs the pack and pack-and-vendor integr
 The package ships source files directly; no compilation or copy step runs.
 The server binds to localhost and serves `src/` with explicit JavaScript and CSS media types.
 Playwright starts and stops its own server; CI runs `tests` and `check` on pushes and pull requests.
+Gallery look helpers wait for stylesheet imports, fonts, and color transitions before reading computed styles.
 Each Playwright run allocates a free localhost port, allowing checks while the developer server runs on port 4173.
 
 Markdown lint runs offline because private repository links require credentials.

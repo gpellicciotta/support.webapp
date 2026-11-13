@@ -2,6 +2,22 @@ import { expect, test } from '@playwright/test';
 import { openGallery, selectGalleryLook, tokenColor } from './gallery-helpers.js';
 import { contrastPairs } from '../unit/contract.js';
 
+test('look selection waits for pending color transitions', async ({ page }) => {
+    const errors = await openGallery(page);
+    await page.evaluate(() => {
+        const probe = document.createElement('div');
+        probe.id = 'settle-probe';
+        probe.style.cssText = 'color: rgb(0, 0, 0); transition: color 1s linear !important';
+        document.body.append(probe);
+        getComputedStyle(probe).color;
+        probe.style.color = 'rgb(255, 0, 0)';
+        getComputedStyle(probe).color;
+    });
+    await selectGalleryLook(page, 'neutral');
+    expect(await page.locator('#settle-probe').evaluate(element => getComputedStyle(element).color)).toBe('rgb(255, 0, 0)');
+    expect(errors).toEqual([]);
+});
+
 test('forced fallback preserves root accents and every contrast pair', async ({ page }) => {
     await page.route('**/looks/bright/look.css', async route => {
         const response = await route.fetch();
