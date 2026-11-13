@@ -12,8 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 4, duration_s: 2315.0, input: 273072, output: 57440, cache_read: 17522432, cache_write: 0}
+  worker: {turns: 6, duration_s: 3060.4, input: 312270, output: 67854, cache_read: 26680576, cache_write: 0}
 work_duration: 1157.5
+review_status: pending
+review_round: 1
 ---
 # T0031: Design and add the list and data table components on native list and table elements
 
@@ -112,4 +114,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-13] **[Verify]**
   Committed synchronization update as c85c0a9; worktree is clean. Completion validation passed. Final task delta: nine files, 348 changed lines; four counted files, 140 counted lines; zero reopenings. No test server remains. Awaiting orchestrator-managed agent review.
+
+- [2026-11-13] **[Review]**
+  Round 1 requested (mode: agent).
 
