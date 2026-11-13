@@ -28,9 +28,9 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0019 Design and add an accessible switch component.
 - [x] T0030 Design and add the tabs component with tablist roles and arrow-key navigation.
 - [x] T0031 Design and add the list and data table components on native list and table elements.
-- [!] T0024 [reason: Required screen reader check blocked: Narrator announcements cannot be captured by available tools; provide recorded screen reader/browser evidence.] [owner: @codex] Add the tooltip component after a screen reader check of meteo's tooltips.
+- [~] T0024 [owner: @codex] Add the tooltip component after a screen reader check of meteo's tooltips.
 - [x] T0029 Add the badge component for non-interactive counts and status labels, based on meteo's badges.
-- [ ] T0032 Add the progress bar and spinner components, static under reduced motion.
+- [x] T0032 Add the progress bar and spinner components, static under reduced motion.
 - [ ] T0033 Design and add multi-select with checkbox rows, range selection, and a bulk action bar.
 - [ ] T0022 Build the Python generate-app devops action and the starter app template.
 - [ ] T0025 [needs: T0022, T0024] Plan the redesign of auth and counters on the design system.
@@ -39,4 +39,5 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0001 Compare the UI design of todos.webapp, family-portal, meteo, auth, and counters, from tokens to app shells.
 
 ## Backlog
+- [ ] T0037 [protocol: adhoc] Check the tooltip component and meteo's tooltips with Narrator or NVDA by hand, recording what each announces.
 - [ ] T0035 Move field and form announcements to the shared live region module, so each page has one polite region.
