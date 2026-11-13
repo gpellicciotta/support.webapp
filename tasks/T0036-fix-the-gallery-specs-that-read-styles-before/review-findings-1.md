@@ -3,7 +3,7 @@ task: T0036
 round: 1
 verdict: approved
 reviewer: "@codex-2"
-reviewed_at: 2026-11-13T00:05:47Z
+reviewed_at: 2026-11-13T00:06:56Z
 reviewed_commit: "9d81716"
 base_commit: "49e113f"
 branch: task/T0036-fix-the-gallery-specs-that-read-styles-before

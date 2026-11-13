@@ -2,7 +2,7 @@
 An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
-- [ ] T0036 Fix the gallery specs that read styles before a look switch settles, seen failing under load in bright and card.
+- [x] T0036 Fix the gallery specs that read styles before a look switch settles, seen failing under load in bright and card.
 - [x] T0034 Add the link button component from family-portal, with its gallery section and browser spec.
 - [x] T0003 Set up the repository tooling: package manifest, linters, unit and browser test runners, devops scripts, and CI.
 - [x] T0004 Extract the shared base tokens, the contract file, and the neutral look from todos.webapp, with the static token test.
