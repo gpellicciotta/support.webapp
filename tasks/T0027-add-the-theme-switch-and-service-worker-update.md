@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 972.8}
+work_duration: 495.0
 ---
 # T0027: Add the theme switch and service worker update modules, and document the shared patterns
 
@@ -48,4 +51,16 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-13] **[Doc]**
   Documented theme preferences, worker updates, delete and Undo, offline pages, and current navigation. Updated the existing prerelease changelog without changing versions.
+
+- [2026-11-13] **[Verify]**
+  Reran python scripts/devops.py check with persistent check-output.txt after the earlier session became unavailable. Session 3539; browser runner PID 87896. Completion validation passed.
+
+- [2026-11-13] **[Decided]**
+  Kept the task within its planned shared-pattern scope. Counted changes: three modified text files and 91 changed lines; added files and CHANGELOG.md are excluded. Reopenings: zero.
+
+- [2026-11-13] **[Verify]**
+  Full check passed: 2103 unit tests, 614 browser tests, four integration tests, three Python tests, linting, and packaging. Two browser cases were skipped. No test servers remained. Saved complete output and summary evidence.
+
+- [2026-11-13] **[Verify]**
+  Committed implementation as 2901a3f. Removed trailing whitespace, reran ESLint and diff checks successfully, and confirmed a clean worktree. Agent review remains pending for the orchestrator.
 
