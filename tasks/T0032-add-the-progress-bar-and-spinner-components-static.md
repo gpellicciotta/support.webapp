@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1901.0, input: 247370, output: 35358, cache_read: 12361216, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0032: Add the progress bar and spinner components, static under reduced motion
 
@@ -73,4 +77,7 @@ See the technical specification for files, tests, and the completion check.
   - Files touched: 4.
   - Lines touched: 47.
   - Reopenings: 0.
+
+- [2026-11-13] **[Review]**
+  Round 1 requested (mode: agent).
 
