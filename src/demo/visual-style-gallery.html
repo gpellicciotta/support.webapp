@@ -77,6 +77,8 @@
                     <li><a href="#error-summary">Error summary</a></li>
                     <li><a href="#banner">Banner</a></li>
                     <li><a href="#shell">App shell</a></li>
+                    <li><a href="#list">List</a></li>
+                    <li><a href="#table">Data table</a></li>
                 </ul>
             </nav>
         </div>
@@ -794,6 +796,64 @@
                 </li>
                 <li class="row"><span class="row__main">A row without actions</span></li>
             </ul>
+        </section>
+        <section id="list" class="gallery-section" aria-labelledby="list-title">
+            <h2 id="list-title">List</h2>
+            <p>Native collections and description pairs. Action rows share the row base; controls keep their own states.</p>
+            <h3>Plain collection</h3>
+            <ul class="list" role="list" aria-label="Supplies">
+                <li class="list__item">Milk</li>
+                <li class="list__item">A reusable shopping bag for the weekly collection</li>
+            </ul>
+            <h3>Ordered collection</h3>
+            <ol class="list" aria-label="Preparation steps">
+                <li class="list__item">Choose supplies</li>
+                <li class="list__item">Check quantities</li>
+            </ol>
+            <h3>Action rows</h3>
+            <ul class="list row__list" role="list" aria-label="Shared collections">
+                <li class="row">
+                    <span class="row__main">Groceries</span>
+                    <span class="row__actions"><button class="button button--secondary" type="button">Edit Groceries</button></span>
+                </li>
+                <li class="row">
+                    <span class="row__main">A longer collection name that wraps within its column without hiding the available actions</span>
+                    <span class="row__actions"><button class="button button--secondary" type="button">Open collection</button></span>
+                </li>
+                <li class="row">
+                    <span class="row__main">Archived collection</span>
+                    <span class="row__actions"><button class="button button--secondary" type="button" disabled>Edit archived collection</button></span>
+                </li>
+            </ul>
+            <h3>Description pairs</h3>
+            <dl class="list list--definitions">
+                <dt class="list__term">Owner</dt><dd class="list__value">Ann</dd>
+                <dt class="list__term">Description</dt><dd class="list__value">Shared household supplies and longer notes that wrap naturally on a phone.</dd>
+            </dl>
+        </section>
+        <section id="table" class="gallery-section" aria-labelledby="table-title">
+            <h2 id="table-title">Data table</h2>
+            <p>Native captions and scoped headers preserve relationships. Focus the named region to scroll wide data with the keyboard.</p>
+            <div class="table__scroll" role="region" aria-labelledby="readings-caption" tabindex="0">
+                <table class="table">
+                    <caption class="table__caption" id="readings-caption">Readings this week</caption>
+                    <thead><tr><th scope="col">Day</th><th scope="col">Meter location</th><th scope="col" class="table__numeric">Energy used</th><th scope="col">Details</th></tr></thead>
+                    <tbody>
+                        <tr><th scope="row">Monday</th><td>Kitchen electricity meter</td><td class="table__numeric">18.50 kWh</td><td><button class="button button--secondary" type="button">View Monday</button></td></tr>
+                        <tr><th scope="row">Tuesday</th><td>Kitchen electricity meter</td><td class="table__numeric">9.25 kWh</td><td>Verified</td></tr>
+                        <tr><th scope="row">Wednesday</th><td>Garden workshop meter</td><td class="table__numeric">105.00 kWh</td><td>Verified</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>Dense table</h3>
+            <table class="table table--dense">
+                <caption class="table__caption">Summary totals</caption>
+                <thead><tr><th scope="col">Meter</th><th scope="col" class="table__numeric">Energy used</th></tr></thead>
+                <tbody>
+                    <tr><th scope="row">Kitchen</th><td class="table__numeric">27.75 kWh</td></tr>
+                    <tr><th scope="row">Workshop</th><td class="table__numeric">105.00 kWh</td></tr>
+                </tbody>
+            </table>
         </section>
         <section id="card" class="gallery-section" aria-labelledby="card-title">
             <h2 id="card-title">Card</h2>

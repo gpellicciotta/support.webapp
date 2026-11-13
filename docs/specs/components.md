@@ -60,8 +60,8 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `row`         | Row base    | todos.webapp  | none                                  | dense row with trailing actions; container query at 36rem | list semantics; actions reachable by keyboard      | T0016     |
 | `empty-state` | Empty state | todos.webapp  | none                                  | icon, title, text, at most two actions                    | heading level set by the app                       | T0016     |
 | `collapsible` | Collapsible | todos.webapp  | `collapsible.js`: `attachCollapsible` | collapsed, expanded                                       | button with `aria-expanded` and `aria-controls`    | T0026     |
-| `list`        | List        | new design    | none                                  | simple list, definition rows                              | native `ul`, `ol`, or `dl`                         | to create |
-| `table`       | Data table  | new design    | none                                  | plain, dense; caption; numeric columns aligned            | native table with `caption` and `th scope`         | to create |
+| `list`        | List        | new design    | none                                  | simple list, definition rows                              | native `ul`, `ol`, or `dl`                         | T0031     |
+| `table`       | Data table  | new design    | none                                  | plain, dense; caption; numeric columns aligned            | native table with `caption` and `th scope`         | T0031     |
 | `tabs`        | Tabs        | new design    | `tabs.js`: `attachTabs`               | selected, disabled                                        | `tablist`, `tab`, and `tabpanel` roles; arrow keys | to create |
 
 ### Feedback
@@ -335,22 +335,56 @@ Collapsible.
 ```
 
 ### list
-List.
+List. Native collection and description markup; no JavaScript module.
+
+- Use native unordered lists for collections, ordered lists for sequences, and description lists for term/value pairs.
+- Ordered lists retain decimal markers; unordered collections omit markers.
+- Compose action rows with `.row__list`, `.row`, `.row__main`, and `.row__actions`; retain native list items.
+- Plain items use `.list__item`; definition terms and values use `.list__term` and `.list__value`.
+- Long text wraps; definition pairs stack at narrow widths.
+- Lists remain static; Tab visits nested links and buttons in document order.
+- Nested controls retain their component's hover, focus-visible, active, and disabled states.
+- Lists have no selection, disabled, or error state themselves; use existing loading, banner, and empty-state patterns.
+- Preserve list semantics when suppressing markers; verify the accessibility tree in browser tests.
+
+The [WAI content structure tutorial](https://www.w3.org/WAI/tutorials/page-structure/content/) describes the native list semantics.
 
 ```html
-<ul class="list"><li class="list__item">...</li></ul>
+<ul class="list" role="list"><li class="list__item">Buy milk</li></ul>
+<ol class="list"><li class="list__item">Check quantities</li></ol>
+<ul class="list row__list" role="list" aria-label="Tasks">
+  <li class="row">
+    <span class="row__main">Buy milk</span>
+    <span class="row__actions"><button class="button" type="button">Edit Buy milk</button></span>
+  </li>
+</ul>
 <dl class="list list--definitions"><dt class="list__term">Owner</dt><dd class="list__value">Ann</dd></dl>
 ```
 
 ### table
-Data table.
+Data table. Native tabular markup; no JavaScript module.
+
+- Preserve native table display, captions, column headers, and row headers.
+- Use `.table__numeric` for numeric alignment and tabular figures.
+- Use `.table--dense` for reduced cell padding; nested controls keep their normal touch targets.
+- Share row spacing, surface, border, and text tokens without applying flex-based `.row` styling to table rows.
+- Wrap wide tables in `.table__scroll`; overflow stays inside the wrapper at phone widths.
+- Make the named scroll region focusable for keyboard scrolling, with the global visible focus outline.
+- Tab visits the wrapper and nested controls; cells remain static and have no arrow-key navigation model.
+- Controls retain their component states; tables have no selected, disabled, or error state themselves.
+- Use existing loading, banner, and empty-state patterns for request outcomes, keeping caption and headers meaningful.
+- CSS introduces no sorting or selection behavior; applications must supply behavior before exposing those controls.
+
+The [WAI-ARIA table pattern](https://www.w3.org/WAI/ARIA/apg/patterns/table/) recommends native tables for static tabular content.
 
 ```html
-<table class="table">
-  <caption class="table__caption">Readings this week</caption>
-  <thead><tr><th scope="col">Day</th><th scope="col" class="table__numeric">Value</th></tr></thead>
-  <tbody><tr><th scope="row">Monday</th><td class="table__numeric">42</td></tr></tbody>
-</table>
+<div class="table__scroll" role="region" aria-labelledby="readings-caption" tabindex="0">
+  <table class="table">
+    <caption class="table__caption" id="readings-caption">Readings this week</caption>
+    <thead><tr><th scope="col">Day</th><th scope="col" class="table__numeric">Value</th></tr></thead>
+    <tbody><tr><th scope="row">Monday</th><td class="table__numeric">42</td></tr></tbody>
+  </table>
+</div>
 ```
 
 ### tabs
