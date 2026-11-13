@@ -12,12 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 4, duration_s: 1744.8, input: 277876, output: 49380, cache_read: 10112512, cache_write: 0}
+  worker: {turns: 6, duration_s: 2887.6, input: 324212, output: 70428, cache_read: 19722496, cache_write: 0}
   review: {turns: 2, duration_s: 161.2, input: 121630, output: 4286, cache_read: 528640, cache_write: 0}
 work_duration: 3349.2
-review_status: rejected
-review_round: 1
-reviewed_by: "@codex-2"
+review_status: pending
+review_round: 2
 ---
 # T0024: Add the tooltip component after a screen reader check of meteo's tooltips
 
@@ -121,4 +120,7 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-13] **[Verify]**
   Full check passed on commit 92024b3 after rebase completion. Regressions cover missing popover methods, computed visibility, closure, and cleanup. Evidence is in validation-proof.md and review-check-output.txt; the orchestrator owns the next review.
+
+- [2026-11-13] **[Review]**
+  Round 2 requested (mode: agent).
 
