@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 2367.4, input: 230774, output: 40138, cache_read: 10780672, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0033: Design and add multi-select with checkbox rows, range selection, and a bulk action bar
 
@@ -85,4 +89,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-13] **[Verify]**
   Committed verified implementation as 79ee5b7. All execution steps except orchestrator-owned Review are checked. Full check passed, including four package/vendor integration tests. No development server remains intentionally running.
+
+- [2026-11-13] **[Review]**
+  Round 1 requested (mode: agent).
 
