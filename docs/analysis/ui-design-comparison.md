@@ -81,12 +81,12 @@ Notes on the corrections:
 ### Token Tiers and Theming
 | App             | Primitive | Semantic | Other                            | Theming mechanism                                                       | No-JS theme    |
 | :-------------- | --------: | -------: | :------------------------------- | :---------------------------------------------------------------------- | :------------- |
-| todos.webapp    | 37        | 83       | 2 component-local                | `light-dark()` plus `color-scheme`; `data-theme` sets `color-scheme`    | follows the OS |
-| family-portal   | 64        | 124      | 1 component-local                | same as todos.webapp, plus `data-season` accents                        | follows the OS |
-| meteo           | 0         | 63       | none                             | `data-theme` and `data-theme-color`, set by a pre-paint script          | light only     |
-| support.js      | 42        | 35       | 41 component, 5 alias            | `prefers-color-scheme` media query plus `data-theme`, values duplicated | follows the OS |
-| auth            | 42        | 53       | 45 component, 7 alias            | as support.js, plus a stored preference applied before paint            | follows the OS |
-| counters.server | 42        | 46       | 82 component, 5 alias, 179 local | as support.js, plus `body.dark-theme` classes                           | follows the OS |
+| todos.webapp    |        37 |       83 | 2 component-local                | `light-dark()` plus `color-scheme`; `data-theme` sets `color-scheme`    | follows the OS |
+| family-portal   |        64 |      124 | 1 component-local                | same as todos.webapp, plus `data-season` accents                        | follows the OS |
+| meteo           |         0 |       63 | none                             | `data-theme` and `data-theme-color`, set by a pre-paint script          | light only     |
+| support.js      |        42 |       35 | 41 component, 5 alias            | `prefers-color-scheme` media query plus `data-theme`, values duplicated | follows the OS |
+| auth            |        42 |       53 | 45 component, 7 alias            | as support.js, plus a stored preference applied before paint            | follows the OS |
+| counters.server |        42 |       46 | 82 component, 5 alias, 179 local | as support.js, plus `body.dark-theme` classes                           | follows the OS |
 
 - todos.webapp: tiers are declared in [tokens.css](../../../todos.webapp/src/css/tokens.css#L4-L5).
   Colors use `light-dark()` ([tokens.css](../../../todos.webapp/src/css/tokens.css#L64-L101)); `data-theme` only switches `color-scheme` ([tokens.css](../../../todos.webapp/src/css/tokens.css#L176-L182)).
@@ -163,13 +163,13 @@ Exact name overlap, all tiers and semantic on both sides:
 
 | Pair                                    | All tiers | Semantic |
 | :-------------------------------------- | --------: | -------: |
-| todos.webapp and family-portal          | 53        | 49       |
-| family-portal and meteo                 | 12        | 12       |
-| todos.webapp and meteo                  | 7         | 7        |
-| family-portal and support.js            | 6         | 3        |
-| todos.webapp and support.js             | 5         | 1        |
-| meteo and support.js                    | 7         | 1        |
-| auth and counters, each with support.js | 123       | 35       |
+| todos.webapp and family-portal          |        53 |       49 |
+| family-portal and meteo                 |        12 |       12 |
+| todos.webapp and meteo                  |         7 |        7 |
+| family-portal and support.js            |         6 |        3 |
+| todos.webapp and support.js             |         5 |        1 |
+| meteo and support.js                    |         7 |        1 |
+| auth and counters, each with support.js |       123 |       35 |
 
 Same names do not mean same values:
 - Space steps 1 to 7 are equal in todos.webapp and family-portal; `--space-8` is 3rem against 2.5rem.
@@ -645,8 +645,8 @@ Each app was served locally without changes:
   Without a backend both apps stop at their sign-in splash.
 - meteo forecast: the live Open-Meteo API with the query `Brussels`.
 
-| App             | Page              | Light 390                                                                                                                         | Light 1440                                                                                                                         | Dark 390                                                                                                                         | Dark 1440                                                                                                                         |
-| :-------------- | :---------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| App             | Page              | Light 390                                                                                                                                  | Light 1440                                                                                                                                  | Dark 390                                                                                                                                  | Dark 1440                                                                                                                                  |
+| :-------------- | :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
 | todos.webapp    | gallery           | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-gallery-light-390.png)               | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-gallery-light-1440.png)               | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-gallery-dark-390.png)               | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-gallery-dark-1440.png)               |
 | todos.webapp    | empty task list   | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-main-light-390.png)                  | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-main-light-1440.png)                  | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-main-dark-390.png)                  | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-main-dark-1440.png)                  |
 | todos.webapp    | task list         | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-main-populated-light-390.png)        | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-main-populated-light-1440.png)        | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-main-populated-dark-390.png)        | [png](../../.plan/tasks/archived/T0001-compare-the-ui-design-of-todos-webapp-family/screenshots/todos-main-populated-dark-1440.png)        |
