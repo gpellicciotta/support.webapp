@@ -80,6 +80,8 @@
                     <li><a href="#shell">App shell</a></li>
                     <li><a href="#list">List</a></li>
                     <li><a href="#table">Data table</a></li>
+                    <li><a href="#progress">Progress</a></li>
+                    <li><a href="#spinner">Spinner</a></li>
                 </ul>
             </nav>
         </div>
@@ -1151,6 +1153,22 @@
                 </div>
             </div>
             <p id="account-menu-demo-result" data-account-menu-result role="status">Route: #/bin</p>
+        </section>
+        <section id="progress" class="gallery-section" aria-labelledby="progress-title">
+            <h2 id="progress-title">Progress</h2>
+            <p>Native values show known completion. Omit value for unknown duration; its labeled track stays static.</p>
+            <div class="field-specimens">
+                <label class="progress"><span class="progress__label">Uploading: 40%</span><progress class="progress__bar" max="100" value="40">40%</progress></label>
+                <label class="progress"><span class="progress__label">Queued: 0%</span><progress class="progress__bar" max="100" value="0">0%</progress></label>
+                <label class="progress"><span class="progress__label">Complete: 100%</span><progress class="progress__bar" max="100" value="100">100%</progress></label>
+                <label class="progress"><span class="progress__label">Preparing upload</span><progress class="progress__bar" max="100">Preparing upload</progress></label>
+            </div>
+        </section>
+        <section id="spinner" class="gallery-section" aria-labelledby="spinner-title">
+            <h2 id="spinner-title">Spinner</h2>
+            <p>Decorative small and medium rings accompany status text. Reduced motion keeps the rings static.</p>
+            <p><span class="spinner spinner--sm" aria-hidden="true"></span> <span role="status">Syncing...</span></p>
+            <p><span class="spinner" aria-hidden="true"></span> <span role="status">Loading details...</span></p>
         </section>
         <section id="loading" class="gallery-section" aria-labelledby="loading-title">
             <h2 id="loading-title">Loading</h2>

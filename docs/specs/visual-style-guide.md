@@ -485,6 +485,17 @@ The controller's `destroy()` removes listeners and restores authored selection, 
 Destroy before replacing tab markup; reattach after changing the tab or panel collection.
 
 ## Loading
+Use the [progress specimens](../../src/demo/visual-style-gallery.html#progress) when completion can be measured.
+Set native `max` and `value`; omit `value` when duration is unknown.
+Keep a visible associated label and show meaningful completion text.
+**[Decided]** Indeterminate progress stays static in every motion preference, avoiding native indeterminate animation.
+Use the [spinner specimens](../../src/demo/visual-style-gallery.html#spinner) beside a visible status for short waits.
+The default ring is medium; `.spinner--sm` fits compact status lines.
+**[Decided]** Rings rotate normally and become static under reduced motion, preserving status text and the ring outline.
+Both components use semantic tokens, support forced colors, and require no scripts.
+Do not use spinners alone, imply measured completion with fake values, or add keyboard focus to these indicators.
+See [components.md](components.md#progress) for progress and spinner markup contracts.
+
 Use the [loading specimens](../../src/demo/visual-style-gallery.html#loading) for ordinary loads, slow lists, and completed content.
 **[Decided]** Keep the polite status outside the busy content, preventing busy-state suppression of progress announcements.
 **[Decided]** Skeleton rows stay static for every motion preference; they communicate layout without requiring motion.

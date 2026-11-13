@@ -71,8 +71,8 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | none, utility | Live region     | todos.webapp | `live-region.js`: `createLiveRegion` | polite, assertive                            | present at page load; text changes are announced             | T0010     |
 | `banner`      | Banner          | todos.webapp | none                                 | info, success, warning, danger               | `role="status"`, or `role="alert"` for danger                | T0007     |
 | `loading`     | Loading pattern | new design   | none                                 | busy region, status line, slow-list skeleton | `aria-busy`; polite status text; static under reduced motion | T0020     |
-| `progress`    | Progress bar    | support.js   | none                                 | determinate, indeterminate                   | native `progress` with a label                               | to create |
-| `spinner`     | Spinner         | support.js   | none                                 | sizes sm, md                                 | label in the status line; static under reduced motion        | to create |
+| `progress`    | Progress bar    | support.js   | none                                 | determinate, indeterminate                   | native `progress` with a label                               | T0032     |
+| `spinner`     | Spinner         | support.js   | none                                 | sizes sm, md                                 | label in the status line; static under reduced motion        | T0032     |
 
 ### Overlays
 | Key              | Component           | Source       | Module and functions                       | Variants and states                       | Accessibility minimum                              | Task         |
@@ -481,7 +481,7 @@ Applications replace placeholders, set `aria-busy="false"`, and update the exist
 Create the status before starting requests; keep focus stable and localize its messages.
 
 ### progress
-Progress bar.
+Progress bar. Delivered as CSS with native determinate and indeterminate states.
 
 ```html
 <label class="progress">
@@ -490,12 +490,22 @@ Progress bar.
 </label>
 ```
 
+Omit `value` for indeterminate progress; never set a fake percentage.
+Keep a visible label associated with each bar. Native values support empty, partial, and complete progress.
+**[Decided]** Indeterminate tracks stay static for every motion preference; status text communicates unknown duration.
+Use a separate polite status for announcements; progress values alone are not live regions.
+
 ### spinner
 Spinner. The spinner is decoration; the status text carries the meaning.
 
 ```html
 <span class="spinner" aria-hidden="true"></span><span role="status">Syncing...</span>
 ```
+
+Use `.spinner--sm` for the small size; the default is medium.
+Keep the ring decorative and provide localized visible status text beside it.
+Reduced motion disables rotation entirely. Neither component needs JavaScript or introduces keyboard stops.
+Applications update status text and native progress values; keep status outside any busy content region.
 
 ### dialog
 Dialog. `openDialog` adds the focus trap, Escape, and focus return; below 64rem it becomes a sheet.
