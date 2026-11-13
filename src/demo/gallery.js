@@ -14,10 +14,11 @@ import { attachPopover } from '../js/popover.js';
 import { attachTooltip } from '../js/tooltip.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { createToast } from '../js/toast.js';
+import { attachThemeSwitch } from '../js/theme-switch.js';
+export { applyTheme, themes } from '../js/theme-switch.js';
 
 // Add each new look here and as an option of the look select.
 export const looks = ['neutral', 'warm', 'bright'];
-export const themes = ['light', 'dark', 'system'];
 
 const accents = { warm: ['spring', 'summer', 'autumn', 'winter'], bright: ['blue', 'yellow', 'red'] };
 
@@ -73,22 +74,6 @@ export function applyLook(doc, look) {
     }
 }
 
-/**
- * Set `data-theme` on the root element, or remove it so the system preference applies.
- * @param {Document} doc gallery document
- * @param {string} theme one of `themes`
- */
-export function applyTheme(doc, theme) {
-    if (!themes.includes(theme)) {
-        throw new RangeError(`Unknown theme: ${theme}`);
-    }
-    if (theme === 'system') {
-        doc.documentElement.removeAttribute('data-theme');
-    }
-    else {
-        doc.documentElement.setAttribute('data-theme', theme);
-    }
-}
 
 /**
  * Show each token's computed value, and flag tokens the current look leaves undefined.
@@ -179,17 +164,17 @@ export function initGallery(doc, view) {
     if (accent) {
         configureAccents(doc, select.value);
     }
-    for (const radio of doc.querySelectorAll('input[name="theme"]')) {
-        radio.addEventListener('change', (event) => {
-            applyTheme(doc, event.target.value);
-            refresh();
-        });
-    }
+    attachThemeSwitch(doc, {
+        document: doc,
+        appName: 'support-webapp-gallery',
+        getStorage: () => view.localStorage,
+        initialTheme: doc.querySelector('input[name="theme"]:checked')?.value || 'system',
+        onChange: refresh
+    });
     setSpriteUrl(spriteHref(select.value));
     if (link.getAttribute('href') !== lookHref(select.value)) {
         applyLook(doc, select.value);
     }
-    applyTheme(doc, doc.querySelector('input[name="theme"]:checked')?.value || 'system');
     refresh();
 }
 

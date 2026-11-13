@@ -8,6 +8,7 @@ All notable changes to this project are documented here.
 > plus the standard areas such as `FrontEnd`, `DevEx`, and `Docs`.
 
 ## v0.1.0-pre
+- Modules: Added app-scoped theme preferences and user-controlled worker updates, including reload prompts after activation in another tab.
 - Components: Added native checkbox multi-select with Shift ranges, mixed select all, announced counts, and bulk action events.
 - Components: Added accessible tooltips with focus, hover, Escape dismissal, reversible controllers, and a fallback for unavailable popover methods.
 - Components: Added labeled native progress bars and decorative status spinners that stay static under reduced motion.

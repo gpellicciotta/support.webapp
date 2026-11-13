@@ -384,8 +384,59 @@ Avoid stacks for large rosters, where a list provides clearer navigation.
 **[Decided]** The placeholder portrait uses a fixed mid-gray fill for visibility in light and dark themes.
 
 ## Patterns
-No pattern is built yet.
-Each pattern task adds its intent, when to use it, when not to, and a gallery link here.
+### Theme preference
+Use the gallery's [theme control](../../src/demo/visual-style-gallery.html) for an immediate System, Light, or Dark preference.
+Use a segmented radio group, rather than a binary switch, because System is a distinct choice.
+Import `attachThemeSwitch(element, options)` from [theme-switch.js](../../src/js/theme-switch.js) and provide a unique `appName`.
+The element contains native radios named `theme`, with values `system`, `light`, and `dark`.
+The controller restores `${appName}.theme` from local storage and checks the matching radio.
+Missing or invalid stored values default to System.
+Light and Dark set the root `data-theme`; System removes it, allowing CSS to follow operating-system changes.
+Use `applyTheme(document, theme)` early during startup when applying a choice before rendering is essential.
+The controller exposes `getTheme()`, `setTheme(theme)`, and `destroy()` to remove listeners.
+`setTheme` returns whether persistence succeeded; `onChange(theme, saved)` lets apps report failures with localized feedback.
+Inject `getStorage()` and `document` for testing or alternate storage.
+Avoid using the preference to select a look; looks and themes are independent.
+
+### Service worker update
+Use a persistent [toast](../../src/demo/visual-style-gallery.html#toast) when a new worker waits behind an existing controller.
+Import `watchWorkerUpdates(options)` from [sw-update.js](../../src/js/sw-update.js).
+Provide `script`, an existing `toaster`, and optional localized `messages: {ready, action}`.
+The promise resolves to a controller with `destroy()`, removing listeners and dismissing its toast.
+Registration errors reject the promise; handle them with the app's localized error feedback.
+Without service worker support, the controller does nothing.
+The first install shows no update toast.
+Update sends `{type: 'skip-waiting'}` to the latest waiting worker; that worker must handle this message with `skipWaiting()`.
+The worker must claim clients after activation so the page receives `controllerchange`.
+Only a tab that requested Update reloads, once, after that event.
+When another tab activates an update, the stale Update toast becomes an explicit Reload action.
+Localize that action with `messages.reload`; `onUpdatedElsewhere()` optionally reports the external activation to app code.
+Do not reload automatically while users edit content, or label Update as Undo.
+The app owns worker registration scope, cache strategy, and preservation of unsaved data before enabling the action.
+
+### Delete and Undo
+Use the [toast Undo action](../../src/demo/visual-style-gallery.html#toast) after moving an item into an app-owned recycle bin.
+Preserve the item and enough context to restore its position; Undo calls the app's restore operation.
+Report a completed move, rather than showing success before persistence succeeds.
+Use `toaster.show(message, {onAction: restore})`; the default action label is Undo.
+Provide a localized `actionLabel` and `undo: true` when translating Undo.
+Keep the recycle bin accessible after the toast expires; expiry must not permanently delete the item.
+Use the appropriate [confirmation tier](../../src/demo/visual-style-gallery.html#dialog) for irreversible deletion instead.
+The package supplies feedback and keyboard behavior; apps own deletion, restore, errors, and retention policies.
+
+### Offline page
+Compose the [empty state](../../src/demo/visual-style-gallery.html#empty-state) with a heading, offline explanation, and Retry button.
+Explain which content remains available and preserve unsent work.
+Retry performs the actual app request or navigation and reports failure without discarding local data.
+Use a [banner](../../src/demo/visual-style-gallery.html#banner) when useful cached content remains visible.
+Do not replace usable offline content with a blocking page or promise connectivity based only on `navigator.onLine`.
+The app owns offline routing, cached resources, and retry behavior.
+
+### Current navigation
+Set `aria-current="page"` on the current destination link in each [shell navigation](../../src/demo/visual-style-gallery.html#shell).
+Keep only one current page per navigation landmark; update it after app-local routing succeeds.
+Keep the link's accessible name and destination intact; the shell styles its current state.
+Use `aria-selected` for tabs and other selection widgets, rather than page navigation.
 
 ---
 

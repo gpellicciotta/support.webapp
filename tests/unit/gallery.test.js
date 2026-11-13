@@ -119,7 +119,9 @@ describe('theme switcher', () => {
     it.each(themes)('sets data-theme when the %s radio changes', (theme) => {
         const { doc, view, root, radios } = fakeGallery();
         initGallery(doc, view);
-        radios.find((radio) => radio.value === theme).dispatch('change');
+        const radio = radios.find((radio) => radio.value === theme);
+        radio.checked = true;
+        radio.dispatch('change');
         expect(root.getAttribute('data-theme')).toBe(theme === 'system' ? null : theme);
     });
 
