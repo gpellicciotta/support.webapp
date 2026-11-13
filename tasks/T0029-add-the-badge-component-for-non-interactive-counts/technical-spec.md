@@ -16,11 +16,13 @@ Add the badge component for non-interactive counts and status labels, based on m
 - `tests/e2e/badge.spec.js`
 - `docs/specs/visual-style-guide.md`
 - `CHANGELOG.md`
+- `docs/specs/components.md` (required by the execution checklist)
 
 Size estimate: 6 files, 200 lines
 
 ### Tests
 - Unit test: none (a CSS-only component; the static token test covers its contrast pairs)
 - Integration: `badge.spec.js` checks contrast of every tone in both themes and that badges are not focusable.
+- Integration: The gallery verifier checks every look and accent for contrast, overflow, focus, and browser errors.
 
 Completion check: `npx playwright test tests/e2e/badge.spec.js`, exit code 0
