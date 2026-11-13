@@ -12,8 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 972.8}
+  worker: {turns: 4, duration_s: 1698.0, input: 161524, output: 27572, cache_read: 6977024, cache_write: 0}
 work_duration: 495.0
+review_status: pending
+review_round: 1
 ---
 # T0027: Add the theme switch and service worker update modules, and document the shared patterns
 
@@ -63,4 +65,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-13] **[Verify]**
   Committed implementation as 2901a3f. Removed trailing whitespace, reran ESLint and diff checks successfully, and confirmed a clean worktree. Agent review remains pending for the orchestrator.
+
+- [2026-11-13] **[Review]**
+  Round 1 requested (mode: agent).
 
