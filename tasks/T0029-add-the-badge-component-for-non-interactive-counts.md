@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 2, duration_s: 1466.0, input: 179212, output: 28994, cache_read: 10772992, cache_write: 0}
+review_status: pending
+review_round: 1
 ---
 # T0029: Add the badge component for non-interactive counts and status labels, based on meteo's badges
 
@@ -62,4 +66,7 @@ See the technical specification for files, tests, and the completion check.
 
 - [2026-11-13] **[Verify]**
   Committed verified implementation as 22b291b. Files touched: 7. Lines touched: 128. Counted size: 4 files, 29 lines. Reopenings: 0. Full verification output and eight inspected screenshots are stored in the companion directory. Agent review remains pending.
+
+- [2026-11-13] **[Review]**
+  Round 1 requested (mode: agent).
 
