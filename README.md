@@ -12,8 +12,8 @@ A shared visual design system and templates for web apps.
 ---
 
 ## Status
-The project is building phase 1 of the [roadmap](docs/roadmap.md): base tokens, the neutral look, and the command line tool.
-[PLAN.md](PLAN.md) lists the current tasks.
+The package provides shared tokens, components, an app shell, JavaScript helpers, and neutral, warm, and bright looks.
+The app generator is planned; see the [roadmap](docs/roadmap.md) and [PLAN.md](PLAN.md) for remaining work.
 
 ---
 

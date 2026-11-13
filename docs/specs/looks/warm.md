@@ -2,11 +2,9 @@
 Warm combines navy and ivory, saffron and brick, Outfit headings, DM Sans body text, and pill buttons.
 
 ## Provenance
-Extracted family-portal commit `1953f75484a2fe65aa3444730b3a9f459ae21cb4`.
-Palette, typography, shapes, and elevations come from its `webapp/css/tokens.css`.
-Its first-party code uses the MIT license, copyright 2026 Giovanni Pellicciotta.
-No third-party icon attribution appears in its source or style guide.
-The font files and accompanying SIL OFL licenses are unchanged copies from its `webapp/fonts/` directory.
+See [ADR-0002](../../adrs/ADR-0002-looks.md) for the look's origins and seasonal variant decisions.
+First-party drawings use the MIT license, copyright 2026 Giovanni Pellicciotta.
+Bundled font files retain their accompanying SIL OFL licenses.
 Fontsource 5.3.0 supplied those variable fonts, including Latin, Latin Extended, and DM Sans italic subsets.
 
 ## Usage
@@ -17,40 +15,37 @@ Browsers without `light-dark()` receive light values, including seasonal accents
 
 ### Seasons
 Set `data-accent` to `spring`, `summer`, `autumn`, or `winter` on the root or a specimen wrapper.
-These replace the source's `data-season` hook without changing its seasonal values.
-`--color-accent` maps the source's `--color-season-accent`; `--color-accent-bg` maps `--color-season-wash`.
-Both default to transparent, preserving the source's neutral seasonal state.
-The source's separate saffron action accent stays outside these seasonal roles.
+`--color-accent` supplies the seasonal decoration; `--color-accent-bg` supplies its background wash.
+Both default to transparent when no season is selected.
+Saffron action colors remain independent, so seasonal decoration does not change control meaning.
 Use seasons decoratively, never as text colors or the sole indication of meaning.
 The [gallery](../../../src/demo/visual-style-gallery.html#seasons) demonstrates every season and offers a root season switch.
 
 ### Glyphs
-The sprite extracts the gallery's glyphs and the survey form's close glyph.
-Source glyph geometry stays unchanged, except `icon-person` uses the contract's standard 24-unit viewBox.
-Aliases map tasks to todos, lists to list-bullets, bin to trash, user and people to account, and note to page.
+The sprite uses the contract's standard 24-unit viewBox, including for `icon-person`.
+Aliases map shared icon names to equivalent drawings; the sprite header records each mapping.
 Missing core and gallery glyphs reuse the first-party neutral sprite's MIT drawings.
-The sprite header lists every supplement explicitly; the circled source check remains distinct from neutral's check.
-Header-specific 20-unit account and help glyphs remain app-local; the shared sprite follows the 24-unit contract.
+The sprite header lists every supplement explicitly; the circled check remains distinct from neutral's check.
+Keep custom 20-unit header glyphs app-local; the shared sprite follows the 24-unit contract.
 
 ## Contract additions
-**[Decided]** Existing source values stay unchanged where the contract provides an equivalent role.
-New mappings use source primitives or shared defaults; no palette hue was added.
+**[Decided]** Semantic roles map to the warm palette or shared defaults, keeping components independent of private primitives.
 - Surface hover, selected, and active alias `--color-surface-sunken`.
 - Primary active aliases primary hover.
 - Danger hover uses brick-750 and brick-200; danger active uses brick-800 and brick-100.
 - On-danger, on-success, and on-warning use white in light and navy-950 in dark.
-- Shadow soft and strong preserve source shadow-color-soft and shadow-color-strong as optional contract roles.
-- Shadow maps source shadow-color; backdrop uses navy at 40% and black at 65% opacity.
+- Soft and strong shadow colors are optional contract roles for different elevation strengths.
+- Backdrop uses navy at 40% and black at 65% opacity for light and dark themes respectively.
 - Control, button, chip, card, and dialog radii map to md, pill, pill, lg, and xl respectively.
-- Icon stroke is 2, matching source standard icons; large icons use the shared 2.5rem size.
+- Icon stroke is 2; large icons use the shared 2.5rem size.
 - Relaxed leading aliases normal leading; normal tracking uses zero.
 - Focus offsets use the shared 2px and -2px defaults.
-- Focus ring preserves the source 3px width with the shared outline syntax.
+- Focus ring uses a 3px width with the shared outline syntax.
 
-The outline replaces the source box-shadow ring deliberately, as required by the shared component contract.
-Selected surfaces use the sunken ground so the source border-strong meets non-text contrast requirements.
+The outline remains visible in forced colors mode, where box shadows disappear.
+Selected surfaces use the sunken ground so strong borders meet non-text contrast requirements.
 Shared spacing, motion, widths, and layer values come from [base.css](../../../src/css/base.css).
-App-specific brand colors, season imagery, avatar dimensions, and editor dimensions remain in family-portal.
+Keep app-specific brand colors, season imagery, avatar dimensions, and editor dimensions in application stylesheets.
 
 ## New looks
 Copy [_template](../../../src/looks/_template/README.md) for a complete neutral-based starting point.

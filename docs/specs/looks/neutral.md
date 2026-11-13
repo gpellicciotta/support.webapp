@@ -1,20 +1,14 @@
 # Neutral look
-The neutral look preserves todos.webapp grays, navy, Inter, and control shapes.
+The neutral look combines gray surfaces, navy actions, Inter typography, and compact control shapes.
 
 ## Provenance
-Read todos.webapp commit `0cf4981f2fa235a4d48d143b83db24e1f46bd48a`.
-The palette and static resolution helpers came from that checkout.
-InterVariable.woff2 and OFL.txt are unchanged copies; the font uses SIL OFL 1.1.
-Shared space extensions, widths, gutter, and offsets follow ADR-0001 and family-portal primitives.
-Read family-portal commit `1953f75484a2fe65aa3444730b3a9f459ae21cb4` for those shared values.
+See [ADR-0002](../../adrs/ADR-0002-looks.md) for the look's origins and separation from shared structure.
+The bundled Inter variable font retains its SIL OFL 1.1 license.
+Shared spacing, widths, gutters, and offsets follow [ADR-0001](../../adrs/ADR-0001-layer-model-and-token-contract.md).
 
 ### Glyphs
-[icons.svg](../../../src/looks/neutral/icons.svg) copies todos.webapp `src/img/icons.svg` at the same commit.
-Mechanical command: `sed -E 's/<symbol id="/<symbol id="icon-/' {{todos-webapp}}/src/img/icons.svg`.
-The header comment and the new `icon-help` glyph were then written by hand.
-The glyphs are first-party drawings of todos.webapp under its MIT license.
-Neither the sprite nor the todos.webapp docs attribute any glyph to a third-party icon set.
-The sprite holds 30 glyphs: the 29 of todos.webapp and `icon-help`.
+[icons.svg](../../../src/looks/neutral/icons.svg) provides first-party MIT-licensed drawings, including the help glyph.
+Symbol IDs use the `icon-` prefix, so components can reference the same names across looks.
 
 ## Usage
 Import [index.css](../../../src/looks/neutral/index.css) from the app stylesheet.
@@ -60,8 +54,8 @@ Leading extends normal by one quarter; tracking uses zero and a small negative e
 Bold uses Inter weight 700; control height follows the shared minimum target.
 Radius roles follow existing control, button, chip, panel, and dialog uses.
 
-## Optional source roles
-These existing todos.webapp tokens remain unchanged and are optional entries in the shared contract.
+## Optional roles
+These optional contract entries support outline shorthands, thin strokes, and task status colors.
 Other looks may omit them; each present token must pass ownership, resolution, and fallback checks.
 - `--focus-ring`: `var(--focus-ring-width) solid var(--color-focus)`, the existing outline shorthand.
 - `--icon-stroke-thin`: `1`, the existing thin icon stroke.
@@ -74,7 +68,8 @@ Its `distinctFrom` metadata preserves the in-progress role's minimum RGB distanc
 The static checks read these fields without naming a look.
 
 ## App-only tokens
-The todos.webapp adoption must retain these six tokens, with their current values, in its local application stylesheet.
+Keep application-specific row and editor dimensions in the application's stylesheet.
+Examples include these six tokens:
 They remain outside the shared contract and neutral look.
 - `--row-height`.
 - `--group-header-height`.
@@ -87,4 +82,3 @@ They remain outside the shared contract and neutral look.
 The static test resolves every look import chain and checks required tokens, ownership, fallback values, and contrast.
 It excludes disabled text from contrast checks.
 Each look, theme, token, and contrast pair reports independently, so one failure does not hide later checks.
-The package entry remains unlinked from the current page, so this extraction changes no rendered UI.

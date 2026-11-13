@@ -1,5 +1,5 @@
 # Component Catalog
-Every component the design system provides, with its key, source, owning task, HTML skeleton, and accessibility minimum.
+Every component the design system provides, with its key, behavior, HTML skeleton, and accessibility minimum.
 [ADR-0003](../adrs/ADR-0003-components-and-patterns.md) records the decisions; [naming.md](naming.md) defines how each key names its files.
 
 - Status: Accepted on 2026-11-12, in review round 2 of the planning task.
@@ -11,8 +11,6 @@ Every component the design system provides, with its key, source, owning task, H
 
 ## How to Read This Catalog
 - Every component in the tables belongs to the first set: the initial set of ADR-0003, delivered across phases 1 and 2.
-- Source names the app whose implementation is the reference; "new design" means no sibling app has one.
-- Task names the owning task; "to create" means the task is created with the revised roadmap.
 - The skeletons are normative: CSS, JavaScript, server templates, and the generator all build on them.
 - Each skeleton heading is the component key, so `components.md#dialog` links to the dialog.
 - Every component gets a gallery section, `id="{{key}}"`, before its task ends.
@@ -28,77 +26,77 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 
 ## Catalog
 ### Controls
-| Key           | Component                      | Source              | Module and functions                     | Variants and states                                                               | Accessibility minimum                                     | Task      |
-| :------------ | :----------------------------- | :------------------ | :--------------------------------------- | :-------------------------------------------------------------------------------- | :-------------------------------------------------------- | :-------- |
-| `button`      | Button                         | todos.webapp        | none                                     | default, secondary, danger, quiet, inverse, small; hover, active, focus, disabled | native button; visible focus; 44 px target                | T0007     |
-| `icon-button` | Icon button                    | todos.webapp        | none                                     | default, danger; pressed toggle                                                   | native button; `aria-label`; `aria-pressed` for toggles   | T0007     |
-| `link-button` | Link button                    | family-portal       | none                                     | default; hover, focus-visible, active, disabled                                   | native button; visible focus; 44 px target                | T0034     |
-| `fab`         | Floating action button         | todos.webapp        | none                                     | one per screen, in the shell's overlay layer                                      | native button; `aria-label`; 44 px target                 | T0028     |
-| `field`       | Field: input, textarea, select | todos.webapp, meteo | `field.js`: `createField`, `attachField` | hint, counter, help, status, error; invalid, pending, disabled, read-only         | label for the control; `aria-invalid`; `aria-describedby` | T0008     |
-| `checkbox`    | Checkbox                       | todos.webapp        | none                                     | checked, indeterminate, disabled, invalid                                         | native input inside its label                             | T0008     |
-| `radio`       | Radio                          | todos.webapp        | none                                     | checked, disabled                                                                 | native radios inside a field group                        | T0008     |
-| `switch`      | Switch                         | new design          | none                                     | off, on, disabled, invalid                                                        | native checkbox with `role="switch"`                      | T0019     |
-| `chip`        | Chip                           | todos.webapp        | none                                     | static, removable, filter toggle; overdue tone                                    | button when interactive; the remove button has a label    | T0007     |
-| `segmented`   | Segmented control              | todos.webapp        | none                                     | 2 to 5 options; selected, disabled                                                | fieldset of native radios with a legend                   | T0007     |
-| `badge`       | Badge                          | meteo               | none                                     | neutral, count, success, warning, danger                                          | text, never color alone                                   | T0029     |
+| Key           | Component                      | Module and functions                     | Variants and states                                                               | Accessibility minimum                                     |
+| :------------ | :----------------------------- | :--------------------------------------- | :-------------------------------------------------------------------------------- | :-------------------------------------------------------- |
+| `button`      | Button                         | none                                     | default, secondary, danger, quiet, inverse, small; hover, active, focus, disabled | native button; visible focus; 44 px target                |
+| `icon-button` | Icon button                    | none                                     | default, danger; pressed toggle                                                   | native button; `aria-label`; `aria-pressed` for toggles   |
+| `link-button` | Link button                    | none                                     | default; hover, focus-visible, active, disabled                                   | native button; visible focus; 44 px target                |
+| `fab`         | Floating action button         | none                                     | one per screen, in the shell's overlay layer                                      | native button; `aria-label`; 44 px target                 |
+| `field`       | Field: input, textarea, select | `field.js`: `createField`, `attachField` | hint, counter, help, status, error; invalid, pending, disabled, read-only         | label for the control; `aria-invalid`; `aria-describedby` |
+| `checkbox`    | Checkbox                       | none                                     | checked, indeterminate, disabled, invalid                                         | native input inside its label                             |
+| `radio`       | Radio                          | none                                     | checked, disabled                                                                 | native radios inside a field group                        |
+| `switch`      | Switch                         | none                                     | off, on, disabled, invalid                                                        | native checkbox with `role="switch"`                      |
+| `chip`        | Chip                           | none                                     | static, removable, filter toggle; overdue tone                                    | button when interactive; the remove button has a label    |
+| `segmented`   | Segmented control              | none                                     | 2 to 5 options; selected, disabled                                                | fieldset of native radios with a legend                   |
+| `badge`       | Badge                          | none                                     | neutral, count, success, warning, danger                                          | text, never color alone                                   |
 
 ### Forms and Selection
-| Key             | Component                      | Source                 | Module and functions                             | Variants and states                                             | Accessibility minimum                                                            | Task                    |
-| :-------------- | :----------------------------- | :--------------------- | :----------------------------------------------- | :-------------------------------------------------------------- | :------------------------------------------------------------------------------- | :---------------------- |
-| `form`          | Form                           | counters, todos.webapp | `form.js`: `attachForm`, using `field.js`        | idle, busy, failed submit; actions row                          | native form; Enter submits; busy state announced                                 | T0008                   |
-| `field`         | Field help toggle              | counters, new design   | `field.js`: `attachField`                        | collapsed, expanded                                             | button with `aria-expanded` and `aria-controls`; help text in `aria-describedby` | T0008                   |
-| `field`         | Validation states              | counters, todos.webapp | `field.js`: `setError`, `setValid`, `setPending` | valid, invalid, pending; icon and text, never color alone       | `aria-invalid`; `aria-busy` while pending; message in the live region            | T0008                   |
-| `error-summary` | Error summary                  | new design             | filled by `attachForm`                           | hidden; shown after a failed submit, one link per invalid field | focus moves to it; links jump to the fields                                      | T0008                   |
-| `field-group`   | Field group                    | counters               | none                                             | checkbox group, radio group, related fields                     | native fieldset and legend                                                       | T0008                   |
-| `selection`     | Multi-select with bulk actions | new design             | `selection.js`: `attachSelection`                | none, some, or all selected; bar with count and actions         | native checkboxes; Shift selects a range; count announced                        | to create, design first |
+| Key             | Component                      | Module and functions                             | Variants and states                                             | Accessibility minimum                                                            |
+| :-------------- | :----------------------------- | :----------------------------------------------- | :-------------------------------------------------------------- | :------------------------------------------------------------------------------- |
+| `form`          | Form                           | `form.js`: `attachForm`, using `field.js`        | idle, busy, failed submit; actions row                          | native form; Enter submits; busy state announced                                 |
+| `field`         | Field help toggle              | `field.js`: `attachField`                        | collapsed, expanded                                             | button with `aria-expanded` and `aria-controls`; help text in `aria-describedby` |
+| `field`         | Validation states              | `field.js`: `setError`, `setValid`, `setPending` | valid, invalid, pending; icon and text, never color alone       | `aria-invalid`; `aria-busy` while pending; message in the live region            |
+| `error-summary` | Error summary                  | filled by `attachForm`                           | hidden; shown after a failed submit, one link per invalid field | focus moves to it; links jump to the fields                                      |
+| `field-group`   | Field group                    | none                                             | checkbox group, radio group, related fields                     | native fieldset and legend                                                       |
+| `selection`     | Multi-select with bulk actions | `selection.js`: `attachSelection`                | none, some, or all selected; bar with count and actions         | native checkboxes; Shift selects a range; count announced                        |
 
 ### Containers
-| Key           | Component   | Source        | Module and functions                  | Variants and states                                       | Accessibility minimum                              | Task      |
-| :------------ | :---------- | :------------ | :------------------------------------ | :-------------------------------------------------------- | :------------------------------------------------- | :-------- |
-| `card`        | Card        | family-portal | none                                  | static, link card with hover lift, with media             | a link card nests no other controls                | T0018     |
-| `icon-tile`   | Icon tile   | family-portal | none                                  | tones 1 to 4; sizes sm, md, lg                            | decorative icon is `aria-hidden`                   | T0018     |
-| `row`         | Row base    | todos.webapp  | none                                  | dense row with trailing actions; container query at 36rem | list semantics; actions reachable by keyboard      | T0016     |
-| `empty-state` | Empty state | todos.webapp  | none                                  | icon, title, text, at most two actions                    | heading level set by the app                       | T0016     |
-| `collapsible` | Collapsible | todos.webapp  | `collapsible.js`: `attachCollapsible` | collapsed, expanded                                       | button with `aria-expanded` and `aria-controls`    | T0026     |
-| `list`        | List        | new design    | none                                  | simple list, definition rows                              | native `ul`, `ol`, or `dl`                         | T0031     |
-| `table`       | Data table  | new design    | none                                  | plain, dense; caption; numeric columns aligned            | native table with `caption` and `th scope`         | T0031     |
-| `tabs`        | Tabs        | new design    | `tabs.js`: `attachTabs`               | selected, disabled                                        | `tablist`, `tab`, and `tabpanel` roles; arrow keys | to create |
+| Key           | Component   | Module and functions                  | Variants and states                                       | Accessibility minimum                              |
+| :------------ | :---------- | :------------------------------------ | :-------------------------------------------------------- | :------------------------------------------------- |
+| `card`        | Card        | none                                  | static, link card with hover lift, with media             | a link card nests no other controls                |
+| `icon-tile`   | Icon tile   | none                                  | tones 1 to 4; sizes sm, md, lg                            | decorative icon is `aria-hidden`                   |
+| `row`         | Row base    | none                                  | dense row with trailing actions; container query at 36rem | list semantics; actions reachable by keyboard      |
+| `empty-state` | Empty state | none                                  | icon, title, text, at most two actions                    | heading level set by the app                       |
+| `collapsible` | Collapsible | `collapsible.js`: `attachCollapsible` | collapsed, expanded                                       | button with `aria-expanded` and `aria-controls`    |
+| `list`        | List        | none                                  | simple list, definition rows                              | native `ul`, `ol`, or `dl`                         |
+| `table`       | Data table  | none                                  | plain, dense; caption; numeric columns aligned            | native table with `caption` and `th scope`         |
+| `tabs`        | Tabs        | `tabs.js`: `attachTabs`               | selected, disabled                                        | `tablist`, `tab`, and `tabpanel` roles; arrow keys |
 
 ### Feedback
-| Key           | Component       | Source       | Module and functions                 | Variants and states                          | Accessibility minimum                                        | Task      |
-| :------------ | :-------------- | :----------- | :----------------------------------- | :------------------------------------------- | :----------------------------------------------------------- | :-------- |
-| `toast`       | Toast           | todos.webapp | `toast.js`: `createToast`            | message, with Undo, persistent; three tiers  | announced by the live region; holds while a modal is open    | T0010     |
-| none, utility | Live region     | todos.webapp | `live-region.js`: `createLiveRegion` | polite, assertive                            | present at page load; text changes are announced             | T0010     |
-| `banner`      | Banner          | todos.webapp | none                                 | info, success, warning, danger               | `role="status"`, or `role="alert"` for danger                | T0007     |
-| `loading`     | Loading pattern | new design   | none                                 | busy region, status line, slow-list skeleton | `aria-busy`; polite status text; static under reduced motion | T0020     |
-| `progress`    | Progress bar    | support.js   | none                                 | determinate, indeterminate                   | native `progress` with a label                               | T0032     |
-| `spinner`     | Spinner         | support.js   | none                                 | sizes sm, md                                 | label in the status line; static under reduced motion        | T0032     |
+| Key           | Component       | Module and functions                 | Variants and states                          | Accessibility minimum                                        |
+| :------------ | :-------------- | :----------------------------------- | :------------------------------------------- | :----------------------------------------------------------- |
+| `toast`       | Toast           | `toast.js`: `createToast`            | message, with Undo, persistent; three tiers  | announced by the live region; holds while a modal is open    |
+| none, utility | Live region     | `live-region.js`: `createLiveRegion` | polite, assertive                            | present at page load; text changes are announced             |
+| `banner`      | Banner          | none                                 | info, success, warning, danger               | `role="status"`, or `role="alert"` for danger                |
+| `loading`     | Loading pattern | none                                 | busy region, status line, slow-list skeleton | `aria-busy`; polite status text; static under reduced motion |
+| `progress`    | Progress bar    | none                                 | determinate, indeterminate                   | native `progress` with a label                               |
+| `spinner`     | Spinner         | none                                 | sizes sm, md                                 | label in the status line; static under reduced motion        |
 
 ### Overlays
-| Key              | Component           | Source       | Module and functions                       | Variants and states                       | Accessibility minimum                              | Task         |
-| :--------------- | :------------------ | :----------- | :----------------------------------------- | :---------------------------------------- | :------------------------------------------------- | :----------- |
-| `dialog`         | Dialog              | todos.webapp | `dialog.js`: `openDialog`, `confirmDialog` | modal, type-to-confirm; sheet below 64rem | native dialog; focus trap; Escape; focus return    | T0009        |
-| `inline-confirm` | Inline confirmation | todos.webapp | `inline-confirm.js`: `attachInlineConfirm` | asking, confirmed, cancelled              | focus moves to the question and back               | T0009        |
-| `menu`           | Menu                | todos.webapp | `menu.js`: `attachMenu`                    | items, separators, danger item            | menu roles; roving focus; type-ahead; Escape       | T0011, T0012 |
-| `popover`        | Popover             | todos.webapp | `popover.js`: `attachPopover`              | anchored panel; light dismiss             | native `popover` attribute; focus returns on close | T0011, T0012 |
-| `tooltip`        | Tooltip             | meteo        | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                | T0024        |
+| Key              | Component           | Module and functions                       | Variants and states                       | Accessibility minimum                              |
+| :--------------- | :------------------ | :----------------------------------------- | :---------------------------------------- | :------------------------------------------------- |
+| `dialog`         | Dialog              | `dialog.js`: `openDialog`, `confirmDialog` | modal, type-to-confirm; sheet below 64rem | native dialog; focus trap; Escape; focus return    |
+| `inline-confirm` | Inline confirmation | `inline-confirm.js`: `attachInlineConfirm` | asking, confirmed, cancelled              | focus moves to the question and back               |
+| `menu`           | Menu                | `menu.js`: `attachMenu`                    | items, separators, danger item            | menu roles; roving focus; type-ahead; Escape       |
+| `popover`        | Popover             | `popover.js`: `attachPopover`              | anchored panel; light dismiss             | native `popover` attribute; focus returns on close |
+| `tooltip`        | Tooltip             | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                |
 
 ### Identity and Foundations
-| Key            | Component    | Source        | Module and functions                                    | Variants and states                                     | Accessibility minimum                              | Task  |
-| :------------- | :----------- | :------------ | :------------------------------------------------------ | :------------------------------------------------------ | :------------------------------------------------- | :---- |
-| `avatar`       | Avatar       | family-portal | none                                                    | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name | T0018 |
-| `account-menu` | Account menu | todos.webapp  | `account-menu.js`: `attachAccountMenu`, using `menu.js` | signed in, signed out                                   | menu pattern; marks the current route              | T0026 |
-| `icon`         | Icon         | todos.webapp  | `icon.js`: `createIcon`                                 | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning            | T0006 |
-| `theme-switch` | Theme switch | todos.webapp  | `theme-switch.js`: `attachThemeSwitch`                  | System, Light, Dark                                     | segmented control of native radios                 | T0027 |
+| Key            | Component    | Module and functions                                    | Variants and states                                     | Accessibility minimum                              |
+| :------------- | :----------- | :------------------------------------------------------ | :------------------------------------------------------ | :------------------------------------------------- |
+| `avatar`       | Avatar       | none                                                    | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name |
+| `account-menu` | Account menu | `account-menu.js`: `attachAccountMenu`, using `menu.js` | signed in, signed out                                   | menu pattern; marks the current route              |
+| `icon`         | Icon         | `icon.js`: `createIcon`                                 | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning            |
+| `theme-switch` | Theme switch | `theme-switch.js`: `attachThemeSwitch`                  | System, Light, Dark                                     | segmented control of native radios                 |
 
 ### Not in the Package
-| Component                                              | Source                      | Reason                                                      |
-| :----------------------------------------------------- | :-------------------------- | :---------------------------------------------------------- |
-| Task row, recycle bin screen                           | todos.webapp                | app-local                                                   |
-| Forecast chart                                         | meteo                       | app-local; its per-hour sentence is the model for any chart |
-| Reaction toggle, drag handles, avatar cropper          | family-portal               | app-local; drag lacks keyboard support                      |
-| Inbox panel, Web Push                                  | todos.webapp, family-portal | app-local, connected features                               |
-| Pagination, slider, date picker, file upload, combobox | none                        | no adopter needs them; they enter under the sharing rule    |
+| Component                                              | Reason                                                                            |
+| :----------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| Task row, recycle bin screen                           | app-local                                                                         |
+| Forecast chart                                         | domain-specific visualization; provide an accessible text equivalent              |
+| Reaction toggle, drag handles, avatar cropper          | app-specific interactions requiring their own keyboard and accessibility behavior |
+| Inbox panel, Web Push                                  | app-local, connected features                                                     |
+| Pagination, slider, date picker, file upload, combobox | no adopter needs them; they enter under the sharing rule                          |
 
 ---
 
@@ -642,18 +640,19 @@ Theme switch. System removes `data-theme`; Light and Dark set it on the root ele
 
 ## App Shell
 The shell has the key `app`, and [ADR-0004](../adrs/ADR-0004-app-shell.md) defines its areas and options.
-Each adopter setup below keeps only the areas and options that adopter uses.
+Choose a setup by navigation, scrolling, and content width; omit areas your application does not need.
 The top bar parts `app__title`, `app__brand`, `app__menu-button`, `app__breadcrumb`, and `app__top-actions` come from ADR-0004.
 The sidebar and the bottom bar hold an `app__nav-list` of `app__nav-item` links, as the [demo pages](../../src/demo/visual-style-gallery.html#shell) show.
 
-### todos.webapp setup
-Every area; sidebar and bottom bar; the main column scrolls. The add bar becomes the action bar, and the editor the side panel.
+### Workspace with sidebar and bottom navigation
+Use every area, with sidebar and bottom navigation; the main column scrolls.
+Place primary controls in the action bar and an editor in the side panel.
 
 ```html
 <body class="app app--scroll-main">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="app__top-bar">
-    <h1 class="app__title">Todos</h1>
+    <h1 class="app__title">Workspace</h1>
     <div class="app__top-actions"><div class="account-menu">...</div></div>
   </header>
   <nav class="app__sidebar" aria-label="Main">...</nav>
@@ -669,7 +668,7 @@ Every area; sidebar and bottom bar; the main column scrolls. The add bar becomes
 </body>
 ```
 
-### counters setup
+### Page with menu navigation
 Top bar with a menu button, banners, action bar, and overlay layer; the page scrolls.
 
 ```html
@@ -677,7 +676,7 @@ Top bar with a menu button, banners, action bar, and overlay layer; the page scr
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="app__top-bar">
     <button class="app__menu-button icon-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Menu">...</button>
-    <h1 class="app__title">Counters</h1>
+    <h1 class="app__title">Dashboard</h1>
   </header>
   <div class="app__banners"></div>
   <main class="app__main" id="main" tabindex="-1">...</main>
@@ -686,13 +685,14 @@ Top bar with a menu button, banners, action bar, and overlay layer; the page scr
 </body>
 ```
 
-### meteo setup
-Top bar, banners, action bar, and overlay layer; no navigation; the page scrolls in a narrow column. The three screens are sections of the main area.
+### Narrow page without navigation
+Use a top bar, banners, action bar, and overlay layer without navigation.
+The page scrolls in a narrow column; screens occupy sections of the main area.
 
 ```html
 <body class="app app--scroll-page app--width-narrow">
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="app__top-bar"><h1 class="app__title">Meteo</h1></header>
+  <header class="app__top-bar"><h1 class="app__title">Overview</h1></header>
   <div class="app__banners"><div class="banner" role="status" hidden>You are offline.</div></div>
   <main class="app__main" id="main" tabindex="-1">
     <section data-screen="start">...</section>
@@ -704,8 +704,10 @@ Top bar, banners, action bar, and overlay layer; no navigation; the page scrolls
 </body>
 ```
 
-### family-portal setup
-Top bar with brand, breadcrumb, help, and account; banners; the action bar holds the footer; the page scrolls. One server template partial renders the top bar.
+### Server-rendered page with breadcrumbs
+Use a top bar with brand, breadcrumbs, help, and account controls; the page scrolls.
+Place notices in banners and the footer in the action bar.
+Render the top bar from one shared server template partial.
 
 ```html
 <body class="app app--scroll-page">

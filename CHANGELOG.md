@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Docs: Explained component purposes, look choices, and shell layouts without requiring knowledge of existing applications.
 
 ## v0.1.0 [released: 2026-11-13]
 - Modules: Shared field, form, and toast announcements through one polite live region per document.

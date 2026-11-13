@@ -66,21 +66,22 @@ In Java and Python terms:
 - A module may export more functions of its own key, such as `confirmDialog` beside `openDialog`.
 
 ### How `createField` Fits
-What todos.webapp has today:
-- `createField(doc, options)` lives in `views/editor-panel.js`, not in a module named after the component.
+A field builder and an attachment helper share one markup contract:
+- Keep field construction in the component module, so views can reuse its behavior.
 - It builds the markup itself: a `div.field` holding a label, one control, and an error line.
 - Its `setError(message)` sets `aria-invalid`, adds the error line to `aria-describedby`, and announces the message in a live region.
-- It has no hint, counter, or help toggle, although the CSS defines hint and counter parts.
+- Optional hints, character counts, and expandable help use the same component parts.
 
-What the rule makes of it:
+Apply the naming rule consistently:
 - The key is `field`, so the module is `js/field.js`, and the class is `.field`.
 - Its parts are `__label`, `__control`, `__hint`, `__counter`, `__help-toggle`, `__help`, `__status`, and `__error`.
 - The HTML skeleton in [components.md](components.md#field) is the contract.
-  Server-rendered pages, such as family-portal's Java templates, write that skeleton by hand.
-- `attachField(element)` enhances existing markup, and returns a controller with `setError`, `setValid`, `setPending`, and the help toggle.
+  Server-rendered pages write that skeleton directly in their templates.
+- `attachField(element)` enhances existing markup and returns a controller with `setError`, `setValid`, and `setPending`.
+  It also connects the help toggle to its expandable content.
   It works on server-rendered and on built markup alike.
 - `createField(doc, options)` builds the skeleton for JavaScript-first apps, then calls `attachField` on it.
-  The returned object keeps todos.webapp's `{element, control, setError}` and gains the rest, so the switch stays lossless.
+  The controller exposes the element, control, error setter, and other field methods through one API.
 - Inputs, textareas, and selects all go through the same pair of functions.
 
 ---
@@ -135,10 +136,11 @@ See [i18n.md](i18n.md) for catalog loading, interpolation, attribute mappings, a
 
 ---
 
-## Names to Change During Extraction
-todos.webapp names that break the rule get the rule's name, plus a deprecated alias for one minor release:
+## Migration Names
+Use component-key names when migrating existing markup and helpers.
+The `createToaster` and `spriteIcon` exports remain deprecated aliases for one minor release.
 
-| Today                           | After extraction               | Reason                             |
+| Previous name                   | Shared name                    | Reason                             |
 | :------------------------------ | :----------------------------- | :--------------------------------- |
 | `createToaster`                 | `createToast` in `js/toast.js` | the key is `toast`                 |
 | `spriteIcon`                    | `createIcon` in `js/icon.js`   | the key is `icon`                  |
@@ -147,5 +149,5 @@ todos.webapp names that break the rule get the rule's name, plus a deprecated al
 | `.user-button`                  | `.account-menu__button`        | the key is `account-menu`          |
 | `.app-tile__body`               | `.card__body`                  | the parts belong to the card       |
 
-The variant attribute changes too: family-portal's `data-season` and meteo's `data-theme-color` become `data-accent`.
+Replace legacy `data-season` and `data-theme-color` variant hooks with `data-accent`.
 [ADR-0002](../adrs/ADR-0002-looks.md) lists the values per look.

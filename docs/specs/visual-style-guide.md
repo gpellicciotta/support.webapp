@@ -9,7 +9,7 @@ Principles, token groups, patterns, and the shell of the shared design system, w
 ---
 
 ## Principles
-- One system serves every sibling app; apps vendor it instead of copying files ([ADR-0005](../adrs/ADR-0005-distribution-and-versioning.md)).
+- One system serves multiple apps; apps vendor it instead of copying files ([ADR-0005](../adrs/ADR-0005-distribution-and-versioning.md)).
 - Components and pages use semantic role tokens only; primitives stay private to their look.
 - Light and dark themes redefine semantic tokens only; `data-theme` overrides the system preference.
 - Primary fills require 4.5:1 label contrast; primary icons and borders require 3:1 against their grounds.
@@ -86,8 +86,8 @@ Use `disabled` for unavailable actions and `hidden` while the action does not ap
 Prefer a labeled button when the icon cannot clearly convey the action.
 The partial uses primary colors, a round shape, elevation, and the global focus outline.
 The shell owns fixed positioning, bottom-bar offsets, safe-area spacing, and trailing content clearance.
-Gallery specimens remain in flow; [shell-todos.html](../../src/demo/shell-todos.html) demonstrates overlay placement.
-The extraction preserves todos.webapp's geometry and maps its signal tokens to the shared primary roles.
+Gallery specimens remain in flow; [shell examples](../../src/demo/visual-style-gallery.html#shell) demonstrate overlay placement.
+Shared primary roles keep the floating action visually consistent with other primary controls.
 
 ### Menus and popovers
 Use the [Menu section](../../src/demo/visual-style-gallery.html#menu) for a short list of actions or one choice.
@@ -139,10 +139,10 @@ A link chosen by keyboard is followed through a click, which reaches `onSelect` 
 
 **[Decided]** The menu aligns its end edge with the button, so `attachMenu` gained an `align` option.
 **[Decided]** The name line sits inside the menu hidden from assistive technology, since a menu owns only items.
-**[Decided]** The avatar image waits for the family-portal phase; the face shows initials or the person icon.
+`attachAccountMenu` renders initials or the person icon; it does not accept an avatar image option.
 
 ### Notifications and toasts
-Notifications follow three tiers, after the counters notification ADR:
+Notifications follow three tiers, separating ongoing states, action feedback, and durable messages:
 - Tier 1, banner: a lasting or urgent state, such as offline, an outage, or an account problem.
   Show the most severe banner only; danger banners alone use `role="alert"`.
 - Tier 2, toast: brief feedback on the user's own action, with Undo when the action can be reversed.
@@ -165,10 +165,10 @@ Import `createToast(options)` from [toast.js](../../src/js/toast.js); `createToa
 - With `undoShortcut`, Ctrl+Z or Cmd+Z outside text fields and modals runs the newest Undo.
   Other actions answer it only with `undo: true`; `undoLatest()` does the same from code.
 - Action buttons carry `data-toast-action`: `undo` for Undo actions and `other` for the rest.
-- For the counters rule of one toast at a time, pass `max: 1`, so a new toast replaces the old one.
+- To show one toast at a time, pass `max: 1`, so a new toast replaces the old one.
 
-**[Decided]** The defaults keep todos.webapp's 8 seconds for every toast and up to three at once.
-- Counters' 4 seconds for plain feedback: rejected as a default, because short timeouts hinder slow readers.
+**[Decided]** Toasts default to eight seconds and at most three visible messages, allowing time to read feedback.
+- Four seconds for plain feedback: rejected as a default, because short timeouts hinder slow readers.
 
 Import `createLiveRegion(options)` from [live-region.js](../../src/js/live-region.js) once, at page load.
 - It adds a polite `role="status"` region and an assertive `role="alert"` region, both `.visually-hidden`.
@@ -192,7 +192,7 @@ Components reference only core ids; apps may add local glyphs in their own sprit
 - An icon that carries meaning alone sets `role="img"` and `aria-label` instead of `aria-hidden`.
 - In script, call `setSpriteUrl` once with the vendored sprite path, then `createIcon(document, 'close')`.
 - `createIcon` takes the name without the `icon-` prefix, plus `size`, `className`, and `label` options.
-- `spriteIcon` is the deprecated todos.webapp alias; it goes away in the next minor release.
+- `spriteIcon` is a deprecated compatibility alias; it goes away in the next minor release.
 - The [Icon section](../../src/demo/visual-style-gallery.html#icon) shows every size and every glyph.
 
 **[Decided]** `createIcon` throws until the app calls `setSpriteUrl`.
@@ -215,7 +215,7 @@ Use [badges](../../src/demo/visual-style-gallery.html#badge) for non-interactive
 The neutral `.badge` and `--count`, `--success`, `--warning`, and `--danger` variants always carry meaningful text.
 Add context to numeric counts with visible text or a `.visually-hidden` word, such as “unread”.
 Use spans without keyboard focus or actions; use chips for interactive labels and banners for notices.
-**[Decided]** Adapt meteo's bordered badges with filled semantic tones and paired text tokens to meet contrast requirements.
+**[Decided]** Use filled semantic badge tones and paired text tokens to meet contrast requirements.
 Explicit status labels preserve meaning when tones coincide or forced colors replaces them.
 
 ### Controls and notices
@@ -235,8 +235,8 @@ Explicit status labels preserve meaning when tones coincide or forced colors rep
 - `--inverse` uses `--color-inverse`, or the text color when the look leaves it undefined.
   A look that defines `--color-inverse` must give it 4.5:1 against `--color-surface`.
 - Icon buttons need an `aria-label` naming the action and its object, such as "Delete Groceries".
-- Link buttons keep family-portal's underlined label, transparent background, and link colors, with a 44 px target.
-  The underline offset stays at `0.2em`, matching the source component.
+- Link buttons use underlined labels, transparent backgrounds, and link colors, with a 44 px target.
+  The underline offset stays at `0.2em`, keeping the underline clear of the label.
   Hover and active share `--color-link-hover`; focus uses the global outline, and native `disabled` prevents activation.
 - Toggles set `aria-pressed`; pressed toggles take the selected ground and a primary border.
 - Static chips are spans and never tab stops; filter chips are buttons with `aria-pressed`.
@@ -249,11 +249,11 @@ Explicit status labels preserve meaning when tones coincide or forced colors rep
 **[Decided]** One partial per key, so the icon button gets `icon-button.css` beside `button.css`.
 - One shared controls file: rejected, because the naming link of ADR-0003 maps each key to its own file.
 
-**[Decided]** The segmented control keeps todos.webapp's `segmented__options` wrapper, and the catalog skeleton gains it.
+**[Decided]** The `segmented__options` wrapper separates the option track from the fieldset legend.
 - Grid on the fieldset itself: rejected, because the rendered legend would sit inside the sunken track.
 
 **[Decided]** The banner error variant is `banner--danger`, matching `button--danger` and the danger tokens.
-- `banner--error`, as in todos.webapp: rejected, because two names would mean the same role.
+- `banner--error`: rejected, because two names would mean the same role.
 
 ### Switch
 Use a [switch](../../src/demo/visual-style-gallery.html#switch) for a binary setting that applies immediately.
@@ -271,7 +271,7 @@ Keyboard focus overrides the danger outline. Forced colors preserve the track, t
 Forced colors use `Highlight` for focus and a dashed `CanvasText` outline for invalid controls.
 
 ### Fields and forms
-Fields, choices, and forms follow todos.webapp's field contract, extended with counters' help and validation states.
+Fields, choices, and forms share markup for labels, help, character counts, errors, and asynchronous validation states.
 
 | Key             | Use it for                                                        | Avoid it for                                      | Gallery                                                                 |
 | :-------------- | :---------------------------------------------------------------- | :------------------------------------------------ | :---------------------------------------------------------------------- |
@@ -283,7 +283,7 @@ Fields, choices, and forms follow todos.webapp's field contract, extended with c
 | `error-summary` | The list of invalid fields after a failed submit.                 | A single field error, which stays on the field.   | [Error summary](../../src/demo/visual-style-gallery.html#error-summary) |
 
 - `createField(doc, options)` builds the skeleton; `attachField(element, options)` enhances server-rendered markup.
-- `createField` keeps todos.webapp's `{element, control, setError}` result, so its adoption stays lossless.
+- `createField` returns the field element, control, and validation methods; its help toggle enhances the markup.
 - The help toggle is a real button with `aria-expanded` and `aria-controls`; collapsed help stays described.
 - The counter shows the length against `maxlength` and joins `aria-describedby`.
 - Invalid: `aria-invalid` on the control, a danger border, and an error line with the alert icon.
@@ -303,13 +303,13 @@ Fields, choices, and forms follow todos.webapp's field contract, extended with c
 **[Decided]** The pending state uses the `icon-more` glyph, because the core glyph contract has no progress glyph.
 - A new required glyph: rejected, because every look and the look template would need it first.
 
-**[Decided]** The counter joins `aria-describedby`, as in todos.webapp, so the catalog skeleton drops its `aria-hidden`.
-- A hidden counter: rejected, because the task goal names counters among the described parts.
+**[Decided]** The character count joins `aria-describedby`, so screen readers receive the same length information as sighted users.
+- A hidden character count: rejected, because length limits must remain available to screen reader users.
 
 **[Decided]** The valid state needs no attribute: a visible status line on a field without `aria-busy` styles it.
 - A `data-field-state` attribute: rejected, because ADR-0003 keeps state in native and ARIA attributes.
 
-**[Decided]** Unit tests use happy-dom as their simulated DOM, as todos.webapp does.
+**[Decided]** Unit tests use happy-dom for events, focus, validity, and form data without starting a browser.
 - A hand-written fake DOM: rejected, because forms need events, focus, validity, and `FormData`.
 
 ---
@@ -363,7 +363,7 @@ The toggle is a native button, so a click, Enter, or Space toggles it.
 The option `onToggle(expanded)` runs after each change, such as to keep one row of a group open.
 The controller returns `expand`, `collapse`, `toggle`, `isExpanded`, and `destroy`.
 
-**[Decided]** The package ships single collapsibles; apps build todos.webapp's one-open accordion with `onToggle`.
+**[Decided]** The package ships single collapsibles; apps coordinate a one-open accordion with `onToggle`.
 
 ### Cards, icon tiles, and avatars
 Use [cards](../../src/demo/visual-style-gallery.html#card) for grouped content or one linked destination.
@@ -382,9 +382,9 @@ Use `.avatar-stack` to overlap portraits, with an optional named group and indiv
 Unmodified stack members use responsive sizing; explicit `avatar--sm`, `avatar--md`, and `avatar--lg` modifiers preserve their normal dimensions.
 Avoid stacks for large rosters, where a list provides clearer navigation.
 
-**[Decided]** Avatar sizes preserve family-portal dimensions through existing space tokens; stacks preserve its responsive size and ground rings.
-**[Decided]** Optional tones fall back to sunken surfaces and text; shared radius roles replace source primitive radii.
-**[Decided]** Cards use the global focus outline; initials and icon fallbacks extend the source to satisfy the catalog.
+**[Decided]** Avatar sizes use existing space tokens; responsive stacks use ground-colored rings to separate overlapping faces.
+**[Decided]** Optional tones fall back to sunken surfaces and text; shared radius roles keep shapes consistent across looks.
+**[Decided]** Cards use the global focus outline; avatars provide initials and icon fallbacks when images are unavailable.
 **[Decided]** Static card buttons stretch with their flex container; applications own action alignment instead of cross-component package selectors.
 **[Decided]** The placeholder portrait uses a fixed mid-gray fill for visibility in light and dark themes.
 
@@ -447,7 +447,7 @@ Use `aria-selected` for tabs and other selection widgets, rather than page navig
 
 ## Shell
 [shell.css](../../src/css/shell.css) lays out the app shell of [ADR-0004](../adrs/ADR-0004-app-shell.md).
-Copy an adopter skeleton from [components.md](components.md#app-shell) and keep only the areas you use.
+Copy a layout skeleton from [components.md](components.md#app-shell) and keep only the areas you use.
 Open the four demo pages from the [App shell section](../../src/demo/visual-style-gallery.html#shell) of the gallery.
 
 Areas are direct children of `<body class="app">`; only `app__main` is required:
@@ -475,11 +475,10 @@ Layout rules:
 The `.skip-link` sits above the top edge until focused, keeping its 44 px target.
 
 **[Decided]** The width options center the banners and action bar with the main area, so their content lines up.
-- Centering the main area alone: rejected, because meteo's actions would then span the full window.
+- Centering the main area alone: rejected, because the action bar would then span the full window.
 
-**[Decided]** Counters moves its wide-screen actions into `app__top-actions` in its own code; the shell adds no option.
-- ADR-0004 describes that move as counters' behavior, not as a shell feature, so the counters demo keeps the action bar.
-- A shell option for the move: rejected, because ADR-0004 defines no such option and only counters needs it.
+**[Decided]** Apps own responsive moves between the action bar and `app__top-actions`.
+The shell defines placement areas without moving controls; see [ADR-0004](../adrs/ADR-0004-app-shell.md) for layout decisions.
 
 ---
 
@@ -509,7 +508,7 @@ The `.skip-link` sits above the top edge until focused, keeping its 44 px target
 - [collapsible.test.js](../../tests/unit/collapsible.test.js) and [account-menu.test.js](../../tests/unit/account-menu.test.js) check both modules in happy-dom.
 - [collapsible.spec.js](../../tests/e2e/collapsible.spec.js) and [account-menu.spec.js](../../tests/e2e/account-menu.spec.js) drive both by pointer and keyboard.
 - [shell.spec.js](../../tests/e2e/shell.spec.js) checks areas, scroll owners, sticky bars, widths, and the side panel on each demo page.
-- [verify-ui.spec.js](../../tests/e2e/verify-ui.spec.js) is the browser verifier, ported from family-portal's `verify-ui.py`.
+- [verify-ui.spec.js](../../tests/e2e/verify-ui.spec.js) is the browser verifier for contrast, layout, focus, and runtime failures.
 
 The verifier runs the gallery and each shell demo page in each look at 390 and 1440 px, with system and explicit themes:
 - HTTP 200, every stylesheet and import loaded, no font errors, no console errors, and no failed requests.
@@ -577,7 +576,7 @@ Use ordinary navigation lists when people cannot select multiple records.
 Use the [tooltip specimen](../../src/demo/visual-style-gallery.html#tooltip) for short, supplementary descriptions of focusable controls.
 Keep essential instructions visible; use a popover or dialog for interactive content.
 Use the [catalog skeleton](components.md#tooltip) and enhance it with `attachTooltip` from [tooltip.js](../../src/js/tooltip.js).
-**[Decided]** Explicit text and `aria-describedby` replace meteo's generated-content tooltip and duplicate native title.
+**[Decided]** Explicit tooltip text and `aria-describedby` expose descriptions to assistive technology without duplicate native titles.
 Keep an independent accessible name on the trigger and unique IDs on descriptions.
 Keyboard focus and mouse hover reveal the tooltip; Escape closes it while focus stays on the trigger.
 Hover persists over the tooltip, and scrolling or resizing repositions the open panel.
