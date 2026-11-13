@@ -273,17 +273,40 @@ Field group. `field-group--row` sets related fields side by side; the hint and e
 ```
 
 ### selection
-Multi-select with bulk actions. Draft only; the design task settles the markup before implementation.
+Multi-select with native checkbox rows and an in-flow bulk action bar.
+**[Decided]** Follow the [APG checkbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) using native checked and indeterminate properties.
+Use a labeled fieldset, ordinary Tab navigation, and Space to toggle each checkbox.
+Shift+click and Shift+Space apply the target's new state over the range from the last ordinary checkbox activation.
+Ranges skip disabled and hidden rows; select all affects only available rows.
+The master checkbox is mixed for partial selection and disabled when no rows are available.
 
 ```html
-<ul class="selection" data-selection aria-label="Tasks">
-  <li class="row"><input class="selection__control" type="checkbox" aria-label="Select Buy milk">...</li>
-</ul>
-<div class="selection__bar" hidden>
-  <p class="selection__count">2 selected</p>
-  <button class="button button--danger" type="button">Delete</button>
-</div>
+<fieldset class="selection" data-selection-root tabindex="-1">
+  <legend>Tasks</legend>
+  <label class="selection__row"><input class="selection__control" type="checkbox" data-selection-all> Select all tasks</label>
+  <ul class="selection__list">
+    <li><label class="selection__row"><input class="selection__control" type="checkbox" data-selection-item value="milk"> Buy milk</label></li>
+  </ul>
+  <p class="selection__count" data-selection-count role="status" aria-live="polite" aria-atomic="true">0 selected</p>
+  <div class="selection__bar" data-selection-bar role="group" aria-label="Bulk actions" hidden>
+    <button class="button button--danger" type="button" data-selection-action="bin">Move to bin</button>
+    <button class="button" type="button" data-selection-clear>Clear selection</button>
+  </div>
+</fieldset>
 ```
+
+Enhance with `attachSelection(root, { formatCount })` from [selection.js](../../src/js/selection.js).
+`formatCount(count)` supplies localized count text; the default is `{{count}} selected`.
+The controller exposes `selectedValues`, `clear()`, `refresh()`, and idempotent `destroy()`.
+Give each item a unique value; call `refresh()` after changing rows, checked properties, or availability.
+Bulk buttons emit bubbling `selection:action` events with `{ action, values }`; the host owns persistence and errors.
+Selection remains until the host clears it after successful actions.
+Clear returns focus from the disappearing bar to select all, or the fieldset when no rows remain.
+Destroy removes listeners and restores authored count, bar, and master checkbox state; item selections remain native form state.
+Labels provide touch targets; native checks convey selection without relying on color.
+Disabled inputs stay unavailable; `aria-invalid="true"` adds the shared danger outline when validation requires it.
+Without JavaScript, individual native checkboxes remain usable; the bulk bar stays hidden.
+For delete, move records to the recycle bin and offer Undo through the host's toast controller.
 
 ### card
 Card. A link card is one link and nests no other controls.

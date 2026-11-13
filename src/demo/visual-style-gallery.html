@@ -1205,6 +1205,26 @@
                 </div>
             </section>
         </section>
+        <section id="selection" class="gallery-section" aria-labelledby="selection-title">
+            <h2 id="selection-title">Multi-select</h2>
+            <p>Use Space to toggle a row. Shift+click or Shift+Space applies a range from the last ordinary selection.</p>
+            <fieldset class="selection" data-selection-root tabindex="-1" aria-describedby="selection-help">
+                <legend>Sample tasks</legend>
+                <p id="selection-help">Select tasks, then move them to the recycle bin. Undo restores them.</p>
+                <label class="selection__row"><input class="selection__control" type="checkbox" data-selection-all> Select all available tasks</label>
+                <ul class="selection__list">
+                    <li><label class="selection__row"><input class="selection__control" type="checkbox" data-selection-item value="notes"> Review sample notes</label></li>
+                    <li><label class="selection__row"><input class="selection__control" type="checkbox" data-selection-item value="meeting"> Plan sample meeting</label></li>
+                    <li><label class="selection__row"><input class="selection__control" type="checkbox" data-selection-item value="report"> Share sample report</label></li>
+                    <li><label class="selection__row"><input class="selection__control" type="checkbox" data-selection-item value="locked" disabled> Locked sample task</label></li>
+                </ul>
+                <p class="selection__count" data-selection-count role="status" aria-live="polite" aria-atomic="true">0 selected</p>
+                <div class="selection__bar" data-selection-bar role="group" aria-label="Bulk actions" hidden>
+                    <button class="button button--danger" type="button" data-selection-action="bin">Move to bin</button>
+                    <button class="button button--secondary" type="button" data-selection-clear>Clear selection</button>
+                </div>
+            </fieldset>
+        </section>
         <section id="accents" class="gallery-section" aria-labelledby="accents-title">
             <h2 id="accents-title">Bright accents</h2>
             <p>Bright changes action fills and labels through wrapper accents. Other looks retain their own actions.</p>

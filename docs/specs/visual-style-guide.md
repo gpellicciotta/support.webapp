@@ -507,6 +507,16 @@ Replace placeholders with results, an empty state, or an error, then clear busy 
 Never put controls inside aria-hidden skeletons. Preserve focus, and avoid repeated announcements for each placeholder.
 See [components.md](components.md#loading) for the markup contract.
 
+## Multi-select
+Use the [selection specimen](../../src/demo/visual-style-gallery.html#selection) for independently selectable rows and bulk actions.
+Use [selection.js](../../src/js/selection.js) to enhance the [catalog skeleton](components.md#selection).
+**[Decided]** Native labeled checkboxes preserve ordinary Tab and Space behavior; Shift adds optional range selection.
+The count remains outside the hidden bulk bar so clearing selection announces zero.
+Keep bulk actions in document flow; the shell owns any sticky placement.
+Use unique values, localize counts with `formatCount`, and refresh after replacing or hiding rows.
+The host handles `selection:action`, clears selection after success, and offers Undo after moving items to the bin.
+Use ordinary navigation lists when people cannot select multiple records.
+
 ## Tooltip
 Use the [tooltip specimen](../../src/demo/visual-style-gallery.html#tooltip) for short, supplementary descriptions of focusable controls.
 Keep essential instructions visible; use a popover or dialog for interactive content.

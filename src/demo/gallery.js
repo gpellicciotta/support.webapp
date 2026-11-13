@@ -6,6 +6,7 @@ import { setSpriteUrl } from '../js/icon.js';
 import { attachAccountMenu } from '../js/account-menu.js';
 import { attachCollapsible } from '../js/collapsible.js';
 import { attachTabs } from '../js/tabs.js';
+import { attachSelection } from '../js/selection.js';
 import { confirmDialog, openDialog } from '../js/dialog.js';
 import { attachInlineConfirm } from '../js/inline-confirm.js';
 import { attachMenu } from '../js/menu.js';
@@ -281,6 +282,29 @@ if (typeof document !== 'undefined' && document.querySelector('.gallery-main')) 
         undoShortcut: true
     });
     const toastResult = document.querySelector('[data-toast-result]');
+    const selectionRoot = document.querySelector('[data-selection-root]');
+    const selection = attachSelection(selectionRoot);
+    selectionRoot.addEventListener('selection:action', event => {
+        if (event.detail.action !== 'bin') {
+            return;
+        }
+        const rows = [...selectionRoot.querySelectorAll('[data-selection-item]')]
+            .filter(item => event.detail.values.includes(item.value)).map(item => item.closest('li'));
+        selection.clear();
+        for (const row of rows) {
+            row.hidden = true;
+        }
+        selection.refresh();
+        toaster.show(`${rows.length} sample tasks moved to the recycle bin.`, {
+            onAction: () => {
+                for (const row of rows) {
+                    row.hidden = false;
+                }
+                selection.refresh();
+                selectionRoot.querySelector('[data-selection-all]').focus();
+            }
+        });
+    });
     const deleteSample = () => {
         toastResult.textContent = 'Sample task deleted.';
         toaster.show('Sample task moved to the recycle bin.', {
