@@ -12,8 +12,10 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 144.8, input: 126980, output: 4108, cache_read: 588544, cache_write: 0}
+  worker: {turns: 4, duration_s: 1744.8, input: 277876, output: 49380, cache_read: 10112512, cache_write: 0}
 work_duration: 78.2
+review_status: pending
+review_round: 1
 ---
 # T0024: Add the tooltip component after a screen reader check of meteo's tooltips
 
@@ -89,4 +91,7 @@ Refine declared files, size estimate, and tests in the technical specification b
 
 - [2026-11-13] **[Verify]**
   Completion validation passed. Committed ab06d04 on the task branch; working tree is clean. Test servers have stopped. The orchestrator owns agent review and integration.
+
+- [2026-11-13] **[Review]**
+  Round 1 requested (mode: agent).
 
