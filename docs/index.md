@@ -17,6 +17,7 @@ Overview of all documentation for the `support.webapp` project.
 - [warm.md](specs/looks/warm.md): Warm look, seasons, fonts, glyphs, and the look template.
 - [devops.md](devops.md): Tool setup, documentation checks, versioning, releasing, plan store, and task workflow.
 - [roadmap.md](roadmap.md): Phases, entry and exit criteria, and adoption order.
+- [auth-redesign.md](plans/auth-redesign.md): How auth moves onto the system, with its new Admin Console.
 
 ---
 

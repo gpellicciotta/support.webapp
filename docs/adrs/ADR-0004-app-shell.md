@@ -96,6 +96,11 @@ Adopter settings:
 - family-portal: top bar with brand, breadcrumb, help, and account; banners; action bar for the footer; `app--scroll-page`.
   One server template partial renders the top bar instead of 14 copies.
 
+- auth, added on 2026-11-15 by the [auth redesign plan](../plans/auth-redesign.md):
+  public pages use the narrow page setup, with `app--scroll-page` and `app--width-narrow`.
+  Signed-in pages use the top bar with a menu button and the account menu; `app--scroll-page`.
+  Its Admin Console uses sidebar, top bar, main, and side panel; `app--scroll-main`; desktop only.
+
 ---
 
 ## Options Considered
