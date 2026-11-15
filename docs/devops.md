@@ -73,6 +73,34 @@ The `prepack` script writes `manifest.json` with each file's look and SHA-256 ha
 
 ---
 
+## App Generator
+The `generate-app` action creates a new web app from [template/](../template/), as [ADR-0006](adrs/ADR-0006-generator.md) defines.
+Run it from a checkout at a release tag, so the template and the vendored files come from one version:
+
+```bash
+git switch --detach v{{version}}
+python scripts/devops.py generate-app {{app-name}} --look {{look}} [options] [-o {{output-dir}}]
+```
+
+- Shell options: `--scroll main|page`, `--nav` repeated for `sidebar`, `bottom`, `menu`, `breadcrumb`, or `none`.
+- More options: `--width reading|narrow|content|full`, `--action-bar`, `--side-panel`, `--title`, and `--owner`.
+- The output folder must not exist; it defaults to `./{{app-name}}`.
+- A pre-release checkout version only warns, so previews can run from `main`.
+- The app is written to a temporary sibling folder and renamed on success; a failure leaves nothing behind.
+- After copying, it runs `node bin/cli.mjs vendor --look {{look}} --to src/vendor/design --styles src/css` inside the app.
+- It never runs `git init` or `plan init`; it prints those next steps instead.
+- Exit codes: 0 success, 1 operational failure, 2 invalid options.
+
+Template rules:
+- Placeholders are `{{app-name}}`, `{{app-title}}`, `{{look}}`, `{{owner}}`, `{{year}}`, `{{design-version}}`, and `{{shell-classes}}`.
+- A backslash before `{{` keeps a documentation placeholder literal; any other unfilled placeholder fails the generation.
+- `<!-- if:{{condition}} -->` and `<!-- end:{{condition}} -->` lines in HTML files keep a block only when the options select it.
+- Conditions are `sidebar`, `bottom`, `menu`, `breadcrumb`, `action-bar`, and `side-panel`; a `!` prefix negates one.
+- Markdown lint and ESLint skip `template/`; [generate-app.test.js](../tests/integration/generate-app.test.js) generates one app per look.
+  Each generated app then runs its own `check`, borrowing this repository's `node_modules` through a junction.
+
+---
+
 ## Versioning and Releasing
 ### Updating Versions
 - [package.json](../package.json) owns the version, which must match the top heading in [CHANGELOG.md](../CHANGELOG.md).

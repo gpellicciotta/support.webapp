@@ -1,0 +1,25 @@
+{
+  "name": "{{app-name}}",
+  "version": "0.1.0-pre",
+  "description": "{{app-title}}, built on the support.webapp design system.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "format": "eslint . --fix",
+    "test": "vitest run",
+    "test:slow": "playwright test",
+    "check:design": "node src/vendor/design/bin/check.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^9.39.5",
+    "vitest": "^5.1.0"
+  }
+}

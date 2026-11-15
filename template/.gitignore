@@ -1,0 +1,24 @@
+# Ignore local files
+*.local.md
+
+# Ignore installed dependencies
+node_modules/
+.venv/
+dist/
+
+# Ignore plan related files
+work/
+.plan/
+/PLAN.md
+/plan.code-workspace
+
+# Ignore env files
+**/*.env
+
+# Ignore Python caches
+__pycache__/
+.ruff_cache/
+
+# Ignore Playwright output
+test-results/
+playwright-report/

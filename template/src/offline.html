@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Offline · {{app-title}}</title>
+    <link rel="icon" href="img/app-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app app--scroll-page app--width-narrow">
+    <header class="app__top-bar"><p class="app__title">{{app-title}}</p></header>
+    <main class="app__main" id="main" tabindex="-1">
+        <div class="empty-state">
+            <h1 class="empty-state__title">You are offline</h1>
+            <p class="empty-state__text">{{app-title}} could not load this page. Check the connection and try again.</p>
+            <div class="empty-state__actions"><a class="button" href="./">Try again</a></div>
+        </div>
+    </main>
+</body>
+</html>

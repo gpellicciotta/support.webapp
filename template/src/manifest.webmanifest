@@ -1,0 +1,13 @@
+{
+  "name": "{{app-title}}",
+  "short_name": "{{app-title}}",
+  "description": "{{app-title}}, built on the support.webapp design system.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "lang": "en-US",
+  "icons": [
+    { "src": "img/app-icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

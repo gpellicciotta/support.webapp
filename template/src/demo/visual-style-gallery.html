@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Visual style gallery · {{app-title}}</title>
+    <link rel="icon" href="../img/app-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="visual-style-gallery.js"></script>
+</head>
+<body class="app app--scroll-page app--width-content">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="app__top-bar"><h1 class="app__title">{{app-title}} visual style gallery</h1></header>
+    <main class="app__main" id="main" tabindex="-1">
+        <section aria-labelledby="system-title">
+            <h2 id="system-title">Design system</h2>
+            <p>This app uses the {{look}} look of support.webapp v{{design-version}}, vendored in <code>src/vendor/design/</code>.
+                The shared gallery of support.webapp shows every shared token, component, and pattern.
+                This page shows only the app's local additions.</p>
+            <fieldset class="segmented" data-theme-switch>
+                <legend class="segmented__legend">Theme</legend>
+                <div class="segmented__options">
+                    <label class="segmented__option"><input type="radio" name="theme" value="system" checked>System</label>
+                    <label class="segmented__option"><input type="radio" name="theme" value="light">Light</label>
+                    <label class="segmented__option"><input type="radio" name="theme" value="dark">Dark</label>
+                </div>
+            </fieldset>
+        </section>
+        <section id="side-panel-header" aria-labelledby="side-panel-header-title">
+            <h2 id="side-panel-header-title">Side panel header</h2>
+            <p>The title of a side panel and its close button on one row.</p>
+            <div class="side-panel__header">
+                <h3>Details</h3>
+                <button class="icon-button" type="button" aria-label="Close">
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="../vendor/design/looks/{{look}}/icons.svg#icon-close"/></svg>
+                </button>
+            </div>
+        </section>
+        <section id="app-footer" aria-labelledby="app-footer-title">
+            <h2 id="app-footer-title">App footer</h2>
+            <p>Muted footer text in the action bar of pages with breadcrumb navigation.</p>
+            <p class="app-footer">&copy; {{year}} {{owner}}</p>
+        </section>
+    </main>
+</body>
+</html>

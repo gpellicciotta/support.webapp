@@ -13,7 +13,8 @@ A shared visual design system and templates for web apps.
 
 ## Status
 The package provides shared tokens, components, an app shell, JavaScript helpers, and neutral, warm, and bright looks.
-The app generator is planned; see the [roadmap](docs/roadmap.md) and [PLAN.md](PLAN.md) for remaining work.
+The `generate-app` action creates a new web app from [template/](template/); see [App Generator](docs/devops.md#app-generator).
+See the [roadmap](docs/roadmap.md) and [PLAN.md](PLAN.md) for remaining work.
 
 ---
 

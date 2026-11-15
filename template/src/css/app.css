@@ -1,0 +1,26 @@
+/*
+ * App components and screen layouts, built from semantic tokens only.
+ * List every component added here in docs/specs/visual-style-guide.md and show it in the gallery.
+ */
+
+/* Main area: sections stacked; the shell places and pads the area, centering it at the width option. */
+.app__main {
+    display: grid;
+    align-content: start;
+    gap: var(--app-section-gap);
+}
+
+/* Side panel header: the panel title and its close button on one row. */
+.side-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+/* Footer text in the action bar of pages with breadcrumb navigation. */
+.app-footer {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+}

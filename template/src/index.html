@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>{{app-title}}</title>
+    <meta name="description" content="{{app-title}}, built on the support.webapp design system.">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="img/app-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/main.js"></script>
+</head>
+<body class="{{shell-classes}}">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="app__top-bar">
+<!-- if:menu -->
+        <button class="app__menu-button icon-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Menu">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="vendor/design/looks/{{look}}/icons.svg#icon-more"/></svg>
+        </button>
+        <div class="menu" id="app-menu" aria-label="Menu">
+            <button class="menu__item" type="button" role="menuitem" data-target="home">Home</button>
+            <button class="menu__item" type="button" role="menuitem" data-target="settings">Settings</button>
+        </div>
+<!-- end:menu -->
+<!-- if:breadcrumb -->
+        <a class="app__brand" href="./">{{app-title}}</a>
+        <nav class="app__breadcrumb" aria-label="Breadcrumb">
+            <ol><li><a href="./" aria-current="page">Home</a></li></ol>
+        </nav>
+<!-- end:breadcrumb -->
+<!-- if:!breadcrumb -->
+        <h1 class="app__title">{{app-title}}</h1>
+<!-- end:!breadcrumb -->
+    </header>
+<!-- if:sidebar -->
+    <nav class="app__sidebar" aria-label="Main">
+        <ul class="app__nav-list">
+            <li><a class="app__nav-item" href="#home" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="vendor/design/looks/{{look}}/icons.svg#icon-lists"/></svg>Home</a></li>
+            <li><a class="app__nav-item" href="#settings"><svg class="icon" aria-hidden="true" focusable="false"><use href="vendor/design/looks/{{look}}/icons.svg#icon-settings"/></svg>Settings</a></li>
+        </ul>
+    </nav>
+<!-- end:sidebar -->
+    <div class="app__banners">
+        <div class="banner banner--warning" role="status" data-offline-banner hidden>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="vendor/design/looks/{{look}}/icons.svg#icon-alert"/></svg>
+            <p class="banner__text">You are offline.</p>
+        </div>
+    </div>
+    <main class="app__main" id="main" tabindex="-1">
+<!-- if:breadcrumb -->
+        <h1>{{app-title}}</h1>
+<!-- end:breadcrumb -->
+        <section id="home" aria-labelledby="home-title">
+            <div class="empty-state">
+                <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="vendor/design/looks/{{look}}/icons.svg#icon-note"/></svg>
+                <h2 class="empty-state__title" id="home-title">Nothing here yet</h2>
+                <p class="empty-state__text">Replace this placeholder with the first screen of {{app-title}}.</p>
+<!-- if:side-panel -->
+                <div class="empty-state__actions"><button class="button button--secondary" type="button" data-panel-open>Open the side panel</button></div>
+<!-- end:side-panel -->
+            </div>
+        </section>
+        <section id="settings" aria-labelledby="settings-title">
+            <h2 id="settings-title">Settings</h2>
+            <fieldset class="segmented" data-theme-switch>
+                <legend class="segmented__legend">Theme</legend>
+                <div class="segmented__options">
+                    <label class="segmented__option"><input type="radio" name="theme" value="system" checked>System</label>
+                    <label class="segmented__option"><input type="radio" name="theme" value="light">Light</label>
+                    <label class="segmented__option"><input type="radio" name="theme" value="dark">Dark</label>
+                </div>
+            </fieldset>
+        </section>
+    </main>
+<!-- if:side-panel -->
+    <aside class="app__side-panel" aria-labelledby="panel-title" hidden>
+        <div class="side-panel__header">
+            <h2 id="panel-title">Details</h2>
+            <button class="icon-button" type="button" aria-label="Close" data-panel-close>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="vendor/design/looks/{{look}}/icons.svg#icon-close"/></svg>
+            </button>
+        </div>
+        <p>Placeholder for a detail or editor view.</p>
+    </aside>
+<!-- end:side-panel -->
+<!-- if:action-bar -->
+<!-- if:breadcrumb -->
+    <footer class="app__action-bar">
+        <p class="app-footer">&copy; {{year}} {{owner}}</p>
+    </footer>
+<!-- end:breadcrumb -->
+<!-- if:!breadcrumb -->
+    <div class="app__action-bar">
+<!-- if:side-panel -->
+        <button class="button" type="button" data-panel-open>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="vendor/design/looks/{{look}}/icons.svg#icon-plus"/></svg>
+            Add an item
+        </button>
+<!-- end:side-panel -->
+<!-- if:!side-panel -->
+        <button class="button" type="button" data-toast="Adding items is not built yet.">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="vendor/design/looks/{{look}}/icons.svg#icon-plus"/></svg>
+            Add an item
+        </button>
+<!-- end:!side-panel -->
+    </div>
+<!-- end:!breadcrumb -->
+<!-- end:action-bar -->
+<!-- if:bottom -->
+    <nav class="app__bottom-nav" aria-label="Main">
+        <ul class="app__nav-list">
+            <li><a class="app__nav-item" href="#home" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="vendor/design/looks/{{look}}/icons.svg#icon-lists"/></svg>Home</a></li>
+            <li><a class="app__nav-item" href="#settings"><svg class="icon" aria-hidden="true" focusable="false"><use href="vendor/design/looks/{{look}}/icons.svg#icon-settings"/></svg>Settings</a></li>
+        </ul>
+    </nav>
+<!-- end:bottom -->
+    <div class="app__overlays"><div class="toast-region" role="region" aria-label="Notifications"></div></div>
+    <noscript><p>{{app-title}} needs JavaScript for its updates and notifications.</p></noscript>
+</body>
+</html>

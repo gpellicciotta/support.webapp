@@ -7,6 +7,7 @@ Defines the tool that creates a new web app, what it generates, and how later te
 - **[Decided]** with the user on 2026-11-11: the generator is Python, run from a checkout of this repository at a release tag.
 - **[Decided]** with the user on 2026-11-11: the generator never runs `git init` or `plan init`.
 - **[Decided]** with the user on 2026-11-11: the generator reuses the Node `vendor` command, and the npm `create` subcommand is dropped.
+- Amended on 2026-11-15 by T0022: the vendor working folder, `--title`, the area markers, and placeholder escapes.
 
 ---
 
@@ -44,6 +45,7 @@ Flags:
 | `--action-bar` | none                                              | off              | Adds the action bar for the main actions of a screen, or a footer.          |
 | `--side-panel` | none                                              | off              | Adds the side panel for a detail or editor view.                            |
 | `--owner`      | a name                                            | the Git user     | The copyright owner in `LICENSE.md`.                                        |
+| `--title`      | a display name                                    | the name, titled | The app title in pages, the web manifest, and the documentation.            |
 | `-o`           | a folder                                          | `./{{app-name}}` | The folder that receives the app; it must not exist.                        |
 
 - The top bar, banners, main area, and overlay layer are always generated.
@@ -60,7 +62,8 @@ python scripts/devops.py generate-app family-portal --look warm --scroll page --
 
 Vendor step:
 - `vendor` is the command of ADR-0005 that copies the design files into an app.
-- After copying the template, the generator runs `node bin/cli.mjs vendor --look {{look}} --to {{output-dir}}/src/vendor/design`.
+- After copying the template, the generator runs `node bin/cli.mjs vendor --look {{look}} --to src/vendor/design --styles src/css`.
+  It runs inside the new app, because `vendor` resolves `--to` and writes `design.json` relative to its working folder.
 - The new app then holds the look-neutral files, the chosen look, `contract.json`, the manifest, `check.mjs`, and `design.json`.
 - Its `src/css/style.css` imports the vendored look entry.
 - The app starts on a pinned, committed copy, with no second command to run.
@@ -84,7 +87,10 @@ Generated app, project files from the project-setup guidelines:
 
 Placeholders in `template/`:
 - `{{app-name}}`, `{{app-title}}`, `{{look}}`, `{{owner}}`, `{{year}}`, and `{{design-version}}`.
-- The generator fails when a placeholder stays unfilled.
+- `{{shell-classes}}` holds the body classes of the scroll and width options.
+- `<!-- if:{{condition}} -->` and `<!-- end:{{condition}} -->` lines in HTML files mark the optional shell areas.
+- A backslash before `{{` keeps a documentation placeholder literal in the generated app.
+- The generator fails when any other placeholder stays unfilled.
 
 Later template changes:
 - Design changes reach generated apps through package releases and `vendor`.

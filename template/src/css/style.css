@@ -1,0 +1,36 @@
+/*
+ * The stylesheet entry point: the only stylesheet a page links.
+ *
+ * It imports the vendored support.webapp design system first, through the {{look}} look entry:
+ * the shared base and reset, the look's palette, fonts, and semantic roles, every package component, and the app shell.
+ * The app's own partials follow, so app rules win equal selectors.
+ * Rules here use semantic tokens only; raw values belong in tokens.css.
+ */
+
+@import url('../vendor/design/looks/{{look}}/index.css');
+@import url('tokens.css');
+@import url('app.css');
+
+/* Base: page ground and body text; the package reset holds the box model and the focus ring. */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+}
+
+/* Base: headings, set in semibold with tight leading. */
+h1,
+h2 {
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+}
+
+h1 {
+    font-size: var(--text-xl);
+}
+
+h2 {
+    font-size: var(--text-lg);
+}

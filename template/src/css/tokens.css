@@ -1,0 +1,11 @@
+/*
+ * App-local tokens: values the shared design system does not define.
+ *
+ * Add a token here only when no shared semantic token fits, and list it in docs/specs/visual-style-guide.md.
+ * Override a shared token only for a documented deviation.
+ */
+
+:root {
+    /* Layout: the gap between the sections of the main area. */
+    --app-section-gap: var(--space-6);
+}

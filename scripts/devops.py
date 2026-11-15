@@ -6,6 +6,7 @@ Install the tools first, as docs/devops.md describes.
 Usage:
   python scripts/devops.py lint | format | check
   python scripts/devops.py release [--dry-run] [--skip-checks] [--yes]
+  python scripts/devops.py generate-app NAME --look LOOK [options] [-o FOLDER]
   python scripts/devops.py help [--verbose] | version
 """
 
@@ -22,6 +23,9 @@ VENV_PYTHON = VENV_DIR / ("Scripts/python.exe" if sys.platform == "win32" else "
 if __name__ == "__main__" and VENV_PYTHON.is_file() and Path(sys.prefix).resolve() != VENV_DIR.resolve():
     sys.exit(subprocess.run([str(VENV_PYTHON), str(Path(__file__).resolve()), *sys.argv[1:]], check=False).returncode)
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import generate_app  # noqa: E402
 from support_python.devops import DevopsCli, NodeProject, resolve_executable  # noqa: E402
 
 
@@ -89,6 +93,14 @@ def build_cli(root: Path = REPO_ROOT) -> DevopsCli:
         "serve src/ on localhost",
         serve,
         configure_parser=lambda parser: parser.add_argument("--port", type=int, default=4173),
+    )
+    cli.add_action(
+        "generate-app",
+        "generate a new web app from template/ with a look and shell options",
+        generate_app.run_action,
+        detail="Run from a checkout at a release tag; the app gets this version's vendored design files.",
+        usage_suffix="NAME --look LOOK [--scroll main|page] [--nav NAV]... [--width WIDTH] [options] [-o FOLDER]",
+        configure_parser=generate_app.configure_parser,
     )
     return cli
 

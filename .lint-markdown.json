@@ -1,5 +1,5 @@
 {
-  "exclude": ["CHANGELOG.md"],
+  "exclude": ["CHANGELOG.md", "template/**"],
   "disable": ["MD014"],
   "enable": ["SW001"],
   "plugins": ["scripts/markdown-links.py"]
