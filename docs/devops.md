@@ -86,7 +86,8 @@ python scripts/devops.py generate-app {{app-name}} --look {{look}} [options] [-o
 - More options: `--width reading|narrow|content|full`, `--action-bar`, `--side-panel`, `--title`, and `--owner`.
 - The output folder must not exist; it defaults to `./{{app-name}}`.
 - A pre-release checkout version only warns, so previews can run from `main`.
-- The app is written to a temporary sibling folder and renamed on success; a failure leaves nothing behind.
+- The app is written to a temporary sibling folder and renamed on success; a failure leaves no app files behind.
+- Titles and owners may not hold quotes, backslashes, `<`, `>`, `&`, braces, or control characters.
 - After copying, it runs `node bin/cli.mjs vendor --look {{look}} --to src/vendor/design --styles src/css` inside the app.
 - It never runs `git init` or `plan init`; it prints those next steps instead.
 - Exit codes: 0 success, 1 operational failure, 2 invalid options.

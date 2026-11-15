@@ -28,7 +28,9 @@ CONDITIONS = ("sidebar", "bottom", "menu", "breadcrumb", "action-bar", "side-pan
 
 APP_NAME = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$")
 # A backslash before the braces keeps a documentation placeholder literal.
-PLACEHOLDER = re.compile(r"(\\?)\{\{([a-z][\w-]*)\}\}")
+PLACEHOLDER = re.compile(r"(\\?)\{\{([A-Za-z][\w-]*)\}\}")
+# Titles and owners land unescaped in JSON, HTML, Python, and Markdown files, so characters that break them are refused.
+UNSAFE_TEXT = re.compile(r'["\\<>&{}\x00-\x1f\x7f]')
 MARKER = re.compile(r"^\s*<!-- (if|end):(!?)([a-z-]+) -->\s*$")
 
 
@@ -97,6 +99,9 @@ def resolve(
     owner = options.owner or git_user()
     if not owner:
         raise GenerateError("No copyright owner: pass --owner or set the Git user name", 2)
+    for label, value in (("title", title), ("owner", owner)):
+        if UNSAFE_TEXT.search(value):
+            raise GenerateError(f"The {label} holds a quote, backslash, <, >, &, brace, or control character", 2)
     output = Path(options.output) if options.output else Path.cwd() / options.name
     return replace(options, title=title, owner=owner, output=output, nav=tuple(dict.fromkeys(options.nav)))
 
@@ -195,7 +200,7 @@ def generate(
     """Generate the app into its output folder and return that folder.
 
     The app is written to a temporary folder beside the output and renamed at the end,
-    so a failure leaves neither a partial app nor the temporary folder.
+    so a failure leaves neither a partial app nor the temporary folder; created parent folders stay.
     """
     resolved = resolve(options, repo_root=repo_root, git_user=git_user)
     output = resolved.output.resolve()
@@ -217,6 +222,8 @@ def generate(
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_text(fill(text, values, relative), encoding="utf-8", newline="\n")
         vendor(staging, resolved.look, repo_root)
+        # mkdtemp creates a private folder; the app folder takes the usual permissions instead.
+        staging.chmod(0o755)
         staging.rename(output)
     except BaseException:
         shutil.rmtree(staging, ignore_errors=True)

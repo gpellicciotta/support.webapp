@@ -253,3 +253,40 @@ def test_cli_rejects_a_bad_app_name_with_exit_code_two(tmp_path):
     assert result.returncode == 2, result.stdout + result.stderr
     assert "app name" in (result.stdout + result.stderr).lower()
     assert not (tmp_path / "app").exists()
+
+
+@pytest.mark.parametrize(
+    "overrides",
+    [{"title": 'Say "Hi"'}, {"title": "A <b>"}, {"title": "Back\\slash"}, {"owner": "A & B"}, {"owner": "Line\nBreak"}],
+)
+def test_rejects_title_and_owner_characters_that_break_json_html_or_python(tmp_path, overrides):
+    with pytest.raises(GEN.GenerateError) as error:
+        make(tmp_path, **overrides)
+    assert error.value.exit_code == 2
+    assert not (tmp_path / "sample-app").exists()
+
+
+def test_accepts_apostrophes_and_accents_in_title_and_owner(tmp_path):
+    app = make(tmp_path, title="Giò's Lists", owner="Giò O'Neil")
+    assert "<title>Giò's Lists</title>" in (app / "src/index.html").read_text(encoding="utf-8")
+
+
+def test_fill_rejects_misspelled_placeholders():
+    with pytest.raises(GEN.GenerateError, match=r"\{\{App-name\}\}"):
+        GEN.fill("{{App-name}}", {"app-name": "a"}, Path("x.md"))
+
+
+def test_select_areas_rejects_an_end_marker_that_does_not_match_its_if_marker():
+    with pytest.raises(GEN.GenerateError, match="without a matching"):
+        GEN.select_areas("<!-- if:menu -->\nx\n<!-- end:!menu -->\n", {"menu"}, Path("i.html"))
+
+
+def test_menu_markup_follows_the_menu_skeleton_before_scripts_run(tmp_path):
+    html = (make(tmp_path, nav=("menu", "breadcrumb")) / "src/index.html").read_text(encoding="utf-8")
+    assert '<div class="menu" id="app-menu" role="menu" aria-label="Menu" popover>' in html
+    assert "app__brand" in html and "app__menu-button" in html
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="POSIX permission bits only")
+def test_generated_folder_is_not_private(tmp_path):
+    assert make(tmp_path).stat().st_mode & 0o755 == 0o755
