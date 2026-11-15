@@ -4,15 +4,18 @@ owner: "@claude-code"
 needs: []
 branch: —
 worktree: —
-status: active
+status: completed
 started_at: "2026-11-15T20:48:30Z"
-ended_at: —
+ended_at: "2026-11-15T21:20:22Z"
 review: agent
 preview: none
 protocol: standard
-review_status: pending
+review_status: approved
 review_round: 1
 review_requested_at: "2026-11-15T20:59:34Z"
+reviewed_by: "@claude"
+review_session: claude-20261115-bc542f
+completion-commit: 9794f21ccee4d316814790e02ac73678eb29f50d
 ---
 # T0025: Plan the redesign of auth on the design system, with the neutral look and a console like ToDo's
 
@@ -27,7 +30,7 @@ The user restricted this task to auth on 2026-11-15; T0046 plans counters.
 - [x] **[Decide]**    Agree the console's placement, widths, dropped extras, and scope with the user.
 - [x] **[Doc]**       Write the redesign plan, its look, and the sibling backlog tasks to propose.
 - [x] **[Verify]**    Run the Markdown lint and the full check suite.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-11] **[Doc]**
@@ -57,4 +60,11 @@ The user restricted this task to auth on 2026-11-15; T0046 plans counters.
   - Files touched: 3.
   - Lines touched: 24.
   - Reopenings: 0.
+
+- [2026-11-15] **[Review]**
+  Round 1 approved by @claude: Approved.
+  - Findings: [review-findings-1.md](T0025-plan-the-redesign-of-auth-and-counters-on/review-findings-1.md).
+
+- [2026-11-15] **[Complete]**
+  Task completed successfully.
 
