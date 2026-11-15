@@ -4,8 +4,8 @@ An overview of all tasks and their planning, possibly split by milestone.
 ## Next Milestone
 - [x] T0038 Rewrite the style guide, specs, look docs, and README for readers who do not know the sibling apps.
 - [x] T0039 Rename the per-app shell demo pages to generic examples, updating the gallery links and browser specs.
-- [!] T0022 [reason: Awaiting T0038 and completed family-portal Phase 2 adoption: T0177 awaits review approval; T0178-T0181 remain pending. todos.webapp adoption is complete.] [owner: @codex] Build the Python generate-app devops action and the starter app template.
-- [ ] T0025 [needs: T0022] Plan the redesign of auth and counters on the design system.
+- [x] T0022 Build the Python generate-app devops action and the starter app template.
+- [ ] T0025 Plan the redesign of auth and counters on the design system.
 
 ## Backlog
 - [ ] T0044 [protocol: adhoc] Investigate intermittent browser verifier screenshot timeouts and incomplete stylesheet loads under parallel execution.
