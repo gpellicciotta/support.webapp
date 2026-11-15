@@ -1,7 +1,7 @@
 # Auth Redesign Plan
 How auth moves onto the design system, and how its Admin Console is rebuilt after ToDo's console.
 
-- Status: Proposed in T0025, awaiting review.
+- Status: Accepted on 2026-11-15, after the agent review of T0025.
 - Date: 2026-11-15.
 - **[Decided]** with the user on 2026-11-15: this plan covers auth only; T0046 plans counters.
 - **[Decided]** with the user on 2026-11-15: auth uses the `neutral` look, as ToDo's does.
