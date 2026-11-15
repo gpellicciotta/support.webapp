@@ -14,3 +14,4 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0041 Refresh the warm look's colors and fonts to new values chosen by the user, after family-portal adopts it.
 - [ ] T0042 Refresh the bright look's colors and fonts to new values chosen by the user, after meteo adopts it.
 - [ ] T0043 Rewrite source comments that name the sibling apps as generic rationale, in the modules, looks, and demos.
+- [ ] T0045 Fit the account menu's small avatar inside its round button, which it overhangs by 2 px on each side.
