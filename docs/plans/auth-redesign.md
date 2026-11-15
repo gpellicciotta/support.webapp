@@ -9,6 +9,10 @@ How auth moves onto the design system, and how its Admin Console is rebuilt afte
 - **[Decided]** with the user on 2026-11-15: the Admin Console targets desktop widths only.
 - **[Decided]** with the user on 2026-11-15: the Recycle Bin, Workbench, and PWA controls are dropped.
 - **[Decided]** with the user on 2026-11-15: every other auth screen also moves to the look and the shell.
+- **[Decided]** with the user on 2026-11-15: the console drops the old client log.
+- **[Decided]** with the user on 2026-11-15: signed-in pages use a menu button in the top bar.
+- **[Decided]** with the user on 2026-11-15: auth.server T0222 fixes the token routes' `expired` filter.
+- **[Decided]** with the user on 2026-11-15: the proposed task list is approved.
 
 ---
 
@@ -96,7 +100,8 @@ The console copies the layout and behavior of ToDo's console; this section lists
   Each row revokes in place; the admin's own session reads "Your session" and cannot be revoked.
   Multi-select with bulk actions revokes the selected tokens, one `DELETE /api/tokens/{{id}}` each.
   Remove expired selects the expired tokens and revokes them the same way, after an in-place confirmation.
-  The bulk `DELETE /api/tokens?expired=true` is never used: it keeps every token in its filter.
+  The bulk `DELETE /api/tokens?expired=true` deletes every token today, so the console avoids it.
+  auth.server T0222 fixes that filter; the console may switch to the bulk request afterwards.
 
 - Applications, `#/applications`: name, base URL, registration time, and last update.
   The panel edits name, description, base, logo, and redirect URLs, and manages user grants.
@@ -173,7 +178,7 @@ App-local in auth:
 
 ## Out of Scope
 - Mail templates: they carry inline styles, as mail clients need.
-- Server endpoints: the console uses today's API, apart from serving `webapp/admin/`.
+- Server endpoints: the console uses today's API, apart from serving `webapp/admin/` and T0222's fix.
 - Narrow layouts of the console.
 - Offline use, which auth rejects as a non-goal.
 
@@ -183,12 +188,15 @@ App-local in auth:
 auth.server tasks start once the promotion is released; they do not wait for T0046.
 Every sibling task is created only after the user approves this plan.
 
-In this repository:
-- Promote the toolbar, pager, data table additions, detail panel, facts, and status chip.
-  Add an admin console example page to the gallery, with browser checks at 1440 px.
-- Release the promotion as a minor version, with the user's approval.
+In this repository, created on 2026-11-15:
+- T0047: promote the toolbar, the pager, and the data table row states.
+- T0048: promote the detail panel, facts, and status chip, and add an admin console example page.
+  It ends with a minor release, published with the user's approval.
 
-In auth.server, in this order:
+In auth.server, created on 2026-11-15:
+- T0222: fix the `expired` filter of the token and credential routes.
+
+In auth.server, after the release, in this order:
 - Vendor the release, and run the conformance check in the devops script and CI.
 - Write the Admin Console spec and wireframes, after ToDo's spec, from this plan.
 - Build the console shell, sign-in, Overview, and Changelog, with browser tests against mocked endpoints.
