@@ -12,6 +12,8 @@ How auth moves onto the design system, and how its Admin Console is rebuilt afte
 - **[Decided]** with the user on 2026-11-15: the console drops the old client log.
 - **[Decided]** with the user on 2026-11-15: signed-in pages use a menu button in the top bar.
 - **[Decided]** with the user on 2026-11-15: auth.server T0222 fixes the token routes' `expired` filter.
+  It shipped in auth v3.4.0 on 2026-11-16.
+- **[Decided]** with the user on 2026-11-16: the auth.server tasks exist before the release; the first waits for it.
 - **[Decided]** with the user on 2026-11-15: the proposed task list is approved.
 
 ---
@@ -93,15 +95,15 @@ The console copies the layout and behavior of ToDo's console; this section lists
   Marked accounts show a warning chip; their panel offers Restore in place of Mark for deletion.
   The panel holds account fields, realm checkboxes, application access, credentials, facts, and a danger zone.
   Each linked credential deletes in place.
+  The panel also sets, resets, or removes the password, and exports the account's data.
   An admin cannot remove their own `admin` realm or delete their own account.
   New user opens an empty panel, replacing the `/users/new` route.
 
 - Sessions, `#/sessions`: the tokens from `GET /api/tokens`, with type and state filters on the loaded list.
   Each row revokes in place; the admin's own session reads "Your session" and cannot be revoked.
   Multi-select with bulk actions revokes the selected tokens, one `DELETE /api/tokens/{{id}}` each.
-  Remove expired selects the expired tokens and revokes them the same way, after an in-place confirmation.
-  The bulk `DELETE /api/tokens?expired=true` deletes every token today, so the console avoids it.
-  auth.server T0222 fixes that filter; the console may switch to the bulk request afterwards.
+  Remove expired confirms in place, then calls `DELETE /api/tokens?expired=true`.
+  Since auth v3.4.0, that request deletes only expired tokens.
 
 - Applications, `#/applications`: name, base URL, registration time, and last update.
   The panel edits name, description, base, logo, and redirect URLs, and manages user grants.
@@ -178,7 +180,7 @@ App-local in auth:
 
 ## Out of Scope
 - Mail templates: they carry inline styles, as mail clients need.
-- Server endpoints: the console uses today's API, apart from serving `webapp/admin/` and T0222's fix.
+- Server endpoints: the console uses today's API, apart from serving `webapp/admin/`.
 - Narrow layouts of the console.
 - Offline use, which auth rejects as a non-goal.
 
@@ -194,20 +196,20 @@ In this repository, created on 2026-11-15:
   It ends with a minor release, published with the user's approval.
 
 In auth.server, created on 2026-11-15:
-- T0222: fix the `expired` filter of the token and credential routes.
+- T0222: fix the `expired` filter of the token and credential routes; done in v3.4.0.
 
-In auth.server, after the release, in this order:
-- Vendor the release, and run the conformance check in the devops script and CI.
-- Write the Admin Console spec and wireframes, after ToDo's spec, from this plan.
-- Build the console shell, sign-in, Overview, and Changelog, with browser tests against mocked endpoints.
-  This task also serves the console at `/admin/` and makes sign-in load it with a full navigation.
-- Build the Users and Sessions screens with their panels, credentials, and bulk revoke.
-- Build the Applications screen with its panel, grants, secret rotation, and deletion.
-- Build the System events, Logs, and Broadcasts screens.
-- Remove the old admin, user, and application views, and redirect their routes to the console.
-- Move the app shell, public pages, and dashboard onto the look and the shell.
-- Move the account, notifications, and help screens onto the system.
-  Then delete the local stylesheets, Roboto, and Font Awesome, and trim the worker's precache list.
+In auth.server, created on 2026-11-16, each with a technical spec:
+- T0224: vendor the release, and add the conformance check and Playwright browser tests.
+  It stays suspended until support.webapp publishes the release with T0047 and T0048.
+- T0225: write the console spec and wireframes, with an inventory of every old console feature.
+- T0226: build the console shell, sign-in, Overview, and Changelog.
+- T0227, T0228, and T0229, which may run in parallel after T0226:
+  Users and Sessions; Applications; and System events, Logs, and Broadcasts.
+- T0230: remove the old admin, user, and application views, and redirect their routes.
+- T0231: move the SPA's shell, menu, notification bar, home view, and error page.
+- T0232 and T0233, in parallel: sign-in, create account, and dashboard; and the account view.
+- T0234: move notifications and help, then delete the remaining stylesheets and Font Awesome.
+  auth is not released between T0231 and T0234, since its screens look mixed until then.
 
 In todos.webapp and todos.server, after the release:
 - todos.webapp vendors the release, since todos.server's console loads that copy.
