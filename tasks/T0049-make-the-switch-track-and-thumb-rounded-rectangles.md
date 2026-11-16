@@ -1,6 +1,7 @@
 ---
 id: T0049
 owner: "@gemini"
+session: antigravity-20261117-537c92
 needs: []
 branch: task/T0049-make-the-switch-track-and-thumb-rounded-rectangles
 worktree: .plan/work/T0049-make-the-switch-track-and-thumb-rounded-rectangles
@@ -31,12 +32,12 @@ Completion check: `python scripts/devops.py check` passes.
 Size estimate: 3 files, 60 lines.
 
 ## Task Execution Steps
-- [ ] **[Implement]** Author a failing test that the track and thumb use the control radius, not 50%.
-- [ ] **[Verify]**    Run the switch tests and confirm the new test fails for the right reason.
-- [ ] **[Implement]** Change the track and thumb radii in switch.css.
+- [x] **[Implement]** Author a failing test that the track and thumb use the control radius, not 50%.
+- [x] **[Verify]**    Run the switch tests and confirm the new test fails for the right reason.
+- [x] **[Implement]** Change the track and thumb radii in switch.css.
 - [ ] **[Verify]**    Run `python scripts/devops.py check` and confirm it passes.
-- [ ] **[Visual]**    Capture the switch gallery sample, off and on, in every look, light and dark.
-- [ ] **[Doc]**       Update CHANGELOG.md.
+- [x] **[Visual]**    Capture the switch gallery sample, off and on, in every look, light and dark.
+- [x] **[Doc]**       Update CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -45,3 +46,22 @@ Size estimate: 3 files, 60 lines.
 
 - [2026-11-16] **[Doc]**
   Filed from ToDo's, whose Settings switch looks egg-shaped; the cause is the 50% round radius.
+
+- [2026-11-17] **[Verify]**
+  Added unit and Playwright switch radius tests and confirmed both fail against the 50% round radius.
+
+- [2026-11-17] **[Implement]**
+  Updated switch.css so the track uses --radius-control and the thumb uses a concentric inner radius.
+
+- [2026-11-17] **[Doc]**
+  Documented the rounded-rectangle switch track and concentric thumb under v0.1.1-pre in CHANGELOG.md.
+
+- [2026-11-17] **[Visual]**
+  Captured before and after switch gallery specimens across every look and theme.
+  - Neutral: [before light](T0049-make-the-switch-track-and-thumb-rounded-rectangles/before-neutral-light.png), [after light](T0049-make-the-switch-track-and-thumb-rounded-rectangles/after-neutral-light.png), [before dark](T0049-make-the-switch-track-and-thumb-rounded-rectangles/before-neutral-dark.png), [after dark](T0049-make-the-switch-track-and-thumb-rounded-rectangles/after-neutral-dark.png).
+  - Warm: [before light](T0049-make-the-switch-track-and-thumb-rounded-rectangles/before-warm-light.png), [after light](T0049-make-the-switch-track-and-thumb-rounded-rectangles/after-warm-light.png), [before dark](T0049-make-the-switch-track-and-thumb-rounded-rectangles/before-warm-dark.png), [after dark](T0049-make-the-switch-track-and-thumb-rounded-rectangles/after-warm-dark.png).
+  - Bright: [before light](T0049-make-the-switch-track-and-thumb-rounded-rectangles/before-bright-light.png), [after light](T0049-make-the-switch-track-and-thumb-rounded-rectangles/after-bright-light.png), [before dark](T0049-make-the-switch-track-and-thumb-rounded-rectangles/before-bright-dark.png), [after dark](T0049-make-the-switch-track-and-thumb-rounded-rectangles/after-bright-dark.png).
+
+- [2026-11-17] **[Verify]**
+  Started python scripts/devops.py check under background task 	ask-144.
+
