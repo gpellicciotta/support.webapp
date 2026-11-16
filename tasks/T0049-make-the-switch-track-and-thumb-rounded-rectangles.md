@@ -1,11 +1,11 @@
 ---
 id: T0049
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0049-make-the-switch-track-and-thumb-rounded-rectangles
+worktree: .plan/work/T0049-make-the-switch-track-and-thumb-rounded-rectangles
+status: active
+started_at: "2026-11-16T23:02:04Z"
 ended_at: —
 review: agent
 preview: none
