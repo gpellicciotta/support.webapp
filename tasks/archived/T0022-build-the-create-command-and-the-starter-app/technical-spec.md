@@ -4,8 +4,8 @@ Build the Python generate-app devops action and the starter app template.
 ---
 
 ## Sources
-- [ADR-0006](../../../docs/adrs/ADR-0006-generator.md) defines the command, flags, generated files, and placeholders.
-- [ADR-0004](../../../docs/adrs/ADR-0004-app-shell.md) and the app shell skeletons of `docs/specs/components.md` define the shell markup.
+- [ADR-0006](../../../../docs/adrs/ADR-0006-generator.md) defines the command, flags, generated files, and placeholders.
+- [ADR-0004](../../../../docs/adrs/ADR-0004-app-shell.md) and the app shell skeletons of `docs/specs/components.md` define the shell markup.
 - todos.webapp `v0.5.0` at `d6e46d5764f47ea1ed7d7d7fadd7e436994d425b`: workspace shell, service worker, style entry, project files.
 - family-portal `v0.6.0` at `46af15981a55f2b866f9206f8ee943de39bd641c`: brand and breadcrumb top bar, footer as action bar.
 - template.python: `.editorconfig`, CI, and project file layout.

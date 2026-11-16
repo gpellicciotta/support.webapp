@@ -22,7 +22,7 @@ completion-commit: 9794f21ccee4d316814790e02ac73678eb29f50d
 ## Goals
 Plan the redesign of auth on the `neutral` look and the shell, retiring its support.js styles.
 Rebuild its Admin Console after ToDo's console in todos.server's `admin/` folder.
-Follow [ADR-0004](../../docs/adrs/ADR-0004-app-shell.md), [ADR-0002](../../docs/adrs/ADR-0002-looks.md), and the roadmap.
+Follow [ADR-0004](../../../docs/adrs/ADR-0004-app-shell.md), [ADR-0002](../../../docs/adrs/ADR-0002-looks.md), and the roadmap.
 The user restricted this task to auth on 2026-11-15; T0046 plans counters.
 
 ## Task Execution Steps

@@ -9,10 +9,6 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0044 [protocol: adhoc] Investigate intermittent browser verifier screenshot timeouts and incomplete stylesheet loads under parallel execution.
 - [ ] T0043 Rewrite source comments that name the sibling apps as generic rationale, in the modules, looks, and demos.
 - [ ] T0045 Fit the account menu's small avatar inside its round button, which it overhangs by 2 px on each side.
-- [x] T0038 Rewrite the style guide, specs, look docs, and README for readers who do not know the sibling apps.
-- [x] T0039 Rename the per-app shell demo pages to generic examples, updating the gallery links and browser specs.
-- [x] T0022 Build the Python generate-app devops action and the starter app template.
-- [x] T0025 Plan the redesign of auth on the design system, with the neutral look and a console like ToDo's.
 
 ## Backlog
 - [ ] T0046 Plan the redesign of counters on the design system, split from T0025.

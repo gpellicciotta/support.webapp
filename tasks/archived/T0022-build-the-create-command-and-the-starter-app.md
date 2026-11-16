@@ -26,7 +26,7 @@ completion-commit: fa7812df0a8d269cc1445299915a9d4331926940
 ## Goals
 Add the `generate-app` action to `scripts/devops.py` and the `template/` starter app, built from the two adopted apps.
 It runs from a checkout at a release tag, calls `node bin/cli.mjs vendor`, and never runs `git init` or `plan init`.
-Follow [ADR-0006](../../docs/adrs/ADR-0006-generator.md) and [ADR-0004](../../docs/adrs/ADR-0004-app-shell.md) and the roadmap.
+Follow [ADR-0006](../../../docs/adrs/ADR-0006-generator.md) and [ADR-0004](../../../docs/adrs/ADR-0004-app-shell.md) and the roadmap.
 Refine declared files, size estimate, and tests in the technical specification before starting.
 
 ## Task Execution Steps
