@@ -12,8 +12,8 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 1527.7, input: 455259, output: 43882, cache_read: 7515060}
-work_duration: 1638.3
+  worker: {turns: 3, duration_s: 1644.9, input: 476183, output: 47250, cache_read: 9041473}
+work_duration: 1778.2
 ---
 # T0049: Make the switch track and thumb rounded rectangles, since the 50% round radius turns the track into an ellipse
 
