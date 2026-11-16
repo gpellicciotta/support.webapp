@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Components: Gave switches rounded-rectangle tracks with `--radius-control` and concentric thumbs instead of elliptical `50%` tracks.
 - Docs: Planned auth's move to the neutral look, with an Admin Console rebuilt after ToDo's console.
 - Template: Added the `generate-app` devops action, which creates an offline-ready app per look and shell options with a vendored design system.
 - DevEx: Made browser verification wait for complete look stylesheet loads before inspecting rendered pages.

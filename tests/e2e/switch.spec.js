@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
-import { expectRing, openGallery, ring, smallTargets, tokenColor } from './gallery-helpers.js';
+import { looks } from '../../src/demo/gallery.js';
+import { expectRing, forcedRing, openGallery, ring, selectGalleryLook, smallTargets, styles, tokenColor, tokenLength } from './gallery-helpers.js';
 
 test('native switch supports pointer, keyboard, forms, reset, and disabled states', async ({ page }) => {
     const problems = await openGallery(page);
@@ -88,5 +89,45 @@ test('forced colors use the system palette for focus and a distinct invalid outl
         .toEqual({ color: system.invalid, style: 'dashed' });
     expectRing(await ring(invalid), system.focus, 'focused invalid switch');
     expect(await control.evaluate(input => getComputedStyle(input, '::before').backgroundColor)).not.toBe('rgba(0, 0, 0, 0)');
+    expect(problems).toEqual([]);
+});
+
+test('switch uses concentric control radii in every look while preserving sizes and states', async ({ page }) => {
+    const problems = await openGallery(page);
+    page.on('requestfailed', request => problems.push(request.url()));
+    const probe = locator => locator.evaluate(el => ({
+        bg: getComputedStyle(el).backgroundColor, border: getComputedStyle(el).borderTopColor,
+        thumb: getComputedStyle(el, '::before').backgroundColor
+    }));
+    for (const look of looks) {
+        await selectGalleryLook(page, look);
+        const [radius, borderRaw, widthRaw, heightRaw] = await Promise.all(
+            ['--radius-control', '--border-width', '--space-8', '--space-6'].map(name => tokenLength(page, name))
+        );
+        const [border, width, height] = [borderRaw, widthRaw, heightRaw].map(parseFloat);
+        const expected = { trackRadius: radius, thumbRadius: `${Math.max(0, parseFloat(radius) - 2 * border)}px`, size: `${height - 4 * border}px` };
+        for (const control of await page.locator('#switch .switch__control').all()) {
+            expect(await control.boundingBox(), look).toMatchObject({ width, height });
+            const actual = await control.evaluate(el => {
+                const [track, thumb] = [getComputedStyle(el), getComputedStyle(el, '::before')];
+                return { trackRadius: track.borderTopLeftRadius, thumbRadius: thumb.borderTopLeftRadius, size: `${thumb.width}x${thumb.height}` };
+            });
+            expect(actual.trackRadius, look).not.toBe('50%');
+            expect(actual.trackRadius, look).not.toContain(' ');
+            expect(actual, look).toEqual({ ...expected, size: `${expected.size}x${expected.size}` });
+        }
+        expect((await smallTargets(page, '#switch input')).small, look).toEqual([]);
+        const [surface, muted, primary, onPrimary, sunken, disabled, hover, active, focus, danger] = await Promise.all(
+            ['surface', 'text-muted', 'primary', 'on-primary', 'surface-sunken', 'text-disabled', 'surface-hover', 'surface-active', 'focus', 'danger']
+                .map(name => tokenColor(page, `--color-${name}`))
+        );
+        expect(await probe(page.locator('#switch input[name="notifications"]')), `${look} off`).toEqual({ bg: surface, border: muted, thumb: muted });
+        expect(await probe(page.locator('#switch input:checked:not(:disabled)').first()), `${look} on`).toEqual({ bg: primary, border: primary, thumb: onPrimary });
+        expect(await probe(page.locator('#switch input:disabled').first()), `${look} disabled`).toEqual({ bg: sunken, border: disabled, thumb: disabled });
+        expect(await styles(page.locator('#switch .switch.is-hover'), ['background-color']), look).toEqual({ 'background-color': hover });
+        expect(await styles(page.locator('#switch .switch.is-active'), ['background-color']), look).toEqual({ 'background-color': active });
+        expectRing(await forcedRing(page.locator('#switch .switch__control.is-focus')), focus, `${look} focus`);
+        expectRing(await forcedRing(page.locator('#switch [aria-invalid="true"]')), danger, `${look} invalid`);
+    }
     expect(problems).toEqual([]);
 });

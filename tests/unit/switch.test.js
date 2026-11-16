@@ -33,4 +33,16 @@ describe('switch markup contract', () => {
             await window.happyDOM.close();
         }
     });
+
+    it('gives the track the control radius and the thumb a concentric inner radius, never 50%', () => {
+        const css = readFileSync(new URL('../../src/css/components/switch.css', import.meta.url), 'utf8')
+            .replace(/\/\*[\s\S]*?\*\//g, '');
+        const rule = selector => css.match(new RegExp(`${selector}\\s*{([^}]*)}`))?.[1] ?? '';
+        expect(rule('\\.switch__control')).toMatch(/border-radius:\s*var\(--radius-control\)\s*;/);
+        expect(rule('\\.switch__control::before')).toMatch(
+            /border-radius:\s*max\(0px,\s*calc\(var\(--radius-control\)\s*-\s*2\s*\*\s*var\(--border-width\)\)\)\s*;/
+        );
+        expect(css).not.toContain('--radius-round');
+        expect(css).not.toContain('50%');
+    });
 });
