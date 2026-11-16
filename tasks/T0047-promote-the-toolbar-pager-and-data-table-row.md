@@ -1,11 +1,11 @@
 ---
 id: T0047
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0047-promote-the-toolbar-pager-and-data-table-row
+worktree: .plan/work/T0047-promote-the-toolbar-pager-and-data-table-row
+status: active
+started_at: "2026-11-16T23:50:40Z"
 ended_at: —
 review: agent
 preview: none
