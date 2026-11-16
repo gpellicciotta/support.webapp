@@ -12,8 +12,8 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 1458.5, input: 12930, output: 485}
-work_duration: 1560.6
+  worker: {turns: 2, duration_s: 1527.7, input: 455259, output: 43882, cache_read: 7515060}
+work_duration: 1638.3
 ---
 # T0049: Make the switch track and thumb rounded rectangles, since the 50% round radius turns the track into an ellipse
 
@@ -66,5 +66,8 @@ Size estimate: 3 files, 60 lines.
   - Bright: [before light](T0049-make-the-switch-track-and-thumb-rounded-rectangles/before-bright-light.png), [after light](T0049-make-the-switch-track-and-thumb-rounded-rectangles/after-bright-light.png), [before dark](T0049-make-the-switch-track-and-thumb-rounded-rectangles/before-bright-dark.png), [after dark](T0049-make-the-switch-track-and-thumb-rounded-rectangles/after-bright-dark.png).
 
 - [2026-11-17] **[Verify]**
-  Started python scripts/devops.py check under background task 	ask-144.
+  Started `python scripts/devops.py check` under background task `task-144` and installed worktree dependencies via `npm.cmd ci`.
+
+- [2026-11-17] **[Verify]**
+  Started supervised `python scripts/devops.py check` job `20261116T233108-46924-05797e` (PID 28184).
 
