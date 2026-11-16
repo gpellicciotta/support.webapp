@@ -90,3 +90,80 @@ Running 4 tests using 4 workers
     [desktop-light] › tests\e2e\switch.spec.js:95:1 › switch uses concentric control radii in every look while preserving sizes and states 
   3 passed (5.2s)
 ```
+
+### Green-Phase Switch Browser Suite
+Command: `npx.cmd playwright test tests/e2e/switch.spec.js`
+Exit code: `0`
+```text
+Running 16 tests using 4 workers
+
+  ✓   3 [desktop-light] › tests\e2e\switch.spec.js:37:1 › switch targets, thumb position, invalid state, and RTL remain visible (1.9s)
+  ✓   2 [desktop-light] › tests\e2e\switch.spec.js:68:1 › forced colors use the system palette for focus and a distinct invalid outline (2.1s)
+  ✓   4 [desktop-light] › tests\e2e\switch.spec.js:5:1 › native switch supports pointer, keyboard, forms, reset, and disabled states (1.9s)
+  ✓   1 [desktop-light] › tests\e2e\switch.spec.js:95:1 › switch uses concentric control radii in every look while preserving sizes and states (4.0s)
+  ✓   5 [desktop-dark] › tests\e2e\switch.spec.js:5:1 › native switch supports pointer, keyboard, forms, reset, and disabled states (1.8s)
+  ✓   6 [desktop-dark] › tests\e2e\switch.spec.js:68:1 › forced colors use the system palette for focus and a distinct invalid outline (1.7s)
+  ✓   7 [desktop-dark] › tests\e2e\switch.spec.js:37:1 › switch targets, thumb position, invalid state, and RTL remain visible (1.7s)
+  ✓  10 [mobile-light] › tests\e2e\switch.spec.js:5:1 › native switch supports pointer, keyboard, forms, reset, and disabled states (2.0s)
+  ✓  11 [mobile-light] › tests\e2e\switch.spec.js:68:1 › forced colors use the system palette for focus and a distinct invalid outline (1.9s)
+  ✓   9 [mobile-light] › tests\e2e\switch.spec.js:37:1 › switch targets, thumb position, invalid state, and RTL remain visible (2.5s)
+  ✓   8 [desktop-dark] › tests\e2e\switch.spec.js:95:1 › switch uses concentric control radii in every look while preserving sizes and states (7.0s)
+  ✓  12 [mobile-light] › tests\e2e\switch.spec.js:95:1 › switch uses concentric control radii in every look while preserving sizes and states (4.5s)
+  ✓  13 [mobile-dark] › tests\e2e\switch.spec.js:37:1 › switch targets, thumb position, invalid state, and RTL remain visible (1.9s)
+  ✓  14 [mobile-dark] › tests\e2e\switch.spec.js:68:1 › forced colors use the system palette for focus and a distinct invalid outline (2.0s)
+  ✓  15 [mobile-dark] › tests\e2e\switch.spec.js:5:1 › native switch supports pointer, keyboard, forms, reset, and disabled states (1.9s)
+  ✓  16 [mobile-dark] › tests\e2e\switch.spec.js:95:1 › switch uses concentric control radii in every look while preserving sizes and states (3.3s)
+
+  16 passed (24.1s)
+```
+
+### Full Repository Check
+Command: `python scripts/devops.py check`
+Exit code: `0`
+```text
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\Scripts\lint-markdown.EXE check --offline
+Process ID: 51456
+All 26 markdown files passed linting.
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m ruff check scripts tests
+Process ID: 51400
+All checks passed!
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m ruff format --check scripts tests
+Process ID: 35676
+6 files already formatted
+Command: "C:\Program Files\nodejs\npm.CMD" run lint
+Process ID: 21276
+> @gpellicciotta/support.webapp@0.1.1-pre lint
+> eslint .
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m pytest
+Process ID: 29064
+[... 12 lines omitted ...]
+======================== 41 passed, 1 skipped in 3.10s ========================
+Command: "C:\Program Files\nodejs\npm.CMD" test
+[... 31 lines omitted ...]
+ ✓ tests/unit/switch.test.js (3 tests) 243ms
+ ✓ tests/unit/loading.test.js (1 test) 189ms
+ Test Files  29 passed (29)
+      Tests  2109 passed (2109)
+[... 4 lines omitted ...]
+Command: "C:\Program Files\nodejs\npm.CMD" run test:slow
+Process ID: 38496
+> @gpellicciotta/support.webapp@0.1.1-pre test:slow
+> playwright test
+Running 628 tests using 4 workers
+[... 828 lines omitted ...]
+  2 skipped
+  626 passed (5.2m)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:integration
+Process ID: 32196
+[... 11 lines omitted ...]
+ Test Files  3 passed (3)
+      Tests  7 passed (7)
+   Start at  00:39:54
+   Duration  69.41s (tests 100%)
+Command: "C:\Program Files\nodejs\npm.CMD" pack --dry-run
+Process ID: 2364
+[... 118 lines omitted ...]
+npm notice total files: 103
+npm notice
+gpellicciotta-support.webapp-0.1.1-pre.tgz
+```
