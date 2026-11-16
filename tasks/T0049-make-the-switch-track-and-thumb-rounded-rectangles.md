@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 4, duration_s: 1732.0, input: 493044, output: 49674, cache_read: 10399220}
+  worker: {turns: 5, duration_s: 2291.1, input: 523700, output: 56297, cache_read: 12794111}
 work_duration: 1887.5
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-16T23:43:16Z"
 ---
 # T0049: Make the switch track and thumb rounded rectangles, since the 50% round radius turns the track into an ellipse
 
@@ -84,4 +87,7 @@ Size estimate: 3 files, 60 lines.
   - Files touched: 3.
   - Lines touched: 59.
   - Reopenings: 0.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
