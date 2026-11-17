@@ -17,19 +17,22 @@
             list-style: none; margin: var(--space-4) 0 0; padding: 0; }
         .icon-grid li { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); text-align: center; }
         .icon-grid .sizes { display: flex; align-items: flex-end; gap: var(--space-2); }
+        .icon-grid em { font-size: 0.75em; opacity: 0.7; margin-top: calc(var(--space-1) * -1); }
         .icon-grid a { font-size: 0.8em; }
     </style>
 </head>
 <body>
     <main class="icon-gallery">
         <h1>App icon gallery</h1>
-        <p>The shared icons of all apps, in four styles. Each style folder in <code>src/img/app-icons/</code> holds an SVG,
+        <p>The shared icons of all apps, existing and planned, in four styles. Each style folder in <code>src/img/app-icons/</code> holds an SVG,
             PNG renditions (32 to 512 px), and a multi-size ICO per app. Shown at 128, 48, 32, and 20 px.
             Regenerate with <code>python scripts/generate-app-icons.py</code>.</p>
         <div id="icon-sets"></div>
     </main>
     <script>
-        const apps = ["meteo", "verkeersregels-quiz", "counters", "todos", "auth", "family-portal"];
+        const apps = ["meteo", "verkeersregels-quiz", "counters", "todos", "auth", "family-portal",
+            "quiz", "stocks", "calories", "time", "tools", "demos"];
+        const planned = new Set(["quiz", "stocks", "calories", "time", "tools", "demos"]);
         const styles = [
             { id: "white-flat", title: "White flat", note: "White hexagon, blue glyph. For dark backgrounds.", dark: true },
             { id: "white-dimensional", title: "White dimensional", note: "Gradient, rim, and shadow. For dark backgrounds.", dark: true },
@@ -44,7 +47,7 @@
                 const base = `../img/app-icons/${style.id}/${app}-icon`;
                 const small = [48, 32, 20].map((size) => `<img src="${base}-64.png" width="${size}" height="${size}" alt="">`).join("");
                 return `<li><img src="${base}.svg" width="128" height="128" alt="${app} icon">
-                    <span class="sizes">${small}</span><strong>${app}</strong>
+                    <span class="sizes">${small}</span><strong>${app}</strong>${planned.has(app) ? "<em>planned</em>" : ""}
                     <span><a href="${base}.svg">svg</a> · <a href="${base}-512.png">png</a> · <a href="${base}.ico">ico</a></span></li>`;
             }).join("");
             section.innerHTML = `<h2>${style.title}</h2><p>${style.note}</p><ul class="icon-grid">${items}</ul>`;

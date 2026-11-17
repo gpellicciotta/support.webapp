@@ -24,7 +24,10 @@ BLUE_LIGHT = "#4aa3e8"
 BLUE_DARK = "#08487a"
 WHITE = "#ffffff"
 
-APPS = ["meteo", "verkeersregels-quiz", "counters", "todos", "auth", "family-portal"]
+APPS = [
+    "meteo", "verkeersregels-quiz", "counters", "todos", "auth", "family-portal",
+    "quiz", "stocks", "calories", "time", "tools", "demos",
+]
 
 # Hexagon: polygon radius + round-joined stroke; corner radius = HEX_STROKE / 2.
 HEX_R = 36
@@ -33,12 +36,18 @@ HEX_STROKE = 16
 # Per glyph: (scale, center-x, center-y). Shrinks the glyph around its visual
 # center so that there is breathing room to the hexagon border.
 FIT = {
-    "meteo": (0.84, 50, 50),
+    "meteo": (0.84, 54.8, 48.1),
     "verkeersregels-quiz": (0.78, 50, 50),
     "counters": (0.84, 50, 50),
     "todos": (1.0, 50, 50),
     "auth": (0.76, 51.1, 50.5),
     "family-portal": (0.84, 50, 50),
+    "quiz": (0.8, 50, 53),
+    "stocks": (0.9, 51, 49),
+    "calories": (0.84, 50, 48),
+    "time": (0.84, 50, 50),
+    "tools": (0.88, 52.1, 46.6),
+    "demos": (0.9, 52, 47.4),
 }
 
 
@@ -54,8 +63,8 @@ def sw(color, w=6):
     return f'fill="none" stroke="{color}" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round"'
 
 
-def mask(uid, shapes):
-    return (f'<mask id="m{uid}" maskUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200">'
+def mask(uid, shapes, suffix=""):
+    return (f'<mask id="m{uid}{suffix}" maskUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200">'
             f'<rect x="-50" y="-50" width="200" height="200" fill="#fff"/>{shapes}</mask>')
 
 
@@ -144,8 +153,64 @@ def g_family(fg, uid):
     return f'{mask(uid, heart)}<g mask="url(#m{uid})">{house}</g>'
 
 
-GLYPHS = {"meteo": g_meteo, "verkeersregels-quiz": g_quiz, "counters": g_counters,
-          "todos": g_todos, "auth": g_auth, "family-portal": g_family}
+def g_quiz_game(fg, uid):
+    """Two speech bubbles: a solid one with a question mark in front of an outlined one with a check."""
+    front = "M25 46H51A9 9 0 0 1 60 55V65A9 9 0 0 1 51 74H36L23 86L25 74A9 9 0 0 1 16 65V55A9 9 0 0 1 25 46Z"
+    q = ('<g transform="translate(38 60) scale(0.66) translate(-50 -50)"><path d="M41.5 42.5A8.5 8.5 0 1 1 55 49.5Q50 52.5 50 57" '
+         'fill="none" stroke="#000" stroke-width="6.5" stroke-linecap="round"/><circle cx="50" cy="65" r="4" fill="#000"/></g>')
+    gap = f'<path d="{front}" fill="#000" stroke="#000" stroke-width="9" stroke-linejoin="round"/>'
+    back = (f'<path d="M51 20H75A9 9 0 0 1 84 29V41A9 9 0 0 1 75 50H73L77 60L63 50H51A9 9 0 0 1 42 41V29A9 9 0 0 1 51 20Z" '
+            f'fill="none" stroke="{fg}" stroke-width="5" stroke-linejoin="round"/>'
+            f'<path d="M54 35L60 41L72 28" {sw(fg, 5)}/>')
+    solid = f'<path d="{front}" fill="{fg}" stroke="{fg}" stroke-width="3" stroke-linejoin="round"/>'
+    return (f'{mask(uid, gap, "b")}{mask(uid, q, "f")}<g mask="url(#m{uid}b)">{back}</g>'
+            f'<g mask="url(#m{uid}f)">{solid}</g>')
+
+
+def g_stocks(fg, uid):
+    """Axes with a rising line and an arrow."""
+    return (f'<path d="M26 24V74H78" {sw(fg, 5.5)}/>'
+            f'<path d="M34 62L46 50L56 58L74 36M62 36H74V48" {sw(fg, 5.5)}/>')
+
+def g_calories(fg, uid):
+    """An apple with a flame cut out of it."""
+    body = ('<path d="M50 38C46 31 38 30 33 33C24 38 24 56 32 68C37 76 43 80 50 77C57 80 63 76 68 68C76 56 76 38 67 33'
+            'C62 30 54 31 50 38Z"/>')
+    leaf_d = "M53 33C53 24 59 18 69 18C69 27 63 33 53 33Z"
+    flame = ('<path d="M50 47C54 52 58 56 58 62C58 67 54 71 50 71C46 71 42 67 42 62C42 58 44 56 45.5 54'
+             'C46.5 56 48 57 49 57C49 54 49 51 50 47Z" fill="#000" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>')
+    gap = f'<path d="{leaf_d}" fill="#000" stroke="#000" stroke-width="6" stroke-linejoin="round"/>'
+    return (f'{mask(uid, flame + gap)}<g mask="url(#m{uid})" fill="{fg}" stroke="{fg}" stroke-width="3" '
+            f'stroke-linejoin="round">{body}</g>'
+            f'<path d="{leaf_d}" fill="{fg}" stroke="{fg}" stroke-width="3" stroke-linejoin="round"/>')
+
+
+def g_time(fg, uid):
+    """A stopwatch."""
+    return (f'<g {sw(fg, 6)}><circle cx="50" cy="56" r="23"/><line x1="50" y1="23" x2="50" y2="31"/>'
+            '<line x1="42" y1="22" x2="58" y2="22"/><line x1="68" y1="34" x2="73" y2="29"/></g>'
+            f'<path d="M50 43V56L59 61" {sw(fg, 5)}/>')
+
+
+def g_tools(fg, uid):
+    """A wrench."""
+    cuts = ('<rect x="0" y="-7" width="26" height="14" transform="translate(62 36) rotate(-45)" fill="#000"/>'
+            '<circle cx="30" cy="70" r="3.5" fill="#000"/>')
+    return (f'{mask(uid, cuts)}<g mask="url(#m{uid})"><circle cx="62" cy="36" r="17" fill="{fg}"/>'
+            f'<line x1="32" y1="68" x2="54" y2="46" {sw(fg, 13)}/></g>')
+
+def g_demos(fg, uid):
+    """A large and a small sparkle."""
+    big = "M46 26Q48 48 70 52Q48 56 46 78Q44 56 22 52Q44 48 46 26Z"
+    small = "M73 17Q74 26 83 27Q74 28 73 37Q72 28 63 27Q72 26 73 17Z"
+    return f'<g fill="{fg}" stroke="{fg}" stroke-width="3" stroke-linejoin="round"><path d="{big}"/><path d="{small}"/></g>'
+
+
+GLYPHS = {
+    "meteo": g_meteo, "verkeersregels-quiz": g_quiz, "counters": g_counters, "todos": g_todos, "auth": g_auth,
+    "family-portal": g_family, "quiz": g_quiz_game, "stocks": g_stocks, "calories": g_calories, "time": g_time,
+    "tools": g_tools, "demos": g_demos,
+}
 
 
 def build(app, variant, uid, size=512):

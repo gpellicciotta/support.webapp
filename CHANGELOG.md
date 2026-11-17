@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Looks: Added app icons for the planned quiz, stocks, calories, time, tools, and demos apps in all four styles.
 - Looks: Added the shared hexagon app icons in four styles as SVG, PNG, and ICO, with a generator script and an [icon gallery](src/demo/app-icon-gallery.html).
 - Looks: Refreshed the neutral look with slate grays and a brighter blue accent, keeping every contrast pair at AA.
 - Docs: Recorded the Narrator and Edge check of the tooltip, which announces its name, role, and description once each.
