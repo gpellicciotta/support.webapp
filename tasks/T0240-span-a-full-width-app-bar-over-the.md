@@ -1,6 +1,7 @@
 ---
 id: T0240
 owner: "@claude"
+session: claude-20261117-b21a04
 needs: []
 branch: task/T0240-span-a-full-width-app-bar-over-the
 worktree: .plan/work/T0240-span-a-full-width-app-bar-over-the
