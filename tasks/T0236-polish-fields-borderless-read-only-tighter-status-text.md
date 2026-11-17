@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1588.6, input: 120, output: 42854, cache_read: 6006721, cache_write: 128977}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T12:18:54Z"
 ---
 # T0236: Polish fields: borderless read-only, tighter status text, aligned hint padding, indented groups, and select chevron spacing with a gallery section
 
@@ -57,4 +62,7 @@ The user requested this after reviewing the gallery on 2026-11-17.
   - [Field before](T0236-polish-fields-borderless-read-only-tighter-status-text/before-field-desktop-light.png), [after](T0236-polish-fields-borderless-read-only-tighter-status-text/after-field-desktop-light.png).
   - [Field group before](T0236-polish-fields-borderless-read-only-tighter-status-text/before-field-group-mobile-light.png), [after](T0236-polish-fields-borderless-read-only-tighter-status-text/after-field-group-mobile-light.png).
   - [Select after](T0236-polish-fields-borderless-read-only-tighter-status-text/after-select-desktop-dark.png).
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
