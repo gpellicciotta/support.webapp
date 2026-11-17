@@ -14,6 +14,11 @@ test('account menu opens by pointer at the end of the top bar and marks the curr
     await expect(button.locator('.avatar--initials')).toHaveText('AN');
     const target = await button.boundingBox();
     expect(Math.min(target.width, target.height)).toBeGreaterThanOrEqual(MIN_TARGET);
+    const face = await button.locator('.avatar').boundingBox();
+    expect(face.x).toBeGreaterThanOrEqual(target.x);
+    expect(face.y).toBeGreaterThanOrEqual(target.y);
+    expect(face.x + face.width).toBeLessThanOrEqual(target.x + target.width);
+    expect(face.y + face.height).toBeLessThanOrEqual(target.y + target.height);
     if (evidence) {
         await section.screenshot({ path: resolve(evidence, `section-account-menu-${testInfo.project.name}.png`) });
     }
