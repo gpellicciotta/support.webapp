@@ -101,6 +101,24 @@ export function tokenLength(page, token) {
 }
 
 /**
+ * Resolve a CSS system color in the current page, such as the forced colors palette's `Highlight`.
+ * Palettes differ by platform: Linux Chromium's emulated `Highlight` is translucent, Windows' is opaque.
+ * @param {import('@playwright/test').Page} page page with the media emulation already applied
+ * @param {string} keyword system color keyword
+ * @returns {Promise<string>} the computed color
+ */
+export function systemColor(page, keyword) {
+    return page.evaluate((name) => {
+        const probe = document.createElement('span');
+        probe.style.cssText = `forced-color-adjust: none; color: ${name}`;
+        document.body.append(probe);
+        const color = getComputedStyle(probe).color;
+        probe.remove();
+        return color;
+    }, keyword);
+}
+
+/**
  * Focus an element with keyboard modality and read its focus indicator: the outline and the box shadow.
  * @param {import('@playwright/test').Locator} locator element to focus
  * @returns {Promise<{focusVisible: boolean, style: string, width: number, offset: number, color: string, shadow: string}>} the indicator

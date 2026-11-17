@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { openGallery, selectGalleryLook, ring, expectForcedRing, expectRing, tokenColor } from './gallery-helpers.js';
+import { openGallery, selectGalleryLook, ring, expectForcedRing, systemColor, expectRing, tokenColor } from './gallery-helpers.js';
 
 for (const look of ['neutral', 'warm']) {
     test(`${look} cards, tiles, and avatars`, async ({ page }, testInfo) => {
@@ -44,7 +44,7 @@ for (const look of ['neutral', 'warm']) {
         await page.locator('style').last().evaluate(element => element.remove());
         await page.emulateMedia({ reducedMotion: 'reduce', forcedColors: 'active' });
         await expect(card).toHaveCSS('transition-duration', '0s, 0s');
-        expectForcedRing(await ring(card), null, 'forced colors card');
+        expectForcedRing(await ring(card), await systemColor(page, 'Highlight'), 'forced colors card');
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
         expect(problems).toEqual([]);
     });

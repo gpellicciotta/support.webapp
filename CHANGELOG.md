@@ -10,7 +10,8 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.2.1-pre
-- Components: Painted the forced colors focus outline in the opaque `Highlight` color, which Linux showed at 0.8 alpha.
+- Components: Painted the forced colors focus outline in the `Highlight` system color instead of a mapped transparent outline.
+- DevEx: Checked forced colors focus outlines against the platform's `Highlight`, which Linux Chromium renders at 0.8 alpha.
 
 ## v0.2.0 [released: 2026-11-17]
 - Components: Gave banner actions one spacing step to the top, bottom, and end borders, wrapping them below multiline text.

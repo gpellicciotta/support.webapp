@@ -27,7 +27,7 @@ body { margin: 0; }
   box-shadow: var(--focus-glow);
 }
 
-/* Some forced palettes keep part of the transparent outline's alpha, so name an opaque system color. */
+/* Forced colors name the focus color explicitly instead of relying on how a palette maps the transparent outline. */
 @media (forced-colors: active) {
   :focus-visible,
   .is-focus {

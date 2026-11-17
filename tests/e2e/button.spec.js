@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { STATES, expectForcedRing, expectRing, forcedRing, openGallery, ring, smallTargets, styles, tokenColor, tokenLength } from './gallery-helpers.js';
+import { STATES, expectForcedRing, systemColor, expectRing, forcedRing, openGallery, ring, smallTargets, styles, tokenColor, tokenLength } from './gallery-helpers.js';
 
 const VARIANTS = {
     default: '.button:not(.button--secondary, .button--danger, .button--quiet, .button--inverse, .button--small)',
@@ -94,6 +94,6 @@ test('the focus glow leaves a visible outline in forced colors mode', async ({ p
     await openGallery(page);
     await page.emulateMedia({ forcedColors: 'active' });
     const live = await ring(page.locator(`#button ${VARIANTS.default}${STATES[0]}`).first());
-    expectForcedRing(live, null, 'forced colors button');
+    expectForcedRing(live, await systemColor(page, 'Highlight'), 'forced colors button');
     expect(live.shadow).toBe('none');
 });
