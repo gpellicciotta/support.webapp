@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1463.5, input: 138, output: 51055, cache_read: 7827974, cache_write: 149434}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T12:56:32Z"
 ---
 # T0238: Align buttons in banners, rows, forms, and cards, and recolor the error summary title and links
 
@@ -51,4 +56,7 @@ The user requested this after reviewing the gallery on 2026-11-17.
   - Files touched: 8.
   - Lines touched: 87.
   - Reopenings: 0.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
