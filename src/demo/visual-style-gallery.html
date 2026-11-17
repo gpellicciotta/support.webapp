@@ -82,6 +82,7 @@
                     <li><a href="#toolbar">Toolbar</a></li>
                     <li><a href="#table">Data table</a></li>
                     <li><a href="#pager">Pager</a></li>
+                    <li><a href="#detail-panel">Detail panel</a></li>
                     <li><a href="#progress">Progress</a></li>
                     <li><a href="#spinner">Spinner</a></li>
                 </ul>
@@ -504,6 +505,14 @@
                 <li class="state"><span class="chip chip--removable">Home<button class="chip__remove" type="button" aria-label="Remove Home"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-close"/></svg></button></span><span class="state__label">Removable</span></li>
                 <li class="state"><span class="chip chip--removable">Errands<button class="chip__remove is-focus" type="button" aria-label="Remove Errands"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-close"/></svg></button></span><span class="state__label">Removable, focus-visible</span></li>
             </ul>
+            <h3>Status</h3>
+            <p>Each status chip pairs a distinct icon shape with a word; warning and danger chips color the icon.</p>
+            <ul class="states">
+                <li class="state"><span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-note"/></svg>Info</span><span class="state__label">Info</span></li>
+                <li class="state"><span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>Running</span><span class="state__label">Success</span></li>
+                <li class="state"><span class="chip chip--status chip--warning"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sync-error"/></svg>Warning</span><span class="state__label">Warning</span></li>
+                <li class="state"><span class="chip chip--status chip--danger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg>Error</span><span class="state__label">Danger</span></li>
+            </ul>
             <h3>Filter</h3>
             <p>A filter chip is a button that toggles a filter with <code>aria-pressed</code>.</p>
             <ul class="states">
@@ -847,6 +856,20 @@
                 <dt class="list__term">Owner</dt><dd class="list__value">Ann</dd>
                 <dt class="list__term">Description</dt><dd class="list__value">Shared household supplies and longer notes that wrap naturally on a phone.</dd>
             </dl>
+            <h3>Facts</h3>
+            <dl class="list list--facts">
+                <dt class="list__term">Status</dt><dd class="list__value"><span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>Running</span></dd>
+                <dt class="list__term">Uptime</dt><dd class="list__value">3 days 4 hours</dd>
+                <dt class="list__term">Environment</dt><dd class="list__value">production</dd>
+                <dt class="list__term">Endpoint</dt><dd class="list__value"><code>https://example.test/api</code></dd>
+            </dl>
+            <h3>Compact facts</h3>
+            <dl class="list list--facts list--compact">
+                <dt class="list__term">ID</dt><dd class="list__value">34</dd>
+                <dt class="list__term">Role</dt><dd class="list__value"><span class="chip">Admin</span></dd>
+                <dt class="list__term">Created</dt><dd class="list__value">2026-09-01 10:00:00</dd>
+                <dt class="list__term">Sessions</dt><dd class="list__value">2</dd>
+            </dl>
         </section>
         <section id="toolbar" class="gallery-section" aria-labelledby="toolbar-title">
             <h2 id="toolbar-title">Toolbar</h2>
@@ -938,6 +961,55 @@
                 </nav>
             </div>
             <nav class="pager" aria-label="Hidden pager" hidden></nav>
+        </section>
+        <section id="detail-panel" class="gallery-section" aria-labelledby="detail-panel-title">
+            <h2 id="detail-panel-title">Detail panel</h2>
+            <p>Fills the shell's side panel with a fixed header, a scrolling body of sections, and a danger zone.</p>
+            <div class="detail-panel-frame">
+                <aside class="detail-panel" aria-labelledby="detail-panel-specimen-heading">
+                    <header class="detail-panel__header">
+                        <h3 class="detail-panel__title" id="detail-panel-specimen-heading" tabindex="-1">South relay</h3>
+                        <button class="icon-button" type="button" aria-label="Close South relay details"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-close"/></svg></button>
+                    </header>
+                    <div class="detail-panel__body">
+                        <section class="detail-panel__section" aria-labelledby="detail-specimen-account">
+                            <h4 id="detail-specimen-account">Account</h4>
+                            <div class="field">
+                                <label class="field__label" for="detail-specimen-name">Name</label>
+                                <input class="field__control" id="detail-specimen-name" type="text" value="South relay">
+                            </div>
+                            <div class="field">
+                                <label class="field__label" for="detail-specimen-email">Address</label>
+                                <input class="field__control" id="detail-specimen-email" type="email" value="relay@example.test">
+                            </div>
+                            <button class="button" type="button">Save changes</button>
+                        </section>
+                        <section class="detail-panel__section" aria-labelledby="detail-specimen-facts">
+                            <h4 id="detail-specimen-facts">Facts</h4>
+                            <dl class="list list--facts list--compact">
+                                <dt class="list__term">ID</dt><dd class="list__value">34</dd>
+                                <dt class="list__term">Role</dt><dd class="list__value"><span class="chip">Admin</span></dd>
+                                <dt class="list__term">Status</dt><dd class="list__value"><span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>Active</span></dd>
+                                <dt class="list__term">Created</dt><dd class="list__value">2026-09-01 10:00:00</dd>
+                                <dt class="list__term">Sessions</dt><dd class="list__value">2</dd>
+                            </dl>
+                        </section>
+                        <section class="detail-panel__section detail-panel__danger" aria-labelledby="detail-specimen-danger">
+                            <h4 id="detail-specimen-danger">Danger zone</h4>
+                            <div class="detail-panel__actions">
+                                <p>Deleting a record permanently removes its history.</p>
+                                <button class="button button--secondary button--danger" type="button">Mark for deletion</button>
+                                <div class="inline-confirm" role="group" aria-label="Confirm permanent deletion">
+                                    <p class="inline-confirm__question">Delete South relay and its sample logs now?</p>
+                                    <button class="button button--danger" type="button">Delete permanently</button>
+                                    <button class="button button--secondary" type="button">Keep</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </aside>
+            </div>
+            <div class="detail-panel" hidden></div>
         </section>
         <section id="card" class="gallery-section" aria-labelledby="card-title">
             <h2 id="card-title">Card</h2>
@@ -1334,6 +1406,7 @@
                 <a class="card" href="shell-toolbar.html"><span class="card__body"><span class="card__title">Toolbar layout</span><span class="card__text">Top bar with a menu button, banners, and action bar; the page scrolls.</span></span></a>
                 <a class="card" href="shell-single-screen.html"><span class="card__body"><span class="card__title">Single screen layout</span><span class="card__text">No navigation; the page scrolls in a narrow column with three screens.</span></span></a>
                 <a class="card" href="shell-portal.html"><span class="card__body"><span class="card__title">Portal layout</span><span class="card__text">Brand, breadcrumb, help, and account; the action bar holds the footer.</span></span></a>
+                <a class="card" href="shell-admin-console.html"><span class="card__body"><span class="card__title">Admin console layout</span><span class="card__text">Sidebar, top bar, open detail panel, and scrolling main area, without bottom or action bars.</span></span></a>
             </div>
         </section>
     </main>

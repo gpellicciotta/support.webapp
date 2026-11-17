@@ -6,7 +6,8 @@ import { selectGalleryLook, settleGalleryStyles } from './gallery-helpers.js';
 
 const pages = [
     { name: 'gallery', path: '/demo/visual-style-gallery.html' },
-    ...['list-editor', 'toolbar', 'single-screen', 'portal'].map((name) => ({ name: `shell-${name}`, path: `/demo/shell-${name}.html` }))
+    ...['list-editor', 'toolbar', 'single-screen', 'portal'].map((name) => ({ name: `shell-${name}`, path: `/demo/shell-${name}.html` })),
+    { name: 'shell-admin-console', path: '/demo/shell-admin-console.html', desktopOnly: true }
 ];
 const NORMAL_TEXT_RATIO = 4.5;
 const LARGE_TEXT_RATIO = 3;
@@ -352,6 +353,7 @@ for (const target of pages) {
     for (const { look, accent } of looks.flatMap(look => (look === 'bright' ? ['blue', 'yellow', 'red'] : ['']).map(accent => ({ look, accent })))) {
         test(`${target.name} passes every verifier check in the ${look} look${accent ? ` ${accent}` : ''}`, async ({ context }, testInfo) => {
             const { colorScheme, viewport } = testInfo.project.use;
+            test.skip(Boolean(target.desktopOnly) && viewport.width < 1024, 'shell-admin-console targets desktop widths');
             const opposite = colorScheme === 'dark' ? 'light' : 'dark';
             // The system choice follows the emulated preference; the explicit choice must override it.
             for (const [theme, effective] of [['system', colorScheme], [opposite, opposite]]) {

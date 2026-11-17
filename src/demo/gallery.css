@@ -450,6 +450,15 @@ h3 {
   gap: var(--space-4);
 }
 
+.detail-panel-frame {
+  display: flex;
+  max-inline-size: var(--width-side-panel);
+  block-size: calc(9 * var(--target-min));
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
 /* Shell demo pages: content of the side panel and the footer only; shell.css lays out every area. */
 .shell-demo-panel__header {
   display: flex;

@@ -240,6 +240,7 @@ Explicit status labels preserve meaning when tones coincide or forced colors rep
   Hover and active share `--color-link-hover`; focus uses the global outline, and native `disabled` prevents activation.
 - Toggles set `aria-pressed`; pressed toggles take the selected ground and a primary border.
 - Static chips are spans and never tab stops; filter chips are buttons with `aria-pressed`.
+- Status chips use `.chip--status` with an icon shape and word; `.chip--warning` and `.chip--danger` color the icon.
 - Overdue chips pair the danger color with an alert icon and a word, never color alone.
 - A segmented control is a `fieldset` of native radios, so arrow keys move the choice.
   Disable one option with `disabled` on its radio, or the whole control with `disabled` on the fieldset.
@@ -337,6 +338,7 @@ Plain collections use `.list` and `.list__item`; action rows compose `.list.row_
 Use native `ol.list` for sequences; it retains decimal markers.
 Add `role="list"` to markerless unordered lists to preserve list exposure across accessibility implementations.
 Description pairs use `.list.list--definitions`, `.list__term`, and `.list__value`; pairs stack below 36rem viewport width.
+Bordered facts grids use `.list.list--facts` with muted `.list__term` and `.list__value` rows; `.list--compact` narrows the term column.
 Long text wraps; nested controls retain their own focus and disabled states.
 Use [toolbars](../../src/demo/visual-style-gallery.html#toolbar) for filter fields and secondary actions above a table or list.
 Avoid toolbars for submitted forms, which use `.form`, or command button strips that require roving arrow-key focus.
@@ -353,6 +355,7 @@ Body rows show hover feedback; `tr[aria-selected="true"]` adds `--color-surface-
 Use `aria-selected="true"` when inspecting one row in a side panel; use [multi-select](#multi-select) for bulk row selection.
 Use [pagers](../../src/demo/visual-style-gallery.html#pager) below paged tables or lists to pair status text with First, Previous, Next, and Last buttons.
 Avoid pagers for step-by-step forms or tab panels; applications own paging requests and disable unavailable boundary buttons natively.
+Use [detail panels](../../src/demo/visual-style-gallery.html#detail-panel) inside `.app__side-panel` for a fixed header, scrolling sections, and an in-place danger zone.
 Use existing loading, banner, and empty-state patterns for request outcomes.
 
 **[Decided]** Tables share row tokens while retaining native table layout, because flex rows would break column alignment.
@@ -462,7 +465,8 @@ The runnable examples demonstrate these combinations:
 - [Toolbar](../../src/demo/shell-toolbar.html): menu navigation with sticky bars and page scrolling.
 - [Single screen](../../src/demo/shell-single-screen.html): narrow content with no navigation and app-owned screen toggles.
 - [Portal](../../src/demo/shell-portal.html): breadcrumbs, account actions, and a footer in the action bar.
-Open the four demo pages from the [App shell section](../../src/demo/visual-style-gallery.html#shell) of the gallery.
+- [Admin console](../../src/demo/shell-admin-console.html): sidebar, top bar, open detail panel, and scrolling main area, without bottom or action bars.
+Open the five demo pages from the [App shell section](../../src/demo/visual-style-gallery.html#shell) of the gallery.
 
 Areas are direct children of `<body class="app">`; only `app__main` is required:
 - `app__top-bar`, with `app__title` or `app__brand`, `app__menu-button` or `app__breadcrumb`, and `app__top-actions`.

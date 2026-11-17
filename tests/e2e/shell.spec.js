@@ -20,7 +20,10 @@ const demos = [
     { name: 'single-screen', title: 'Single screen', path: '/demo/shell-single-screen.html', scroll: 'page', width: NARROW,
         areas: ['top-bar', 'banners', 'main', 'action-bar', 'overlays'] },
     { name: 'portal', title: 'Portal', path: '/demo/shell-portal.html', scroll: 'page', width: null,
-        areas: ['top-bar', 'banners', 'main', 'action-bar', 'overlays'] }
+        areas: ['top-bar', 'banners', 'main', 'action-bar', 'overlays'] },
+    { name: 'admin-console', title: 'Admin console', path: '/demo/shell-admin-console.html', scroll: 'main', width: null,
+        desktopOnly: true, panelOpen: true,
+        areas: ['top-bar', 'sidebar', 'banners', 'main', 'side-panel', 'overlays'] }
 ];
 
 /**
@@ -70,6 +73,7 @@ function makeTall(page) {
 for (const demo of demos) {
     test.describe(`${demo.name} shell demo`, () => {
         test('renders its areas and drops the absent ones', async ({ page }) => {
+            test.skip(Boolean(demo.desktopOnly) && page.viewportSize().width < BREAKPOINT, 'admin-console targets desktop widths');
             const problems = await openDemo(page, demo.path);
             await expect(page).toHaveTitle(`${demo.title} shell demo · support.webapp`);
             const { width } = page.viewportSize();
@@ -80,6 +84,7 @@ for (const demo of demos) {
             }
             const main = await areaBox(page, 'main');
             const sidebar = await areaBox(page, 'sidebar');
+            const sidePanel = await areaBox(page, 'side-panel');
             const bottomNav = await areaBox(page, 'bottom-nav');
             if (demo.areas.includes('sidebar') && wide) {
                 expect(sidebar.width).toBeCloseTo(SIDEBAR, 0);
@@ -95,8 +100,15 @@ for (const demo of demos) {
             else {
                 expect(bottomNav).toBeNull();
             }
-            // The hidden side panel leaves no track, so the main area reaches the end edge.
-            expect(main.x + main.width).toBeCloseTo(width, 0);
+            if (demo.panelOpen && wide) {
+                expect(sidePanel.width).toBeCloseTo(SIDE_PANEL, 0);
+                expect(sidePanel.x + sidePanel.width).toBeCloseTo(width, 0);
+                expect(main.x + main.width).toBeCloseTo(sidePanel.x, 0);
+            }
+            else {
+                // The hidden side panel leaves no track, so the main area reaches the end edge.
+                expect(main.x + main.width).toBeCloseTo(width, 0);
+            }
             await expect(page.locator('nav[aria-label="Main"]:visible')).toHaveCount(demo.areas.includes('sidebar') ? 1 : 0);
             const top = await areaBox(page, 'top-bar');
             expect(top.y).toBe(0);
@@ -105,6 +117,7 @@ for (const demo of demos) {
         });
 
         test(`scrolls the ${demo.scroll === 'main' ? 'main area' : 'page'} and keeps the bars in place`, async ({ page }) => {
+            test.skip(Boolean(demo.desktopOnly) && page.viewportSize().width < BREAKPOINT, 'admin-console targets desktop widths');
             const problems = await openDemo(page, demo.path);
             const { height } = page.viewportSize();
             await makeTall(page);
@@ -130,11 +143,14 @@ for (const demo of demos) {
             const action = await areaBox(page, 'action-bar');
             const bottomNav = await areaBox(page, 'bottom-nav');
             expect(top.y).toBeCloseTo(0, 0);
-            expect(action.y + action.height).toBeCloseTo(bottomNav ? bottomNav.y : height, 0);
+            if (action) {
+                expect(action.y + action.height).toBeCloseTo(bottomNav ? bottomNav.y : height, 0);
+            }
             expect(problems).toEqual([]);
         });
 
         test('puts the toast region in the overlay layer above the bottom bars', async ({ page }) => {
+            test.skip(Boolean(demo.desktopOnly) && page.viewportSize().width < BREAKPOINT, 'admin-console targets desktop widths');
             const problems = await openDemo(page, demo.path);
             const region = page.locator('body > .app__overlays > .toast-region');
             await expect(region).toHaveCount(1);
@@ -144,11 +160,12 @@ for (const demo of demos) {
             await expect(toast).toBeVisible();
             const box = await toast.boundingBox();
             const action = await areaBox(page, 'action-bar');
-            expect(box.y + box.height).toBeLessThanOrEqual(action.y + 0.5);
+            expect(box.y + box.height).toBeLessThanOrEqual(action ? action.y + 0.5 : page.viewportSize().height);
             expect(problems).toEqual([]);
         });
 
         test('leads the first Tab to a skip link that moves focus to the main area', async ({ page }) => {
+            test.skip(Boolean(demo.desktopOnly) && page.viewportSize().width < BREAKPOINT, 'admin-console targets desktop widths');
             const problems = await openDemo(page, demo.path);
             const skip = page.locator('body > .skip-link');
             await expect(skip).toHaveAttribute('href', '#main');
@@ -163,6 +180,7 @@ for (const demo of demos) {
         });
 
         test('marks one current entry in each navigation', async ({ page }) => {
+            test.skip(Boolean(demo.desktopOnly) && page.viewportSize().width < BREAKPOINT, 'admin-console targets desktop widths');
             const problems = await openDemo(page, demo.path);
             for (const nav of await page.locator('nav').all()) {
                 if (await nav.locator('a').count() > 0 && !(await nav.evaluate((element) => element.closest('.gallery-controls')))) {
@@ -304,14 +322,20 @@ test('the action bar pads both sides with their own safe-area insets', () => {
     expect(end).not.toContain('safe-area-inset-left');
 });
 
-test('the gallery links to every shell demo page', async ({ page }) => {
+test('the gallery links to every shell demo page', async ({ page }, testInfo) => {
     await page.goto(GALLERY, { waitUntil: 'networkidle' });
+    if (process.env.T0048_BEFORE) {
+        await page.locator('#shell').screenshot({ path: `${process.env.T0048_BEFORE}/before-shell-${testInfo.project.name}.png` });
+    }
     for (const demo of demos) {
         const link = page.locator(`#shell a[href="${demo.path.replace('/demo/', '')}"]`);
         await expect(link, demo.name).toHaveCount(1);
         await expect(link.locator('.card__title')).toHaveText(`${demo.title} layout`);
         const response = await page.request.get(demo.path);
         expect(response.status(), demo.name).toBe(200);
+    }
+    if (process.env.T0048_AFTER) {
+        await page.locator('#shell').screenshot({ path: `${process.env.T0048_AFTER}/after-shell-${testInfo.project.name}.png` });
     }
 });
 

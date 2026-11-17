@@ -87,6 +87,8 @@ Adopter settings:
 - todos.webapp: every area; sidebar and bottom bar; `app--scroll-main`.
   Its add bar becomes the action bar, and its editor becomes the side panel.
 
+- todos.server Admin Console: sidebar, top bar, main, and side panel; no bottom or action bar; `app--scroll-main`; desktop only.
+
 - counters: top bar with a menu button, banners, action bar, and overlay layer; `app--scroll-page`.
   On wide screens its actions move into the top bar, as the support.js layout does today.
 
@@ -122,7 +124,7 @@ Adopter settings:
 - meteo's six width breakpoints, from 380 to 768 px, give way to the width option and container queries.
 - family-portal's 40rem breakpoint, used 8 times and mirrored in JavaScript, becomes container queries or stays app-local.
 - counters leaves its ID-anchored grid at its redesign.
-- One demo page per adopter's settings proves the fit; each gets browser checks at 390 and 1440 px.
+- One demo page per layout setup proves the fit, with desktop checks for the admin console.
 
 Open points:
 - meteo's main column was not measured, and its cards cap at 420 to 480 px in its own CSS.

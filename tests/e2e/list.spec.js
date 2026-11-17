@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { openGallery, selectGalleryLook, ring, expectRing, tokenColor, smallTargets } from './gallery-helpers.js';
+import { openGallery, selectGalleryLook, ring, expectRing, styles, tokenColor, tokenLength, smallTargets } from './gallery-helpers.js';
 
 for (const look of ['neutral', 'warm', 'bright']) {
     test(`${look} lists retain semantics, wrap content, and preserve action focus`, async ({ page }, testInfo) => {
@@ -7,6 +7,9 @@ for (const look of ['neutral', 'warm', 'bright']) {
         page.on('requestfailed', request => failures.push(request.url()));
         const problems = await openGallery(page);
         await selectGalleryLook(page, look);
+        if (process.env.T0048_BEFORE && look === 'neutral') {
+            await page.locator('#list').screenshot({ path: `${process.env.T0048_BEFORE}/before-list-${testInfo.project.name}.png` });
+        }
         if (process.env.LIST_TABLE_BEFORE) {
             await page.locator('#row').screenshot({ path: `${process.env.LIST_TABLE_BEFORE}/before-${look}-${testInfo.project.name}.png` });
         }
@@ -16,10 +19,11 @@ for (const look of ['neutral', 'warm', 'bright']) {
         await expect(list.getByRole('listitem')).toHaveCount(3);
         expect(await list.ariaSnapshot()).toContain('listitem');
         await expect(section.getByRole('list', { name: 'Supplies' }).getByRole('listitem')).toHaveCount(2);
-        await expect(section.getByRole('term')).toHaveCount(2);
-        await expect(section.getByRole('definition')).toHaveCount(2);
-        const term = await section.locator('.list__term').first().boundingBox();
-        const value = await section.locator('.list__value').first().boundingBox();
+        const definitions = section.locator('.list--definitions');
+        await expect(definitions.getByRole('term')).toHaveCount(2);
+        await expect(definitions.getByRole('definition')).toHaveCount(2);
+        const term = await definitions.locator('.list__term').first().boundingBox();
+        const value = await definitions.locator('.list__value').first().boundingBox();
         if (page.viewportSize().width === 390) {
             expect(value.y).toBeGreaterThanOrEqual(term.y + term.height);
         }
@@ -39,6 +43,40 @@ for (const look of ['neutral', 'warm', 'bright']) {
             await section.screenshot({ path: `${process.env.LIST_TABLE_PROOF}/after-list-${look}-${testInfo.project.name}.png` });
         }
         expect([...problems, ...failures]).toEqual([]);
+    });
+
+    test(`${look} facts lists render bordered term and value rows with a narrower compact column`, async ({ page }, testInfo) => {
+        const problems = await openGallery(page);
+        await selectGalleryLook(page, look);
+        const section = page.locator('#list');
+        const facts = section.locator('dl.list.list--facts:not(.list--compact)');
+        const compact = section.locator('dl.list.list--facts.list--compact');
+        await expect(facts).toHaveCount(1);
+        await expect(compact).toHaveCount(1);
+
+        expect(await styles(facts, ['background-color', 'border-top-left-radius'])).toEqual({
+            'background-color': await tokenColor(page, '--color-surface'),
+            'border-top-left-radius': await tokenLength(page, '--radius-card')
+        });
+        const muted = await tokenColor(page, '--color-text-muted');
+        const firstTerm = facts.locator('.list__term').first();
+        const firstValue = facts.locator('.list__value').first();
+        expect((await styles(firstTerm, ['color'])).color).toBe(muted);
+        expect(parseFloat((await styles(firstTerm, ['border-bottom-width']))['border-bottom-width'])).toBeGreaterThan(0);
+        expect(parseFloat((await styles(facts.locator('.list__term').last(), ['border-bottom-width']))['border-bottom-width'])).toBe(0);
+        expect(parseFloat((await styles(facts.locator('.list__value').last(), ['border-bottom-width']))['border-bottom-width'])).toBe(0);
+
+        const termBox = await firstTerm.boundingBox();
+        const valueBox = await firstValue.boundingBox();
+        const compactBox = await compact.locator('.list__term').first().boundingBox();
+        expect(valueBox.x).toBeGreaterThanOrEqual(termBox.x + termBox.width - 0.5);
+        expect(valueBox.y).toBeCloseTo(termBox.y, 0);
+        expect(compactBox.width).toBeLessThan(termBox.width);
+        expect(await section.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
+        if (process.env.T0048_AFTER) {
+            await section.screenshot({ path: `${process.env.T0048_AFTER}/after-list-${look}-${testInfo.project.name}.png` });
+        }
+        expect(problems).toEqual([]);
     });
 }
 

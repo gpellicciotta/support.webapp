@@ -36,7 +36,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `checkbox`    | Checkbox                       | none                                     | checked, indeterminate, disabled, invalid                                         | native input inside its label                             |
 | `radio`       | Radio                          | none                                     | checked, disabled                                                                 | native radios inside a field group                        |
 | `switch`      | Switch                         | none                                     | off, on, disabled, invalid                                                        | native checkbox with `role="switch"`                      |
-| `chip`        | Chip                           | none                                     | static, removable, filter toggle; overdue tone                                    | button when interactive; the remove button has a label    |
+| `chip`        | Chip                           | none                                     | static, status with icon, removable, filter toggle; overdue, warning, danger      | icon and word; button when interactive; labeled remove    |
 | `segmented`   | Segmented control              | none                                     | 2 to 5 options; selected, disabled                                                | fieldset of native radios with a legend                   |
 | `badge`       | Badge                          | none                                     | neutral, count, success, warning, danger                                          | text, never color alone                                   |
 
@@ -51,18 +51,19 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `selection`     | Multi-select with bulk actions | `selection.js`: `attachSelection`                | none, some, or all selected; bar with count and actions         | native checkboxes; Shift selects a range; count announced                        |
 
 ### Containers
-| Key           | Component   | Module and functions                  | Variants and states                                           | Accessibility minimum                              |
-| :------------ | :---------- | :------------------------------------ | :------------------------------------------------------------ | :------------------------------------------------- |
-| `card`        | Card        | none                                  | static, link card with hover lift, with media                 | a link card nests no other controls                |
-| `icon-tile`   | Icon tile   | none                                  | tones 1 to 4; sizes sm, md, lg                                | decorative icon is `aria-hidden`                   |
-| `row`         | Row base    | none                                  | dense row with trailing actions; container query at 36rem     | list semantics; actions reachable by keyboard      |
-| `empty-state` | Empty state | none                                  | icon, title, text, at most two actions                        | heading level set by the app                       |
-| `collapsible` | Collapsible | `collapsible.js`: `attachCollapsible` | collapsed, expanded                                           | button with `aria-expanded` and `aria-controls`    |
-| `list`        | List        | none                                  | simple list, definition rows                                  | native `ul`, `ol`, or `dl`                         |
-| `toolbar`     | Toolbar     | none                                  | wrapping filter fields and actions aligned to the bottom edge | `role="search"` landmark; labeled native controls  |
-| `table`       | Data table  | none                                  | plain, dense, framed; hover and `aria-selected` rows; numeric | native table with `caption` and `th scope`         |
-| `pager`       | Pager       | none                                  | status text with First, Previous, Next, and Last buttons      | labeled `nav`; native `disabled` on boundaries     |
-| `tabs`        | Tabs        | `tabs.js`: `attachTabs`               | selected, disabled                                            | `tablist`, `tab`, and `tabpanel` roles; arrow keys |
+| Key            | Component    | Module and functions                  | Variants and states                                           | Accessibility minimum                              |
+| :------------- | :----------- | :------------------------------------ | :------------------------------------------------------------ | :------------------------------------------------- |
+| `card`         | Card         | none                                  | static, link card with hover lift, with media                 | a link card nests no other controls                |
+| `icon-tile`    | Icon tile    | none                                  | tones 1 to 4; sizes sm, md, lg                                | decorative icon is `aria-hidden`                   |
+| `row`          | Row base     | none                                  | dense row with trailing actions; container query at 36rem     | list semantics; actions reachable by keyboard      |
+| `empty-state`  | Empty state  | none                                  | icon, title, text, at most two actions                        | heading level set by the app                       |
+| `collapsible`  | Collapsible  | `collapsible.js`: `attachCollapsible` | collapsed, expanded                                           | button with `aria-expanded` and `aria-controls`    |
+| `list`         | List         | none                                  | simple list, definition rows, bordered facts, compact facts   | native `ul`, `ol`, or `dl`                         |
+| `toolbar`      | Toolbar      | none                                  | wrapping filter fields and actions aligned to the bottom edge | `role="search"` landmark; labeled native controls  |
+| `table`        | Data table   | none                                  | plain, dense, framed; hover and `aria-selected` rows; numeric | native table with `caption` and `th scope`         |
+| `pager`        | Pager        | none                                  | status text with First, Previous, Next, and Last buttons      | labeled `nav`; native `disabled` on boundaries     |
+| `detail-panel` | Detail panel | none                                  | fixed header, scrolling body, sections, and danger zone       | labeled landmark; focus moves in and returns       |
+| `tabs`         | Tabs         | `tabs.js`: `attachTabs`               | selected, disabled                                            | `tablist`, `tab`, and `tabpanel` roles; arrow keys |
 
 ### Feedback
 | Key           | Component       | Module and functions                 | Variants and states                          | Accessibility minimum                                        |
@@ -197,9 +198,12 @@ Switch. New design; the native checkbox keeps form submission and keyboard suppo
 
 ### chip
 Chip. A static chip is a `span`; a filter or removable chip uses buttons.
+Status chips pair a distinct icon shape with a word; warning and danger color the icon.
 
 ```html
 <span class="chip">Work</span>
+<span class="chip chip--status"><svg class="icon" aria-hidden="true"><use href="icons.svg#icon-check"/></svg>Running</span>
+<span class="chip chip--status chip--warning"><svg class="icon" aria-hidden="true"><use href="icons.svg#icon-alert"/></svg>Warning</span>
 <button class="chip chip--filter" type="button" aria-pressed="true">Today</button>
 <span class="chip chip--removable">Home<button class="chip__remove" type="button" aria-label="Remove Home">
   <svg class="icon" aria-hidden="true"><use href="icons.svg#icon-close"/></svg></button></span>
@@ -368,6 +372,7 @@ List. Native collection and description markup; no JavaScript module.
 - Ordered lists retain decimal markers; unordered collections omit markers.
 - Compose action rows with `.row__list`, `.row`, `.row__main`, and `.row__actions`; retain native list items.
 - Plain items use `.list__item`; definition terms and values use `.list__term` and `.list__value`.
+- Use `.list--facts` for a bordered grid of muted terms and values; `.list--compact` narrows the term column.
 - Long text wraps; definition pairs stack at narrow widths.
 - Lists remain static; Tab visits nested links and buttons in document order.
 - Nested controls retain their component's hover, focus-visible, active, and disabled states.
@@ -386,6 +391,7 @@ The [WAI content structure tutorial](https://www.w3.org/WAI/tutorials/page-struc
   </li>
 </ul>
 <dl class="list list--definitions"><dt class="list__term">Owner</dt><dd class="list__value">Ann</dd></dl>
+<dl class="list list--facts list--compact"><dt class="list__term">ID</dt><dd class="list__value">34</dd></dl>
 ```
 
 ### toolbar
@@ -453,6 +459,35 @@ Pager. Status text beside First, Previous, Next, and Last buttons below a table 
     <button class="button button--secondary" type="button">Last</button>
   </div>
 </nav>
+```
+
+### detail-panel
+Detail panel. Record details inside the shell's side panel; no JavaScript module.
+- Compose `.detail-panel__header`, scrolling `.detail-panel__body`, `.detail-panel__section` blocks, and an optional `.detail-panel__danger` zone.
+- Move focus into the panel on open, return focus on close, and confirm destructive actions in place.
+
+```html
+<div class="detail-panel">
+  <header class="detail-panel__header">
+    <h2 class="detail-panel__title" id="detail-title" tabindex="-1">Alex North</h2>
+    <button class="icon-button" type="button" aria-label="Close user details">
+      <svg class="icon" aria-hidden="true"><use href="icons.svg#icon-close"/></svg>
+    </button>
+  </header>
+  <div class="detail-panel__body">
+    <section class="detail-panel__section" aria-labelledby="detail-facts">
+      <h3 id="detail-facts">Facts</h3>
+      <dl class="list list--facts list--compact"><dt class="list__term">ID</dt><dd class="list__value">34</dd></dl>
+    </section>
+    <section class="detail-panel__section detail-panel__danger" aria-labelledby="detail-danger">
+      <h3 id="detail-danger">Danger zone</h3>
+      <div class="detail-panel__actions">
+        <button class="button button--secondary button--danger" type="button">Mark for deletion</button>
+        <div class="inline-confirm" role="group" aria-label="Confirm permanent deletion" hidden>...</div>
+      </div>
+    </section>
+  </div>
+</div>
 ```
 
 ### tabs
@@ -708,6 +743,27 @@ Place primary controls in the action bar and an editor in the side panel.
     <div class="toast-region" role="region" aria-label="Notifications"></div>
     <button class="fab" type="button" aria-label="Add task">...</button>
   </div>
+</body>
+```
+
+### Admin console with sidebar and detail panel
+Use a sidebar, top bar, scrolling main column, and side panel on desktop widths.
+Omit the bottom navigation and action bar; open record details inside the side panel.
+
+```html
+<body class="app app--scroll-main">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="app__top-bar">
+    <h1 class="app__title">Accounts</h1>
+    <div class="app__top-actions"><div class="account-menu">...</div></div>
+  </header>
+  <nav class="app__sidebar" aria-label="Main">...</nav>
+  <div class="app__banners"></div>
+  <main class="app__main" id="main" tabindex="-1">...</main>
+  <aside class="app__side-panel" aria-labelledby="detail-title">
+    <div class="detail-panel">...</div>
+  </aside>
+  <div class="app__overlays"><div class="toast-region" role="region" aria-label="Notifications"></div></div>
 </body>
 ```
 

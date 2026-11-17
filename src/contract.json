@@ -886,6 +886,7 @@
     "toolbar",
     "table",
     "pager",
+    "detail-panel",
     "tabs",
     "toast",
     "banner",

@@ -1,14 +1,18 @@
 import { expect, test } from '@playwright/test';
-import { STATES, expectRing, forcedRing, openGallery, ring, smallTargets, styles, tokenColor, tokenLength } from './gallery-helpers.js';
+import { STATES, expectRing, forcedRing, openGallery, ring, selectGalleryLook, smallTargets, styles, tokenColor, tokenLength } from './gallery-helpers.js';
 
 const FILTER = '.chip--filter';
 const PRESSED = '.chip--filter[aria-pressed="true"]';
 
-test('the chip section shows static, overdue, removable, and filter chips in every state', async ({ page }) => {
+test('the chip section shows static, overdue, status, removable, and filter chips in every state', async ({ page }, testInfo) => {
     const problems = await openGallery(page);
+    if (process.env.T0048_BEFORE) {
+        await page.locator('#chip').screenshot({ path: `${process.env.T0048_BEFORE}/before-chip-${testInfo.project.name}.png` });
+    }
     await expect(page.locator('#chip h2')).toHaveText('Chip');
-    await expect(page.locator('#chip span.chip:not(.chip--overdue, .chip--removable)')).not.toHaveCount(0);
+    await expect(page.locator('#chip span.chip:not(.chip--overdue, .chip--removable, .chip--status)')).not.toHaveCount(0);
     await expect(page.locator('#chip span.chip.chip--overdue')).not.toHaveCount(0);
+    await expect(page.locator('#chip span.chip.chip--status')).toHaveCount(4);
     await expect(page.locator('#chip span.chip.chip--removable > button.chip__remove')).not.toHaveCount(0);
     await expect(page.locator('#chip .chip__remove.is-focus')).not.toHaveCount(0);
     for (const state of STATES) {
@@ -112,3 +116,41 @@ test('the remove button shows hover and active grounds distinct from its sunken 
     expect(grounds.slice(1), `chip ${ground}`).not.toContain(ground);
     expect(new Set(grounds).size, grounds.join(' / ')).toBe(3);
 });
+
+for (const look of ['neutral', 'warm', 'bright']) {
+    test(`${look} status chips pair distinct icon shapes with words and color warning and danger icons`, async ({ page }, testInfo) => {
+        const problems = await openGallery(page);
+        await selectGalleryLook(page, look);
+        const section = page.locator('#chip');
+        const statuses = section.locator('span.chip.chip--status');
+        await expect(statuses).toHaveCount(4);
+
+        const text = await tokenColor(page, '--color-text');
+        const muted = await tokenColor(page, '--color-text-muted');
+        const danger = await tokenColor(page, '--color-danger');
+        const shapes = [];
+        for (const chip of await statuses.all()) {
+            expect(await chip.evaluate((element) => element.tabIndex)).toBe(-1);
+            await expect(chip.locator('svg.icon')).toHaveCount(1);
+            await expect(chip).toHaveText(/\S/);
+            expect((await styles(chip, ['color'])).color).toBe(text);
+            const href = await chip.locator('svg.icon use').getAttribute('href');
+            shapes.push(href.split('#')[1]);
+        }
+        expect(new Set(shapes).size).toBe(4);
+
+        const neutralIcons = section.locator('span.chip.chip--status:not(.chip--warning, .chip--danger) > svg.icon');
+        await expect(neutralIcons).toHaveCount(2);
+        for (const icon of await neutralIcons.all()) {
+            expect((await styles(icon, ['color'])).color).toBe(muted);
+        }
+        for (const tone of ['.chip--warning', '.chip--danger']) {
+            const icon = section.locator(`span.chip.chip--status${tone} > svg.icon`).first();
+            expect((await styles(icon, ['color'])).color, tone).toBe(danger);
+        }
+        if (process.env.T0048_AFTER) {
+            await section.screenshot({ path: `${process.env.T0048_AFTER}/after-chip-${look}-${testInfo.project.name}.png` });
+        }
+        expect(problems).toEqual([]);
+    });
+}

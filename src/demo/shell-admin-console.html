@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="icon" href="data:,">
+    <title>Admin console shell demo · support.webapp</title>
+    <link id="look-stylesheet" rel="stylesheet" href="../looks/neutral/index.css">
+    <link rel="stylesheet" href="gallery.css">
+    <script type="module" src="shell-admin-console.js"></script>
+</head>
+<body class="app app--scroll-main">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="app__top-bar">
+        <h1 class="app__title">Accounts</h1>
+        <div class="app__top-actions">
+            <div class="account-menu" data-account-menu>
+                <button class="account-menu__button" type="button" popovertarget="admin-account-menu" aria-label="Alex North" title="Alex North">
+                    <span class="avatar avatar--sm avatar--initials" aria-hidden="true">AN</span>
+                </button>
+                <div class="menu account-menu__panel" id="admin-account-menu" role="menu" aria-labelledby="admin-account-name" popover>
+                    <p class="account-menu__name" id="admin-account-name" data-account-menu-name aria-hidden="true">Alex North</p>
+                    <a class="menu__item" role="menuitem" href="#main" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-settings"/></svg>Manage account</a>
+                    <div class="menu__separator" role="separator"></div>
+                    <button class="menu__item" type="button" role="menuitem">Sign out</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav class="app__sidebar" aria-label="Main">
+        <a class="app__brand" href="#main">Admin Console</a>
+        <ul class="app__nav-list">
+            <li><a class="app__nav-item" href="#demo-settings-title"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-lists"/></svg>Overview</a></li>
+            <li><a class="app__nav-item" href="#main" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-people"/></svg>Accounts</a></li>
+            <li><a class="app__nav-item" href="#accounts-heading"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg>Sessions</a></li>
+            <li><a class="app__nav-item" href="#accounts-heading"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-note"/></svg>System events</a></li>
+            <li><a class="app__nav-item" href="visual-style-gallery.html#shell"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-back"/></svg>Back to gallery</a></li>
+        </ul>
+    </nav>
+    <div class="app__banners"></div>
+    <main class="app__main" id="main" tabindex="-1">
+        <section class="gallery-section" aria-labelledby="demo-settings-title">
+            <h2 id="demo-settings-title">Demo settings</h2>
+            <p>Return to the <a href="visual-style-gallery.html#shell">visual style gallery</a> for the other shell demos.</p>
+            <form class="gallery-controls" aria-label="Demo settings">
+                <div class="gallery-controls__look">
+                    <label for="look-select">Look</label>
+                    <select id="look-select" name="look">
+                        <option value="neutral">Neutral</option>
+                        <option value="warm">Warm</option>
+                        <option value="bright">Bright</option>
+                    </select>
+                </div>
+                <div class="gallery-controls__look">
+                    <label for="accent-select">Accent</label>
+                    <select id="accent-select" name="accent" disabled>
+                        <option value="">Default</option>
+                    </select>
+                </div>
+                <fieldset class="gallery-controls__theme">
+                    <legend>Theme</legend>
+                    <label><input type="radio" name="theme" value="system" checked> System</label>
+                    <label><input type="radio" name="theme" value="light"> Light</label>
+                    <label><input type="radio" name="theme" value="dark"> Dark</label>
+                </fieldset>
+            </form>
+            <div class="toast-demo-actions">
+                <button class="button button--secondary" type="button" data-demo-toast="Sample audit entry refreshed.">Show a sample toast</button>
+            </div>
+        </section>
+        <section class="gallery-section" aria-labelledby="accounts-heading">
+            <h2 id="accounts-heading">Sample accounts</h2>
+            <div class="toolbar" role="search" aria-label="Filter accounts">
+                <div class="field">
+                    <label class="field__label" for="admin-filter">Filter this page</label>
+                    <input class="field__control" id="admin-filter" type="search" placeholder="Name or email">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="admin-status">Status</label>
+                    <select class="field__control" id="admin-status">
+                        <option value="">All statuses</option>
+                        <option value="active">Active</option>
+                        <option value="warning">Marked for deletion</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="admin-size">Page size</label>
+                    <select class="field__control" id="admin-size">
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table__frame" role="region" aria-labelledby="admin-accounts-caption" tabindex="0">
+                <table class="table table--dense">
+                    <caption class="visually-hidden" id="admin-accounts-caption">Sample accounts, 20 per page</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table__numeric">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Roles</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table__numeric">1</td>
+                            <th scope="row">Alex North</th>
+                            <td>alex.north@example.test</td>
+                            <td><span class="chip">admin</span></td>
+                            <td><span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>Active</span></td>
+                            <td><button class="button button--secondary button--small" type="button" data-demo-panel-open="Alex North" data-demo-facts="{&quot;created&quot;:&quot;2026-01-05 09:30:00&quot;,&quot;last-active&quot;:&quot;2026-11-17 07:40:00&quot;,&quot;auth-user-id&quot;:&quot;101&quot;,&quot;lists&quot;:&quot;12&quot;,&quot;sessions&quot;:&quot;3&quot;}" data-demo-panel-email="alex.north@example.test">Inspect <span class="visually-hidden">Alex North</span></button></td>
+                        </tr>
+                        <tr aria-selected="true">
+                            <td class="table__numeric">34</td>
+                            <th scope="row">Samira Patel</th>
+                            <td>samira.patel@example.test</td>
+                            <td><span class="chip">owner</span></td>
+                            <td><span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>Active</span></td>
+                            <td><button class="button button--secondary button--small" type="button" data-demo-panel-open="Samira Patel" data-demo-facts="{&quot;created&quot;:&quot;2026-09-01 10:00:00&quot;,&quot;last-active&quot;:&quot;2026-11-16 08:15:00&quot;,&quot;auth-user-id&quot;:&quot;912&quot;,&quot;lists&quot;:&quot;6&quot;,&quot;sessions&quot;:&quot;2&quot;}" data-demo-panel-email="samira.patel@example.test">Inspect <span class="visually-hidden">Samira Patel</span></button></td>
+                        </tr>
+                        <tr>
+                            <td class="table__numeric">36</td>
+                            <th scope="row">Jordan Kim</th>
+                            <td>jordan.kim@example.test</td>
+                            <td><span class="chip">owner</span></td>
+                            <td><span class="chip chip--status chip--warning"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sync-error"/></svg>Marked for deletion</span></td>
+                            <td><button class="button button--secondary button--small" type="button" data-demo-panel-open="Jordan Kim" data-demo-facts="{&quot;created&quot;:&quot;2026-09-20 14:05:00&quot;,&quot;last-active&quot;:&quot;2026-11-10 17:22:00&quot;,&quot;auth-user-id&quot;:&quot;948&quot;,&quot;lists&quot;:&quot;3&quot;,&quot;sessions&quot;:&quot;0&quot;}" data-demo-panel-email="jordan.kim@example.test">Inspect <span class="visually-hidden">Jordan Kim</span></button></td>
+                        </tr>
+                        <tr>
+                            <td class="table__numeric">41</td>
+                            <th scope="row">Morgan Lee</th>
+                            <td>morgan.lee@example.test</td>
+                            <td><span class="chip">owner</span></td>
+                            <td><span class="chip chip--status chip--danger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg>Locked</span></td>
+                            <td><button class="button button--secondary button--small" type="button" data-demo-panel-open="Morgan Lee" data-demo-facts="{&quot;created&quot;:&quot;2026-10-02 11:45:00&quot;,&quot;last-active&quot;:&quot;2026-11-12 09:03:00&quot;,&quot;auth-user-id&quot;:&quot;967&quot;,&quot;lists&quot;:&quot;1&quot;,&quot;sessions&quot;:&quot;0&quot;}" data-demo-panel-email="morgan.lee@example.test">Inspect <span class="visually-hidden">Morgan Lee</span></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <nav class="pager" aria-label="Pages">
+                <p class="pager__text">Page 1 · 4 accounts shown</p>
+                <div class="pager__buttons">
+                    <button class="button button--secondary" type="button" disabled>First</button>
+                    <button class="button button--secondary" type="button" disabled>Previous</button>
+                    <button class="button button--secondary" type="button">Next</button>
+                    <button class="button button--secondary" type="button">Last</button>
+                </div>
+            </nav>
+        </section>
+    </main>
+    <aside class="app__side-panel" aria-labelledby="detail-panel-demo-title">
+        <div class="detail-panel">
+            <header class="detail-panel__header">
+                <h2 class="detail-panel__title" id="detail-panel-demo-title" tabindex="-1">Samira Patel</h2>
+                <button class="icon-button" type="button" aria-label="Close account details" data-demo-panel-close>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-close"/></svg>
+                </button>
+            </header>
+            <div class="detail-panel__body">
+                <section class="detail-panel__section" aria-labelledby="admin-detail-account">
+                    <h3 id="admin-detail-account">Account</h3>
+                    <div class="field">
+                        <label class="field__label" for="admin-detail-name">Name</label>
+                        <input class="field__control" id="admin-detail-name" type="text" autocomplete="name" value="Samira Patel">
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="admin-detail-email">Email</label>
+                        <input class="field__control" id="admin-detail-email" type="email" autocomplete="email" inputmode="email" value="samira.patel@example.test">
+                    </div>
+                    <button class="button" type="button">Save changes</button>
+                </section>
+                <section class="detail-panel__section" aria-labelledby="admin-detail-facts">
+                    <h3 id="admin-detail-facts">Facts</h3>
+                    <dl class="list list--facts list--compact">
+                        <dt class="list__term">ID</dt><dd class="list__value" data-fact="id">34</dd>
+                        <dt class="list__term">Roles</dt><dd class="list__value" data-fact="roles"><span class="chip">owner</span></dd>
+                        <dt class="list__term">Status</dt><dd class="list__value" data-fact="status"><span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>Active</span></dd>
+                        <dt class="list__term">Created</dt><dd class="list__value" data-fact="created">2026-09-01 10:00:00</dd>
+                        <dt class="list__term">Last active</dt><dd class="list__value" data-fact="last-active">2026-11-16 08:15:00</dd>
+                        <dt class="list__term">Auth user ID</dt><dd class="list__value" data-fact="auth-user-id">912</dd>
+                        <dt class="list__term">Lists</dt><dd class="list__value" data-fact="lists">6</dd>
+                        <dt class="list__term">Sessions</dt><dd class="list__value" data-fact="sessions">2</dd>
+                    </dl>
+                </section>
+                <section class="detail-panel__section detail-panel__danger" aria-labelledby="admin-detail-danger">
+                    <h3 id="admin-detail-danger">Danger zone</h3>
+                    <div class="detail-panel__actions" data-admin-confirm>
+                        <p>Permanent deletion removes all lists and active sessions.</p>
+                        <button class="button button--secondary button--danger" type="button">Mark for deletion</button>
+                        <button class="button button--danger" type="button" data-inline-confirm-content data-inline-confirm-trigger>Delete permanently</button>
+                        <div class="inline-confirm" data-inline-confirm role="group" aria-label="Confirm permanent deletion" hidden>
+                            <p class="inline-confirm__question">Delete <span data-admin-confirm-name>Samira Patel</span> and all sample data now?</p>
+                            <button class="button button--danger" type="button" data-inline-confirm-answer="yes">Delete permanently</button>
+                            <button class="button button--secondary" type="button" data-inline-confirm-answer="no">Keep</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </aside>
+    <div class="app__overlays"><div class="toast-region" role="region" aria-label="Notifications"></div></div>
+</body>
+</html>
