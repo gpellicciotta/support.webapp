@@ -1,11 +1,11 @@
 ---
 id: T0241
-owner: ~
-needs: [T0040, T0235, T0236, T0237, T0238, T0239, T0240]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@claude"
+needs: []
+branch: task/T0241-release-the-palette-component-polish-and-shell-layout
+worktree: .plan/work/T0241-release-the-palette-component-polish-and-shell-layout
+status: active
+started_at: "2026-11-17T16:54:36Z"
 ended_at: —
 review: agent
 preview: none
