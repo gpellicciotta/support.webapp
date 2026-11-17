@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1520.7, input: 36, output: 5546, cache_read: 810584, cache_write: 34413}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T02:40:09Z"
 ---
 # T0043: Rewrite source comments that name the sibling apps as generic rationale, in the modules, looks, and demos.
 
@@ -54,4 +59,7 @@ Size estimate: 9 files, 80 lines
 
 - [2026-11-17] **[Doc]**
   Added the CHANGELOG.md bullet.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
