@@ -13,9 +13,13 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 1, duration_s: 1520.7, input: 36, output: 5546, cache_read: 810584, cache_write: 34413}
-review_status: pending
+  review: {turns: 1, duration_s: 393.5, input: 87432, output: 2816, cache_read: 1269120, cache_write: 0}
+review_status: rejected
 review_round: 1
 review_requested_at: "2026-11-17T02:40:09Z"
+reviewed_by: "@codex"
+review_session: codex-20261117-0b885a
+work_duration: 1928.4
 ---
 # T0043: Rewrite source comments that name the sibling apps as generic rationale, in the modules, looks, and demos.
 
@@ -62,4 +66,11 @@ Size estimate: 9 files, 80 lines
 
 - [2026-11-17] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-17] **[Review]**
+  Round 1 rejected by @codex: [Decided]** Rejected because the required completion check fails in the reviewed worktree.
+  - Findings: [review-findings-1.md](T0043-rewrite-source-comments-that-name-the-sibling-apps/review-findings-1.md).
+
+- [2026-11-17] **[Verify]**
+  Round 2: repaired worktree node_modules junction; devops check exit 0. Also edited src/looks/warm/primitives.css and warm/icons.svg (scope beyond declared files, comment-only).
 
