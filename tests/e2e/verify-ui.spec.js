@@ -2,7 +2,7 @@
 // The static token test covers raw colors, so this verifier checks only rendered pages.
 import { expect, test } from '@playwright/test';
 import { lookHref, looks } from '../../src/demo/gallery.js';
-import { selectGalleryLook, settleGalleryStyles } from './gallery-helpers.js';
+import { selectGalleryLook, settleGalleryStyles, shadowLayers } from './gallery-helpers.js';
 
 const pages = [
     { name: 'gallery', path: '/demo/visual-style-gallery.html' },
@@ -113,12 +113,16 @@ function collect() {
             inSentence = /\p{L}{2,}/u.test(rest.textContent);
         }
         out.targets.push({ where: describe(el), width: box.width, height: box.height, inSentence });
+        // The opening Tab may have focused this element already, so read its unfocused shadow after a blur.
+        if (document.activeElement === el) {
+            el.blur();
+        }
         const before = getComputedStyle(el).boxShadow;
         el.focus();
         const focused = getComputedStyle(el);
         out.focus.push({ where: describe(el), focusVisible: el.matches(':focus-visible'), outlineStyle: focused.outlineStyle,
             outlineWidth: parseFloat(focused.outlineWidth), outlineColor: focused.outlineColor, boxShadow: focused.boxShadow,
-            boxShadowBefore: before, layers: layers(el.parentElement) });
+            boxShadowBefore: before, specimen: el.classList.contains('is-focus'), layers: layers(el.parentElement), innerLayers: layers(el) });
         el.blur();
     }
     return out;
@@ -251,11 +255,30 @@ export function targetProblems(targets, minimum) {
         .map((target) => `${target.where}: target ${target.width.toFixed(0)}x${target.height.toFixed(0)}px < ${minimum.toFixed(0)}px`);
 }
 
+/**
+ * Check the contrast of a focus contour against its ground, and against its halo over that ground.
+ * @param {string} where element description
+ * @param {number[]} contour parsed contour color
+ * @param {number[]|null} halo parsed halo color, if any
+ * @param {number[]|null} ground ground color next to the contour
+ * @returns {string[]} problems
+ */
+function contourProblems(where, contour, halo, ground) {
+    if (!ground) {
+        return [];
+    }
+    const grounds = [ground, ...(halo ? [blend(halo, ground)] : [])];
+    const ratio = Math.min(...grounds.map((next) => contrastRatio(blend(contour, next), next)));
+    return ratio + 1e-9 < NON_TEXT_RATIO ? [`${where}: focus contour contrast ${ratio.toFixed(2)} < ${NON_TEXT_RATIO}`] : [];
+}
+
 export function focusProblems(records, canvas) {
     const problems = [];
     for (const record of records) {
-        const outlined = record.outlineStyle !== 'none' && record.outlineWidth >= MIN_FOCUS_OUTLINE_PX;
-        const shadowed = record.boxShadow !== 'none' && record.boxShadow !== record.boxShadowBefore;
+        const outlineColor = parseColor(record.outlineColor);
+        const outlined = record.outlineStyle !== 'none' && record.outlineWidth >= MIN_FOCUS_OUTLINE_PX && (!outlineColor || outlineColor[3] > 0);
+        // A forced `.is-focus` specimen glows before focus too, so its shadow counts without a change.
+        const shadowed = record.boxShadow !== 'none' && (record.specimen || record.boxShadow !== record.boxShadowBefore);
         if (!record.focusVisible) {
             problems.push(`${record.where}: does not match :focus-visible when focused`);
         }
@@ -271,6 +294,19 @@ export function focusProblems(records, canvas) {
                     problems.push(`${record.where}: focus outline contrast ${ratio.toFixed(2)} < ${NON_TEXT_RATIO}`);
                 }
             }
+        }
+        else {
+            // A glow: the first solid layer is the contour, and the next blurred layer is its halo.
+            const layers = shadowLayers(record.boxShadow);
+            const contour = layers.find((layer) => layer.blur === 0 && layer.spread >= MIN_FOCUS_OUTLINE_PX);
+            const color = contour && parseColor(contour.color);
+            if (!color) {
+                continue;
+            }
+            const next = layers[layers.indexOf(contour) + 1];
+            const halo = next && next.blur > 0 && next.inset === contour.inset ? parseColor(next.color) : null;
+            const ground = background(contour.inset ? record.innerLayers : record.layers, canvas);
+            problems.push(...contourProblems(record.where, color, halo, ground));
         }
     }
     return problems;
@@ -396,12 +432,16 @@ test('reports injected overflow, contrast, target, and focus violations', async 
             <p id="faint">Faint placeholder text</p>
             <button id="tiny" type="button">x</button>
             <button id="unringed" type="button">Placeholder action</button>
+            <button id="faint-glow" type="button">Faint glow action</button>
             <div id="wide">Wide placeholder</div>
             <label id="inactive"><input type="radio" disabled>Inactive placeholder</label></div>`);
         const ground = getComputedStyle(document.body).backgroundColor;
         Object.assign(document.getElementById('faint').style, { color: ground });
         Object.assign(document.getElementById('tiny').style, { width: '10px', height: '10px', padding: '0' });
-        Object.assign(document.getElementById('unringed').style, { outline: 'none', minHeight: '3rem', minWidth: '3rem' });
+        Object.assign(document.getElementById('unringed').style, { outline: 'none', boxShadow: 'none', minHeight: '3rem', minWidth: '3rem' });
+        const faint = document.createElement('style');
+        faint.textContent = `#faint-glow:focus-visible { box-shadow: 0 0 0 2px ${ground}; }`;
+        document.head.append(faint);
         Object.assign(document.getElementById('wide').style, { width: '300vw' });
         Object.assign(document.getElementById('inactive').style, { color: ground });
     });
@@ -410,6 +450,7 @@ test('reports injected overflow, contrast, target, and focus violations', async 
     expect(problems.some((problem) => problem.startsWith('p#faint') && problem.includes('contrast'))).toBe(true);
     expect(problems.some((problem) => problem.startsWith('button#tiny: target 10x10px'))).toBe(true);
     expect(problems).toContain('button#unringed: no visible focus indicator');
+    expect(problems.some((problem) => problem.startsWith('button#faint-glow: focus contour contrast 1.00'))).toBe(true);
     // WCAG exempts the text of inactive controls, so a label of a disabled control is not checked.
     expect(problems.filter((problem) => problem.startsWith('label#inactive'))).toEqual([]);
 });

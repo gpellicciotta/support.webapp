@@ -231,6 +231,10 @@
   box-shadow: inset 0 var(--border-width-strong) 0 var(--color-primary);
 }
 
+.app__bottom-nav .app__nav-item[aria-current='page']:focus-visible {
+  box-shadow: var(--focus-glow), inset 0 var(--border-width-strong) 0 var(--color-primary);
+}
+
 /* Banners: system and status banners above the content; the area takes no room while every banner is hidden. */
 .app__banners {
   display: grid;
@@ -254,6 +258,7 @@
 
 .app__main:focus {
   outline: none;
+  box-shadow: none;
 }
 
 .app:not(.app--scroll-page) > .app__main {

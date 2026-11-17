@@ -10,6 +10,10 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Components: Replaced the focus outline with a glow, a solid contour plus a soft halo, keeping a transparent outline for forced colors.
+- Tokens: Added the `--focus-glow`, `--focus-glow-inset`, `--focus-glow-danger`, and `--focus-glow-danger-inset` base tokens.
+- Components: Drew menu focus inside each item and widened menu side padding, so focus clears neighbors and borders.
+- DevEx: Made the browser verifier check glow contours at 3:1 against their ground and their halo.
 - Looks: Refreshed the neutral look with slate grays and a brighter blue accent, keeping every contrast pair at AA.
 - Docs: Recorded the Narrator and Edge check of the tooltip, which announces its name, role, and description once each.
 - Components: Sized the account menu's small avatar inside its round button, which it overhung by 2 px per side.

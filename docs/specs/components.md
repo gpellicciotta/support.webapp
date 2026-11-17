@@ -127,7 +127,7 @@ Icon button. A toggle carries `aria-pressed`; a plain action omits it.
 ### link-button
 Use a link button for a secondary action, such as showing details; use an anchor for navigation.
 It stays underlined with a transparent background and keeps a 44 px target in both dimensions.
-Hover and active use the link hover color; focus uses the global ring, and native `disabled` blocks activation.
+Hover and active use the link hover color; focus uses the global glow, and native `disabled` blocks activation.
 See every state in the [gallery](../../src/demo/visual-style-gallery.html#link-button).
 
 ```html
@@ -421,7 +421,7 @@ Data table. Native tabular markup; no JavaScript module.
 - Use `.table--dense` for reduced cell padding; nested controls keep their normal touch targets.
 - Share row spacing, surface, border, and text tokens without applying flex-based `.row` styling to table rows.
 - Wrap wide tables in `.table__scroll`, or `.table__frame` for a bordered card frame; overflow stays contained.
-- Make the named scroll region focusable for keyboard scrolling, with the global visible focus outline.
+- Make the named scroll region focusable for keyboard scrolling, with the global visible focus glow.
 - Tab visits the wrapper and nested controls; cells remain static and have no arrow-key navigation model.
 - Body rows show hover feedback; `tr[aria-selected="true"]` adds the selected ground and a primary inline-start edge.
 - Forced colors keep a `Highlight` inline-start border on selected rows, so selection never relies on color alone.
@@ -513,7 +513,7 @@ It follows the [WAI-ARIA tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/
 - Automatic activation requires preloaded panels without noticeable loading latency.
 - Native `disabled` tabs remain visible but cannot receive focus or activate.
 - Show default, hover, focus-visible, selected, and disabled states with semantic tokens.
-- Mark selection with an underline and text emphasis; preserve a separate visible focus outline.
+- Mark selection with an underline and text emphasis; preserve a separate visible focus glow.
 - Keep targets at least 44 pixels tall; let the tablist scroll horizontally on narrow screens.
 - Expose `attachTabs(element)` returning `{ destroy() }`; destruction removes listeners and restores authored attributes.
 - Scope behavior to the owning root so nested tabsets operate independently.

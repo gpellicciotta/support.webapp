@@ -98,6 +98,10 @@
   font-weight: var(--weight-semibold);
 }
 
+.chip--filter[aria-pressed='true']:is(:focus-visible, .is-focus) {
+  box-shadow: var(--focus-glow), inset 0 0 0 var(--border-width) var(--color-primary);
+}
+
 .chip--filter:where([aria-pressed='true']):is(:hover, .is-hover) {
   background-color: var(--color-surface-hover);
 }

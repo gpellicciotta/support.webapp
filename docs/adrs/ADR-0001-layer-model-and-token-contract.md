@@ -85,6 +85,7 @@ An initial list, which the extraction tasks confirm against real use and record 
 - Space: `--space-1` to `--space-12` with family-portal's values.
 - Radius roles: `--radius-control`, `--radius-button`, `--radius-chip`, `--radius-card`, `--radius-dialog`, `--radius-round`.
 - Lines: `--border-width`, `--border-width-strong`, `--focus-ring-width`, `--focus-ring-offset`, `--focus-ring-offset-inset`.
+  The base adds `--focus-glow`, `--focus-glow-inset`, `--focus-glow-danger`, and `--focus-glow-danger-inset` from look tokens.
 - Elevation: `--elevation-1` and `--elevation-2`.
 - Layers, with todos.webapp's values: `--layer-base` 0, `-sticky` 10, `-float` 20, `-popover` 100, `-dialog` 200, `-toast` 300.
 - Motion: `--duration-fast` 120 ms, `--duration-base` 200 ms, `--duration-spin`, `--ease-standard`, and two `--offset-` steps.
@@ -108,6 +109,7 @@ Roles of the role groups, from the categories above:
 | `width`      | `reading`, `narrow`, `content`, `main`, `sidebar`, `side-panel`, `menu`                                                                                        |
 | `border`     | `width`                                                                                                                                                        |
 | `focus-ring` | `width`, `offset`                                                                                                                                              |
+| `focus-glow` | `inset`, `danger`, `danger-inset`                                                                                                                              |
 | `offset`     | `press`, `lift`                                                                                                                                                |
 | `ease`       | `standard`                                                                                                                                                     |
 | `target`     | `min`                                                                                                                                                          |

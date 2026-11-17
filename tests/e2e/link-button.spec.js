@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { STATES, expectRing, forcedRing, openGallery, ring, smallTargets, styles, tokenColor } from './gallery-helpers.js';
+import { STATES, expectForcedRing, expectRing, forcedRing, openGallery, ring, smallTargets, styles, tokenColor } from './gallery-helpers.js';
 
 test('link buttons show every state with native button semantics', async ({ page }) => {
     const problems = await openGallery(page);
@@ -60,8 +60,6 @@ test('link buttons keep 44 px targets, including short labels, and the global fo
     expectRing(await ring(normal), color, 'live');
     expectRing(await forcedRing(page.locator('#link-button .is-focus')), color, 'specimen');
     await page.emulateMedia({ forcedColors: 'active' });
-    const forced = await ring(normal);
-    expect(forced.style).toBe('solid');
-    expect(forced.width).toBeGreaterThanOrEqual(2);
+    expectForcedRing(await ring(normal), null, 'forced colors');
     expect(problems).toEqual([]);
 });

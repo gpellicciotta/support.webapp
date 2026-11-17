@@ -88,11 +88,12 @@
   border-color: var(--color-text-muted);
 }
 
-/* Field controls show the ring on any focus, including the picker buttons inside date and time inputs. */
+/* Field controls glow on any focus, including the picker buttons inside date and time inputs. */
 .field__control:is(:focus-within, .is-focus) {
   border-color: var(--color-focus);
-  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline: var(--focus-ring-width) solid transparent;
   outline-offset: var(--focus-ring-offset);
+  box-shadow: var(--focus-glow);
 }
 
 textarea.field__control {
@@ -116,9 +117,9 @@ textarea.field__control {
   box-shadow: inset 0 0 0 var(--border-width) var(--color-danger);
 }
 
-/* Danger focus: an invalid control draws the focus ring in the danger color too. */
+/* Danger focus: an invalid control glows in the danger color and keeps its inset danger border. */
 .field__control[aria-invalid='true']:is(:focus-within, .is-focus) {
-  outline-color: var(--color-danger);
+  box-shadow: var(--focus-glow-danger), inset 0 0 0 var(--border-width) var(--color-danger);
 }
 
 .field:not([aria-busy='true']):has(> .field__status:not([hidden])) > .field__control:not([aria-invalid='true']) {

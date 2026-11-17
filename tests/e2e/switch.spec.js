@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { looks } from '../../src/demo/gallery.js';
-import { expectRing, forcedRing, openGallery, ring, selectGalleryLook, smallTargets, styles, tokenColor, tokenLength } from './gallery-helpers.js';
+import { expectForcedRing, expectRing, shadowLayers, forcedRing, openGallery, ring, selectGalleryLook, smallTargets, styles, tokenColor, tokenLength } from './gallery-helpers.js';
 
 test('native switch supports pointer, keyboard, forms, reset, and disabled states', async ({ page }) => {
     const problems = await openGallery(page);
@@ -69,7 +69,7 @@ test('forced colors use the system palette for focus and a distinct invalid outl
     const problems = await openGallery(page);
     page.on('requestfailed', request => problems.push(request.url()));
     const control = page.locator('#switch input[name="notifications"]');
-    const authorFocus = (await ring(control)).color;
+    const authorFocus = shadowLayers((await ring(control)).shadow)[0].color;
     await page.emulateMedia({ forcedColors: 'active' });
     const system = await page.evaluate(() => {
         const probe = document.createElement('span');
@@ -83,11 +83,11 @@ test('forced colors use the system palette for focus and a distinct invalid outl
     const focused = await ring(control);
     await page.locator('#switch').screenshot({ path: testInfo.outputPath('switch-forced-colors.png') });
     expect(focused.color).not.toBe(authorFocus);
-    expectRing(focused, system.focus, 'forced colors switch');
+    expectForcedRing(focused, system.focus, 'forced colors switch');
     const invalid = page.locator('#switch [aria-invalid="true"]');
     expect(await invalid.evaluate(input => ({ color: getComputedStyle(input).outlineColor, style: getComputedStyle(input).outlineStyle })))
         .toEqual({ color: system.invalid, style: 'dashed' });
-    expectRing(await ring(invalid), system.focus, 'focused invalid switch');
+    expectForcedRing(await ring(invalid), system.focus, 'focused invalid switch');
     expect(await control.evaluate(input => getComputedStyle(input, '::before').backgroundColor)).not.toBe('rgba(0, 0, 0, 0)');
     expect(problems).toEqual([]);
 });
@@ -127,7 +127,7 @@ test('switch uses concentric control radii in every look while preserving sizes 
         expect(await styles(page.locator('#switch .switch.is-hover'), ['background-color']), look).toEqual({ 'background-color': hover });
         expect(await styles(page.locator('#switch .switch.is-active'), ['background-color']), look).toEqual({ 'background-color': active });
         expectRing(await forcedRing(page.locator('#switch .switch__control.is-focus')), focus, `${look} focus`);
-        expectRing(await forcedRing(page.locator('#switch [aria-invalid="true"]')), danger, `${look} invalid`);
+        expectForcedRing(await forcedRing(page.locator('#switch [aria-invalid="true"]')), danger, `${look} invalid`);
     }
     expect(problems).toEqual([]);
 });

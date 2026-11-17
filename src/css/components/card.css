@@ -25,6 +25,15 @@ a.card:active, .card.is-active {
   transform: translateY(var(--offset-press));
 }
 
+/* The glow keeps the card's elevation. */
+a.card:focus-visible, .card.is-focus {
+  box-shadow: var(--focus-glow), var(--elevation-1);
+}
+
+a.card:hover:focus-visible, .card.is-hover.is-focus {
+  box-shadow: var(--focus-glow), var(--elevation-2);
+}
+
 .card__media {
   display: block;
   min-inline-size: 0;

@@ -50,7 +50,7 @@ test('arrow keys move the selection, and the focused option draws the focus ring
     await expect(radios.nth(1)).toBeChecked();
     await expect(radios.nth(1)).toBeFocused();
     expectRing(await labelRing(1), focus, 'second option');
-    expect((await labelRing(0)).style).toBe('none');
+    expect((await labelRing(0)).shadow).toBe('none');
     await page.keyboard.press('ArrowLeft');
     await expect(radios.nth(0)).toBeChecked();
     await page.keyboard.press('Tab');

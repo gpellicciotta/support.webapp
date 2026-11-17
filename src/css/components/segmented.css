@@ -67,8 +67,13 @@
 }
 
 .segmented__option:is(:has(:focus-visible), .is-focus) {
-  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline: var(--focus-ring-width) solid transparent;
   outline-offset: var(--focus-ring-offset);
+  box-shadow: var(--focus-glow);
+}
+
+.segmented__option:has(:checked):is(:has(:focus-visible), .is-focus) {
+  box-shadow: var(--focus-glow), inset 0 0 0 var(--focus-ring-width) var(--color-primary);
 }
 
 /* A disabled radio dims its own option; a disabled fieldset disables every radio, so it dims them all. */

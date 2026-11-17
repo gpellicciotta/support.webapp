@@ -84,7 +84,7 @@ Place a native `button.fab` directly inside `.app__overlays`, with `type="button
 Its icon is decorative; set `aria-hidden="true"` and `focusable="false"`.
 Use `disabled` for unavailable actions and `hidden` while the action does not apply.
 Prefer a labeled button when the icon cannot clearly convey the action.
-The partial uses primary colors, a round shape, elevation, and the global focus outline.
+The partial uses primary colors, a round shape, elevation, and the global focus glow.
 The shell owns fixed positioning, bottom-bar offsets, safe-area spacing, and trailing content clearance.
 Gallery specimens remain in flow; [shell examples](../../src/demo/visual-style-gallery.html#shell) demonstrate overlay placement.
 Shared primary roles keep the floating action visually consistent with other primary controls.
@@ -202,9 +202,14 @@ Components reference only core ids; apps may add local glyphs in their own sprit
 **[Decided]** The core list adds `icon-chevron-down` for disclosure toggles, such as the collapsible and select menus.
 
 ### Focus
-- One global `:focus-visible` outline in `--color-focus` marks focus, from [reset.css](../../src/css/reset.css).
-- Danger buttons and danger icon buttons draw the ring in `--color-danger`.
-- The ring is an outline, so it stays visible in forced colors mode, where shadows disappear.
+- One global `:focus-visible` glow marks focus, from [reset.css](../../src/css/reset.css).
+- The glow is a solid `--focus-ring-width` contour in `--color-focus`, plus a soft halo at 20% of that color.
+- The contour reaches 3:1 against every ground, also where the halo tints it.
+- Danger buttons, icon buttons, menu items, and invalid controls glow in `--color-danger` with `--focus-glow-danger`.
+- Components with their own shadow compose `var(--focus-glow)` before it, such as the elevated floating action button.
+- Menu items and collapsible toggles touch their neighbors, so they glow inside the box with `--focus-glow-inset`.
+- Menus add `--space-2` of inline padding, so the inset glow keeps clear of the side borders.
+- A transparent outline stays in place, so forced colors mode, which drops shadows, paints it in a system color.
 - `.is-hover`, `.is-focus`, and `.is-active` force a state on gallery specimens only; apps never set them.
 
 ### Controls
@@ -237,7 +242,7 @@ Explicit status labels preserve meaning when tones coincide or forced colors rep
 - Icon buttons need an `aria-label` naming the action and its object, such as "Delete Groceries".
 - Link buttons use underlined labels, transparent backgrounds, and link colors, with a 44 px target.
   The underline offset stays at `0.2em`, keeping the underline clear of the label.
-  Hover and active share `--color-link-hover`; focus uses the global outline, and native `disabled` prevents activation.
+  Hover and active share `--color-link-hover`; focus uses the global glow, and native `disabled` prevents activation.
 - Toggles set `aria-pressed`; pressed toggles take the selected ground and a primary border.
 - Static chips are spans and never tab stops; filter chips are buttons with `aria-pressed`.
 - Status chips use `.chip--status` with an icon shape and word; `.chip--warning` and `.chip--danger` color the icon.
@@ -268,7 +273,7 @@ Logical properties support RTL. No animation is used.
 
 The label provides a 44 px target. Hover, active, focus, disabled, and invalid specimens use semantic tokens.
 Use native `disabled`, including disabled fieldsets. Connect invalid controls to visible error text with `aria-describedby`.
-Keyboard focus overrides the danger outline. Forced colors preserve the track, thumb, and focus outline.
+Keyboard focus replaces the danger outline with the glow. Forced colors preserve the track, thumb, and focus outline.
 Forced colors use `Highlight` for focus and a dashed `CanvasText` outline for invalid controls.
 
 ### Fields and forms
@@ -293,7 +298,7 @@ Fields, choices, and forms share markup for labels, help, character counts, erro
 - An edit discards a pending or valid state; an overtaken check then checks the current value instead.
 - `createField` always adds the hidden status line, so created fields show pending and valid states too.
 - Field messages reach screen readers through one shared polite live region per document.
-- Checkboxes and radios keep the native input, with `accent-color` in the primary color and the global focus ring.
+- Checkboxes and radios keep the native input, with `accent-color` in the primary color and the global focus glow.
 - Their label row is the 44 px target; an invalid checkbox draws a danger outline beside the group's error text.
 - `attachForm` sets `aria-busy` on the form and `aria-disabled` on its submit buttons while sending.
 - One submit runs at a time, from validation through sending, so a double submit never sends twice.
@@ -349,7 +354,7 @@ Keep the native table display, a visible or visually hidden caption, and scoped 
 Use `.table__numeric` for end-aligned numbers with tabular figures.
 Use `.table--dense` to reduce cell padding in compact data views; nested controls retain their own touch targets.
 Wrap wide tables in `.table__scroll`, or `.table__frame` for a bordered card frame, with `role="region"`, `tabindex="0"`, and `aria-labelledby`.
-The wrapper contains horizontal overflow; its keyboard focus uses the global outline.
+The wrapper contains horizontal overflow; its keyboard focus uses the global glow.
 Tab visits the wrapper and nested controls; static cells stay outside the tab order.
 Body rows show hover feedback; `tr[aria-selected="true"]` adds `--color-surface-selected` and a primary inline-start edge.
 Use `aria-selected="true"` when inspecting one row in a side panel; use [multi-select](#multi-select) for bulk row selection.
@@ -396,7 +401,7 @@ Avoid stacks for large rosters, where a list provides clearer navigation.
 
 **[Decided]** Avatar sizes use existing space tokens; responsive stacks use ground-colored rings to separate overlapping faces.
 **[Decided]** Optional tones fall back to sunken surfaces and text; shared radius roles keep shapes consistent across looks.
-**[Decided]** Cards use the global focus outline; avatars provide initials and icon fallbacks when images are unavailable.
+**[Decided]** Cards use the global focus glow above their elevation; avatars provide initials and icon fallbacks when images are unavailable.
 **[Decided]** Static card buttons stretch with their flex container; applications own action alignment instead of cross-component package selectors.
 **[Decided]** The placeholder portrait uses a fixed mid-gray fill for visibility in light and dark themes.
 
@@ -534,7 +539,8 @@ The verifier runs the gallery and each shell demo page in each look at 390 and 1
 - Every `<use>` reference resolves to a symbol in a loaded sprite file.
 - Rendered text contrast of 4.5:1, or 3:1 for large text.
 - Targets of at least `--target-min`, except links inside sentences.
-- A `:focus-visible` outline of at least 2 px at 3:1, or a focus shadow, on every interactive element.
+- A `:focus-visible` outline of at least 2 px at 3:1, or a glow, on every interactive element.
+- A glow contour of at least 2 px at 3:1 against its ground and against its halo over that ground.
 - A screenshot per look, theme, and width in the Playwright output folder.
 
 Run it with `npx playwright test tests/e2e/verify-ui.spec.js`.
@@ -550,7 +556,7 @@ Only the selected enabled tab participates in the tab order.
 Left and Right wrap across enabled tabs; Home and End select the first and last enabled tabs.
 Focus automatically selects a preloaded panel; Tab then leaves the tablist.
 Native button activation supports pointer, Enter, and Space.
-The selected underline and bold label distinguish selection from the global focus outline.
+The selected underline and bold label distinguish selection from the global focus glow.
 Disabled tabs use native `disabled`; narrow lists scroll horizontally without widening the page.
 No animation is applied, including under reduced motion.
 For script-free pages, omit panel `hidden` attributes so every panel remains readable.

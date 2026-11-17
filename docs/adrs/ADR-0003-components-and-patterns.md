@@ -45,8 +45,10 @@ First set, by category; the catalog holds the detail:
   JavaScript never sets a class to show state.
 - The classes `.is-hover`, `.is-active`, and `.is-focus` mirror pseudo-classes for gallery specimens only.
 - Components hold no fixed or sticky positions; the shell of [ADR-0004](ADR-0004-app-shell.md) owns them.
-- One global `:focus-visible` outline in `--color-focus` marks focus, with danger and inset variants, as in todos.webapp.
-  Forced colors mode sets `box-shadow` to none ([MDN][mdn-forced-colors]), so rings never rely on shadows.
+- One global `:focus-visible` glow marks focus, with danger and inset variants.
+  The glow is a solid contour in `--color-focus` plus a soft halo, both drawn with `box-shadow`.
+  Forced colors mode sets `box-shadow` to none ([MDN][mdn-forced-colors]), so a transparent outline stays for it.
+  **[Decided]** with the user on 2026-11-17: the glow replaced the earlier outline after a gallery review.
 
 ### Naming link
 Each component has one kebab-case key, and every artifact derives its name from it.
@@ -156,7 +158,7 @@ Internationalization of server pages:
 - family-portal pages show default-language text until the script applies the catalog.
   The adoption task measures this delay and reports it.
 - family-portal has no recycle bin; its adoption task records the gap against the delete pattern.
-- family-portal's 3 px box-shadow focus ring becomes an outline, a deliberate visible change.
+- family-portal's 3 px box-shadow focus ring becomes the shared glow, a deliberate visible change.
 - The switch, loading, multi-select, and error summary designs need gallery specimens and tests before any app uses them.
 
 ---
