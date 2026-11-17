@@ -1,11 +1,11 @@
 ---
 id: T0040
-owner: ~
+owner: "@claude-code"
 needs: []
 branch: —
 worktree: —
-status: ready
-started_at: —
+status: active
+started_at: "2026-11-17T09:32:39Z"
 ended_at: —
 review: agent
 preview: human
@@ -16,6 +16,9 @@ size_status: approved
 size_approved: 3 files, 120 lines
 size_approved_by: "@gpellicciotta"
 size_approved_at: "2026-11-17T09:29:05Z"
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T09:42:39Z"
 ---
 # T0040: Refresh the neutral look's colors and fonts to the variant the user picks from five rendered candidates.
 
@@ -28,13 +31,13 @@ The user picks one of five rendered variants; see the technical specification fo
 
 ## Task Execution Steps
 - [x] **[Preview]**   Obtain preview approval of the task definition before work starts.
-- [ ] **[Read]**      Read ADR-0002, the look's spec, and the user's new values in the technical specification.
-- [ ] **[Implement]** Write or update the failing tests named in the technical specification.
-- [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
-- [ ] **[Implement]** Apply the new values in the look's primitives and update its font loading.
-- [ ] **[Verify]**    Run the token test, the verifier, and the completion check until they pass.
-- [ ] **[Visual]**    Capture the gallery per theme at 390 and 1440 px, before and after.
-- [ ] **[Doc]**       Update the look's spec and CHANGELOG.md.
+- [x] **[Read]**      Read ADR-0002, the look's spec, and the user's new values in the technical specification.
+- [x] **[Implement]** Write or update the failing tests named in the technical specification.
+- [x] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
+- [x] **[Implement]** Apply the new values in the look's primitives and update its font loading.
+- [x] **[Verify]**    Run the token test, the verifier, and the completion check until they pass.
+- [x] **[Visual]**    Capture the gallery per theme at 390 and 1440 px, before and after.
+- [x] **[Doc]**       Update the look's spec and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -46,4 +49,25 @@ The user picks one of five rendered variants; see the technical specification fo
 
 - [2026-11-17] **[Preview]**
   Preview approved by @gpellicciotta.
+
+- [2026-11-17] **[Implement]**
+  Added the palette test; it failed on undefined blue primitives and old grays, as recorded in red.log.
+
+- [2026-11-17] **[Implement]**
+  Applied slate grays and blue primitives, renamed navy to blue, and tinted shadows slate; Inter needed no font loading change.
+
+- [2026-11-17] **[Visual]**
+  Started the gallery server for screenshots with python scripts/devops.py serve --port 4173.
+  - PIDs: python 27016, node 27120.
+  - Before and after PNGs: button and field, both themes, 390 and 1440 px.
+
+- [2026-11-17] **[Verify]**
+  Completion check passed with exit code 0; proof and screenshots are in validation-proof.md.
+  - Vitest: 2131 passed; Playwright: 724 passed, 28 skipped.
+
+- [2026-11-17] **[Size]**
+  Touched undeclared look.css to rename navy primitives to blue; 4 counted files, 97 lines, below the typical line.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
