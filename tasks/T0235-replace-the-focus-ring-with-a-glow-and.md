@@ -12,8 +12,8 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 3, duration_s: 3915.8, input: 182024, output: 5945, cache_read: 798466}
-work_duration: 3967.6
+  worker: {turns: 4, duration_s: 3961.4, input: 182034, output: 8581, cache_read: 1904891, cache_write: 6425}
+work_duration: 4037.8
 contributors: "@gemini"
 ---
 # T0235: Replace the focus ring with a glow, and give menu items room so focus never overlaps neighbors or edges
@@ -27,9 +27,9 @@ Apply the same treatment to the gallery's `.is-focus` specimens.
 The user requested this after reviewing the gallery on 2026-11-17.
 
 ## Task Execution Steps
-- [ ] **[Implement]** Implement required changes for T0235.
-- [ ] **[Verify]**    Verify implementation with automated test suites.
-- [ ] **[Doc]**       Update documentation and CHANGELOG.md.
+- [x] **[Implement]** Implement required changes for T0235.
+- [x] **[Verify]**    Verify implementation with automated test suites.
+- [x] **[Doc]**       Update documentation and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -45,4 +45,21 @@ The user requested this after reviewing the gallery on 2026-11-17.
 - [2026-11-17] **[Doc]**
   Size note: 31 counted files and about 420 lines cross the large line; each component partial owns its focus override.
   - Human size approval is needed before integration.
+
+- [2026-11-17] **[Verify]**
+  Full devops check exited 0; a load-related form test flake passed 20 of 20 reruns.
+  - Unit: 2163 passed.
+  - Browser: 728 passed, 28 skipped.
+  - Committed as 52f480c.
+
+- [2026-11-17] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 31.
+  - Lines touched: 418.
+  - Reopenings: 0.
+
+- [2026-11-17] **[Visual]**
+  Captured before and after gallery screenshots in light and dark, linked in [validation-proof.md](T0235-replace-the-focus-ring-with-a-glow-and/validation-proof.md#screenshots).
+  - [Menu after](T0235-replace-the-focus-ring-with-a-glow-and/after-menu-desktop-light.png).
+  - [Menu before](T0235-replace-the-focus-ring-with-a-glow-and/before-menu-desktop-light.png).
 

@@ -40,7 +40,39 @@ At 20%, `npx playwright test tests/e2e/verify-ui.spec.js -g "neutral|injected" -
 ```
 
 ### Full check
-{{full-check}}
+Command: `python scripts/devops.py check`
+
+Exit code: 0 (second run on the final sources)
+
+```text
+All 26 markdown files passed linting.
+All checks passed!
+======================== 41 passed, 1 skipped in 2.92s ========================
+ Test Files  33 passed (33)
+      Tests  2163 passed (2163)
+  28 skipped
+  728 passed (8.3m)
+ Test Files  3 passed (3)
+      Tests  7 passed (7)
+gpellicciotta-support.webapp-0.1.1-pre.tgz
+```
+
+The first run on the same sources exited 1 on one test in two of four projects:
+
+```text
+  ✘   54 [desktop-light] › tests\e2e\form.spec.js:102:1 › clearing the address while the name check runs during submit blocks the send (8.8s)
+  ✘  621 [mobile-dark] › tests\e2e\form.spec.js:102:1 › clearing the address while the name check runs during submit blocks the send (12.4s)
+  2 failed
+  28 skipped
+  726 passed (11.7m)
+```
+
+The error summary never opened, a JavaScript timing race under load, not a style change.
+`npx playwright test tests/e2e/form.spec.js -g "clearing the address" --repeat-each 5 --reporter=line` exited 0:
+
+```text
+  20 passed (21.6s)
+```
 
 ### Screenshots
 Gallery sections at 1440 px, before and after, in light and dark:
