@@ -1,6 +1,7 @@
 ---
 id: T0238
 owner: "@claude"
+session: claude-20261117-19c8ee
 needs: []
 branch: task/T0238-align-buttons-in-banners-rows-forms-and-cards
 worktree: .plan/work/T0238-align-buttons-in-banners-rows-forms-and-cards
@@ -22,11 +23,32 @@ Color the error summary title with the danger color, and keep its links in the t
 The user requested this after reviewing the gallery on 2026-11-17.
 
 ## Task Execution Steps
-- [ ] **[Implement]** Implement required changes for T0238.
-- [ ] **[Verify]**    Verify implementation with automated test suites.
-- [ ] **[Doc]**       Update documentation and CHANGELOG.md.
+- [x] **[Implement]** Implement required changes for T0238.
+- [x] **[Verify]**    Verify implementation with automated test suites.
+- [x] **[Doc]**       Update documentation and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-17] **[Doc]**
   Companion task file scaffolded at task creation.
+
+- [2026-11-17] **[Implement]**
+  Wrote button-alignment.spec.js and proved 24 failures, then aligned banner, row, card, and error summary styles.
+  - Banner end padding matches block padding; wrapped actions move end.
+  - Rows top-align; text pads its first line to the target.
+  - Added .card__actions; forms already flowed to the end edge.
+
+- [2026-11-17] **[Verify]**
+  New spec passes in four projects; the full check passed apart from generate-app, fixed by npm install.
+  - Proof and screenshots: validation-proof.md and screenshots/.
+  - npm install synced the lockfile version to 0.1.1-pre.
+
+- [2026-11-17] **[Doc]**
+  Updated the visual style guide, components spec, and CHANGELOG for banners, rows, cards, and the error summary.
+
+- [2026-11-17] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 8.
+  - Lines touched: 87.
+  - Reopenings: 0.
+

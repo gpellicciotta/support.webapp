@@ -1,0 +1,28 @@
+
+Running 24 tests using 4 workers
+
+[1/24] [desktop-light] › tests\e2e\button-alignment.spec.js:116:1 › row actions end at the row end edge
+[2/24] [desktop-light] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline
+[3/24] [desktop-light] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline
+[4/24] [desktop-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[5/24] [desktop-light] › tests\e2e\button-alignment.spec.js:128:1 › form and card buttons flow to the end edge
+[6/24] [desktop-light] › tests\e2e\button-alignment.spec.js:147:1 › the error summary title takes the danger color and its links the text color
+[7/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[8/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline
+[9/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline
+[10/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:116:1 › row actions end at the row end edge
+[11/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:128:1 › form and card buttons flow to the end edge
+[12/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:147:1 › the error summary title takes the danger color and its links the text color
+[13/24] [mobile-light] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline
+[14/24] [mobile-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[15/24] [mobile-light] › tests\e2e\button-alignment.spec.js:116:1 › row actions end at the row end edge
+[16/24] [mobile-light] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline
+[17/24] [mobile-light] › tests\e2e\button-alignment.spec.js:128:1 › form and card buttons flow to the end edge
+[18/24] [mobile-light] › tests\e2e\button-alignment.spec.js:147:1 › the error summary title takes the danger color and its links the text color
+[19/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[20/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline
+[21/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline
+[22/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:116:1 › row actions end at the row end edge
+[23/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:128:1 › form and card buttons flow to the end edge
+[24/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:147:1 › the error summary title takes the danger color and its links the text color
+  24 passed (15.0s)

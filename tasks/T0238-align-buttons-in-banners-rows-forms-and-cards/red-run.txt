@@ -1,0 +1,648 @@
+
+Running 24 tests using 4 workers
+
+[1/24] [desktop-light] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline
+[2/24] [desktop-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[3/24] [desktop-light] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge
+[4/24] [desktop-light] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline
+  1) [desktop-light] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge 
+
+    Error: Shared collection
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 1288
+    Received: 1284
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   4
+
+      119 |         const edges = await innerEdges(row);
+      120 |         const last = await row.locator('.row__actions > :last-child').boundingBox();
+    > 121 |         expect(last.x + last.width, await row.locator('.row__main').textContent()).toBeCloseTo(edges.right, 0);
+          |                                                                                    ^
+      122 |     }
+      123 |     expect(problems).toEqual([]);
+      124 | });
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:121:84
+
+    Error Context: test-results\button-alignment-row-actions-end-at-the-row-end-edge-desktop-light\error-context.md
+
+
+  2) [desktop-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+
+    Error: end space
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 8
+    Received: 16
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   8
+
+      59 |         const after = edges.right - (button.x + button.width);
+      60 |         const padding = px(await banner.evaluate((element) => getComputedStyle(element).paddingBottom));
+    > 61 |         expect(after, 'end space').toBeCloseTo(padding, 0);
+         |                                    ^
+      62 |         if (button.y >= text.y + text.height) {
+      63 |             // A wrapped button sits below the text, at the bottom end corner.
+      64 |             expect(below, 'bottom space of a wrapped button').toBeCloseTo(after, 0);
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:61:36
+
+    Error Context: test-results\button-alignment-banner-bu-85e04--above-below-and-after-them-desktop-light\error-context.md
+
+
+  3) [desktop-light] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline 
+
+    Error: A longer collection name that wraps within its column without displacing the trailing actions
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 17258.5
+    Received: 17270.5
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   12
+
+      100 |             const lines = await main.evaluate((element) => Math.round(element.getBoundingClientRect().height / Number.parseFloat(getComputedStyle(element).lineHeight)));
+      101 |             wrapped += lines > 1 ? 1 : 0;
+    > 102 |             expect(await firstBaseline(row.locator('.row__actions .button').first()), await main.textContent()).toBeCloseTo(await firstBaseline(main), 0);
+          |                                                                                                                 ^
+      103 |         }
+      104 |         expect(wrapped, 'rows with wrapped names').toBeGreaterThan(0);
+      105 |         // Icon-only actions have no label, so they stay centered on the row text.
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:102:113
+
+    Error Context: test-results\button-alignment-neutral-r-13b10-e-row-text-s-first-baseline-desktop-light\error-context.md
+
+
+  4) [desktop-light] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline 
+
+    Error: A longer collection name that wraps within its column without displacing the trailing actions
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 17748.796875
+    Received: 17760.984375
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   12.1875
+
+      100 |             const lines = await main.evaluate((element) => Math.round(element.getBoundingClientRect().height / Number.parseFloat(getComputedStyle(element).lineHeight)));
+      101 |             wrapped += lines > 1 ? 1 : 0;
+    > 102 |             expect(await firstBaseline(row.locator('.row__actions .button').first()), await main.textContent()).toBeCloseTo(await firstBaseline(main), 0);
+          |                                                                                                                 ^
+      103 |         }
+      104 |         expect(wrapped, 'rows with wrapped names').toBeGreaterThan(0);
+      105 |         // Icon-only actions have no label, so they stay centered on the row text.
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:102:113
+
+    Error Context: test-results\button-alignment-warm-row--b06be-e-row-text-s-first-baseline-desktop-light\error-context.md
+
+
+[5/24] [desktop-light] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color
+[6/24] [desktop-light] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge
+[7/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[8/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline
+  5) [desktop-light] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge 
+
+    Error: card button keeps its natural width
+
+    expect(received).toBeGreaterThan(expected)
+
+    Expected: > 177
+    Received:   176
+
+      139 |     const cardButton = await card.locator('.button').last().boundingBox();
+      140 |     expect(cardButton.x + cardButton.width).toBeCloseTo(content.right, 0);
+    > 141 |     expect(cardButton.x, 'card button keeps its natural width').toBeGreaterThan(content.left + 1);
+          |                                                                 ^
+      142 |     expect(problems).toEqual([]);
+      143 | });
+      144 |
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:141:65
+
+    Error Context: test-results\button-alignment-form-and-card-buttons-flow-to-the-end-edge-desktop-light\error-context.md
+
+
+  6) [desktop-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+
+    Error: end space
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 8
+    Received: 16
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   8
+
+      59 |         const after = edges.right - (button.x + button.width);
+      60 |         const padding = px(await banner.evaluate((element) => getComputedStyle(element).paddingBottom));
+    > 61 |         expect(after, 'end space').toBeCloseTo(padding, 0);
+         |                                    ^
+      62 |         if (button.y >= text.y + text.height) {
+      63 |             // A wrapped button sits below the text, at the bottom end corner.
+      64 |             expect(below, 'bottom space of a wrapped button').toBeCloseTo(after, 0);
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:61:36
+
+    Error Context: test-results\button-alignment-banner-bu-85e04--above-below-and-after-them-desktop-dark\error-context.md
+
+
+  7) [desktop-dark] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline 
+
+    Error: A longer collection name that wraps within its column without displacing the trailing actions
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 17258.5
+    Received: 17270.5
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   12
+
+      100 |             const lines = await main.evaluate((element) => Math.round(element.getBoundingClientRect().height / Number.parseFloat(getComputedStyle(element).lineHeight)));
+      101 |             wrapped += lines > 1 ? 1 : 0;
+    > 102 |             expect(await firstBaseline(row.locator('.row__actions .button').first()), await main.textContent()).toBeCloseTo(await firstBaseline(main), 0);
+          |                                                                                                                 ^
+      103 |         }
+      104 |         expect(wrapped, 'rows with wrapped names').toBeGreaterThan(0);
+      105 |         // Icon-only actions have no label, so they stay centered on the row text.
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:102:113
+
+    Error Context: test-results\button-alignment-neutral-r-13b10-e-row-text-s-first-baseline-desktop-dark\error-context.md
+
+
+[9/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline
+[10/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge
+[11/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge
+  8) [desktop-dark] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge 
+
+    Error: Shared collection
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 1288
+    Received: 1284
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   4
+
+      119 |         const edges = await innerEdges(row);
+      120 |         const last = await row.locator('.row__actions > :last-child').boundingBox();
+    > 121 |         expect(last.x + last.width, await row.locator('.row__main').textContent()).toBeCloseTo(edges.right, 0);
+          |                                                                                    ^
+      122 |     }
+      123 |     expect(problems).toEqual([]);
+      124 | });
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:121:84
+
+    Error Context: test-results\button-alignment-row-actions-end-at-the-row-end-edge-desktop-dark\error-context.md
+
+
+  9) [desktop-dark] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline 
+
+    Error: A longer collection name that wraps within its column without displacing the trailing actions
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 17748.796875
+    Received: 17760.984375
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   12.1875
+
+      100 |             const lines = await main.evaluate((element) => Math.round(element.getBoundingClientRect().height / Number.parseFloat(getComputedStyle(element).lineHeight)));
+      101 |             wrapped += lines > 1 ? 1 : 0;
+    > 102 |             expect(await firstBaseline(row.locator('.row__actions .button').first()), await main.textContent()).toBeCloseTo(await firstBaseline(main), 0);
+          |                                                                                                                 ^
+      103 |         }
+      104 |         expect(wrapped, 'rows with wrapped names').toBeGreaterThan(0);
+      105 |         // Icon-only actions have no label, so they stay centered on the row text.
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:102:113
+
+    Error Context: test-results\button-alignment-warm-row--b06be-e-row-text-s-first-baseline-desktop-dark\error-context.md
+
+
+  10) [desktop-dark] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge 
+
+    Error: card button keeps its natural width
+
+    expect(received).toBeGreaterThan(expected)
+
+    Expected: > 177
+    Received:   176
+
+      139 |     const cardButton = await card.locator('.button').last().boundingBox();
+      140 |     expect(cardButton.x + cardButton.width).toBeCloseTo(content.right, 0);
+    > 141 |     expect(cardButton.x, 'card button keeps its natural width').toBeGreaterThan(content.left + 1);
+          |                                                                 ^
+      142 |     expect(problems).toEqual([]);
+      143 | });
+      144 |
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:141:65
+
+    Error Context: test-results\button-alignment-form-and-card-buttons-flow-to-the-end-edge-desktop-dark\error-context.md
+
+
+[12/24] [desktop-dark] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color
+[13/24] [mobile-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[14/24] [mobile-light] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline
+  11) [desktop-light] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color 
+
+    Error: expect(locator).toHaveCSS(expected) failed
+
+    Locator:  locator('#error-summary .error-summary').locator('.error-summary__title')
+    Expected: "rgb(178, 59, 11)"
+    Received: "rgb(2, 6, 23)"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCSS" locator('#error-summary .error-summary').locator('.error-summary__title') with timeout 5000ms
+      - waiting for locator('#error-summary .error-summary').locator('.error-summary__title')
+        14 × locator resolved to <h3 class="error-summary__title" id="error-summary-specimen-title">Fix 2 fields</h3>
+           - unexpected value "rgb(2, 6, 23)"
+
+
+      146 |     const problems = await openGallery(page);
+      147 |     const summary = page.locator('#error-summary .error-summary');
+    > 148 |     await expect(summary.locator('.error-summary__title')).toHaveCSS('color', await tokenColor(page, '--color-danger'));
+          |                                                            ^
+      149 |     for (const link of await summary.locator('.error-summary__link').all()) {
+      150 |         await expect(link).toHaveCSS('color', await tokenColor(page, '--color-text'));
+      151 |     }
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:148:60
+
+    Error Context: test-results\button-alignment-the-error-30739-nd-its-links-the-text-color-desktop-light\error-context.md
+
+
+  12) [mobile-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+
+    Error: end space
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 8
+    Received: 248.015625
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   240.015625
+
+      59 |         const after = edges.right - (button.x + button.width);
+      60 |         const padding = px(await banner.evaluate((element) => getComputedStyle(element).paddingBottom));
+    > 61 |         expect(after, 'end space').toBeCloseTo(padding, 0);
+         |                                    ^
+      62 |         if (button.y >= text.y + text.height) {
+      63 |             // A wrapped button sits below the text, at the bottom end corner.
+      64 |             expect(below, 'bottom space of a wrapped button').toBeCloseTo(after, 0);
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:61:36
+
+    Error Context: test-results\button-alignment-banner-bu-85e04--above-below-and-after-them-mobile-light\error-context.md
+
+
+  13) [mobile-light] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline 
+
+    Error: A longer collection name that wraps within its column without displacing the trailing actions
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 36293
+    Received: 36305
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   12
+
+      100 |             const lines = await main.evaluate((element) => Math.round(element.getBoundingClientRect().height / Number.parseFloat(getComputedStyle(element).lineHeight)));
+      101 |             wrapped += lines > 1 ? 1 : 0;
+    > 102 |             expect(await firstBaseline(row.locator('.row__actions .button').first()), await main.textContent()).toBeCloseTo(await firstBaseline(main), 0);
+          |                                                                                                                 ^
+      103 |         }
+      104 |         expect(wrapped, 'rows with wrapped names').toBeGreaterThan(0);
+      105 |         // Icon-only actions have no label, so they stay centered on the row text.
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:102:113
+
+    Error Context: test-results\button-alignment-neutral-r-13b10-e-row-text-s-first-baseline-mobile-light\error-context.md
+
+
+[15/24] [mobile-light] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline
+[16/24] [mobile-light] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge
+[17/24] [mobile-light] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge
+  14) [mobile-light] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline 
+
+    Error: A longer collection name that wraps within its column without displacing the trailing actions
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 37367.265625
+    Received: 37379.453125
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   12.1875
+
+      100 |             const lines = await main.evaluate((element) => Math.round(element.getBoundingClientRect().height / Number.parseFloat(getComputedStyle(element).lineHeight)));
+      101 |             wrapped += lines > 1 ? 1 : 0;
+    > 102 |             expect(await firstBaseline(row.locator('.row__actions .button').first()), await main.textContent()).toBeCloseTo(await firstBaseline(main), 0);
+          |                                                                                                                 ^
+      103 |         }
+      104 |         expect(wrapped, 'rows with wrapped names').toBeGreaterThan(0);
+      105 |         // Icon-only actions have no label, so they stay centered on the row text.
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:102:113
+
+    Error Context: test-results\button-alignment-warm-row--b06be-e-row-text-s-first-baseline-mobile-light\error-context.md
+
+
+  15) [mobile-light] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge 
+
+    Error: Shared collection
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 374
+    Received: 370
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   4
+
+      119 |         const edges = await innerEdges(row);
+      120 |         const last = await row.locator('.row__actions > :last-child').boundingBox();
+    > 121 |         expect(last.x + last.width, await row.locator('.row__main').textContent()).toBeCloseTo(edges.right, 0);
+          |                                                                                    ^
+      122 |     }
+      123 |     expect(problems).toEqual([]);
+      124 | });
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:121:84
+
+    Error Context: test-results\button-alignment-row-actions-end-at-the-row-end-edge-mobile-light\error-context.md
+
+
+  16) [mobile-light] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge 
+
+    Error: card button keeps its natural width
+
+    expect(received).toBeGreaterThan(expected)
+
+    Expected: > 41
+    Received:   40
+
+      139 |     const cardButton = await card.locator('.button').last().boundingBox();
+      140 |     expect(cardButton.x + cardButton.width).toBeCloseTo(content.right, 0);
+    > 141 |     expect(cardButton.x, 'card button keeps its natural width').toBeGreaterThan(content.left + 1);
+          |                                                                 ^
+      142 |     expect(problems).toEqual([]);
+      143 | });
+      144 |
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:141:65
+
+    Error Context: test-results\button-alignment-form-and-card-buttons-flow-to-the-end-edge-mobile-light\error-context.md
+
+
+[18/24] [mobile-light] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color
+[19/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[20/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline
+  17) [desktop-dark] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color 
+
+    Error: expect(locator).toHaveCSS(expected) failed
+
+    Locator:  locator('#error-summary .error-summary').locator('.error-summary__title')
+    Expected: "rgb(251, 146, 60)"
+    Received: "rgb(248, 250, 252)"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCSS" locator('#error-summary .error-summary').locator('.error-summary__title') with timeout 5000ms
+      - waiting for locator('#error-summary .error-summary').locator('.error-summary__title')
+        14 × locator resolved to <h3 class="error-summary__title" id="error-summary-specimen-title">Fix 2 fields</h3>
+           - unexpected value "rgb(248, 250, 252)"
+
+
+      146 |     const problems = await openGallery(page);
+      147 |     const summary = page.locator('#error-summary .error-summary');
+    > 148 |     await expect(summary.locator('.error-summary__title')).toHaveCSS('color', await tokenColor(page, '--color-danger'));
+          |                                                            ^
+      149 |     for (const link of await summary.locator('.error-summary__link').all()) {
+      150 |         await expect(link).toHaveCSS('color', await tokenColor(page, '--color-text'));
+      151 |     }
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:148:60
+
+    Error Context: test-results\button-alignment-the-error-30739-nd-its-links-the-text-color-desktop-dark\error-context.md
+
+
+  18) [mobile-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+
+    Error: end space
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 8
+    Received: 248.015625
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   240.015625
+
+      59 |         const after = edges.right - (button.x + button.width);
+      60 |         const padding = px(await banner.evaluate((element) => getComputedStyle(element).paddingBottom));
+    > 61 |         expect(after, 'end space').toBeCloseTo(padding, 0);
+         |                                    ^
+      62 |         if (button.y >= text.y + text.height) {
+      63 |             // A wrapped button sits below the text, at the bottom end corner.
+      64 |             expect(below, 'bottom space of a wrapped button').toBeCloseTo(after, 0);
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:61:36
+
+    Error Context: test-results\button-alignment-banner-bu-85e04--above-below-and-after-them-mobile-dark\error-context.md
+
+
+[21/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline
+  19) [mobile-dark] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline 
+
+    Error: A longer collection name that wraps within its column without displacing the trailing actions
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 36293
+    Received: 36305
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   12
+
+      100 |             const lines = await main.evaluate((element) => Math.round(element.getBoundingClientRect().height / Number.parseFloat(getComputedStyle(element).lineHeight)));
+      101 |             wrapped += lines > 1 ? 1 : 0;
+    > 102 |             expect(await firstBaseline(row.locator('.row__actions .button').first()), await main.textContent()).toBeCloseTo(await firstBaseline(main), 0);
+          |                                                                                                                 ^
+      103 |         }
+      104 |         expect(wrapped, 'rows with wrapped names').toBeGreaterThan(0);
+      105 |         // Icon-only actions have no label, so they stay centered on the row text.
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:102:113
+
+    Error Context: test-results\button-alignment-neutral-r-13b10-e-row-text-s-first-baseline-mobile-dark\error-context.md
+
+
+[22/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge
+[23/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge
+  20) [mobile-dark] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline 
+
+    Error: A longer collection name that wraps within its column without displacing the trailing actions
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 37367.265625
+    Received: 37379.453125
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   12.1875
+
+      100 |             const lines = await main.evaluate((element) => Math.round(element.getBoundingClientRect().height / Number.parseFloat(getComputedStyle(element).lineHeight)));
+      101 |             wrapped += lines > 1 ? 1 : 0;
+    > 102 |             expect(await firstBaseline(row.locator('.row__actions .button').first()), await main.textContent()).toBeCloseTo(await firstBaseline(main), 0);
+          |                                                                                                                 ^
+      103 |         }
+      104 |         expect(wrapped, 'rows with wrapped names').toBeGreaterThan(0);
+      105 |         // Icon-only actions have no label, so they stay centered on the row text.
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:102:113
+
+    Error Context: test-results\button-alignment-warm-row--b06be-e-row-text-s-first-baseline-mobile-dark\error-context.md
+
+
+  21) [mobile-dark] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge 
+
+    Error: Shared collection
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 374
+    Received: 370
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   4
+
+      119 |         const edges = await innerEdges(row);
+      120 |         const last = await row.locator('.row__actions > :last-child').boundingBox();
+    > 121 |         expect(last.x + last.width, await row.locator('.row__main').textContent()).toBeCloseTo(edges.right, 0);
+          |                                                                                    ^
+      122 |     }
+      123 |     expect(problems).toEqual([]);
+      124 | });
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:121:84
+
+    Error Context: test-results\button-alignment-row-actions-end-at-the-row-end-edge-mobile-dark\error-context.md
+
+
+[24/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color
+  22) [mobile-dark] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge 
+
+    Error: card button keeps its natural width
+
+    expect(received).toBeGreaterThan(expected)
+
+    Expected: > 41
+    Received:   40
+
+      139 |     const cardButton = await card.locator('.button').last().boundingBox();
+      140 |     expect(cardButton.x + cardButton.width).toBeCloseTo(content.right, 0);
+    > 141 |     expect(cardButton.x, 'card button keeps its natural width').toBeGreaterThan(content.left + 1);
+          |                                                                 ^
+      142 |     expect(problems).toEqual([]);
+      143 | });
+      144 |
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:141:65
+
+    Error Context: test-results\button-alignment-form-and-card-buttons-flow-to-the-end-edge-mobile-dark\error-context.md
+
+
+  23) [mobile-light] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color 
+
+    Error: expect(locator).toHaveCSS(expected) failed
+
+    Locator:  locator('#error-summary .error-summary').locator('.error-summary__title')
+    Expected: "rgb(178, 59, 11)"
+    Received: "rgb(2, 6, 23)"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCSS" locator('#error-summary .error-summary').locator('.error-summary__title') with timeout 5000ms
+      - waiting for locator('#error-summary .error-summary').locator('.error-summary__title')
+        14 × locator resolved to <h3 class="error-summary__title" id="error-summary-specimen-title">Fix 2 fields</h3>
+           - unexpected value "rgb(2, 6, 23)"
+
+
+      146 |     const problems = await openGallery(page);
+      147 |     const summary = page.locator('#error-summary .error-summary');
+    > 148 |     await expect(summary.locator('.error-summary__title')).toHaveCSS('color', await tokenColor(page, '--color-danger'));
+          |                                                            ^
+      149 |     for (const link of await summary.locator('.error-summary__link').all()) {
+      150 |         await expect(link).toHaveCSS('color', await tokenColor(page, '--color-text'));
+      151 |     }
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:148:60
+
+    Error Context: test-results\button-alignment-the-error-30739-nd-its-links-the-text-color-mobile-light\error-context.md
+
+
+  24) [mobile-dark] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color 
+
+    Error: expect(locator).toHaveCSS(expected) failed
+
+    Locator:  locator('#error-summary .error-summary').locator('.error-summary__title')
+    Expected: "rgb(251, 146, 60)"
+    Received: "rgb(248, 250, 252)"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCSS" locator('#error-summary .error-summary').locator('.error-summary__title') with timeout 5000ms
+      - waiting for locator('#error-summary .error-summary').locator('.error-summary__title')
+        14 × locator resolved to <h3 class="error-summary__title" id="error-summary-specimen-title">Fix 2 fields</h3>
+           - unexpected value "rgb(248, 250, 252)"
+
+
+      146 |     const problems = await openGallery(page);
+      147 |     const summary = page.locator('#error-summary .error-summary');
+    > 148 |     await expect(summary.locator('.error-summary__title')).toHaveCSS('color', await tokenColor(page, '--color-danger'));
+          |                                                            ^
+      149 |     for (const link of await summary.locator('.error-summary__link').all()) {
+      150 |         await expect(link).toHaveCSS('color', await tokenColor(page, '--color-text'));
+      151 |     }
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:148:60
+
+    Error Context: test-results\button-alignment-the-error-30739-nd-its-links-the-text-color-mobile-dark\error-context.md
+
+
+  24 failed
+    [desktop-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    [desktop-light] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline 
+    [desktop-light] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline 
+    [desktop-light] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge 
+    [desktop-light] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge 
+    [desktop-light] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color 
+    [desktop-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    [desktop-dark] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline 
+    [desktop-dark] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline 
+    [desktop-dark] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge 
+    [desktop-dark] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge 
+    [desktop-dark] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color 
+    [mobile-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    [mobile-light] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline 
+    [mobile-light] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline 
+    [mobile-light] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge 
+    [mobile-light] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge 
+    [mobile-light] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color 
+    [mobile-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    [mobile-dark] › tests\e2e\button-alignment.spec.js:87:5 › neutral row button labels sit on the row text's first baseline 
+    [mobile-dark] › tests\e2e\button-alignment.spec.js:87:5 › warm row button labels sit on the row text's first baseline 
+    [mobile-dark] › tests\e2e\button-alignment.spec.js:114:1 › row actions end at the row end edge ─
+    [mobile-dark] › tests\e2e\button-alignment.spec.js:126:1 › form and card buttons flow to the end edge 
+    [mobile-dark] › tests\e2e\button-alignment.spec.js:145:1 › the error summary title takes the danger color and its links the text color 
