@@ -4,10 +4,13 @@ round: 1
 verdict: rejected
 blocking: 1
 reviewer: "@codex"
-reviewed_at: 2026-11-17T12:18:55Z
+reviewed_at: 2026-11-17T12:20:36Z
 reviewed_commit: "0ed959e"
 base_commit: "643efb6"
 branch: task/T0236-polish-fields-borderless-read-only-tighter-status-text
+session: codex-20261117-8bb7d3
+session_agent: codex
+session_created_at: 2026-11-17T12:18:55Z
 ---
 # Review Findings: Task T0236 (Round 1)
 

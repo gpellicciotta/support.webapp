@@ -22,3 +22,5 @@ Added: tests/e2e/field-polish.spec.js.
 Completion check: `python scripts/devops.py check`
 
 Size estimate: 5 files, 160 lines
+
+Added files and CHANGELOG.md are excluded from counted files and lines, per the sizing rules.

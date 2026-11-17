@@ -106,3 +106,55 @@ Screenshots come from the gallery at 1440 px and 390 px, light and dark, with no
 | Select      | none (new section)                                               | [mobile light](after-select-mobile-light.png)                  |
 
 Measured on desktop: the status gap fell from 10.67 px to 4 px; field group items moved 16 px in.
+
+## Round 2 Rework: Forced Colors
+
+### Red phase
+
+Command: `npx playwright test tests/e2e/field-polish.spec.js -g "forced colors" --reporter=list` (before the fix). Exit code: 1.
+
+```text
+  ✘  2 [mobile-dark] › tests\e2e\field-polish.spec.js:157:1 › forced colors restore the native select arrow, since they drop gradient backgrounds (2.8s)
+  ✘  4 [desktop-dark] › tests\e2e\field-polish.spec.js:157:1 › forced colors restore the native select arrow, since they drop gradient backgrounds (2.6s)
+  ✘  3 [mobile-light] › tests\e2e\field-polish.spec.js:157:1 › forced colors restore the native select arrow, since they drop gradient backgrounds (3.0s)
+  ✘  1 [desktop-light] › tests\e2e\field-polish.spec.js:157:1 › forced colors restore the native select arrow, since they drop gradient backgrounds (2.9s)
+  4 failed
+    Error: :not(.is-hover, .is-focus, :disabled, [aria-invalid="true"])
+
+    expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "none"
+
+      161 |     for (const state of [':not(.is-hover, .is-focus, :disabled, [aria-invalid="true"])', ':disabled']) {
+```
+
+### Green phase: affected tests
+
+Command: `npx playwright test tests/e2e/field-polish.spec.js tests/e2e/field.spec.js --reporter=list`. Exit code: 0.
+
+```text
+  ✓   6 [desktop-light] › tests\e2e\field-polish.spec.js:157:1 › forced colors restore the native select arrow, since they drop gradient backgrounds (1.8s)
+  ✓  18 [desktop-dark] › tests\e2e\field-polish.spec.js:157:1 › forced colors restore the native select arrow, since they drop gradient backgrounds (1.4s)
+  ✓  30 [mobile-light] › tests\e2e\field-polish.spec.js:157:1 › forced colors restore the native select arrow, since they drop gradient backgrounds (1.5s)
+  ✓  42 [mobile-dark] › tests\e2e\field-polish.spec.js:157:1 › forced colors restore the native select arrow, since they drop gradient backgrounds (1.4s)
+[... 44 other passing lines omitted ...]
+  48 passed (22.8s)
+```
+
+### Full check
+
+Command: `python scripts/devops.py check`. Exit code: 0.
+
+```text
+All 26 markdown files passed linting.
+All checks passed!
+======================== 41 passed, 1 skipped in 2.50s ========================
+ Test Files  33 passed (33)
+      Tests  2163 passed (2163)
+  32 skipped
+  772 passed (5.8m)
+ Test Files  3 passed (3)
+      Tests  7 passed (7)
+[... npm pack --dry-run file list omitted ...]
+gpellicciotta-support.webapp-0.1.1-pre.tgz
+```
