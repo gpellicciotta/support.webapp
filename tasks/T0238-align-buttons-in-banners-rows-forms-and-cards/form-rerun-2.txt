@@ -1,0 +1,32 @@
+
+Running 28 tests using 4 workers
+
+[1/28] [desktop-light] › tests\e2e\form.spec.js:25:1 › each summary link moves focus to its field
+[2/28] [desktop-light] › tests\e2e\form.spec.js:39:1 › an async check shows the pending state, then its error
+[3/28] [desktop-light] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it
+[4/28] [desktop-light] › tests\e2e\form.spec.js:55:1 › a valid submit sets the busy state, then confirms the save
+[5/28] [desktop-light] › tests\e2e\form.spec.js:72:1 › the error summary section shows a filled summary with links to fields
+[6/28] [desktop-light] › tests\e2e\form.spec.js:83:1 › an edit during a pending check discards the old result and checks the new value
+[7/28] [desktop-light] › tests\e2e\form.spec.js:102:1 › clearing the address while the name check runs during submit blocks the send
+[8/28] [desktop-dark] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it
+[9/28] [desktop-dark] › tests\e2e\form.spec.js:39:1 › an async check shows the pending state, then its error
+[10/28] [desktop-dark] › tests\e2e\form.spec.js:55:1 › a valid submit sets the busy state, then confirms the save
+[11/28] [desktop-dark] › tests\e2e\form.spec.js:25:1 › each summary link moves focus to its field
+[12/28] [desktop-dark] › tests\e2e\form.spec.js:72:1 › the error summary section shows a filled summary with links to fields
+[13/28] [desktop-dark] › tests\e2e\form.spec.js:83:1 › an edit during a pending check discards the old result and checks the new value
+[14/28] [desktop-dark] › tests\e2e\form.spec.js:102:1 › clearing the address while the name check runs during submit blocks the send
+[15/28] [mobile-light] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it
+[16/28] [mobile-light] › tests\e2e\form.spec.js:25:1 › each summary link moves focus to its field
+[17/28] [mobile-light] › tests\e2e\form.spec.js:72:1 › the error summary section shows a filled summary with links to fields
+[18/28] [mobile-light] › tests\e2e\form.spec.js:83:1 › an edit during a pending check discards the old result and checks the new value
+[19/28] [mobile-light] › tests\e2e\form.spec.js:39:1 › an async check shows the pending state, then its error
+[20/28] [mobile-light] › tests\e2e\form.spec.js:55:1 › a valid submit sets the busy state, then confirms the save
+[21/28] [mobile-light] › tests\e2e\form.spec.js:102:1 › clearing the address while the name check runs during submit blocks the send
+[22/28] [mobile-dark] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it
+[23/28] [mobile-dark] › tests\e2e\form.spec.js:25:1 › each summary link moves focus to its field
+[24/28] [mobile-dark] › tests\e2e\form.spec.js:39:1 › an async check shows the pending state, then its error
+[25/28] [mobile-dark] › tests\e2e\form.spec.js:72:1 › the error summary section shows a filled summary with links to fields
+[26/28] [mobile-dark] › tests\e2e\form.spec.js:55:1 › a valid submit sets the busy state, then confirms the save
+[27/28] [mobile-dark] › tests\e2e\form.spec.js:83:1 › an edit during a pending check discards the old result and checks the new value
+[28/28] [mobile-dark] › tests\e2e\form.spec.js:102:1 › clearing the address while the name check runs during submit blocks the send
+  28 passed (35.2s)

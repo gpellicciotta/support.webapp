@@ -96,3 +96,77 @@ Neutral look, desktop light and mobile dark, before and after:
 - Card: [before](screenshots/before-desktop-light-card.png), [after](screenshots/after-desktop-light-card.png).
 - Error summary: [before](screenshots/before-desktop-light-error-summary.png), [after](screenshots/after-desktop-light-error-summary.png).
 - Form, unchanged: [before](screenshots/before-mobile-dark-form.png), [after](screenshots/after-mobile-dark-form.png).
+
+## Review Round 1 Rework
+
+### Red phase: stricter banner test against the round 1 banner styles
+`npx playwright test tests/e2e/button-alignment.spec.js -g "banner" --reporter=line` exited with code 1.
+
+```text
+  1) [mobile-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    Error: 420px This item is in the recycle bin.: bottom space
+  2) [mobile-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    Error: 420px This item is in the recycle bin.: bottom space
+  3) [desktop-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    Error: 420px Your session expired. Sign in again to keep syncing.: bottom space
+  4) [desktop-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    Error: 420px Your session expired. Sign in again to keep syncing.: bottom space
+  4 failed
+```
+
+### Green phase: new spec after the banner rework
+`npx playwright test tests/e2e/button-alignment.spec.js --reporter=line` exited with code 0.
+
+```text
+[... 26 lines omitted ...]
+[24/24] [mobile-dark] › tests\e2e\button-alignment.spec.js:162:1 › the error summary title takes the danger color and its links the text color
+  24 passed (26.7s)
+```
+
+### Full check
+`python scripts/devops.py check` exited with code 1 at the Ruff format stage.
+`scripts/generate-app-icons.py` arrived unformatted from main in `12a1124`; follow-up task T0243 covers it.
+
+```text
+All 26 markdown files passed linting.
+All checks passed!
+unformatted: File would be reformatted
+1 file would be reformatted, 6 files already formatted
+**[ERROR]** Finished devops check in 7.3s with status: failed
+```
+
+### Remaining check stages
+`npm run lint && python -m pytest -q && npm test && npm run test:slow && npm run test:integration` exited with code 1.
+One form test failed intermittently under load; the chain stopped before the integration suite.
+
+```text
+41 passed, 1 skipped in 3.95s
+ Test Files  33 passed (33)
+      Tests  2163 passed (2163)
+    Error: expect(locator).toBeHidden() failed
+    Error Context: test-results\form-an-edit-during-a-pend-b2e58-lt-and-checks-the-new-value-mobile-light\error-context.md
+  1 failed
+  795 passed (11.2m)
+```
+
+### Rerun of the form spec
+`npx playwright test tests/e2e/form.spec.js --reporter=line` exited with code 0; follow-up task T0244 tracks the intermittent failure.
+
+```text
+[28/28] [mobile-dark] › tests\e2e\form.spec.js:102:1 › clearing the address while the name check runs during submit blocks the send
+  28 passed (35.2s)
+```
+
+### Integration suite
+`npm run test:integration` exited with code 0.
+
+```text
+ Test Files  3 passed (3)
+      Tests  7 passed (7)
+   Start at  14:16:21
+   Duration  171.17s (tests 100%)
+```
+
+### Screenshots
+- Mobile dark, wrapped actions: [after rework](screenshots/after-2-mobile-dark-banner.png), compared with [round 1](screenshots/after-mobile-dark-banner.png).
+- Desktop light at 560 px and full width: [560 px](screenshots/after-2-desktop-light-banner-560.png), [full width](screenshots/after-2-desktop-light-banner.png).

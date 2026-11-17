@@ -13,9 +13,13 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 1, duration_s: 1463.5, input: 138, output: 51055, cache_read: 7827974, cache_write: 149434}
-review_status: pending
+  review: {turns: 1, duration_s: 85.4, input: 38217, output: 1749, cache_read: 312448, cache_write: 0}
+review_status: rejected
 review_round: 1
 review_requested_at: "2026-11-17T12:56:32Z"
+reviewed_by: "@codex"
+review_session: codex-20261117-bf455a
+work_duration: 1571.8
 ---
 # T0238: Align buttons in banners, rows, forms, and cards, and recolor the error summary title and links
 
@@ -59,4 +63,27 @@ The user requested this after reviewing the gallery on 2026-11-17.
 
 - [2026-11-17] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-17] **[Review]**
+  Round 1 rejected by @codex: [Decided]** Rejected for one unmet banner spacing goal.
+  - Findings: [review-findings-1.md](T0238-align-buttons-in-banners-rows-forms-and-cards/review-findings-1.md).
+
+- [2026-11-17] **[Implement]**
+  Addressed review round 1: banner actions wrap below text that would need a second line, so all three spaces match.
+  - Text starts at its one-line width, capped beside the icon.
+  - Banner test now checks five widths, inline and wrapped.
+
+- [2026-11-17] **[Verify]**
+  Stricter banner test failed first, then passed in four projects; lint, unit, browser, and integration suites passed.
+  - One intermittent form test passed on rerun; tracked in T0244.
+  - Main's unformatted icon script fails Ruff; tracked in T0243.
+
+- [2026-11-17] **[Doc]**
+  Documented that banner actions wrap below multiline text, in the style guide and CHANGELOG.
+
+- [2026-11-17] **[Verify]**
+  Recorded task outcomes after review rework.
+  - Files touched: 8.
+  - Lines touched: 81.
+  - Reopenings: 0.
 

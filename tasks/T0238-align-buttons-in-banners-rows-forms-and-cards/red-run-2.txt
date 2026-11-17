@@ -1,0 +1,112 @@
+
+Running 4 tests using 4 workers
+
+[1/4] [desktop-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[2/4] [desktop-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[3/4] [mobile-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+[4/4] [mobile-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them
+  1) [mobile-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+
+    Error: 420px This item is in the recycle bin.: bottom space
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 8
+    Received: 18
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   10
+
+      69 |             const padding = px(await banner.evaluate((element) => getComputedStyle(element).paddingBottom));
+      70 |             expect(after, `${label}: end space`).toBeCloseTo(padding, 0);
+    > 71 |             expect(below, `${label}: bottom space`).toBeCloseTo(after, 0);
+         |                                                     ^
+      72 |             if (button.y >= text.y + text.height) {
+      73 |                 // A wrapped button sits at the bottom end corner, one row gap below the text box.
+      74 |                 wrapped += 1;
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:71:53
+
+    Error Context: test-results\button-alignment-banner-bu-85e04--above-below-and-after-them-mobile-light\error-context.md
+
+
+  2) [mobile-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+
+    Error: 420px This item is in the recycle bin.: bottom space
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 8
+    Received: 18
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   10
+
+      69 |             const padding = px(await banner.evaluate((element) => getComputedStyle(element).paddingBottom));
+      70 |             expect(after, `${label}: end space`).toBeCloseTo(padding, 0);
+    > 71 |             expect(below, `${label}: bottom space`).toBeCloseTo(after, 0);
+         |                                                     ^
+      72 |             if (button.y >= text.y + text.height) {
+      73 |                 // A wrapped button sits at the bottom end corner, one row gap below the text box.
+      74 |                 wrapped += 1;
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:71:53
+
+    Error Context: test-results\button-alignment-banner-bu-85e04--above-below-and-after-them-mobile-dark\error-context.md
+
+
+  3) [desktop-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+
+    Error: 420px Your session expired. Sign in again to keep syncing.: bottom space
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 8
+    Received: 18
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   10
+
+      69 |             const padding = px(await banner.evaluate((element) => getComputedStyle(element).paddingBottom));
+      70 |             expect(after, `${label}: end space`).toBeCloseTo(padding, 0);
+    > 71 |             expect(below, `${label}: bottom space`).toBeCloseTo(after, 0);
+         |                                                     ^
+      72 |             if (button.y >= text.y + text.height) {
+      73 |                 // A wrapped button sits at the bottom end corner, one row gap below the text box.
+      74 |                 wrapped += 1;
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:71:53
+
+    Error Context: test-results\button-alignment-banner-bu-85e04--above-below-and-after-them-desktop-dark\error-context.md
+
+
+  4) [desktop-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+
+    Error: 420px Your session expired. Sign in again to keep syncing.: bottom space
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 8
+    Received: 18
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   10
+
+      69 |             const padding = px(await banner.evaluate((element) => getComputedStyle(element).paddingBottom));
+      70 |             expect(after, `${label}: end space`).toBeCloseTo(padding, 0);
+    > 71 |             expect(below, `${label}: bottom space`).toBeCloseTo(after, 0);
+         |                                                     ^
+      72 |             if (button.y >= text.y + text.height) {
+      73 |                 // A wrapped button sits at the bottom end corner, one row gap below the text box.
+      74 |                 wrapped += 1;
+        at C:\Dev-Projects\support.webapp\.plan\work\T0238-align-buttons-in-banners-rows-forms-and-cards\tests\e2e\button-alignment.spec.js:71:53
+
+    Error Context: test-results\button-alignment-banner-bu-85e04--above-below-and-after-them-desktop-light\error-context.md
+
+
+  4 failed
+    [desktop-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    [desktop-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    [mobile-light] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 
+    [mobile-dark] › tests\e2e\button-alignment.spec.js:50:1 › banner buttons keep the same space above, below, and after them 

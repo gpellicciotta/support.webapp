@@ -1,0 +1,13 @@
+
+> @gpellicciotta/support.webapp@0.1.1-pre test:integration
+> vitest run --config vitest.integration.config.js
+
+
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0238-align-buttons-in-banners-rows-forms-and-cards
+
+
+ Test Files  3 passed (3)
+      Tests  7 passed (7)
+   Start at  14:16:21
+   Duration  171.17s (tests 100%)
+
