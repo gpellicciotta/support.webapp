@@ -34,13 +34,17 @@ describe('switch markup contract', () => {
         }
     });
 
-    it('gives the track the control radius and the thumb a concentric inner radius, never 50%', () => {
+    it('gives the low track one border width more than the control radius and the thumb a concentric inner radius, never 50%', () => {
         const css = readFileSync(new URL('../../src/css/components/switch.css', import.meta.url), 'utf8')
             .replace(/\/\*[\s\S]*?\*\//g, '');
         const rule = selector => css.match(new RegExp(`${selector}\\s*{([^}]*)}`))?.[1] ?? '';
-        expect(rule('\\.switch__control')).toMatch(/border-radius:\s*var\(--radius-control\)\s*;/);
+        const track = rule('\\.switch__control');
+        expect(track).toMatch(/--_switch-height:\s*calc\(var\(--space-5\)\s*\+\s*2\s*\*\s*var\(--border-width\)\)\s*;/);
+        expect(track).toMatch(/--_switch-radius:\s*calc\(var\(--radius-control\)\s*\+\s*var\(--border-width\)\)\s*;/);
+        expect(track).toMatch(/block-size:\s*var\(--_switch-height\)\s*;/);
+        expect(track).toMatch(/border-radius:\s*var\(--_switch-radius\)\s*;/);
         expect(rule('\\.switch__control::before')).toMatch(
-            /border-radius:\s*max\(0px,\s*calc\(var\(--radius-control\)\s*-\s*2\s*\*\s*var\(--border-width\)\)\)\s*;/
+            /border-radius:\s*max\(0px,\s*calc\(var\(--_switch-radius\)\s*-\s*2\s*\*\s*var\(--border-width\)\)\)\s*;/
         );
         expect(css).not.toContain('--radius-round');
         expect(css).not.toContain('50%');

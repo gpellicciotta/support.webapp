@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { STATES, expectForcedRing, expectRing, forcedRing, openGallery, ring, smallTargets, styles, tokenColor } from './gallery-helpers.js';
+import { STATES, expectForcedRing, expectRing, forcedRing, openGallery, ring, smallTargets, styles, tokenColor, tokenLength } from './gallery-helpers.js';
 
 test('link buttons show every state with native button semantics', async ({ page }) => {
     const problems = await openGallery(page);
@@ -61,5 +61,14 @@ test('link buttons keep 44 px targets, including short labels, and the global fo
     expectRing(await forcedRing(page.locator('#link-button .is-focus')), color, 'specimen');
     await page.emulateMedia({ forcedColors: 'active' });
     expectForcedRing(await ring(normal), null, 'forced colors');
+    expect(problems).toEqual([]);
+});
+
+test('link buttons pad their label on both sides, so the focus glow never touches the text', async ({ page }) => {
+    const problems = await openGallery(page);
+    const padding = await tokenLength(page, '--space-2');
+    for (const button of await page.locator('#link-button .link-button').all()) {
+        expect(await styles(button, ['padding-left', 'padding-right', 'padding-top'])).toEqual({ 'padding-left': padding, 'padding-right': padding, 'padding-top': '0px' });
+    }
     expect(problems).toEqual([]);
 });

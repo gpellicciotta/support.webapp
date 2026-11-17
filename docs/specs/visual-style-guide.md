@@ -223,6 +223,10 @@ Use spans without keyboard focus or actions; use chips for interactive labels an
 **[Decided]** Use filled semantic badge tones and paired text tokens to meet contrast requirements.
 Explicit status labels preserve meaning when tones coincide or forced colors replaces them.
 
+**[Decided]** Badges use `--text-xs` and half-step block padding, so they sit lower than chips.
+Their corners take the rounder of `--radius-chip` and `--radius-control`.
+- A new `--radius-badge` token: rejected, because every look would need a value for one component.
+
 ### Controls and notices
 | Key           | Use it for                                                    | Avoid it for                                      | Gallery                                                                 |
 | :------------ | :------------------------------------------------------------ | :------------------------------------------------ | :---------------------------------------------------------------------- |
@@ -242,6 +246,7 @@ Explicit status labels preserve meaning when tones coincide or forced colors rep
 - Icon buttons need an `aria-label` naming the action and its object, such as "Delete Groceries".
 - Link buttons use underlined labels, transparent backgrounds, and link colors, with a 44 px target.
   The underline offset stays at `0.2em`, keeping the underline clear of the label.
+  `--space-2` side padding keeps the label clear of the focus glow and of neighbors.
   Hover and active share `--color-link-hover`; focus uses the global glow, and native `disabled` prevents activation.
 - Toggles set `aria-pressed`; pressed toggles take the selected ground and a primary border.
 - Static chips are spans and never tab stops; filter chips are buttons with `aria-pressed`.
@@ -249,6 +254,7 @@ Explicit status labels preserve meaning when tones coincide or forced colors rep
 - Overdue chips pair the danger color with an alert icon and a word, never color alone.
 - A segmented control is a `fieldset` of native radios, so arrow keys move the choice.
   Disable one option with `disabled` on its radio, or the whole control with `disabled` on the fieldset.
+  Options sit `--space-2` apart and draw outlines and the focus glow inside, so outlines never touch.
 - Banners come in info, success, warning, and danger; only danger banners use `role="alert"`.
 - Forced colors mode drops shadows, so pressed chips and toggles thicken their border, and checked options gain one.
 
@@ -272,6 +278,8 @@ The thumb changes position, so color alone never conveys the state.
 Logical properties support RTL. No animation is used.
 
 The label provides a 44 px target. Hover, active, focus, disabled, and invalid specimens use semantic tokens.
+The low track is two border widths taller than `--space-5`.
+Its radius is one border width above `--radius-control`, and the thumb radius stays concentric.
 Use native `disabled`, including disabled fieldsets. Connect invalid controls to visible error text with `aria-describedby`.
 Keyboard focus replaces the danger outline with the glow. Forced colors preserve the track, thumb, and focus outline.
 Forced colors use `Highlight` for focus and a dashed `CanvasText` outline for invalid controls.
@@ -556,7 +564,9 @@ Only the selected enabled tab participates in the tab order.
 Left and Right wrap across enabled tabs; Home and End select the first and last enabled tabs.
 Focus automatically selects a preloaded panel; Tab then leaves the tablist.
 Native button activation supports pointer, Enter, and Space.
-The selected underline and bold label distinguish selection from the global focus glow.
+The selected bar and bold label distinguish selection from the focus glow, which tabs draw inside.
+Tabs round only their top corners, so the `--border-width-strong` primary bar stays straight on the divider.
+Forced colors show the bar in `Highlight` on the selected tab only.
 Disabled tabs use native `disabled`; narrow lists scroll horizontally without widening the page.
 No animation is applied, including under reduced motion.
 For script-free pages, omit panel `hidden` attributes so every panel remains readable.

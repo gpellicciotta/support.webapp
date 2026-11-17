@@ -10,6 +10,10 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Components: Gave link buttons side padding, and made badges smaller and lower with corners at least as round as controls.
+- Components: Lowered switch tracks by 2 px and rounded them by one border width, keeping the thumb concentric.
+- Components: Separated segmented options by a full spacing step and drew their focus glow inside, so outlines never touch.
+- Components: Restyled tabs with top-only rounded corners and a straight primary bar on the divider, with inset focus.
 - Components: Replaced the focus outline with a glow, a solid contour plus a soft halo, keeping a transparent outline for forced colors.
 - Tokens: Added the `--focus-glow`, `--focus-glow-inset`, `--focus-glow-danger`, and `--focus-glow-danger-inset` base tokens.
 - Components: Drew menu focus inside each item and widened menu side padding, so focus clears neighbors and borders.

@@ -92,7 +92,7 @@ test('forced colors use the system palette for focus and a distinct invalid outl
     expect(problems).toEqual([]);
 });
 
-test('switch uses concentric control radii in every look while preserving sizes and states', async ({ page }) => {
+test('switch uses a low track, one border width rounder than controls, with a concentric thumb in every look', async ({ page }) => {
     const problems = await openGallery(page);
     page.on('requestfailed', request => problems.push(request.url()));
     const probe = locator => locator.evaluate(el => ({
@@ -101,11 +101,14 @@ test('switch uses concentric control radii in every look while preserving sizes 
     }));
     for (const look of looks) {
         await selectGalleryLook(page, look);
-        const [radius, borderRaw, widthRaw, heightRaw] = await Promise.all(
-            ['--radius-control', '--border-width', '--space-8', '--space-6'].map(name => tokenLength(page, name))
+        const [control, borderRaw, widthRaw, lowRaw, previousRaw] = await Promise.all(
+            ['--radius-control', '--border-width', '--space-8', '--space-5', '--space-6'].map(name => tokenLength(page, name))
         );
-        const [border, width, height] = [borderRaw, widthRaw, heightRaw].map(parseFloat);
-        const expected = { trackRadius: radius, thumbRadius: `${Math.max(0, parseFloat(radius) - 2 * border)}px`, size: `${height - 4 * border}px` };
+        const [border, width, low, previous] = [borderRaw, widthRaw, lowRaw, previousRaw].map(parseFloat);
+        const height = low + 2 * border;
+        expect(height, look).toBeLessThan(previous);
+        const radius = parseFloat(control) + border;
+        const expected = { trackRadius: `${radius}px`, thumbRadius: `${Math.max(0, radius - 2 * border)}px`, size: `${height - 4 * border}px` };
         for (const control of await page.locator('#switch .switch__control').all()) {
             expect(await control.boundingBox(), look).toMatchObject({ width, height });
             const actual = await control.evaluate(el => {
