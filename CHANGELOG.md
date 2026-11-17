@@ -10,6 +10,10 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Components: Dropped the border of read-only fields and inset field messages to align with the control's text.
+- Components: Kept field rows at their natural height, so status and error lines sit one small step below the control.
+- Components: Indented field group content from its legend, and gave selects a chevron inset like the collapsible's.
+- Docs: Added a [Select section](src/demo/visual-style-gallery.html#select) to the gallery with every select state.
 - Components: Gave link buttons side padding, and made badges smaller and lower with corners at least as round as controls.
 - Components: Lowered switch tracks by 2 px and rounded them by one border width, keeping the thumb concentric.
 - Components: Separated segmented options by a full spacing step and drew their focus glow inside, so outlines never touch.

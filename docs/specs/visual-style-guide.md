@@ -303,6 +303,12 @@ Fields, choices, and forms share markup for labels, help, character counts, erro
 - Invalid: `aria-invalid` on the control, a danger border, and an error line with the alert icon.
 - Pending: `aria-busy` on the field, and a muted status line with the more icon.
 - Valid: a success border, and a status line with the check icon and a message.
+- Read-only: a sunken ground without a border; focus still shows the focus border and glow.
+- Hint, counter, status, and error lines inset their text to start and end with the text inside the control.
+- Field rows keep their natural height, so messages sit one small step below the control in any grid.
+- A select replaces the native arrow with a chevron one small step inside the edge, like the collapsible's.
+  The [Select section](../../src/demo/visual-style-gallery.html#select) shows its states.
+- A field group indents its items, hint, and error from the legend, so they read as part of the group.
 - An edit discards a pending or valid state; an overtaken check then checks the current value instead.
 - `createField` always adds the hidden status line, so created fields show pending and valid states too.
 - Field messages reach screen readers through one shared polite live region per document.
@@ -319,6 +325,15 @@ Fields, choices, and forms share markup for labels, help, character counts, erro
 
 **[Decided]** The character count joins `aria-describedby`, so screen readers receive the same length information as sighted users.
 - A hidden character count: rejected, because length limits must remain available to screen reader users.
+
+**[Decided]** The select chevron is two gradient strokes in `--color-text-muted`, sized from `--icon-md` and `--icon-stroke`.
+- The native arrow: rejected, because it ignores padding and sits against the border.
+- A wrapper with the sprite's `icon-chevron-down`: rejected, because every existing select would need new markup.
+- An SVG data URL: rejected, because it needs a raw color that cannot follow the theme.
+- Forced colors drop gradient backgrounds, so there the select restores its native arrow in system colors.
+
+**[Decided]** A field group indents through fieldset padding, and its legend pulls back by the same step.
+- A margin on each item: rejected, because it widens the gaps between row variant columns.
 
 **[Decided]** The valid state needs no attribute: a visible status line on a field without `aria-busy` styles it.
 - A `data-field-state` attribute: rejected, because ADR-0003 keeps state in native and ARIA attributes.

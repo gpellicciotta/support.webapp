@@ -70,6 +70,7 @@
                     <li><a href="#badge">Badge</a></li>
                     <li><a href="#segmented">Segmented control</a></li>
                     <li><a href="#field">Field</a></li>
+                    <li><a href="#select">Select</a></li>
                     <li><a href="#checkbox">Checkbox</a></li>
                     <li><a href="#switch">Switch</a></li>
                     <li><a href="#radio">Radio</a></li>
@@ -631,6 +632,71 @@
                         <option>Never</option>
                         <option>Every day</option>
                         <option>Every week</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        <section id="select" class="gallery-section" aria-labelledby="select-title">
+            <h2 id="select-title">Select</h2>
+            <p>A native select in a field, for one choice among many options; the native list opens on click, Space, or Alt+Down.
+                Its chevron sits one small step inside the edge, like the collapsible's chevron.</p>
+            <div class="field-specimens">
+                <div class="field">
+                    <label class="field__label" for="select-default">Repeat</label>
+                    <select class="field__control" id="select-default" name="default">
+                        <option>Never</option>
+                        <option selected>Every week</option>
+                        <option>Every month</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="select-hover">Hover</label>
+                    <select class="field__control is-hover" id="select-hover" name="hover">
+                        <option>Never</option>
+                        <option selected>Every week</option>
+                        <option>Every month</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="select-focus">Focus</label>
+                    <select class="field__control is-focus" id="select-focus" name="focus">
+                        <option>Never</option>
+                        <option selected>Every week</option>
+                        <option>Every month</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="select-hint">With hint</label>
+                    <select class="field__control" id="select-hint" name="hint" aria-describedby="select-hint-hint">
+                        <option>Never</option>
+                        <option selected>Every week</option>
+                        <option>Every month</option>
+                    </select>
+                    <p class="field__hint" id="select-hint-hint">Applies to new tasks only.</p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="select-invalid">Invalid</label>
+                    <select class="field__control" id="select-invalid" name="invalid" required aria-invalid="true" aria-describedby="select-invalid-error">
+                        <option value="" selected>Choose a list</option>
+                        <option>Groceries</option>
+                        <option>Chores</option>
+                    </select>
+                    <p class="field__error" id="select-invalid-error"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg>Choose a list.</p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="select-valid">Valid</label>
+                    <select class="field__control" id="select-valid" name="valid" aria-describedby="select-valid-status">
+                        <option>Groceries</option>
+                        <option selected>Chores</option>
+                    </select>
+                    <p class="field__status" id="select-valid-status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>Shared with the family.</p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="select-disabled">Disabled</label>
+                    <select class="field__control" id="select-disabled" name="disabled" disabled>
+                        <option>Never</option>
+                        <option selected>Every week</option>
+                        <option>Every month</option>
                     </select>
                 </div>
             </div>
