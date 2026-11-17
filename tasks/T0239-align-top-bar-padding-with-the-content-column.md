@@ -1,11 +1,11 @@
 ---
 id: T0239
-owner: ~
+owner: "@claude"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0239-align-top-bar-padding-with-the-content-column
+worktree: .plan/work/T0239-align-top-bar-padding-with-the-content-column
+status: active
+started_at: "2026-11-17T15:17:11Z"
 ended_at: —
 review: agent
 preview: none
