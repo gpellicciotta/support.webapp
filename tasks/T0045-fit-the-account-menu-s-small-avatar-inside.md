@@ -1,11 +1,11 @@
 ---
 id: T0045
-owner: ~
+owner: "@claude"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0045-fit-the-account-menu-s-small-avatar-inside
+worktree: .plan/work/T0045-fit-the-account-menu-s-small-avatar-inside
+status: active
+started_at: "2026-11-17T02:59:20Z"
 ended_at: —
 review: agent
 preview: none
