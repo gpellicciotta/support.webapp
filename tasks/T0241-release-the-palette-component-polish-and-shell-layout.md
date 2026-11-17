@@ -11,6 +11,12 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 961.0, input: 54, output: 7896, cache_read: 1552022, cache_write: 52657}
+work_duration: 973.2
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T17:44:00Z"
 ---
 # T0241: Release the palette, component polish, and shell layout work as v0.2.0
 
@@ -25,7 +31,7 @@ Afterwards, record which sibling apps should run `vendor` to pick up the release
 - [x] **[Implement]** Implement required changes for T0241.
 - [x] **[Verify]**    Verify implementation with automated test suites.
 - [x] **[Doc]**       Update documentation and CHANGELOG.md.
-- [ ] **[Implement]** Run release --yes from clean main after user approval, then create vendor tasks per app.
+- [x] **[Decided]**   Moved the approved release run and vendor tasks to T0246, since the bump must merge first.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -48,4 +54,10 @@ Afterwards, record which sibling apps should run `vendor` to pick up the release
   Needs user approval to run release --yes from clean main after merging 17ad214; it tags, pushes, and publishes v0.2.0.
   - Open question: approve the v0.2.0 release push and publish?.
   - Then vendor into auth, family-portal, meteo, todos.webapp (all on 0.1.0).
+
+- [2026-11-17] **[Decided]**
+  The user approved the v0.2.0 release, push, and publish on 2026-11-17; T0246 runs it after this bump merges.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
