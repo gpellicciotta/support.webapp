@@ -110,13 +110,21 @@ test('an edit during a pending check discards the old result and checks the new 
 });
 
 test('clearing the address while the name check runs during submit blocks the send', async ({ page }) => {
+    // The paused clock holds the 600 ms check open, so the address is cleared before the submit can send.
+    await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') });
     const problems = await openGallery(page);
+    await page.clock.pauseAt(new Date('2026-01-01T01:00:00Z'));
     const form = page.locator('#form form[data-form]');
     await form.locator('#form-name').fill('Steps');
     await form.locator('#form-url').fill('https://example.test');
     await form.getByRole('button', { name: 'Save' }).click();
     await expect(form.locator('.field:has(#form-name)')).toHaveAttribute('aria-busy', 'true');
     await form.locator('#form-url').fill('');
+    // The edit makes the submit check every field again, so the name check runs a second time.
+    await page.clock.runFor(600);
+    await expect(form.locator('#form-url')).toHaveAttribute('aria-invalid', 'true');
+    await expect(form.locator('.field:has(#form-name)')).toHaveAttribute('aria-busy', 'true');
+    await page.clock.runFor(600);
     const summary = form.locator('.error-summary');
     await expect(summary).toBeFocused();
     await expect(summary.locator('.error-summary__link')).toHaveText(['Enter an address.']);

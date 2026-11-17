@@ -19,6 +19,7 @@ All notable changes to this project are documented here.
 - Looks: Redrew `icon-more` as vertical dots in every look's sprite.
 - Docs: Moved the toolbar demo's overflow menu button to the end of the top bar.
 - DevEx: Paused the page clock in the form spec's pending-check edit test, so a slow run cannot settle the old check early.
+- DevEx: Paused the page clock in the form spec's submit-time check test, so the address is cleared before the send.
 - Looks: Added 16, 48, and 96 px app icons, apple touch icons, and maskable install icons on opaque plates.
 - Looks: Left the app icons out of releases, so `vendor` no longer copies every app's icons into each app.
 - Docs: Documented the app icon styles, files, and adoption, and embedded the Lucide notice in the todos icon.
