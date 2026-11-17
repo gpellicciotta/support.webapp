@@ -12,6 +12,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0241 [needs: T0236, T0237, T0238, T0239, T0240] Release the palette, component polish, and shell layout work as v0.2.0.
 
 ## Backlog
+- [ ] T0242 Fix the form spec's pending-check edit test, which failed once under full-suite load and passed 84 times alone.
 - [ ] T0046 Plan the redesign of counters on the design system, split from T0025.
 - [ ] T0041 Refresh the warm look's colors and fonts to new values chosen by the user, after family-portal adopts it.
 - [ ] T0042 Refresh the bright look's colors and fonts to new values chosen by the user, after meteo adopts it.
