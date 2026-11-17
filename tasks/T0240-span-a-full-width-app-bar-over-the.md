@@ -12,8 +12,8 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 1800.7, input: 2, output: 8}
-work_duration: 1814.8
+  worker: {turns: 2, duration_s: 2451.7, input: 40, output: 7338, cache_read: 3825817, cache_write: 15601}
+work_duration: 2492.4
 ---
 # T0240: Span a full-width app bar over the sidebar and side panel, with a hamburger toggling open, rail, and hidden navigation
 
@@ -52,4 +52,7 @@ The user chose this layout, including the icon rail, in the 2026-11-17 layout re
   - Files touched: 16.
   - Lines touched: 385.
   - Reopenings: 0.
+
+- [2026-11-17] **[Verify]**
+  Resumed turn found the work committed, verified, and validated; no changes were needed before review.
 
