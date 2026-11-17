@@ -15,6 +15,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0241 [needs: T0238, T0239, T0240] Release the palette, component polish, and shell layout work as v0.2.0.
 
 ## Backlog
+- [ ] T0245 Pause the page clock in the form spec's other async-check tests, which share the 600 ms timing race.
 - [ ] T0046 Plan the redesign of counters on the design system, split from T0025.
 - [ ] T0041 Refresh the warm look's colors and fonts to new values chosen by the user, after family-portal adopts it.
 - [ ] T0042 Refresh the bright look's colors and fonts to new values chosen by the user, after meteo adopts it.
