@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1763.6, input: 148, output: 35319, cache_read: 7084977, cache_write: 119628}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T15:46:50Z"
 ---
 # T0239: Align top bar padding with the content column, align edge icons optically, and use vertical overflow dots at the bar's end
 
@@ -56,4 +61,7 @@ Guides measured 0 px start and end offsets in the portal demo at 390 and 1440 px
   - Files touched: 7.
   - Lines touched: 125.
   - Reopenings: 0.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
