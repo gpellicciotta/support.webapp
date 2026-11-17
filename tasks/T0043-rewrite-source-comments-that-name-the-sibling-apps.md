@@ -1,11 +1,11 @@
 ---
 id: T0043
-owner: ~
-needs: [T0038]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@claude"
+needs: []
+branch: task/T0043-rewrite-source-comments-that-name-the-sibling-apps
+worktree: .plan/work/T0043-rewrite-source-comments-that-name-the-sibling-apps
+status: active
+started_at: "2026-11-17T02:14:38Z"
 ended_at: —
 review: agent
 preview: none

@@ -6,8 +6,8 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0048 Promote the detail panel, facts list, and status chip, and add an admin console shell example.
 - [x] T0047 Promote the toolbar, pager, and data table row states from ToDo's admin console into the package.
 - [!] T0037 [reason: needs review: requires manual Narrator/NVDA testing of the tooltip component and meteo tooltips by a human; announcements cannot be recorded without a screen reader] [owner: @claude, session: claude-20261117-a1f695] [protocol: adhoc] Check the tooltip component and meteo's tooltips with Narrator or NVDA by hand, recording what each announces.
-- [~] T0044 [owner: @claude] [protocol: adhoc] Investigate intermittent browser verifier screenshot timeouts and incomplete stylesheet loads under parallel execution.
-- [ ] T0043 Rewrite source comments that name the sibling apps as generic rationale, in the modules, looks, and demos.
+- [!] T0044 [reason: needs review: could not reproduce. Full suite (8 workers: 724 passed), verify-ui at 24 workers (122 passed) and 32 workers x2 (244 passed) showed no screenshot timeouts or incomplete stylesheet loads. Need the original failing log, machine load, and runner (plan supervise or concurrent worktrees) to continue.] [owner: @claude, session: claude-20261117-5bdc3c] [protocol: adhoc] Investigate intermittent browser verifier screenshot timeouts and incomplete stylesheet loads under parallel execution.
+- [~] T0043 [owner: @claude] Rewrite source comments that name the sibling apps as generic rationale, in the modules, looks, and demos.
 - [ ] T0045 Fit the account menu's small avatar inside its round button, which it overhangs by 2 px on each side.
 
 ## Backlog
