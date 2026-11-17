@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 1826.6, input: 10, output: 1606, cache_read: 423045, cache_write: 6344}
+  worker: {turns: 3, duration_s: 2399.9, input: 46, output: 10087, cache_read: 3052970, cache_write: 25217}
 work_duration: 1866.1
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T11:49:33Z"
 ---
 # T0237: Polish small controls: link button padding, smaller rounder badges, lower switches, separated segment borders, and tab headings
 
@@ -53,4 +56,7 @@ The user requested this after reviewing the gallery on 2026-11-17.
 
 - [2026-11-17] **[Implement]**
   Size note: 12 counted files exceed the typical line; each component pairs one stylesheet with its spec, and lines stay near 205.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
