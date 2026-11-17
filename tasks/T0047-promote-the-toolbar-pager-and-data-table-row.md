@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 1902.7, input: 420239, output: 70026, cache_read: 14081843}
+  worker: {turns: 3, duration_s: 3002.7, input: 531051, output: 95093, cache_read: 27682788}
 work_duration: 1936.5
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T00:41:40Z"
 ---
 # T0047: Promote the toolbar, pager, and data table row states from ToDo's admin console into the package
 
@@ -71,4 +74,7 @@ Name them by `docs/specs/naming.md`; ToDo's class names may change.
   - Files touched: 7.
   - Lines touched: 266.
   - Reopenings: 0.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
