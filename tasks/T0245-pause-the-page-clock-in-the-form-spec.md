@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1491.3, input: 98, output: 18252, cache_read: 3491565, cache_write: 83509}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T19:37:44Z"
 ---
 # T0245: Pause the page clock in the form spec's other async-check tests, which share the 600 ms timing race
 
@@ -39,4 +44,7 @@ Pause the page clock in the form spec's other async-check tests, which share the
 
 - [2026-11-17] **[Doc]**
   Added a DevEx bullet under v0.2.2-pre in CHANGELOG.md.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
