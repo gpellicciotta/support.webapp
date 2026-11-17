@@ -11,8 +11,8 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0236 Polish fields: borderless read-only, tighter status text, aligned hint padding, indented groups, and select chevron spacing with a gallery section.
 - [x] T0238 Align buttons in banners, rows, forms, and cards, and recolor the error summary title and links.
 - [x] T0239 Align top bar padding with the content column, align edge icons optically, and use vertical overflow dots at the bar's end.
-- [~] T0240 [owner: @claude] Span a full-width app bar over the sidebar and side panel, with a hamburger toggling open, rail, and hidden navigation.
-- [ ] T0241 [needs: T0240] Release the palette, component polish, and shell layout work as v0.2.0.
+- [x] T0240 Span a full-width app bar over the sidebar and side panel, with a hamburger toggling open, rail, and hidden navigation.
+- [ ] T0241 Release the palette, component polish, and shell layout work as v0.2.0.
 
 ## Backlog
 - [ ] T0245 Pause the page clock in the form spec's other async-check tests, which share the 600 ms timing race.
