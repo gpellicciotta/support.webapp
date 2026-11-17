@@ -12,8 +12,8 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 315.0, input: 182020, output: 5921, cache_read: 798466}
-work_duration: 327.9
+  worker: {turns: 2, duration_s: 2115.5, input: 182022, output: 5929, cache_read: 798466}
+work_duration: 2141.5
 contributors: "@gemini"
 ---
 # T0235: Replace the focus ring with a glow, and give menu items room so focus never overlaps neighbors or edges
@@ -35,3 +35,14 @@ The user requested this after reviewing the gallery on 2026-11-17.
 ## Execution Log
 - [2026-11-17] **[Doc]**
   Companion task file scaffolded at task creation.
+
+- [2026-11-17] **[Implement]**
+  Replaced the focus outline with a contour-and-halo glow from four base tokens, with inset menu and collapsible variants and wider menu padding.
+
+- [2026-11-17] **[Decided]**
+  Lowered the halo to 20%, since 25% left the neutral dark contour at 2.80:1 on active grounds; danger glows are fixed tokens.
+
+- [2026-11-17] **[Doc]**
+  Size note: 31 counted files and about 420 lines cross the large line; each component partial owns its focus override.
+  - Human size approval is needed before integration.
+
