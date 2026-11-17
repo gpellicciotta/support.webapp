@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1195.3, input: 70, output: 16911, cache_read: 2409628, cache_write: 71428}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T15:11:04Z"
 ---
 # T0242: Fix the form spec's pending-check edit test, which failed once under full-suite load and passed 84 times alone
 
@@ -43,4 +48,7 @@ Fix the form spec's pending-check edit test, which failed once under full-suite 
 
 - [2026-11-17] **[Doc]**
   Created backlog task T0245 for the two sibling async-check tests, whose busy assertions share the 600 ms race.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
