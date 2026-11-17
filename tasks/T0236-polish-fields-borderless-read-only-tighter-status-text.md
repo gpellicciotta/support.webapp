@@ -1,11 +1,11 @@
 ---
 id: T0236
-owner: ~
+owner: "@claude"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0236-polish-fields-borderless-read-only-tighter-status-text
+worktree: .plan/work/T0236-polish-fields-borderless-read-only-tighter-status-text
+status: active
+started_at: "2026-11-17T11:52:11Z"
 ended_at: —
 review: agent
 preview: none
