@@ -1,6 +1,7 @@
 ---
 id: T0235
 owner: "@gemini"
+session: antigravity-20261117-a3b972
 needs: []
 branch: task/T0235-replace-the-focus-ring-with-a-glow-and
 worktree: .plan/work/T0235-replace-the-focus-ring-with-a-glow-and
