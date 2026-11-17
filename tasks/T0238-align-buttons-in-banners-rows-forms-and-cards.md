@@ -1,11 +1,11 @@
 ---
 id: T0238
-owner: ~
-needs: ['T0237']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@claude"
+needs: []
+branch: task/T0238-align-buttons-in-banners-rows-forms-and-cards
+worktree: .plan/work/T0238-align-buttons-in-banners-rows-forms-and-cards
+status: active
+started_at: "2026-11-17T12:31:51Z"
 ended_at: —
 review: agent
 preview: none
