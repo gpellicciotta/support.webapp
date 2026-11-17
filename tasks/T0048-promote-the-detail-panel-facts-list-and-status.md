@@ -1,7 +1,7 @@
 ---
 id: T0048
-owner: "@gemini"
-session: antigravity-20261117-80b584
+owner: "@claude"
+session: claude-20261117-8cb807
 needs: []
 branch: task/T0048-promote-the-detail-panel-facts-list-and-status
 worktree: .plan/work/T0048-promote-the-detail-panel-facts-list-and-status
@@ -12,8 +12,9 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 1878.3, input: 485446, output: 93790, cache_read: 20332563}
-work_duration: 1912.0
+  worker: {turns: 3, duration_s: 2456.6, input: 499912, output: 96059, cache_read: 22503989}
+work_duration: 2512.8
+contributors: "@gemini"
 ---
 # T0048: Promote the detail panel, facts list, and status chip, and add an admin console shell example
 
@@ -29,7 +30,7 @@ After review, release the promoted parts as a minor version with the user's appr
 - [x] **[Implement]** Author failing browser tests for the three parts and the admin console example.
 - [x] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
 - [x] **[Implement]** Add the parts, gallery specimens, the example page, and catalog entries.
-- [ ] **[Verify]**    Run the affected tests and the full check suite.
+- [x] **[Verify]**    Run the affected tests and the full check suite.
 - [x] **[Doc]**       Update components.md, ADR-0004's setups, and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
@@ -67,4 +68,7 @@ After review, release the promoted parts as a minor version with the user's appr
 
 - [2026-11-17] **[Verify]**
   Running python scripts/devops.py check synchronously under background task task-272; also touched undeclared tests/e2e/verify-ui.spec.js (13 modified files, 360 lines).
+
+- [2026-11-17] **[Verify]**
+  Full devops check passed after npm ci filled the worktree node_modules; output in validation-proof.md.
 

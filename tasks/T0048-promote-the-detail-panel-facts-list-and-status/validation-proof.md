@@ -85,3 +85,41 @@ Running 240 tests using 4 workers
   18 skipped
   222 passed (1.4m)
 ```
+
+## python scripts/devops.py check (final)
+
+```text
+All 26 markdown files passed linting.
+All checks passed!
+rootdir: C:\Dev-Projects\support.webapp\.plan\work\T0048-promote-the-detail-panel-facts-list-and-status
+======================== 41 passed, 1 skipped in 2.02s ========================
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0048-promote-the-detail-panel-facts-list-and-status
+ Test Files  33 passed (33)
+      Tests  2130 passed (2130)
+  ✓   18 [desktop-light] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, status, removable, and filter chips in every state (1.1s)
+  ✓   27 [desktop-light] › tests\e2e\chip.spec.js:121:5 › neutral status chips pair distinct icon shapes with words and color warning and danger icons (1.1s)
+  ✓   28 [desktop-light] › tests\e2e\chip.spec.js:121:5 › warm status chips pair distinct icon shapes with words and color warning and danger icons (1.4s)
+  ✓   29 [desktop-light] › tests\e2e\chip.spec.js:121:5 › bright status chips pair distinct icon shapes with words and color warning and danger icons (1.5s)
+  ✓   48 [desktop-light] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it (1.0s)
+  ✓   71 [desktop-light] › tests\e2e\loading.spec.js:5:1 › loading status and slow-list placeholders render across looks and motion preferences (2.0s)
+  ✓  130 [desktop-light] › tests\e2e\spinner.spec.js:4:1 › decorative spinner sizes accompany status and stop under reduced motion (2.4s)
+  ✓  206 [desktop-dark] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, status, removable, and filter chips in every state (991ms)
+  ✓  215 [desktop-dark] › tests\e2e\chip.spec.js:121:5 › neutral status chips pair distinct icon shapes with words and color warning and danger icons (1.2s)
+  ✓  216 [desktop-dark] › tests\e2e\chip.spec.js:121:5 › warm status chips pair distinct icon shapes with words and color warning and danger icons (1.4s)
+  ✓  217 [desktop-dark] › tests\e2e\chip.spec.js:121:5 › bright status chips pair distinct icon shapes with words and color warning and danger icons (1.3s)
+  ✓  236 [desktop-dark] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it (1.0s)
+  ✓  259 [desktop-dark] › tests\e2e\loading.spec.js:5:1 › loading status and slow-list placeholders render across looks and motion preferences (2.1s)
+  ✓  318 [desktop-dark] › tests\e2e\spinner.spec.js:4:1 › decorative spinner sizes accompany status and stop under reduced motion (2.7s)
+  ✓  394 [mobile-light] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, status, removable, and filter chips in every state (1.0s)
+  ✓  403 [mobile-light] › tests\e2e\chip.spec.js:121:5 › neutral status chips pair distinct icon shapes with words and color warning and danger icons (1.3s)
+  ✓  404 [mobile-light] › tests\e2e\chip.spec.js:121:5 › warm status chips pair distinct icon shapes with words and color warning and danger icons (1.6s)
+  ✓  405 [mobile-light] › tests\e2e\chip.spec.js:121:5 › bright status chips pair distinct icon shapes with words and color warning and danger icons (1.4s)
+  ✓  424 [mobile-light] › tests\e2e\form.spec.js:4:1 › a failed submit by Enter fills the error summary, announces it, and focuses it (1.1s)
+  ✓  447 [mobile-light] › tests\e2e\loading.spec.js:5:1 › loading status and slow-list placeholders render across looks and motion preferences (2.2s)
+  ✓  506 [mobile-light] › tests\e2e\spinner.spec.js:4:1 › decorative spinner sizes accompany status and stop under reduced motion (2.5s)
+  ✓  582 [mobile-dark] › tests\e2e\chip.spec.js:7:1 › the chip section shows static, overdue, status, removable, and filter chips in every state (1.1s)
+  ✓  591 [mobile-dark] › tests\e2e\chip.spec.js:121:5 › neutral status chips pair distinct icon shapes with words and color warning and danger icons (1.1s)
+exit=0
+```
+
+Note: first run failed in tests/integration/generate-app.test.js because the worktree node_modules was empty; npm ci fixed it.
