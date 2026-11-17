@@ -50,6 +50,12 @@ All notable changes to this project are documented here.
 - DevEx: Made browser verification wait for complete look stylesheet loads before inspecting rendered pages.
 - Shell: Renamed demos to list editor, toolbar, single screen, and portal examples, with descriptive gallery links.
 - Docs: Explained component purposes, look choices, and shell layouts without requiring knowledge of existing applications.
+- Shell: Spanned the top bar and the action bar over every wide column, with the sidebar and side panel between them.
+- Shell: Added the `app__nav-toggle` hamburger, which cycles the wide sidebar through open, an icon rail, and hidden.
+- Shell: Opened the sidebar as a drawer under the top bar below 64rem, with a backdrop, Escape, and focus return.
+- Modules: Added `attachAppNav` in `app-nav.js`, which drives the nav toggle through `aria-expanded`, `hidden`, and the popover state.
+- Looks: Added the core `icon-nav-menu` glyph, three horizontal lines, to every look's sprite.
+- Docs: Moved the admin console demo's brand into the top bar and its page title into the content heading.
 
 ## v0.1.0 [released: 2026-11-13]
 - Modules: Shared field, form, and toast announcements through one polite live region per document.

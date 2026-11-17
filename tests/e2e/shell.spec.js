@@ -10,6 +10,8 @@ const AREAS = ['top-bar', 'sidebar', 'banners', 'main', 'side-panel', 'action-ba
 const BREAKPOINT = 1024;
 const SIDEBAR = 256;
 const SIDE_PANEL = 400;
+// The neutral rail: two 8 px sidebar paddings, two 12 px item paddings, the 20 px glyph, and the 1 px border.
+const RAIL = 61;
 const NARROW = 880;
 
 const demos = [
@@ -61,7 +63,9 @@ function areaBox(page, area) {
 }
 
 /**
- * Measure the offsets of the top bar's edge items from the main area's content edges.
+ * Measure the offsets of the top bar's edge items from their reference edges.
+ * The start reference is the sidebar's glyph column while a sidebar shows, and the main area's content start otherwise.
+ * The end reference is the main area's content end, measured from the window edge while a side panel shows.
  * Icon buttons count by their glyph box, other items by their own box; closed popovers and hidden items are skipped.
  * @param {import('@playwright/test').Page} page page to probe
  * @returns {Promise<{start: number, end: number, first: string, last: string}>} signed offsets in px, positive inward
@@ -71,7 +75,13 @@ function topBarEdges(page) {
         const main = document.querySelector('body > .app__main');
         const style = getComputedStyle(main);
         const rect = main.getBoundingClientRect();
-        const content = { start: rect.left + parseFloat(style.paddingLeft), end: rect.right - parseFloat(style.paddingRight) };
+        const rendered = (element) => Boolean(element) && element.getClientRects().length > 0;
+        const glyph = document.querySelector('body > .app__sidebar .app__nav-item .icon');
+        const panel = document.querySelector('body > .app__side-panel');
+        const content = {
+            start: rendered(glyph) ? glyph.getBoundingClientRect().left : rect.left + parseFloat(style.paddingLeft),
+            end: (rendered(panel) ? document.documentElement.clientWidth : rect.right) - parseFloat(style.paddingRight)
+        };
         const shown = (element) => element.getClientRects().length > 0 && !element.matches('[popover]');
         const items = [...document.querySelector('body > .app__top-bar').children]
             .flatMap((child) => (child.matches('.app__top-actions') ? [...child.children] : [child]))
@@ -136,6 +146,18 @@ for (const demo of demos) {
             await expect(page.locator('nav[aria-label="Main"]:visible')).toHaveCount(demo.areas.includes('sidebar') ? 1 : 0);
             const top = await areaBox(page, 'top-bar');
             expect(top.y).toBe(0);
+            // The top bar and the action bar span every column; the side columns sit between them.
+            expect(top.x).toBe(0);
+            expect(top.width).toBeCloseTo(width, 0);
+            const action = await areaBox(page, 'action-bar');
+            if (action) {
+                expect(action.x).toBe(0);
+                expect(action.width).toBeCloseTo(width, 0);
+            }
+            for (const column of [sidebar, demo.panelOpen && wide ? sidePanel : null].filter(Boolean)) {
+                expect(column.y).toBeCloseTo(top.height, 0);
+                expect(column.y + column.height).toBeCloseTo(action ? action.y : page.viewportSize().height, 0);
+            }
             expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
             expect(problems).toEqual([]);
         });
@@ -271,10 +293,13 @@ test('list-editor opens its side panel beside the main column or as a full-windo
     const box = await panel.boundingBox();
     const main = await areaBox(page, 'main');
     if (width >= BREAKPOINT) {
+        const top = await areaBox(page, 'top-bar');
+        const action = await areaBox(page, 'action-bar');
         expect(box.width).toBeCloseTo(SIDE_PANEL, 0);
         expect(box.x + box.width).toBeCloseTo(width, 0);
         expect(main.x + main.width).toBeCloseTo(box.x, 0);
-        expect(box.height).toBeCloseTo(height, 0);
+        expect(box.y).toBeCloseTo(top.height, 0);
+        expect(box.y + box.height).toBeCloseTo(action.y, 0);
     }
     else {
         expect(box).toEqual({ x: 0, y: 0, width, height });
@@ -311,7 +336,7 @@ test('a shell without a scroll modifier scrolls the main area, as the default ap
     expect(problems).toEqual([]);
 });
 
-test('the page scroll mode keeps the sidebar and side panel at the full viewport height on wide screens', async ({ page }) => {
+test('the page scroll mode keeps the sidebar and side panel in view between the bars on wide screens', async ({ page }) => {
     const { width, height } = page.viewportSize();
     test.skip(width < BREAKPOINT, 'the sidebar and the side panel column exist only in the wide layout');
     const problems = await openDemo(page, demos[0].path);
@@ -320,12 +345,126 @@ test('the page scroll mode keeps the sidebar and side panel at the full viewport
     await makeTall(page);
     await page.evaluate(() => window.scrollTo(0, 1500));
     expect(await page.evaluate(() => window.scrollY)).toBe(1500);
+    const top = await areaBox(page, 'top-bar');
+    const action = await areaBox(page, 'action-bar');
+    expect(top.y).toBeCloseTo(0, 0);
+    expect(action.y + action.height).toBeCloseTo(height, 0);
     for (const area of ['sidebar', 'side-panel']) {
         await expect(page.locator(`.app__${area}`), area).toHaveCSS('position', 'sticky');
         const box = await areaBox(page, area);
-        expect(box.y, area).toBeCloseTo(0, 0);
-        expect(box.height, area).toBeCloseTo(height, 0);
+        expect(box.y, area).toBeCloseTo(top.height, 0);
+        expect(box.y + box.height, area).toBeCloseTo(action.y, 0);
     }
+    expect(problems).toEqual([]);
+});
+
+for (const demo of demos.filter(({ areas }) => areas.includes('sidebar'))) {
+    test(`${demo.name} cycles its sidebar through open, rail, and hidden from the nav toggle`, async ({ page }) => {
+        const { width } = page.viewportSize();
+        test.skip(width < BREAKPOINT, 'the sidebar states exist only in the wide layout');
+        const problems = await openDemo(page, demo.path);
+        const toggle = page.locator('body > .app__top-bar > .app__nav-toggle');
+        await expect(toggle).toHaveCount(1);
+        await expect(toggle.locator('use')).toHaveAttribute('href', /#icon-nav-menu$/);
+        const glyphLeft = () => page.evaluate(() => ({
+            toggle: document.querySelector('.app__nav-toggle .icon').getBoundingClientRect().left,
+            nav: document.querySelector('.app__sidebar .app__nav-item .icon')?.getBoundingClientRect().left ?? null
+        }));
+        const states = [
+            { expanded: 'true', label: 'Collapse navigation', track: SIDEBAR },
+            { expanded: 'false', label: 'Hide navigation', track: RAIL },
+            { expanded: 'false', label: 'Show navigation', track: 0 },
+            { expanded: 'true', label: 'Collapse navigation', track: SIDEBAR }
+        ];
+        for (const [index, state] of states.entries()) {
+            if (index > 0) {
+                await toggle.click();
+            }
+            await expect(toggle).toHaveAttribute('aria-expanded', state.expanded);
+            await expect(toggle).toHaveAccessibleName(state.label);
+            const sidebar = await areaBox(page, 'sidebar');
+            const main = await areaBox(page, 'main');
+            expect(sidebar?.width ?? 0, state.label).toBeCloseTo(state.track, 0);
+            expect(main.x, state.label).toBeCloseTo(state.track, 0);
+            const glyphs = await glyphLeft();
+            if (state.track > 0) {
+                expect(Math.abs(glyphs.toggle - glyphs.nav), state.label).toBeLessThan(0.5);
+            }
+            if (state.track === RAIL) {
+                // The rail clips the labels but keeps them as the links' accessible names.
+                const item = page.locator('.app__sidebar .app__nav-item').first();
+                expect(await item.evaluate((element) => element.scrollWidth > element.clientWidth)).toBe(true);
+                await expect(item).toHaveAccessibleName(/\S/);
+                await expect(page.locator('.app__sidebar')).toHaveCSS('overflow-x', 'hidden');
+            }
+            const top = await areaBox(page, 'top-bar');
+            expect(top.width, state.label).toBeCloseTo(width, 0);
+        }
+        expect(problems).toEqual([]);
+    });
+}
+
+test('list-editor hides its nav toggle below 64rem, where the bottom bar holds the navigation', async ({ page }) => {
+    const { width } = page.viewportSize();
+    test.skip(width >= BREAKPOINT, 'the toggle shows in the wide layout');
+    const problems = await openDemo(page, demos[0].path);
+    await expect(page.locator('.app__nav-toggle')).toBeHidden();
+    await expect(page.locator('.app__bottom-nav')).toBeVisible();
+    expect(problems).toEqual([]);
+});
+
+test('admin-console opens its navigation as a drawer under the bar below 64rem', async ({ page }) => {
+    const { width, height } = page.viewportSize();
+    test.skip(width >= BREAKPOINT, 'the drawer exists only in the narrow layout');
+    const problems = await openDemo(page, demos[4].path);
+    await page.locator('[data-demo-panel-close]').click();
+    const toggle = page.locator('.app__nav-toggle');
+    const sidebar = page.locator('.app__sidebar');
+    await expect(toggle).toBeVisible();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(toggle).toHaveAccessibleName('Open navigation');
+    await expect(sidebar).toBeHidden();
+    const edges = await topBarEdges(page);
+    expect(Math.abs(edges.start), `start offset of ${edges.first}`).toBeLessThan(0.5);
+
+    await toggle.click();
+    await expect(sidebar).toBeVisible();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(toggle).toHaveAccessibleName('Close navigation');
+    await expect(sidebar.locator('[aria-current="page"]')).toBeFocused();
+    const top = await areaBox(page, 'top-bar');
+    const drawer = await sidebar.boundingBox();
+    expect(drawer.x).toBe(0);
+    expect(drawer.y).toBeCloseTo(top.height, 0);
+    expect(drawer.y + drawer.height).toBeCloseTo(height, 0);
+    expect(drawer.width).toBeLessThan(width);
+    const glyphs = await page.evaluate(() => ({
+        toggle: document.querySelector('.app__nav-toggle .icon').getBoundingClientRect().left,
+        nav: document.querySelector('.app__sidebar .app__nav-item .icon').getBoundingClientRect().left
+    }));
+    expect(Math.abs(glyphs.toggle - glyphs.nav)).toBeLessThan(0.5);
+    const backdrop = await sidebar.evaluate((element) => {
+        const style = getComputedStyle(element, '::backdrop');
+        return { color: style.backgroundColor, top: style.top };
+    });
+    expect(backdrop.color).not.toBe('rgba(0, 0, 0, 0)');
+    expect(parseFloat(backdrop.top)).toBeCloseTo(top.height, 0);
+
+    await page.keyboard.press('Escape');
+    await expect(sidebar).toBeHidden();
+    await expect(toggle).toBeFocused();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
+    await toggle.click();
+    await expect(sidebar).toBeVisible();
+    await toggle.click();
+    await expect(sidebar).toBeHidden();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
+    await toggle.click();
+    await page.mouse.click(width - 10, height / 2);
+    await expect(sidebar).toBeHidden();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     expect(problems).toEqual([]);
 });
 

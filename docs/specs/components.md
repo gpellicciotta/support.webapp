@@ -727,7 +727,7 @@ Theme switch. System removes `data-theme`; Light and Dark set it on the root ele
 ## App Shell
 The shell has the key `app`, and [ADR-0004](../adrs/ADR-0004-app-shell.md) defines its areas and options.
 Choose a setup by navigation, scrolling, and content width; omit areas your application does not need.
-The top bar parts `app__title`, `app__brand`, `app__menu-button`, `app__breadcrumb`, and `app__top-actions` come from ADR-0004.
+The top bar parts `app__nav-toggle`, `app__title`, `app__brand`, `app__menu-button`, `app__breadcrumb`, and `app__top-actions` come from ADR-0004.
 The sidebar and the bottom bar hold an `app__nav-list` of `app__nav-item` links, as the [demo pages](../../src/demo/visual-style-gallery.html#shell) show.
 
 ### Workspace with sidebar and bottom navigation
@@ -755,19 +755,22 @@ Place primary controls in the action bar and an editor in the side panel.
 ```
 
 ### Admin console with sidebar and detail panel
-Use a sidebar, top bar, scrolling main column, and side panel on desktop widths.
+Use a nav toggle and brand in the top bar, a sidebar, a scrolling main column, and a side panel.
 Omit the bottom navigation and action bar; open record details inside the side panel.
+Put the page title in the main area; `attachAppNav` from `app-nav.js` drives the toggle.
 
 ```html
 <body class="app app--scroll-main">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="app__top-bar">
-    <h1 class="app__title">Accounts</h1>
+    <button class="app__nav-toggle icon-button" type="button" popovertarget="app-nav" aria-controls="app-nav"
+            aria-expanded="true" aria-label="Navigation" data-app-nav-toggle>...</button>
+    <a class="app__brand" href="/">Admin Console</a>
     <div class="app__top-actions"><div class="account-menu">...</div></div>
   </header>
-  <nav class="app__sidebar" aria-label="Main">...</nav>
+  <nav class="app__sidebar" id="app-nav" aria-label="Main" popover>...</nav>
   <div class="app__banners"></div>
-  <main class="app__main" id="main" tabindex="-1">...</main>
+  <main class="app__main" id="main" tabindex="-1"><h1>Accounts</h1>...</main>
   <aside class="app__side-panel" aria-labelledby="detail-title">
     <div class="detail-panel">...</div>
   </aside>

@@ -12,7 +12,10 @@
 <body class="app app--scroll-main">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="app__top-bar">
-        <h1 class="app__title">Accounts</h1>
+        <button class="app__nav-toggle icon-button" type="button" popovertarget="admin-nav" aria-controls="admin-nav" aria-expanded="true" aria-label="Navigation" data-app-nav-toggle>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-nav-menu"/></svg>
+        </button>
+        <a class="app__brand" href="#main">Admin Console</a>
         <div class="app__top-actions">
             <div class="account-menu" data-account-menu>
                 <button class="account-menu__button" type="button" popovertarget="admin-account-menu" aria-label="Alex North" title="Alex North">
@@ -27,8 +30,7 @@
             </div>
         </div>
     </header>
-    <nav class="app__sidebar" aria-label="Main">
-        <a class="app__brand" href="#main">Admin Console</a>
+    <nav class="app__sidebar" id="admin-nav" aria-label="Main" popover>
         <ul class="app__nav-list">
             <li><a class="app__nav-item" href="#demo-settings-title"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-lists"/></svg>Overview</a></li>
             <li><a class="app__nav-item" href="#main" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-people"/></svg>Accounts</a></li>
@@ -39,6 +41,7 @@
     </nav>
     <div class="app__banners"></div>
     <main class="app__main" id="main" tabindex="-1">
+        <h1>Accounts</h1>
         <section class="gallery-section" aria-labelledby="demo-settings-title">
             <h2 id="demo-settings-title">Demo settings</h2>
             <p>Return to the <a href="visual-style-gallery.html#shell">visual style gallery</a> for the other shell demos.</p>

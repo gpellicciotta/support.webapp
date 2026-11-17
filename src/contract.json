@@ -887,7 +887,8 @@
     "icon-check",
     "icon-alert",
     "icon-help",
-    "icon-chevron-down"
+    "icon-chevron-down",
+    "icon-nav-menu"
   ],
   "components": [
     "button",

@@ -1,6 +1,7 @@
-/* Admin console shell demo interactions: look/theme switchers, row selection, detail panel focus, and inline confirmation. */
+/* Admin console shell demo interactions: look/theme switchers, nav toggle, row selection, detail panel focus, and inline confirmation. */
 
 import { attachAccountMenu } from '../js/account-menu.js';
+import { attachAppNav } from '../js/app-nav.js';
 import { attachInlineConfirm } from '../js/inline-confirm.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { createToast } from '../js/toast.js';
@@ -8,6 +9,10 @@ import { initGallery } from './gallery.js';
 
 export function initAdminConsoleDemo(doc, view) {
     initGallery(doc, view);
+    const navToggle = doc.querySelector('[data-app-nav-toggle]');
+    if (navToggle) {
+        attachAppNav(navToggle, doc.getElementById(navToggle.getAttribute('aria-controls')));
+    }
     const liveRegion = createLiveRegion({ document: doc });
     const toaster = createToast({
         document: doc,

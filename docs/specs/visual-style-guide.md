@@ -201,6 +201,9 @@ Components reference only core ids; apps may add local glyphs in their own sprit
 
 **[Decided]** The core list adds `icon-chevron-down` for disclosure toggles, such as the collapsible and select menus.
 
+**[Decided]** The core list adds `icon-nav-menu`, three horizontal lines, for the shell's nav toggle.
+- `icon-menu`: rejected, because the warm look already draws a utensils glyph under that id.
+
 ### Focus
 - One global `:focus-visible` glow marks focus, from [reset.css](../../src/css/reset.css).
 - The glow is a solid `--focus-ring-width` contour in `--color-focus`, plus a soft halo at 20% of that color.
@@ -505,11 +508,12 @@ The runnable examples demonstrate these combinations:
 - [Toolbar](../../src/demo/shell-toolbar.html): an overflow menu at the bar end, with sticky bars and page scrolling.
 - [Single screen](../../src/demo/shell-single-screen.html): narrow content with no navigation and app-owned screen toggles.
 - [Portal](../../src/demo/shell-portal.html): breadcrumbs, account actions, and a footer in the action bar.
-- [Admin console](../../src/demo/shell-admin-console.html): sidebar, top bar, open detail panel, and scrolling main area, without bottom or action bars.
+- [Admin console](../../src/demo/shell-admin-console.html): nav toggle, brand, sidebar, open detail panel, and scrolling main area.
+  It has no bottom or action bar, so below 64rem its navigation opens as a drawer.
 Open the five demo pages from the [App shell section](../../src/demo/visual-style-gallery.html#shell) of the gallery.
 
 Areas are direct children of `<body class="app">`; only `app__main` is required:
-- `app__top-bar`, with `app__title` or `app__brand`, `app__menu-button` or `app__breadcrumb`, and `app__top-actions`.
+- `app__top-bar`, with `app__nav-toggle`, `app__title` or `app__brand`, `app__menu-button` or `app__breadcrumb`, and `app__top-actions`.
 - `app__sidebar` and `app__bottom-nav`, both `<nav aria-label="Main">`, with `app__nav-list` and `app__nav-item` links.
 - `app__banners`, which takes no room while every banner inside it is hidden.
 - `app__main`, with `id="main"` and `tabindex="-1"` as the skip link target.
@@ -520,22 +524,50 @@ Areas are direct children of `<body class="app">`; only `app__main` is required:
 Layout rules:
 - The grid drops the tracks of absent areas through `:has()`, so no class names the present areas.
 - Below 64rem the sidebar hides, the bottom bar shows, and the side panel covers the window as a sheet.
-- From 64rem the sidebar and the side panel sit beside the main column, and the bottom bar hides.
+- From 64rem the top bar and the action bar span every column; the sidebar and side panel sit between them.
+  The bottom bar hides.
 - Media queries cannot read custom properties, so 64rem is a constant; components use container queries instead.
 - `app--scroll-main`, the default without a scroll class, makes the main area the scroll container between the bars.
 - `app--scroll-page` scrolls the document; the top bar, the action bar, and the bottom bar stick.
 - `app--width-reading`, `app--width-narrow`, and `app--width-content` center the top bar, banners, main area, and action bar.
 - The top bar's first and last icon buttons reach outward by their glyph inset, so the glyphs align with content text.
+- With a sidebar in the wide layout, the top bar starts on the sidebar's glyph column instead.
 - Put an overflow menu's `icon-more` button, drawn as vertical dots, at the end of the top bar.
 - The toast region sits above the action bar and the bottom bar.
 - Mark the current navigation entry, and the last breadcrumb link, with `aria-current="page"`.
 - Add `viewport-fit=cover` to the viewport meta tag, so bars pad with the safe-area insets of phones.
+
+Nav toggle:
+- Put the `app__nav-toggle` icon button first in the top bar, drawing `icon-nav-menu`.
+- Give the sidebar an `id` and the `popover` attribute, and point the toggle's `popovertarget` and `aria-controls` at it.
+- Call `attachAppNav(toggle, sidebar)` from [app-nav.js](../../src/js/app-nav.js).
+- From 64rem each press cycles the sidebar through open, an icon rail, and hidden.
+  `aria-expanded` is true only while it is open, and the label names the next step.
+- Below 64rem each press opens or closes a drawer under the top bar, with a backdrop.
+  Escape, a click outside, and a followed link close it; Escape returns focus to the toggle.
+- Below 64rem the toggle hides when a bottom bar holds the navigation.
+- The rail clips the link labels, which stay the links' accessible names; its glyphs keep their open-state column.
+- Without the script, the toggle still opens the drawer at every width through `popovertarget`.
+
+```html
+<header class="app__top-bar">
+  <button class="app__nav-toggle icon-button" type="button" popovertarget="app-nav" aria-controls="app-nav"
+          aria-expanded="true" aria-label="Navigation" data-app-nav-toggle>...</button>
+  <a class="app__brand" href="/">Admin Console</a>
+</header>
+<nav class="app__sidebar" id="app-nav" aria-label="Main" popover>...</nav>
+```
 
 `shell.css` is the only package stylesheet with fixed or sticky positions; it also pins the toast region.
 The `.skip-link` sits above the top edge until focused, keeping its 44 px target.
 
 **[Decided]** The width options center the top bar, banners, and action bar with the main area, so their content lines up.
 - Centering the main area alone: rejected, because the action bar would then span the full window.
+
+**[Decided]** The nav toggle keeps its state in native states and ARIA, as [naming.md](naming.md) requires.
+- The toggle's `aria-expanded`, the sidebar's `hidden`, and `:popover-open` carry open, rail, hidden, and the drawer.
+- A state class on `.app`: rejected, because assistive technology cannot see it.
+- Reusing `app__menu-button`: rejected, because that part opens a menu, not the navigation.
 
 **[Decided]** Apps own responsive moves between the action bar and `app__top-actions`.
 The shell defines placement areas without moving controls; see [ADR-0004](../adrs/ADR-0004-app-shell.md) for layout decisions.
@@ -567,7 +599,8 @@ The shell defines placement areas without moving controls; see [ADR-0004](../adr
 - [toast.spec.js](../../tests/e2e/toast.spec.js) raises gallery toasts and checks Undo by pointer and keyboard.
 - [collapsible.test.js](../../tests/unit/collapsible.test.js) and [account-menu.test.js](../../tests/unit/account-menu.test.js) check both modules in happy-dom.
 - [collapsible.spec.js](../../tests/e2e/collapsible.spec.js) and [account-menu.spec.js](../../tests/e2e/account-menu.spec.js) drive both by pointer and keyboard.
-- [shell.spec.js](../../tests/e2e/shell.spec.js) checks areas, scroll owners, sticky bars, widths, and the side panel on each demo page.
+- [app-nav.test.js](../../tests/unit/app-nav.test.js) checks the nav toggle's states, labels, drawer, and focus in happy-dom.
+- [shell.spec.js](../../tests/e2e/shell.spec.js) checks areas, scroll owners, sticky bars, widths, the nav toggle, and the side panel on each demo page.
 - [verify-ui.spec.js](../../tests/e2e/verify-ui.spec.js) is the browser verifier for contrast, layout, focus, and runtime failures.
 
 The verifier runs the gallery and each shell demo page in each look at 390 and 1440 px, with system and explicit themes:

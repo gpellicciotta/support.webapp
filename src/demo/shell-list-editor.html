@@ -12,6 +12,9 @@
 <body class="app app--scroll-main">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="app__top-bar">
+        <button class="app__nav-toggle icon-button" type="button" popovertarget="list-nav" aria-controls="list-nav" aria-expanded="true" aria-label="Navigation" data-app-nav-toggle>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-nav-menu"/></svg>
+        </button>
         <h1 class="app__title">List editor</h1>
         <div class="app__top-actions">
             <button class="icon-button" type="button" aria-label="Account">
@@ -19,7 +22,7 @@
             </button>
         </div>
     </header>
-    <nav class="app__sidebar" aria-label="Main">
+    <nav class="app__sidebar" id="list-nav" aria-label="Main" popover>
         <ul class="app__nav-list">
             <li><a class="app__nav-item" href="#main" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-tasks"/></svg>Tasks</a></li>
             <li><a class="app__nav-item" href="#sample-lists"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-lists"/></svg>Lists</a></li>

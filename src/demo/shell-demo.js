@@ -1,17 +1,22 @@
-/* Look and theme switchers and the sample interactions of the shell demo pages. */
+/* Look and theme switchers, the nav toggle, and the sample interactions of the shell demo pages. */
 
 import { initGallery } from './gallery.js';
+import { attachAppNav } from '../js/app-nav.js';
 import { attachMenu } from '../js/menu.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { createToast } from '../js/toast.js';
 
 /**
- * Wire the switchers, the sample toast and menu, the side panel, and the screen toggle of one shell demo page.
+ * Wire the switchers, the nav toggle, the sample toast and menu, the side panel, and the screen toggle of one shell demo page.
  * @param {Document} doc demo document
  * @param {Window} view window that computes styles
  */
 export function initShellDemo(doc, view) {
     initGallery(doc, view);
+    const navToggle = doc.querySelector('[data-app-nav-toggle]');
+    if (navToggle) {
+        attachAppNav(navToggle, doc.getElementById(navToggle.getAttribute('aria-controls')));
+    }
     const toaster = createToast({ document: doc, region: doc.querySelector('.app__overlays > .toast-region'), liveRegion: createLiveRegion({ document: doc }) });
     for (const button of doc.querySelectorAll('[data-demo-toast]')) {
         button.addEventListener('click', () => toaster.show(button.dataset.demoToast));
