@@ -1,4 +1,4 @@
-<!-- First-party family-portal glyphs, MIT, copyright 2026 Giovanni Pellicciotta.
+<!-- First-party warm glyphs, MIT, copyright 2026 Giovanni Pellicciotta.
 Core and gallery supplements from neutral (MIT): icon-status-todo, icon-status-in-progress, icon-status-completed, icon-status-cancelled, icon-clock, icon-help, icon-more, icon-back, icon-plus, icon-search, icon-sort, icon-chevron-down, icon-settings, icon-bell, icon-sync-local, icon-sync-synced, icon-sync-syncing, icon-sync-offline, icon-sync-sign-in, icon-sync-error. -->
 <svg xmlns="http://www.w3.org/2000/svg">
 <symbol id="icon-counters" viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></symbol>

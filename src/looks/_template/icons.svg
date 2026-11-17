@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg">
   <!--
-    Icon sprite of the neutral look, copied from todos.webapp with the icon- id prefix: one 24 px grid, stroked outlines, round caps and joins.
+    Icon sprite of the neutral look, with the icon- id prefix: one 24 px grid, stroked outlines, round caps and joins.
     Pages draw an icon with <svg class="icon" aria-hidden="true" focusable="false"><use href="{{path}}/looks/neutral/icons.svg#{{id}}"/></svg>.
     Every look sprite provides the core ids that src/contract.json lists under "icons".
     The `.icon` class sets the size, the stroke width, and `stroke: currentColor`, so icons follow the text color.

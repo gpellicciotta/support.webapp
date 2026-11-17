@@ -1,4 +1,4 @@
-/* Private bright palette and system stacks; meteo 8937c32 with documented AA adjustments. */
+/* Private bright palette and system stacks, with documented AA adjustments. */
 :root {
   --white: #ffffff;
   --slate-50: #f8fafc;

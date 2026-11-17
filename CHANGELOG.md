@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Docs: Rewrote source comments that named sibling apps as generic rationale, keeping license notes.
 - Components: Added `.detail-panel`, bordered `.list--facts` and `.list--compact` rows, `.chip--status` variants, and the [admin console demo](src/demo/shell-admin-console.html).
 - Components: Added the filter `.toolbar`, `.pager`, bordered `.table__frame`, and table row hover and `aria-selected` states with gallery specimens.
 - Components: Gave switches rounded-rectangle tracks with `--radius-control` and concentric thumbs instead of elliptical `50%` tracks.
