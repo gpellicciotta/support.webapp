@@ -1,11 +1,11 @@
 ---
 id: T0048
-owner: ~
-needs: [T0047]
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0048-promote-the-detail-panel-facts-list-and-status
+worktree: .plan/work/T0048-promote-the-detail-panel-facts-list-and-status
+status: active
+started_at: "2026-11-17T00:49:19Z"
 ended_at: —
 review: agent
 preview: none
