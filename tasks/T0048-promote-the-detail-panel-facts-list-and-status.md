@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1800.6, input: 2962, output: 340}
+work_duration: 1809.8
 ---
 # T0048: Promote the detail panel, facts list, and status chip, and add an admin console shell example
 
