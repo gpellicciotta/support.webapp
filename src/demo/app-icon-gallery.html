@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../img/app-icons/blue-flat/family-portal-icon-32.png" type="image/png">
+    <title>App icon gallery · support.webapp</title>
+    <link rel="stylesheet" href="../looks/neutral/index.css">
+    <style>
+        .icon-gallery { max-width: 64rem; margin-inline: auto; padding: var(--space-4); }
+        .icon-set { margin-block: var(--space-6); padding: var(--space-4); border: var(--border-width) solid var(--color-border);
+            border-radius: var(--radius-card); background-color: var(--color-surface); }
+        .icon-set--dark { background-color: #0a1626; color: #e5edf8; border-color: #1f3350; }
+        .icon-set--dark a { color: #8ec5f5; }
+        .icon-set h2 { margin-block: 0 var(--space-1); }
+        .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: var(--space-4);
+            list-style: none; margin: var(--space-4) 0 0; padding: 0; }
+        .icon-grid li { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); text-align: center; }
+        .icon-grid .sizes { display: flex; align-items: flex-end; gap: var(--space-2); }
+        .icon-grid a { font-size: 0.8em; }
+    </style>
+</head>
+<body>
+    <main class="icon-gallery">
+        <h1>App icon gallery</h1>
+        <p>The shared icons of all apps, in four styles. Each style folder in <code>src/img/app-icons/</code> holds an SVG,
+            PNG renditions (32 to 512 px), and a multi-size ICO per app. Shown at 128, 48, 32, and 20 px.
+            Regenerate with <code>python scripts/generate-app-icons.py</code>.</p>
+        <div id="icon-sets"></div>
+    </main>
+    <script>
+        const apps = ["meteo", "verkeersregels-quiz", "counters", "todos", "auth", "family-portal"];
+        const styles = [
+            { id: "white-flat", title: "White flat", note: "White hexagon, blue glyph. For dark backgrounds.", dark: true },
+            { id: "white-dimensional", title: "White dimensional", note: "Gradient, rim, and shadow. For dark backgrounds.", dark: true },
+            { id: "blue-flat", title: "Blue flat", note: "Blue hexagon, white glyph. For light backgrounds.", dark: false },
+            { id: "blue-dimensional", title: "Blue dimensional", note: "Gradient, rim light, and shadow. For light backgrounds.", dark: false },
+        ];
+        const root = document.getElementById("icon-sets");
+        for (const style of styles) {
+            const section = document.createElement("section");
+            section.className = "icon-set" + (style.dark ? " icon-set--dark" : "");
+            const items = apps.map((app) => {
+                const base = `../img/app-icons/${style.id}/${app}-icon`;
+                const small = [48, 32, 20].map((size) => `<img src="${base}-64.png" width="${size}" height="${size}" alt="">`).join("");
+                return `<li><img src="${base}.svg" width="128" height="128" alt="${app} icon">
+                    <span class="sizes">${small}</span><strong>${app}</strong>
+                    <span><a href="${base}.svg">svg</a> · <a href="${base}-512.png">png</a> · <a href="${base}.ico">ico</a></span></li>`;
+            }).join("");
+            section.innerHTML = `<h2>${style.title}</h2><p>${style.note}</p><ul class="icon-grid">${items}</ul>`;
+            root.append(section);
+        }
+    </script>
+</body>
+</html>
