@@ -1,5 +1,14 @@
 # Neutral look
-The neutral look combines gray surfaces, navy actions, Inter typography, and compact control shapes.
+The neutral look combines slate gray surfaces, blue actions, Inter typography, and compact control shapes.
+
+## Palette
+**[Decided]** The user chose slate grays and a blue accent from five rendered variants on 2026-11-17.
+The blue replaces the earlier navy, so primary actions stand out more against the grays.
+- Grays: slate steps from `#ffffff` and `#f8fafc` to `#0f172a` and `#020617`.
+- Primary: blue `#2563eb` in light and `#7ea2f6` in dark; hover and active step darker in light and lighter in dark.
+- Dark blue is lighter than `#60a5fa`, keeping in-progress status at least 60 RGB distance from primary.
+- Shadow and backdrop tints use slate 900 in light.
+- Inter remains the only face.
 
 ## Provenance
 See [ADR-0002](../../adrs/ADR-0002-looks.md) for the look's origins and separation from shared structure.

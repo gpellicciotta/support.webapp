@@ -264,6 +264,22 @@ describe('token contract', () => {
         expect(() => resolveRaw(tokens, '--missing', 'light')).toThrow('undefined token');
     });
 
+    it('uses the chosen slate and blue neutral palette without navy primitives', () => {
+        const primitives = declarations(clean(readFileSync(join(root, 'looks/neutral/primitives.css'), 'utf8')));
+        const expected = {
+            '--gray-0': '#ffffff', '--gray-50': '#f8fafc', '--gray-100': '#f1f5f9', '--gray-200': '#e2e8f0',
+            '--gray-300': '#cbd5e1', '--gray-400': '#94a3b8', '--gray-500': '#64748b', '--gray-600': '#475569',
+            '--gray-700': '#334155', '--gray-800': '#1e293b', '--gray-850': '#172033', '--gray-900': '#0f172a',
+            '--gray-950': '#020617', '--blue-50': '#eff6ff', '--blue-200': '#c3d5fb', '--blue-300': '#a3bdf8',
+            '--blue-400': '#7ea2f6', '--blue-600': '#2563eb', '--blue-700': '#1d4ed8', '--blue-800': '#1e40af',
+            '--blue-950': '#172554'
+        };
+        expect(Object.fromEntries(Object.keys(expected).map((name) => [name, primitives.get(name)]))).toEqual(expected);
+        for (const file of ['primitives.css', 'look.css']) {
+            expect(clean(readFileSync(join(root, 'looks/neutral', file), 'utf8')), file).not.toMatch(/--navy-/);
+        }
+    });
+
     it('preserves the copied font and license bytes', () => {
         const hashes = {
             'InterVariable.woff2': '693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3',
