@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1800.6, input: 2, output: 24}
+work_duration: 1813.7
 ---
 # T0237: Polish small controls: link button padding, smaller rounder badges, lower switches, separated segment borders, and tab headings
 
