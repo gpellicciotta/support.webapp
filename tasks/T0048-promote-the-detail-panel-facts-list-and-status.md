@@ -12,9 +12,12 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 3, duration_s: 2456.6, input: 499912, output: 96059, cache_read: 22503989}
+  worker: {turns: 4, duration_s: 3221.7, input: 499934, output: 98224, cache_read: 22931834, cache_write: 25711}
 work_duration: 2512.8
 contributors: "@gemini"
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T01:44:05Z"
 ---
 # T0048: Promote the detail panel, facts list, and status chip, and add an admin console shell example
 
@@ -71,4 +74,7 @@ After review, release the promoted parts as a minor version with the user's appr
 
 - [2026-11-17] **[Verify]**
   Full devops check passed after npm ci filled the worktree node_modules; output in validation-proof.md.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
