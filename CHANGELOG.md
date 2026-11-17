@@ -9,7 +9,7 @@ All notable changes to this project are documented here.
 
 ---
 
-## v0.2.0-pre
+## v0.2.0 [released: 2026-11-17]
 - Components: Gave banner actions one spacing step to the top, bottom, and end borders, wrapping them below multiline text.
 - Components: Put labeled row actions on the row text's first baseline, and ended row actions at the row's end edge.
 - Components: Added `.card__actions`, which flows static card buttons to the end edge instead of stretching them.
