@@ -79,7 +79,9 @@
                     <li><a href="#banner">Banner</a></li>
                     <li><a href="#shell">App shell</a></li>
                     <li><a href="#list">List</a></li>
+                    <li><a href="#toolbar">Toolbar</a></li>
                     <li><a href="#table">Data table</a></li>
+                    <li><a href="#pager">Pager</a></li>
                     <li><a href="#progress">Progress</a></li>
                     <li><a href="#spinner">Spinner</a></li>
                 </ul>
@@ -846,6 +848,34 @@
                 <dt class="list__term">Description</dt><dd class="list__value">Shared household supplies and longer notes that wrap naturally on a phone.</dd>
             </dl>
         </section>
+        <section id="toolbar" class="gallery-section" aria-labelledby="toolbar-title">
+            <h2 id="toolbar-title">Toolbar</h2>
+            <p>Filter fields and optional actions align to their bottom edge and wrap on narrow screens.</p>
+            <div class="toolbar" role="search" aria-label="Filter sample records">
+                <div class="field">
+                    <label class="field__label" for="toolbar-filter">Filter this page</label>
+                    <input class="field__control" id="toolbar-filter" type="search" placeholder="Name or location">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="toolbar-category">Category</label>
+                    <select class="field__control" id="toolbar-category">
+                        <option value="">All categories</option>
+                        <option value="meter">Meters</option>
+                        <option value="sensor">Sensors</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="toolbar-size">Page size</label>
+                    <select class="field__control" id="toolbar-size">
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+                <button class="button button--secondary" type="button">Clear filters</button>
+            </div>
+            <div class="toolbar" role="search" aria-label="Hidden filter bar" hidden></div>
+        </section>
         <section id="table" class="gallery-section" aria-labelledby="table-title">
             <h2 id="table-title">Data table</h2>
             <p>Native captions and scoped headers preserve relationships. Focus the named region to scroll wide data with the keyboard.</p>
@@ -869,6 +899,45 @@
                     <tr><th scope="row">Workshop</th><td class="table__numeric">105.00 kWh</td></tr>
                 </tbody>
             </table>
+            <h3>Framed table and row states</h3>
+            <p>A framed region rounds the card border. Rows show hover feedback, and a selected row adds the selected ground and a primary start edge.</p>
+            <div class="table__frame" role="region" aria-labelledby="accounts-caption" tabindex="0">
+                <table class="table table--dense">
+                    <caption class="visually-hidden" id="accounts-caption">Sample accounts</caption>
+                    <thead><tr><th scope="col" class="table__numeric">ID</th><th scope="col">Account</th><th scope="col">Role</th><th scope="col">Status</th><th scope="col">Details</th></tr></thead>
+                    <tbody>
+                        <tr><td class="table__numeric">1</td><th scope="row">North hub</th><td><span class="chip">Operator</span></td><td>Active</td><td><button class="button button--secondary button--small" type="button">Inspect North hub</button></td></tr>
+                        <tr class="is-hover"><td class="table__numeric">14</td><th scope="row">East sensor</th><td><span class="chip">Reader</span></td><td>Active (hover)</td><td><button class="button button--secondary button--small" type="button">Inspect East sensor</button></td></tr>
+                        <tr aria-selected="true"><td class="table__numeric">34</td><th scope="row">South relay</th><td><span class="chip">Admin</span></td><td>Active (selected)</td><td><button class="button button--secondary button--small" type="button">Inspect South relay</button></td></tr>
+                        <tr><td class="table__numeric">42</td><th scope="row">West archive</th><td><span class="chip">Reader</span></td><td>Standby</td><td><button class="button button--secondary button--small" type="button">Inspect West archive</button></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section id="pager" class="gallery-section" aria-labelledby="pager-title">
+            <h2 id="pager-title">Pager</h2>
+            <p>Status text sits beside First, Previous, Next, and Last buttons; unavailable boundaries use native disabled.</p>
+            <div class="stack">
+                <nav class="pager" aria-label="First page example">
+                    <p class="pager__text">Page 1 · 20 records shown</p>
+                    <div class="pager__buttons">
+                        <button class="button button--secondary" type="button" disabled>First</button>
+                        <button class="button button--secondary" type="button" disabled>Previous</button>
+                        <button class="button button--secondary" type="button">Next</button>
+                        <button class="button button--secondary" type="button">Last</button>
+                    </div>
+                </nav>
+                <nav class="pager" aria-label="Last page example">
+                    <p class="pager__text">Last page · 8 records shown</p>
+                    <div class="pager__buttons">
+                        <button class="button button--secondary" type="button">First</button>
+                        <button class="button button--secondary" type="button">Previous</button>
+                        <button class="button button--secondary" type="button" disabled>Next</button>
+                        <button class="button button--secondary" type="button" disabled>Last</button>
+                    </div>
+                </nav>
+            </div>
+            <nav class="pager" aria-label="Hidden pager" hidden></nav>
         </section>
         <section id="card" class="gallery-section" aria-labelledby="card-title">
             <h2 id="card-title">Card</h2>

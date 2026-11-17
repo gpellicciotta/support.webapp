@@ -10,7 +10,7 @@ Every component the design system provides, with its key, behavior, HTML skeleto
 ---
 
 ## How to Read This Catalog
-- Every component in the tables belongs to the first set: the initial set of ADR-0003, delivered across phases 1 and 2.
+- The tables list the initial set of ADR-0003 and components promoted under its sharing rule.
 - The skeletons are normative: CSS, JavaScript, server templates, and the generator all build on them.
 - Each skeleton heading is the component key, so `components.md#dialog` links to the dialog.
 - Every component gets a gallery section, `id="{{key}}"`, before its task ends.
@@ -51,16 +51,18 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `selection`     | Multi-select with bulk actions | `selection.js`: `attachSelection`                | none, some, or all selected; bar with count and actions         | native checkboxes; Shift selects a range; count announced                        |
 
 ### Containers
-| Key           | Component   | Module and functions                  | Variants and states                                       | Accessibility minimum                              |
-| :------------ | :---------- | :------------------------------------ | :-------------------------------------------------------- | :------------------------------------------------- |
-| `card`        | Card        | none                                  | static, link card with hover lift, with media             | a link card nests no other controls                |
-| `icon-tile`   | Icon tile   | none                                  | tones 1 to 4; sizes sm, md, lg                            | decorative icon is `aria-hidden`                   |
-| `row`         | Row base    | none                                  | dense row with trailing actions; container query at 36rem | list semantics; actions reachable by keyboard      |
-| `empty-state` | Empty state | none                                  | icon, title, text, at most two actions                    | heading level set by the app                       |
-| `collapsible` | Collapsible | `collapsible.js`: `attachCollapsible` | collapsed, expanded                                       | button with `aria-expanded` and `aria-controls`    |
-| `list`        | List        | none                                  | simple list, definition rows                              | native `ul`, `ol`, or `dl`                         |
-| `table`       | Data table  | none                                  | plain, dense; caption; numeric columns aligned            | native table with `caption` and `th scope`         |
-| `tabs`        | Tabs        | `tabs.js`: `attachTabs`               | selected, disabled                                        | `tablist`, `tab`, and `tabpanel` roles; arrow keys |
+| Key           | Component   | Module and functions                  | Variants and states                                           | Accessibility minimum                              |
+| :------------ | :---------- | :------------------------------------ | :------------------------------------------------------------ | :------------------------------------------------- |
+| `card`        | Card        | none                                  | static, link card with hover lift, with media                 | a link card nests no other controls                |
+| `icon-tile`   | Icon tile   | none                                  | tones 1 to 4; sizes sm, md, lg                                | decorative icon is `aria-hidden`                   |
+| `row`         | Row base    | none                                  | dense row with trailing actions; container query at 36rem     | list semantics; actions reachable by keyboard      |
+| `empty-state` | Empty state | none                                  | icon, title, text, at most two actions                        | heading level set by the app                       |
+| `collapsible` | Collapsible | `collapsible.js`: `attachCollapsible` | collapsed, expanded                                           | button with `aria-expanded` and `aria-controls`    |
+| `list`        | List        | none                                  | simple list, definition rows                                  | native `ul`, `ol`, or `dl`                         |
+| `toolbar`     | Toolbar     | none                                  | wrapping filter fields and actions aligned to the bottom edge | `role="search"` landmark; labeled native controls  |
+| `table`       | Data table  | none                                  | plain, dense, framed; hover and `aria-selected` rows; numeric | native table with `caption` and `th scope`         |
+| `pager`       | Pager       | none                                  | status text with First, Previous, Next, and Last buttons      | labeled `nav`; native `disabled` on boundaries     |
+| `tabs`        | Tabs        | `tabs.js`: `attachTabs`               | selected, disabled                                            | `tablist`, `tab`, and `tabpanel` roles; arrow keys |
 
 ### Feedback
 | Key           | Component       | Module and functions                 | Variants and states                          | Accessibility minimum                                        |
@@ -90,13 +92,13 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `theme-switch` | Theme switch | `theme-switch.js`: `attachThemeSwitch`                  | System, Light, Dark                                     | segmented control of native radios                 |
 
 ### Not in the Package
-| Component                                              | Reason                                                                            |
-| :----------------------------------------------------- | :-------------------------------------------------------------------------------- |
-| Task row, recycle bin screen                           | app-local                                                                         |
-| Forecast chart                                         | domain-specific visualization; provide an accessible text equivalent              |
-| Reaction toggle, drag handles, avatar cropper          | app-specific interactions requiring their own keyboard and accessibility behavior |
-| Inbox panel, Web Push                                  | app-local, connected features                                                     |
-| Pagination, slider, date picker, file upload, combobox | no adopter needs them; they enter under the sharing rule                          |
+| Component                                     | Reason                                                                            |
+| :-------------------------------------------- | :-------------------------------------------------------------------------------- |
+| Task row, recycle bin screen                  | app-local                                                                         |
+| Forecast chart                                | domain-specific visualization; provide an accessible text equivalent              |
+| Reaction toggle, drag handles, avatar cropper | app-specific interactions requiring their own keyboard and accessibility behavior |
+| Inbox panel, Web Push                         | app-local, connected features                                                     |
+| Slider, date picker, file upload, combobox    | no adopter needs them; they enter under the sharing rule                          |
 
 ---
 
@@ -386,30 +388,71 @@ The [WAI content structure tutorial](https://www.w3.org/WAI/tutorials/page-struc
 <dl class="list list--definitions"><dt class="list__term">Owner</dt><dd class="list__value">Ann</dd></dl>
 ```
 
+### toolbar
+Toolbar. Filter fields and optional actions in one wrapping row above a table or list; no JavaScript module.
+- Items align to their bottom edge so labeled controls and trailing buttons share one baseline.
+- Field containers keep at least `--width-menu` where room allows and wrap cleanly on narrow screens.
+- Use `role="search"` with an accessible label so inputs and selects keep ordinary Tab and arrow keys.
+- Never set `role="toolbar"` on filter fields, since roving arrow keys conflict with text editing and selects.
+
+```html
+<div class="toolbar" role="search" aria-label="Filter accounts">
+  <div class="field">
+    <label class="field__label" for="account-filter">Filter this page</label>
+    <input class="field__control" id="account-filter" type="search" placeholder="Name or email">
+  </div>
+  <div class="field">
+    <label class="field__label" for="account-size">Page size</label>
+    <select class="field__control" id="account-size"><option>20</option><option>50</option><option>100</option></select>
+  </div>
+</div>
+```
+
 ### table
 Data table. Native tabular markup; no JavaScript module.
-
 - Preserve native table display, captions, column headers, and row headers.
 - Use `.table__numeric` for numeric alignment and tabular figures.
 - Use `.table--dense` for reduced cell padding; nested controls keep their normal touch targets.
 - Share row spacing, surface, border, and text tokens without applying flex-based `.row` styling to table rows.
-- Wrap wide tables in `.table__scroll`; overflow stays inside the wrapper at phone widths.
+- Wrap wide tables in `.table__scroll`, or `.table__frame` for a bordered card frame; overflow stays contained.
 - Make the named scroll region focusable for keyboard scrolling, with the global visible focus outline.
 - Tab visits the wrapper and nested controls; cells remain static and have no arrow-key navigation model.
-- Controls retain their component states; tables have no selected, disabled, or error state themselves.
+- Body rows show hover feedback; `tr[aria-selected="true"]` adds the selected ground and a primary inline-start edge.
+- Forced colors keep a `Highlight` inline-start border on selected rows, so selection never relies on color alone.
+- Tables have no disabled or error state themselves; nested controls keep their own component states.
 - Use existing loading, banner, and empty-state patterns for request outcomes, keeping caption and headers meaningful.
 - CSS introduces no sorting or selection behavior; applications must supply behavior before exposing those controls.
 
 The [WAI-ARIA table pattern](https://www.w3.org/WAI/ARIA/apg/patterns/table/) recommends native tables for static tabular content.
 
 ```html
-<div class="table__scroll" role="region" aria-labelledby="readings-caption" tabindex="0">
-  <table class="table">
-    <caption class="table__caption" id="readings-caption">Readings this week</caption>
-    <thead><tr><th scope="col">Day</th><th scope="col" class="table__numeric">Value</th></tr></thead>
-    <tbody><tr><th scope="row">Monday</th><td class="table__numeric">42</td></tr></tbody>
+<div class="table__frame" role="region" aria-labelledby="accounts-caption" tabindex="0">
+  <table class="table table--dense">
+    <caption class="visually-hidden" id="accounts-caption">Accounts</caption>
+    <thead><tr><th scope="col" class="table__numeric">ID</th><th scope="col">Account</th><th scope="col">Details</th></tr></thead>
+    <tbody>
+      <tr aria-selected="true"><td class="table__numeric">34</td><th scope="row">South relay</th><td><button class="button button--secondary button--small" type="button">Inspect South relay</button></td></tr>
+    </tbody>
   </table>
 </div>
+```
+
+### pager
+Pager. Status text beside First, Previous, Next, and Last buttons below a table or list; no JavaScript module.
+- Use a labeled `nav.pager` landmark; disambiguate `aria-label` when multiple pagers appear on one page.
+- `.pager__text` uses muted small text with tabular numerals; `.pager__buttons` wraps native secondary buttons.
+- Disable unavailable boundary buttons natively with `disabled`; applications own paging state, bookmarks, and requests.
+
+```html
+<nav class="pager" aria-label="Pages">
+  <p class="pager__text">Page 1 · 20 records shown</p>
+  <div class="pager__buttons">
+    <button class="button button--secondary" type="button" disabled>First</button>
+    <button class="button button--secondary" type="button" disabled>Previous</button>
+    <button class="button button--secondary" type="button">Next</button>
+    <button class="button button--secondary" type="button">Last</button>
+  </div>
+</nav>
 ```
 
 ### tabs

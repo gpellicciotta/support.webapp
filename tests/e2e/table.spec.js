@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { openGallery, selectGalleryLook, ring, expectRing, tokenColor } from './gallery-helpers.js';
+import { openGallery, selectGalleryLook, ring, expectRing, tokenColor, tokenLength } from './gallery-helpers.js';
 
 for (const look of ['neutral', 'warm', 'bright']) {
     test(`${look} tables preserve headers and captions with keyboard scroll containment`, async ({ page }, testInfo) => {
@@ -37,6 +37,46 @@ for (const look of ['neutral', 'warm', 'bright']) {
             await section.screenshot({ path: `${process.env.LIST_TABLE_PROOF}/after-table-${look}-${testInfo.project.name}.png` });
         }
         expect([...problems, ...failures]).toEqual([]);
+    });
+
+    test(`${look} framed table shows hover feedback and a selected row edge and ground`, async ({ page }) => {
+        const problems = await openGallery(page);
+        await selectGalleryLook(page, look);
+        const section = page.locator('#table');
+        const frame = section.getByRole('region', { name: 'Sample accounts' });
+        await expect(frame).toBeVisible({ timeout: 1000 });
+        await expect(frame).toHaveCSS('border-top-color', await tokenColor(page, '--color-border'));
+        await expect(frame).toHaveCSS('border-top-left-radius', await tokenLength(page, '--radius-card'));
+
+        const table = frame.getByRole('table', { name: 'Sample accounts' });
+        const rows = table.locator('tbody tr');
+        await expect(rows).toHaveCount(4);
+        await expect(rows.last().locator('td').first()).toHaveCSS('border-bottom-width', '0px');
+
+        const hoverColor = await tokenColor(page, '--color-surface-hover');
+        await expect(rows.nth(1)).toHaveCSS('background-color', hoverColor);
+        await rows.first().hover();
+        await expect(rows.first()).toHaveCSS('background-color', hoverColor);
+
+        const selected = table.locator('tbody tr[aria-selected="true"]');
+        await expect(selected).toHaveCount(1);
+        await expect(selected).toHaveCSS('background-color', await tokenColor(page, '--color-surface-selected'));
+        const primary = await tokenColor(page, '--color-primary');
+        const strong = await tokenLength(page, '--border-width-strong');
+        const ringWidth = await tokenLength(page, '--focus-ring-width');
+        expect(await selected.evaluate(row => getComputedStyle(row).boxShadow)).toBe(`${primary} ${strong} 0px 0px 0px inset`);
+
+        await frame.evaluate(el => el.setAttribute('dir', 'rtl'));
+        expect(await selected.evaluate(row => getComputedStyle(row).boxShadow)).toBe(`${primary} -${strong} 0px 0px 0px inset`);
+        await frame.evaluate(el => el.removeAttribute('dir'));
+
+        await page.emulateMedia({ forcedColors: 'active' });
+        const expectedForcedWidth = `${Math.max(parseFloat(strong), parseFloat(ringWidth))}px`;
+        await expect(selected.locator(':scope > :first-child')).toHaveCSS('border-inline-start-width', expectedForcedWidth);
+        await page.emulateMedia({ forcedColors: 'none' });
+
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+        expect(problems).toEqual([]);
     });
 }
 

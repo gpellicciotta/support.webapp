@@ -338,18 +338,27 @@ Use native `ol.list` for sequences; it retains decimal markers.
 Add `role="list"` to markerless unordered lists to preserve list exposure across accessibility implementations.
 Description pairs use `.list.list--definitions`, `.list__term`, and `.list__value`; pairs stack below 36rem viewport width.
 Long text wraps; nested controls retain their own focus and disabled states.
+Use [toolbars](../../src/demo/visual-style-gallery.html#toolbar) for filter fields and secondary actions above a table or list.
+Avoid toolbars for submitted forms, which use `.form`, or command button strips that require roving arrow-key focus.
+Give filter bars `role="search"` and an accessible label so inputs and selects keep ordinary Tab and arrow keys.
+Items align to their bottom edge and wrap below `--width-menu` per field without overflowing narrow screens.
 Use [data tables](../../src/demo/visual-style-gallery.html#table) when values share column relationships.
-Keep the native table display, a visible `.table__caption`, and scoped column and row headers.
+Keep the native table display, a visible or visually hidden caption, and scoped column and row headers.
 Use `.table__numeric` for end-aligned numbers with tabular figures.
 Use `.table--dense` to reduce cell padding in compact data views; nested controls retain their own touch targets.
-Wrap wide tables in `.table__scroll`, with `role="region"`, `tabindex="0"`, and `aria-labelledby` naming the caption.
+Wrap wide tables in `.table__scroll`, or `.table__frame` for a bordered card frame, with `role="region"`, `tabindex="0"`, and `aria-labelledby`.
 The wrapper contains horizontal overflow; its keyboard focus uses the global outline.
 Tab visits the wrapper and nested controls; static cells stay outside the tab order.
+Body rows show hover feedback; `tr[aria-selected="true"]` adds `--color-surface-selected` and a primary inline-start edge.
+Use `aria-selected="true"` when inspecting one row in a side panel; use [multi-select](#multi-select) for bulk row selection.
+Use [pagers](../../src/demo/visual-style-gallery.html#pager) below paged tables or lists to pair status text with First, Previous, Next, and Last buttons.
+Avoid pagers for step-by-step forms or tab panels; applications own paging requests and disable unavailable boundary buttons natively.
 Use existing loading, banner, and empty-state patterns for request outcomes.
-Use interactive selection components for bulk selection; these static components provide no grid keyboard model.
 
 **[Decided]** Tables share row tokens while retaining native table layout, because flex rows would break column alignment.
 **[Decided]** A focusable, named scroll wrapper makes wide data keyboard accessible without converting cells into widgets.
+**[Decided]** Filter toolbars use `role="search"` instead of `role="toolbar"`, because roving arrow keys would hijack text inputs and selects.
+**[Decided]** Selected rows pair `--color-surface-selected` with a primary inline-start edge and a forced-colors `Highlight` border, avoiding color-only state.
 
 ### Collapsible
 Use [the collapsible](../../src/demo/visual-style-gallery.html#collapsible) to show and hide a secondary group, such as done tasks.
