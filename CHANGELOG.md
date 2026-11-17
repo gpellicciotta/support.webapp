@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- DevEx: Paused the page clock in the form spec's pending-check edit test, so a slow run cannot settle the old check early.
 - Looks: Added 16, 48, and 96 px app icons, apple touch icons, and maskable install icons on opaque plates.
 - Looks: Left the app icons out of releases, so `vendor` no longer copies every app's icons into each app.
 - Docs: Documented the app icon styles, files, and adoption, and embedded the Lucide notice in the todos icon.

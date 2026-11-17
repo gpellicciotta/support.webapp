@@ -81,9 +81,14 @@ test('the error summary section shows a filled summary with links to fields', as
 });
 
 test('an edit during a pending check discards the old result and checks the new value', async ({ page }) => {
+    // The gallery's name check waits 600 ms; a paused clock keeps a slow run from settling it before the edit.
+    await page.clock.install();
     const problems = await openGallery(page);
+    // Pause well ahead of the page clock, so a slow round trip cannot make the target time lie in the past.
+    await page.clock.pauseAt(await page.evaluate(() => Date.now()) + 60_000);
     const form = page.locator('#form form[data-form]');
     const field = form.locator('.field:has(#form-name)');
+    const status = field.locator('.field__status');
     const name = form.locator('#form-name');
     await name.fill('taken');
     await name.blur();
@@ -91,9 +96,14 @@ test('an edit during a pending check discards the old result and checks the new 
     await name.press('End');
     await name.press('s');
     await expect(field).not.toHaveAttribute('aria-busy', 'true');
-    await expect(field.locator('.field__status')).toBeHidden();
+    await expect(status).toBeHidden();
     // The overtaken check of "taken" settles by checking "takens" instead, which passes.
-    await expect(field.locator('.field__status')).toHaveText('Name is free.');
+    await page.clock.runFor(600);
+    await expect(field).toHaveAttribute('aria-busy', 'true');
+    await expect(status).toHaveText('Checking the name.');
+    await page.clock.runFor(600);
+    await expect(field).not.toHaveAttribute('aria-busy', 'true');
+    await expect(status).toHaveText('Name is free.');
     await expect(field.locator('.field__error')).toBeHidden();
     await expect(name).not.toHaveAttribute('aria-invalid', 'true');
     expect(problems).toEqual([]);
