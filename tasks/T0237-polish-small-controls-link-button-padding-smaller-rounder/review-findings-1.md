@@ -4,10 +4,13 @@ round: 1
 verdict: approved
 blocking: 0
 reviewer: "@codex"
-reviewed_at: 2026-11-17T11:49:34Z
+reviewed_at: 2026-11-17T11:51:50Z
 reviewed_commit: "b31c863"
 base_commit: "4c9deb7"
 branch: task/T0237-polish-small-controls-link-button-padding-smaller-rounder
+session: codex-20261117-efe0f5
+session_agent: codex
+session_created_at: 2026-11-17T11:49:34Z
 ---
 # Review Findings: Task T0237 (Round 1)
 
