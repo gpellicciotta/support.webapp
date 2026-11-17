@@ -12,12 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 1463.5, input: 138, output: 51055, cache_read: 7827974, cache_write: 149434}
+  worker: {turns: 2, duration_s: 2798.4, input: 154, output: 55176, cache_read: 9203712, cache_write: 156349}
   review: {turns: 1, duration_s: 85.4, input: 38217, output: 1749, cache_read: 312448, cache_write: 0}
-review_status: rejected
-review_round: 1
-review_requested_at: "2026-11-17T12:56:32Z"
-reviewed_by: "@codex"
+review_status: pending
+review_round: 2
+review_requested_at: "2026-11-17T13:21:21Z"
 review_session: codex-20261117-bf455a
 work_duration: 1571.8
 ---
@@ -86,4 +85,7 @@ The user requested this after reviewing the gallery on 2026-11-17.
   - Files touched: 8.
   - Lines touched: 81.
   - Reopenings: 0.
+
+- [2026-11-17] **[Review]**
+  Round 2 requested (mode: agent).
 
