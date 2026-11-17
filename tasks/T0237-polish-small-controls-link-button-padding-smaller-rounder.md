@@ -1,11 +1,11 @@
 ---
 id: T0237
-owner: ~
+owner: "@claude"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0237-polish-small-controls-link-button-padding-smaller-rounder
+worktree: .plan/work/T0237-polish-small-controls-link-button-padding-smaller-rounder
+status: active
+started_at: "2026-11-17T11:08:25Z"
 ended_at: —
 review: agent
 preview: none
