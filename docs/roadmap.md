@@ -103,7 +103,7 @@ Entry criteria:
 
 Work in this repository:
 - T0023: the `bright` look from meteo with its accent variant and AA contrast on every accent.
-- T0024: the tooltip component, after a screen reader check.
+- T0024: the tooltip component, verified by hand with Narrator and Edge in T0037.
 
 Work in meteo, as backlog tasks created there once the phase's tasks in this repository are complete:
 - Drop the quiz leftovers: unused icons, classes, and tokens.

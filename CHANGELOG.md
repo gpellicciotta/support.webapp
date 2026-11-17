@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Docs: Recorded the Narrator and Edge check of the tooltip, which announces its name, role, and description once each.
 - Components: Sized the account menu's small avatar inside its round button, which it overhung by 2 px per side.
 - Docs: Rewrote source comments that named sibling apps as generic rationale, keeping license notes.
 - Components: Added `.detail-panel`, bordered `.list--facts` and `.list--compact` rows, `.chip--status` variants, and the [admin console demo](src/demo/shell-admin-console.html).

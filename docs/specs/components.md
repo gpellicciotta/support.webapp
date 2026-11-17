@@ -669,7 +669,10 @@ Touch users receive no hover behavior; essential instructions must remain visibl
 Use text only, without focusable content, explicit tooltip names, or live regions.
 Without enhancement, the description stays visible and readable.
 Chromium accessibility-tree evidence replaced the initial live screen reader gate by orchestrator decision.
-Manual Narrator or NVDA verification remains tracked separately; no spoken announcement has been verified.
+Narrator with Edge announced the gallery tooltip button as name, role, then description, once each: "Refresh forecast. Button. Get the latest forecast for this location".
+Narrator first announces the enclosing section heading, so a leading section name is not a defect.
+Escape closed the tooltip and kept focus on the button; hover showed it visually, and Narrator speaks nothing on hover.
+Not verified: NVDA, other browsers, and touch screen readers.
 
 ### avatar
 Avatar. The fallback shows initials, or the person icon when no name is known.
