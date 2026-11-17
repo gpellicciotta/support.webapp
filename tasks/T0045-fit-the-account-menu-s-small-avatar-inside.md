@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 626.0, input: 46, output: 7232, cache_read: 1085925, cache_write: 38114}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T03:10:08Z"
 ---
 # T0045: Fit the account menu's small avatar inside its round button, which it overhangs by 2 px on each side
 
@@ -45,4 +50,7 @@ Size estimate: 3 files, 30 lines.
 
 - [2026-11-17] **[Verify]**
   Full check passed except generate-app integration, which lacks @stylistic/eslint-plugin in its temp app.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
