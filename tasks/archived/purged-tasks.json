@@ -6,5 +6,21 @@
   "T0037": {
     "description": "Check the tooltip component and meteo's tooltips with Narrator or NVDA by hand, recording what each announces.",
     "purged_at": "2026-11-17"
+  },
+  "T0243": {
+    "description": "Format the app icon generator script with Ruff, which currently fails the devops check.",
+    "purged_at": "2026-11-17"
+  },
+  "T0244": {
+    "description": "Investigate the intermittent mobile-light failure of the form spec's edit-during-pending-check test under load.",
+    "purged_at": "2026-11-17"
+  },
+  "T0248": {
+    "description": "Paint the forced colors focus outline in an opaque system color, which Linux CI renders at 0.8 alpha.",
+    "purged_at": "2026-11-17"
+  },
+  "T0246": {
+    "description": "Run release --yes for v0.2.0 from main, then create vendor backlog tasks in auth, family-portal, meteo, and todos.webapp.",
+    "purged_at": "2026-11-17"
   }
 }
