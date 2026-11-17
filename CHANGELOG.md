@@ -10,6 +10,10 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Shell: Padded the top bar like the main area, so its title and content text share a start edge at every width.
+- Shell: Pulled the top bar's first and last icon buttons outward by their glyph inset, so glyphs align with content.
+- Looks: Redrew `icon-more` as vertical dots in every look's sprite.
+- Docs: Moved the toolbar demo's overflow menu button to the end of the top bar.
 - DevEx: Paused the page clock in the form spec's pending-check edit test, so a slow run cannot settle the old check early.
 - Looks: Added 16, 48, and 96 px app icons, apple touch icons, and maskable install icons on opaque plates.
 - Looks: Left the app icons out of releases, so `vendor` no longer copies every app's icons into each app.

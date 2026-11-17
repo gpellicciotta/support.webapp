@@ -125,6 +125,13 @@ describe('core icon ids', () => {
                 expect(glyphs.filter(({ viewBox }) => viewBox !== '0 0 24 24').map(({ id }) => id)).toEqual([]);
             });
 
+            it('draws icon-more as three vertical dots on the center line', () => {
+                const more = glyphs.find(({ id }) => id === 'icon-more');
+                const dots = [...more.body.matchAll(/<circle\b([^>]*)\/?>/g)]
+                    .map(([, attributes]) => Object.fromEntries([...attributes.matchAll(/\b(cx|cy)="([^"]*)"/g)].map(([, name, value]) => [name, Number(value)])));
+                expect(dots).toEqual([{ cx: 12, cy: 5 }, { cx: 12, cy: 12 }, { cx: 12, cy: 19 }]);
+            });
+
             it('holds no color of its own', () => {
                 const paints = glyphs.flatMap(({ id, body }) => [...body.matchAll(/\b(fill|stroke|color|style)="([^"]*)"/g)]
                     .filter(([, , value]) => !['none', 'currentColor'].includes(value))

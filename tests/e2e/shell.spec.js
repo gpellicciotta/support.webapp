@@ -60,6 +60,30 @@ function areaBox(page, area) {
     }, area);
 }
 
+/**
+ * Measure the offsets of the top bar's edge items from the main area's content edges.
+ * Icon buttons count by their glyph box, other items by their own box; closed popovers and hidden items are skipped.
+ * @param {import('@playwright/test').Page} page page to probe
+ * @returns {Promise<{start: number, end: number, first: string, last: string}>} signed offsets in px, positive inward
+ */
+function topBarEdges(page) {
+    return page.evaluate(() => {
+        const main = document.querySelector('body > .app__main');
+        const style = getComputedStyle(main);
+        const rect = main.getBoundingClientRect();
+        const content = { start: rect.left + parseFloat(style.paddingLeft), end: rect.right - parseFloat(style.paddingRight) };
+        const shown = (element) => element.getClientRects().length > 0 && !element.matches('[popover]');
+        const items = [...document.querySelector('body > .app__top-bar').children]
+            .flatMap((child) => (child.matches('.app__top-actions') ? [...child.children] : [child]))
+            .filter(shown);
+        const box = (element) => (element.matches('.icon-button') ? element.querySelector('.icon') : element).getBoundingClientRect();
+        const name = (element) => element.getAttribute('aria-label') ?? element.className;
+        const first = items[0];
+        const last = items.at(-1);
+        return { start: box(first).left - content.start, end: content.end - box(last).right, first: name(first), last: name(last) };
+    });
+}
+
 /** Append tall content to the main area, so either the main area or the page has to scroll. */
 function makeTall(page) {
     return page.evaluate(() => {
@@ -189,6 +213,15 @@ for (const demo of demos) {
             }
             expect(problems).toEqual([]);
         });
+
+        test('aligns the top bar edge text and glyphs with the content column', async ({ page }) => {
+            test.skip(Boolean(demo.desktopOnly) && page.viewportSize().width < BREAKPOINT, 'admin-console targets desktop widths');
+            const problems = await openDemo(page, demo.path);
+            const edges = await topBarEdges(page);
+            expect(Math.abs(edges.start), `start offset of ${edges.first}`).toBeLessThan(0.5);
+            expect(Math.abs(edges.end), `end offset of ${edges.last}`).toBeLessThan(0.5);
+            expect(problems).toEqual([]);
+        });
     });
 }
 
@@ -296,11 +329,16 @@ test('the page scroll mode keeps the sidebar and side panel at the full viewport
     expect(problems).toEqual([]);
 });
 
-test('the toolbar menu button opens its sample menu', async ({ page }) => {
+test('the toolbar overflow button sits at the bar end and opens its sample menu', async ({ page }) => {
     const problems = await openDemo(page, demos[1].path);
-    const button = page.locator('.app__menu-button');
+    const button = page.locator('.app__top-bar > .app__top-actions > .icon-button');
     const menu = page.locator('#toolbar-menu');
     await expect(button).toHaveAttribute('aria-haspopup', 'menu');
+    await expect(button).toHaveAccessibleName('More actions');
+    await expect(button.locator('use')).toHaveAttribute('href', /#icon-more$/);
+    const edges = await topBarEdges(page);
+    expect(edges.first).toBe('app__title');
+    expect(edges.last).toBe('More actions');
     await button.click();
     await expect(button).toHaveAttribute('aria-expanded', 'true');
     await expect(menu).toBeVisible();
@@ -311,16 +349,21 @@ test('the toolbar menu button opens its sample menu', async ({ page }) => {
     expect(problems).toEqual([]);
 });
 
-test('the action bar pads both sides with their own safe-area insets', () => {
-    const shell = readFileSync(fileURLToPath(new URL('../../src/css/shell.css', import.meta.url)), 'utf8');
-    const rule = shell.match(/\.app__action-bar \{[^}]*\}/)[0];
-    const padding = rule.match(/padding-inline:([^;]*);/)[1];
-    const [start, end] = padding.split(/\)\s+max\(/);
-    expect(start).toContain('env(safe-area-inset-left)');
-    expect(start).not.toContain('safe-area-inset-right');
-    expect(end).toContain('env(safe-area-inset-right)');
-    expect(end).not.toContain('safe-area-inset-left');
-});
+for (const bar of ['top-bar', 'action-bar']) {
+    test(`the ${bar.replace('-', ' ')} pads both sides with the main column formula and their own safe-area insets`, () => {
+        const shell = readFileSync(fileURLToPath(new URL('../../src/css/shell.css', import.meta.url)), 'utf8');
+        const rule = shell.match(new RegExp(`\\.app__${bar} \\{[^}]*\\}`))[0];
+        const padding = rule.match(/padding-inline:([^;]*);/)[1];
+        const [start, end] = padding.split(/\)\s+max\(/);
+        for (const side of [start, end]) {
+            expect(side).toContain('var(--gutter), (100% - var(--_app-width)) / 2');
+        }
+        expect(start).toContain('env(safe-area-inset-left)');
+        expect(start).not.toContain('safe-area-inset-right');
+        expect(end).toContain('env(safe-area-inset-right)');
+        expect(end).not.toContain('safe-area-inset-left');
+    });
+}
 
 test('the gallery links to every shell demo page', async ({ page }, testInfo) => {
     await page.goto(GALLERY, { waitUntil: 'networkidle' });

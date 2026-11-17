@@ -12,14 +12,16 @@
 <body class="app app--scroll-page">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="app__top-bar">
-        <button class="app__menu-button icon-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Menu">
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-more"/></svg>
-        </button>
-        <div class="menu" id="toolbar-menu" aria-label="Menu" data-demo-menu>
-            <button class="menu__item" type="button" role="menuitem">Sort items</button>
-            <button class="menu__item" type="button" role="menuitem">Settings</button>
-        </div>
         <h1 class="app__title">Toolbar</h1>
+        <div class="app__top-actions">
+            <button class="icon-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="More actions" data-demo-menu-button>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-more"/></svg>
+            </button>
+            <div class="menu" id="toolbar-menu" aria-label="More actions" popover data-demo-menu>
+                <button class="menu__item" type="button" role="menuitem">Sort items</button>
+                <button class="menu__item" type="button" role="menuitem">Settings</button>
+            </div>
+        </div>
     </header>
     <div class="app__banners">
         <div class="banner" role="status">

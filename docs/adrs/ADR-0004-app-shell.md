@@ -75,6 +75,9 @@ Layout rules:
 - The sidebar and the bottom bar both carry `aria-label="Main"`; only one shows at any width.
 - A skip link leads to the main area.
 - Bars pad themselves with the safe-area insets of phones.
+- The top bar pads with the main area's formula, so its edge text shares the content column's edges.
+  Its first and last icon buttons reach outward by their glyph inset, so glyphs, not 44 px boxes, align.
+- Overflow menus open from `icon-more`, drawn as vertical dots, at the end of the top bar.
 - Navigation links mark the current entry with `aria-current="page"`.
 
 Responsive behavior:

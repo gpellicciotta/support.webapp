@@ -490,7 +490,7 @@ Use `aria-selected` for tabs and other selection widgets, rather than page navig
 Copy a layout skeleton from [components.md](components.md#app-shell) and keep only the areas you use.
 The runnable examples demonstrate these combinations:
 - [List editor](../../src/demo/shell-list-editor.html): sidebar, bottom navigation, side panel, and a scrolling main area.
-- [Toolbar](../../src/demo/shell-toolbar.html): menu navigation with sticky bars and page scrolling.
+- [Toolbar](../../src/demo/shell-toolbar.html): an overflow menu at the bar end, with sticky bars and page scrolling.
 - [Single screen](../../src/demo/shell-single-screen.html): narrow content with no navigation and app-owned screen toggles.
 - [Portal](../../src/demo/shell-portal.html): breadcrumbs, account actions, and a footer in the action bar.
 - [Admin console](../../src/demo/shell-admin-console.html): sidebar, top bar, open detail panel, and scrolling main area, without bottom or action bars.
@@ -512,7 +512,9 @@ Layout rules:
 - Media queries cannot read custom properties, so 64rem is a constant; components use container queries instead.
 - `app--scroll-main`, the default without a scroll class, makes the main area the scroll container between the bars.
 - `app--scroll-page` scrolls the document; the top bar, the action bar, and the bottom bar stick.
-- `app--width-reading`, `app--width-narrow`, and `app--width-content` center the banners, main area, and action bar.
+- `app--width-reading`, `app--width-narrow`, and `app--width-content` center the top bar, banners, main area, and action bar.
+- The top bar's first and last icon buttons reach outward by their glyph inset, so the glyphs align with content text.
+- Put an overflow menu's `icon-more` button, drawn as vertical dots, at the end of the top bar.
 - The toast region sits above the action bar and the bottom bar.
 - Mark the current navigation entry, and the last breadcrumb link, with `aria-current="page"`.
 - Add `viewport-fit=cover` to the viewport meta tag, so bars pad with the safe-area insets of phones.
@@ -520,7 +522,7 @@ Layout rules:
 `shell.css` is the only package stylesheet with fixed or sticky positions; it also pins the toast region.
 The `.skip-link` sits above the top edge until focused, keeping its 44 px target.
 
-**[Decided]** The width options center the banners and action bar with the main area, so their content lines up.
+**[Decided]** The width options center the top bar, banners, and action bar with the main area, so their content lines up.
 - Centering the main area alone: rejected, because the action bar would then span the full window.
 
 **[Decided]** Apps own responsive moves between the action bar and `app__top-actions`.

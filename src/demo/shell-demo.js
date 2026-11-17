@@ -18,7 +18,8 @@ export function initShellDemo(doc, view) {
     }
     const menu = doc.querySelector('[data-demo-menu]');
     if (menu) {
-        attachMenu(doc.querySelector('.app__menu-button'), menu, {
+        attachMenu(doc.querySelector('[data-demo-menu-button]'), menu, {
+            align: 'end',
             onSelect: (item) => toaster.show(`${item.textContent} is a sample menu item.`)
         });
     }

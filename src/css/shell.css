@@ -72,17 +72,34 @@
   translate: none;
 }
 
-/* Top bar: title or brand, a menu button or breadcrumb, and account actions. */
+/*
+ * Top bar: title or brand, a menu button or breadcrumb, and account actions.
+ * It pads with the main area's formula, so its edge text starts and ends on the content column.
+ */
 .app__top-bar {
+  --_app-glyph-inset: calc((var(--target-min) - var(--icon-md)) / 2);
   display: flex;
   grid-area: top;
   align-items: center;
   gap: var(--space-2);
   min-block-size: calc(var(--_app-bar-size) + env(safe-area-inset-top));
   padding-block-start: env(safe-area-inset-top);
-  padding-inline: max(var(--space-4), env(safe-area-inset-left)) max(var(--space-2), env(safe-area-inset-right));
+  padding-inline: max(var(--gutter), (100% - var(--_app-width)) / 2, env(safe-area-inset-left)) max(var(--gutter), (100% - var(--_app-width)) / 2, env(safe-area-inset-right));
   border-block-end: var(--border-width) solid var(--color-border);
   background-color: var(--color-surface);
+}
+
+/*
+ * Edge icon buttons reach outward by their glyph inset, so the glyph, not the 44 px box, lines up with the content.
+ * Closed popovers and hidden siblings take no room, so a button followed only by its menu still counts as last.
+ */
+.app__top-bar > .icon-button:first-child {
+  margin-inline-start: calc(-1 * var(--_app-glyph-inset));
+}
+
+.app__top-bar > .icon-button:not(:has(~ :not([popover], [hidden]))),
+.app__top-bar > .app__top-actions:not(:has(~ :not([popover], [hidden]))) > .icon-button:not(:has(~ :not([popover], [hidden]))) {
+  margin-inline-end: calc(-1 * var(--_app-glyph-inset));
 }
 
 .app__title {
