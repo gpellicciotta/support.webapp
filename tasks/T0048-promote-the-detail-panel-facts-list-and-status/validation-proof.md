@@ -123,3 +123,37 @@ exit=0
 ```
 
 Note: first run failed in tests/integration/generate-app.test.js because the worktree node_modules was empty; npm ci fixed it.
+
+## Round 1 rework: python scripts/devops.py check (exit=0)
+
+```text
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\Scripts\lint-markdown.EXE check --offline
+Process ID: 50192
+All 26 markdown files passed linting.
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m ruff check scripts tests
+Process ID: 16408
+All checks passed!
+======================== 41 passed, 1 skipped in 2.14s ========================
+Command: "C:\Program Files\nodejs\npm.CMD" test
+Process ID: 45568
+> @gpellicciotta/support.webapp@0.1.1-pre test
+> vitest run
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0048-promote-the-detail-panel-facts-list-and-status
+ Test Files  33 passed (33)
+      Tests  2130 passed (2130)
+[... per-test Playwright lines omitted ...]
+  724 passed (5.1m)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:integration
+Process ID: 46756
+> @gpellicciotta/support.webapp@0.1.1-pre test:integration
+> vitest run --config vitest.integration.config.js
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0048-promote-the-detail-panel-facts-list-and-status
+ Test Files  3 passed (3)
+      Tests  7 passed (7)
+   Start at  02:53:05
+   Duration  48.40s (tests 100%)
+Command: "C:\Program Files\nodejs\npm.CMD" pack --dry-run
+Process ID: 6592
+> @gpellicciotta/support.webapp@0.1.1-pre prepack
+exit=0
+```

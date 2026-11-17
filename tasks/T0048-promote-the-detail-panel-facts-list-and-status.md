@@ -13,11 +13,14 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 4, duration_s: 3221.7, input: 499934, output: 98224, cache_read: 22931834, cache_write: 25711}
-work_duration: 2512.8
+  review: {turns: 1, duration_s: 140.2, input: 72335, output: 2574, cache_read: 522496, cache_write: 0}
+work_duration: 3429.9
 contributors: "@gemini"
-review_status: pending
+review_status: rejected
 review_round: 1
 review_requested_at: "2026-11-17T01:44:05Z"
+reviewed_by: "@codex"
+review_session: codex-20261117-c288f3
 ---
 # T0048: Promote the detail panel, facts list, and status chip, and add an admin console shell example
 
@@ -77,4 +80,11 @@ After review, release the promoted parts as a minor version with the user's appr
 
 - [2026-11-17] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-17] **[Review]**
+  Round 1 rejected by @codex: [Decided]** Rejected for one incorrect selection behavior in the admin console example.
+  - Findings: [review-findings-1.md](T0048-promote-the-detail-panel-facts-list-and-status/review-findings-1.md).
+
+- [2026-11-17] **[Implement]**
+  Rework D1: selection now updates facts and deletion question, dismisses open confirmation; added e2e regression; full check passed.
 
