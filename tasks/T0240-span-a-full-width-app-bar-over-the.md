@@ -1,11 +1,11 @@
 ---
 id: T0240
-owner: ~
-needs: ['T0239']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@claude"
+needs: []
+branch: task/T0240-span-a-full-width-app-bar-over-the
+worktree: .plan/work/T0240-span-a-full-width-app-bar-over-the
+status: active
+started_at: "2026-11-17T15:59:10Z"
 ended_at: —
 review: agent
 preview: none
