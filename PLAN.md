@@ -3,7 +3,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
 - [x] T0245 Pause the page clock in the form spec's other async-check tests, which share the 600 ms timing race.
-- [~] T0247 [owner: @claude] Make the release action bump package-lock.json with package.json, which v0.1.0 and v0.2.0 both left one version behind.
+- [x] T0247 Make the release action bump package-lock.json with package.json, which v0.1.0 and v0.2.0 both left one version behind.
 
 ## Backlog
 - [ ] T0046 Plan the redesign of counters on the design system, split from T0025.
