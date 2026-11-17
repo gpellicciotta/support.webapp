@@ -1,0 +1,13 @@
+{"schema": 1,
+ "completed": [
+  {"item": "Global focus glow: solid contour plus 20% halo, transparent outline kept for forced colors", "evidence": "uncommitted worktree diff; expectRing in tests/e2e/gallery-helpers.js passes across button, chip, field, fab, card, icon-button, link-button, switch specs"},
+  {"item": "Danger controls glow in the danger color", "evidence": "button.spec.js, icon-button.spec.js, detail-panel.spec.js, menu.spec.js danger specimen pass"},
+  {"item": "Contour keeps 3:1 against every ground and its halo", "evidence": "verify-ui.spec.js contour check plus faint-glow fault test pass in all looks and themes"},
+  {"item": "Menu focus inset, clear of neighbors, with --space-2 side room", "evidence": "menu.spec.js 'menu focus glows inside each item, clear of neighbors and side borders' passes"},
+  {"item": "Gallery .is-focus specimens use the glow", "evidence": "forcedRing assertions on .is-focus specimens pass"},
+  {"item": "Docs, ADR-0001, ADR-0003, CHANGELOG, contract tokens", "evidence": "python scripts/devops.py check exit 0: 2163 unit, 728 browser passed, markdown lint passed"}
+ ],
+ "remaining": ["commit the worktree changes to the task branch", "paste the passing full-check output into validation-proof.md", "check steps 1 to 3 in the task file", "human size approval: 31 counted files, 418 lines, above the large line"],
+ "next_action": "Commit the work, fill the full-check section of validation-proof.md, run plan tasks validate --completion, and check steps 1 to 3.",
+ "blocker": null,
+ "scope": null}

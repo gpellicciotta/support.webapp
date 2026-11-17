@@ -12,8 +12,8 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 2115.5, input: 182022, output: 5929, cache_read: 798466}
-work_duration: 2141.5
+  worker: {turns: 3, duration_s: 3915.8, input: 182024, output: 5945, cache_read: 798466}
+work_duration: 3967.6
 contributors: "@gemini"
 ---
 # T0235: Replace the focus ring with a glow, and give menu items room so focus never overlaps neighbors or edges
