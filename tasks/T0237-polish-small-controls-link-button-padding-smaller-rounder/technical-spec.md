@@ -29,7 +29,7 @@
 - tests/e2e/small-controls.spec.js (added, uncounted: opt-in evidence screenshots)
 
 Size estimate: 12 files, 170 lines
-Size note: 12 counted files exceed the typical line, because each component pairs one stylesheet with its spec; lines stay near 170.
+Size note: 12 counted files exceed the typical line, because each component pairs one stylesheet with its spec; measured lines stay near 205.
 Combined task: the user requested the five component tweaks together after one gallery review; each is a few lines.
 
 ### Tests
