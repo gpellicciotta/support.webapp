@@ -1,6 +1,19 @@
 import { expect, test } from '@playwright/test';
 import { expectRing, forcedRing, openGallery, styles, tokenColor } from './gallery-helpers.js';
 
+/**
+ * Open the gallery on a paused page clock, so a slow run cannot settle the 600 ms name check or 800 ms save early.
+ * @param {import('@playwright/test').Page} page page to open the gallery in
+ * @returns {Promise<string[]>} the page problems collected by `openGallery`
+ */
+async function openPausedGallery(page) {
+    await page.clock.install();
+    const problems = await openGallery(page);
+    // Pause well ahead of the page clock, so a slow round trip cannot make the target time lie in the past.
+    await page.clock.pauseAt(await page.evaluate(() => Date.now()) + 60_000);
+    return problems;
+}
+
 test('a failed submit by Enter fills the error summary, announces it, and focuses it', async ({ page }) => {
     const problems = await openGallery(page);
     const form = page.locator('#form form[data-form]');
@@ -37,33 +50,48 @@ test('each summary link moves focus to its field', async ({ page }) => {
 });
 
 test('an async check shows the pending state, then its error', async ({ page }) => {
-    const problems = await openGallery(page);
+    const problems = await openPausedGallery(page);
     const form = page.locator('#form form[data-form]');
     const field = form.locator('.field:has(#form-name)');
+    const status = field.locator('.field__status');
     await form.locator('#form-name').fill('taken');
     await form.locator('#form-name').blur();
     await expect(field).toHaveAttribute('aria-busy', 'true');
-    await expect(field.locator('.field__status')).toBeVisible();
+    await expect(status).toHaveText('Checking the name.');
+    await page.clock.runFor(600);
     await expect(field).not.toHaveAttribute('aria-busy', 'true');
     await expect(field.locator('.field__error')).toHaveText('That name is taken.');
     await form.locator('#form-name').fill('Steps');
     await form.locator('#form-name').blur();
-    await expect(field.locator('.field__status')).toHaveText('Name is free.');
+    await expect(field).toHaveAttribute('aria-busy', 'true');
+    await page.clock.runFor(600);
+    await expect(field).not.toHaveAttribute('aria-busy', 'true');
+    await expect(status).toHaveText('Name is free.');
     expect(problems).toEqual([]);
 });
 
 test('a valid submit sets the busy state, then confirms the save', async ({ page }) => {
-    const problems = await openGallery(page);
+    const problems = await openPausedGallery(page);
     const form = page.locator('#form form[data-form]');
+    const polite = page.locator('[data-live-region="polite"]');
     await expect(page.locator('#form .banner--success')).toBeHidden();
     await form.locator('#form-name').fill('Steps');
     await form.locator('#form-url').fill('https://example.test');
     await form.getByRole('button', { name: 'Save' }).click();
-    await expect(form).toHaveAttribute('aria-busy', 'true');
-    await expect(page.locator('[data-live-region="polite"]')).toHaveCount(1);
-    await expect(page.locator('[data-live-region="polite"]')).toHaveText('Saving.');
-    await expect(form.getByRole('button', { name: 'Save' })).toHaveAttribute('aria-disabled', 'true');
+    // The submit first runs the 600 ms name check, then marks the form busy for the 800 ms save.
+    await expect(form.locator('.field:has(#form-name)')).toHaveAttribute('aria-busy', 'true');
     await expect(form).not.toHaveAttribute('aria-busy', 'true');
+    await page.clock.runFor(600);
+    await expect(form).toHaveAttribute('aria-busy', 'true');
+    await expect(form.getByRole('button', { name: 'Save' })).toHaveAttribute('aria-disabled', 'true');
+    // The live region sets the busy message 100 ms after clearing the region.
+    await page.clock.runFor(100);
+    await expect(polite).toHaveCount(1);
+    await expect(polite).toHaveText('Saving.');
+    await expect(form).toHaveAttribute('aria-busy', 'true');
+    await page.clock.runFor(700);
+    await expect(form).not.toHaveAttribute('aria-busy', 'true');
+    await expect(form.getByRole('button', { name: 'Save' })).not.toHaveAttribute('aria-disabled', 'true');
     await expect(page.locator('#form .banner--success')).toBeVisible();
     await expect(form.locator('.error-summary')).toBeHidden();
     expect(problems).toEqual([]);
@@ -81,11 +109,8 @@ test('the error summary section shows a filled summary with links to fields', as
 });
 
 test('an edit during a pending check discards the old result and checks the new value', async ({ page }) => {
-    // The gallery's name check waits 600 ms; a paused clock keeps a slow run from settling it before the edit.
-    await page.clock.install();
-    const problems = await openGallery(page);
-    // Pause well ahead of the page clock, so a slow round trip cannot make the target time lie in the past.
-    await page.clock.pauseAt(await page.evaluate(() => Date.now()) + 60_000);
+    // The paused clock keeps a slow run from settling the 600 ms check before the edit.
+    const problems = await openPausedGallery(page);
     const form = page.locator('#form form[data-form]');
     const field = form.locator('.field:has(#form-name)');
     const status = field.locator('.field__status');
@@ -111,9 +136,7 @@ test('an edit during a pending check discards the old result and checks the new 
 
 test('clearing the address while the name check runs during submit blocks the send', async ({ page }) => {
     // The paused clock holds the 600 ms check open, so the address is cleared before the submit can send.
-    await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') });
-    const problems = await openGallery(page);
-    await page.clock.pauseAt(new Date('2026-01-01T01:00:00Z'));
+    const problems = await openPausedGallery(page);
     const form = page.locator('#form form[data-form]');
     await form.locator('#form-name').fill('Steps');
     await form.locator('#form-url').fill('https://example.test');
