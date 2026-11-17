@@ -1,11 +1,11 @@
 ---
 id: T0242
-owner: ~
+owner: "@claude"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0242-fix-the-form-spec-s-pending-check-edit
+worktree: .plan/work/T0242-fix-the-form-spec-s-pending-check-edit
+status: active
+started_at: "2026-11-17T14:50:55Z"
 ended_at: —
 review: agent
 preview: none
