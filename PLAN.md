@@ -5,7 +5,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0049 Make the switch track and thumb rounded rectangles, since the 50% round radius turns the track into an ellipse.
 - [x] T0048 Promote the detail panel, facts list, and status chip, and add an admin console shell example.
 - [x] T0047 Promote the toolbar, pager, and data table row states from ToDo's admin console into the package.
-- [ ] T0037 [protocol: adhoc] Check the tooltip component and meteo's tooltips with Narrator or NVDA by hand, recording what each announces.
+- [~] T0037 [owner: @claude] [protocol: adhoc] Check the tooltip component and meteo's tooltips with Narrator or NVDA by hand, recording what each announces.
 - [ ] T0044 [protocol: adhoc] Investigate intermittent browser verifier screenshot timeouts and incomplete stylesheet loads under parallel execution.
 - [ ] T0043 Rewrite source comments that name the sibling apps as generic rationale, in the modules, looks, and demos.
 - [ ] T0045 Fit the account menu's small avatar inside its round button, which it overhangs by 2 px on each side.
