@@ -12,8 +12,8 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 1800.6, input: 2962, output: 340}
-work_duration: 1809.8
+  worker: {turns: 2, duration_s: 1878.3, input: 485446, output: 93790, cache_read: 20332563}
+work_duration: 1912.0
 ---
 # T0048: Promote the detail panel, facts list, and status chip, and add an admin console shell example
 
@@ -64,4 +64,7 @@ After review, release the promoted parts as a minor version with the user's appr
   - Chip: [before](T0048-promote-the-detail-panel-facts-list-and-status/before-chip-desktop-light.png), [after](T0048-promote-the-detail-panel-facts-list-and-status/after-chip-neutral-desktop-light.png).
   - List: [before](T0048-promote-the-detail-panel-facts-list-and-status/before-list-desktop-light.png), [after](T0048-promote-the-detail-panel-facts-list-and-status/after-list-neutral-desktop-light.png).
   - Shell and console: [before](T0048-promote-the-detail-panel-facts-list-and-status/before-shell-desktop-light.png), [after](T0048-promote-the-detail-panel-facts-list-and-status/after-admin-console-neutral-desktop-light.png), [dark](T0048-promote-the-detail-panel-facts-list-and-status/after-admin-console-warm-desktop-dark.png).
+
+- [2026-11-17] **[Verify]**
+  Running python scripts/devops.py check synchronously under background task task-272; also touched undeclared tests/e2e/verify-ui.spec.js (13 modified files, 360 lines).
 
