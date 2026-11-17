@@ -101,29 +101,73 @@ export function tokenLength(page, token) {
 }
 
 /**
- * Focus an element with keyboard modality and read its outline.
+ * Focus an element with keyboard modality and read its focus indicator: the outline and the box shadow.
  * @param {import('@playwright/test').Locator} locator element to focus
- * @returns {Promise<{focusVisible: boolean, style: string, width: number, color: string}>} the ring
+ * @returns {Promise<{focusVisible: boolean, style: string, width: number, offset: number, color: string, shadow: string}>} the indicator
  */
 export async function ring(locator) {
     await locator.page().keyboard.press('Tab');
     return locator.evaluate((element) => {
         element.focus();
         const style = getComputedStyle(element);
-        return { focusVisible: element.matches(':focus-visible'), style: style.outlineStyle, width: parseFloat(style.outlineWidth), color: style.outlineColor };
+        return { focusVisible: element.matches(':focus-visible'), style: style.outlineStyle, width: parseFloat(style.outlineWidth),
+            offset: parseFloat(style.outlineOffset), color: style.outlineColor, shadow: style.boxShadow };
     });
 }
 
 /**
- * Read the outline of a forced `.is-focus` specimen without focusing it.
+ * Read the focus indicator of a forced `.is-focus` specimen without focusing it.
  * @param {import('@playwright/test').Locator} locator specimen
- * @returns {Promise<{style: string, width: number, color: string}>} the ring
+ * @returns {Promise<{style: string, width: number, offset: number, color: string, shadow: string}>} the indicator
  */
 export function forcedRing(locator) {
     return locator.evaluate((element) => {
         const style = getComputedStyle(element);
-        return { style: style.outlineStyle, width: parseFloat(style.outlineWidth), color: style.outlineColor };
+        return { style: style.outlineStyle, width: parseFloat(style.outlineWidth), offset: parseFloat(style.outlineOffset),
+            color: style.outlineColor, shadow: style.boxShadow };
     });
+}
+
+/**
+ * Split a computed `box-shadow` into layers.
+ * @param {string} value computed box shadow
+ * @returns {{inset: boolean, color: string, x: number, y: number, blur: number, spread: number}[]} the layers, topmost first
+ */
+export function shadowLayers(value) {
+    if (!value || value === 'none') {
+        return [];
+    }
+    const parts = [];
+    let depth = 0;
+    let start = 0;
+    for (let index = 0; index < value.length; index++) {
+        if (value[index] === '(') {
+            depth++;
+        }
+        else if (value[index] === ')') {
+            depth--;
+        }
+        else if (value[index] === ',' && depth === 0) {
+            parts.push(value.slice(start, index));
+            start = index + 1;
+        }
+    }
+    parts.push(value.slice(start));
+    return parts.map((part) => {
+        const color = part.match(/(?:rgba?|color)\([^)]*\)/)?.[0] ?? '';
+        const [x = 0, y = 0, blur = 0, spread = 0] = part.replace(color, '').replace(/\binset\b/, '').trim().split(/\s+/).map(parseFloat);
+        return { inset: /\binset\b/.test(part), color, x, y, blur, spread };
+    });
+}
+
+/**
+ * Read the alpha channel of a computed color.
+ * @param {string} color computed color
+ * @returns {number} alpha from 0 to 1
+ */
+export function alphaOf(color) {
+    const match = color.match(/\/\s*([\d.]+)\s*\)$/) ?? color.match(/^rgba\([^,]+,[^,]+,[^,]+,\s*([\d.]+)\)$/);
+    return match ? parseFloat(match[1]) : 1;
 }
 
 /**
@@ -165,16 +209,51 @@ export function styles(locator, properties) {
 }
 
 /**
- * Expect a solid ring of at least 2 px in a color, on a focused element or a forced specimen.
- * @param {{focusVisible?: boolean, style: string, width: number, color: string}} actual ring read by `ring` or `forcedRing`
- * @param {string} color expected computed color
+ * Expect the focus glow in a color, on a focused element or a forced specimen.
+ * The glow is a solid contour of at least 2 px, then a soft translucent halo.
+ * A transparent outline of at least 2 px stands in for forced colors mode, which drops shadows.
+ * @param {{focusVisible?: boolean, style: string, width: number, offset: number, color: string, shadow: string}} actual indicator read by `ring` or `forcedRing`
+ * @param {string} color expected computed contour color
  * @param {string} label assertion label
+ * @param {{inset?: boolean}} [options] `inset` expects the glow and the forced colors outline inside the element's box
  */
-export function expectRing(actual, color, label) {
+export function expectRing(actual, color, label, { inset = false } = {}) {
     expect(actual.focusVisible ?? true, `${label}: matches :focus-visible`).toBe(true);
     expect(actual.style, `${label}: outline style`).toBe('solid');
     expect(actual.width, `${label}: outline width`).toBeGreaterThanOrEqual(2);
-    expect(actual.color, `${label}: outline color`).toBe(color);
+    expect(actual.color, `${label}: outline color`).toBe('rgba(0, 0, 0, 0)');
+    const [contour, halo, ...rest] = shadowLayers(actual.shadow);
+    expect(contour, `${label}: contour layer of ${actual.shadow}`).toBeDefined();
+    expect(contour.color, `${label}: contour color`).toBe(color);
+    expect(contour.spread, `${label}: contour width`).toBeGreaterThanOrEqual(2);
+    expect(contour.blur, `${label}: contour blur`).toBe(0);
+    expect(contour.inset, `${label}: contour inset`).toBe(inset);
+    expect(halo, `${label}: halo layer of ${actual.shadow}`).toBeDefined();
+    expect(halo.blur, `${label}: halo blur`).toBeGreaterThan(0);
+    expect(halo.inset, `${label}: halo inset`).toBe(inset);
+    expect(alphaOf(halo.color), `${label}: halo alpha`).toBeGreaterThan(0);
+    expect(alphaOf(halo.color), `${label}: halo alpha`).toBeLessThan(1);
+    if (inset) {
+        expect(actual.offset + actual.width, `${label}: forced colors outline stays inside`).toBeLessThanOrEqual(0);
+        expect(rest.every((layer) => layer.inset), `${label}: no outer shadow`).toBe(true);
+    }
+}
+
+/**
+ * Expect a visible solid outline of at least 2 px, the focus indicator forced colors mode keeps.
+ * @param {{style: string, width: number, color: string}} actual indicator read by `ring` or `forcedRing`
+ * @param {string|null} color expected computed outline color, or null for any opaque color
+ * @param {string} label assertion label
+ */
+export function expectForcedRing(actual, color, label) {
+    expect(actual.style, `${label}: outline style`).toBe('solid');
+    expect(actual.width, `${label}: outline width`).toBeGreaterThanOrEqual(2);
+    if (color) {
+        expect(actual.color, `${label}: outline color`).toBe(color);
+    }
+    else {
+        expect(alphaOf(actual.color), `${label}: outline opacity of ${actual.color}`).toBe(1);
+    }
 }
 
 /**

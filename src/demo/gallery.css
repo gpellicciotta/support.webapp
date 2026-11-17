@@ -262,6 +262,7 @@ a:hover { color: var(--color-link-hover); }
 .token__sample--radius { border-radius: var(--specimen); }
 .token__sample--shadow { border-color: var(--color-border); background-color: var(--color-surface); box-shadow: var(--specimen); }
 .token__sample--ring { outline: var(--specimen); outline-offset: var(--focus-ring-offset); }
+.token__sample--glow { border-color: var(--color-border); background-color: var(--color-surface); box-shadow: var(--specimen); }
 .token__sample--line { block-size: 0; border-block-start: var(--specimen) solid var(--color-text); }
 .token__sample--size { font-size: var(--specimen); line-height: var(--leading-tight); }
 .token__sample--leading { max-inline-size: var(--width-menu); line-height: var(--specimen); }
@@ -359,6 +360,10 @@ a:hover { color: var(--color-link-hover); }
 .token--focus-ring-offset { --specimen: var(--focus-ring-offset); }
 .token--focus-ring-offset-inset { --specimen: var(--focus-ring-offset-inset); }
 .token--focus-ring { --specimen: var(--focus-ring); }
+.token--focus-glow { --specimen: var(--focus-glow); }
+.token--focus-glow-inset { --specimen: var(--focus-glow-inset); }
+.token--focus-glow-danger { --specimen: var(--focus-glow-danger); }
+.token--focus-glow-danger-inset { --specimen: var(--focus-glow-danger-inset); }
 .token--elevation-1 { --specimen: var(--elevation-1); }
 .token--elevation-2 { --specimen: var(--elevation-2); }
 .token--layer-base { --specimen: var(--layer-base); }

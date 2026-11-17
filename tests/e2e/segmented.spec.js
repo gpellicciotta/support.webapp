@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { expectRing, forcedRing, openGallery, smallTargets, styles, tokenColor } from './gallery-helpers.js';
+import { expectRing, forcedRing, openGallery, shadowLayers, smallTargets, styles, tokenColor, tokenLength } from './gallery-helpers.js';
 
 test('the segmented section shows fieldsets of native radios with legends and every state', async ({ page }) => {
     const problems = await openGallery(page);
@@ -45,12 +45,12 @@ test('arrow keys move the selection, and the focused option draws the focus ring
     await expect(radios.nth(0)).toBeFocused();
     const focus = await tokenColor(page, '--color-focus');
     const labelRing = (index) => forcedRing(group.locator('.segmented__option').nth(index));
-    expectRing(await labelRing(0), focus, 'first option');
+    expectRing(await labelRing(0), focus, 'first option', { inset: true });
     await page.keyboard.press('ArrowRight');
     await expect(radios.nth(1)).toBeChecked();
     await expect(radios.nth(1)).toBeFocused();
-    expectRing(await labelRing(1), focus, 'second option');
-    expect((await labelRing(0)).style).toBe('none');
+    expectRing(await labelRing(1), focus, 'second option', { inset: true });
+    expect((await labelRing(0)).shadow).toBe('none');
     await page.keyboard.press('ArrowLeft');
     await expect(radios.nth(0)).toBeChecked();
     await page.keyboard.press('Tab');
@@ -75,7 +75,7 @@ test('the checked option stands out by ground, outline, and weight, also in forc
 
 test('the forced state specimens and the disabled group render their states', async ({ page }) => {
     await openGallery(page);
-    expectRing(await forcedRing(page.locator('#segmented .segmented__option.is-focus').first()), await tokenColor(page, '--color-focus'), 'focus specimen');
+    expectRing(await forcedRing(page.locator('#segmented .segmented__option.is-focus').first()), await tokenColor(page, '--color-focus'), 'focus specimen', { inset: true });
     const hover = await styles(page.locator('#segmented .segmented__option.is-hover:not(:has(:checked))').first(), ['background-color']);
     // Hover sits on the sunken track, so it must differ from the track in every look and theme.
     const track = await styles(page.locator('#segmented .segmented__options').first(), ['background-color']);
@@ -106,4 +106,27 @@ test('a single disabled radio dims its option in an enabled group and ignores ho
     const plain = await styles(options.and(page.locator(':not(.is-hover)')).first(), ['background-color']);
     const hovered = await styles(options.and(page.locator('.is-hover')).first(), ['background-color']);
     expect(hovered).toEqual(plain);
+});
+
+test('option outlines and focus glows stay inside each option, so neighbors and the track edge never touch', async ({ page }) => {
+    const problems = await openGallery(page);
+    const group = page.getByRole('group', { name: 'View', exact: true });
+    // Focus the checked option, so its outline and the glow combine.
+    await group.getByRole('radio').first().focus();
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('ArrowLeft');
+    const options = page.locator('#segmented .segmented__option');
+    expect(await options.count()).toBeGreaterThanOrEqual(9);
+    for (const option of await options.all()) {
+        const shadow = (await styles(option, ['box-shadow']))['box-shadow'];
+        const outer = shadowLayers(shadow).filter((layer) => !layer.inset);
+        expect(outer, `${await option.textContent()}: ${shadow}`).toEqual([]);
+    }
+    const gap = await tokenLength(page, '--space-2');
+    for (const track of await page.locator('#segmented .segmented__options').all()) {
+        expect(await styles(track, ['column-gap', 'row-gap'])).toEqual({ 'column-gap': gap, 'row-gap': gap });
+    }
+    const focused = group.locator('.segmented__option:has(:focus-visible)');
+    expectRing(await forcedRing(focused), await tokenColor(page, '--color-focus'), 'checked and focused option', { inset: true });
+    expect(problems).toEqual([]);
 });

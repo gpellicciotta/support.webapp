@@ -19,8 +19,9 @@
 }
 
 .error-summary:is(:focus, .is-focus) {
-  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline: var(--focus-ring-width) solid transparent;
   outline-offset: var(--focus-ring-offset);
+  box-shadow: var(--focus-glow);
 }
 
 .error-summary__title {

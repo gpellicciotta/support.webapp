@@ -108,7 +108,7 @@ test('field groups are fieldsets with legends, and the field sections never over
         await expect(group.locator(':scope > legend.field-group__legend')).toHaveText(/\S/);
     }
     await expect(page.locator('#field-group .field-group--row .field')).not.toHaveCount(0);
-    for (const id of ['field', 'checkbox', 'radio', 'field-group', 'form', 'error-summary']) {
+    for (const id of ['field', 'select', 'checkbox', 'radio', 'field-group', 'form', 'error-summary']) {
         const overflow = await page.locator(`#${id}`).evaluate((section) => section.scrollWidth - section.clientWidth);
         expect(overflow, id).toBeLessThanOrEqual(0);
     }

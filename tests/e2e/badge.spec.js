@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { join } from 'node:path';
-import { openGallery, selectGalleryLook, tokenColor } from './gallery-helpers.js';
+import { looks } from '../../src/demo/gallery.js';
+import { openGallery, selectGalleryLook, styles, tokenColor, tokenLength } from './gallery-helpers.js';
 
 test('badges show labeled tones without adding keyboard stops', async ({ page }, testInfo) => {
     const failed = [];
@@ -53,5 +54,20 @@ test('badges show labeled tones without adding keyboard stops', async ({ page },
         expect(await badge.evaluate(element => getComputedStyle(element).borderTopStyle)).toBe('solid');
     }
     expect(failed).toEqual([]);
+    expect(problems).toEqual([]);
+});
+
+test('badges use small text, a low box, and corners at least as round as controls in every look', async ({ page }) => {
+    const problems = await openGallery(page);
+    for (const look of looks) {
+        await selectGalleryLook(page, look);
+        const [text, space, chip, control] = await Promise.all(['--text-xs', '--space-1', '--radius-chip', '--radius-control'].map(name => tokenLength(page, name)));
+        const radius = `${Math.max(parseFloat(chip), parseFloat(control))}px`;
+        for (const badge of await page.locator('#badge .badge:not([hidden])').all()) {
+            const style = await styles(badge, ['font-size', 'padding-top', 'padding-bottom', 'border-top-left-radius']);
+            expect(style, look).toEqual({ 'font-size': text, 'padding-top': `${parseFloat(space) / 2}px`, 'padding-bottom': `${parseFloat(space) / 2}px`, 'border-top-left-radius': radius });
+            expect((await badge.boundingBox()).height, look).toBeLessThanOrEqual(22);
+        }
+    }
     expect(problems).toEqual([]);
 });

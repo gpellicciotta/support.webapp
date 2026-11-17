@@ -10,6 +10,18 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Components: Dropped the border of read-only fields and inset field messages to align with the control's text.
+- Components: Kept field rows at their natural height, so status and error lines sit one small step below the control.
+- Components: Indented field group content from its legend, and gave selects a chevron inset like the collapsible's.
+- Docs: Added a [Select section](src/demo/visual-style-gallery.html#select) to the gallery with every select state.
+- Components: Gave link buttons side padding, and made badges smaller and lower with corners at least as round as controls.
+- Components: Lowered switch tracks by 2 px and rounded them by one border width, keeping the thumb concentric.
+- Components: Separated segmented options by a full spacing step and drew their focus glow inside, so outlines never touch.
+- Components: Restyled tabs with top-only rounded corners and a straight primary bar on the divider, with inset focus.
+- Components: Replaced the focus outline with a glow, a solid contour plus a soft halo, keeping a transparent outline for forced colors.
+- Tokens: Added the `--focus-glow`, `--focus-glow-inset`, `--focus-glow-danger`, and `--focus-glow-danger-inset` base tokens.
+- Components: Drew menu focus inside each item and widened menu side padding, so focus clears neighbors and borders.
+- DevEx: Made the browser verifier check glow contours at 3:1 against their ground and their halo.
 - Looks: Added app icons for the planned quiz, stocks, calories, time, tools, and demos apps in all four styles.
 - Looks: Added the shared hexagon app icons in four styles as SVG, PNG, and ICO, with a generator script and an [icon gallery](src/demo/app-icon-gallery.html).
 - Looks: Refreshed the neutral look with slate grays and a brighter blue accent, keeping every contrast pair at AA.
