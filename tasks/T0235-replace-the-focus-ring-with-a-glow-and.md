@@ -12,9 +12,12 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 4, duration_s: 3961.4, input: 182034, output: 8581, cache_read: 1904891, cache_write: 6425}
+  worker: {turns: 5, duration_s: 4027.5, input: 182056, output: 11936, cache_read: 4195758, cache_write: 13072}
 work_duration: 4037.8
 contributors: "@gemini"
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T11:04:27Z"
 ---
 # T0235: Replace the focus ring with a glow, and give menu items room so focus never overlaps neighbors or edges
 
@@ -62,4 +65,7 @@ The user requested this after reviewing the gallery on 2026-11-17.
   Captured before and after gallery screenshots in light and dark, linked in [validation-proof.md](T0235-replace-the-focus-ring-with-a-glow-and/validation-proof.md#screenshots).
   - [Menu after](T0235-replace-the-focus-ring-with-a-glow-and/after-menu-desktop-light.png).
   - [Menu before](T0235-replace-the-focus-ring-with-a-glow-and/before-menu-desktop-light.png).
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
