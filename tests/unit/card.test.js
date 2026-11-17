@@ -3,7 +3,7 @@ import { expect, it } from 'vitest';
 
 it('ships static and interactive card parts without coupling nested controls', () => {
     const css = readFileSync('src/css/components/card.css', 'utf8');
-    for (const part of ['media', 'body', 'title', 'text']) {
+    for (const part of ['media', 'body', 'title', 'text', 'actions']) {
         expect(css).toContain(`.card__${part}`);
     }
     expect(css).toContain('a.card:hover');

@@ -314,12 +314,17 @@ For delete, move records to the recycle bin and offer Undo through the host's to
 
 ### card
 Card. A link card is one link and nests no other controls.
+A static card puts its buttons in `.card__actions`, which flows them to the end edge.
 
 ```html
 <a class="card" href="...">
   <span class="card__media"><span class="icon-tile icon-tile--tone-1">...</span></span>
   <span class="card__body"><span class="card__title">Calendar</span><span class="card__text">Family events</span></span>
 </a>
+<article class="card">
+  <div class="card__body"><h3 class="card__title">Backup</h3><p class="card__text">Saved daily.</p></div>
+  <div class="card__actions"><button class="button" type="button">Back up now</button></div>
+</article>
 ```
 
 ### icon-tile

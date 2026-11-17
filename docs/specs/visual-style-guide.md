@@ -256,6 +256,9 @@ Their corners take the rounder of `--radius-chip` and `--radius-control`.
   Disable one option with `disabled` on its radio, or the whole control with `disabled` on the fieldset.
   Options sit `--space-2` apart and draw outlines and the focus glow inside, so outlines never touch.
 - Banners come in info, success, warning, and danger; only danger banners use `role="alert"`.
+- A banner action keeps one spacing step to the top, bottom, and end borders, and wraps to the end edge.
+  It wraps below the text whenever the text would need a second line beside it.
+  Text keeps its full end inset, so text-only banners look unchanged.
 - Forced colors mode drops shadows, so pressed chips and toggles thicken their border, and checked options gain one.
 
 **[Decided]** One partial per key, so the icon button gets `icon-button.css` beside `button.css`.
@@ -318,6 +321,9 @@ Fields, choices, and forms share markup for labels, help, character counts, erro
 - One submit runs at a time, from validation through sending, so a double submit never sends twice.
 - A value edited while a submit validates triggers another validation, so every sent value was checked.
 - After a failed submit, the error summary takes `role="alert"` and focus, and each link focuses its field.
+- Like a danger banner, the error summary uses the danger color for its edge and title.
+  Its links use the text color.
+- The form actions row flows its buttons to the end edge and puts the main action last.
 - The static error summary specimen omits `role="alert"`, so the gallery announces nothing on load.
 
 **[Decided]** The pending state uses the `icon-more` glyph, because the core glyph contract has no progress glyph.
@@ -356,6 +362,9 @@ Use [the row base](../../src/demo/visual-style-gallery.html#row) for dense items
 Use native list markup: `.list.row__list` contains `.row`, with `.row__main` and optional `.row__actions`.
 The `.row__list` class establishes the `row-list` size container and removes default list spacing and markers.
 Below 36rem of container width, actions wrap below the content and remain keyboard reachable.
+Actions end at the row's end edge.
+A labeled first action puts its label on the row text's first baseline, also when that text wraps.
+Icon-only actions stay centered, because they have no label to align.
 Long content wraps without truncation; action buttons retain their existing focus, disabled, and touch-target behavior.
 Task status, drag handles, selection, navigation, and row interactions remain app-local.
 Use a table when columns need shared alignment across rows.
@@ -409,6 +418,7 @@ The controller returns `expand`, `collapse`, `toggle`, `isExpanded`, and `destro
 Use [cards](../../src/demo/visual-style-gallery.html#card) for grouped content or one linked destination.
 Compose `.card__media`, `.card__body`, `.card__title`, and `.card__text`; select headings appropriate to the page hierarchy.
 Link cards must not contain nested controls; static cards may contain buttons.
+Put static card buttons in `.card__actions`, which flows them to the end edge and wraps them on narrow cards.
 Use rows instead for dense collections.
 Use [icon tiles](../../src/demo/visual-style-gallery.html#icon-tile) as decorative containers, never standalone controls.
 Sizes are `--sm`, `--md` (default), and `--lg`; tones are `--tone-1` through `--tone-4`.
@@ -425,7 +435,9 @@ Avoid stacks for large rosters, where a list provides clearer navigation.
 **[Decided]** Avatar sizes use existing space tokens; responsive stacks use ground-colored rings to separate overlapping faces.
 **[Decided]** Optional tones fall back to sunken surfaces and text; shared radius roles keep shapes consistent across looks.
 **[Decided]** Cards use the global focus glow above their elevation; avatars provide initials and icon fallbacks when images are unavailable.
-**[Decided]** Static card buttons stretch with their flex container; applications own action alignment instead of cross-component package selectors.
+**[Decided]** Static card buttons sit in `.card__actions`, an end-aligned row like `.form__actions`, at their natural width.
+- Stretched buttons in the card column: rejected after the 2026-11-17 gallery review, because buttons should flow to the end edge.
+- A `.card > .button` selector: rejected, because the card styles would couple to another component.
 **[Decided]** The placeholder portrait uses a fixed mid-gray fill for visibility in light and dark themes.
 
 ## Patterns

@@ -10,6 +10,10 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Components: Gave banner actions one spacing step to the top, bottom, and end borders, wrapping them below multiline text.
+- Components: Put labeled row actions on the row text's first baseline, and ended row actions at the row's end edge.
+- Components: Added `.card__actions`, which flows static card buttons to the end edge instead of stretching them.
+- Components: Colored the error summary title with the danger color and its links with the text color.
 - Shell: Padded the top bar like the main area, so its title and content text share a start edge at every width.
 - Shell: Pulled the top bar's first and last icon buttons outward by their glyph inset, so glyphs align with content.
 - Looks: Redrew `icon-more` as vertical dots in every look's sprite.
