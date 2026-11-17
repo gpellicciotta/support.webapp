@@ -11,6 +11,7 @@ All notable changes to this project are documented here.
 
 ## v0.2.2-pre
 - DevEx: Paused the page clock in the form spec's async check and valid submit tests, so a slow run keeps their busy states.
+- DevEx: Set the `package-lock.json` root versions in both release version edits, so the lockfile tracks `package.json`.
 
 ## v0.2.1 [released: 2026-11-17]
 - Components: Painted the forced colors focus outline in the `Highlight` system color instead of a mapped transparent outline.

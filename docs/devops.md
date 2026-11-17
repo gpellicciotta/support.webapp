@@ -122,6 +122,8 @@ python scripts/devops.py release --yes
 Without `--yes`, the script asks you to type `release v{{version}}`.
 The shared support.python release pipeline checks repository state, runs the full check, freezes versions, tags, and publishes a GitHub release.
 It then opens the next development version.
+Both version edits also set the two root versions in [package-lock.json](../package-lock.json).
+The dry run lists each lockfile edit, and both commits stage the lockfile.
 Review `python scripts/devops.py help --verbose` before releasing; publishing requires explicit authorization.
 
 ### Publishing the Package

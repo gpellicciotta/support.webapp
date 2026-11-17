@@ -12,6 +12,8 @@ Usage:
 
 from __future__ import annotations
 
+import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -27,6 +29,94 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import generate_app  # noqa: E402
 from support_python.devops import DevopsCli, NodeProject, resolve_executable  # noqa: E402
+from support_python.devops.release import ReleasePipeline  # noqa: E402
+from support_python.files import atomic_write_text  # noqa: E402
+
+LOCKFILE_NAME = "package-lock.json"
+
+
+LOCKFILE_VERSIONS = (
+    # The top-level version, indented by two spaces like every top-level key.
+    re.compile(r'^(  "version": ")[^"]*(")', re.MULTILINE),
+    # The version of the root package, keyed by the empty path under "packages".
+    re.compile(r'("packages": \{\s*"": \{[^{}]*?"version": ")[^"]*(")'),
+)
+
+
+def set_lockfile_version(root: Path, version: str) -> None:
+    """Set both root versions of package-lock.json, leaving every other byte in place.
+
+    Raises:
+        ValueError: If the lockfile lacks either root version.
+    """
+    path = Path(root) / LOCKFILE_NAME
+    text = path.read_bytes().decode("utf-8")
+    for pattern in LOCKFILE_VERSIONS:
+        text, count = pattern.subn(lambda match: f"{match.group(1)}{version}{match.group(2)}", text, count=1)
+        if count != 1:
+            raise ValueError(f"No root version to update in {LOCKFILE_NAME}.")
+    data = json.loads(text)
+    if data.get("version") != version or data.get("packages", {}).get("", {}).get("version") != version:
+        raise ValueError(f"Could not set the root versions of {LOCKFILE_NAME} to {version}.")
+    atomic_write_text(path, text, newline="")
+
+
+class LockfileReleasePipeline(ReleasePipeline):
+    """Release like ReleasePipeline, also setting the package-lock.json root versions with package.json."""
+
+    def _plan(self, *args, **kwargs):
+        """Follow each package.json version edit with the matching lockfile edit."""
+        self._version_edits = {}
+        steps = []
+        for step in super()._plan(*args, **kwargs):
+            steps.append(step)
+            if step[0] in self._version_edits:
+                steps.append(self._set_lockfile_version(Path(self.root), self._version_edits[step[0]]))
+        return steps
+
+    def _set_version(self, root, entry, name, version):
+        """Remember which version each version file edit writes."""
+        step = super()._set_version(root, entry, name, version)
+        self._version_edits[step[0]] = version
+        return step
+
+    def _command(self, root, argv):
+        """Stage the lockfile with the version file."""
+        if argv[:2] == ["git", "add"]:
+            argv = [*argv, LOCKFILE_NAME]
+        return super()._command(root, argv)
+
+    def _set_lockfile_version(self, root, version):
+        """Return the step setting both lockfile root versions."""
+
+        def action() -> bool:
+            try:
+                set_lockfile_version(root, version)
+            except (OSError, ValueError) as exc:
+                self.logger.error(f"Could not update {LOCKFILE_NAME}: {exc}")
+                return False
+            return True
+
+        return f"edit {LOCKFILE_NAME}: root versions {version}", action
+
+
+class WebDevopsCli(DevopsCli):
+    """Run the shared CLI, releasing through the lockfile-aware pipeline."""
+
+    def _release(self, args, logger) -> int:
+        """Release with the same settings as DevopsCli, keeping package-lock.json in step."""
+        self.project.logger = logger
+        pipeline = LockfileReleasePipeline(
+            root=self.project.root,
+            logger=logger,
+            quality_check=None if args.skip_checks else self.project.check,
+            assets=self.project.release_assets,
+            build=self.project.build,
+            dry_run=args.dry_run,
+            assume_yes=args.yes,
+            runner=self.project.runner,
+        )
+        return pipeline.run()
 
 
 class WebProject(NodeProject):
@@ -70,7 +160,7 @@ class WebProject(NodeProject):
 def build_cli(root: Path = REPO_ROOT) -> DevopsCli:
     """Create the shared CLI with test and local server actions."""
     project = WebProject(root)
-    cli = DevopsCli(
+    cli = WebDevopsCli(
         project, description="Run tests, checks, packaging validation, releases, and the local server with serve."
     )
     cli.add_action(
