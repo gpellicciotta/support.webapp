@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 2451.7, input: 40, output: 7338, cache_read: 3825817, cache_write: 15601}
+  worker: {turns: 3, duration_s: 2520.9, input: 60, output: 10153, cache_read: 5853390, cache_write: 25152}
 work_duration: 2492.4
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T16:42:14Z"
 ---
 # T0240: Span a full-width app bar over the sidebar and side panel, with a hamburger toggling open, rail, and hidden navigation
 
@@ -55,4 +58,7 @@ The user chose this layout, including the icon rail, in the 2026-11-17 layout re
 
 - [2026-11-17] **[Verify]**
   Resumed turn found the work committed, verified, and validated; no changes were needed before review.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
