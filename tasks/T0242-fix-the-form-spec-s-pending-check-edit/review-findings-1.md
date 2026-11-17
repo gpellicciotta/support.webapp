@@ -3,8 +3,8 @@ task: T0242
 round: 1
 verdict: approved
 blocking: 0
-reviewer: "@codex"
-reviewed_at: 2026-11-17T15:11:05Z
+reviewer: "@claude"
+reviewed_at: 2026-11-17T15:12:39Z
 reviewed_commit: "d2e5b53"
 base_commit: "eadbfe4"
 branch: task/T0242-fix-the-form-spec-s-pending-check-edit
@@ -12,15 +12,34 @@ branch: task/T0242-fix-the-form-spec-s-pending-check-edit
 # Review Findings: Task T0242 (Round 1)
 
 ## Summary
-**[Decided]** Approved. The paused page clock removes the real-time race while preserving assertions that an edit clears the pending state, the overtaken check starts validation of the new value, and the new check succeeds without an error. Reviewed git log main..HEAD, git diff main...HEAD, the field implementation, technical specification, and validation proof.
+Approved. The fix removes the real-timer race in the pending-check edit test.
 
-Independent verification: npx playwright test tests/e2e/form.spec.js --reporter=dot exited 0, with 28 passed (20.7s); npx eslint tests/e2e/form.spec.js exited 0 with no output. Recorded evidence includes the failing delayed-edit reproduction, passing delayed-edit test, and 200 successful repetitions at 12 workers. The recorded full check failed on integration dependency resolution; its separate integration rerun passed 7/7 after correcting the dependency junction. The recorded unit and full browser suites passed.
+- The root cause matches the code.
+  The gallery's name check awaits `view.setTimeout(600)` in `src/demo/gallery.js`.
+  A late edit lets that timer settle first.
+- The test installs the clock before navigation, so the gallery's `setTimeout` is controlled.
+  It then pauses ahead of page time, so no timer fires before the edit.
+- The two `runFor(600)` steps follow `src/js/field.js`.
+  The first settles the overtaken check, which re-validates and sets `aria-busy` with "Checking the name.".
+  The second settles the new check as "Name is free.".
+- The new busy and pending-text assertions strengthen the test's coverage of the overtake path.
+- The CHANGELOG `DevEx:` entry matches existing categories.
+- Follow-up T0245 exists for the two sibling async-check tests.
+
+Reviewer verification:
+
+- `npx playwright test tests/e2e/form.spec.js --repeat-each 10 --reporter=line`: 280 passed (3.4m), all four projects.
+- `npx eslint tests/e2e/form.spec.js`: exit 0.
+- `plan tasks validate T0242 --completion`: passed.
 
 ## Defects
-None. Blocking findings: 0.
+None.
 
 ## Process Gaps
-None.
+- Non-blocking: the full `devops.py check` failed in the worktree's integration suite because `node_modules` was missing.
+  The worker reran the integration suite against the main checkout's `node_modules` (7/7 passed).
+  The worker reported this transparently in the validation proof.
+  A worktree bootstrap step would avoid this workaround.
 
 ## Required Rework
 None.

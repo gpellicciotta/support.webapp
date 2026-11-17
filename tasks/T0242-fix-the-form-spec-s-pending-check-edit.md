@@ -13,9 +13,11 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 1, duration_s: 1195.3, input: 70, output: 16911, cache_read: 2409628, cache_write: 71428}
+  review: {turns: 1, duration_s: 74.3, input: 32425, output: 1526, cache_read: 208384, cache_write: 0}
 review_status: pending
 review_round: 1
 review_requested_at: "2026-11-17T15:11:04Z"
+work_duration: 1288.7
 ---
 # T0242: Fix the form spec's pending-check edit test, which failed once under full-suite load and passed 84 times alone
 
