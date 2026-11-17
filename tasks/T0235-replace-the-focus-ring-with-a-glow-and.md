@@ -1,7 +1,7 @@
 ---
 id: T0235
-owner: "@gemini"
-session: antigravity-20261117-a3b972
+owner: "@claude"
+session: claude-20261117-9b1540
 needs: []
 branch: task/T0235-replace-the-focus-ring-with-a-glow-and
 worktree: .plan/work/T0235-replace-the-focus-ring-with-a-glow-and
@@ -11,6 +11,10 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 315.0, input: 182020, output: 5921, cache_read: 798466}
+work_duration: 327.9
+contributors: "@gemini"
 ---
 # T0235: Replace the focus ring with a glow, and give menu items room so focus never overlaps neighbors or edges
 
