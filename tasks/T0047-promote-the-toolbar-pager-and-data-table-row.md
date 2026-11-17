@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1800.4, input: 5459, output: 875}
+work_duration: 1809.4
 ---
 # T0047: Promote the toolbar, pager, and data table row states from ToDo's admin console into the package
 
