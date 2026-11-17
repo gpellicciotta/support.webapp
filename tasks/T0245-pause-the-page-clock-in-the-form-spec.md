@@ -1,11 +1,11 @@
 ---
 id: T0245
-owner: ~
+owner: "@claude"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0245-pause-the-page-clock-in-the-form-spec
+worktree: .plan/work/T0245-pause-the-page-clock-in-the-form-spec
+status: active
+started_at: "2026-11-17T19:12:31Z"
 ended_at: —
 review: agent
 preview: none
