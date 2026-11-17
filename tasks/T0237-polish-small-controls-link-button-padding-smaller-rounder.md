@@ -1,6 +1,7 @@
 ---
 id: T0237
 owner: "@claude"
+session: claude-20261117-b6ed32
 needs: []
 branch: task/T0237-polish-small-controls-link-button-padding-smaller-rounder
 worktree: .plan/work/T0237-polish-small-controls-link-button-padding-smaller-rounder
