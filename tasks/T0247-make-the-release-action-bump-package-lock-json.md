@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1202.8, input: 90, output: 22172, cache_read: 3548696, cache_write: 86946}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-17T20:00:46Z"
 ---
 # T0247: Make the release action bump package-lock.json with package.json, which v0.1.0 and v0.2.0 both left one version behind
 
@@ -56,4 +61,7 @@ Cover the frozen release version and the next development version, and check the
 
 - [2026-11-17] **[Doc]**
   Added a CHANGELOG.md DevEx entry and described the lockfile edits under Making a Release in docs/devops.md.
+
+- [2026-11-17] **[Review]**
+  Round 1 requested (mode: agent).
 
