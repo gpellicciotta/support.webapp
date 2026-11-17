@@ -3,7 +3,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
 - [x] T0243 [owner: @claude, session: claude-20261117-911132] [protocol: adhoc] Format the app icon generator script with Ruff, which currently fails the devops check.
-- [~] T0244 [owner: @claude] [protocol: adhoc] Investigate the intermittent mobile-light failure of the form spec's edit-during-pending-check test under load.
+- [!] T0244 [reason: circuit breaker: 3 consecutive no-op turns] [owner: @claude, session: claude-20261117-3cd0be] [protocol: adhoc] Investigate the intermittent mobile-light failure of the form spec's edit-during-pending-check test under load.
 - [ ] T0242 Fix the form spec's pending-check edit test, which failed once under full-suite load and passed 84 times alone.
 - [x] T0040 Refresh the neutral look's colors and fonts to the variant the user picks from five rendered candidates.
 - [x] T0235 Replace the focus ring with a glow, and give menu items room so focus never overlaps neighbors or edges.
