@@ -12,6 +12,7 @@ Overview of all documentation for the `support.webapp` project.
 - [visual-style-guide.md](specs/visual-style-guide.md): Principles, token groups, gallery, and the browser verifier.
 - [components.md](specs/components.md): Component catalog with markup skeletons, statuses, and owning tasks.
 - [naming.md](specs/naming.md): Naming conventions linking tokens, HTML classes, CSS files, modules, and tests.
+- [app-icons.md](specs/app-icons.md): Hexagon app icon styles, files, adoption, and regeneration.
 - [i18n.md](specs/i18n.md): Translation catalogs, interpolation, markup attributes, and application lifecycle.
 - [neutral.md](specs/looks/neutral.md): Neutral look provenance, usage, and contract gap values.
 - [warm.md](specs/looks/warm.md): Warm look, seasons, fonts, glyphs, and the look template.

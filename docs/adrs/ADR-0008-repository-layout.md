@@ -72,7 +72,8 @@ Rules:
 
 - `src/css/style.css` stays the single entry for look-neutral styles, as the ui-guidelines require.
 - A component key `{{key}}` owns `src/css/components/{{key}}.css`, an optional `src/js/{{key}}.js`, and a gallery section.
-- `npm pack` ships `src/` without `demo/`, plus `bin/`, the manifest, and the project files.
+- `npm pack` ships `src/` without `demo/` and `img/app-icons/`, plus `bin/`, the manifest, and the project files.
+- Each app copies only its own [app icons](../specs/app-icons.md), so releases leave the per-app icons out.
 - The public entry points of ADR-0005 are the only files apps may link or import; all other files are private.
 - [devops.py](../../scripts/devops.py) wraps tests, checks, linting, release, and `generate-app`, following the cli-guidelines.
 - `generate-app` reads `template/` from a checkout at a release tag ([ADR-0006](ADR-0006-generator.md)).

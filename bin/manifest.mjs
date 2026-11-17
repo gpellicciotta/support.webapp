@@ -11,7 +11,8 @@ export function buildManifest(root = packageRoot) {
     function walk(folder, prefix = '') {
         for (const item of readdirSync(folder, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
             const name = `${prefix}${item.name}`;
-            if (name === 'demo' || name === 'index.html') {
+            // The gallery and the per-app icons stay out of the package; apps copy their own icon files.
+            if (name === 'demo' || name === 'index.html' || name === 'img/app-icons') {
                 continue;
             }
             if (item.isSymbolicLink()) {

@@ -1,11 +1,15 @@
-"""Generate the shared app icon set: SVG sources, PNG renditions, and multi-size .ico files.
+"""Generate the shared app icon set: SVG sources, PNG renditions, multi-size .ico files, and install icons.
 
 Output goes to src/img/app-icons/{style}/. PNG rendering needs Chrome or Edge (override with CHROME_PATH) and
-the Pillow package. Run: python scripts/generate-app-icons.py
+the Pillow package from scripts/requirements.txt. Run: python scripts/generate-app-icons.py
+
+Install icons sit on an opaque plate: iOS fills a transparent apple-touch-icon with black, and Android crops
+maskable icons to its own shape, so the hexagon must stay inside the safe zone.
 
 The hexagon is a polygon with a round-joined stroke, so the corner radius is half the stroke width.
 Glyphs are drawn on a 100 x 100 grid and shrunk around their visual center for padding.
 """
+
 # ruff: noqa: E501  (inline SVG markup)
 import math
 import os
@@ -14,19 +18,36 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from PIL import Image
-
 OUT = Path(__file__).resolve().parent.parent / "src" / "img" / "app-icons"
-PNG_SIZES = (32, 64, 128, 192, 256, 512)
+PNG_SIZES = (16, 32, 48, 64, 96, 128, 192, 256, 512)
 ICO_SIZES = (16, 32, 48, 64, 128, 256)
+TOUCH_SIZE = 180
+MASKABLE_SIZES = (192, 512)
 BLUE = "#0e6eb8"
 BLUE_LIGHT = "#4aa3e8"
 BLUE_DARK = "#08487a"
 WHITE = "#ffffff"
+NIGHT = "#0a1626"
+
+# Install icon plates: light behind the blue styles, dark behind the white styles.
+PLATES = {"white-flat": NIGHT, "white-dimensional": NIGHT, "blue-flat": WHITE, "blue-dimensional": WHITE}
+# Hexagon scale on a plate. Maskable icons keep it inside the safe zone, a circle of 40% radius.
+MASKABLE_SCALE = 0.8
+TOUCH_SCALE = 0.88
 
 APPS = [
-    "meteo", "verkeersregels-quiz", "counters", "todos", "auth", "family-portal",
-    "quiz", "stocks", "calories", "time", "tools", "demos",
+    "meteo",
+    "verkeersregels-quiz",
+    "counters",
+    "todos",
+    "auth",
+    "family-portal",
+    "quiz",
+    "stocks",
+    "calories",
+    "time",
+    "tools",
+    "demos",
 ]
 
 # Hexagon: polygon radius + round-joined stroke; corner radius = HEX_STROKE / 2.
@@ -64,46 +85,87 @@ def sw(color, w=6):
 
 
 def mask(uid, shapes, suffix=""):
-    return (f'<mask id="m{uid}{suffix}" maskUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200">'
-            f'<rect x="-50" y="-50" width="200" height="200" fill="#fff"/>{shapes}</mask>')
+    return (
+        f'<mask id="m{uid}{suffix}" maskUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200">'
+        f'<rect x="-50" y="-50" width="200" height="200" fill="#fff"/>{shapes}</mask>'
+    )
 
 
 def g_counters(fg, uid):
-    bars = ('<line x1="34" y1="31" x2="33" y2="68"/><line x1="45" y1="30" x2="45.5" y2="69"/>'
-            '<line x1="56" y1="32" x2="58" y2="68"/><line x1="67" y1="31" x2="69" y2="67"/>'
-            '<line x1="24" y1="41" x2="77" y2="61"/>')
-    return f'<g {sw(fg, 5)}>{bars}</g>'
+    bars = (
+        '<line x1="34" y1="31" x2="33" y2="68"/><line x1="45" y1="30" x2="45.5" y2="69"/>'
+        '<line x1="56" y1="32" x2="58" y2="68"/><line x1="67" y1="31" x2="69" y2="67"/>'
+        '<line x1="24" y1="41" x2="77" y2="61"/>'
+    )
+    return f"<g {sw(fg, 5)}>{bars}</g>"
+
+
+LUCIDE_NOTICE = """Checkbox glyph: Lucide square-check-big, https://lucide.dev/icons/square-check-big
+
+ISC License
+
+Copyright (c) 2026 Lucide Icons and Contributors
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE."""
+
+# Third-party notices that must travel inside each copy of an app's icon.
+NOTICES = {"todos": LUCIDE_NOTICE}
 
 
 def g_todos(fg, uid):
-    # Lucide "square-check-big", as used by the todos app icon (24 grid).
-    return (f'<g transform="translate(50 50) scale(1.85) translate(-12.5 -12)" {sw(fg, 2.4)}>'
-            '<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>'
-            '<path d="m9 11 3 3L22 4"/></g>')
+    # Lucide "square-check-big" (24 grid); its license is in LUCIDE_NOTICE.
+    return (
+        f'<g transform="translate(50 50) scale(1.85) translate(-12.5 -12)" {sw(fg, 2.4)}>'
+        '<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>'
+        '<path d="m9 11 3 3L22 4"/></g>'
+    )
 
 
 def g_meteo(fg, uid):
     rays = "".join(
         f'<line x1="{66 + 13 * math.cos(math.radians(d)):.1f}" y1="{34 + 13 * math.sin(math.radians(d)):.1f}" '
         f'x2="{66 + 18 * math.cos(math.radians(d)):.1f}" y2="{34 + 18 * math.sin(math.radians(d)):.1f}"/>'
-        for d in range(0, 360, 45))
+        for d in range(0, 360, 45)
+    )
     sun = f'<circle cx="66" cy="34" r="8" fill="{fg}"/><g {sw(fg, 3.5)}>{rays}</g>'
-    cloud = ('<rect x="27" y="46" width="44" height="12" rx="6"/>'
-             '<circle cx="39" cy="47" r="8"/><circle cx="53" cy="42" r="10.5"/>')
-    drops = (f'<g {sw(fg, 4.5)}><line x1="37" y1="65" x2="34" y2="72"/>'
-             '<line x1="49" y1="65" x2="46" y2="72"/><line x1="61" y1="65" x2="58" y2="72"/></g>')
+    cloud = (
+        '<rect x="27" y="46" width="44" height="12" rx="6"/>'
+        '<circle cx="39" cy="47" r="8"/><circle cx="53" cy="42" r="10.5"/>'
+    )
+    drops = (
+        f'<g {sw(fg, 4.5)}><line x1="37" y1="65" x2="34" y2="72"/>'
+        '<line x1="49" y1="65" x2="46" y2="72"/><line x1="61" y1="65" x2="58" y2="72"/></g>'
+    )
     cut = f'<g fill="#000" stroke="#000" stroke-width="5" stroke-linejoin="round">{cloud}</g>'
-    return (f'{mask(uid, cut)}<g transform="translate(0 4)"><g mask="url(#m{uid})">{sun}</g>'
-            f'<g fill="{fg}">{cloud}</g>{drops}</g>')
+    return (
+        f'{mask(uid, cut)}<g transform="translate(0 4)"><g mask="url(#m{uid})">{sun}</g>'
+        f'<g fill="{fg}">{cloud}</g>{drops}</g>'
+    )
 
 
 def g_quiz(fg, uid):
-    q = ('<path d="M41.5 42.5A8.5 8.5 0 1 1 55 49.5Q50 52.5 50 57" fill="none" stroke="#000" '
-         'stroke-width="5.5" stroke-linecap="round"/><circle cx="50" cy="65" r="3.4" fill="#000"/>')
-    ring = (f'<polygon points="50,14 86,50 50,86 14,50" fill="none" stroke="{fg}" stroke-width="4" '
-            'stroke-linejoin="round"/>')
-    inner = (f'<polygon points="50,25 75,50 50,75 25,50" fill="{fg}" stroke="{fg}" stroke-width="5" '
-             'stroke-linejoin="round"/>')
+    q = (
+        '<path d="M41.5 42.5A8.5 8.5 0 1 1 55 49.5Q50 52.5 50 57" fill="none" stroke="#000" '
+        'stroke-width="5.5" stroke-linecap="round"/><circle cx="50" cy="65" r="3.4" fill="#000"/>'
+    )
+    ring = (
+        f'<polygon points="50,14 86,50 50,86 14,50" fill="none" stroke="{fg}" stroke-width="4" '
+        'stroke-linejoin="round"/>'
+    )
+    inner = (
+        f'<polygon points="50,25 75,50 50,75 25,50" fill="{fg}" stroke="{fg}" stroke-width="5" '
+        'stroke-linejoin="round"/>'
+    )
     return f'{mask(uid, q)}{ring}<g mask="url(#m{uid})">{inner}</g>'
 
 
@@ -136,68 +198,93 @@ KEY_PATH = (
 
 
 def g_auth(fg, uid):
-    users = "".join(f'<path d="{d}" fill="{fg}" stroke="{fg}" stroke-width="1" stroke-linejoin="round"/>' for d in USERS_PATHS)
+    users = "".join(
+        f'<path d="{d}" fill="{fg}" stroke="{fg}" stroke-width="1" stroke-linejoin="round"/>' for d in USERS_PATHS
+    )
     key = f'<path d="{KEY_PATH}" fill="none" stroke="{fg}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
-    return (f'<g transform="translate(18.7 23) scale(1.83 1.618)">{users}</g>'
-            f'<g transform="translate(51.3 48.2) scale(1.54 1.43)">{key}</g>')
+    return (
+        f'<g transform="translate(18.7 23) scale(1.83 1.618)">{users}</g>'
+        f'<g transform="translate(51.3 48.2) scale(1.54 1.43)">{key}</g>'
+    )
 
 
 def g_family(fg, uid):
     y = 68
-    heart = (f'<path d="M50 {y}C40 {y - 7} 36 {y - 12} 36 {y - 17}C36 {y - 21} 39 {y - 23.5} 42.5 {y - 23.5}'
-             f'C46 {y - 23.5} 48.5 {y - 21.5} 50 {y - 19}C51.5 {y - 21.5} 54 {y - 23.5} 57.5 {y - 23.5}'
-             f'C61 {y - 23.5} 64 {y - 21} 64 {y - 17}C64 {y - 12} 60 {y - 7} 50 {y}Z" '
-             'fill="#000" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>')
-    house = (f'<path d="M50 22L80 47H72V75H28V47H20Z" fill="{fg}" stroke="{fg}" stroke-width="4" '
-             'stroke-linejoin="round"/>')
+    heart = (
+        f'<path d="M50 {y}C40 {y - 7} 36 {y - 12} 36 {y - 17}C36 {y - 21} 39 {y - 23.5} 42.5 {y - 23.5}'
+        f"C46 {y - 23.5} 48.5 {y - 21.5} 50 {y - 19}C51.5 {y - 21.5} 54 {y - 23.5} 57.5 {y - 23.5}"
+        f'C61 {y - 23.5} 64 {y - 21} 64 {y - 17}C64 {y - 12} 60 {y - 7} 50 {y}Z" '
+        'fill="#000" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>'
+    )
+    house = (
+        f'<path d="M50 22L80 47H72V75H28V47H20Z" fill="{fg}" stroke="{fg}" stroke-width="4" stroke-linejoin="round"/>'
+    )
     return f'{mask(uid, heart)}<g mask="url(#m{uid})">{house}</g>'
 
 
 def g_quiz_game(fg, uid):
     """Two speech bubbles: a solid one with a question mark in front of an outlined one with a check."""
     front = "M25 46H51A9 9 0 0 1 60 55V65A9 9 0 0 1 51 74H36L23 86L25 74A9 9 0 0 1 16 65V55A9 9 0 0 1 25 46Z"
-    q = ('<g transform="translate(38 60) scale(0.66) translate(-50 -50)"><path d="M41.5 42.5A8.5 8.5 0 1 1 55 49.5Q50 52.5 50 57" '
-         'fill="none" stroke="#000" stroke-width="6.5" stroke-linecap="round"/><circle cx="50" cy="65" r="4" fill="#000"/></g>')
+    q = (
+        '<g transform="translate(38 60) scale(0.66) translate(-50 -50)"><path d="M41.5 42.5A8.5 8.5 0 1 1 55 49.5Q50 52.5 50 57" '
+        'fill="none" stroke="#000" stroke-width="6.5" stroke-linecap="round"/><circle cx="50" cy="65" r="4" fill="#000"/></g>'
+    )
     gap = f'<path d="{front}" fill="#000" stroke="#000" stroke-width="9" stroke-linejoin="round"/>'
-    back = (f'<path d="M51 20H75A9 9 0 0 1 84 29V41A9 9 0 0 1 75 50H73L77 60L63 50H51A9 9 0 0 1 42 41V29A9 9 0 0 1 51 20Z" '
-            f'fill="none" stroke="{fg}" stroke-width="5" stroke-linejoin="round"/>'
-            f'<path d="M54 35L60 41L72 28" {sw(fg, 5)}/>')
+    back = (
+        f'<path d="M51 20H75A9 9 0 0 1 84 29V41A9 9 0 0 1 75 50H73L77 60L63 50H51A9 9 0 0 1 42 41V29A9 9 0 0 1 51 20Z" '
+        f'fill="none" stroke="{fg}" stroke-width="5" stroke-linejoin="round"/>'
+        f'<path d="M54 35L60 41L72 28" {sw(fg, 5)}/>'
+    )
     solid = f'<path d="{front}" fill="{fg}" stroke="{fg}" stroke-width="3" stroke-linejoin="round"/>'
-    return (f'{mask(uid, gap, "b")}{mask(uid, q, "f")}<g mask="url(#m{uid}b)">{back}</g>'
-            f'<g mask="url(#m{uid}f)">{solid}</g>')
+    return (
+        f'{mask(uid, gap, "b")}{mask(uid, q, "f")}<g mask="url(#m{uid}b)">{back}</g><g mask="url(#m{uid}f)">{solid}</g>'
+    )
 
 
 def g_stocks(fg, uid):
     """Axes with a rising line and an arrow."""
-    return (f'<path d="M26 24V74H78" {sw(fg, 5.5)}/>'
-            f'<path d="M34 62L46 50L56 58L74 36M62 36H74V48" {sw(fg, 5.5)}/>')
+    return f'<path d="M26 24V74H78" {sw(fg, 5.5)}/><path d="M34 62L46 50L56 58L74 36M62 36H74V48" {sw(fg, 5.5)}/>'
+
 
 def g_calories(fg, uid):
     """An apple with a flame cut out of it."""
-    body = ('<path d="M50 38C46 31 38 30 33 33C24 38 24 56 32 68C37 76 43 80 50 77C57 80 63 76 68 68C76 56 76 38 67 33'
-            'C62 30 54 31 50 38Z"/>')
+    body = (
+        '<path d="M50 38C46 31 38 30 33 33C24 38 24 56 32 68C37 76 43 80 50 77C57 80 63 76 68 68C76 56 76 38 67 33'
+        'C62 30 54 31 50 38Z"/>'
+    )
     leaf_d = "M53 33C53 24 59 18 69 18C69 27 63 33 53 33Z"
-    flame = ('<path d="M50 47C54 52 58 56 58 62C58 67 54 71 50 71C46 71 42 67 42 62C42 58 44 56 45.5 54'
-             'C46.5 56 48 57 49 57C49 54 49 51 50 47Z" fill="#000" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>')
+    flame = (
+        '<path d="M50 47C54 52 58 56 58 62C58 67 54 71 50 71C46 71 42 67 42 62C42 58 44 56 45.5 54'
+        'C46.5 56 48 57 49 57C49 54 49 51 50 47Z" fill="#000" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>'
+    )
     gap = f'<path d="{leaf_d}" fill="#000" stroke="#000" stroke-width="6" stroke-linejoin="round"/>'
-    return (f'{mask(uid, flame + gap)}<g mask="url(#m{uid})" fill="{fg}" stroke="{fg}" stroke-width="3" '
-            f'stroke-linejoin="round">{body}</g>'
-            f'<path d="{leaf_d}" fill="{fg}" stroke="{fg}" stroke-width="3" stroke-linejoin="round"/>')
+    return (
+        f'{mask(uid, flame + gap)}<g mask="url(#m{uid})" fill="{fg}" stroke="{fg}" stroke-width="3" '
+        f'stroke-linejoin="round">{body}</g>'
+        f'<path d="{leaf_d}" fill="{fg}" stroke="{fg}" stroke-width="3" stroke-linejoin="round"/>'
+    )
 
 
 def g_time(fg, uid):
     """A stopwatch."""
-    return (f'<g {sw(fg, 6)}><circle cx="50" cy="56" r="23"/><line x1="50" y1="23" x2="50" y2="31"/>'
-            '<line x1="42" y1="22" x2="58" y2="22"/><line x1="68" y1="34" x2="73" y2="29"/></g>'
-            f'<path d="M50 43V56L59 61" {sw(fg, 5)}/>')
+    return (
+        f'<g {sw(fg, 6)}><circle cx="50" cy="56" r="23"/><line x1="50" y1="23" x2="50" y2="31"/>'
+        '<line x1="42" y1="22" x2="58" y2="22"/><line x1="68" y1="34" x2="73" y2="29"/></g>'
+        f'<path d="M50 43V56L59 61" {sw(fg, 5)}/>'
+    )
 
 
 def g_tools(fg, uid):
     """A wrench."""
-    cuts = ('<rect x="0" y="-7" width="26" height="14" transform="translate(62 36) rotate(-45)" fill="#000"/>'
-            '<circle cx="30" cy="70" r="3.5" fill="#000"/>')
-    return (f'{mask(uid, cuts)}<g mask="url(#m{uid})"><circle cx="62" cy="36" r="17" fill="{fg}"/>'
-            f'<line x1="32" y1="68" x2="54" y2="46" {sw(fg, 13)}/></g>')
+    cuts = (
+        '<rect x="0" y="-7" width="26" height="14" transform="translate(62 36) rotate(-45)" fill="#000"/>'
+        '<circle cx="30" cy="70" r="3.5" fill="#000"/>'
+    )
+    return (
+        f'{mask(uid, cuts)}<g mask="url(#m{uid})"><circle cx="62" cy="36" r="17" fill="{fg}"/>'
+        f'<line x1="32" y1="68" x2="54" y2="46" {sw(fg, 13)}/></g>'
+    )
+
 
 def g_demos(fg, uid):
     """A large and a small sparkle."""
@@ -207,23 +294,33 @@ def g_demos(fg, uid):
 
 
 GLYPHS = {
-    "meteo": g_meteo, "verkeersregels-quiz": g_quiz, "counters": g_counters, "todos": g_todos, "auth": g_auth,
-    "family-portal": g_family, "quiz": g_quiz_game, "stocks": g_stocks, "calories": g_calories, "time": g_time,
-    "tools": g_tools, "demos": g_demos,
+    "meteo": g_meteo,
+    "verkeersregels-quiz": g_quiz,
+    "counters": g_counters,
+    "todos": g_todos,
+    "auth": g_auth,
+    "family-portal": g_family,
+    "quiz": g_quiz_game,
+    "stocks": g_stocks,
+    "calories": g_calories,
+    "time": g_time,
+    "tools": g_tools,
+    "demos": g_demos,
 }
 
 
-def build(app, variant, uid, size=512):
-    """variant: inverted | flat | 3d"""
+def build(app, variant, uid, size=512, plate=None, scale=1.0):
+    """Return the icon SVG of one app in one of VARIANTS; a plate color fills the square behind a scaled icon."""
     fg = BLUE if variant in ("white-flat", "white-dimensional") else WHITE
     s, cx, cy = FIT[app]
-    glyph = (f'<g transform="translate(50 50) scale({s}) translate({-cx} {-cy})">'
-             f'{GLYPHS[app](fg, uid)}</g>')
+    glyph = f'<g transform="translate(50 50) scale({s}) translate({-cx} {-cy})">{GLYPHS[app](fg, uid)}</g>'
     pts = hex_points(HEX_R)
     defs, gfilter = "", ""
     if variant == "white-flat":
-        base = (f'<polygon points="{pts}" fill="{WHITE}" stroke="{WHITE}" stroke-width="{HEX_STROKE}" '
-                'stroke-linejoin="round"/>')
+        base = (
+            f'<polygon points="{pts}" fill="{WHITE}" stroke="{WHITE}" stroke-width="{HEX_STROKE}" '
+            'stroke-linejoin="round"/>'
+        )
     elif variant == "blue-dimensional":
         defs = (
             f'<linearGradient id="g{uid}" x1="0.2" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="{BLUE_LIGHT}"/>'
@@ -232,12 +329,15 @@ def build(app, variant, uid, size=512):
             '<stop offset="0.5" stop-color="#fff" stop-opacity="0.1"/><stop offset="1" stop-color="#000" stop-opacity="0.45"/></linearGradient>'
             f'<clipPath id="c{uid}"><polygon points="{pts}" stroke-width="{HEX_STROKE}"/></clipPath>'
             f'<filter id="s{uid}" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="2" stdDeviation="1.6" flood-color="#04243f" flood-opacity="0.45"/></filter>'
-            f'<filter id="t{uid}" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="1.2" stdDeviation="1" flood-color="#04243f" flood-opacity="0.5"/></filter>')
-        base = (f'<g filter="url(#s{uid})"><polygon points="{pts}" fill="url(#h{uid})" stroke="url(#h{uid})" '
-                f'stroke-width="{HEX_STROKE}" stroke-linejoin="round"/></g>'
-                f'<polygon points="{pts}" fill="url(#g{uid})" stroke="url(#g{uid})" '
-                f'stroke-width="{HEX_STROKE - 5}" stroke-linejoin="round"/>'
-                f'<ellipse cx="42" cy="24" rx="28" ry="12" fill="#fff" opacity="0.13" transform="rotate(-18 42 24)"/>')
+            f'<filter id="t{uid}" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="1.2" stdDeviation="1" flood-color="#04243f" flood-opacity="0.5"/></filter>'
+        )
+        base = (
+            f'<g filter="url(#s{uid})"><polygon points="{pts}" fill="url(#h{uid})" stroke="url(#h{uid})" '
+            f'stroke-width="{HEX_STROKE}" stroke-linejoin="round"/></g>'
+            f'<polygon points="{pts}" fill="url(#g{uid})" stroke="url(#g{uid})" '
+            f'stroke-width="{HEX_STROKE - 5}" stroke-linejoin="round"/>'
+            f'<ellipse cx="42" cy="24" rx="28" ry="12" fill="#fff" opacity="0.13" transform="rotate(-18 42 24)"/>'
+        )
         gfilter = f' filter="url(#t{uid})"'
     elif variant == "white-dimensional":
         defs = (
@@ -246,20 +346,44 @@ def build(app, variant, uid, size=512):
             f'<linearGradient id="h{uid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/>'
             '<stop offset="0.5" stop-color="#dbe8f4"/><stop offset="1" stop-color="#6f97bb"/></linearGradient>'
             f'<filter id="s{uid}" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="2" stdDeviation="1.6" flood-color="#000" flood-opacity="0.55"/></filter>'
-            f'<filter id="t{uid}" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="0.9" stdDeviation="0.5" flood-color="#fff" flood-opacity="0.95"/></filter>')
-        base = (f'<g filter="url(#s{uid})"><polygon points="{pts}" fill="url(#h{uid})" stroke="url(#h{uid})" '
-                f'stroke-width="{HEX_STROKE}" stroke-linejoin="round"/></g>'
-                f'<polygon points="{pts}" fill="url(#g{uid})" stroke="url(#g{uid})" '
-                f'stroke-width="{HEX_STROKE - 5}" stroke-linejoin="round"/>')
+            f'<filter id="t{uid}" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="0.9" stdDeviation="0.5" flood-color="#fff" flood-opacity="0.95"/></filter>'
+        )
+        base = (
+            f'<g filter="url(#s{uid})"><polygon points="{pts}" fill="url(#h{uid})" stroke="url(#h{uid})" '
+            f'stroke-width="{HEX_STROKE}" stroke-linejoin="round"/></g>'
+            f'<polygon points="{pts}" fill="url(#g{uid})" stroke="url(#g{uid})" '
+            f'stroke-width="{HEX_STROKE - 5}" stroke-linejoin="round"/>'
+        )
         gfilter = f' filter="url(#t{uid})"'
     else:
-        base = (f'<polygon points="{pts}" fill="{BLUE}" stroke="{BLUE}" stroke-width="{HEX_STROKE}" '
-                'stroke-linejoin="round"/>')
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="{size}" height="{size}" '
-            f'role="img" aria-label="{app} icon"><title>{app}</title><defs>{defs}</defs>{base}<g{gfilter}>{glyph}</g></svg>')
+        base = (
+            f'<polygon points="{pts}" fill="{BLUE}" stroke="{BLUE}" stroke-width="{HEX_STROKE}" '
+            'stroke-linejoin="round"/>'
+        )
+    body = f"{base}<g{gfilter}>{glyph}</g>"
+    if plate:
+        body = (
+            f'<rect width="100" height="100" fill="{plate}"/>'
+            f'<g transform="translate(50 50) scale({scale}) translate(-50 -50)">{body}</g>'
+        )
+    notice = f"<!--\n{NOTICES[app]}\n-->" if app in NOTICES else ""
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="{size}" height="{size}" '
+        f'role="img" aria-label="{app} icon"><title>{app}</title>{notice}<defs>{defs}</defs>{body}</svg>'
+    )
 
 
 VARIANTS = ("white-flat", "white-dimensional", "blue-flat", "blue-dimensional")
+
+
+def rendition_names(app):
+    """Return the file names that the generator writes for one app in each style folder."""
+    return (
+        [f"{app}-icon.svg", f"{app}-icon.ico"]
+        + [f"{app}-icon-{size}.png" for size in PNG_SIZES]
+        + [f"{app}-apple-touch-icon.png"]
+        + [f"{app}-icon-maskable-{size}.png" for size in MASKABLE_SIZES]
+    )
 
 
 def find_chrome():
@@ -277,27 +401,62 @@ def find_chrome():
 
 def render_png(chrome, svg_path, png_path):
     subprocess.run(
-        [chrome, "--headless", "--disable-gpu", "--hide-scrollbars", "--default-background-color=00000000",
-         "--window-size=512,512", f"--screenshot={png_path}", svg_path.resolve().as_uri()],
-        check=True, capture_output=True,
+        [
+            chrome,
+            "--headless",
+            "--disable-gpu",
+            "--hide-scrollbars",
+            "--default-background-color=00000000",
+            "--window-size=512,512",
+            f"--screenshot={png_path}",
+            svg_path.resolve().as_uri(),
+        ],
+        check=True,
+        capture_output=True,
     )
 
 
+def render_master(chrome, svg, tmp, name):
+    from PIL import Image
+
+    svg_path = Path(tmp) / f"{name}.svg"
+    svg_path.write_text(svg, encoding="utf-8")
+    png_path = Path(tmp) / f"{name}.png"
+    render_png(chrome, svg_path, png_path)
+    return Image.open(png_path).convert("RGBA")
+
+
+def save_plated(chrome, app, variant, uid, scale, tmp, sizes, name):
+    """Render the app icon on its opaque plate and save it at each size; {size} in the name is replaced."""
+    from PIL import Image
+
+    plated = render_master(
+        chrome, build(app, variant, uid, plate=PLATES[variant], scale=scale), tmp, f"{variant}-{app}-{scale}"
+    ).convert("RGB")
+    for size in sizes:
+        plated.resize((size, size), Image.LANCZOS).save(OUT / variant / name.format(size=size), optimize=True)
+
+
 def main():
+    from PIL import Image
+
     chrome = find_chrome()
     with tempfile.TemporaryDirectory() as tmp:
         for variant in VARIANTS:
             folder = OUT / variant
             folder.mkdir(parents=True, exist_ok=True)
             for index, app in enumerate(APPS):
-                svg_path = folder / f"{app}-icon.svg"
-                svg_path.write_text(build(app, variant, f"{variant}{index}") + "\n", encoding="utf-8")
-                master_path = Path(tmp) / f"{variant}-{app}.png"
-                render_png(chrome, svg_path, master_path)
-                master = Image.open(master_path).convert("RGBA")
+                uid = f"{variant}{index}"
+                svg = build(app, variant, uid)
+                (folder / f"{app}-icon.svg").write_text(svg + "\n", encoding="utf-8")
+                master = render_master(chrome, svg, tmp, f"{variant}-{app}")
                 for size in PNG_SIZES:
                     master.resize((size, size), Image.LANCZOS).save(folder / f"{app}-icon-{size}.png", optimize=True)
                 master.save(folder / f"{app}-icon.ico", sizes=[(size, size) for size in ICO_SIZES])
+                save_plated(chrome, app, variant, uid, TOUCH_SCALE, tmp, [TOUCH_SIZE], f"{app}-apple-touch-icon.png")
+                save_plated(
+                    chrome, app, variant, uid, MASKABLE_SCALE, tmp, MASKABLE_SIZES, f"{app}-icon-maskable-{{size}}.png"
+                )
             print(f"generated {variant}")
 
 

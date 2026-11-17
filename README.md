@@ -21,6 +21,7 @@ See the [roadmap](docs/roadmap.md) and [PLAN.md](PLAN.md) for remaining work.
 ## Releases
 Each GitHub release publishes `@gpellicciotta/support.webapp` to GitHub Packages.
 Apps copy one pinned release into their web root with the `vendor` command; they never copy files by hand.
+The shared [app icons](docs/specs/app-icons.md) are the one exception: each app copies only its own icon files.
 See [Versioning and Releasing](docs/devops.md#versioning-and-releasing) for the release flow and registry token setup.
 
 See [requirements.md](docs/requirements.md) for scope and [index.md](docs/index.md) for all documentation.

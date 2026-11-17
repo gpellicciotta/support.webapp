@@ -19,13 +19,21 @@
         .icon-grid .sizes { display: flex; align-items: flex-end; gap: var(--space-2); }
         .icon-grid em { font-size: 0.75em; opacity: 0.7; margin-top: calc(var(--space-1) * -1); }
         .icon-grid a { font-size: 0.8em; }
+        .icon-grid .install { display: flex; gap: var(--space-2); }
+        /* Previews of the install icons as iOS and Android crop them. */
+        .icon-grid .touch { border-radius: 22%; }
+        .icon-grid .maskable { border-radius: 50%; }
+        /* Outline the crop, since a plate matches the background of its section. */
+        .icon-grid .touch, .icon-grid .maskable { box-shadow: 0 0 0 1px rgb(128 128 128 / 0.6); }
     </style>
 </head>
 <body>
     <main class="icon-gallery">
         <h1>App icon gallery</h1>
         <p>The shared icons of all apps, existing and planned, in four styles. Each style folder in <code>src/img/app-icons/</code> holds an SVG,
-            PNG renditions (32 to 512 px), and a multi-size ICO per app. Shown at 128, 48, 32, and 20 px.
+            PNG renditions (16 to 512 px), a multi-size ICO, an apple touch icon, and maskable install icons per app.
+            Shown at 128, 48, 32, and 20 px, then as a touch icon and a maskable icon cropped the way devices crop them.
+            Apps use blue flat for favicons and logos and blue dimensional for install icons.
             Regenerate with <code>python scripts/generate-app-icons.py</code>.</p>
         <div id="icon-sets"></div>
     </main>
@@ -46,9 +54,13 @@
             const items = apps.map((app) => {
                 const base = `../img/app-icons/${style.id}/${app}-icon`;
                 const small = [48, 32, 20].map((size) => `<img src="${base}-64.png" width="${size}" height="${size}" alt="">`).join("");
+                const folder = `../img/app-icons/${style.id}/${app}`;
+                const install = `<span class="install"><img class="touch" src="${folder}-apple-touch-icon.png" width="48" height="48" alt="${app} touch icon">`
+                    + `<img class="maskable" src="${folder}-icon-maskable-192.png" width="48" height="48" alt="${app} maskable icon"></span>`;
                 return `<li><img src="${base}.svg" width="128" height="128" alt="${app} icon">
-                    <span class="sizes">${small}</span><strong>${app}</strong>${planned.has(app) ? "<em>planned</em>" : ""}
-                    <span><a href="${base}.svg">svg</a> · <a href="${base}-512.png">png</a> · <a href="${base}.ico">ico</a></span></li>`;
+                    <span class="sizes">${small}</span>${install}<strong>${app}</strong>${planned.has(app) ? "<em>planned</em>" : ""}
+                    <span><a href="${base}.svg">svg</a> · <a href="${base}-512.png">png</a> · <a href="${base}.ico">ico</a>
+                    · <a href="${folder}-apple-touch-icon.png">touch</a> · <a href="${folder}-icon-maskable-512.png">maskable</a></span></li>`;
             }).join("");
             section.innerHTML = `<h2>${style.title}</h2><p>${style.note}</p><ul class="icon-grid">${items}</ul>`;
             root.append(section);

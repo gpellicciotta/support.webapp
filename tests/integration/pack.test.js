@@ -15,7 +15,7 @@ const entryPoints = [
     'manifest.json'
 ];
 
-it('packs the source layout of ADR-0008 without the gallery or repository tooling', () => {
+it('packs the source layout of ADR-0008 without the gallery, app icons, or repository tooling', () => {
     const npm = process.env.npm_execpath;
     expect(npm, 'Run this integration scenario through npm or npx').toBeTruthy();
     const pack = spawnSync(process.execPath, [npm, 'pack', '--dry-run', '--json'], { cwd: resolve('.'), encoding: 'utf8' });
@@ -26,11 +26,12 @@ it('packs the source layout of ADR-0008 without the gallery or repository toolin
     const unexpected = paths.filter((path) => !projectFiles.includes(path) && !shipped.some((root) => path.startsWith(root)));
     expect(unexpected).toEqual([]);
     expect(paths).toEqual(expect.arrayContaining([...entryPoints, ...projectFiles]));
-    // The package ships every source file except the gallery and the development server's landing page.
+    // The package ships every source file except the gallery, the app icons, and the development server's landing page.
     const sources = readdirSync(resolve('src'), { recursive: true, withFileTypes: true })
         .filter((item) => item.isFile())
         .map((item) => relative(resolve('.'), join(item.parentPath, item.name)).replaceAll(sep, '/'))
-        .filter((path) => !path.startsWith('src/demo/') && path !== 'src/index.html');
+        .filter((path) => !path.startsWith('src/demo/') && !path.startsWith('src/img/app-icons/') && path !== 'src/index.html');
+    expect(paths.some((path) => path.startsWith('src/img/app-icons/'))).toBe(false);
     expect(paths.filter((path) => path.startsWith('src/')).sort()).toEqual(sources.sort());
 });
 

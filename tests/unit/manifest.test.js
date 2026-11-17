@@ -6,13 +6,15 @@ import { join } from 'node:path';
 import { buildManifest, packageManifest } from '../../bin/manifest.mjs';
 
 describe('package manifest', () => {
-    it('hashes shipped bytes and classifies look files without demo files', () => {
+    it('hashes shipped bytes and classifies look files without demo files or app icons', () => {
         const manifest = buildManifest();
         expect(manifest.version).toBe(JSON.parse(readFileSync('package.json')).version);
         expect(manifest.files['css/style.css']).toEqual({ look: null, sha256: createHash('sha256').update(readFileSync('src/css/style.css')).digest('hex') });
         expect(manifest.files['looks/neutral/index.css'].look).toBe('neutral');
         expect(manifest.files['bin/check.mjs'].look).toBe(null);
         expect(Object.keys(manifest.files).some(path => path.startsWith('demo/') || path === 'index.html')).toBe(false);
+        // Apps copy their own app icon files from a tagged checkout instead of vendoring every app's icons.
+        expect(Object.keys(manifest.files).some(path => path.startsWith('img/app-icons/'))).toBe(false);
         expect(buildManifest()).toEqual(manifest);
     });
 

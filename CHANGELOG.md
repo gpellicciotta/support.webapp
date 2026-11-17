@@ -10,6 +10,10 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.1.1-pre
+- Looks: Added 16, 48, and 96 px app icons, apple touch icons, and maskable install icons on opaque plates.
+- Looks: Left the app icons out of releases, so `vendor` no longer copies every app's icons into each app.
+- Docs: Documented the app icon styles, files, and adoption, and embedded the Lucide notice in the todos icon.
+- DevEx: Declared the Pillow dependency of the app icon generator.
 - Components: Dropped the border of read-only fields and inset field messages to align with the control's text.
 - Components: Kept field rows at their natural height, so status and error lines sit one small step below the control.
 - Components: Indented field group content from its legend, and gave selects a chevron inset like the collapsible's.
