@@ -1,0 +1,10 @@
+{
+  "T0044": {
+    "description": "Investigate intermittent browser verifier screenshot timeouts and incomplete stylesheet loads under parallel execution.",
+    "purged_at": "2026-11-17"
+  },
+  "T0037": {
+    "description": "Check the tooltip component and meteo's tooltips with Narrator or NVDA by hand, recording what each announces.",
+    "purged_at": "2026-11-17"
+  }
+}
