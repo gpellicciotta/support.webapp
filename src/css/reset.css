@@ -26,3 +26,11 @@ body { margin: 0; }
   outline-offset: var(--focus-ring-offset);
   box-shadow: var(--focus-glow);
 }
+
+/* Some forced palettes keep part of the transparent outline's alpha, so name an opaque system color. */
+@media (forced-colors: active) {
+  :focus-visible,
+  .is-focus {
+    outline-color: Highlight;
+  }
+}
