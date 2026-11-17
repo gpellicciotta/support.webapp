@@ -1,11 +1,11 @@
 ---
 id: T0235
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0235-replace-the-focus-ring-with-a-glow-and
+worktree: .plan/work/T0235-replace-the-focus-ring-with-a-glow-and
+status: active
+started_at: "2026-11-17T09:55:39Z"
 ended_at: —
 review: agent
 preview: none

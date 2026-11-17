@@ -3,7 +3,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
 - [x] T0040 Refresh the neutral look's colors and fonts to the variant the user picks from five rendered candidates.
-- [ ] T0235 Replace the focus ring with a glow, and give menu items room so focus never overlaps neighbors or edges.
+- [~] T0235 [owner: @gemini] Replace the focus ring with a glow, and give menu items room so focus never overlaps neighbors or edges.
 - [ ] T0237 Polish small controls: link button padding, smaller rounder badges, lower switches, separated segment borders, and tab headings.
 - [ ] T0236 Polish fields: borderless read-only, tighter status text, aligned hint padding, indented groups, and select chevron spacing with a gallery section.
 - [ ] T0238 [needs: T0237] Align buttons in banners, rows, forms, and cards, and recolor the error summary title and links.
