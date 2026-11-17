@@ -12,8 +12,8 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 1800.4, input: 5459, output: 875}
-work_duration: 1809.4
+  worker: {turns: 2, duration_s: 1902.7, input: 420239, output: 70026, cache_read: 14081843}
+work_duration: 1936.5
 ---
 # T0047: Promote the toolbar, pager, and data table row states from ToDo's admin console into the package
 
@@ -29,8 +29,8 @@ Name them by `docs/specs/naming.md`; ToDo's class names may change.
 - [x] **[Implement]** Author failing browser and unit tests for toolbar, pager, and table row states.
 - [x] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
 - [x] **[Implement]** Add the components, gallery specimens, and catalog entries.
-- [ ] **[Verify]**    Run the affected tests and the full check suite.
-- [ ] **[Doc]**       Update components.md, the style guide, and CHANGELOG.md.
+- [x] **[Verify]**    Run the affected tests and the full check suite.
+- [x] **[Doc]**       Update components.md, the style guide, and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -48,4 +48,27 @@ Name them by `docs/specs/naming.md`; ToDo's class names may change.
 
 - [2026-11-17] **[Implement]**
   Added toolbar.css, pager.css, .table__frame and row states, gallery specimens, and catalog entries; updated undeclared src/contract.json (7 modified files).
+
+- [2026-11-17] **[Doc]**
+  Updated components.md, visual-style-guide.md, and CHANGELOG.md under v0.1.1-pre.
+
+- [2026-11-17] **[Visual]**
+  Captured before and after gallery specimens across neutral, warm, and bright in light and dark.
+  - Neutral: [before](T0047-promote-the-toolbar-pager-and-data-table-row/before-table-neutral-desktop-light.png), [table](T0047-promote-the-toolbar-pager-and-data-table-row/after-table-neutral-desktop-light.png), [toolbar](T0047-promote-the-toolbar-pager-and-data-table-row/after-toolbar-neutral-desktop-light.png), [pager](T0047-promote-the-toolbar-pager-and-data-table-row/after-pager-neutral-desktop-light.png).
+  - Warm dark: [before](T0047-promote-the-toolbar-pager-and-data-table-row/before-table-warm-desktop-dark.png), [table](T0047-promote-the-toolbar-pager-and-data-table-row/after-table-warm-desktop-dark.png), [toolbar](T0047-promote-the-toolbar-pager-and-data-table-row/after-toolbar-warm-desktop-dark.png), [pager](T0047-promote-the-toolbar-pager-and-data-table-row/after-pager-warm-desktop-dark.png).
+  - Bright mobile: [before](T0047-promote-the-toolbar-pager-and-data-table-row/before-table-bright-mobile-light.png), [table](T0047-promote-the-toolbar-pager-and-data-table-row/after-table-bright-mobile-light.png), [toolbar](T0047-promote-the-toolbar-pager-and-data-table-row/after-toolbar-bright-mobile-light.png), [pager](T0047-promote-the-toolbar-pager-and-data-table-row/after-pager-bright-mobile-light.png).
+
+- [2026-11-17] **[Verify]**
+  Running python scripts/devops.py check synchronously under background task task-262.
+
+- [2026-11-17] **[Verify]**
+  Confirmed python scripts/devops.py check passed all linters, unit, browser, integration, and pack checks.
+  - 41 pytest and 2123 Vitest unit tests passed.
+  - 662 Playwright browser and 7 integration tests passed.
+
+- [2026-11-17] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 7.
+  - Lines touched: 266.
+  - Reopenings: 0.
 
