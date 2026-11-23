@@ -27,6 +27,32 @@ All checks passed!
 ```
 
 ## Visual
+Portal shell demo at 390 px, neutral look, light theme: [before](before-portal.png) and [after](after-portal.png).
+The error and ready states of the sample view, per look, theme, and width, are linked here:
+- [view-error-bright-desktop-dark.png](view-error-bright-desktop-dark.png)
+- [view-error-bright-desktop-light.png](view-error-bright-desktop-light.png)
+- [view-error-bright-mobile-dark.png](view-error-bright-mobile-dark.png)
+- [view-error-bright-mobile-light.png](view-error-bright-mobile-light.png)
+- [view-error-neutral-desktop-dark.png](view-error-neutral-desktop-dark.png)
+- [view-error-neutral-desktop-light.png](view-error-neutral-desktop-light.png)
+- [view-error-neutral-mobile-dark.png](view-error-neutral-mobile-dark.png)
+- [view-error-neutral-mobile-light.png](view-error-neutral-mobile-light.png)
+- [view-error-warm-desktop-dark.png](view-error-warm-desktop-dark.png)
+- [view-error-warm-desktop-light.png](view-error-warm-desktop-light.png)
+- [view-error-warm-mobile-dark.png](view-error-warm-mobile-dark.png)
+- [view-error-warm-mobile-light.png](view-error-warm-mobile-light.png)
+- [view-ready-bright-desktop-dark.png](view-ready-bright-desktop-dark.png)
+- [view-ready-bright-desktop-light.png](view-ready-bright-desktop-light.png)
+- [view-ready-bright-mobile-dark.png](view-ready-bright-mobile-dark.png)
+- [view-ready-bright-mobile-light.png](view-ready-bright-mobile-light.png)
+- [view-ready-neutral-desktop-dark.png](view-ready-neutral-desktop-dark.png)
+- [view-ready-neutral-desktop-light.png](view-ready-neutral-desktop-light.png)
+- [view-ready-neutral-mobile-dark.png](view-ready-neutral-mobile-dark.png)
+- [view-ready-neutral-mobile-light.png](view-ready-neutral-mobile-light.png)
+- [view-ready-warm-desktop-dark.png](view-ready-warm-desktop-dark.png)
+- [view-ready-warm-desktop-light.png](view-ready-warm-desktop-light.png)
+- [view-ready-warm-mobile-dark.png](view-ready-warm-mobile-dark.png)
+- [view-ready-warm-mobile-light.png](view-ready-warm-mobile-light.png)
 
-New part, so no before captures. Error and ready states of the sample view, per look, theme, and width, are the `view-*.png` files in this folder.
-The first captures showed an empty bordered button beside Try again, the hidden back link; the browser test and a shell.css rule fix it.
+The first captures showed an empty bordered button beside Try again, the hidden back link.
+A browser test and a shell.css rule fix it.

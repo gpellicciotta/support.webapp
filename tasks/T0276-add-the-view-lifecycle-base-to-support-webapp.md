@@ -4,15 +4,17 @@ owner: "@claude-code"
 needs: []
 branch: —
 worktree: —
-status: active
+status: completed
 started_at: "2026-11-23T10:35:19Z"
-ended_at: —
-review: agent
+ended_at: "2026-11-23T12:37:48Z"
+review: human
 preview: none
 protocol: standard
-review_status: pending
-review_round: 1
-review_requested_at: "2026-11-23T11:07:58Z"
+review_status: approved
+review_round: 5
+review_requested_at: "2026-11-23T12:37:25Z"
+reviewed_by: "@giova"
+completion-commit: 25ef5316c3e9101cb01e24de710d1cee675e95c6
 ---
 # T0276: Add the view lifecycle base to support.webapp, promoted from Auth's Component and AppView, which support.js v4 removed
 
@@ -34,7 +36,7 @@ Completion check: `python scripts/devops.py check` passes, with the new unit tes
 - [x] **[Verify]**    Run the affected tests and the full check suite.
 - [x] **[Visual]**    Capture the error and wait overlays across looks and themes at mobile and desktop width.
 - [x] **[Doc]**       Update ADR-0003, components.md, the upgrade note for apps, and CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-23] **[Doc]**
@@ -66,4 +68,40 @@ Completion check: `python scripts/devops.py check` passes, with the new unit tes
 
 - [2026-11-23] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-23] **[Review]**
+  Review raised from agent to human.
+
+- [2026-11-23] **[Review]**
+  Round 2 approved by @giova.
+
+- [2026-11-23] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 6.
+  - Lines touched: 98.
+  - Reopenings: 0.
+
+- [2026-11-23] **[Review]**
+  Round 3 approved by @giova.
+
+- [2026-11-23] **[Verify]**
+  Merged main into the task branch; check passed on 0ed37d6: 2258 unit, 866 browser tests.
+
+- [2026-11-23] **[Review]**
+  Round 4 requested (mode: human); the work changed after the round 3 approval of commit 3b6b720.
+
+- [2026-11-23] **[Review]**
+  Round 4 approved by @giova.
+
+- [2026-11-23] **[Verify]**
+  Merged main again; check passed on 2984fc4.
+
+- [2026-11-23] **[Review]**
+  Round 5 requested (mode: human); the work changed after the round 4 approval of commit 0ed37d6.
+
+- [2026-11-23] **[Review]**
+  Round 5 approved by @giova.
+
+- [2026-11-23] **[Complete]**
+  Task completed successfully.
 

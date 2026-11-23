@@ -2,7 +2,7 @@
 An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
-- [~] T0276 [owner: @claude-code] Add the view lifecycle base to support.webapp, promoted from Auth's Component and AppView, which support.js v4 removed.
+- [x] T0276 Add the view lifecycle base to support.webapp, promoted from Auth's Component and AppView, which support.js v4 removed.
 - [x] T0275 Add the Refresh pattern and an auto-refresh module, promoted from Auth's SPA.
 - [x] T0274 Add pull-to-refresh to the app shell, promoted from Auth's installed SPA.
 - [x] T0273 Promote the entry list of log lines and events from Auth's admin console into the package.
@@ -17,7 +17,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0283 Add Auth's shell additions to shell.css: sidebar end group, entry badges, hidden top bar parts, and banner dismiss.
 - [ ] T0284 Add a view header component for a screen's title and summary line, promoted from Auth.
 - [ ] T0285 Add a file download helper and download toast actions, promoted from Auth's account export.
-- [ ] T0286 [needs: T0276] Add a screen action bar renderer for the screen actions of routed views, promoted from Auth's shell.
+- [ ] T0286 Add a screen action bar renderer for the screen actions of routed views, promoted from Auth's shell.
 - [ ] T0287 [needs: T0294] Add a data loading helper with loading, failed, and sign-in states, promoted from Auth's admin console.
 - [ ] T0288 [needs: T0294] Add paged and filtered table state kept in the URL, promoted from Auth's and ToDo's admin consoles.
 - [ ] T0289 Add an action registry for app actions with enabled state and disabled reasons, promoted from Auth's App.
@@ -26,7 +26,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0292 Add a help page pattern with search, topic chips, FAQ, and feedback link, promoted from Auth.
 - [ ] T0293 [needs: T0294] Add an admin console frame with hash router, screen registry, and gate pages, promoted from Auth.
 - [ ] T0294 Add DOM builders for package components, promoted from Auth's and ToDo's admin console helpers.
-- [ ] T0295 [needs: T0276, T0289] Add a view router for routed views with sign-in guards and a fallback view, promoted from Auth's App.
+- [ ] T0295 [needs: T0289] Add a view router for routed views with sign-in guards and a fallback view, promoted from Auth's App.
 - [ ] T0296 [needs: T0293, T0294] Add the shared admin Overview screen with server state reloaded while visible, promoted from Auth's and ToDo's consoles.
 - [ ] T0297 [needs: T0293, T0294] Add the shared admin Logs screen with filtered, paged entry cards, promoted from Auth's and ToDo's consoles.
 - [ ] T0298 [needs: T0293, T0294] Add the shared admin System events screen with filters, paging, and JSON details, promoted from Auth's and ToDo's consoles.
