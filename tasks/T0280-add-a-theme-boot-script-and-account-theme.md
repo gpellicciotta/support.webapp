@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 1800.4, input: 2321, output: 129}
+  worker: {turns: 2, duration_s: 1935.1, input: 89829, output: 9465, cache_read: 572213}
 work_duration: 1811.1
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T17:23:13Z"
 ---
 # T0280: Add a theme boot script and account theme sync to the theme switch, promoted from Auth
 
@@ -68,4 +71,7 @@ Size estimate: 4 files, 100 lines.
   - Files touched: 6.
   - Lines touched: 321.
   - Reopenings: 0.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
