@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 1840.6, input: 253663, output: 41221, cache_read: 5902249}
+  worker: {turns: 3, duration_s: 2092.4, input: 293014, output: 51111, cache_read: 8863538}
 work_duration: 1878.1
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T18:36:49Z"
 ---
 # T0282: Defer field validation on blur until a pointer press ends, promoted from Auth's admin console
 
@@ -62,4 +65,7 @@ Size estimate: 4 files, 90 lines.
 
 - [2026-11-23] **[Verify]**
   Confirmed red-phase failures in 3 new field.test.js unit tests and 4 field.spec.js browser viewport runs before editing field.js.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
