@@ -19,10 +19,11 @@ Defines the one shared shell: its areas, options, markup, responsive behavior, s
 
 ## Decision
 The shell is documented markup plus one `shell.css`, with no shell script and no router.
-Two optional modules enhance the shell, and the areas never depend on them:
-- `app-nav.js` drives the nav toggle.
-- `pull-refresh.js` adds pull-to-refresh to installed apps, with the `app__pull-indicator` overlay part.
-- `view.js` is the base of views that load their own data, with a wait status and an error page.
+Optional modules enhance the shell, and the areas never depend on them:
+- [app-nav.js](../../src/js/app-nav.js) drives the nav toggle.
+- [pull-refresh.js](../../src/js/pull-refresh.js) adds pull-to-refresh to installed apps, with the `app__pull-indicator` overlay part.
+- [view.js](../../src/js/view.js) is the base of views that load their own data, with a wait status and an error page.
+- [screen-action-bar.js](../../src/js/screen-action-bar.js) renders the screen actions of routed views in `.app__action-bar` and removes empty bars.
 Its component key is `app`, following the naming rules of [naming.md](../specs/naming.md).
 
 Areas, each optional except the main area:

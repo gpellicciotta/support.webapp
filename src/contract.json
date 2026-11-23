@@ -936,6 +936,7 @@
     "icon",
     "theme-switch",
     "install-prompt",
-    "file-download"
+    "file-download",
+    "screen-action-bar"
   ]
 }

@@ -89,15 +89,16 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `tooltip`        | Tooltip             | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                |
 
 ### Identity and Foundations
-| Key              | Component      | Module and functions                                                                           | Variants and states                                     | Accessibility minimum                                             |
-| :--------------- | :------------- | :--------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
-| none, base       | Page base      | none                                                                                           | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable           |
-| `avatar`         | Avatar         | none                                                                                           | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name                |
-| `account-menu`   | Account menu   | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                        | signed in, signed out                                   | menu pattern; marks the current route                             |
-| `icon`           | Icon           | `icon.js`: `createIcon`                                                                        | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                           |
-| `theme-switch`   | Theme switch   | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js` | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                                |
-| `install-prompt` | Install prompt | `install-prompt.js`: `attachInstallPrompt`                                                     | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
-| `file-download`  | File download  | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`       | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
+| Key                 | Component         | Module and functions                                                                           | Variants and states                                     | Accessibility minimum                                             |
+| :------------------ | :---------------- | :--------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
+| none, base          | Page base         | none                                                                                           | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable           |
+| `avatar`            | Avatar            | none                                                                                           | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name                |
+| `account-menu`      | Account menu      | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                        | signed in, signed out                                   | menu pattern; marks the current route                             |
+| `icon`              | Icon              | `icon.js`: `createIcon`                                                                        | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                           |
+| `theme-switch`      | Theme switch      | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js` | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                                |
+| `install-prompt`    | Install prompt    | `install-prompt.js`: `attachInstallPrompt`                                                     | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
+| `file-download`     | File download     | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`       | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
+| `screen-action-bar` | Screen action bar | `screen-action-bar.js`: `attachScreenActionBar`                                                | buttons, links, disabled hints, empty-bar removal       | native `disabled` on buttons; `aria-disabled` on links            |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -891,6 +892,28 @@ Upgrading an existing app:
 - Replace manual `urlsByNoteId` maps and notification-delete cleanup in Auth and counters account exports with `toast.js` `download` actions.
 - See the [File download section](../../src/demo/visual-style-gallery.html#file-download) of the gallery.
 
+### screen-action-bar
+Screen action bar renderer ([screen-action-bar.js](../../src/js/screen-action-bar.js)).
+Draws the screen actions that `RoutedView` passes to `app.setScreenActions` inside the shell's `.app__action-bar`.
+
+```html
+<div class="app__action-bar" data-screen-action-bar>
+  <button class="button button--secondary" type="button" data-screen-action-bar-item data-action="view.save">Save</button>
+  <a class="button button--secondary" href="/help" data-screen-action-bar-item data-action="view.help" aria-disabled="true" title="Load data first" aria-description="Load data first">Help</a>
+</div>
+```
+
+- Call `attachScreenActionBar(root, { app, getAction, events, eventType, before, onAction, document })`.
+- The controller returns `setScreenActions(actions)`, `render()`, `getElement()`, `getActions()`, and `destroy()`.
+- Actions with `href` render as links with `aria-disabled="true"` when disabled; other actions render as native buttons with `disabled`.
+- Disabled actions expose `disabled-reason` (falling back to `description`) in `title` and `aria-description`; empty bars remove `.app__action-bar`.
+- Listening on `ACTION_STATE_CHANGED_EVENT` (`action-state-changed`) redraws on state changes; DOM construction escapes every text and attribute value.
+
+Upgrading an existing app:
+- Replace Auth shell `setScreenActions` and `renderActionBar` methods or counters' local `app-action-bar.mjs` with `attachScreenActionBar` from [screen-action-bar.js](../../src/js/screen-action-bar.js).
+- Mark the sibling that follows the bar with `data-screen-action-bar-before`, or pass `before`, and bind `app.setScreenActions = bar.setScreenActions`.
+- See the [portal shell demo](../../src/demo/shell-portal.html) for a routed view driving the screen action bar.
+
 ---
 
 ## Page Base
@@ -1098,7 +1121,7 @@ Moving from support.js v3:
 | `AppView`, `import ... app-view.mjs`       | `RoutedView` from `view.js`                                 |
 | `Component.errorIconSprite`, `errorIconId` | `setSpriteUrl` and `options.icon`                           |
 | `Component.waitUIDelayTime`                | `options.waitDelay`                                         |
-| `AppView.ActionBarClass`, action bars      | `app.setScreenActions(ids)` of the app's own shell          |
+| `AppView.ActionBarClass`, action bars      | `attachScreenActionBar` from `screen-action-bar.js`         |
 | `.error-overlay`, `.wait-overlay`, `.main` | `[data-view-error]`, `[data-view-wait]`, `[data-view-main]` |
 | logger created inside                      | `options.log`, silent by default                            |
 

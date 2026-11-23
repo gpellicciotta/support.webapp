@@ -58,7 +58,10 @@
         </section>
         <section class="gallery-section" aria-labelledby="sample-view-title">
             <h2 id="sample-view-title">Sample view</h2>
-            <p>A view that loads its own data: the first load fails to show the error page, and Try again loads the sample data.</p>
+            <p>A view that loads its own data: the first load fails to show the error page, and Try again loads the sample data. Its screen actions show in the action bar and disappear when detached.</p>
+            <div class="toast-demo-actions">
+                <button class="button button--secondary" type="button" data-demo-view-toggle>Detach sample view</button>
+            </div>
             <div data-demo-view></div>
         </section>
         <section class="gallery-section" aria-labelledby="sample-calendar-title">
@@ -72,9 +75,9 @@
             </div>
         </section>
     </main>
-    <footer class="app__action-bar">
+    <div class="app__action-bar" data-screen-action-bar>
         <p class="shell-demo-footer">Placeholder footer of a sample portal.</p>
-    </footer>
-    <div class="app__overlays"><div class="toast-region" role="region" aria-label="Notifications"></div></div>
+    </div>
+    <div class="app__overlays" data-screen-action-bar-before><div class="toast-region" role="region" aria-label="Notifications"></div></div>
 </body>
 </html>

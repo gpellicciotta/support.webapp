@@ -111,6 +111,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   Apps pick the heading level and attach `data-*` hooks and `role="status"` to optional summary lines.
 - **[Decided]** on 2026-11-23: `file-download` moved in from Auth and counters as [file-download.js](../../src/js/file-download.js), with download actions in [toast.js](../../src/js/toast.js).
   One-shot helpers click a temporary anchor and revoke later; persistent download toasts revoke their URL on dismiss.
+- **[Decided]** on 2026-11-23: `screen-action-bar` moved in from Auth's shell and counters as [screen-action-bar.js](../../src/js/screen-action-bar.js).
+  It renders routed-view buttons and links in `.app__action-bar`, blocks disabled links, shows disabled hints, and removes empty bars.
 
 ### Shared patterns
 Documented as contracts without components of their own:

@@ -7,16 +7,26 @@ import { attachInstallPrompt } from '../js/install-prompt.js';
 import { attachMenu } from '../js/menu.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { attachPullRefresh } from '../js/pull-refresh.js';
+import { ACTION_STATE_CHANGED_EVENT, attachScreenActionBar } from '../js/screen-action-bar.js';
 import { createToast } from '../js/toast.js';
 import { RoutedView } from '../js/view.js';
 
 /**
- * A sample view whose first load fails and whose later loads succeed, to show the error page and Try again.
+ * A sample view whose first load fails and whose later loads succeed, to show the error page, Try again, and screen actions.
  */
 class SampleView extends RoutedView {
     constructor(app, options) {
         super('sample-view', app, 'Sample', undefined, options);
         this.loads = 0;
+    }
+
+    getActions() {
+        const waiting = this.loads < 2;
+        return [
+            { id: 'sample-view.export', title: 'Export', description: 'Export the current view summary', run: () => this.app.showToast?.('Sample summary exported.') },
+            { id: 'sample-view.publish', title: 'Publish', description: 'Publish the loaded sample data', disabled: waiting, 'disabled-reason': 'Load sample data before publishing', run: () => this.app.showToast?.('Sample data published.') },
+            { id: 'sample-view.calendar', title: 'Calendar', description: 'Jump to the sample calendar', href: '#sample-calendar-title', disabled: waiting, 'disabled-reason': 'Load sample data to open calendar' }
+        ];
     }
 
     createMainUIHtml() {
@@ -34,17 +44,61 @@ class SampleView extends RoutedView {
 
     updateMainUI(info) {
         this.mainUIEl.querySelector('[data-sample-view-text]').textContent = info;
+        this.app.enableAction?.('sample-view.publish');
+        this.app.enableAction?.('sample-view.calendar');
     }
 }
 
 /**
- * Attach the sample view to its host and load it.
+ * Attach the sample view to its host, connect the screen action bar, and wire the attach/detach toggle.
  * @param {HTMLElement} host the element that receives the view
+ * @param {{show: (message: string) => void}} toaster toast controller for sample action feedback
  */
-function mountSampleView(host) {
-    const view = new SampleView({}, { document: host.ownerDocument });
+function mountSampleView(host, toaster) {
+    const doc = host.ownerDocument;
+    const actions = new Map();
+    const events = new EventTarget();
+    const app = {
+        addAction(action) {
+            actions.set(action.id, { disabled: false, ...action });
+        },
+        removeAction(id) {
+            actions.delete(id);
+        },
+        getAction(id) {
+            return actions.get(id);
+        },
+        enableAction(id) {
+            const action = actions.get(id);
+            if (!action || !action.disabled) {
+                return;
+            }
+            action.disabled = false;
+            events.dispatchEvent(new CustomEvent(ACTION_STATE_CHANGED_EVENT, { detail: { action } }));
+        },
+        addEventListener: (type, listener) => events.addEventListener(type, listener),
+        removeEventListener: (type, listener) => events.removeEventListener(type, listener),
+        showToast: (message) => toaster.show(message)
+    };
+    const bar = attachScreenActionBar(doc.body, { app, onAction: (action) => action.run?.() });
+    app.setScreenActions = bar.setScreenActions;
+    const view = new SampleView(app, { document: doc });
+    let attached = true;
     view.attach(host);
     view.refreshComponentUI();
+    const toggle = doc.querySelector('[data-demo-view-toggle]');
+    toggle?.addEventListener('click', () => {
+        if (attached) {
+            view.detach();
+            attached = false;
+            toggle.textContent = 'Attach sample view';
+        }
+        else {
+            view.attach(host);
+            attached = true;
+            toggle.textContent = 'Detach sample view';
+        }
+    });
 }
 
 /**
@@ -103,7 +157,7 @@ export function initShellDemo(doc, view) {
     }
     const sampleViewHost = doc.querySelector('[data-demo-view]');
     if (sampleViewHost) {
-        mountSampleView(sampleViewHost);
+        mountSampleView(sampleViewHost, toaster);
     }
     // The Refresh pattern: a sample check on each visible poll and return, without a Refresh button.
     const checked = doc.querySelector('[data-demo-checked]');

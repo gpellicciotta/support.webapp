@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Modules: Added [screen-action-bar.js](src/js/screen-action-bar.js) to render routed view actions in `.app__action-bar`, with disabled hints and empty-bar removal.
 - Modules: Added [file-download.js](src/js/file-download.js) and persistent download actions in [toast.js](src/js/toast.js) that revoke URLs on dismiss.
 - Components: Added [view-header.css](src/css/components/view-header.css) for screen titles and optional muted summary lines that collapse when empty.
 - Shell: Added sidebar end lists, nav badges, brand logos, hidden top bar parts, and banner dismiss in [shell.css](src/css/shell.css).
