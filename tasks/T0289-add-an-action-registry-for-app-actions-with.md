@@ -1,11 +1,11 @@
 ---
 id: T0289
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0289-add-an-action-registry-for-app-actions-with
+worktree: .plan/work/T0289-add-an-action-registry-for-app-actions-with
+status: active
+started_at: "2026-11-23T21:23:42Z"
 ended_at: —
 review: agent
 preview: none
