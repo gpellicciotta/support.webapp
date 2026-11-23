@@ -1,11 +1,11 @@
 ---
 id: T0291
-owner: ~
-needs: ['T0290']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0291-add-the-notifications-inbox-pattern-and-the-unread
+worktree: .plan/work/T0291-add-the-notifications-inbox-pattern-and-the-unread
+status: active
+started_at: "2026-11-23T22:32:34Z"
 ended_at: —
 review: agent
 preview: none
