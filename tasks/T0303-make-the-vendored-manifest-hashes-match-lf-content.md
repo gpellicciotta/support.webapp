@@ -1,6 +1,7 @@
 ---
 id: T0303
 owner: "@gemini"
+session: antigravity-20261123-b52085
 needs: []
 branch: task/T0303-make-the-vendored-manifest-hashes-match-lf-content
 worktree: .plan/work/T0303-make-the-vendored-manifest-hashes-match-lf-content
@@ -23,11 +24,11 @@ Then release with `python scripts/devops.py release --yes`; Auth re-vendors in i
 See [technical-spec.md](T0303-make-the-vendored-manifest-hashes-match-lf-content/technical-spec.md).
 
 ## Task Execution Steps
-- [ ] **[Implement]** Add unit and integration tests for LF, CRLF, text edits, and binary line-ending bytes.
-- [ ] **[Verify]**    Run the new tests and confirm the LF and CRLF cases fail on raw hashing.
-- [ ] **[Implement]** Add the normalizing hash to `check.mjs` and use it in `manifest.mjs`.
-- [ ] **[Verify]**    Run `python scripts/devops.py check` and record its output.
-- [ ] **[Doc]**       Update ADR-0005, `docs/devops.md`, and `CHANGELOG.md` with the line-ending rule.
+- [x] **[Implement]** Add unit and integration tests for LF, CRLF, text edits, and binary line-ending bytes.
+- [x] **[Verify]**    Run the new tests and confirm the LF and CRLF cases fail on raw hashing.
+- [x] **[Implement]** Add the normalizing hash to `check.mjs` and use it in `manifest.mjs`.
+- [x] **[Verify]**    Run `python scripts/devops.py check` and record its output.
+- [x] **[Doc]**       Update ADR-0005, `docs/devops.md`, and `CHANGELOG.md` with the line-ending rule.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -36,4 +37,21 @@ See [technical-spec.md](T0303-make-the-vendored-manifest-hashes-match-lf-content
 
 - [2026-11-23] **[Doc]**
   Rewrote the goals to normalize line endings in check.mjs and manifest.mjs, so LF and CRLF checkouts both pass.
+
+- [2026-11-23] **[Verify]**
+  Confirmed red-phase failures on LF/CRLF hashing in check.test.js, manifest.test.js, and vendor.test.js.
+
+- [2026-11-23] **[Implement]**
+  Added normalizing fileHash in check.mjs, imported it in manifest.mjs, and updated ADR-0005, docs/devops.md, and CHANGELOG.md.
+
+- [2026-11-23] **[Verify]**
+  Passed full python scripts/devops.py check with exit code 0.
+  - 28 markdown, Ruff, ESLint, 61 pytest, 2262 unit tests passed.
+  - 866 Playwright e2e, 7 integration tests, and npm pack passed.
+
+- [2026-11-23] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 7.
+  - Lines touched: 107.
+  - Reopenings: 0.
 
