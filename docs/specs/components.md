@@ -88,13 +88,14 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `tooltip`        | Tooltip             | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                |
 
 ### Identity and Foundations
-| Key            | Component    | Module and functions                                                                           | Variants and states                                     | Accessibility minimum                                   |
-| :------------- | :----------- | :--------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :------------------------------------------------------ |
-| none, base     | Page base    | none                                                                                           | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable |
-| `avatar`       | Avatar       | none                                                                                           | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name      |
-| `account-menu` | Account menu | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                        | signed in, signed out                                   | menu pattern; marks the current route                   |
-| `icon`         | Icon         | `icon.js`: `createIcon`                                                                        | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                 |
-| `theme-switch` | Theme switch | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js` | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                      |
+| Key              | Component      | Module and functions                                                                           | Variants and states                                     | Accessibility minimum                                             |
+| :--------------- | :------------- | :--------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
+| none, base       | Page base      | none                                                                                           | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable           |
+| `avatar`         | Avatar         | none                                                                                           | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name                |
+| `account-menu`   | Account menu   | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                        | signed in, signed out                                   | menu pattern; marks the current route                             |
+| `icon`           | Icon           | `icon.js`: `createIcon`                                                                        | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                           |
+| `theme-switch`   | Theme switch   | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js` | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                                |
+| `install-prompt` | Install prompt | `install-prompt.js`: `attachInstallPrompt`                                                     | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -819,6 +820,25 @@ Upgrading an existing app:
 - Replace hand-written `<head>` theme scripts with `theme-boot.js`, setting `data-theme-switch-app` and any `data-theme-switch-legacy-key`.
 - Replace local settings parsing and server theme sync with `themeOfSettings`, `syncAccountTheme`, and `attachThemeSwitch` `sync` callbacks.
 - See the [Theme switch section](../../src/demo/visual-style-gallery.html#theme-switch) of the gallery.
+
+### install-prompt
+Install prompt tracking ([install-prompt.js](../../src/js/install-prompt.js)).
+The module owns no button; it tracks `beforeinstallprompt`, `appinstalled`, and `(display-mode: standalone)` and reports `{ installable, installed }`.
+
+```html
+<button class="button button--secondary" type="button" data-install-prompt-action hidden>Install app</button>
+```
+
+- Call `attachInstallPrompt({ window, matchMedia, onChange })`; `onChange({ installable, installed })` runs only when state changes.
+- The controller exposes `getState()`, `isInstallable()`, `isInstalled()`, `prompt()`, and `destroy()`.
+- Call `prompt()` inside a click handler; it clears the single-use event before awaiting and resolves to the choice.
+- Without a kept event, `prompt()` resolves to `{ outcome: 'unavailable' }`; standalone mode keeps the action hidden.
+- Use native `hidden` and `aria-disabled="true"` while prompting so focus stays on the button.
+
+Upgrading an existing app:
+- Replace local `beforeinstallprompt`, `appinstalled`, and `standalone` handlers with `attachInstallPrompt` from [install-prompt.js](../../src/js/install-prompt.js).
+- Show or hide the app's install button from `onChange` and call `prompt()` from its click handler.
+- See the [portal shell demo](../../src/demo/shell-portal.html) for a wired `data-install-prompt-action` button.
 
 ---
 

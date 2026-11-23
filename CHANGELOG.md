@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Modules: Added [install-prompt.js](src/js/install-prompt.js) to track installable and installed state and trigger browser install prompts.
 - Components: Added [theme-boot.js](src/js/theme-boot.js) for pre-paint theme loading with legacy key migration, and account theme sync to [theme-switch.js](src/js/theme-switch.js).
 - Template: Added `<meta name="color-scheme">` and the `theme-boot.js` pre-paint script to the starter [index.html](template/src/index.html).
 - Components: Added the [release-notes](src/js/release-notes.js) renderer with filters, category and Breaking badges, area groups, status chips, and paging.

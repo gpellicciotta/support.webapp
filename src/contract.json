@@ -933,6 +933,7 @@
     "avatar",
     "account-menu",
     "icon",
-    "theme-switch"
+    "theme-switch",
+    "install-prompt"
   ]
 }

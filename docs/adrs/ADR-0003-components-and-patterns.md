@@ -103,6 +103,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It renders plain release objects without importing support.js, reusing `collapsible.js`, `icon.js`, and catalog badge, chip, and button variants.
 - **[Decided]** on 2026-11-23: pre-paint theme booting ([theme-boot.js](../../src/js/theme-boot.js)) and callback-based account theme sync moved into [theme-switch.js](../../src/js/theme-switch.js) from Auth.
   Apps pass `data-theme-switch-app`, optional `data-theme-switch-legacy-key`, and `load`/`save` callbacks, keeping account APIs out of the package.
+- **[Decided]** on 2026-11-23: `install-prompt` moved in from Auth, counters, and meteo as [install-prompt.js](../../src/js/install-prompt.js).
+  It owns no button, tracks `beforeinstallprompt`, `appinstalled`, and standalone mode, and clears each single-use event in `prompt()`.
 
 ### Shared patterns
 Documented as contracts without components of their own:

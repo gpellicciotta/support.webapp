@@ -3,6 +3,7 @@
 import { initGallery } from './gallery.js';
 import { attachAppNav } from '../js/app-nav.js';
 import { attachAutoRefresh } from '../js/auto-refresh.js';
+import { attachInstallPrompt } from '../js/install-prompt.js';
 import { attachMenu } from '../js/menu.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { attachPullRefresh } from '../js/pull-refresh.js';
@@ -68,6 +69,35 @@ export function initShellDemo(doc, view) {
             onRefresh: async () => {
                 await new Promise((resolve) => view.setTimeout(resolve, 600));
                 toaster.show('Sample page refreshed.');
+            }
+        });
+    }
+    const installButton = doc.querySelector('[data-install-prompt-action]');
+    if (installButton) {
+        const installer = attachInstallPrompt({
+            window: view,
+            onChange({ installable, installed }) {
+                installButton.hidden = !installable || installed;
+            }
+        });
+        installButton.hidden = !installer.isInstallable() || installer.isInstalled();
+        installButton.addEventListener('click', async () => {
+            if (installButton.getAttribute('aria-disabled') === 'true') {
+                return;
+            }
+            // Keep focus on the button while prompting instead of using `disabled`.
+            installButton.setAttribute('aria-disabled', 'true');
+            try {
+                const choice = await installer.prompt();
+                if (choice?.outcome === 'accepted') {
+                    toaster.show('Install prompt accepted.');
+                }
+                else if (choice?.outcome === 'dismissed') {
+                    toaster.show('Install prompt dismissed.');
+                }
+            }
+            finally {
+                installButton.removeAttribute('aria-disabled');
             }
         });
     }
