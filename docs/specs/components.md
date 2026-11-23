@@ -99,6 +99,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `install-prompt`    | Install prompt    | `install-prompt.js`: `attachInstallPrompt`                                                     | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
 | `file-download`     | File download     | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`       | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
 | `screen-action-bar` | Screen action bar | `screen-action-bar.js`: `attachScreenActionBar`                                                | buttons, links, disabled hints, empty-bar removal       | native `disabled` on buttons; `aria-disabled` on links            |
+| `action-registry`   | Action registry   | `action-registry.js`: `createActionRegistry`, `attachActionRegistry`                           | enabled, disabled with reason, scoped lookup, events    | blocks disabled and `aria-disabled` `[data-action]` triggers      |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -913,6 +914,27 @@ Upgrading an existing app:
 - Replace Auth shell `setScreenActions` and `renderActionBar` methods or counters' local `app-action-bar.mjs` with `attachScreenActionBar` from [screen-action-bar.js](../../src/js/screen-action-bar.js).
 - Mark the sibling that follows the bar with `data-screen-action-bar-before`, or pass `before`, and bind `app.setScreenActions = bar.setScreenActions`.
 - See the [portal shell demo](../../src/demo/shell-portal.html) for a routed view driving the screen action bar.
+
+### action-registry
+Action registry ([action-registry.js](../../src/js/action-registry.js)).
+Stores app and routed-view actions with enabled state, disabled reasons, state events, and `[data-action]` click delegation.
+
+```html
+<button class="button button--secondary" type="button" data-action="items.export">Export</button>
+<a class="button button--secondary" href="/help" data-action="navigate-to-help" aria-disabled="true" title="Sign in first" aria-description="Sign in first">Help</a>
+```
+
+- Call `createActionRegistry({ actions, getScope, onNavigate, root, document, events })` or `attachActionRegistry(root, options)`.
+- The controller returns `addAction`, `removeAction`, `getAction`, `getActions`, `isActionEnabled`, `enableAction`, `disableAction`, `toggleAction`, `runAction`, `addEventListener`, `removeEventListener`, `attach`, `detach`, and `destroy`.
+- Action descriptors carry `id`, `title`, `description`, `href` or `run`, `disabled`, `disabled-reason`, and a tracked `run-count`.
+- `getScope` resolves `${scope}.${id}` before global IDs; `onNavigate(href, action, data)` handles `href` actions so routing stays outside.
+- State changes emit `ACTION_STATE_CHANGED_EVENT` (`action-state-changed`); additions, removals, and runs emit `ACTION_ADDED_EVENT`, `ACTION_REMOVED_EVENT`, `ACTION_RUN_EVENT`, and `action.id`.
+- Delegated clicks on `[data-action]` pass dataset values to `runAction`, and block disabled actions and `aria-disabled="true"` controls.
+
+Upgrading an existing app:
+- Replace the action map, state methods, and `[data-action]` click handler in Auth's or counters' `App` with `createActionRegistry` or `attachActionRegistry` from [action-registry.js](../../src/js/action-registry.js).
+- Pass initial `APP_ACTIONS` in `options.actions`, wire `getScope: () => this.activeView?.id`, and pass `onNavigate: (href) => this.activateView(href, {}, 'navigate action')`.
+- Pair it with [screen-action-bar.js](../../src/js/screen-action-bar.js) and [view.js](../../src/js/view.js), as shown in the [portal shell demo](../../src/demo/shell-portal.html).
 
 ---
 

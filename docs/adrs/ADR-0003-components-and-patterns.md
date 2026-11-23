@@ -113,6 +113,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   One-shot helpers click a temporary anchor and revoke later; persistent download toasts revoke their URL on dismiss.
 - **[Decided]** on 2026-11-23: `screen-action-bar` moved in from Auth's shell and counters as [screen-action-bar.js](../../src/js/screen-action-bar.js).
   It renders routed-view buttons and links in `.app__action-bar`, blocks disabled links, shows disabled hints, and removes empty bars.
+- **[Decided]** on 2026-11-23: `action-registry` moved in from Auth's `App` and counters as [action-registry.js](../../src/js/action-registry.js).
+  It manages action state, disabled reasons, events, and `data-action` clicks, leaving routing in an `onNavigate` callback.
 
 ### Shared patterns
 Documented as contracts without components of their own:

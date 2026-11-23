@@ -1,13 +1,14 @@
 /* Look and theme switchers, the nav toggle, pull-to-refresh, auto-refresh, the sample view, and the sample interactions of the shell demo pages. */
 
 import { initGallery } from './gallery.js';
+import { attachActionRegistry } from '../js/action-registry.js';
 import { attachAppNav } from '../js/app-nav.js';
 import { attachAutoRefresh } from '../js/auto-refresh.js';
 import { attachInstallPrompt } from '../js/install-prompt.js';
 import { attachMenu } from '../js/menu.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { attachPullRefresh } from '../js/pull-refresh.js';
-import { ACTION_STATE_CHANGED_EVENT, attachScreenActionBar } from '../js/screen-action-bar.js';
+import { attachScreenActionBar } from '../js/screen-action-bar.js';
 import { createToast } from '../js/toast.js';
 import { RoutedView } from '../js/view.js';
 
@@ -50,50 +51,47 @@ class SampleView extends RoutedView {
 }
 
 /**
- * Attach the sample view to its host, connect the screen action bar, and wire the attach/detach toggle.
+ * Attach the sample view to its host, connect the action registry and screen action bar, and wire the attach/detach toggle.
  * @param {HTMLElement} host the element that receives the view
  * @param {{show: (message: string) => void}} toaster toast controller for sample action feedback
  */
 function mountSampleView(host, toaster) {
     const doc = host.ownerDocument;
-    const actions = new Map();
-    const events = new EventTarget();
-    const app = {
-        addAction(action) {
-            actions.set(action.id, { disabled: false, ...action });
-        },
-        removeAction(id) {
-            actions.delete(id);
-        },
-        getAction(id) {
-            return actions.get(id);
-        },
-        enableAction(id) {
-            const action = actions.get(id);
-            if (!action || !action.disabled) {
-                return;
+    let activeView = null;
+    const registry = attachActionRegistry(doc.body, {
+        document: doc,
+        getScope: () => activeView?.id ?? null,
+        onNavigate: (href) => {
+            if (href.startsWith('#')) {
+                const target = doc.getElementById(href.slice(1));
+                target?.scrollIntoView?.();
+                if (doc.defaultView?.location) {
+                    doc.defaultView.location.hash = href;
+                }
             }
-            action.disabled = false;
-            events.dispatchEvent(new CustomEvent(ACTION_STATE_CHANGED_EVENT, { detail: { action } }));
-        },
-        addEventListener: (type, listener) => events.addEventListener(type, listener),
-        removeEventListener: (type, listener) => events.removeEventListener(type, listener),
+        }
+    });
+    const app = {
+        ...registry,
         showToast: (message) => toaster.show(message)
     };
-    const bar = attachScreenActionBar(doc.body, { app, onAction: (action) => action.run?.() });
+    const bar = attachScreenActionBar(doc.body, { app });
     app.setScreenActions = bar.setScreenActions;
     const view = new SampleView(app, { document: doc });
     let attached = true;
+    activeView = view;
     view.attach(host);
     view.refreshComponentUI();
     const toggle = doc.querySelector('[data-demo-view-toggle]');
     toggle?.addEventListener('click', () => {
         if (attached) {
             view.detach();
+            activeView = null;
             attached = false;
             toggle.textContent = 'Attach sample view';
         }
         else {
+            activeView = view;
             view.attach(host);
             attached = true;
             toggle.textContent = 'Detach sample view';

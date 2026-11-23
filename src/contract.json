@@ -937,6 +937,7 @@
     "theme-switch",
     "install-prompt",
     "file-download",
-    "screen-action-bar"
+    "screen-action-bar",
+    "action-registry"
   ]
 }
