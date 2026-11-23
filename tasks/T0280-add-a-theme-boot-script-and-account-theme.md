@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1800.4, input: 2321, output: 129}
+work_duration: 1811.1
 ---
 # T0280: Add a theme boot script and account theme sync to the theme switch, promoted from Auth
 
