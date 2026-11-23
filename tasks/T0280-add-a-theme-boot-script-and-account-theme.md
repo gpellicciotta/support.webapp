@@ -1,11 +1,11 @@
 ---
 id: T0280
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0280-add-a-theme-boot-script-and-account-theme
+worktree: .plan/work/T0280-add-a-theme-boot-script-and-account-theme
+status: active
+started_at: "2026-11-23T16:50:23Z"
 ended_at: —
 review: agent
 preview: none
