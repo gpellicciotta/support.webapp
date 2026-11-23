@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 1800.5, input: 2320, output: 175}
+  worker: {turns: 2, duration_s: 1912.7, input: 419159, output: 61068, cache_read: 22270001}
 work_duration: 1813.9
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T21:13:30Z"
 ---
 # T0286: Add a screen action bar renderer for the screen actions of routed views, promoted from Auth's shell
 
@@ -72,4 +75,7 @@ Size estimate: 4 files, 70 lines.
 
 - [2026-11-23] **[Doc]**
   Updated components.md with upgrade notes, ADR-0003, ADR-0004, and CHANGELOG.md.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
