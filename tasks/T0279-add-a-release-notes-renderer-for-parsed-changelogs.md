@@ -1,11 +1,11 @@
 ---
 id: T0279
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0279-add-a-release-notes-renderer-for-parsed-changelogs
+worktree: .plan/work/T0279-add-a-release-notes-renderer-for-parsed-changelogs
+status: active
+started_at: "2026-11-23T16:14:29Z"
 ended_at: —
 review: agent
 preview: none
