@@ -22,6 +22,7 @@ The shell is documented markup plus one `shell.css`, with no shell script and no
 Two optional modules enhance the shell, and the areas never depend on them:
 - `app-nav.js` drives the nav toggle.
 - `pull-refresh.js` adds pull-to-refresh to installed apps, with the `app__pull-indicator` overlay part.
+- `view.js` is the base of views that load their own data, with a wait status and an error page.
 Its component key is `app`, following the naming rules of [naming.md](../specs/naming.md).
 
 Areas, each optional except the main area:

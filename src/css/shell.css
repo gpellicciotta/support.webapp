@@ -563,3 +563,8 @@ html[data-pull-refresh] {
     block-size: calc(100dvh - var(--_app-top-offset) - var(--_app-action-offset));
   }
 }
+
+/* A view's overlays and way back toggle through `hidden`; a component's own display must not defeat it (view.js). */
+.app__view :is([data-view-error], [data-view-wait], [data-view-main], [data-view-back])[hidden] {
+  display: none;
+}

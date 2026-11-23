@@ -12,6 +12,7 @@ All notable changes to this project are documented here.
 ## v0.4.0-pre
 - Docs: Followed support.js v4.0.0, which dropped its UI; the comparison now links its stylesheets at commit `7738fab`.
 - Components: Added the entry list: log lines and events as spaced cards, with the message first and chips for time, severity, and source.
+- Modules: Added `view.js` with `View` and `RoutedView`, the view lifecycle base promoted from Auth's `Component` and `AppView`, which support.js v4 removed.
 - Shell: Added pull-to-refresh for installed apps, as `pull-refresh.js` and the `app__pull-indicator` overlay part, promoted from Auth's SPA.
 - Looks: Added the core `icon-refresh` glyph to every look sprite, and the pull-to-refresh indicator now draws it.
 - Modules: Added the Refresh pattern and `auto-refresh.js`, which polls while the tab is visible and reports returns, promoted from Auth's SPA.

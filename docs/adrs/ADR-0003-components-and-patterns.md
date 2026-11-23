@@ -92,6 +92,9 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   Its log and event cards suit every app with an activity view, so the package holds it ahead of reuse.
 - **[Decided]** with the user on 2026-11-23: `pull-refresh.js` moved in from Auth's installed SPA before a second app needed it.
   Installed apps lack a pull-down reload on iOS, and only `shell.css` may style its fixed indicator.
+- **[Decided]** with the user on 2026-11-23: all UI and view code that apps can share belongs in the package, ahead of a second app.
+  `view.js` moved in from Auth's `Component` and `AppView`, which support.js v4.0.0 removed and counters also used.
+  It is a module with classes, not a function: apps extend `View` and `RoutedView`.
 
 ### Shared patterns
 Documented as contracts without components of their own:

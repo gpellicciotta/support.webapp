@@ -894,6 +894,46 @@ Installed apps add it to any setup with `attachPullRefresh(root, { onRefresh, co
 - `data-state` is `pulling`, `armed`, or `refreshing`, and `hidden` hides the idle indicator.
 - The module moves the indicator through `--_app-pull-travel` and `--_app-pull-progress`.
 
+### View lifecycle
+Views that load their own data extend `View`, or `RoutedView` when a router selects them, from `view.js`.
+It replaces `Component` and `AppView` of support.js v3, which v4.0.0 removed; member names stay the same.
+- `new View(id, app, options)` builds the root; `attach(el)` adds it, and `detach()` removes it with its tracked listeners.
+- Override `createMainUIHtml()`, `updateMainUI(info)`, and `refreshData()`; `refreshComponentUI()` reloads and shows the result.
+- A failed load shows the error page in place of the main UI, with Try again and an optional way back.
+- A load slower than the wait delay, 700 ms by default, shows a status with a spinner; the main UI stays visible.
+- `startLongRunningOperation({ title, description, start, success, error, always })` runs any other asynchronous work the same way.
+- Call `setSpriteUrl` first; the error page draws `icon-alert` unless `options.icon` names another glyph, or `null`.
+
+```html
+<div id="users" class="app__view" data-view data-view-state="ready">
+  <div data-view-error hidden>
+    <div class="empty-state" role="alert">...<button class="button" data-view-retry>Try again</button>...</div>
+  </div>
+  <div data-view-wait hidden><span class="spinner" aria-hidden="true"></span><span role="status"></span></div>
+  <div data-view-main>...the view's own markup...</div>
+</div>
+```
+
+- The module sets `data-view-state` to `ready`, `updating`, or `error`, plus `hidden` and `aria-busy`; apps never write them.
+- `options` are `log`, `waitDelay`, `icon`, `labels` (`retry`, `waiting`, `errorTitle`, `errorText`), and `document`.
+- Override `getBackLink()` to return `{ href, label, attributes }` or `null`; it is asked again on every error.
+- Error texts are set as plain text, where support.js v3 set them as HTML.
+- `RoutedView(id, app, title, routeRegex, options)` adds `routeRegex`, `getActions()`, and the registration of actions.
+  The app may offer `addAction`, `removeAction`, and `setScreenActions`; actions with `'context-bar': false` stay out of the screen actions.
+- The app may offer `startProgress` and `stopProgress`; a slow operation brackets them.
+
+Moving from support.js v3:
+
+| support.js v3                              | support.webapp                                              |
+| :----------------------------------------- | :---------------------------------------------------------- |
+| `Component`, `import ... component.mjs`    | `View` from `view.js`                                       |
+| `AppView`, `import ... app-view.mjs`       | `RoutedView` from `view.js`                                 |
+| `Component.errorIconSprite`, `errorIconId` | `setSpriteUrl` and `options.icon`                           |
+| `Component.waitUIDelayTime`                | `options.waitDelay`                                         |
+| `AppView.ActionBarClass`, action bars      | `app.setScreenActions(ids)` of the app's own shell          |
+| `.error-overlay`, `.wait-overlay`, `.main` | `[data-view-error]`, `[data-view-wait]`, `[data-view-main]` |
+| logger created inside                      | `options.log`, silent by default                            |
+
 ---
 
 ## Glossary

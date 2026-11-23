@@ -1,4 +1,4 @@
-/* Look and theme switchers, the nav toggle, pull-to-refresh, auto-refresh, and the sample interactions of the shell demo pages. */
+/* Look and theme switchers, the nav toggle, pull-to-refresh, auto-refresh, the sample view, and the sample interactions of the shell demo pages. */
 
 import { initGallery } from './gallery.js';
 import { attachAppNav } from '../js/app-nav.js';
@@ -7,6 +7,44 @@ import { attachMenu } from '../js/menu.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { attachPullRefresh } from '../js/pull-refresh.js';
 import { createToast } from '../js/toast.js';
+import { RoutedView } from '../js/view.js';
+
+/**
+ * A sample view whose first load fails and whose later loads succeed, to show the error page and Try again.
+ */
+class SampleView extends RoutedView {
+    constructor(app, options) {
+        super('sample-view', app, 'Sample', undefined, options);
+        this.loads = 0;
+    }
+
+    createMainUIHtml() {
+        return '<div class="sample-view"><p data-sample-view-text>Not loaded yet.</p></div>';
+    }
+
+    async refreshData() {
+        this.loads += 1;
+        await new Promise((resolve) => globalThis.setTimeout(resolve, 100));
+        if (this.loads === 1) {
+            throw new Error('the sample server is not answering');
+        }
+        return `Sample data loaded on attempt ${this.loads}.`;
+    }
+
+    updateMainUI(info) {
+        this.mainUIEl.querySelector('[data-sample-view-text]').textContent = info;
+    }
+}
+
+/**
+ * Attach the sample view to its host and load it.
+ * @param {HTMLElement} host the element that receives the view
+ */
+function mountSampleView(host) {
+    const view = new SampleView({}, { document: host.ownerDocument });
+    view.attach(host);
+    view.refreshComponentUI();
+}
 
 /**
  * Wire the switchers, the nav toggle, the sample toast and menu, the side panel, and the screen toggle of one shell demo page.
@@ -32,6 +70,10 @@ export function initShellDemo(doc, view) {
                 toaster.show('Sample page refreshed.');
             }
         });
+    }
+    const sampleViewHost = doc.querySelector('[data-demo-view]');
+    if (sampleViewHost) {
+        mountSampleView(sampleViewHost);
     }
     // The Refresh pattern: a sample check on each visible poll and return, without a Refresh button.
     const checked = doc.querySelector('[data-demo-checked]');
