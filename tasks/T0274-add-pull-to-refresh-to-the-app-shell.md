@@ -4,16 +4,18 @@ owner: "@claude-code"
 needs: []
 branch: —
 worktree: —
-status: active
+status: completed
 started_at: "2026-11-23T10:09:15Z"
-ended_at: —
+ended_at: "2026-11-23T10:59:49Z"
 review: agent
 preview: none
 protocol: standard
-review_status: pending
+review_status: approved
 review_round: 2
 review_requested_at: "2026-11-23T10:56:40Z"
-review_session: antigravity-20261123-812336
+review_session: antigravity-20261123-32b07a
+reviewed_by: "@gemini"
+completion-commit: 2a630c060465dcdb056c28c5f8b1f71300596825
 ---
 # T0274: Add pull-to-refresh to the app shell, promoted from Auth's installed SPA
 
@@ -33,7 +35,7 @@ Completion check: `python scripts/devops.py check` passes, with the new unit and
 - [x] **[Verify]**    Run the affected tests and the full check suite.
 - [x] **[Visual]**    Capture the shell demo mid-pull across looks and themes at mobile width, before and after.
 - [x] **[Doc]**       Update ADR-0003, ADR-0004, components.md, and CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-23] **[Doc]**
@@ -98,4 +100,11 @@ Completion check: `python scripts/devops.py check` passes, with the new unit and
 
 - [2026-11-23] **[Review]**
   Round 2 requested (mode: agent).
+
+- [2026-11-23] **[Review]**
+  Round 2 approved by @gemini: Approved in round 2.
+  - Findings: [review-findings-2.md](T0274-add-pull-to-refresh-to-the-app-shell/review-findings-2.md).
+
+- [2026-11-23] **[Complete]**
+  Task completed successfully.
 
