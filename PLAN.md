@@ -8,7 +8,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0280 Add a theme boot script and account theme sync to the theme switch, promoted from Auth.
 - [x] T0281 Add an install prompt module for installable apps, promoted from Auth, counters, and meteo.
 - [x] T0282 Defer field validation on blur until a pointer press ends, promoted from Auth's admin console.
-- [ ] T0283 Add Auth's shell additions to shell.css: sidebar end group, entry badges, hidden top bar parts, and banner dismiss.
+- [~] T0283 [owner: @gemini] Add Auth's shell additions to shell.css: sidebar end group, entry badges, hidden top bar parts, and banner dismiss.
 - [ ] T0284 Add a view header component for a screen's title and summary line, promoted from Auth.
 - [ ] T0285 Add a file download helper and download toast actions, promoted from Auth's account export.
 - [ ] T0286 Add a screen action bar renderer for the screen actions of routed views, promoted from Auth's shell.

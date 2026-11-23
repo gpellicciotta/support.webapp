@@ -1,11 +1,11 @@
 ---
 id: T0283
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0283-add-auth-s-shell-additions-to-shell-css
+worktree: .plan/work/T0283-add-auth-s-shell-additions-to-shell-css
+status: active
+started_at: "2026-11-23T18:39:39Z"
 ended_at: —
 review: agent
 preview: none
