@@ -1,6 +1,7 @@
 ---
 id: T0282
 owner: "@gemini"
+session: antigravity-20261123-409ad6
 needs: []
 branch: task/T0282-defer-field-validation-on-blur-until-a-pointer
 worktree: .plan/work/T0282-defer-field-validation-on-blur-until-a-pointer
@@ -22,10 +23,10 @@ Completion check: `python scripts/devops.py check`, with the new tests green.
 Size estimate: 4 files, 90 lines.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read the technical specification, the audit section, and the Auth source it cites.
-- [ ] **[Decide]**    Decide how a held check interacts with submit validation in `attachForm`.
-- [ ] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
-- [ ] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
+- [x] **[Read]**      Read the technical specification, the audit section, and the Auth source it cites.
+- [x] **[Decide]**    Decide how a held check interacts with submit validation in `attachForm`.
+- [x] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
+- [x] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
 - [ ] **[Implement]** Defer blur validation in `field.js` until the pointer press ends, keeping keyboard blur immediate.
 - [ ] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
 - [ ] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
@@ -37,4 +38,7 @@ Size estimate: 4 files, 90 lines.
 
 - [2026-11-23] **[Doc]**
   Task fleshed out from the T0277 audit of Auth's webapp at commit eeb9439.
+
+- [2026-11-23] **[Decided]**
+  Keep attachForm unchanged; its submit handler calls field.validate synchronously during click, ahead of the release task, so invalidating the held callback drops duplicate blur checks cleanly.
 
