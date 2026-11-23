@@ -5,18 +5,22 @@ session: antigravity-20261123-18c692
 needs: []
 branch: task/T0290-add-a-notices-module-that-routes-app-notifications
 worktree: .plan/work/T0290-add-a-notices-module-that-routes-app-notifications
-status: active
+status: completed
 started_at: "2026-11-23T21:50:47Z"
-ended_at: —
+ended_at: "2026-11-23T22:32:11Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 3, duration_s: 2225.1, input: 541376, output: 81227, cache_read: 18605043}
-work_duration: 1471.7
-review_status: pending
+  review: {turns: 1, duration_s: 172.9, input: 26, output: 7187, cache_read: 753883, cache_write: 66700}
+work_duration: 2484.8
+review_status: approved
 review_round: 1
 review_requested_at: "2026-11-23T22:29:11Z"
+reviewed_by: "@claude"
+review_session: claude-20261123-6c421e
+completion-commit: 301d13005ddc7a95573ea6adeed6892f531887de
 ---
 # T0290: Add a notices module that routes app notifications to banners and toasts, promoted from Auth
 
@@ -38,7 +42,7 @@ Size estimate: 5 files, 200 lines.
 - [x] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
 - [x] **[Visual]**    Capture the notices module across looks and themes at mobile and desktop width.
 - [x] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-23] **[Doc]**
@@ -82,4 +86,11 @@ Size estimate: 5 files, 200 lines.
 
 - [2026-11-23] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-23] **[Review]**
+  Round 1 approved by @claude: Approved.
+  - Findings: [review-findings-1.md](T0290-add-a-notices-module-that-routes-app-notifications/review-findings-1.md).
+
+- [2026-11-23] **[Complete]**
+  Task completed successfully.
 
