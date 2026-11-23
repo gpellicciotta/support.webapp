@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1750.6, input: 369186, output: 69577, cache_read: 17005138}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T20:30:15Z"
 ---
 # T0285: Add a file download helper and download toast actions, promoted from Auth's account export
 
@@ -58,4 +63,7 @@ Size estimate: 4 files, 80 lines.
 
 - [2026-11-23] **[Read]**
   Reviewed technical-spec.md, the Auth audit section, ui.mjs saveJson, account-view.mjs export, and app-notices.mjs.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
