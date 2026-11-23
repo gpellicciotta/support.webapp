@@ -165,13 +165,31 @@ export function initGallery(doc, view) {
     if (accent) {
         configureAccents(doc, select.value);
     }
-    attachThemeSwitch(doc, {
+    const syncStatus = doc.querySelector('[data-theme-sync-status]');
+    const themeSwitch = attachThemeSwitch(doc, {
         document: doc,
         appName: 'support-webapp-gallery',
         getStorage: () => view.localStorage,
         initialTheme: doc.querySelector('input[name="theme"]:checked')?.value || 'system',
-        onChange: refresh
+        onChange: refresh,
+        sync: syncStatus ? {
+            save: (theme) => {
+                syncStatus.textContent = `Saved account theme: ${theme}.`;
+            }
+        } : undefined
     });
+    if (syncStatus) {
+        const payloads = {
+            dark: [{ name: 'theme', value: 'dark' }],
+            default: { 'style-settings': { theme: 'default' } }
+        };
+        for (const button of doc.querySelectorAll('[data-theme-sync-demo]')) {
+            button.addEventListener('click', async () => {
+                const applied = await themeSwitch.sync(payloads[button.dataset.themeSyncDemo]);
+                syncStatus.textContent = `Synced account theme at sign-in: ${applied}.`;
+            });
+        }
+    }
     setSpriteUrl(spriteHref(select.value));
     if (link.getAttribute('href') !== lookHref(select.value)) {
         applyLook(doc, select.value);

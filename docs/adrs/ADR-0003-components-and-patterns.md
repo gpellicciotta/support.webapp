@@ -101,6 +101,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It is a module with classes, not a function: apps extend `View` and `RoutedView`.
 - **[Decided]** on 2026-11-23: `release-notes` moved in from Auth's Help view and admin console as [release-notes.js](../../src/js/release-notes.js) and [release-notes.css](../../src/css/components/release-notes.css).
   It renders plain release objects without importing support.js, reusing `collapsible.js`, `icon.js`, and catalog badge, chip, and button variants.
+- **[Decided]** on 2026-11-23: pre-paint theme booting ([theme-boot.js](../../src/js/theme-boot.js)) and callback-based account theme sync moved into [theme-switch.js](../../src/js/theme-switch.js) from Auth.
+  Apps pass `data-theme-switch-app`, optional `data-theme-switch-legacy-key`, and `load`/`save` callbacks, keeping account APIs out of the package.
 
 ### Shared patterns
 Documented as contracts without components of their own:

@@ -10,6 +10,8 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Components: Added [theme-boot.js](src/js/theme-boot.js) for pre-paint theme loading with legacy key migration, and account theme sync to [theme-switch.js](src/js/theme-switch.js).
+- Template: Added `<meta name="color-scheme">` and the `theme-boot.js` pre-paint script to the starter [index.html](template/src/index.html).
 - Components: Added the [release-notes](src/js/release-notes.js) renderer with filters, category and Breaking badges, area groups, status chips, and paging.
 - Components: Added [page.css](src/css/page.css) for body text, headings, links, code, and a `[hidden]` guard sparing `until-found`.
 - CLI: Normalized CRLF to LF in text integrity hashes, so LF and CRLF checkouts of vendored copies both pass.

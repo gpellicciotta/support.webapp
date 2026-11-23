@@ -88,13 +88,13 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `tooltip`        | Tooltip             | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                |
 
 ### Identity and Foundations
-| Key            | Component    | Module and functions                                    | Variants and states                                     | Accessibility minimum                                   |
-| :------------- | :----------- | :------------------------------------------------------ | :------------------------------------------------------ | :------------------------------------------------------ |
-| none, base     | Page base    | none                                                    | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable |
-| `avatar`       | Avatar       | none                                                    | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name      |
-| `account-menu` | Account menu | `account-menu.js`: `attachAccountMenu`, using `menu.js` | signed in, signed out                                   | menu pattern; marks the current route                   |
-| `icon`         | Icon         | `icon.js`: `createIcon`                                 | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                 |
-| `theme-switch` | Theme switch | `theme-switch.js`: `attachThemeSwitch`                  | System, Light, Dark                                     | segmented control of native radios                      |
+| Key            | Component    | Module and functions                                                                           | Variants and states                                     | Accessibility minimum                                   |
+| :------------- | :----------- | :--------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :------------------------------------------------------ |
+| none, base     | Page base    | none                                                                                           | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable |
+| `avatar`       | Avatar       | none                                                                                           | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name      |
+| `account-menu` | Account menu | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                        | signed in, signed out                                   | menu pattern; marks the current route                   |
+| `icon`         | Icon         | `icon.js`: `createIcon`                                                                        | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                 |
+| `theme-switch` | Theme switch | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js` | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                      |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -788,7 +788,7 @@ Icon. The sprite path comes from the vendored look, such as `vendor/design/looks
 ```
 
 ### theme-switch
-Theme switch. System removes `data-theme`; Light and Dark set it on the root element.
+Theme switch. System removes `data-theme`; Light and Dark set it on the root element and sync `meta[name="color-scheme"]`.
 
 ```html
 <fieldset class="segmented theme-switch" data-theme-switch>
@@ -798,6 +798,27 @@ Theme switch. System removes `data-theme`; Light and Dark set it on the root ele
   <label class="segmented__option"><input type="radio" name="theme" value="dark">Dark</label>
 </fieldset>
 ```
+
+Pre-paint boot script ([theme-boot.js](../../src/js/theme-boot.js)):
+- Place `<meta name="color-scheme" content="light dark">` and the classic boot script in `<head>` before stylesheets.
+- Pass `data-theme-switch-app="{{app-name}}"` and optional `data-theme-switch-legacy-key` to migrate a legacy key once without throwing.
+- Use `themeBootScript(appName, { legacyKey })` from [theme-switch.js](../../src/js/theme-switch.js) when a server template inlines the script.
+
+```html
+<meta name="color-scheme" content="light dark">
+<script src="vendor/design/js/theme-boot.js" data-theme-switch-app="example" data-theme-switch-legacy-key="example_theme"></script>
+```
+
+Account theme sync ([theme-switch.js](../../src/js/theme-switch.js)):
+- `themeOfSettings(settings)` reads `theme` or `style-settings` from lists, objects, or strings, mapping `default` to `system`.
+- `syncAccountTheme({ appName, settings, load, onChange, onError })` applies the account theme at sign-in without a mounted switch.
+- `attachThemeSwitch(element, { appName, legacyKey, sync: { load, save, onError } })` exposes `sync(settings?)` and saves manual changes.
+- Account sync never echoes `save(theme)` back; cross-tab `storage` events keep open tabs aligned without saving.
+
+Upgrading an existing app:
+- Replace hand-written `<head>` theme scripts with `theme-boot.js`, setting `data-theme-switch-app` and any `data-theme-switch-legacy-key`.
+- Replace local settings parsing and server theme sync with `themeOfSettings`, `syncAccountTheme`, and `attachThemeSwitch` `sync` callbacks.
+- See the [Theme switch section](../../src/demo/visual-style-gallery.html#theme-switch) of the gallery.
 
 ---
 

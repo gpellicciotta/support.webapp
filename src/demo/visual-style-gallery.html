@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <script src="../js/theme-boot.js" data-theme-switch-app="support-webapp-gallery"></script>
     <link rel="icon" href="data:,">
     <title>Visual style gallery · support.webapp</title>
     <link id="look-stylesheet" rel="stylesheet" href="../looks/neutral/index.css">
@@ -89,6 +91,7 @@
                     <li><a href="#detail-panel">Detail panel</a></li>
                     <li><a href="#progress">Progress</a></li>
                     <li><a href="#spinner">Spinner</a></li>
+                    <li><a href="#theme-switch">Theme switch</a></li>
                 </ul>
             </nav>
         </div>
@@ -1553,6 +1556,15 @@
                 <div class="season" data-accent="autumn">Autumn</div>
                 <div class="season" data-accent="winter">Winter</div>
             </div>
+        </section>
+        <section id="theme-switch" class="gallery-section" aria-labelledby="theme-switch-title">
+            <h2 id="theme-switch-title">Theme switch and account sync</h2>
+            <p>Load <code>theme-boot.js</code> in <code>&lt;head&gt;</code> with <code>data-theme-switch-app</code> (and optional <code>data-theme-switch-legacy-key</code>) to apply the stored theme before first paint. Use <code>attachThemeSwitch</code> with <code>sync</code> callbacks or <code>syncAccountTheme</code> at sign-in.</p>
+            <div class="toast-demo-actions">
+                <button class="button button--secondary" type="button" data-theme-sync-demo="dark">Simulate sign-in (Dark)</button>
+                <button class="button button--secondary" type="button" data-theme-sync-demo="default">Simulate sign-in (Legacy default)</button>
+            </div>
+            <p data-theme-sync-status role="status">Account theme: idle. Use the header Theme control or simulate sign-in.</p>
         </section>
         <section id="shell" class="gallery-section" aria-labelledby="shell-title">
             <h2 id="shell-title">App shell</h2>
