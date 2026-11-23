@@ -1,11 +1,11 @@
 ---
 id: T0284
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0284-add-a-view-header-component-for-a-screen
+worktree: .plan/work/T0284-add-a-view-header-component-for-a-screen
+status: active
+started_at: "2026-11-23T19:26:01Z"
 ended_at: —
 review: agent
 preview: none
