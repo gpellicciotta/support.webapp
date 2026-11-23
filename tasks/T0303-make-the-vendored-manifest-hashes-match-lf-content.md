@@ -1,11 +1,11 @@
 ---
 id: T0303
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0303-make-the-vendored-manifest-hashes-match-lf-content
+worktree: .plan/work/T0303-make-the-vendored-manifest-hashes-match-lf-content
+status: active
+started_at: "2026-11-23T15:04:39Z"
 ended_at: —
 review: agent
 preview: none
