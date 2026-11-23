@@ -1,6 +1,7 @@
 ---
 id: T0286
 owner: "@gemini"
+session: antigravity-20261123-e09e85
 needs: []
 branch: task/T0286-add-a-screen-action-bar-renderer-for-the
 worktree: .plan/work/T0286-add-a-screen-action-bar-renderer-for-the
@@ -22,14 +23,14 @@ Completion check: `python scripts/devops.py check`, with the new tests green.
 Size estimate: 4 files, 70 lines.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read the technical specification, the audit section, and the Auth source it cites.
-- [ ] **[Decide]**    Choose the module key and exported API, following naming.md and the ADR-0003 JavaScript approach.
-- [ ] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
-- [ ] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
-- [ ] **[Implement]** Add the screen action bar renderer, its contract entry, and a gallery or shell demo section.
-- [ ] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
-- [ ] **[Visual]**    Capture the screen action bar renderer across looks and themes at mobile and desktop width.
-- [ ] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
+- [x] **[Read]**      Read the technical specification, the audit section, and the Auth source it cites.
+- [x] **[Decide]**    Choose the module key and exported API, following naming.md and the ADR-0003 JavaScript approach.
+- [x] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
+- [x] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
+- [x] **[Implement]** Add the screen action bar renderer, its contract entry, and a gallery or shell demo section.
+- [x] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
+- [x] **[Visual]**    Capture the screen action bar renderer across looks and themes at mobile and desktop width.
+- [x] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -38,4 +39,25 @@ Size estimate: 4 files, 70 lines.
 
 - [2026-11-23] **[Doc]**
   Task fleshed out from the T0277 audit of Auth's webapp at commit eeb9439.
+
+- [2026-11-23] **[Decided]**
+  Chose key screen-action-bar with attachScreenActionBar in src/js/screen-action-bar.js.
+  - Uses data-screen-action-bar hooks and data-action attributes without style-class hooks.
+  - Demo integrates with SampleView in shell-portal.html.
+
+- [2026-11-23] **[Implement]**
+  Added src/js/screen-action-bar.js, contract entry, unit and browser tests, and portal demo integration.
+  - Also updated ADR-0003 and ADR-0004 (undeclared) per Doc step.
+
+- [2026-11-23] **[Visual]**
+  Captured and inspected before/after screenshots across neutral, warm, and bright looks, light/dark themes, mobile/desktop.
+  - Before: [before-shell-portal.png](T0286-add-a-screen-action-bar-renderer-for-the/before-shell-portal.png).
+  - After: [after-neutral-light-desktop.png](T0286-add-a-screen-action-bar-renderer-for-the/after-neutral-light-desktop.png), [after-neutral-dark-desktop.png](T0286-add-a-screen-action-bar-renderer-for-the/after-neutral-dark-desktop.png).
+  - Mobile: [after-neutral-light-mobile.png](T0286-add-a-screen-action-bar-renderer-for-the/after-neutral-light-mobile.png), [after-warm-dark-mobile.png](T0286-add-a-screen-action-bar-renderer-for-the/after-warm-dark-mobile.png), [after-bright-dark-mobile.png](T0286-add-a-screen-action-bar-renderer-for-the/after-bright-dark-mobile.png).
+
+- [2026-11-23] **[Verify]**
+  All lint, unit (2346), pytest (61), browser (974), integration (7), and pack checks passed.
+  - Files touched: 6.
+  - Lines touched: 132.
+  - Reopenings: 0.
 
