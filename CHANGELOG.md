@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.0-pre
+- Docs: Followed support.js v4.0.0, which dropped its UI; the comparison now links its stylesheets at commit `7738fab`.
 - Components: Added the entry list: log lines and events as spaced cards, with the message first and chips for time, severity, and source.
 
 ## v0.3.0 [released: 2026-11-23]

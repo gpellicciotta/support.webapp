@@ -45,7 +45,7 @@ Overview of all documentation for the `support.webapp` project.
 - [meteo](https://github.com/gpellicciotta/meteo): Weather forecast app, a first adopter.
 - auth.server: Identity service, to be redesigned later.
 - counters: Counters app, to be redesigned later.
-- [support.js](https://github.com/gpellicciotta/support.js): Shared JavaScript code and the older auth and counters styles.
+- [support.js](https://github.com/gpellicciotta/support.js): Shared non-UI JavaScript code; v4.0.0 dropped its stylesheets and UI components.
 
 ---
 

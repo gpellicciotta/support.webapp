@@ -1,6 +1,7 @@
 # UI Design Comparison
 How todos.webapp, family-portal, meteo, auth, and counters implement their UI design, from tokens to app shells.
 This comparison is the evidence base for the design system plan of T0002.
+support.js links pin commit `7738fab`, since its v4.0.0 removed the stylesheets and UI components.
 
 ---
 
@@ -39,14 +40,14 @@ This comparison is the evidence base for the design system plan of T0002.
 All sibling repositories were read at the commits below and left unchanged.
 Line numbers in links refer to these commits.
 
-| App             | Commit    | Web root  | Stylesheet entry point                                                  | Gallery                                                                                       | Style guide                                                                        | Depth     |
-| :-------------- | :-------- | :-------- | :---------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- | :-------- |
-| todos.webapp    | `dac760b` | `src/`    | [style.css](../../../todos.webapp/src/css/style.css#L10-L16)            | [visual-style-gallery.html](../../../todos.webapp/src/demo/visual-style-gallery.html)         | [visual-style-guide.md](../../../todos.webapp/docs/specs/visual-style-guide.md)    | full      |
-| family-portal   | `1953f75` | `webapp/` | [style.css](../../../family-portal/webapp/css/style.css#L13-L15)        | [visual-style-gallery.html](../../../family-portal/webapp/demo/visual-style-gallery.html)     | [visual-style-guide.md](../../../family-portal/docs/specs/visual-style-guide.md)   | full      |
-| meteo           | `8937c32` | root      | [style.css](../../../meteo/css/style.css)                               | absent                                                                                        | absent                                                                             | full      |
-| support.js      | `7738fab` | none      | none; partials import `style.css` each                                  | absent                                                                                        | [visual-style-guide.md](../../../support.js/docs/specs/visual-style-guide.md)      | tokens    |
-| auth            | `ef0c67f` | `webapp/` | [auth.css](../../../auth/webapp/css/auth.css#L4-L37)                    | absent; 16 demo harnesses                                                                     | absent; defers to support.js                                                       | reference |
-| counters.server | `cf13d8b` | `webapp/` | [counters.css](../../../counters.server/webapp/css/counters.css#L4-L41) | [design-system-gallery.html](../../../counters.server/webapp/demo/design-system-gallery.html) | [visual-style-guide.md](../../../counters.server/docs/specs/visual-style-guide.md) | reference |
+| App             | Commit    | Web root  | Stylesheet entry point                                                  | Gallery                                                                                       | Style guide                                                                                                        | Depth     |
+| :-------------- | :-------- | :-------- | :---------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------- | :-------- |
+| todos.webapp    | `dac760b` | `src/`    | [style.css](../../../todos.webapp/src/css/style.css#L10-L16)            | [visual-style-gallery.html](../../../todos.webapp/src/demo/visual-style-gallery.html)         | [visual-style-guide.md](../../../todos.webapp/docs/specs/visual-style-guide.md)                                    | full      |
+| family-portal   | `1953f75` | `webapp/` | [style.css](../../../family-portal/webapp/css/style.css#L13-L15)        | [visual-style-gallery.html](../../../family-portal/webapp/demo/visual-style-gallery.html)     | [visual-style-guide.md](../../../family-portal/docs/specs/visual-style-guide.md)                                   | full      |
+| meteo           | `8937c32` | root      | [style.css](../../../meteo/css/style.css)                               | absent                                                                                        | absent                                                                                                             | full      |
+| support.js      | `7738fab` | none      | none; partials import `style.css` each                                  | absent                                                                                        | [visual-style-guide.md](https://github.com/gpellicciotta/support.js/blob/7738fab/docs/specs/visual-style-guide.md) | tokens    |
+| auth            | `ef0c67f` | `webapp/` | [auth.css](../../../auth/webapp/css/auth.css#L4-L37)                    | absent; 16 demo harnesses                                                                     | absent; defers to support.js                                                                                       | reference |
+| counters.server | `cf13d8b` | `webapp/` | [counters.css](../../../counters.server/webapp/css/counters.css#L4-L41) | [design-system-gallery.html](../../../counters.server/webapp/demo/design-system-gallery.html) | [visual-style-guide.md](../../../counters.server/docs/specs/visual-style-guide.md)                                 | reference |
 
 Method:
 - Token counts come from a regex over `--name:` declarations, first definition per name.
@@ -69,7 +70,7 @@ Method:
 | todos.webapp uses an SVG sprite; family-portal uses inline stroke SVG icons       | Confirmed, with a nuance | todos.webapp: one [icons.svg](../../../todos.webapp/src/img/icons.svg) file. family-portal: a `<symbol>` block pasted into each template, used through `<use href="#icon-…">`.                    |
 
 Notes on the corrections:
-- The fork direction is reversed: support.js extracted 9 shared stylesheets from auth and counters in v1.0.0 ([CHANGELOG.md](../../../support.js/CHANGELOG.md#L53)).
+- The fork direction is reversed: support.js extracted 9 shared stylesheets from auth and counters in v1.0.0 ([CHANGELOG.md](https://github.com/gpellicciotta/support.js/blob/7738fab/CHANGELOG.md?plain=1#L53)).
   Most small diffs are support.js normalization the forks never took back.
 - support.js uses CRLF line endings in its working tree and the forks use LF, so byte comparison flags every file.
 - The 45-of-71 measurement method is unknown; no tier split or history state of [tokens.css](../../../todos.webapp/src/css/tokens.css) reproduces it.
@@ -95,8 +96,8 @@ Notes on the corrections:
   `data-season` redefines two accent tokens ([tokens.css](../../../family-portal/webapp/css/tokens.css#L281-L299)).
 - meteo: one tier with raw hex in role tokens ([style.css](../../../meteo/css/style.css#L9-L87)).
   Accent and dark blocks cover six combinations ([style.css](../../../meteo/css/style.css#L91-L206)), resolved by [theme.js](../../../meteo/js/theme.js#L10-L35).
-- support.js: the media query and the `data-theme` block repeat 19 dark values ([style.css](../../../support.js/css/style.css#L83-L130)).
-  Components sometimes reference primitives directly, such as `--form-text-color: var(--blue-hex)` ([forms.css](../../../support.js/css/forms.css#L14)).
+- support.js: the media query and the `data-theme` block repeat 19 dark values ([style.css](https://github.com/gpellicciotta/support.js/blob/7738fab/css/style.css#L83-L130)).
+  Components sometimes reference primitives directly, such as `--form-text-color: var(--blue-hex)` ([forms.css](https://github.com/gpellicciotta/support.js/blob/7738fab/css/forms.css#L14)).
 - Similarities: todos.webapp and family-portal resolve themes in CSS and keep the non-color scales as raw values in the semantic tier.
 - Differences that matter: meteo needs JavaScript for dark mode; the support.js lineage defines dark values twice.
 - **Reference:** todos.webapp, for its tier comments, fallback parity test, and smaller semantic set.
@@ -190,7 +191,7 @@ Same names do not mean same values:
 - meteo: blue, yellow, or red accent; rain colors follow the accent.
   White on yellow is 2.94:1 and was kept by a recorded decision ([T0027 spec](../../../meteo/.plan/tasks/archived/T0027-use-white-text-on-yellow-accent-buttons-in/technical-spec.md#L3-L4)).
   No contrast test exists.
-- support.js: a 17-hue palette with RGB triples for alpha mixing ([colors.css](../../../support.js/css/colors.css#L9-L42)).
+- support.js: a 17-hue palette with RGB triples for alpha mixing ([colors.css](https://github.com/gpellicciotta/support.js/blob/7738fab/css/colors.css#L9-L42)).
   Computed failures: muted text on the app background, 4.23:1; white on the warning tag, 2.94:1.
   White on the green tag reaches only 2.57:1.
 - auth added role tokens `--color-*` beside the ordinal names and fixed dark link contrast ([style.css](../../../auth/webapp/css/style.css#L56-L78)).
@@ -199,13 +200,13 @@ Same names do not mean same values:
 - **Verdict:** shared contract (role names, test rules); palettes are look-specific.
 
 ### Typography
-| App            | Families                                                                     | Loading                                                                                        | Scale                          | Line heights          |
-| :------------- | :--------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------- | :----------------------------- | :-------------------- |
-| todos.webapp   | Inter variable; system mono                                                  | self-hosted woff2, [fonts.css](../../../todos.webapp/src/css/fonts.css#L9-L15)                 | 5 steps, 0.75 to 1.375rem      | 1.25, 1.5 tokens      |
-| family-portal  | Outfit headings, DM Sans body; system mono                                   | self-hosted Fontsource woff2, [fonts.css](../../../family-portal/webapp/css/fonts.css#L12-L69) | 8 steps, two fluid `clamp()`   | 1.05, 1.3, 1.6 tokens |
-| meteo          | system stack ([style.css](../../../meteo/css/style.css#L218))                | none                                                                                           | 7 steps, 8 raw sizes bypass it | raw values only       |
-| support.js     | Roboto, Roboto Mono ([style.css](../../../support.js/css/style.css#L49-L52)) | left to the consumer                                                                           | none; about 40 literal sizes   | reset sets 1          |
-| auth, counters | Roboto                                                                       | Google Fonts, regular weight only                                                              | literal sizes                  | literal values        |
+| App            | Families                                                                                                          | Loading                                                                                        | Scale                          | Line heights          |
+| :------------- | :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------- | :----------------------------- | :-------------------- |
+| todos.webapp   | Inter variable; system mono                                                                                       | self-hosted woff2, [fonts.css](../../../todos.webapp/src/css/fonts.css#L9-L15)                 | 5 steps, 0.75 to 1.375rem      | 1.25, 1.5 tokens      |
+| family-portal  | Outfit headings, DM Sans body; system mono                                                                        | self-hosted Fontsource woff2, [fonts.css](../../../family-portal/webapp/css/fonts.css#L12-L69) | 8 steps, two fluid `clamp()`   | 1.05, 1.3, 1.6 tokens |
+| meteo          | system stack ([style.css](../../../meteo/css/style.css#L218))                                                     | none                                                                                           | 7 steps, 8 raw sizes bypass it | raw values only       |
+| support.js     | Roboto, Roboto Mono ([style.css](https://github.com/gpellicciotta/support.js/blob/7738fab/css/style.css#L49-L52)) | left to the consumer                                                                           | none; about 40 literal sizes   | reset sets 1          |
+| auth, counters | Roboto                                                                                                            | Google Fonts, regular weight only                                                              | literal sizes                  | literal values        |
 
 - Similarities: todos.webapp and family-portal self-host variable fonts with `font-display: swap` and precache them.
 - Differences that matter: auth and counters contact a third-party font service; heavier Roboto weights are likely synthesized.
@@ -219,7 +220,7 @@ Same names do not mean same values:
 - Borders: the strong border is 3 px in todos.webapp and 1.5 px in family-portal.
 - Shadows: two elevation levels in both new systems; family-portal tints them navy in light mode.
 - Layers: tokenized in todos.webapp, family-portal, and support.js; meteo uses raw 5, 20, 60, and 1000.
-  Raw values remain anyway: [todos app-chrome.css](../../../todos.webapp/src/css/app-chrome.css#L415), [family-portal components.css](../../../family-portal/webapp/css/components.css#L830), and [support.js progress.css](../../../support.js/css/progress.css#L93).
+  Raw values remain anyway: [todos app-chrome.css](../../../todos.webapp/src/css/app-chrome.css#L415), [family-portal components.css](../../../family-portal/webapp/css/components.css#L830), and [support.js progress.css](https://github.com/gpellicciotta/support.js/blob/7738fab/css/progress.css#L93).
 - Motion: both new systems zero durations under `prefers-reduced-motion` at token level.
   See [todos tokens.css](../../../todos.webapp/src/css/tokens.css#L185-L191) and [family-portal tokens.css](../../../family-portal/webapp/css/tokens.css#L353-L358).
   meteo, support.js, auth, and counters have no reduced-motion handling.
@@ -250,7 +251,7 @@ Same names do not mean same values:
 - family-portal: global box-shadow ring of 3 px ([components.css](../../../family-portal/webapp/css/components.css#L276-L280)).
   Five components use an outline with offset instead.
 - meteo: 11 `outline: none` rules; the primary button shows no ring at all ([style.css](../../../meteo/css/style.css#L403-L408)).
-- support.js: inputs get a 0.2-alpha ring ([forms.css](../../../support.js/css/forms.css#L147-L153)); buttons keep the browser outline.
+- support.js: inputs get a 0.2-alpha ring ([forms.css](https://github.com/gpellicciotta/support.js/blob/7738fab/css/forms.css#L147-L153)); buttons keep the browser outline.
 - Touch targets: todos.webapp and family-portal define `--target-min` as 2.75rem (44 px).
   Below 44 px: the todos.webapp sync badge at 18 px ([app-chrome.css](../../../todos.webapp/src/css/app-chrome.css#L411-L428)).
   Also below: meteo footer buttons at 38 px ([style.css](../../../meteo/css/style.css#L780-L781)) and the counters target token at 40 px.
@@ -269,7 +270,7 @@ Same names do not mean same values:
   Also `.link-button` and `.icon-button` with `--danger` ([components.css](../../../family-portal/webapp/css/components.css#L943-L1013)).
 - meteo: `.btn-primary`, circle footer buttons, and stacked close-button aliases ([style.css](../../../meteo/css/style.css#L396-L643)).
   No disabled or active styles.
-- support.js: element selectors on `button` with hover and disabled only ([forms.css](../../../support.js/css/forms.css#L225-L258)).
+- support.js: element selectors on `button` with hover and disabled only ([forms.css](https://github.com/gpellicciotta/support.js/blob/7738fab/css/forms.css#L225-L258)).
   counters added four archetypes with `:focus-visible` ([forms.css](../../../counters.server/webapp/css/forms.css#L685-L769)).
 - Similarities: todos.webapp and family-portal share the BEM API: `.button`, `--secondary`, `--danger`, and `.icon-button`.
 - Differences that matter: shape and fill colors; family-portal `--danger` is missing from its gallery.
@@ -285,7 +286,7 @@ Same names do not mean same values:
 - family-portal: the same block names without the counter ([components.css](../../../family-portal/webapp/css/components.css#L1257-L1322)).
   Validation lives per page, as in `survey-form.mjs`.
 - meteo: native `<select>` and checkboxes in `.config-field`; errors only as a `role="alert"` line.
-- support.js: `.input-group` grid with `.valid` and `.invalid` classes and `<i>` icons ([forms.css](../../../support.js/css/forms.css#L80-L197)).
+- support.js: `.input-group` grid with `.valid` and `.invalid` classes and `<i>` icons ([forms.css](https://github.com/gpellicciotta/support.js/blob/7738fab/css/forms.css#L80-L197)).
   It sets no ARIA, and `markInvalid` writes `innerHTML`.
 - Similarities: todos.webapp and family-portal share the markup contract almost exactly:
   ```html
@@ -348,7 +349,7 @@ Same names do not mean same values:
 - family-portal: Delete uses `confirm()` or an inline Delete and Keep question ([pages.mjs](../../../family-portal/webapp/portal/js/pages.mjs#L83-L98)).
   No undo after delete and no recycle bin.
 - meteo: none of these patterns.
-- support.js: `CollectionEditor` offers checkbox rows and bulk delete ([collection-editor.mjs](../../../support.js/src/collection-editor.mjs#L39-L59)).
+- support.js: `CollectionEditor` offers checkbox rows and bulk delete ([collection-editor.mjs](https://github.com/gpellicciotta/support.js/blob/7738fab/src/collection-editor.mjs#L39-L59)).
   Its checkbox is `display: none`, so selection works by pointer only.
 - counters: a recycle bin view ([recycle-bin-view.mjs](../../../counters.server/webapp/js/view/recycle-bin-view.mjs)) and multi-select through `CollectionEditor`.
 - **Reference:** todos.webapp, because it makes every delete reversible twice: Undo first, the bin later.
@@ -362,7 +363,7 @@ Same names do not mean same values:
 - family-portal: several unstyled or per-component empty messages; loading is text in the page header.
   `.widget--loading` with `aria-busy` exists only in the gallery.
 - meteo: a `role="status"` text line reports search and load progress.
-- support.js: skeleton classes, spinner, and a top progress bar ([component.css](../../../support.js/css/component.css#L87-L151)).
+- support.js: skeleton classes, spinner, and a top progress bar ([component.css](https://github.com/gpellicciotta/support.js/blob/7738fab/css/component.css#L87-L151)).
   The skeletons have no dark variant and no `aria-busy`.
 - **Reference:** todos.webapp for empty states, because it caps actions at two and documents the anatomy.
   No app offers an accessible loading reference.
@@ -422,7 +423,7 @@ Same names do not mean same values:
 - family-portal: one `<dialog>` opened with `showModal()` for widget parameters ([visual-editor.mjs](../../../family-portal/webapp/portal/js/visual-editor.mjs#L315-L316)).
   Other confirmations use `confirm()` or in-row questions.
 - meteo: no dialogs; About and Settings are full-window screens without focus management.
-- support.js: `Dialog` is a `div` overlay without role, focus trap, or Escape ([dialog.mjs](../../../support.js/src/dialog.mjs#L44-L78)).
+- support.js: `Dialog` is a `div` overlay without role, focus trap, or Escape ([dialog.mjs](https://github.com/gpellicciotta/support.js/blob/7738fab/src/dialog.mjs#L44-L78)).
   counters colors dialog buttons by matching their label text ([dialog.css](../../../counters.server/webapp/css/dialog.css#L179-L247)).
 - Reference anatomy, from todos.webapp; `openDialog` adds focus trap, Escape, and focus return:
   ```html
@@ -467,7 +468,7 @@ Same names do not mean same values:
   The header is hand-copied into all 14 portal templates ([page.html](../../../family-portal/webapp/portal/page.html#L34-L46)).
   A fixed footer, no sidebar, no bottom bar, and no floating action button.
 - meteo: three full-window screens with sticky header and footer ([index.html](../../../meteo/index.html#L44-L152)); a centered card from 640 px.
-- support.js lineage: a `#sticky-top`, `#content`, `#sticky-bottom` grid anchored on element IDs ([main-layout.css](../../../support.js/css/main-layout.css#L57-L165)).
+- support.js lineage: a `#sticky-top`, `#content`, `#sticky-bottom` grid anchored on element IDs ([main-layout.css](https://github.com/gpellicciotta/support.js/blob/7738fab/css/main-layout.css#L57-L165)).
   Actions move to the bottom bar on phones and to the header on desktop.
 - todos.webapp shell skeleton, one DOM for phone and desktop:
   ```html

@@ -16,7 +16,7 @@ The decisions behind each phase are in the [ADRs](adrs/ADR-0001-layer-model-and-
 2. Add the `warm` look from family-portal, which proves that the contract separates look from structure.
 3. Build the generator from the two adopted apps.
 4. Add the `bright` look from meteo and move meteo onto the system, dropping its quiz leftovers.
-5. Redesign and re-create auth and counters on the system, then retire the support.js styles.
+5. Redesign and re-create auth and counters on the system, off the retired support.js styles.
    auth follows the [auth redesign plan](plans/auth-redesign.md); counters.server T0272 plans counters.
 
 ---
@@ -138,13 +138,16 @@ Work in auth.server, as backlog tasks created there once the promotion is releas
 Work in todos.webapp and todos.server, after the same release:
 - Vendor the release, then swap the console's local components for the promoted ones.
 
-Work in counters.server and support.js, as counters.server T0272 proposes:
+Work in counters.server, as counters.server T0272 proposes:
 - Re-create counters on the system, with no support.js stylesheets left.
-- Retire the support.js stylesheets once no app loads them.
+
+support.js v4.0.0 retired its stylesheets and UI components on 2026-11-23, ahead of both apps.
+auth and counters keep support.js v3.1.0 or local copies until each is re-created.
+Its [client upgrade guide](https://github.com/gpellicciotta/support.js/blob/main/docs/specs/client-upgrade-guide.md) maps each removed module to this system.
 
 Exit criteria:
 - auth and counters run on the system and pass the conformance check.
-- support.js ships no stylesheets.
+- support.js ships no stylesheets: met by v4.0.0 on 2026-11-23.
 
 ---
 
