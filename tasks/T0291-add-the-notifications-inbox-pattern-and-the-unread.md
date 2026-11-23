@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 1800.5, input: 2432, output: 219}
+  worker: {turns: 2, duration_s: 1854.1, input: 466799, output: 82201, cache_read: 20420603}
 work_duration: 1811.8
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T23:04:07Z"
 ---
 # T0291: Add the notifications inbox pattern and the unread count button, promoted from Auth
 
@@ -77,4 +80,7 @@ Size estimate: 7 files, 220 lines.
 
 - [2026-11-24] **[Implement]**
   Implemented inbox.js, inbox.css, top-bar unread button styles in shell.css, contract entry, gallery and portal demos, and tests.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
