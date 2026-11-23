@@ -616,6 +616,8 @@ The shell defines placement areas without moving controls; see [ADR-0004](../adr
 - [collapsible.test.js](../../tests/unit/collapsible.test.js) and [account-menu.test.js](../../tests/unit/account-menu.test.js) check both modules in happy-dom.
 - [collapsible.spec.js](../../tests/e2e/collapsible.spec.js) and [account-menu.spec.js](../../tests/e2e/account-menu.spec.js) drive both by pointer and keyboard.
 - [app-nav.test.js](../../tests/unit/app-nav.test.js) checks the nav toggle's states, labels, drawer, and focus in happy-dom.
+- [pull-refresh.test.js](../../tests/unit/pull-refresh.test.js) checks the pull gesture, threshold, indicator, and inactive cases.
+- [pull-refresh.spec.js](../../tests/e2e/pull-refresh.spec.js) pulls the portal demo as an installed app and as a browser tab.
 - [shell.spec.js](../../tests/e2e/shell.spec.js) checks areas, scroll owners, sticky bars, widths, the nav toggle, and the side panel on each demo page.
 - [verify-ui.spec.js](../../tests/e2e/verify-ui.spec.js) is the browser verifier for contrast, layout, focus, and runtime failures.
 

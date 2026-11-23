@@ -6,7 +6,8 @@
  * - `<html data-pull-refresh>` lets shell.css set `overscroll-behavior-y: contain`, so no native reload drops app state;
  * - a one-finger pull that starts at the top of the page and of every scrolled ancestor, outside open popovers
  *   and dialogs, moves the indicator by half the dragged distance, up to 96 px;
- * - a release at 64 px or more calls `onRefresh`, and the indicator spins until its promise settles, for at least 400 ms.
+ * - a release at 64 px or more calls `onRefresh`, and the indicator spins until its promise settles, for at least 400 ms;
+ * - an upward move, a second finger, or a cancelled touch drops the pull without refreshing.
  * Touch events are used rather than pointer events, since browsers cancel a touch pointer once they take over the pan.
  * State lives in the indicator's `hidden` and `data-state` attributes; travel and progress are private properties.
  * Auth's installed SPA built the first version app-locally, in its task T0249.
@@ -101,8 +102,11 @@ export function attachPullRefresh(root, { onRefresh, container = root, media, la
      * @param {TouchEvent} event touchstart event
      */
     function onTouchStart(event) {
-        start = null;
-        const target = event.target;
+        if (start !== null) {
+            cancel(); // A second finger ends the pull.
+        }
+        // WebKit can report a text node as the target of a touch on text.
+        const target = event.target?.closest ? event.target : event.target?.parentElement;
         if (!query.matches || refreshing || event.touches.length !== 1 || !target?.closest) {
             return;
         }
@@ -122,9 +126,12 @@ export function attachPullRefresh(root, { onRefresh, container = root, media, la
             return;
         }
         const dragged = event.touches[0].clientY - start.y;
-        if (dragged <= 0 || !atTop(start.target)) {
-            start = null;
-            travel = 0;
+        if (dragged < 0 || !atTop(start.target)) {
+            cancel();
+            return;
+        }
+        if (dragged === 0) {
+            travel = 0; // Back at the start height, the pull stays alive.
             render();
             return;
         }
@@ -133,6 +140,24 @@ export function attachPullRefresh(root, { onRefresh, container = root, media, la
         }
         travel = Math.min(dragged * PULL_RATIO, MAX_TRAVEL);
         render();
+    }
+
+    /**
+     * Drop the current pull without refreshing, such as when a second finger lands or the system takes the touch.
+     */
+    function cancel() {
+        start = null;
+        travel = 0;
+        render();
+    }
+
+    /**
+     * Drop a pull whose touch the system took over.
+     */
+    function onTouchCancel() {
+        if (start !== null) {
+            cancel();
+        }
     }
 
     /**
@@ -169,7 +194,7 @@ export function attachPullRefresh(root, { onRefresh, container = root, media, la
     root.addEventListener('touchstart', onTouchStart, { passive: true });
     root.addEventListener('touchmove', onTouchMove, { passive: false });
     root.addEventListener('touchend', onTouchEnd);
-    root.addEventListener('touchcancel', onTouchEnd);
+    root.addEventListener('touchcancel', onTouchCancel);
     query.addEventListener?.('change', applyMode);
     applyMode();
 
@@ -178,7 +203,7 @@ export function attachPullRefresh(root, { onRefresh, container = root, media, la
             root.removeEventListener('touchstart', onTouchStart);
             root.removeEventListener('touchmove', onTouchMove);
             root.removeEventListener('touchend', onTouchEnd);
-            root.removeEventListener('touchcancel', onTouchEnd);
+            root.removeEventListener('touchcancel', onTouchCancel);
             query.removeEventListener?.('change', applyMode);
             doc.documentElement.removeAttribute('data-pull-refresh');
             indicator.remove();

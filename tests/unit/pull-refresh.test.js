@@ -168,6 +168,46 @@ describe('attachPullRefresh', () => {
         expect(onRefresh).not.toHaveBeenCalled();
     });
 
+    it('keeps a pull through a move that returns to the start height', () => {
+        const onRefresh = vi.fn();
+        controller = attachPullRefresh(document.body, { media: fakeMedia(true), onRefresh });
+        touch(main, 'touchstart', [100]);
+        touch(main, 'touchmove', [100]);
+        touch(main, 'touchmove', [160]);
+        touch(main, 'touchmove', [100]);
+        expect(touch(main, 'touchmove', [300]).defaultPrevented).toBe(true);
+        touch(main, 'touchend');
+        expect(onRefresh).toHaveBeenCalledTimes(1);
+    });
+
+    it('lets the indicator go when a second finger lands mid-pull', () => {
+        const onRefresh = vi.fn();
+        controller = attachPullRefresh(document.body, { container: overlays, media: fakeMedia(true), onRefresh });
+        const indicator = overlays.querySelector('.app__pull-indicator');
+        pull(main, 200, false);
+        expect(indicator.hidden).toBe(false);
+        touch(main, 'touchstart', [300, 320]);
+        expect(indicator.hidden).toBe(true);
+        touch(main, 'touchend');
+        expect(onRefresh).not.toHaveBeenCalled();
+    });
+
+    it('starts a pull on a text node, as WebKit reports touches on text', () => {
+        const onRefresh = vi.fn();
+        controller = attachPullRefresh(document.body, { media: fakeMedia(true), onRefresh });
+        pull(document.getElementById('text').firstChild, 200);
+        expect(onRefresh).toHaveBeenCalledTimes(1);
+    });
+
+    it('cancels an armed pull when the system takes the touch', () => {
+        const onRefresh = vi.fn();
+        controller = attachPullRefresh(document.body, { container: overlays, media: fakeMedia(true), onRefresh });
+        pull(main, 200, false);
+        touch(main, 'touchcancel');
+        expect(overlays.querySelector('.app__pull-indicator').hidden).toBe(true);
+        expect(onRefresh).not.toHaveBeenCalled();
+    });
+
     it('ignores two-finger touches', () => {
         const onRefresh = vi.fn();
         controller = attachPullRefresh(document.body, { media: fakeMedia(true), onRefresh });
