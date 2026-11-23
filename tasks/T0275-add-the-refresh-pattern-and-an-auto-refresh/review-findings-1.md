@@ -4,7 +4,7 @@ round: 1
 verdict: approved
 blocking: 0
 reviewer: "@gemini"
-reviewed_at: 2026-11-23T11:13:47Z
+reviewed_at: 2026-11-23T11:18:37Z
 reviewed_commit: "241dca0"
 base_commit: "2a630c0"
 branch: main
@@ -12,15 +12,13 @@ branch: main
 # Review Findings: Task T0275 (Round 1)
 
 ## Summary
-Approved. Commit `241dca0` promotes Auth's auto-refresh timing logic into `src/js/auto-refresh.js` (`attachAutoRefresh`), documents the Refresh pattern and user sharing-rule exception in `ADR-0003`, updates `components.md`, `naming.md`, `visual-style-guide.md`, and `CHANGELOG.md`, and wires the pattern into `src/demo/shell-portal.html` via `src/demo/shell-demo.js`.
+Approved. Commit `241dca0` promotes Auth's auto-refresh timing logic into `src/js/auto-refresh.js` and documents the Refresh pattern completely.
 
-Independent verification passed on the clean working tree:
-- `python scripts/devops.py lint`: Markdown lint (27 files), Ruff check/format, and ESLint all passed.
-- `python scripts/devops.py tests`: 61 pytest tests (1 skipped) and 2222 Vitest tests across 37 files (including all 9 tests in `tests/unit/auto-refresh.test.js`) passed.
-- `npx playwright test tests/e2e/shell.spec.js tests/e2e/pull-refresh.spec.js`: 174 passed, 22 skipped.
-- `npm run test:integration`: 7 tests across 3 files passed.
-- `npm pack --dry-run`: includes `src/js/auto-refresh.js` cleanly.
-- Visual captures in the companion directory show the portal demo status update and long-return toast cleanly in light and dark themes at 390 px and 1440 px.
+Verified deliverables:
+- `attachAutoRefresh` matches the contract in `technical-spec.md` and Auth's reference implementation at `c7129b8`.
+- `ADR-0003`, `components.md`, `naming.md`, `visual-style-guide.md`, and `CHANGELOG.md` document the pattern, utility, and sharing-rule override.
+- `shell-portal.html` and `shell-demo.js` wire auto-refresh alongside pull-to-refresh; before/after captures confirm both themes and viewports.
+- Independent verification passed: `devops.py lint`, `devops.py tests` (61 pytest, 2222 Vitest), `test:integration` (7), and Playwright shell/pull-refresh/smoke tests (178 passed).
 
 ## Defects
 None.
