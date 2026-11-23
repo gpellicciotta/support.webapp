@@ -85,7 +85,7 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
 - The help toggle is a real button with `aria-expanded` and `aria-controls`; the help text also sits in `aria-describedby`.
 - Invalid fields carry `aria-invalid`; pending checks carry `aria-busy` on the field and a status line.
 - Icon, text, and color together carry each state, never color alone; icons come from the shared sprite.
-- Validation runs on blur and on submit; server errors reach a field through the controller's `setError`.
+- Validation runs on blur and submit; a pointer blur waits for release, and server errors use `setError`.
 - After a failed submit, an error summary lists every invalid field as a link, and focus moves to it.
 - Messages reach screen readers through the live region.
 
@@ -105,6 +105,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   Apps pass `data-theme-switch-app`, optional `data-theme-switch-legacy-key`, and `load`/`save` callbacks, keeping account APIs out of the package.
 - **[Decided]** on 2026-11-23: `install-prompt` moved in from Auth, counters, and meteo as [install-prompt.js](../../src/js/install-prompt.js).
   It owns no button, tracks `beforeinstallprompt`, `appinstalled`, and standalone mode, and clears each single-use event in `prompt()`.
+- **[Decided]** on 2026-11-23: pointer-deferred blur validation moved into [field.js](../../src/js/field.js) from Auth's admin console.
+  A shared document pointer state holds blur checks until after release, and `attachForm` drops them on submit.
 
 ### Shared patterns
 Documented as contracts without components of their own:

@@ -155,6 +155,8 @@ The shell fixes it above bottom navigation and action bars, with safe-area spaci
 ### field
 Field. Every part except the label and the control is optional. The help text stays in `aria-describedby` while collapsed.
 `attachField` orders `aria-describedby` as hint, help, counter, status, and error, naming only visible status and error lines.
+A blur during a pointer press waits until after release, so a new error line cannot shift pressed buttons.
+Keyboard blur validates at once; calling `validate`, `clear`, or `setError` drops any held check.
 
 ```html
 <div class="field" data-field>
@@ -170,6 +172,10 @@ Field. Every part except the label and the control is optional. The help text st
   <p class="field__error" id="name-error"><svg class="icon" aria-hidden="true"><use href="icons.svg#icon-alert"/></svg>Enter a name.</p>
 </div>
 ```
+
+Upgrading an existing app:
+- Drop local pointer-blur wrappers such as Auth's `validatedField`; `attachField` and `createField` handle pointer releases directly.
+- Re-enable initial field autofocus where apps removed it to avoid lost button clicks on blur.
 
 ### checkbox
 Checkbox.

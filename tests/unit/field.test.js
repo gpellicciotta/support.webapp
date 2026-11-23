@@ -304,3 +304,92 @@ describe('review round 1 regressions', () => {
         expect(element.querySelector('.field__status').hidden).toBe(true);
     });
 });
+
+describe('pointer blur deferral', () => {
+    const pointer = (type) => doc.dispatchEvent(new window.Event(type, { bubbles: true }));
+    const blur = (control) => control.dispatchEvent(new window.FocusEvent('blur'));
+
+    beforeEach(() => vi.useFakeTimers());
+    afterEach(() => vi.useRealTimers());
+
+    it('holds blur validation during a pointer press until after pointerup or pointercancel', async () => {
+        const field = attachField(mount(SKELETON), { document: doc, announce: () => {}, messages: { valueMissing: 'Enter a name.' } });
+        pointer('pointerdown');
+        blur(field.control);
+        await Promise.resolve();
+        expect(field.error).toBe(null);
+        expect(field.control.hasAttribute('aria-invalid')).toBe(false);
+        pointer('pointerup');
+        // The release task dispatches click first; validation waits for the next task.
+        expect(field.error).toBe(null);
+        await vi.runAllTimersAsync();
+        expect(field.error).toBe('Enter a name.');
+        expect(field.control.getAttribute('aria-invalid')).toBe('true');
+
+        field.clear();
+        pointer('pointerdown');
+        blur(field.control);
+        expect(field.error).toBe(null);
+        pointer('pointercancel');
+        await vi.runAllTimersAsync();
+        expect(field.error).toBe('Enter a name.');
+    });
+
+    it('drops a held blur check when validate, clear, or setError runs before the release task', async () => {
+        const check = vi.fn(() => null);
+        const field = attachField(mount(SKELETON), { document: doc, announce: () => {}, messages: { valueMissing: 'Enter a name.' }, validate: check });
+
+        field.control.value = 'Steps';
+        pointer('pointerdown');
+        blur(field.control);
+        pointer('pointerup');
+        await field.validate();
+        await vi.runAllTimersAsync();
+        expect(check).toHaveBeenCalledTimes(1);
+
+        field.control.value = '';
+        pointer('pointerdown');
+        blur(field.control);
+        pointer('pointerup');
+        field.clear();
+        await vi.runAllTimersAsync();
+        expect(field.error).toBe(null);
+
+        pointer('pointerdown');
+        blur(field.control);
+        pointer('pointerup');
+        field.setError('Server rejected.');
+        await vi.runAllTimersAsync();
+        expect(field.error).toBe('Server rejected.');
+    });
+
+    it('validates a keyboard blur immediately and skips held checks if refocused, removed, or destroyed', async () => {
+        const element = mount(SKELETON);
+        const field = attachField(element, { document: doc, announce: () => {}, messages: { valueMissing: 'Enter a name.' } });
+        blur(field.control);
+        expect(field.error).toBe('Enter a name.');
+
+        field.clear();
+        pointer('pointerdown');
+        blur(field.control);
+        pointer('pointerup');
+        field.control.focus();
+        await vi.runAllTimersAsync();
+        expect(field.error).toBe(null);
+
+        pointer('pointerdown');
+        field.control.blur();
+        pointer('pointerup');
+        element.remove();
+        await vi.runAllTimersAsync();
+        expect(field.error).toBe(null);
+
+        doc.body.append(element);
+        pointer('pointerdown');
+        blur(field.control);
+        field.destroy();
+        pointer('pointerup');
+        await vi.runAllTimersAsync();
+        expect(field.error).toBe(null);
+    });
+});

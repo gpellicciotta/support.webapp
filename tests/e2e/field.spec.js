@@ -113,3 +113,28 @@ test('field groups are fieldsets with legends, and the field sections never over
         expect(overflow, id).toBeLessThanOrEqual(0);
     }
 });
+
+test('clicking submit from an empty required field still submits and then shows the error', async ({ page }) => {
+    const problems = await openGallery(page);
+    const form = page.locator('#form form[data-form]');
+    const name = form.locator('#form-name');
+    const nameError = form.locator('#form-name-error');
+    const save = form.getByRole('button', { name: 'Save' });
+    const summary = form.locator('.error-summary');
+
+    await save.scrollIntoViewIfNeeded();
+    await name.focus();
+    const box = await save.boundingBox();
+    // Press near the top edge of Save; an immediate blur error pushes Save below this point and loses the click.
+    await page.mouse.move(box.x + box.width / 2, box.y + 4);
+    await page.mouse.down();
+    await expect(nameError).toBeHidden();
+    expect((await save.boundingBox()).y).toBe(box.y);
+    await page.mouse.up();
+
+    await expect(summary).toBeVisible();
+    await expect(summary).toBeFocused();
+    await expect(name).toHaveAttribute('aria-invalid', 'true');
+    await expect(nameError).toBeVisible();
+    expect(problems).toEqual([]);
+});
