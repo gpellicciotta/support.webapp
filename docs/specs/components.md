@@ -71,7 +71,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 ### Feedback
 | Key           | Component       | Module and functions                   | Variants and states                          | Accessibility minimum                                        |
 | :------------ | :-------------- | :------------------------------------- | :------------------------------------------- | :----------------------------------------------------------- |
-| `toast`       | Toast           | `toast.js`: `createToast`              | message, with Undo, persistent; three tiers  | announced by the live region; holds while a modal is open    |
+| `toast`       | Toast           | `toast.js`: `createToast`              | message, Undo, download, persistent; 3 tiers | announced by the live region; holds while a modal is open    |
 | none, utility | Live region     | `live-region.js`: `createLiveRegion`   | polite, assertive                            | present at page load; text changes are announced             |
 | none, utility | Auto-refresh    | `auto-refresh.js`: `attachAutoRefresh` | poll while visible; return; long return      | no Refresh button; keeps typed input and selections          |
 | `banner`      | Banner          | none                                   | info, success, warning, danger               | `role="status"`, or `role="alert"` for danger                |
@@ -97,6 +97,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `icon`           | Icon           | `icon.js`: `createIcon`                                                                        | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                           |
 | `theme-switch`   | Theme switch   | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js` | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                                |
 | `install-prompt` | Install prompt | `install-prompt.js`: `attachInstallPrompt`                                                     | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
+| `file-download`  | File download  | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`       | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -644,10 +645,13 @@ The skeleton shows enhanced state; remove `hidden` for the readable, script-free
 
 ### toast
 Toast. The toast region sits in the shell's overlay layer; the live region announces the text.
+`toast.js` uses `file-download.js` when `download` (`{ json | blob | source | url, filename, label? }` or a `createFileDownload` handle) is passed, making the toast persistent by default.
+Its button carries `data-toast-action="download"`, ignores `Ctrl+Z`, and revokes its object URL when dismissed.
 
 ```html
 <div class="toast-region" role="region" aria-label="Notifications">
   <div class="toast"><p class="toast__text">Task deleted.</p><button class="button button--quiet" type="button" data-toast-action="undo">Undo</button></div>
+  <div class="toast"><p class="toast__text">Account export is ready.</p><button class="button button--quiet" type="button" data-toast-action="download">user-data.json</button></div>
 </div>
 ```
 
@@ -867,6 +871,25 @@ Upgrading an existing app:
 - Replace local `beforeinstallprompt`, `appinstalled`, and `standalone` handlers with `attachInstallPrompt` from [install-prompt.js](../../src/js/install-prompt.js).
 - Show or hide the app's install button from `onChange` and call `prompt()` from its click handler.
 - See the [portal shell demo](../../src/demo/shell-portal.html) for a wired `data-install-prompt-action` button.
+
+### file-download
+File download helper ([file-download.js](../../src/js/file-download.js)).
+Hands the viewer a JSON value or `Blob` as a named file through a temporary hidden `a[download]`.
+
+```html
+<button class="button button--secondary" type="button" data-file-download-json="sample-export.json">Download sample JSON</button>
+```
+
+- `downloadJson(value, filename, options)` formats JSON with two-space indentation and a trailing newline, clicks a temporary anchor, and revokes the URL after a short delay.
+- `downloadBlob(blob, filename, options)` and `downloadFile(source, filename, options)` download a `Blob` or JSON value the same way.
+- `downloadUrl(href, filename, options)` clicks a temporary `a[download]` for an existing URL without managing revocation.
+- `createFileDownload(source, filename, options)` returns `{ filename, blob, url, download, revoke, isRevoked, destroy }` to keep an object URL until dismissed.
+- Pass `{ download: { json, filename } }` or `{ download: { blob, filename } }` to `createToast().show()` for a persistent download toast that revokes its URL on dismiss.
+
+Upgrading an existing app:
+- Replace local helpers such as Auth admin's `saveJson` with `downloadJson`, `downloadBlob`, or `downloadFile` from [file-download.js](../../src/js/file-download.js).
+- Replace manual `urlsByNoteId` maps and notification-delete cleanup in Auth and counters account exports with `toast.js` `download` actions.
+- See the [File download section](../../src/demo/visual-style-gallery.html#file-download) of the gallery.
 
 ---
 

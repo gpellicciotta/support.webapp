@@ -14,6 +14,7 @@ import { attachMenu } from '../js/menu.js';
 import { attachPopover } from '../js/popover.js';
 import { attachTooltip } from '../js/tooltip.js';
 import { createLiveRegion } from '../js/live-region.js';
+import { downloadJson } from '../js/file-download.js';
 import { createToast } from '../js/toast.js';
 import { attachThemeSwitch } from '../js/theme-switch.js';
 export { applyTheme, themes } from '../js/theme-switch.js';
@@ -328,9 +329,10 @@ if (typeof document !== 'undefined' && document.querySelector('.gallery-main')) 
         }
         showFilter();
     });
+    const liveRegion = createLiveRegion();
     const toaster = createToast({
         region: document.getElementById('toast-demo-region'),
-        liveRegion: createLiveRegion(),
+        liveRegion,
         undoShortcut: true
     });
     const toastResult = document.querySelector('[data-toast-result]');
@@ -378,4 +380,23 @@ if (typeof document !== 'undefined' && document.querySelector('.gallery-main')) 
     const toastModal = document.getElementById('toast-modal');
     document.getElementById('toast-demo-modal').addEventListener('click', () => openDialog(toastModal));
     toastModal.querySelector('[data-toast-modal-delete]').addEventListener('click', deleteSample);
+    const downloadRegion = document.querySelector('[data-file-download-region]');
+    const downloadResult = document.querySelector('[data-file-download-result]');
+    if (downloadRegion) {
+        const downloadToaster = createToast({ region: downloadRegion, liveRegion, undoShortcut: true });
+        document.querySelector('[data-file-download-json]')?.addEventListener('click', (event) => {
+            const filename = event.currentTarget.dataset.fileDownloadJson;
+            downloadJson({ app: 'support.webapp', exportedAt: '2026-11-23T00:00:00Z' }, filename);
+            downloadResult.textContent = `Downloaded ${filename}.`;
+        });
+        document.querySelector('[data-file-download-toast]')?.addEventListener('click', (event) => {
+            const filename = event.currentTarget.dataset.fileDownloadToast;
+            downloadToaster.show('Account export is ready.', {
+                download: { json: { account: 'Alex North', exportedAt: '2026-11-23T00:00:00Z' }, filename },
+                onAction: () => {
+                    downloadResult.textContent = `Downloaded ${filename} from toast.`;
+                }
+            });
+        });
+    }
 }

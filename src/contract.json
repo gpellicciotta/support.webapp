@@ -935,6 +935,7 @@
     "account-menu",
     "icon",
     "theme-switch",
-    "install-prompt"
+    "install-prompt",
+    "file-download"
   ]
 }

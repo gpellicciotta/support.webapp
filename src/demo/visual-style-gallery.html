@@ -92,6 +92,7 @@
                     <li><a href="#detail-panel">Detail panel</a></li>
                     <li><a href="#progress">Progress</a></li>
                     <li><a href="#spinner">Spinner</a></li>
+                    <li><a href="#file-download">File download</a></li>
                     <li><a href="#theme-switch">Theme switch</a></li>
                 </ul>
             </nav>
@@ -1401,6 +1402,18 @@
                     <button class="button button--danger" type="button" data-toast-modal-delete>Delete sample task</button>
                 </div>
             </dialog>
+        </section>
+        <section id="file-download" class="gallery-section" aria-labelledby="file-download-title">
+            <h2 id="file-download-title">File download</h2>
+            <p>Hands the viewer a JSON value or blob as a named file, directly or from a persistent toast whose URL revokes on dismiss.</p>
+            <div class="toast-demo-actions">
+                <button class="button button--secondary" type="button" data-file-download-json="sample-export.json">Download sample JSON</button>
+                <button class="button button--secondary" type="button" data-file-download-toast="account-export.json">Show download toast</button>
+            </div>
+            <div class="card-specimens">
+                <div class="toast-region" data-file-download-region role="region" aria-label="Download notifications"></div>
+            </div>
+            <p data-file-download-result role="status">No file downloaded.</p>
         </section>
         <section id="avatar" class="gallery-section" aria-labelledby="avatar-title">
             <h2 id="avatar-title">Avatar</h2>
