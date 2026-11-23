@@ -7,6 +7,7 @@ import { attachAutoRefresh } from '../js/auto-refresh.js';
 import { attachInstallPrompt } from '../js/install-prompt.js';
 import { attachMenu } from '../js/menu.js';
 import { createLiveRegion } from '../js/live-region.js';
+import { attachNotices } from '../js/notices.js';
 import { attachPullRefresh } from '../js/pull-refresh.js';
 import { attachScreenActionBar } from '../js/screen-action-bar.js';
 import { createToast } from '../js/toast.js';
@@ -113,6 +114,68 @@ export function initShellDemo(doc, view) {
     const toaster = createToast({ document: doc, region: doc.querySelector('.app__overlays > .toast-region'), liveRegion: createLiveRegion({ document: doc }) });
     for (const button of doc.querySelectorAll('[data-demo-toast]')) {
         button.addEventListener('click', () => toaster.show(button.dataset.demoToast));
+    }
+    const noticeErrorButton = doc.querySelector('[data-demo-notice-error]');
+    const noticesBanners = noticeErrorButton ? doc.querySelector('body > .app__banners') : null;
+    if (noticesBanners) {
+        let inboxItems = [
+            {
+                id: 101,
+                type: 'info',
+                message: 'Placeholder maintenance window starts tonight at 22:00.',
+                banner: true,
+                'creation-time': '2026-11-23T18:00:00Z',
+                'action-url': '/demo/shell-portal.html#sample-calendar-title',
+                'action-label': 'View details'
+            },
+            {
+                id: 102,
+                type: 'info',
+                message: 'Placeholder backup check completes at 02:00.',
+                banner: true,
+                'creation-time': '2026-11-23T12:00:00Z'
+            }
+        ];
+        const notices = attachNotices(noticesBanners, {
+            document: doc,
+            toaster,
+            inboxHref: '/demo/shell-portal.html#sample-notices-title',
+            onDiscardInbox: (id) => {
+                inboxItems = inboxItems.filter((item) => item.id !== id);
+                notices.setInboxNotifications(inboxItems);
+            },
+            onNavigate: (href) => {
+                const hashIndex = href.indexOf('#');
+                if (hashIndex !== -1) {
+                    const hash = href.slice(hashIndex);
+                    doc.getElementById(hash.slice(1))?.scrollIntoView?.();
+                    if (doc.defaultView?.location) {
+                        doc.defaultView.location.hash = hash;
+                    }
+                }
+            }
+        });
+        notices.setInboxNotifications(inboxItems);
+        let errorCount = 0;
+        let warningCount = 0;
+        let infoCount = 0;
+        doc.querySelector('[data-demo-notice-error]')?.addEventListener('click', () => {
+            errorCount += 1;
+            notices.addNotification(`Sample connection error #${errorCount}.`, 'error');
+        });
+        doc.querySelector('[data-demo-notice-warning]')?.addEventListener('click', () => {
+            warningCount += 1;
+            notices.addNotification(`Sample storage warning #${warningCount}.`, 'warning');
+        });
+        doc.querySelector('[data-demo-notice-info]')?.addEventListener('click', () => {
+            infoCount += 1;
+            notices.addNotification(`Sample preference saved #${infoCount}.`, 'info');
+        });
+        doc.querySelector('[data-demo-notice-action]')?.addEventListener('click', () => {
+            notices.addNotification('A new sample version is ready.', 'info', {
+                action: { label: 'Reload', onClick: () => toaster.show('Sample reload started.') }
+            });
+        });
     }
     // Installed, a pull at the page top runs a sample refresh; browser tabs keep their own pull-down reload.
     if (doc.body.hasAttribute('data-demo-pull-refresh')) {

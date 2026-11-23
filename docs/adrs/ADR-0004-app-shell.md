@@ -25,6 +25,7 @@ Optional modules enhance the shell, and the areas never depend on them:
 - [view.js](../../src/js/view.js) is the base of views that load their own data, with a wait status and an error page.
 - [screen-action-bar.js](../../src/js/screen-action-bar.js) renders the screen actions of routed views in `.app__action-bar` and removes empty bars.
 - [action-registry.js](../../src/js/action-registry.js) manages app and view actions with enabled state, disabled reasons, events, and `data-action` click delegation.
+- [notices.js](../../src/js/notices.js) routes app and sticky inbox notifications to `.app__banners` and `.toast-region`.
 Its component key is `app`, following the naming rules of [naming.md](../specs/naming.md).
 
 Areas, each optional except the main area:

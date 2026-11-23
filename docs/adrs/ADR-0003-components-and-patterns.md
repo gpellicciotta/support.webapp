@@ -115,6 +115,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It renders routed-view buttons and links in `.app__action-bar`, blocks disabled links, shows disabled hints, and removes empty bars.
 - **[Decided]** on 2026-11-23: `action-registry` moved in from Auth's `App` and counters as [action-registry.js](../../src/js/action-registry.js).
   It manages action state, disabled reasons, events, and `data-action` clicks, leaving routing in an `onNavigate` callback.
+- **[Decided]** on 2026-11-23: `notices` moved in from Auth and counters as [notices.js](../../src/js/notices.js), using [toast.js](../../src/js/toast.js) and [icon.js](../../src/js/icon.js).
+  It routes app errors and warnings to at most three banners, other notices to toasts, and sticky inbox alerts via callbacks.
 
 ### Shared patterns
 Documented as contracts without components of their own:

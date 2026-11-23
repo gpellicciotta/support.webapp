@@ -938,6 +938,7 @@
     "install-prompt",
     "file-download",
     "screen-action-bar",
-    "action-registry"
+    "action-registry",
+    "notices"
   ]
 }

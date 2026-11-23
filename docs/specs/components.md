@@ -69,15 +69,16 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `tabs`          | Tabs          | `tabs.js`: `attachTabs`                                                                           | selected, disabled                                                | `tablist`, `tab`, and `tabpanel` roles; arrow keys          |
 
 ### Feedback
-| Key           | Component       | Module and functions                   | Variants and states                          | Accessibility minimum                                        |
-| :------------ | :-------------- | :------------------------------------- | :------------------------------------------- | :----------------------------------------------------------- |
-| `toast`       | Toast           | `toast.js`: `createToast`              | message, Undo, download, persistent; 3 tiers | announced by the live region; holds while a modal is open    |
-| none, utility | Live region     | `live-region.js`: `createLiveRegion`   | polite, assertive                            | present at page load; text changes are announced             |
-| none, utility | Auto-refresh    | `auto-refresh.js`: `attachAutoRefresh` | poll while visible; return; long return      | no Refresh button; keeps typed input and selections          |
-| `banner`      | Banner          | none                                   | info, success, warning, danger               | `role="status"`, or `role="alert"` for danger                |
-| `loading`     | Loading pattern | none                                   | busy region, status line, slow-list skeleton | `aria-busy`; polite status text; static under reduced motion |
-| `progress`    | Progress bar    | none                                   | determinate, indeterminate                   | native `progress` with a label                               |
-| `spinner`     | Spinner         | none                                   | sizes sm, md                                 | label in the status line; static under reduced motion        |
+| Key           | Component       | Module and functions                                                        | Variants and states                              | Accessibility minimum                                           |
+| :------------ | :-------------- | :-------------------------------------------------------------------------- | :----------------------------------------------- | :-------------------------------------------------------------- |
+| `toast`       | Toast           | `toast.js`: `createToast`                                                   | message, Undo, download, persistent; 3 tiers     | announced by the live region; holds while a modal is open       |
+| none, utility | Live region     | `live-region.js`: `createLiveRegion`                                        | polite, assertive                                | present at page load; text changes are announced                |
+| none, utility | Auto-refresh    | `auto-refresh.js`: `attachAutoRefresh`                                      | poll while visible; return; long return          | no Refresh button; keeps typed input and selections             |
+| `banner`      | Banner          | none                                                                        | info, success, warning, danger                   | `role="status"`, or `role="alert"` for danger                   |
+| `notices`     | Notices         | `notices.js`: `createNotices`, `attachNotices`, using `toast.js`, `icon.js` | app banners (cap 3), sticky inbox banner, toasts | `role="alert"` for errors, `role="status"` otherwise; safe URLs |
+| `loading`     | Loading pattern | none                                                                        | busy region, status line, slow-list skeleton     | `aria-busy`; polite status text; static under reduced motion    |
+| `progress`    | Progress bar    | none                                                                        | determinate, indeterminate                       | native `progress` with a label                                  |
+| `spinner`     | Spinner         | none                                                                        | sizes sm, md                                     | label in the status line; static under reduced motion           |
 
 ### Overlays
 | Key              | Component           | Module and functions                       | Variants and states                       | Accessibility minimum                              |
@@ -935,6 +936,39 @@ Upgrading an existing app:
 - Replace the action map, state methods, and `[data-action]` click handler in Auth's or counters' `App` with `createActionRegistry` or `attachActionRegistry` from [action-registry.js](../../src/js/action-registry.js).
 - Pass initial `APP_ACTIONS` in `options.actions`, wire `getScope: () => this.activeView?.id`, and pass `onNavigate: (href) => this.activateView(href, {}, 'navigate action')`.
 - Pair it with [screen-action-bar.js](../../src/js/screen-action-bar.js) and [view.js](../../src/js/view.js), as shown in the [portal shell demo](../../src/demo/shell-portal.html).
+
+### notices
+Notices router and notification store ([notices.js](../../src/js/notices.js)), using [toast.js](../../src/js/toast.js) and [icon.js](../../src/js/icon.js).
+Errors and warnings stay in `.app__banners` (at most three); other notices become toasts.
+
+```html
+<div class="app__banners" data-notices-banners>
+  <div class="banner banner--danger" role="alert" data-notices-banner data-notices-id="2" data-notices-source="inbox">
+    <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#icon-alert"/></svg>
+    <p class="banner__text"><strong>Outage:</strong> Service maintenance is underway.</p>
+    <a class="link-button" href="/notifications" data-notices-all>View all 3 alerts</a>
+    <a class="button button--quiet" href="/help" data-notices-action>Read more</a>
+    <button class="icon-button" type="button" data-notices-dismiss aria-label="Dismiss" title="Dismiss">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#icon-close"/></svg>
+    </button>
+  </div>
+</div>
+```
+
+- Call `createNotices(options)` or `attachNotices(banners, options)` after calling `setSpriteUrl`.
+- Store methods include `addNotification`, `deleteNotification`, `getNotifications`, `clearNotifications`, `setInboxNotifications`, `getInboxNotifications`, `getUnreadCount`, and `refreshInbox`.
+- Lifecycle methods include `dismissBanner`, `update`, `attach`, `detach`, `addEventListener`, `removeEventListener`, and `destroy`.
+- Pure helpers exported: `noticeKind`, `bannerVariant`, `bannerRole`, `pickBanner`, and `safeUrl`.
+- Store events exported: `NOTIFICATION_ADDED_EVENT`, `NOTIFICATION_DELETED_EVENT`, `NOTIFICATIONS_CLEARED_EVENT`, and `NOTIFICATIONS_UPDATED_EVENT`.
+- `pickBanner` picks the most severe, then newest, live sticky inbox notice and counts all active alerts.
+- Dismissing an app banner or toast deletes its notification; dismissing an inbox banner calls `onDiscardInbox`.
+- Action URLs must be same-origin paths or `http(s)` links; all text is built with DOM APIs.
+- Placeholder entries guard against duplicate toasts when overflow removes an older toast during `show()`.
+
+Upgrading an existing app:
+- Replace Auth's `app-notices.mjs` and `App` notification store, or counters' `app-notification-bar.mjs` and `toast-manager.mjs`, with [notices.js](../../src/js/notices.js).
+- Pass `onDiscardInbox`, `loadInbox`, `isSignedIn`, and `onNavigate` callbacks so API and routing stay app-local.
+- See the [portal shell demo](../../src/demo/shell-portal.html) for live error, warning, info, action, and sticky inbox notices.
 
 ---
 

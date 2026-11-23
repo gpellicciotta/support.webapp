@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Modules: Added [notices.js](src/js/notices.js) to route app and sticky inbox notifications to shell banners and toasts.
 - Modules: Added [action-registry.js](src/js/action-registry.js) to manage app and view actions, disabled reasons, state events, and `data-action` click delegation.
 - Modules: Added [screen-action-bar.js](src/js/screen-action-bar.js) to render routed view actions in `.app__action-bar`, with disabled hints and empty-bar removal.
 - Modules: Added [file-download.js](src/js/file-download.js) and persistent download actions in [toast.js](src/js/toast.js) that revoke URLs on dismiss.
