@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1497.0, input: 296674, output: 47919, cache_read: 11631957}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T17:58:11Z"
 ---
 # T0281: Add an install prompt module for installable apps, promoted from Auth, counters, and meteo
 
@@ -68,4 +73,7 @@ Size estimate: 3 files, 60 lines.
   - Files touched: 5.
   - Lines touched: 70.
   - Reopenings: 0.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
