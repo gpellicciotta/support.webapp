@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 1800.6, input: 2391, output: 95}
+  worker: {turns: 2, duration_s: 1828.3, input: 414128, output: 68556, cache_read: 21007671}
 work_duration: 1812.3
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T19:10:44Z"
 ---
 # T0283: Add Auth's shell additions to shell.css: sidebar end group, entry badges, hidden top bar parts, and banner dismiss
 
@@ -73,4 +76,7 @@ Size estimate: 4 files, 70 lines.
   - Files touched: 5.
   - Lines touched: 73.
   - Reopenings: 0.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
