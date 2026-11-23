@@ -146,7 +146,7 @@ Notifications follow three tiers, separating ongoing states, action feedback, an
 - Tier 1, banner: a lasting or urgent state, such as offline, an outage, or an account problem.
   Show the most severe banner only; danger banners alone use `role="alert"`.
 - Tier 2, toast: brief feedback on the user's own action, with Undo when the action can be reversed.
-- Tier 3, inbox: durable messages, such as broadcasts and finished exports; inboxes stay app-local.
+- Tier 3, inbox: durable messages, such as broadcasts and finished exports; use [inbox.js](../../src/js/inbox.js) and the [inbox section](../../src/demo/visual-style-gallery.html#inbox).
 - Toasts never enter the inbox, and banners never rotate on their own (WCAG 2.2.2).
 
 Use the [Toast section](../../src/demo/visual-style-gallery.html#toast) for the toast specimens and a working toaster.

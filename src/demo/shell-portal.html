@@ -17,6 +17,10 @@
             <ol><li><a href="#main">Home</a></li><li><a href="#main" aria-current="page">Calendar</a></li></ol>
         </nav>
         <div class="app__top-actions">
+            <a class="icon-button app__notifications-button" href="#sample-inbox-title" data-inbox-button aria-label="Notifications" title="Notifications">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bell"/></svg>
+                <span class="badge badge--count app__notifications-count" data-inbox-count aria-hidden="true" hidden></span>
+            </a>
             <a class="icon-button" href="#main" aria-label="Help"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-help"/></svg></a>
             <button class="icon-button" type="button" aria-label="Account"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg></button>
         </div>
@@ -73,6 +77,11 @@
                 <button class="button button--secondary" type="button" data-demo-notice-info>Raise info toast</button>
                 <button class="button button--secondary" type="button" data-demo-notice-action>Raise action toast</button>
             </div>
+        </section>
+        <section id="sample-inbox" class="gallery-section" aria-labelledby="sample-inbox-title">
+            <h2 id="sample-inbox-title">Notifications inbox</h2>
+            <p>Selectable notification rows backed by the notices store; marking rows read or discarding them updates the summary and the top-bar unread count button.</p>
+            <div class="inbox" data-inbox data-demo-inbox></div>
         </section>
         <section class="gallery-section" aria-labelledby="sample-calendar-title">
             <h2 id="sample-calendar-title">Sample calendar</h2>

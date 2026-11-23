@@ -4,6 +4,7 @@ import { initGallery } from './gallery.js';
 import { attachActionRegistry } from '../js/action-registry.js';
 import { attachAppNav } from '../js/app-nav.js';
 import { attachAutoRefresh } from '../js/auto-refresh.js';
+import { attachInbox, attachUnreadButton } from '../js/inbox.js';
 import { attachInstallPrompt } from '../js/install-prompt.js';
 import { attachMenu } from '../js/menu.js';
 import { createLiveRegion } from '../js/live-region.js';
@@ -122,7 +123,9 @@ export function initShellDemo(doc, view) {
             {
                 id: 101,
                 type: 'info',
+                title: 'Maintenance window',
                 message: 'Placeholder maintenance window starts tonight at 22:00.',
+                source: 'ops',
                 banner: true,
                 'creation-time': '2026-11-23T18:00:00Z',
                 'action-url': '/demo/shell-portal.html#sample-calendar-title',
@@ -131,30 +134,81 @@ export function initShellDemo(doc, view) {
             {
                 id: 102,
                 type: 'info',
+                title: 'Backup check',
                 message: 'Placeholder backup check completes at 02:00.',
+                source: 'ops',
                 banner: true,
                 'creation-time': '2026-11-23T12:00:00Z'
+            },
+            {
+                id: 103,
+                type: 'warning',
+                title: 'Storage quota',
+                message: 'Placeholder archive storage reached 80% capacity.',
+                source: 'storage',
+                banner: false,
+                'creation-time': '2026-11-23T10:30:00Z',
+                'action-url': '/demo/shell-portal.html#sample-calendar-title'
+            },
+            {
+                id: 104,
+                type: 'success',
+                title: 'Export ready',
+                message: 'Placeholder quarterly summary finished generating.',
+                source: 'exports',
+                banner: false,
+                'creation-time': '2026-11-22T09:15:00Z',
+                'read-time': '2026-11-22T10:00:00Z'
             }
         ];
+        const navigateHash = (href) => {
+            const hashIndex = href.indexOf('#');
+            if (hashIndex !== -1) {
+                const hash = href.slice(hashIndex);
+                doc.getElementById(hash.slice(1))?.scrollIntoView?.();
+                if (doc.defaultView?.location) {
+                    doc.defaultView.location.hash = hash;
+                }
+            }
+        };
         const notices = attachNotices(noticesBanners, {
             document: doc,
             toaster,
-            inboxHref: '/demo/shell-portal.html#sample-notices-title',
+            inboxHref: '/demo/shell-portal.html#sample-inbox-title',
             onDiscardInbox: (id) => {
                 inboxItems = inboxItems.filter((item) => item.id !== id);
                 notices.setInboxNotifications(inboxItems);
             },
-            onNavigate: (href) => {
-                const hashIndex = href.indexOf('#');
-                if (hashIndex !== -1) {
-                    const hash = href.slice(hashIndex);
-                    doc.getElementById(hash.slice(1))?.scrollIntoView?.();
-                    if (doc.defaultView?.location) {
-                        doc.defaultView.location.hash = hash;
+            onNavigate: navigateHash
+        });
+        const unreadButton = doc.querySelector('[data-inbox-button]');
+        if (unreadButton) {
+            attachUnreadButton(unreadButton, { notices });
+        }
+        const inboxHost = doc.querySelector('[data-demo-inbox]');
+        if (inboxHost) {
+            attachInbox(inboxHost, {
+                notices,
+                showHeader: false,
+                onNavigate: navigateHash,
+                onAction: ({ action, ids }) => {
+                    const targetIds = new Set(ids);
+                    if (action === 'mark-read') {
+                        const readTime = new Date().toISOString();
+                        inboxItems = inboxItems.map((item) => (targetIds.has(item.id) ? { ...item, 'read-time': readTime } : item));
+                        notices.setInboxNotifications(inboxItems);
+                    }
+                    else if (action === 'discard') {
+                        inboxItems = inboxItems.filter((item) => !targetIds.has(item.id));
+                        notices.setInboxNotifications(inboxItems);
+                    }
+                    else if (action === 'discard-all') {
+                        inboxItems = [];
+                        notices.setInboxNotifications(inboxItems);
                     }
                 }
-            }
-        });
+            });
+        }
         notices.setInboxNotifications(inboxItems);
         let errorCount = 0;
         let warningCount = 0;

@@ -26,11 +26,12 @@ Optional modules enhance the shell, and the areas never depend on them:
 - [screen-action-bar.js](../../src/js/screen-action-bar.js) renders the screen actions of routed views in `.app__action-bar` and removes empty bars.
 - [action-registry.js](../../src/js/action-registry.js) manages app and view actions with enabled state, disabled reasons, events, and `data-action` click delegation.
 - [notices.js](../../src/js/notices.js) routes app and sticky inbox notifications to `.app__banners` and `.toast-region`.
+- [inbox.js](../../src/js/inbox.js) renders the notifications inbox and drives the top-bar `app__notifications-button` and `app__notifications-count` badge.
 Its component key is `app`, following the naming rules of [naming.md](../specs/naming.md).
 
 Areas, each optional except the main area:
 - Top bar: a nav toggle, title or brand, a menu button or breadcrumb, and account actions.
-  Its parts are `app__nav-toggle`, `app__title`, `app__brand`, `app__brand-logo`, `app__menu-button`, `app__breadcrumb`, and `app__top-actions`.
+  Its parts are `app__nav-toggle`, `app__title`, `app__brand`, `app__brand-logo`, `app__menu-button`, `app__breadcrumb`, `app__top-actions`, `app__notifications-button`, and `app__notifications-count`.
   Setting `hidden` on a top bar part hides it despite its display rule, while sparing `hidden="until-found"`.
 - Navigation: a sidebar on wide screens, a bottom bar on narrow screens, or both.
   An `app__nav-list--end` list pins to the sidebar bottom in every state, and a `.badge` sits at an `app__nav-item` end.

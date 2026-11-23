@@ -1548,6 +1548,50 @@
                 </div>
             </fieldset>
         </section>
+        <section id="inbox" class="gallery-section" aria-labelledby="inbox-title">
+            <h2 id="inbox-title">Notifications inbox</h2>
+            <p>Selectable notification rows with type badges, unread marks, source and time chips, row actions, and a top-bar unread count button capped at 99+. Try the interactive inbox in the <a href="shell-portal.html#sample-inbox-title">portal shell demo</a>.</p>
+            <h3>Unread count button states</h3>
+            <ul class="states">
+                <li class="state"><button class="icon-button app__notifications-button" type="button" aria-label="Notifications" title="Notifications"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bell"/></svg><span class="badge badge--count app__notifications-count" aria-hidden="true" hidden></span></button><span class="state__label">No unread</span></li>
+                <li class="state"><button class="icon-button app__notifications-button" type="button" aria-label="Notifications, 3 unread notifications" title="Notifications, 3 unread notifications"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bell"/></svg><span class="badge badge--count app__notifications-count" aria-hidden="true">3</span></button><span class="state__label">3 unread</span></li>
+                <li class="state"><button class="icon-button app__notifications-button" type="button" aria-label="Notifications, 99+ unread notifications" title="Notifications, 99+ unread notifications"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bell"/></svg><span class="badge badge--count app__notifications-count" aria-hidden="true">99+</span></button><span class="state__label">Capped 99+</span></li>
+                <li class="state"><a class="icon-button app__notifications-button" href="#inbox" aria-current="page" aria-label="Notifications, 2 unread notifications" title="Notifications, 2 unread notifications"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bell"/></svg><span class="badge badge--count app__notifications-count" aria-hidden="true">2</span></a><span class="state__label">Current page</span></li>
+            </ul>
+            <h3>Inbox rows</h3>
+            <div class="inbox">
+                <p class="view-header__text">1 unread · 2 total</p>
+                <ul class="list row__list inbox__list" role="list" aria-label="Sample notifications">
+                    <li class="row inbox__item inbox__item--unread" data-inbox-unread="true">
+                        <label class="inbox__select"><input class="selection__control" type="checkbox"><span class="visually-hidden">Select Storage warning</span></label>
+                        <span class="row__main inbox__main">
+                            <span class="inbox__heading"><span class="inbox__title">Storage warning</span><span class="badge badge--warning">Warning</span><span class="badge inbox__unread">Unread</span></span>
+                            <p class="inbox__message">Placeholder archive storage reached 80% capacity.</p>
+                            <span class="inbox__meta"><span class="chip">storage</span><span class="chip" title="2026-11-23 10:30"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg><time datetime="2026-11-23T10:30:00Z">2 hours ago</time></span></span>
+                        </span>
+                        <span class="row__actions inbox__actions">
+                            <a class="button button--secondary button--small" href="#inbox" aria-label="Open: Storage warning">Open</a>
+                            <button class="button button--secondary button--small" type="button" aria-label="Mark Read: Storage warning">Mark Read</button>
+                            <button class="button button--secondary button--danger button--small" type="button" aria-label="Discard: Storage warning">Discard</button>
+                        </span>
+                    </li>
+                    <li class="row inbox__item">
+                        <label class="inbox__select"><input class="selection__control" type="checkbox"><span class="visually-hidden">Select Export ready</span></label>
+                        <span class="row__main inbox__main">
+                            <span class="inbox__heading"><span class="inbox__title">Export ready</span><span class="badge badge--success">Success</span></span>
+                            <p class="inbox__message">Placeholder quarterly summary finished generating.</p>
+                            <span class="inbox__meta"><span class="chip">exports</span><span class="chip" title="2026-11-22 09:15"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg><time datetime="2026-11-22T09:15:00Z">Yesterday</time></span></span>
+                        </span>
+                        <span class="row__actions inbox__actions">
+                            <button class="button button--secondary button--danger button--small" type="button" aria-label="Discard: Export ready">Discard</button>
+                        </span>
+                    </li>
+                </ul>
+                <div class="inbox__footer">
+                    <button class="button button--secondary button--danger" type="button">Discard All</button>
+                </div>
+            </div>
+        </section>
         <section id="accents" class="gallery-section" aria-labelledby="accents-title">
             <h2 id="accents-title">Bright accents</h2>
             <p>Bright changes action fills and labels through wrapper accents. Other looks retain their own actions.</p>

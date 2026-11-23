@@ -69,16 +69,17 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `tabs`          | Tabs          | `tabs.js`: `attachTabs`                                                                           | selected, disabled                                                | `tablist`, `tab`, and `tabpanel` roles; arrow keys          |
 
 ### Feedback
-| Key           | Component       | Module and functions                                                        | Variants and states                              | Accessibility minimum                                           |
-| :------------ | :-------------- | :-------------------------------------------------------------------------- | :----------------------------------------------- | :-------------------------------------------------------------- |
-| `toast`       | Toast           | `toast.js`: `createToast`                                                   | message, Undo, download, persistent; 3 tiers     | announced by the live region; holds while a modal is open       |
-| none, utility | Live region     | `live-region.js`: `createLiveRegion`                                        | polite, assertive                                | present at page load; text changes are announced                |
-| none, utility | Auto-refresh    | `auto-refresh.js`: `attachAutoRefresh`                                      | poll while visible; return; long return          | no Refresh button; keeps typed input and selections             |
-| `banner`      | Banner          | none                                                                        | info, success, warning, danger                   | `role="status"`, or `role="alert"` for danger                   |
-| `notices`     | Notices         | `notices.js`: `createNotices`, `attachNotices`, using `toast.js`, `icon.js` | app banners (cap 3), sticky inbox banner, toasts | `role="alert"` for errors, `role="status"` otherwise; safe URLs |
-| `loading`     | Loading pattern | none                                                                        | busy region, status line, slow-list skeleton     | `aria-busy`; polite status text; static under reduced motion    |
-| `progress`    | Progress bar    | none                                                                        | determinate, indeterminate                       | native `progress` with a label                                  |
-| `spinner`     | Spinner         | none                                                                        | sizes sm, md                                     | label in the status line; static under reduced motion           |
+| Key           | Component           | Module and functions                                                                                                                | Variants and states                                                           | Accessibility minimum                                                  |
+| :------------ | :------------------ | :---------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------- | :--------------------------------------------------------------------- |
+| `toast`       | Toast               | `toast.js`: `createToast`                                                                                                           | message, Undo, download, persistent; 3 tiers                                  | announced by the live region; holds while a modal is open              |
+| none, utility | Live region         | `live-region.js`: `createLiveRegion`                                                                                                | polite, assertive                                                             | present at page load; text changes are announced                       |
+| none, utility | Auto-refresh        | `auto-refresh.js`: `attachAutoRefresh`                                                                                              | poll while visible; return; long return                                       | no Refresh button; keeps typed input and selections                    |
+| `banner`      | Banner              | none                                                                                                                                | info, success, warning, danger                                                | `role="status"`, or `role="alert"` for danger                          |
+| `notices`     | Notices             | `notices.js`: `createNotices`, `attachNotices`, using `toast.js`, `icon.js`                                                         | app banners (cap 3), sticky inbox banner, toasts                              | `role="alert"` for errors, `role="status"` otherwise; safe URLs        |
+| `inbox`       | Notifications inbox | `inbox.js`: `createInbox`, `attachInbox`, `createUnreadButton`, `attachUnreadButton`, using `selection.js`, `notices.js`, `icon.js` | selectable rows, unread edge and badge, bulk actions, empty state, 99+ button | 44 px checkbox labels; disambiguated row actions; count in button name |
+| `loading`     | Loading pattern     | none                                                                                                                                | busy region, status line, slow-list skeleton                                  | `aria-busy`; polite status text; static under reduced motion           |
+| `progress`    | Progress bar        | none                                                                                                                                | determinate, indeterminate                                                    | native `progress` with a label                                         |
+| `spinner`     | Spinner             | none                                                                                                                                | sizes sm, md                                                                  | label in the status line; static under reduced motion                  |
 
 ### Overlays
 | Key              | Component           | Module and functions                       | Variants and states                       | Accessibility minimum                              |
@@ -108,7 +109,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | Task row, recycle bin screen                  | app-local                                                                         |
 | Forecast chart                                | domain-specific visualization; provide an accessible text equivalent              |
 | Reaction toggle, drag handles, avatar cropper | app-specific interactions requiring their own keyboard and accessibility behavior |
-| Inbox panel, Web Push                         | app-local, connected features                                                     |
+| Web Push                                      | app-local, connected feature                                                      |
 | Slider, date picker, file upload, combobox    | no adopter needs them; they enter under the sharing rule                          |
 
 ---
@@ -970,6 +971,67 @@ Upgrading an existing app:
 - Pass `onDiscardInbox`, `loadInbox`, `isSignedIn`, and `onNavigate` callbacks so API and routing stay app-local.
 - See the [portal shell demo](../../src/demo/shell-portal.html) for live error, warning, info, action, and sticky inbox notices.
 
+### inbox
+Notifications inbox and top-bar unread button ([inbox.js](../../src/js/inbox.js), [inbox.css](../../src/css/components/inbox.css), [shell.css](../../src/css/shell.css)).
+Uses [selection.js](../../src/js/selection.js), [notices.js](../../src/js/notices.js), and [icon.js](../../src/js/icon.js).
+
+```html
+<a class="icon-button app__notifications-button" href="/notifications" data-inbox-button aria-label="Notifications, 3 unread notifications" title="Notifications, 3 unread notifications">
+  <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#icon-bell"/></svg>
+  <span class="badge badge--count app__notifications-count" data-inbox-count aria-hidden="true">3</span>
+</a>
+<div class="inbox" data-inbox>
+  <header class="view-header">
+    <h1 class="view-header__title">Notifications</h1>
+    <p class="view-header__text" role="status" data-inbox-summary>1 unread · 2 total</p>
+  </header>
+  <p class="loading__status inbox__loading" role="status" aria-live="polite" data-inbox-loading hidden>Loading notifications…</p>
+  <div class="empty-state inbox__empty" data-inbox-empty hidden>...</div>
+  <fieldset class="selection inbox__selection" data-selection-root data-inbox-selection tabindex="-1">
+    <legend class="visually-hidden">Notifications</legend>
+    <label class="selection__row"><input class="selection__control" type="checkbox" data-selection-all> Select all</label>
+    <ul class="list row__list inbox__list" role="list" aria-label="Notifications" data-inbox-list>
+      <li class="row inbox__item inbox__item--unread" data-inbox-item="1" data-inbox-unread="true">
+        <label class="inbox__select"><input class="selection__control" type="checkbox" data-selection-item value="1"><span class="visually-hidden">Select Storage</span></label>
+        <span class="row__main inbox__main">
+          <span class="inbox__heading"><span class="inbox__title">Storage</span><span class="badge badge--warning">Warning</span><span class="badge inbox__unread" data-inbox-unread-badge>Unread</span></span>
+          <p class="inbox__message">Archive storage reached 80% capacity.</p>
+          <span class="inbox__meta"><span class="chip" data-inbox-source>storage</span><span class="chip" title="2026-11-23 10:30"><svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#icon-clock"/></svg><time datetime="2026-11-23T10:30:00Z">2h ago</time></span></span>
+        </span>
+        <span class="row__actions inbox__actions">
+          <a class="button button--secondary button--small" href="/storage" data-inbox-action="open" aria-label="Open: Storage">Open</a>
+          <button class="button button--secondary button--small" type="button" data-inbox-action="mark-read" aria-label="Mark Read: Storage">Mark Read</button>
+          <button class="button button--secondary button--danger button--small" type="button" data-inbox-action="discard" aria-label="Discard: Storage">Discard</button>
+        </span>
+      </li>
+    </ul>
+    <p class="selection__count inbox__count" data-selection-count role="status" aria-live="polite" aria-atomic="true">0 selected</p>
+    <div class="selection__bar" data-selection-bar role="group" aria-label="Bulk actions" hidden>
+      <button class="button button--secondary" type="button" data-selection-action="mark-read">Mark Read</button>
+      <button class="button button--danger" type="button" data-selection-action="discard">Discard</button>
+      <button class="button button--quiet" type="button" data-selection-clear>Clear Selection</button>
+    </div>
+  </fieldset>
+  <div class="inbox__footer">
+    <button class="button button--secondary button--danger" type="button" data-inbox-discard-all>Discard All</button>
+  </div>
+</div>
+```
+
+- Call `createInbox(doc, options)` or `attachInbox(root, options)` after calling `setSpriteUrl`.
+- Controller methods: `setNotifications`, `getNotifications`, `setLoading`, `getSelectedIds`, `clearSelection`, `refresh`, and `destroy`.
+- Call `createUnreadButton(doc, options)` or `attachUnreadButton(button, options)` for the top-bar button.
+- Unread button methods: `setCount`, `getCount`, `setRoute`, and `destroy`; both badge and accessible name cap at `99+`.
+- Pass `options.notices` from [notices.js](../../src/js/notices.js) so rows and unread counts stay synchronized automatically.
+- Actions emit bubbling `inbox:action` (`INBOX_ACTION_EVENT`) with `{ action, ids, notifications, scope }`; bulk `mark-read` skips already-read rows.
+- Same-origin `Open` links emit cancelable `inbox:navigate` (`INBOX_NAVIGATE_EVENT`) and invoke `options.onNavigate`; unsafe URLs are omitted.
+- Pure helpers exported: `isUnread`, `inboxTypeBadge`, `formatUnreadCount`, `formatUnreadLabel`, and `formatInboxSummary`.
+
+Upgrading an existing app:
+- Replace Auth's `notifications-view.mjs` rendering and `app.css` inbox and unread button styles, or counters' `notifications-view.mjs`, with [inbox.js](../../src/js/inbox.js).
+- Wire `attachUnreadButton` and `attachInbox` to your [notices.js](../../src/js/notices.js) store and handle `inbox:action` with your API client.
+- See the [Notifications inbox section](../../src/demo/visual-style-gallery.html#inbox) and the interactive [portal shell demo](../../src/demo/shell-portal.html#sample-inbox-title).
+
 ---
 
 ## Page Base
@@ -1005,10 +1067,12 @@ Shell additions in [shell.css](../../src/css/shell.css):
 - Hidden top bar parts: setting `hidden` on any part inside `app__top-bar` hides it despite shell or component display rules.
   Elements with `hidden="until-found"` keep their box, matching [page.css](../../src/css/page.css).
 - Banner dismiss: a direct `.icon-button` inside `.app__banners .banner` stays at the banner end, even on a wrapped line.
+- Unread count button: place `.icon-button.app__notifications-button` with `.badge.badge--count.app__notifications-count` inside `.app__top-actions`.
+  Drive it with `attachUnreadButton` from [inbox.js](../../src/js/inbox.js); its badge and accessible name cap at `99+`.
 
 Upgrading an existing app:
 - Replace app-local `.app__sidebar > .nav-end` markup and CSS with `<ul class="app__nav-list app__nav-list--end">`.
-- Remove app-local rules for `.app__nav-item .badge`, `.app__brand` gap, `.app__brand-logo`, `.app__top-bar [hidden]`, and `.app__banners .banner > .icon-button`.
+- Remove app-local rules for `.app__nav-item .badge`, `.app__brand` gap, `.app__brand-logo`, `.app__top-bar [hidden]`, `.app__notifications-button`, `.app__notifications-count`, and `.app__banners .banner > .icon-button`.
 
 ### Workspace with sidebar and bottom navigation
 Use every area, with sidebar and bottom navigation; the main column scrolls.

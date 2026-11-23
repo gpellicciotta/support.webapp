@@ -939,6 +939,7 @@
     "file-download",
     "screen-action-bar",
     "action-registry",
-    "notices"
+    "notices",
+    "inbox"
   ]
 }

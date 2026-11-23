@@ -196,6 +196,27 @@
   margin-inline-start: auto;
 }
 
+/* Unread count button in the top bar: badge sits at the top end; the button's accessible name carries the count. */
+.app__notifications-button {
+  position: relative;
+}
+
+.app__notifications-button[aria-current='page'] {
+  background-color: var(--color-surface-selected);
+  color: var(--color-primary);
+}
+
+.app__notifications-count {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  padding-inline: var(--space-1);
+  border-color: var(--color-surface);
+  background-color: var(--color-danger);
+  color: var(--color-on-danger);
+  pointer-events: none;
+}
+
 /* Top bar parts hidden by a layout stay hidden even where the shell or a component sets display. */
 .app__top-bar [hidden]:not([hidden='until-found' i]) {
   display: none;

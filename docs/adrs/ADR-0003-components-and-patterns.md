@@ -117,6 +117,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It manages action state, disabled reasons, events, and `data-action` clicks, leaving routing in an `onNavigate` callback.
 - **[Decided]** on 2026-11-23: `notices` moved in from Auth and counters as [notices.js](../../src/js/notices.js), using [toast.js](../../src/js/toast.js) and [icon.js](../../src/js/icon.js).
   It routes app errors and warnings to at most three banners, other notices to toasts, and sticky inbox alerts via callbacks.
+- **[Decided]** on 2026-11-23: `inbox` moved in from Auth and counters as [inbox.js](../../src/js/inbox.js) and [inbox.css](../../src/css/components/inbox.css), with top-bar unread button styles in [shell.css](../../src/css/shell.css).
+  It reuses [selection.js](../../src/js/selection.js), [notices.js](../../src/js/notices.js), and [icon.js](../../src/js/icon.js), emitting action events so apps keep APIs local.
 
 ### Shared patterns
 Documented as contracts without components of their own:
