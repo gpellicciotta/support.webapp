@@ -204,6 +204,9 @@ Components reference only core ids; apps may add local glyphs in their own sprit
 **[Decided]** The core list adds `icon-nav-menu`, three horizontal lines, for the shell's nav toggle.
 - `icon-menu`: rejected, because the warm look already draws a utensils glyph under that id.
 
+**[Decided]** with the user on 2026-11-23: the core list adds `icon-refresh`, one clockwise arrowed arc, for pull-to-refresh.
+- `icon-sync-syncing`: rejected, because its two arrows mean a sync in progress, not a refresh.
+
 ### Focus
 - One global `:focus-visible` glow marks focus, from [reset.css](../../src/css/reset.css).
 - The glow is a solid `--focus-ring-width` contour in `--color-focus`, plus a soft halo at 20% of that color.

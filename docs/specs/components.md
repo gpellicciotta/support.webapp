@@ -878,7 +878,7 @@ Installed apps add it to any setup with `attachPullRefresh(root, { onRefresh, co
 - A one-finger pull at the top of the page and every scrolled ancestor, outside open dialogs and popovers, starts it.
 - A release at 64 px or more calls `onRefresh`; the indicator spins until its promise settles, for at least 400 ms.
 - The module appends the indicator to `container`, normally the overlay layer, and announces "Refreshing" politely.
-- Call `setSpriteUrl` first; the indicator draws `icon-sync-syncing` unless `icon` names another glyph.
+- Call `setSpriteUrl` first; the indicator draws the core `icon-refresh` unless `icon` names another glyph.
 
 ```html
 <html data-pull-refresh>

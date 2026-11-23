@@ -32,10 +32,10 @@ const DEFAULT_LABELS = { refreshing: 'Refreshing' };
  * @param {{matches: boolean, addEventListener?: Function, removeEventListener?: Function}} [options.media]
  *   whether the app runs installed; `matchMedia('(display-mode: standalone)')` by default
  * @param {{refreshing?: string}} [options.labels] the announcement when a refresh starts
- * @param {string} [options.icon] the indicator's sprite glyph, `sync-syncing` by default; set the sprite url first
+ * @param {string} [options.icon] the indicator's sprite glyph, the core `refresh` by default; set the sprite url first
  * @returns {{destroy: () => void}} the controller
  */
-export function attachPullRefresh(root, { onRefresh, container = root, media, labels = {}, icon = 'sync-syncing' } = {}) {
+export function attachPullRefresh(root, { onRefresh, container = root, media, labels = {}, icon = 'refresh' } = {}) {
     const doc = root.ownerDocument;
     const win = doc.defaultView;
     const query = media ?? win.matchMedia(STANDALONE_QUERY);

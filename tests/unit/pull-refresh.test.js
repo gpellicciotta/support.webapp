@@ -96,7 +96,7 @@ describe('attachPullRefresh', () => {
         expect(indicator.hidden).toBe(true);
         expect(indicator.getAttribute('aria-hidden')).toBe('true');
         expect(indicator.className).toBe('app__pull-indicator');
-        expect(indicator.querySelector('svg.icon use').getAttribute('href')).toBe('icons.svg#icon-sync-syncing');
+        expect(indicator.querySelector('svg.icon use').getAttribute('href')).toBe('icons.svg#icon-refresh');
     });
 
     it('moves the indicator by half the drag, arms it at the threshold, and refreshes once on release', async () => {

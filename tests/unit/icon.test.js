@@ -105,7 +105,7 @@ describe('core icon ids', () => {
     it('lists unique icon-prefixed kebab-case ids, validation icons included', () => {
         expect(new Set(icons).size).toBe(icons.length);
         expect(icons.filter((id) => !/^icon-[a-z0-9]+(-[a-z0-9]+)*$/.test(id))).toEqual([]);
-        expect(icons).toEqual(expect.arrayContaining(['icon-alert', 'icon-check', 'icon-help', 'icon-close', 'icon-more', 'icon-chevron-down', 'icon-nav-menu']));
+        expect(icons).toEqual(expect.arrayContaining(['icon-alert', 'icon-check', 'icon-help', 'icon-close', 'icon-more', 'icon-chevron-down', 'icon-nav-menu', 'icon-refresh']));
     });
 
     for (const look of looks) {
@@ -130,6 +130,13 @@ describe('core icon ids', () => {
                 const dots = [...more.body.matchAll(/<circle\b([^>]*)\/?>/g)]
                     .map(([, attributes]) => Object.fromEntries([...attributes.matchAll(/\b(cx|cy)="([^"]*)"/g)].map(([, name, value]) => [name, Number(value)])));
                 expect(dots).toEqual([{ cx: 12, cy: 5 }, { cx: 12, cy: 12 }, { cx: 12, cy: 19 }]);
+            });
+
+            it('draws icon-refresh as one arrowed arc, unlike the two arcs of icon-sync-syncing', () => {
+                const refresh = glyphs.find(({ id }) => id === 'icon-refresh');
+                const arcs = [...(refresh?.body ?? '').matchAll(/a\s*8[ ,]8\b/g)];
+                expect(arcs).toHaveLength(1);
+                expect(refresh.body).not.toBe(glyphs.find(({ id }) => id === 'icon-sync-syncing')?.body);
             });
 
             it('draws icon-nav-menu as three horizontal lines of one length', () => {

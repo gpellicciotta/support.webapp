@@ -888,7 +888,8 @@
     "icon-alert",
     "icon-help",
     "icon-chevron-down",
-    "icon-nav-menu"
+    "icon-nav-menu",
+    "icon-refresh"
   ],
   "components": [
     "button",
