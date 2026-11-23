@@ -2,13 +2,9 @@
 An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
-- [x] T0276 Add the view lifecycle base to support.webapp, promoted from Auth's Component and AppView, which support.js v4 removed.
-- [x] T0275 Add the Refresh pattern and an auto-refresh module, promoted from Auth's SPA.
-- [x] T0274 Add pull-to-refresh to the app shell, promoted from Auth's installed SPA.
-- [x] T0273 Promote the entry list of log lines and events from Auth's admin console into the package.
+*(Currently no tasks)*
 
 ## Backlog
-- [x] T0277 Audit Auth's webapp for further UI and view code that support.webapp should provide to every app.
 - [ ] T0278 Add a page base stylesheet for body text, headings, links, code, and the hidden guard, promoted from Auth.
 - [ ] T0279 Add a release notes renderer for parsed changelogs, promoted from Auth's Help view and admin console.
 - [ ] T0280 Add a theme boot script and account theme sync to the theme switch, promoted from Auth.
