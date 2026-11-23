@@ -62,6 +62,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `toolbar`      | Toolbar      | none                                  | wrapping filter fields and actions aligned to the bottom edge | `role="search"` landmark; labeled native controls  |
 | `table`        | Data table   | none                                  | plain, dense, framed; hover and `aria-selected` rows; numeric | native table with `caption` and `th scope`         |
 | `pager`        | Pager        | none                                  | status text with First, Previous, Next, and Last buttons      | labeled `nav`; native `disabled` on boundaries     |
+| `entry-list`   | Entry list   | none                                  | log or event cards; code message; action; details; hover      | labeled native `ul`; time chip with `time` element |
 | `detail-panel` | Detail panel | none                                  | fixed header, scrolling body, sections, and danger zone       | labeled landmark; focus moves in and returns       |
 | `tabs`         | Tabs         | `tabs.js`: `attachTabs`               | selected, disabled                                            | `tablist`, `tab`, and `tabpanel` roles; arrow keys |
 
@@ -464,6 +465,37 @@ Pager. Status text beside First, Previous, Next, and Last buttons below a table 
     <button class="button button--secondary" type="button">Last</button>
   </div>
 </nav>
+```
+
+### entry-list
+Entry list. Log lines or events as spaced cards, newest first; no JavaScript module.
+- Use a native `ul.entry-list` with `role="list"` and an `aria-label`, so suppressed markers keep list semantics.
+- Each `li.entry-list__item` card shows `.entry-list__message` first, then the `.entry-list__meta` chip row.
+- The message keeps its line breaks; `.entry-list__message--code` sets log lines in monospace.
+- The chip row wraps and starts with a time chip: the `clock` icon and a `time` element with a `datetime` value.
+- Severity uses a status chip; `.entry-list__code` sets identifiers such as logger names in a monospace chip that may wrap.
+- An optional `.entry-list__action` holds one icon button at the end of the chip row, such as a details toggle.
+- A details toggle sets `aria-expanded` and `aria-controls`; its chevron turns while `.entry-list__details` shows.
+- Details, such as pretty-printed JSON, follow the chip row inside the card and keep their line breaks.
+- Cards show hover feedback with `--color-surface-hover`; their chips and details rise to `--color-surface` to stay distinct.
+- Cards stay static: Tab visits only nested buttons and links, and there is no selection or arrow-key model.
+- Use existing loading, banner, empty-state, and pager patterns for request outcomes and paging.
+
+```html
+<ul class="entry-list" role="list" aria-label="Recent log entries">
+  <li class="entry-list__item">
+    <p class="entry-list__message entry-list__message--code">Processing error: connection closed</p>
+    <div class="entry-list__meta">
+      <span class="chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#icon-clock"/></svg><time datetime="2026-11-17T09:03:18Z">2026-11-17 09:03:18</time></span>
+      <span class="chip chip--status chip--danger"><svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#icon-alert"/></svg>Error</span>
+      <span class="chip entry-list__code">relay.audit</span>
+      <span class="entry-list__action">
+        <button class="icon-button" type="button" aria-expanded="true" aria-controls="entry-details-7" aria-label="Hide details of entry 7"><svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#icon-chevron-down"/></svg></button>
+      </span>
+    </div>
+    <pre class="entry-list__details" id="entry-details-7">{ "account": 34 }</pre>
+  </li>
+</ul>
 ```
 
 ### detail-panel

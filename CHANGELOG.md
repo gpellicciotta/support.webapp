@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.3.1-pre
+- Components: Added the entry list: log lines and events as spaced cards, with the message first and chips for time, severity, and source.
 
 ## v0.3.0 [released: 2026-11-23]
 - Looks: Refreshed the bright look with sea-tinted slate, cerulean blue, raspberry red, and self-hosted Lexend, keeping every contrast pair at AA.

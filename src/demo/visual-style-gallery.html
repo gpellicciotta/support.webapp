@@ -83,6 +83,7 @@
                     <li><a href="#toolbar">Toolbar</a></li>
                     <li><a href="#table">Data table</a></li>
                     <li><a href="#pager">Pager</a></li>
+                    <li><a href="#entry-list">Entry list</a></li>
                     <li><a href="#detail-panel">Detail panel</a></li>
                     <li><a href="#progress">Progress</a></li>
                     <li><a href="#spinner">Spinner</a></li>
@@ -1032,6 +1033,66 @@
                 </nav>
             </div>
             <nav class="pager" aria-label="Hidden pager" hidden></nav>
+        </section>
+        <section id="entry-list" class="gallery-section" aria-labelledby="entry-list-title">
+            <h2 id="entry-list-title">Entry list</h2>
+            <p>Log lines and events as spaced cards, newest first: the message, then chips for time, severity, and source. The first log card shows the hover state.</p>
+            <div class="stack">
+                <ul class="entry-list" role="list" aria-label="Recent log entries">
+                    <li class="entry-list__item is-hover">
+                        <p class="entry-list__message entry-list__message--code">8000 requests have been handled now.</p>
+                        <div class="entry-list__meta">
+                            <span class="chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg><time datetime="2026-11-17T09:14:02Z">2026-11-17 09:14:02</time></span>
+                            <span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-note"/></svg>Info</span>
+                            <span class="chip entry-list__code">relay.traffic</span>
+                        </div>
+                    </li>
+                    <li class="entry-list__item">
+                        <p class="entry-list__message entry-list__message--code">Processing error: connection closed while listing tokens for account 34
+  at relay.persistence.TokenStore.list(TokenStore.java:918)
+  at relay.services.AccountService.tokens(AccountService.java:412)</p>
+                        <div class="entry-list__meta">
+                            <span class="chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg><time datetime="2026-11-17T09:03:18Z">2026-11-17 09:03:18</time></span>
+                            <span class="chip chip--status chip--danger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg>Error</span>
+                            <span class="chip entry-list__code">relay</span>
+                        </div>
+                    </li>
+                    <li class="entry-list__item">
+                        <p class="entry-list__message entry-list__message--code">Received an invalid authorization code for 'GET /api/accounts/me?include=grants,credentials,sessions' from client 'south-relay'</p>
+                        <div class="entry-list__meta">
+                            <span class="chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg><time datetime="2026-11-17T08:58:20Z">2026-11-17 08:58:20</time></span>
+                            <span class="chip chip--status chip--warning"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sync-error"/></svg>Warning</span>
+                            <span class="chip entry-list__code">relay.audit</span>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="entry-list" role="list" aria-label="Recent system events">
+                    <li class="entry-list__item">
+                        <p class="entry-list__message">Retracted broadcast event 105, which withdrew 14 active notifications</p>
+                        <div class="entry-list__meta">
+                            <span class="chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg><time datetime="2026-11-16T18:30:11Z">2026-11-16 18:30:11</time></span>
+                            <span class="chip chip--status chip--warning"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-sync-error"/></svg>Warning</span>
+                            <span class="chip entry-list__code">broadcast-retracted</span>
+                            <span class="chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg>ann@example.test</span>
+                            <span class="entry-list__action"><button class="icon-button" type="button" aria-expanded="true" aria-controls="entry-list-details-107" aria-label="Hide details of event 107"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button></span>
+                        </div>
+                        <pre class="entry-list__details" id="entry-list-details-107">{
+  "retracted-event-id": 105,
+  "retracted-count": 14
+}</pre>
+                    </li>
+                    <li class="entry-list__item">
+                        <p class="entry-list__message">Purged account 40 after its deletion grace period ended</p>
+                        <div class="entry-list__meta">
+                            <span class="chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg><time datetime="2026-11-15T03:00:00Z">2026-11-15 03:00:00</time></span>
+                            <span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-note"/></svg>Info</span>
+                            <span class="chip entry-list__code">account-purged</span>
+                            <span class="chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg>system</span>
+                            <span class="entry-list__action"><button class="icon-button" type="button" aria-expanded="false" aria-label="Show details of event 104" disabled><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </section>
         <section id="detail-panel" class="gallery-section" aria-labelledby="detail-panel-title">
             <h2 id="detail-panel-title">Detail panel</h2>

@@ -915,6 +915,7 @@
     "toolbar",
     "table",
     "pager",
+    "entry-list",
     "detail-panel",
     "tabs",
     "toast",

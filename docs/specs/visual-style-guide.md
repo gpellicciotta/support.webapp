@@ -395,11 +395,16 @@ Body rows show hover feedback; `tr[aria-selected="true"]` adds `--color-surface-
 Use `aria-selected="true"` when inspecting one row in a side panel; use [multi-select](#multi-select) for bulk row selection.
 Use [pagers](../../src/demo/visual-style-gallery.html#pager) below paged tables or lists to pair status text with First, Previous, Next, and Last buttons.
 Avoid pagers for step-by-step forms or tab panels; applications own paging requests and disable unavailable boundary buttons natively.
+Use an [entry list](../../src/demo/visual-style-gallery.html#entry-list) for log lines and events, whose long messages crowd table cells.
+Each spaced card shows the message first, then chips for time, severity, and source; the time chip carries the clock icon.
+Use `.entry-list__message--code` for log lines and `.entry-list__code` for identifier chips such as logger names and event types.
+Keep the chip order stable across cards, so the eye finds the time, severity, and source in the same place.
 Use [detail panels](../../src/demo/visual-style-gallery.html#detail-panel) inside `.app__side-panel` for a fixed header, scrolling sections, and an in-place danger zone.
 Use existing loading, banner, and empty-state patterns for request outcomes.
 
 **[Decided]** Tables share row tokens while retaining native table layout, because flex rows would break column alignment.
 **[Decided]** A focusable, named scroll wrapper makes wide data keyboard accessible without converting cells into widgets.
+**[Decided]** with the user on 2026-11-23: log lines and events use entry list cards instead of table rows, as in Auth's Admin Console.
 **[Decided]** Filter toolbars use `role="search"` instead of `role="toolbar"`, because roving arrow keys would hijack text inputs and selects.
 **[Decided]** Selected rows pair `--color-surface-selected` with a primary inline-start edge and a forced-colors `Highlight` border, avoiding color-only state.
 
