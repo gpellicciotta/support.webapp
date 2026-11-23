@@ -10,6 +10,8 @@ ended_at: —
 review: agent
 preview: human
 protocol: standard
+preview_status: pending
+preview_requested_at: "2026-11-23T07:52:46Z"
 ---
 # T0042: Refresh the bright look's colors and fonts to the variant the user picks from five rendered candidates.
 
@@ -21,6 +23,7 @@ Release the change as a new minor version; meteo picks it up with `vendor`.
 The user picks one of five rendered variants; see the technical specification for files and tests.
 
 ## Task Execution Steps
+- [ ] **[Preview]**   Obtain preview approval of the task definition before work starts.
 - [ ] **[Read]**      Read ADR-0002, the look's spec, and the user's new values in the technical specification.
 - [ ] **[Implement]** Write or update the failing tests named in the technical specification.
 - [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
@@ -40,4 +43,10 @@ The user picks one of five rendered variants; see the technical specification fo
 - [2026-11-23] **[Visual]**
   Rendered five bright candidates and the current look in both themes; all pass the token test.
   - Comparison: candidates/index.html and candidates.md.
+
+- [2026-11-23] **[Decided]**
+  The user picked the Ocean and raspberry variant with Lexend; the technical specification lists its values.
+
+- [2026-11-23] **[Preview]**
+  Preview requested (mode: human).
 
