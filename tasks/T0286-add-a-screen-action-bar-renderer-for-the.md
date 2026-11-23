@@ -1,11 +1,11 @@
 ---
 id: T0286
-owner: ~
-needs: ['T0276']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0286-add-a-screen-action-bar-renderer-for-the
+worktree: .plan/work/T0286-add-a-screen-action-bar-renderer-for-the
+status: active
+started_at: "2026-11-23T20:40:59Z"
 ended_at: —
 review: agent
 preview: none
