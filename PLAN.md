@@ -2,9 +2,6 @@
 An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
-*(Currently no tasks)*
-
-## Backlog
 - [ ] T0303 Make the design integrity hashes ignore line endings, so LF and CRLF checkouts of a vendored copy both pass.
 - [ ] T0278 Add a page base stylesheet for body text, headings, links, code, and the hidden guard, promoted from Auth.
 - [ ] T0279 Add a release notes renderer for parsed changelogs, promoted from Auth's Help view and admin console.
@@ -31,3 +28,6 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [ ] T0300 [needs: T0293, T0294] Add the shared admin Users screen with table, detail panel, creation, and deletion, promoted from Auth's and ToDo's consoles.
 - [ ] T0301 [needs: T0293, T0294] Add the shared admin Sessions screen with single, bulk, and expired token revocation, promoted from Auth's and ToDo's consoles.
 - [ ] T0302 [needs: T0279, T0293, T0294] Add the shared admin Changelog screen on the release notes renderer, promoted from Auth's and ToDo's consoles.
+
+## Backlog
+*(Currently no tasks)*
