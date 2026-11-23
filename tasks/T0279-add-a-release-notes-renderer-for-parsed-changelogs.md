@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1553.4, input: 363864, output: 67950, cache_read: 15242474}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T16:40:31Z"
 ---
 # T0279: Add a release notes renderer for parsed changelogs, promoted from Auth's Help view and admin console
 
@@ -66,4 +71,7 @@ Size estimate: 4 files, 120 lines.
 
 - [2026-11-23] **[Implement]**
   Authored failing unit and browser tests, then added release-notes.js, release-notes.css, contract entry, and gallery specimens.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
