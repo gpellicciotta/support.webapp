@@ -4,9 +4,9 @@ owner: ~
 needs: []
 branch: —
 worktree: —
-status: ready
+status: cancelled
 started_at: —
-ended_at: —
+ended_at: "2026-11-23T07:48:53Z"
 review: agent
 preview: human
 protocol: standard
@@ -21,6 +21,7 @@ Release the change as a new minor version; family-portal picks it up with `vendo
 The user picks one of five rendered variants; see the technical specification for files and tests.
 
 ## Task Execution Steps
+- [ ] **[Preview]**   Obtain preview approval of the task definition before work starts.
 - [ ] **[Read]**      Read ADR-0002, the look's spec, and the user's new values in the technical specification.
 - [ ] **[Implement]** Write or update the failing tests named in the technical specification.
 - [ ] **[Verify]**    Run the new tests and record their failure output in validation-proof.md.
@@ -40,4 +41,16 @@ The user picks one of five rendered variants; see the technical specification fo
 - [2026-11-23] **[Visual]**
   Rendered five warm candidates and the current look in both themes; all pass the token test.
   - Comparison: candidates/index.html and candidates.md.
+
+- [2026-11-23] **[Decided]**
+  The user kept the current warm look over the five candidates, so no palette or font change remains.
+
+- [2026-11-23] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 0.
+  - Lines touched: 0.
+  - Reopenings: 0.
+
+- [2026-11-23] **[Cancelled]**
+  The user kept the current warm look after reviewing five rendered candidates.
 
