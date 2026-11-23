@@ -111,3 +111,6 @@ The user picks one of five rendered variants; see the technical specification fo
 - [2026-11-23] **[Complete]**
   Task completed successfully.
 
+- [2026-11-23] **[Implement]**
+  After completion, widened the .gitattributes binary rule to nested font folders, so OFL.txt hashes survive CRLF checkouts.
+
