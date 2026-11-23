@@ -6,7 +6,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0278 Add a page base stylesheet for body text, headings, links, code, and the hidden guard, promoted from Auth.
 - [x] T0279 Add a release notes renderer for parsed changelogs, promoted from Auth's Help view and admin console.
 - [x] T0280 Add a theme boot script and account theme sync to the theme switch, promoted from Auth.
-- [~] T0281 [owner: @gemini] Add an install prompt module for installable apps, promoted from Auth, counters, and meteo.
+- [x] T0281 Add an install prompt module for installable apps, promoted from Auth, counters, and meteo.
 - [ ] T0282 Defer field validation on blur until a pointer press ends, promoted from Auth's admin console.
 - [ ] T0283 Add Auth's shell additions to shell.css: sidebar end group, entry badges, hidden top bar parts, and banner dismiss.
 - [ ] T0284 Add a view header component for a screen's title and summary line, promoted from Auth.

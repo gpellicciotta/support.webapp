@@ -5,17 +5,22 @@ session: antigravity-20261123-504b38
 needs: []
 branch: task/T0281-add-an-install-prompt-module-for-installable-apps
 worktree: .plan/work/T0281-add-an-install-prompt-module-for-installable-apps
-status: active
+status: completed
 started_at: "2026-11-23T17:33:05Z"
-ended_at: —
+ended_at: "2026-11-23T18:00:32Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 1, duration_s: 1497.0, input: 296674, output: 47919, cache_read: 11631957}
-review_status: pending
+  review: {turns: 1, duration_s: 133.6, input: 24, output: 4796, cache_read: 578392, cache_write: 46572}
+review_status: approved
 review_round: 1
 review_requested_at: "2026-11-23T17:58:11Z"
+reviewed_by: "@claude"
+review_session: claude-20261123-8a705f
+work_duration: 1647.6
+completion-commit: 11250b72f593f5efbff367dd485168bbb73c65a4
 ---
 # T0281: Add an install prompt module for installable apps, promoted from Auth, counters, and meteo
 
@@ -35,7 +40,7 @@ Size estimate: 3 files, 60 lines.
 - [x] **[Implement]** Add the install prompt module, its contract entry, and a gallery or shell demo section.
 - [x] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
 - [x] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-23] **[Doc]**
@@ -76,4 +81,11 @@ Size estimate: 3 files, 60 lines.
 
 - [2026-11-23] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-23] **[Review]**
+  Round 1 approved by @claude: Approved.
+  - Findings: [review-findings-1.md](T0281-add-an-install-prompt-module-for-installable-apps/review-findings-1.md).
+
+- [2026-11-23] **[Complete]**
+  Task completed successfully.
 
