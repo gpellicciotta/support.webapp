@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1800.6, input: 2391, output: 95}
+work_duration: 1812.3
 ---
 # T0283: Add Auth's shell additions to shell.css: sidebar end group, entry badges, hidden top bar parts, and banner dismiss
 
