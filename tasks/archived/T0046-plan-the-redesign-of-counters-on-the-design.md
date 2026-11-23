@@ -4,9 +4,9 @@ owner: ~
 needs: []
 branch: —
 worktree: —
-status: ready
+status: cancelled
 started_at: —
-ended_at: —
+ended_at: "2026-11-23T07:58:31Z"
 review: agent
 preview: none
 protocol: standard
@@ -29,3 +29,7 @@ Size estimate: 2 files, 120 lines
 ## Execution Log
 - [2026-11-15] **[Doc]**
   Split from T0025 when the user restricted T0025 to auth.
+
+- [2026-11-23] **[Cancelled]**
+  Moved to counters.server T0272, since the plan is counters-specific; package gaps it finds become tasks here.
+
