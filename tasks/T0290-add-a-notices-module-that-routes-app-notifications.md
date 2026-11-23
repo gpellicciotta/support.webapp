@@ -12,8 +12,8 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 1, duration_s: 1215.4, input: 414002, output: 65369, cache_read: 16649691}
-work_duration: 1242.1
+  worker: {turns: 2, duration_s: 1416.0, input: 506074, output: 76315, cache_read: 17662871}
+work_duration: 1471.7
 ---
 # T0290: Add a notices module that routes app notifications to banners and toasts, promoted from Auth
 
@@ -32,7 +32,7 @@ Size estimate: 5 files, 200 lines.
 - [x] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
 - [x] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
 - [x] **[Implement]** Add the notices module, its contract entry, and a gallery or shell demo section.
-- [ ] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
+- [x] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
 - [x] **[Visual]**    Capture the notices module across looks and themes at mobile and desktop width.
 - [x] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
@@ -71,4 +71,9 @@ Size estimate: 5 files, 200 lines.
   Started supervised full check via python scripts/devops.py check.
   - PID: 37912 (handle 20261123T221039-28212-30cf8f).
   - Yielding turn until supervised verification completes.
+
+- [2026-11-23] **[Verify]**
+  Ran python scripts/devops.py check directly in-turn (task-62) with exit code 0.
+  - Lint, 61 pytest, 2375 Vitest, 986 Playwright, 7 integration tests, and pack passed.
+  - Recorded verbatim proof in validation-proof.md.
 

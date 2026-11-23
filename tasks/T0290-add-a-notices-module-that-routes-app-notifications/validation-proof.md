@@ -171,6 +171,46 @@ npm notice
 gpellicciotta-support.webapp-0.4.1-pre.tgz
 ```
 
+Command: `python scripts/devops.py check`
+Exit code: `0`
+
+```text
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\Scripts\lint-markdown.EXE check --offline
+Process ID: 32372
+All 28 markdown files passed linting.
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m ruff check scripts tests
+Process ID: 36304
+All checks passed!
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m ruff format --check scripts tests
+Process ID: 11592
+9 files already formatted
+Command: "C:\Program Files\nodejs\npm.CMD" run lint
+Process ID: 36456
+> @gpellicciotta/support.webapp@0.4.1-pre lint
+> eslint .
+Command: C:\Users\giova\AppData\Local\Programs\Python\Python315\python.exe -m pytest
+[... 13 lines omitted ...]
+======================= 61 passed, 1 skipped in 33.47s ========================
+Command: "C:\Program Files\nodejs\npm.CMD" test
+[... 67 lines omitted ...]
+ Test Files  48 passed (48)
+      Tests  2375 passed (2375)
+[... 4 lines omitted ...]
+Command: "C:\Program Files\nodejs\npm.CMD" run test:slow
+[... 1253 lines omitted ...]
+  986 passed (9.3m)
+Command: "C:\Program Files\nodejs\npm.CMD" run test:integration
+[... 12 lines omitted ...]
+ Test Files  3 passed (3)
+      Tests  7 passed (7)
+[... 2 lines omitted ...]
+Command: "C:\Program Files\nodejs\npm.CMD" pack --dry-run
+[... 141 lines omitted ...]
+npm notice total files: 125
+npm notice
+gpellicciotta-support.webapp-0.4.1-pre.tgz
+```
+
 ### Visual Verification
 - Before: [before-shell-portal.png](before-shell-portal.png), [before-shell-portal-mobile.png](before-shell-portal-mobile.png)
 - After (neutral, light/dark, desktop/mobile): [after-neutral-light-desktop.png](after-neutral-light-desktop.png), [after-neutral-dark-desktop.png](after-neutral-dark-desktop.png), [after-neutral-light-mobile.png](after-neutral-light-mobile.png)
