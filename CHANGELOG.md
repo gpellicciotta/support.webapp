@@ -15,6 +15,7 @@ All notable changes to this project are documented here.
 - Shell: Added pull-to-refresh for installed apps, as `pull-refresh.js` and the `app__pull-indicator` overlay part, promoted from Auth's SPA.
 - Looks: Added the core `icon-refresh` glyph to every look sprite, and the pull-to-refresh indicator now draws it.
 - Modules: Added the Refresh pattern and `auto-refresh.js`, which polls while the tab is visible and reports returns, promoted from Auth's SPA.
+- Docs: Added the Auth webapp audit, which ranks 18 UI and view parts and 7 admin screens to promote into the package.
 
 ## v0.3.0 [released: 2026-11-23]
 - Looks: Refreshed the bright look with sea-tinted slate, cerulean blue, raspberry red, and self-hosted Lexend, keeping every contrast pair at AA.

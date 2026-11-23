@@ -36,6 +36,7 @@ Overview of all documentation for the `support.webapp` project.
 
 ## Analysis
 - [ui-design-comparison.md](analysis/ui-design-comparison.md): How the sibling apps implement UI design, with sharing verdicts.
+- [auth-webapp-ui-audit.md](analysis/auth-webapp-ui-audit.md): Which UI and view code of Auth's webapp the package should provide.
 
 ---
 

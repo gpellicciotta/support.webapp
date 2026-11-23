@@ -24,7 +24,7 @@ See [README.md](README.md), [requirements.md](docs/requirements.md), and [devops
 - [tests/](tests/): fast unit tests and slow browser checks.
 - [scripts/](scripts/): the devops script, with its pinned support.python requirement.
 - [docs/adrs/](docs/adrs/): architecture decision records of the design system.
-- [docs/analysis/](docs/analysis/): the UI design comparison of the sibling apps.
+- [docs/analysis/](docs/analysis/): the UI design comparison of the sibling apps and the Auth webapp audit.
 - [docs/roadmap.md](docs/roadmap.md): the adoption roadmap.
 
 ## Project Conventions
