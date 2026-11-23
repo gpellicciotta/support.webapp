@@ -1,11 +1,11 @@
 ---
 id: T0282
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0282-defer-field-validation-on-blur-until-a-pointer
+worktree: .plan/work/T0282-defer-field-validation-on-blur-until-a-pointer
+status: active
+started_at: "2026-11-23T18:00:55Z"
 ended_at: —
 review: agent
 preview: none
