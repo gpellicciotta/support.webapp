@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1800.5, input: 2432, output: 219}
+work_duration: 1811.8
 ---
 # T0291: Add the notifications inbox pattern and the unread count button, promoted from Auth
 
