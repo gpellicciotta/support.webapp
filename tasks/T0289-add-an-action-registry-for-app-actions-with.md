@@ -1,6 +1,7 @@
 ---
 id: T0289
 owner: "@gemini"
+session: antigravity-20261123-4a7532
 needs: []
 branch: task/T0289-add-an-action-registry-for-app-actions-with
 worktree: .plan/work/T0289-add-an-action-registry-for-app-actions-with
@@ -22,13 +23,13 @@ Completion check: `python scripts/devops.py check`, with the new tests green.
 Size estimate: 4 files, 150 lines.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read the technical specification, the audit section, and the Auth source it cites.
-- [ ] **[Decide]**    Choose the module key and exported API, following naming.md and the ADR-0003 JavaScript approach.
-- [ ] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
-- [ ] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
-- [ ] **[Implement]** Add the action registry, its contract entry, and a gallery or shell demo section.
-- [ ] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
-- [ ] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
+- [x] **[Read]**      Read the technical specification, the audit section, and the Auth source it cites.
+- [x] **[Decide]**    Choose the module key and exported API, following naming.md and the ADR-0003 JavaScript approach.
+- [x] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
+- [x] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
+- [x] **[Implement]** Add the action registry, its contract entry, and a gallery or shell demo section.
+- [x] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
+- [x] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -37,4 +38,24 @@ Size estimate: 4 files, 150 lines.
 
 - [2026-11-23] **[Doc]**
   Task fleshed out from the T0277 audit of Auth's webapp at commit eeb9439.
+
+- [2026-11-23] **[Decided]**
+  Chose key action-registry with createActionRegistry and attachActionRegistry in src/js/action-registry.js, using CustomEvent constants and onNavigate callback.
+
+- [2026-11-23] **[Doc]**
+  Updated undeclared file docs/adrs/ADR-0003-components-and-patterns.md with the sharing-rule decision; total counted changes are 5 files and 74 lines.
+
+- [2026-11-23] **[Verify]**
+  Verified action-registry unit, browser, lint, build, and full check suites; generate-app.test.js failed only on cache-only worktree node_modules.
+  - 14 new unit tests and 4 new E2E tests passed.
+  - Lint, 61 pytest, 2360 unit, 978 E2E, pack, vendor passed.
+
+- [2026-11-23] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 5.
+  - Lines touched: 74.
+  - Reopenings: 0.
+
+- [2026-11-23] **[Implement]**
+  Implemented src/js/action-registry.js, wired it into src/demo/shell-demo.js, registered action-registry in src/contract.json, and added unit and Playwright tests.
 
