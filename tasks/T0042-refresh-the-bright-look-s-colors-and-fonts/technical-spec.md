@@ -40,6 +40,7 @@ Size estimate: 8 files, 180 lines
 ### Tests
 - Unit: a bright palette test asserting the new primitive values, failing first; existing contrast checks keep passing.
 - Unit: the font byte test pins the Lexend files' SHA-256; the bright test expects `fonts.css` and the Lexend stack.
+- Unit: the bright test fails when `fonts.css` references any URL other than a relative path, keeping fonts offline.
 - Integration: the bright browser spec expects a loaded Lexend body font; the verifier covers light and dark at 390 and 1440 px.
 
 Completion check: `python scripts/devops.py check`, exit code 0
