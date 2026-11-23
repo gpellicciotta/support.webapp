@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Components: Added [view-header.css](src/css/components/view-header.css) for screen titles and optional muted summary lines that collapse when empty.
 - Shell: Added sidebar end lists, nav badges, brand logos, hidden top bar parts, and banner dismiss in [shell.css](src/css/shell.css).
 - Components: Deferred blur validation in [field.js](src/js/field.js) until pointer release, so new error lines never shift pressed buttons.
 - Modules: Added [install-prompt.js](src/js/install-prompt.js) to track installable and installed state and trigger browser install prompts.

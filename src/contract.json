@@ -914,6 +914,7 @@
     "collapsible",
     "release-notes",
     "list",
+    "view-header",
     "toolbar",
     "table",
     "pager",

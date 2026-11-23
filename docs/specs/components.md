@@ -60,6 +60,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `collapsible`   | Collapsible   | `collapsible.js`: `attachCollapsible`                                                             | collapsed, expanded                                               | button with `aria-expanded` and `aria-controls`             |
 | `release-notes` | Release notes | `release-notes.js`: `createReleaseNotes`, `attachReleaseNotes`, using `collapsible.js`, `icon.js` | collapsibles or open blocks; filters, area groups, status, paging | filter group `aria-pressed`; `role="list"`; findable panels |
 | `list`          | List          | none                                                                                              | simple list, definition rows, bordered facts, compact facts       | native `ul`, `ol`, or `dl`                                  |
+| `view-header`   | View header   | none                                                                                              | title with optional muted summary; empty summary collapses        | heading level set by the app; `role="status"` when live     |
 | `toolbar`       | Toolbar       | none                                                                                              | wrapping filter fields and actions aligned to the bottom edge     | `role="search"` landmark; labeled native controls           |
 | `table`         | Data table    | none                                                                                              | plain, dense, framed; hover and `aria-selected` rows; numeric     | native table with `caption` and `th scope`                  |
 | `pager`         | Pager         | none                                                                                              | status text with First, Previous, Next, and Last buttons          | labeled `nav`; native `disabled` on boundaries              |
@@ -451,6 +452,27 @@ The [WAI content structure tutorial](https://www.w3.org/WAI/tutorials/page-struc
 <dl class="list list--definitions"><dt class="list__term">Owner</dt><dd class="list__value">Ann</dd></dl>
 <dl class="list list--facts list--compact"><dt class="list__term">ID</dt><dd class="list__value">34</dd></dl>
 ```
+
+### view-header
+View header. A screen's page title and an optional muted summary line; no JavaScript module.
+- The title uses `--font-heading` and `--text-2xl`; the app chooses the heading level.
+- An empty or `hidden` summary takes no room, so a live `role="status"` element stays mounted safely.
+- Select dynamic summary nodes with `data-*` hooks, such as `data-view-header-text`, never style classes.
+
+```html
+<header class="view-header">
+  <h1 class="view-header__title">Notifications</h1>
+  <p class="view-header__text" role="status" data-view-header-text>3 unread · 12 total</p>
+</header>
+<header class="view-header">
+  <h1 class="view-header__title">Accounts</h1>
+</header>
+```
+
+Upgrading an existing app:
+- Replace app-local `.view-header` and `.screen-title` CSS with `.view-header`, `.view-header__title`, and `.view-header__text`.
+- Move dynamic summary hooks from style classes to `data-*` attributes and native `hidden` or empty text.
+- See the [View header section](../../src/demo/visual-style-gallery.html#view-header) of the gallery.
 
 ### toolbar
 Toolbar. Filter fields and optional actions in one wrapping row above a table or list; no JavaScript module.

@@ -83,6 +83,7 @@
                     <li><a href="#banner">Banner</a></li>
                     <li><a href="#shell">App shell</a></li>
                     <li><a href="#list">List</a></li>
+                    <li><a href="#view-header">View header</a></li>
                     <li><a href="#toolbar">Toolbar</a></li>
                     <li><a href="#table">Data table</a></li>
                     <li><a href="#pager">Pager</a></li>
@@ -961,6 +962,15 @@
                 <dt class="list__term">Created</dt><dd class="list__value">2026-09-01 10:00:00</dd>
                 <dt class="list__term">Sessions</dt><dd class="list__value">2</dd>
             </dl>
+        </section>
+        <section id="view-header" class="gallery-section" aria-labelledby="view-header-title">
+            <h2 id="view-header-title">View header</h2>
+            <p>A screen's page title and an optional muted summary line; the app chooses the heading level and any <code>data-*</code> hook.</p>
+            <div class="card-specimens">
+                <div class="card"><div><header class="view-header" data-view-header="status"><h3 class="view-header__title">Notifications</h3><p class="view-header__text" role="status" data-view-header-text>3 unread · 12 total</p></header><p>Polite status summary above screen content.</p></div></div>
+                <div class="card"><div><header class="view-header" data-view-header="title-only"><h3 class="view-header__title">Accounts</h3></header><p>Title-only header for screens without a summary.</p></div></div>
+                <div class="card"><div><header class="view-header" data-view-header="empty"><h3 class="view-header__title">Accounts</h3><p class="view-header__text" role="status" data-view-header-text></p></header><p>Empty status line takes no extra height.</p></div></div>
+            </div>
         </section>
         <section id="toolbar" class="gallery-section" aria-labelledby="toolbar-title">
             <h2 id="toolbar-title">Toolbar</h2>

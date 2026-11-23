@@ -26,6 +26,7 @@
 @import url('components/row.css');
 @import url('components/list.css');
 @import url('components/selection.css');
+@import url('components/view-header.css');
 @import url('components/toolbar.css');
 @import url('components/table.css');
 @import url('components/pager.css');
