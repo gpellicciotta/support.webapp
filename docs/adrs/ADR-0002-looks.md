@@ -10,6 +10,7 @@ Defines look contents, look names, selection, app-local looks, icons, and the fi
 - **[Decided]** with the user on 2026-11-12: one sprite per look, with a shared core id list.
 - **[Decided]** with the user on 2026-11-12: every look variant uses `data-accent`, family-portal's seasons included.
 - **[Decided]** with the user on 2026-11-12: `bright` pairs yellow with dark text, and meteo may override that value.
+- **[Decided]** with the user on 2026-11-23: `bright` uses self-hosted Lexend and a cerulean and raspberry palette.
 
 ---
 
@@ -139,9 +140,12 @@ Variant attribute:
   ```
 
 - White passes AA on light blue `#1a56db` at 6.18:1 and red `#dc2626` at 4.83:1.
+- The 2026-11-23 palette keeps these ratios: white reaches 6.21:1 on blue `#006796` and 4.81:1 on red `#db2157`.
+- Lexend replaces the system font stack, which stays as fallback; its files ship with the look, so apps stay offline.
 - **[Decided]** Implementation adjustment: light yellow uses `#b88000`, giving pressed icons 3:1 contrast against shared grounds.
 - **[Decided]** Dark blue uses `#60a5fa`, and dark red uses `#f87171`, with dark labels for shared icon contrast.
   These implementation choices satisfy the shared contract; they are not additional user-approved palette decisions.
+  The 2026-11-23 palette replaces them with `#00adf6` and `#f77086` at the same luminance.
 - Meteo's lossless adoption must assess action fills, hover and active fills, labels, links, focus, and shared grounds separately.
   Restoring source colors needs several documented app overrides, including light yellow and dark blue and red action roles.
   Keeping package values instead requires listing those visual changes explicitly in the adoption proof.

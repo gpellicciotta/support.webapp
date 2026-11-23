@@ -31,7 +31,7 @@ test('forced fallback preserves root accents and every contrast pair', async ({ 
         await page.locator(`input[name="theme"][value="${theme}"]`).check();
         for (const accent of ['blue', 'yellow', 'red']) {
             await page.locator('#accent-select').selectOption(accent);
-            const expected = { blue: 'rgb(26, 86, 219)', yellow: 'rgb(184, 128, 0)', red: 'rgb(220, 38, 38)' };
+            const expected = { blue: 'rgb(0, 103, 150)', yellow: 'rgb(184, 128, 0)', red: 'rgb(219, 33, 87)' };
             expect(await tokenColor(page, '--color-primary')).toBe(expected[accent]);
             const ratios = await page.evaluate(pairs => {
                 const probe = document.createElement('span');
@@ -77,7 +77,11 @@ test('bright accents work on roots and wrappers and reset when switching looks',
             await page.screenshot({ path: `${process.env.BRIGHT_PROOF}/after-${accent}-${testInfo.project.name}.png`, fullPage: true });
         }
     }
-    await expect(page.locator('body')).toHaveCSS('font-family', /system-ui/);
+    await expect(page.locator('body')).toHaveCSS('font-family', /^"Lexend Variable", "?Lexend"?, system-ui,/);
+    expect(await page.evaluate(async () => {
+        await document.fonts.ready;
+        return [...document.fonts].some(face => face.family === 'Lexend Variable' && face.status === 'loaded');
+    })).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await selectGalleryLook(page, 'warm');
     await expect(page.locator('html')).not.toHaveAttribute('data-accent');

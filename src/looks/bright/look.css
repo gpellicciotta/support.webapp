@@ -23,7 +23,7 @@
   --color-on-danger: light-dark(var(--white), var(--slate-950));
   --color-shadow: light-dark(var(--shadow-tint-light), var(--shadow-tint-dark));
   --color-backdrop: light-dark(var(--scrim-light), var(--scrim-dark));
-  --font-body: var(--font-family-system);
+  --font-body: var(--font-family-body);
   --font-mono: var(--font-family-mono);
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;

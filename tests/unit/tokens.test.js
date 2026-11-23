@@ -288,6 +288,27 @@ describe('token contract', () => {
         for (const [name, hash] of Object.entries(hashes)) {
             expect(createHash('sha256').update(readFileSync(join(root, 'looks/neutral/fonts', name))).digest('hex')).toBe(hash);
         }
+        const lexend = {
+            'lexend-latin-wght-normal.woff2': 'b7e7538f59bff1812841d7627f8e49e70fe86438f9f7b397a028c0d05301c874',
+            'lexend-latin-ext-wght-normal.woff2': 'b5d815d42066da25e5894bdfe47a415e1f79ef436486e3f843b475806d2e613c',
+            'OFL.txt': 'cdfed8f91b0660b004befb744757918b7c7d40dc2201b6c6d0a86b2fab9408f8'
+        };
+        for (const [name, hash] of Object.entries(lexend)) {
+            expect(createHash('sha256').update(readFileSync(join(root, 'looks/bright/fonts/lexend', name))).digest('hex'), name).toBe(hash);
+        }
+    });
+
+    it('uses the chosen sea slate, cerulean, and raspberry bright palette', () => {
+        const primitives = declarations(clean(readFileSync(join(root, 'looks/bright/primitives.css'), 'utf8')));
+        const expected = {
+            '--slate-50': '#f8fafc', '--slate-75': '#f4f7f9', '--slate-200': '#dfe9ee', '--slate-400': '#8ba6b3',
+            '--slate-500': '#728791', '--slate-600': '#53646c', '--slate-800': '#294350', '--slate-900': '#132c37',
+            '--slate-925': '#05222e', '--slate-950': '#011a26', '--blue-200': '#b2dffd', '--blue-300': '#7bc9fc',
+            '--blue-400': '#00adf6', '--blue-600': '#006796', '--blue-800': '#004c6f', '--red-200': '#fdcace',
+            '--red-300': '#fba4af', '--red-400': '#f77086', '--red-600': '#db2157', '--red-700': '#b71747',
+            '--red-800': '#98183b', '--red-900': '#7e1b33'
+        };
+        expect(Object.fromEntries(Object.keys(expected).map((name) => [name, primitives.get(name)]))).toEqual(expected);
     });
 });
 

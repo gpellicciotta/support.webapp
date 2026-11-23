@@ -1,34 +1,34 @@
-/* Private bright palette and system stacks, with documented AA adjustments. */
+/* Private bright palette and font stacks, with documented AA adjustments. */
 :root {
   --white: #ffffff;
   --slate-50: #f8fafc;
-  --slate-75: #f5f7fa;
-  --slate-200: #e2e8f0;
-  --slate-400: #94a3b8;
-  --slate-500: #788595;
-  --slate-600: #596270;
-  --slate-800: #334155;
-  --slate-900: #1e293b;
-  --slate-925: #141f33;
-  --slate-950: #0f172a;
-  --blue-200: #bfdbfe;
-  --blue-300: #93c5fd;
-  --blue-400: #60a5fa;
-  --blue-600: #1a56db;
-  --blue-800: #163f9e;
-  --red-900: #7f1d1d;
-  --red-800: #991b1b;
-  --red-700: #b91c1c;
-  --red-400: #f87171;
-  --red-300: #fca5a5;
-  --red-200: #fecaca;
+  --slate-75: #f4f7f9;
+  --slate-200: #dfe9ee;
+  --slate-400: #8ba6b3;
+  --slate-500: #728791;
+  --slate-600: #53646c;
+  --slate-800: #294350;
+  --slate-900: #132c37;
+  --slate-925: #05222e;
+  --slate-950: #011a26;
+  --blue-200: #b2dffd;
+  --blue-300: #7bc9fc;
+  --blue-400: #00adf6;
+  --blue-600: #006796;
+  --blue-800: #004c6f;
+  --red-900: #7e1b33;
+  --red-800: #98183b;
+  --red-700: #b71747;
+  --red-400: #f77086;
+  --red-300: #fba4af;
+  --red-200: #fdcace;
   --green-700: #15803d;
   --green-400: #4ade80;
   --shadow-tint-light: rgb(17 18 22 / 14%);
   --shadow-tint-dark: rgb(0 0 0 / 55%);
   --scrim-light: rgb(17 18 22 / 40%);
   --scrim-dark: rgb(0 0 0 / 65%);
-  --font-family-system: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-family-body: "Lexend Variable", "Lexend", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-family-mono: ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace;
   --radius-sm: 0.25rem;
   --radius-md: 0.625rem;
@@ -36,5 +36,5 @@
   --yellow-700: #b88000;
   --yellow-600: #d97706;
   --ink-950: #111827;
-  --red-600: #dc2626;
+  --red-600: #db2157;
 }
