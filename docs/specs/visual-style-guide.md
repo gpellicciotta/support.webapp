@@ -504,6 +504,19 @@ Keep only one current page per navigation landmark; update it after app-local ro
 Keep the link's accessible name and destination intact; the shell styles its current state.
 Use `aria-selected` for tabs and other selection widgets, rather than page navigation.
 
+### Refresh
+Do not add a manual Refresh button; screens refresh themselves, as [ADR-0003](../adrs/ADR-0003-components-and-patterns.md) defines.
+Import `attachAutoRefresh(options)` from [auto-refresh.js](../../src/js/auto-refresh.js) once a session starts.
+- `onPoll` runs every `interval`, 60 seconds by default, only while the tab is visible.
+- `onReturn({ away, long })` runs when the tab shows again; `long` turns true after `longAbsence`, 60 seconds by default.
+- Refresh small, cheap data on each poll and return, such as an unread count.
+- Reload the current screen only on a long return, and only when that screen opts in.
+- Never reload a screen with a form, so typed input survives.
+- Compare the new data with the shown data, and update the UI only when it changed.
+- Call `destroy()` when the session ends, such as at sign-out.
+- Installed apps add [pull-to-refresh](#shell) for an explicit refresh.
+The [portal demo](../../src/demo/shell-portal.html) shows the time of its last sample check.
+
 ---
 
 ## Shell

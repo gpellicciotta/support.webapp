@@ -1,7 +1,8 @@
-/* Look and theme switchers, the nav toggle, pull-to-refresh, and the sample interactions of the shell demo pages. */
+/* Look and theme switchers, the nav toggle, pull-to-refresh, auto-refresh, and the sample interactions of the shell demo pages. */
 
 import { initGallery } from './gallery.js';
 import { attachAppNav } from '../js/app-nav.js';
+import { attachAutoRefresh } from '../js/auto-refresh.js';
 import { attachMenu } from '../js/menu.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { attachPullRefresh } from '../js/pull-refresh.js';
@@ -29,6 +30,23 @@ export function initShellDemo(doc, view) {
             onRefresh: async () => {
                 await new Promise((resolve) => view.setTimeout(resolve, 600));
                 toaster.show('Sample page refreshed.');
+            }
+        });
+    }
+    // The Refresh pattern: a sample check on each visible poll and return, without a Refresh button.
+    const checked = doc.querySelector('[data-demo-checked]');
+    if (checked) {
+        const check = () => {
+            checked.textContent = `Checked for new events at ${new Date().toLocaleTimeString()}.`;
+        };
+        attachAutoRefresh({
+            document: doc,
+            onPoll: check,
+            onReturn: ({ long }) => {
+                check();
+                if (long) {
+                    toaster.show('Sample page refreshed after a long absence.');
+                }
             }
         });
     }

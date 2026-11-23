@@ -89,12 +89,13 @@ Apply the naming rule consistently:
 ## Utility Modules
 Modules without a component key hold shared helpers and never style anything:
 
-| Module           | Exports                                | Used by                     |
-| :--------------- | :------------------------------------- | :-------------------------- |
-| `focus.js`       | `tabbableIn`                           | dialog, menu, popover       |
-| `anchor.js`      | `anchorPanel`                          | menu, popover, account menu |
-| `live-region.js` | `createLiveRegion`                     | toast, field, form, loading |
-| `i18n.js`        | `setCatalog`, `applyTranslations`, `t` | every app                   |
+| Module            | Exports                                | Used by                                   |
+| :---------------- | :------------------------------------- | :---------------------------------------- |
+| `focus.js`        | `tabbableIn`                           | dialog, menu, popover                     |
+| `anchor.js`       | `anchorPanel`                          | menu, popover, account menu               |
+| `live-region.js`  | `createLiveRegion`                     | toast, field, form, loading, pull-refresh |
+| `i18n.js`         | `setCatalog`, `applyTranslations`, `t` | every app                                 |
+| `auto-refresh.js` | `attachAutoRefresh`                    | apps following the Refresh pattern        |
 
 - A utility module imports no component module.
 - A new utility module needs an entry in this table.

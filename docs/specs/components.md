@@ -67,14 +67,15 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `tabs`         | Tabs         | `tabs.js`: `attachTabs`               | selected, disabled                                            | `tablist`, `tab`, and `tabpanel` roles; arrow keys |
 
 ### Feedback
-| Key           | Component       | Module and functions                 | Variants and states                          | Accessibility minimum                                        |
-| :------------ | :-------------- | :----------------------------------- | :------------------------------------------- | :----------------------------------------------------------- |
-| `toast`       | Toast           | `toast.js`: `createToast`            | message, with Undo, persistent; three tiers  | announced by the live region; holds while a modal is open    |
-| none, utility | Live region     | `live-region.js`: `createLiveRegion` | polite, assertive                            | present at page load; text changes are announced             |
-| `banner`      | Banner          | none                                 | info, success, warning, danger               | `role="status"`, or `role="alert"` for danger                |
-| `loading`     | Loading pattern | none                                 | busy region, status line, slow-list skeleton | `aria-busy`; polite status text; static under reduced motion |
-| `progress`    | Progress bar    | none                                 | determinate, indeterminate                   | native `progress` with a label                               |
-| `spinner`     | Spinner         | none                                 | sizes sm, md                                 | label in the status line; static under reduced motion        |
+| Key           | Component       | Module and functions                   | Variants and states                          | Accessibility minimum                                        |
+| :------------ | :-------------- | :------------------------------------- | :------------------------------------------- | :----------------------------------------------------------- |
+| `toast`       | Toast           | `toast.js`: `createToast`              | message, with Undo, persistent; three tiers  | announced by the live region; holds while a modal is open    |
+| none, utility | Live region     | `live-region.js`: `createLiveRegion`   | polite, assertive                            | present at page load; text changes are announced             |
+| none, utility | Auto-refresh    | `auto-refresh.js`: `attachAutoRefresh` | poll while visible; return; long return      | no Refresh button; keeps typed input and selections          |
+| `banner`      | Banner          | none                                   | info, success, warning, danger               | `role="status"`, or `role="alert"` for danger                |
+| `loading`     | Loading pattern | none                                   | busy region, status line, slow-list skeleton | `aria-busy`; polite status text; static under reduced motion |
+| `progress`    | Progress bar    | none                                   | determinate, indeterminate                   | native `progress` with a label                               |
+| `spinner`     | Spinner         | none                                   | sizes sm, md                                 | label in the status line; static under reduced motion        |
 
 ### Overlays
 | Key              | Component           | Module and functions                       | Variants and states                       | Accessibility minimum                              |

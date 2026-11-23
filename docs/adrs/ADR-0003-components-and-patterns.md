@@ -99,6 +99,14 @@ Documented as contracts without components of their own:
 - The current navigation entry carries `aria-current="page"`.
 - A new service worker version shows an Update toast, and the user chooses when to reload.
 - The offline page explains the state and offers Retry.
+- Refresh: screens have no manual Refresh button.
+  - Apps refresh when the user returns to the tab, and poll only while the tab is visible.
+  - A return after a longer absence also reloads the current screen, when that screen opts in.
+  - A refresh never reloads a screen with a form, so typed input survives.
+  - A refresh updates the UI only when the data changed, so selections and scroll positions survive.
+  - Installed apps also refresh on pull-down, through `pull-refresh.js`.
+  - The `auto-refresh.js` utility times polls and returns; what to refresh stays with the app.
+  - **[Decided]** with the user on 2026-11-23: promoted from Auth's SPA before a second app needed it.
 
 ### Internationalization contract
 - One JSON catalog per locale holds flat dotted keys, such as `common.save`; component strings use `{{key}}.{{name}}`.
