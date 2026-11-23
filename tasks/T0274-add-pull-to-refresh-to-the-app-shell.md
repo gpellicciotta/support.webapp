@@ -1,15 +1,18 @@
 ---
 id: T0274
-owner: ~
+owner: "@claude-code"
 needs: []
 branch: —
 worktree: —
-status: ready
-started_at: —
+status: active
+started_at: "2026-11-23T10:09:15Z"
 ended_at: —
 review: agent
 preview: none
 protocol: standard
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T10:29:28Z"
 ---
 # T0274: Add pull-to-refresh to the app shell, promoted from Auth's installed SPA
 
@@ -22,15 +25,51 @@ Record that exception in ADR-0003, document the part in ADR-0004, and show it in
 Completion check: `python scripts/devops.py check` passes, with the new unit and browser tests green.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read Auth's pull-to-refresh module, styles, tests, and T0249, plus app-nav.js and ADR-0004.
-- [ ] **[Implement]** Author failing unit and browser tests for the gesture, threshold, indicator, and inactive cases.
-- [ ] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
-- [ ] **[Implement]** Add pull-refresh.js, the shell indicator styles, and the shell demo wiring.
-- [ ] **[Verify]**    Run the affected tests and the full check suite.
-- [ ] **[Visual]**    Capture the shell demo mid-pull across looks and themes at mobile width, before and after.
-- [ ] **[Doc]**       Update ADR-0003, ADR-0004, components.md, and CHANGELOG.md.
+- [x] **[Read]**      Read Auth's pull-to-refresh module, styles, tests, and T0249, plus app-nav.js and ADR-0004.
+- [x] **[Implement]** Author failing unit and browser tests for the gesture, threshold, indicator, and inactive cases.
+- [x] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
+- [x] **[Implement]** Add pull-refresh.js, the shell indicator styles, and the shell demo wiring.
+- [x] **[Verify]**    Run the affected tests and the full check suite.
+- [x] **[Visual]**    Capture the shell demo mid-pull across looks and themes at mobile width, before and after.
+- [x] **[Doc]**       Update ADR-0003, ADR-0004, components.md, and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-23] **[Doc]**
   Companion task file scaffolded at task creation.
+
+- [2026-11-23] **[Read]**
+  Read Auth's pull-to-refresh module, styles, wiring, and tests at c7129b8, plus app-nav.js, live-region.js, and ADR-0004.
+
+- [2026-11-23] **[Decided]**
+  Used the sprite's sync-syncing glyph, overridable by an icon option, since no look sprite holds a refresh glyph.
+
+- [2026-11-23] **[Decided]**
+  Also ignored pulls inside any scrolled ancestor, so the main scroll mode's scrolled main area keeps its own pan.
+
+- [2026-11-23] **[Verify]**
+  Added unit and browser tests; the unit file failed to import the missing module, and two browser tests failed as expected.
+
+- [2026-11-23] **[Implement]**
+  Added pull-refresh.js, the shell indicator styles, and the portal demo wiring with a sample refresh toast.
+
+- [2026-11-23] **[Verify]**
+  Confirmed python scripts/devops.py check passed linters, unit, browser, integration, and pack checks.
+  - 2209 Vitest and 61 pytest tests passed.
+  - 858 Playwright and 7 integration tests passed.
+
+- [2026-11-23] **[Visual]**
+  Captured the portal demo mid-pull across looks and themes at 390 px; see validation-proof.md for the links.
+
+- [2026-11-23] **[Doc]**
+  Updated ADR-0003, ADR-0004, components.md, the undeclared visual-style-guide.md, and CHANGELOG.md; seven counted files stay below the typical line.
+
+- [2026-11-23] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 7.
+  - Lines touched: 121.
+  - Reopenings: 0.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
+

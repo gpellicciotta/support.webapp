@@ -42,6 +42,7 @@ The starter template precaches every vendored manifest file, so it needs no chan
 - docs/adrs/ADR-0003-components-and-patterns.md
 - docs/adrs/ADR-0004-app-shell.md
 - docs/specs/components.md
+- docs/specs/visual-style-guide.md
 
 Added files, not counted: `src/js/pull-refresh.js`, `tests/unit/pull-refresh.test.js`, `tests/e2e/pull-refresh.spec.js`.
 
