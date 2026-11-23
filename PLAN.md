@@ -3,7 +3,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
 - [x] T0303 Make the design integrity hashes ignore line endings, so LF and CRLF checkouts of a vendored copy both pass.
-- [~] T0278 [owner: @gemini] Add a page base stylesheet for body text, headings, links, code, and the hidden guard, promoted from Auth.
+- [x] T0278 Add a page base stylesheet for body text, headings, links, code, and the hidden guard, promoted from Auth.
 - [ ] T0279 Add a release notes renderer for parsed changelogs, promoted from Auth's Help view and admin console.
 - [ ] T0280 Add a theme boot script and account theme sync to the theme switch, promoted from Auth.
 - [ ] T0281 Add an install prompt module for installable apps, promoted from Auth, counters, and meteo.
