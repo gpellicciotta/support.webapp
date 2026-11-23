@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1215.4, input: 414002, output: 65369, cache_read: 16649691}
+work_duration: 1242.1
 ---
 # T0290: Add a notices module that routes app notifications to banners and toasts, promoted from Auth
 

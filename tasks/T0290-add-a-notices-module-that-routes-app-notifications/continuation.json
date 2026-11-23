@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "completed": [
+    {
+      "item": "Add notices module with store, 3-banner cap, sticky inbox banner, safe URLs, and callbacks",
+      "evidence": "commit f18904d (src/js/notices.js); 15 unit tests passed in tests/unit/notices.test.js"
+    },
+    {
+      "item": "Register notices contract entry and wire portal shell demo",
+      "evidence": "commit f18904d (src/contract.json, shell-portal.html, shell-demo.js); 36 e2e and 20 verify-ui tests passed"
+    },
+    {
+      "item": "Capture mobile and desktop screenshots across looks and themes",
+      "evidence": "2 before and 7 after screenshots saved in task companion dir and linked in validation-proof.md"
+    },
+    {
+      "item": "Update components.md, ADR-0003, ADR-0004 (1 line), upgrade note, and CHANGELOG.md",
+      "evidence": "commit f18904d (6 counted files, 131 lines; python scripts/devops.py lint passed)"
+    },
+    {
+      "item": "Verify fast tests, integration tests, and package dry-run",
+      "evidence": "devops.py tests (61 pytest, 2375 Vitest), test:integration (7 tests), and npm pack --dry-run passed"
+    }
+  ],
+  "remaining": [
+    "Run python scripts/devops.py check to completion, log proof, check step 6, and run plan tasks validate --completion"
+  ],
+  "next_action": "Run python scripts/devops.py check directly in-turn instead of plan tasks supervise (PID 37912 exited with 0-byte log and no result JSON on turn 1 exit), log proof, check step 6, validate.",
+  "blocker": null,
+  "scope": null
+}
