@@ -1,8 +1,8 @@
-import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { fileURLToPath } from 'node:url';
+import { fileHash } from './check.mjs';
 
 export const packageRoot = fileURLToPath(new URL('../', import.meta.url));
 
@@ -22,12 +22,12 @@ export function buildManifest(root = packageRoot) {
                 walk(join(folder, item.name), `${name}/`);
             }
             else {
-                files[name] = { look: /^looks\/([^/]+)\//.exec(name)?.[1] ?? null, sha256: createHash('sha256').update(readFileSync(join(folder, item.name))).digest('hex') };
+                files[name] = { look: /^looks\/([^/]+)\//.exec(name)?.[1] ?? null, sha256: fileHash(join(folder, item.name)) };
             }
         }
     }
     walk(join(root, 'src'));
-    files['bin/check.mjs'] = { look: null, sha256: createHash('sha256').update(readFileSync(join(root, 'bin/check.mjs'))).digest('hex') };
+    files['bin/check.mjs'] = { look: null, sha256: fileHash(join(root, 'bin/check.mjs')) };
     return { version: JSON.parse(readFileSync(join(root, 'package.json'))).version, files };
 }
 

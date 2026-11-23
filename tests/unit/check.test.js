@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { check, inside, scanStyles } from '../../bin/check.mjs';
+import { check, fileHash, inside, scanStyles } from '../../bin/check.mjs';
 
 const contract = { deprecated: ['--old'], tokens: [{ name: '--color-text' }] };
 describe('app style conformance', () => {
@@ -28,18 +28,18 @@ describe('app style conformance', () => {
 
 describe('vendored copy integrity', () => {
     const hash = text => createHash('sha256').update(text).digest('hex');
-    function fixture() {
+    function fixture(extra = {}) {
         const app = mkdtempSync(join(tmpdir(), 'design-check-'));
         onTestFinished(() => rmSync(app, { recursive: true, force: true }));
         const target = join(app, 'vendor/design');
         mkdirSync(join(target, 'looks/neutral'), { recursive: true });
         mkdirSync(join(app, 'css'));
-        const files = { 'contract.json': '{"tokens":[]}', 'css/style.css': '.a {}', 'looks/neutral/primitives.css': ':root { --neutral-ink: #000; }' };
+        const files = { 'contract.json': '{"tokens":[]}', 'css/style.css': '.a {}', 'looks/neutral/primitives.css': ':root { --neutral-ink: #000; }', ...extra };
         const manifest = { version: '1.2.3', files: {} };
-        for (const [path, text] of Object.entries(files)) {
+        for (const [path, data] of Object.entries(files)) {
             mkdirSync(join(target, path, '..'), { recursive: true });
-            writeFileSync(join(target, path), text);
-            manifest.files[path] = { look: /^looks\/([^/]+)\//.exec(path)?.[1] ?? null, sha256: hash(text) };
+            writeFileSync(join(target, path), data);
+            manifest.files[path] = { look: /^looks\/([^/]+)\//.exec(path)?.[1] ?? null, sha256: hash(data) };
         }
         writeFileSync(join(target, 'manifest.json'), JSON.stringify(manifest));
         writeFileSync(join(app, 'design.json'), JSON.stringify({ version: '1.2.3', look: 'neutral', target: 'vendor/design', styles: ['css'] }));
@@ -79,6 +79,31 @@ describe('vendored copy integrity', () => {
         const { app } = fixture();
         writeFileSync(join(app, 'design.json'), JSON.stringify({ version: '1.2.3', look: 'neutral', target: 'vendor/design', styles: ['nope'] }));
         expect(check(app).conformance.errors).toEqual(['Missing styles folder: nope']);
+    });
+    it('passes a vendored copy rewritten to CRLF and back to LF', () => {
+        const { app, target } = fixture({ 'css/style.css': '.a {\n  color: var(--c);\n}\n', 'js/app.js': 'export const a = 1;\nexport const b = 2;\n' });
+        for (const path of ['css/style.css', 'js/app.js']) {
+            writeFileSync(join(target, path), path.endsWith('.css') ? '.a {\r\n  color: var(--c);\r\n}\r\n' : 'export const a = 1;\r\nexport const b = 2;\r\n');
+        }
+        expect(fileHash(join(target, 'css/style.css'))).toBe(hash('.a {\n  color: var(--c);\n}\n'));
+        expect(check(app)).toMatchObject({ ok: true, integrity: { errors: [] } });
+        for (const path of ['css/style.css', 'js/app.js']) {
+            writeFileSync(join(target, path), path.endsWith('.css') ? '.a {\n  color: var(--c);\n}\n' : 'export const a = 1;\nexport const b = 2;\n');
+        }
+        expect(check(app)).toMatchObject({ ok: true, integrity: { errors: [] } });
+    });
+    it('fails a changed character or lone carriage return in a text file', () => {
+        const { app, target } = fixture({ 'css/style.css': '.a {\n  color: var(--c);\n}\n' });
+        writeFileSync(join(target, 'css/style.css'), '.a {\r\n  color: var(--d);\r\n}\r\n');
+        expect(errors(app)).toMatch(/Changed file: css\/style\.css/);
+        writeFileSync(join(target, 'css/style.css'), '.a {\r  color: var(--c);\n}\n');
+        expect(errors(app)).toMatch(/Changed file: css\/style\.css/);
+    });
+    it('fails a binary file whose CRLF bytes become LF', () => {
+        const { app, target } = fixture({ 'fonts/font.woff2': Buffer.from([0x77, 0x4f, 0x46, 0x32, 0x0d, 0x0a, 0x00, 0x01]) });
+        expect(check(app).ok).toBe(true);
+        writeFileSync(join(target, 'fonts/font.woff2'), Buffer.from([0x77, 0x4f, 0x46, 0x32, 0x0a, 0x00, 0x01]));
+        expect(errors(app)).toMatch(/Changed file: fonts\/font\.woff2/);
     });
     it('resolves relative roots and rejects paths that leave them', () => {
         expect(inside('.', 'bin')).toBe(resolve('bin'));

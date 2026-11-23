@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- CLI: Normalized CRLF to LF in text integrity hashes, so LF and CRLF checkouts of vendored copies both pass.
 
 ## v0.4.0 [released: 2026-11-23]
 - Docs: Followed support.js v4.0.0, which dropped its UI; the comparison now links its stylesheets at commit `7738fab`.

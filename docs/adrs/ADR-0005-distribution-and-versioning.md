@@ -68,6 +68,8 @@ Pin and drift check:
 - `check.mjs` is self-contained: it holds its own hashing code and imports nothing else.
 - `node {{web-root}}/vendor/design/bin/check.mjs` fails when the copy differs from its manifest.
   A changed file, a missing file, or a file the manifest does not list fails it.
+- Known text files (`css`, `js`, `mjs`, `json`, `svg`, `html`, `md`, `txt`) normalize CRLF to LF before hashing.
+- Lone CR bytes stay unchanged, other file types hash raw bytes, and both LF and CRLF checkouts pass.
 - It also fails when the pin differs from the `version` in `manifest.json`.
 - It catches accidental edits; an edit to both a file and its manifest entry is out of scope.
 - [ADR-0007](ADR-0007-documentation-and-verification.md) describes the integrity and conformance jobs of the check.

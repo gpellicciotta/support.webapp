@@ -69,6 +69,8 @@ node {{web-root}}/vendor/design/bin/check.mjs --format json
 - Exit codes: 0 success, 1 operational or check failure, 2 invalid arguments.
 
 The `prepack` script writes `manifest.json` with each file's look and SHA-256 hash; `postpack` removes it.
+Both [manifest.mjs](../bin/manifest.mjs) and [check.mjs](../bin/check.mjs) normalize CRLF to LF for `css`, `js`, `mjs`, `json`, `svg`, `html`, `md`, and `txt` files.
+Lone CR bytes stay unchanged, and other file types hash raw bytes, so LF and CRLF checkouts pass.
 `vendor` refuses a package whose files differ from its `manifest.json`.
 
 ---

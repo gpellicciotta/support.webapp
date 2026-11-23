@@ -33,6 +33,17 @@ it('packs, vendors, checks offline, re-vendors, and rejects drift and bad argume
     const checker = join(app, target, 'bin/check.mjs');
     const check = () => run(checker, ['--format', 'json'], app);
     expect(check().status, check().stderr).toBe(0);
+    const vendoredFiles = Object.entries(JSON.parse(readFileSync(join(app, target, 'manifest.json'))).files)
+        .filter(([name, entry]) => (entry.look === null || entry.look === 'neutral') && /\.(?:css|js|mjs|json|svg|html|md|txt)$/i.test(name))
+        .map(([name]) => join(app, target, name));
+    for (const file of vendoredFiles) {
+        writeFileSync(file, readFileSync(file, 'utf8').replace(/\r?\n/g, '\r\n'));
+    }
+    expect(check().status, check().stderr).toBe(0);
+    for (const file of vendoredFiles) {
+        writeFileSync(file, readFileSync(file, 'utf8').replaceAll('\r\n', '\n'));
+    }
+    expect(check().status, check().stderr).toBe(0);
     expect(JSON.parse(readFileSync(join(app, 'design.json'))).styles).toEqual(['styles']);
     writeFileSync(join(app, 'styles/app.css'), '.app { color: red; }');
     expect(check().status).toBe(1);
