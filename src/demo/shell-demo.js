@@ -1,9 +1,10 @@
-/* Look and theme switchers, the nav toggle, and the sample interactions of the shell demo pages. */
+/* Look and theme switchers, the nav toggle, pull-to-refresh, and the sample interactions of the shell demo pages. */
 
 import { initGallery } from './gallery.js';
 import { attachAppNav } from '../js/app-nav.js';
 import { attachMenu } from '../js/menu.js';
 import { createLiveRegion } from '../js/live-region.js';
+import { attachPullRefresh } from '../js/pull-refresh.js';
 import { createToast } from '../js/toast.js';
 
 /**
@@ -20,6 +21,16 @@ export function initShellDemo(doc, view) {
     const toaster = createToast({ document: doc, region: doc.querySelector('.app__overlays > .toast-region'), liveRegion: createLiveRegion({ document: doc }) });
     for (const button of doc.querySelectorAll('[data-demo-toast]')) {
         button.addEventListener('click', () => toaster.show(button.dataset.demoToast));
+    }
+    // Installed, a pull at the page top runs a sample refresh; browser tabs keep their own pull-down reload.
+    if (doc.body.hasAttribute('data-demo-pull-refresh')) {
+        attachPullRefresh(doc.body, {
+            container: doc.querySelector('.app__overlays'),
+            onRefresh: async () => {
+                await new Promise((resolve) => view.setTimeout(resolve, 600));
+                toaster.show('Sample page refreshed.');
+            }
+        });
     }
     const menu = doc.querySelector('[data-demo-menu]');
     if (menu) {

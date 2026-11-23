@@ -871,6 +871,28 @@ Render the top bar from one shared server template partial.
 </body>
 ```
 
+### Pull-to-refresh
+Installed apps add it to any setup with `attachPullRefresh(root, { onRefresh, container, media, labels, icon })` from `pull-refresh.js`.
+- It acts only while `(display-mode: standalone)` matches; browser tabs keep their native pull-down reload.
+- A one-finger pull at the top of the page and every scrolled ancestor, outside open dialogs and popovers, starts it.
+- A release at 64 px or more calls `onRefresh`; the indicator spins until its promise settles, for at least 400 ms.
+- The module appends the indicator to `container`, normally the overlay layer, and announces "Refreshing" politely.
+- Call `setSpriteUrl` first; the indicator draws `icon-sync-syncing` unless `icon` names another glyph.
+
+```html
+<html data-pull-refresh>
+  ...
+  <div class="app__overlays">
+    <div class="toast-region" role="region" aria-label="Notifications"></div>
+    <div class="app__pull-indicator" aria-hidden="true" data-state="pulling">...</div>
+  </div>
+</html>
+```
+
+- The module sets `data-pull-refresh` and the indicator; apps never write them.
+- `data-state` is `pulling`, `armed`, or `refreshing`, and `hidden` hides the idle indicator.
+- The module moves the indicator through `--_app-pull-travel` and `--_app-pull-progress`.
+
 ---
 
 ## Glossary

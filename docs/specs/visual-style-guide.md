@@ -564,7 +564,17 @@ Nav toggle:
 <nav class="app__sidebar" id="app-nav" aria-label="Main" popover>...</nav>
 ```
 
-`shell.css` is the only package stylesheet with fixed or sticky positions; it also pins the toast region.
+Pull-to-refresh:
+- Call `attachPullRefresh(document.body, { onRefresh, container })` from [pull-refresh.js](../../src/js/pull-refresh.js) at page load.
+  Pass the overlay layer as `container`, and set the sprite url first.
+- It acts only while the app runs installed; browser tabs keep their own pull-down reload.
+- Use it on screens whose data can change elsewhere, such as dashboards and inboxes.
+- Do not make it the only way to refresh, since browser tabs never show it.
+- The indicator slides down under the top bar, turns as the pull nears 64 px, and spins while refreshing.
+- Reduced motion stops the spin; the "Refreshing" announcement reaches screen readers.
+- The [portal demo](../../src/demo/shell-portal.html) runs a sample refresh when installed.
+
+`shell.css` is the only package stylesheet with fixed or sticky positions; it also pins the toast region and pull indicator.
 The `.skip-link` sits above the top edge until focused, keeping its 44 px target.
 
 **[Decided]** The width options center the top bar, banners, and action bar with the main area, so their content lines up.

@@ -10,6 +10,7 @@
  * Scroll modes: `app--scroll-main`, the default without a modifier, scrolls the main area between fixed bars;
  *   `app--scroll-page` scrolls the document with sticky bars.
  * Width options: `app--width-reading`, `app--width-narrow`, and `app--width-content` center the main column at that width token.
+ * Installed apps add the pull-to-refresh indicator to the overlay layer (pull-refresh.js).
  * This is the only package stylesheet that sets fixed or sticky positions; bars pad themselves with the safe-area insets.
  */
 
@@ -378,6 +379,61 @@
 /* Content can scroll clear of the control in either scroll mode. */
 .app:has(> .app__overlays > .fab:not([hidden])) > .app__main {
   padding-block-end: calc(var(--target-min) + var(--space-3) + var(--space-7));
+}
+
+/*
+ * Pull-to-refresh in the installed app (pull-refresh.js): the page keeps the browser from reloading on overscroll,
+ * and a round indicator slides down under the top bar with the pull, turning as it nears the threshold,
+ * then spins while refreshing. The module sets the travel and progress properties.
+ */
+html[data-pull-refresh] {
+  overscroll-behavior-y: contain;
+}
+
+.app__pull-indicator {
+  position: fixed;
+  inset-block-start: max(var(--_app-top-offset), env(safe-area-inset-top));
+  inset-inline-start: calc(50% - var(--target-min) / 2);
+  z-index: var(--layer-float);
+  display: grid;
+  place-items: center;
+  inline-size: var(--target-min);
+  block-size: var(--target-min);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-round);
+  background-color: var(--color-surface);
+  box-shadow: var(--elevation-1);
+  color: var(--color-primary);
+  opacity: var(--_app-pull-progress, 0);
+  pointer-events: none;
+  transform: translateY(calc(var(--_app-pull-travel, 0px) - var(--target-min)));
+}
+
+.app__pull-indicator[hidden] {
+  display: none;
+}
+
+.app__pull-indicator .icon {
+  transform: rotate(calc(var(--_app-pull-progress, 0) * 270deg));
+}
+
+.app__pull-indicator[data-state='refreshing'] {
+  opacity: 1;
+  transform: translateY(var(--space-4));
+}
+
+.app__pull-indicator[data-state='refreshing'] .icon {
+  animation: app-pull-indicator-spin var(--duration-spin) linear infinite;
+}
+
+@keyframes app-pull-indicator-spin {
+  to { transform: rotate(1turn); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app__pull-indicator[data-state='refreshing'] .icon {
+    animation: none;
+  }
 }
 
 .toast-region {

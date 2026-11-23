@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="gallery.css">
     <script type="module" src="shell-demo.js"></script>
 </head>
-<body class="app app--scroll-page">
+<body class="app app--scroll-page" data-demo-pull-refresh>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="app__top-bar">
         <a class="app__brand" href="#main">Portal</a>
@@ -52,6 +52,7 @@
         <section class="gallery-section" aria-labelledby="sample-calendar-title">
             <h2 id="sample-calendar-title">Sample calendar</h2>
             <p>One server template partial renders this top bar; the footer moves from a fixed position into the action bar.</p>
+            <p>Installed as an app, a pull down at the page top runs a sample refresh.</p>
             <div class="toast-demo-actions">
                 <button class="button button--secondary" type="button" data-demo-toast="Sample event saved.">Show a sample toast</button>
             </div>

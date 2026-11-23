@@ -12,6 +12,7 @@ All notable changes to this project are documented here.
 ## v0.4.0-pre
 - Docs: Followed support.js v4.0.0, which dropped its UI; the comparison now links its stylesheets at commit `7738fab`.
 - Components: Added the entry list: log lines and events as spaced cards, with the message first and chips for time, severity, and source.
+- Shell: Added pull-to-refresh for installed apps, as `pull-refresh.js` and the `app__pull-indicator` overlay part, promoted from Auth's SPA.
 
 ## v0.3.0 [released: 2026-11-23]
 - Looks: Refreshed the bright look with sea-tinted slate, cerulean blue, raspberry red, and self-hosted Lexend, keeping every contrast pair at AA.

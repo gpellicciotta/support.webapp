@@ -19,7 +19,9 @@ Defines the one shared shell: its areas, options, markup, responsive behavior, s
 
 ## Decision
 The shell is documented markup plus one `shell.css`, with no shell script and no router.
-One optional module, `app-nav.js`, enhances the nav toggle; the areas never depend on it.
+Two optional modules enhance the shell, and the areas never depend on them:
+- `app-nav.js` drives the nav toggle.
+- `pull-refresh.js` adds pull-to-refresh to installed apps, with the `app__pull-indicator` overlay part.
 Its component key is `app`, following the naming rules of [naming.md](../specs/naming.md).
 
 Areas, each optional except the main area:
@@ -30,7 +32,7 @@ Areas, each optional except the main area:
 - Main: the content, the only required area.
 - Action bar: the main actions of the current screen, or a footer.
 - Side panel: a detail or editor panel beside the main column.
-- Overlay layer: the toast region and other floating parts.
+- Overlay layer: the toast region and other floating parts, such as the pull-to-refresh indicator.
   The live region is not part of the markup: `createLiveRegion` appends it once at page load.
 
 Markup skeleton, with every area present:
@@ -72,6 +74,7 @@ Layout rules:
 
 - `shell.css` is the only package stylesheet that sets fixed or sticky positions.
   The floating action button sits in the overlay layer, as the one fixed control.
+  The pull-to-refresh indicator sits there too, as a decorative fixed part.
 
 - The sidebar and the bottom bar both carry `aria-label="Main"`; only one shows at any width.
 - A skip link leads to the main area.
@@ -88,6 +91,12 @@ Layout rules:
   The `popovertarget` attribute keeps the drawer working without the script.
 - Overflow menus open from `icon-more`, drawn as vertical dots, at the end of the top bar.
 - Navigation links mark the current entry with `aria-current="page"`.
+- **[Decided]** with the user on 2026-11-23: installed apps refresh on a pull down at the page top.
+  iOS gives installed web apps no pull-down reload, so `pull-refresh.js` supplies the gesture while `(display-mode: standalone)` matches.
+  Browser tabs keep their native reload; the module then sets nothing and ignores touches.
+  While installed, `<html data-pull-refresh>` sets `overscroll-behavior-y: contain`, so no native reload drops app state.
+  The `app__pull-indicator` slides down under the top bar, arms at 64 px, and spins until the refresh settles.
+  Auth's SPA built it app-locally in its task T0249; as a shell part, its fixed position stays in `shell.css`.
 
 Responsive behavior:
 - One layout breakpoint at 64rem, todos.webapp's value, splits narrow and wide layouts.

@@ -90,6 +90,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
 - Any later component starts app-local and moves into the package once a second app needs it.
 - **[Decided]** with the user on 2026-11-23: `entry-list` moved in from Auth's Admin Console before a second app needed it.
   Its log and event cards suit every app with an activity view, so the package holds it ahead of reuse.
+- **[Decided]** with the user on 2026-11-23: `pull-refresh.js` moved in from Auth's installed SPA before a second app needed it.
+  Installed apps lack a pull-down reload on iOS, and only `shell.css` may style its fixed indicator.
 
 ### Shared patterns
 Documented as contracts without components of their own:
