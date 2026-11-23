@@ -87,12 +87,13 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `tooltip`        | Tooltip             | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                |
 
 ### Identity and Foundations
-| Key            | Component    | Module and functions                                    | Variants and states                                     | Accessibility minimum                              |
-| :------------- | :----------- | :------------------------------------------------------ | :------------------------------------------------------ | :------------------------------------------------- |
-| `avatar`       | Avatar       | none                                                    | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name |
-| `account-menu` | Account menu | `account-menu.js`: `attachAccountMenu`, using `menu.js` | signed in, signed out                                   | menu pattern; marks the current route              |
-| `icon`         | Icon         | `icon.js`: `createIcon`                                 | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning            |
-| `theme-switch` | Theme switch | `theme-switch.js`: `attachThemeSwitch`                  | System, Light, Dark                                     | segmented control of native radios                 |
+| Key            | Component    | Module and functions                                    | Variants and states                                     | Accessibility minimum                                   |
+| :------------- | :----------- | :------------------------------------------------------ | :------------------------------------------------------ | :------------------------------------------------------ |
+| none, base     | Page base    | none                                                    | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable |
+| `avatar`       | Avatar       | none                                                    | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name      |
+| `account-menu` | Account menu | `account-menu.js`: `attachAccountMenu`, using `menu.js` | signed in, signed out                                   | menu pattern; marks the current route                   |
+| `icon`         | Icon         | `icon.js`: `createIcon`                                 | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                 |
+| `theme-switch` | Theme switch | `theme-switch.js`: `attachThemeSwitch`                  | System, Light, Dark                                     | segmented control of native radios                      |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -754,6 +755,23 @@ Theme switch. System removes `data-theme`; Light and Dark set it on the root ele
   <label class="segmented__option"><input type="radio" name="theme" value="dark">Dark</label>
 </fieldset>
 ```
+
+---
+
+## Page Base
+[page.css](../../src/css/page.css) loads after [reset.css](../../src/css/reset.css) and before components, styling bare elements from public tokens only.
+- `body`: ground (`--color-bg`), text (`--color-text`), `--font-body`, `--text-base`, `--weight-regular`, and `--leading-normal`.
+- Headings (`h1`–`h6`): `--font-heading`, `--weight-semibold`, `--leading-tight`; `h1` uses `--text-xl`, `h2` `--text-lg`, and `h3` `--text-base`.
+- Links (`a`): `--color-link`, hover color `--color-link-hover`, and `--focus-ring-width` underline thickness.
+- Inline code (`code`): `--font-mono` and `--text-sm`.
+- Guard: `[hidden]:not([hidden='until-found' i])` sets `display: none` while keeping `hidden="until-found"` panels findable.
+- Zero-specificity `:where(...)` selectors let component classes and app stylesheets override any element rule directly.
+- Set `data-page-base="off"` on `<html>` to opt out of bare element styles while keeping the `[hidden]` guard.
+
+Upgrading an existing app:
+- After vendoring this release, remove app-local base rules for `body`, headings, `a`, `code`, and `[hidden]`.
+- Keep only app-specific overrides, which win over [page.css](../../src/css/page.css) automatically.
+- See the [Page base section](../../src/demo/visual-style-gallery.html#page) of the gallery.
 
 ---
 

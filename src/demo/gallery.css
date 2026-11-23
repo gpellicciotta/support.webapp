@@ -69,29 +69,17 @@
   color: var(--color-text);
 }
 
-/* Page: the base text and ground, until the package ships element styles. */
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  line-height: var(--leading-normal);
-}
-
-h1, h2 {
+/* Gallery chrome typography overrides; page.css owns base body, headings, links, and code. */
+.gallery-header h1,
+.gallery-section > h2 {
   margin: 0 0 var(--space-3);
-  font-family: var(--font-heading);
-  font-weight: var(--weight-semibold);
-  line-height: var(--leading-tight);
   letter-spacing: var(--tracking-tight);
 }
 
-h1 { font-size: var(--text-3xl); }
-h2 { font-size: var(--text-xl); }
-p { margin: 0 0 var(--space-4); }
-code { font-family: var(--font-mono); font-size: var(--text-sm); }
-a { color: var(--color-link); }
-a:hover { color: var(--color-link-hover); }
+.gallery-header h1 { font-size: var(--text-3xl); }
+.gallery-section > h2 { font-size: var(--text-xl); }
+.gallery-header p,
+.gallery-section > p { margin: 0 0 var(--space-4); }
 
 /* Header and main column. */
 .gallery-header {
@@ -419,12 +407,9 @@ a:hover { color: var(--color-link-hover); }
 }
 
 /* Component sections: one list of state specimens per variant, each with its label. */
-h3 {
+.gallery-section > h3 {
   margin: var(--space-6) 0 var(--space-3);
-  font-family: var(--font-heading);
   font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
-  line-height: var(--leading-tight);
 }
 
 .states {

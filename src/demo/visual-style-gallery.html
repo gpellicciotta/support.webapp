@@ -61,6 +61,7 @@
                     <li><a href="#tokens-motion">Motion</a></li>
                     <li><a href="#tokens-sizes">Sizes</a></li>
                     <li><a href="#tokens-widths">Widths</a></li>
+                    <li><a href="#page">Page base</a></li>
                     <li><a href="#icon">Icon</a></li>
                     <li><a href="#button">Button</a></li>
                     <li><a href="#icon-button">Icon button</a></li>
@@ -323,6 +324,19 @@
                 <li class="token token--width-reading" data-token="--width-reading"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--width-reading</code><span class="token__value"></span></li>
                 <li class="token token--gutter" data-token="--gutter"><span class="token__sample token__sample--bar" aria-hidden="true"></span><code class="token__name">--gutter</code><span class="token__value"></span></li>
             </ul>
+        </section>
+        <section id="page" class="gallery-section" aria-labelledby="page-title">
+            <h2 id="page-title">Page base</h2>
+            <p>Default ground, body text, headings, underlined links, inline code, and the <code>[hidden]</code> guard from <code>page.css</code>.</p>
+            <div class="card">
+                <div>
+                    <h2>Heading level 2</h2>
+                    <h3>Heading level 3</h3>
+                    <p>Body text carries the look's body font, an <a href="#page">inline link</a>, a <a class="is-hover" href="#page">hovered link</a>, and inline <code>page.css</code> code.</p>
+                    <div class="card" hidden data-page-hidden><p>Hidden card content.</p></div>
+                    <div hidden="until-found" data-page-until-found><p>Content hidden until found stays searchable by find in page.</p></div>
+                </div>
+            </div>
         </section>
         <section id="icon" class="gallery-section" aria-labelledby="icon-title">
             <h2 id="icon-title">Icon</h2>

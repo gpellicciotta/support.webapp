@@ -49,6 +49,10 @@ First set, by category; the catalog holds the detail:
   The glow is a solid contour in `--color-focus` plus a soft halo, both drawn with `box-shadow`.
   Forced colors mode sets `box-shadow` to none ([MDN][mdn-forced-colors]), so a transparent outline stays for it.
   **[Decided]** with the user on 2026-11-17: the glow replaced the earlier outline after a gallery review.
+- **[Decided]** on 2026-11-23: [page.css](../../src/css/page.css) styles bare `body`, headings, `a`, `code`, and `[hidden]` after [reset.css](../../src/css/reset.css) and before components.
+  Element rules use `:where(...)` (zero specificity) so component classes and app stylesheets win without raising specificity.
+  An app opts out by overriding any rule in its own stylesheet, or by setting `data-page-base="off"` on `<html>`.
+  The `[hidden]` guard spares `hidden="until-found"` panels so find in page can reveal them.
 
 ### Naming link
 Each component has one kebab-case key, and every artifact derives its name from it.
