@@ -11,14 +11,14 @@ review: agent
 preview: human
 protocol: standard
 ---
-# T0042: Refresh the bright look's colors and fonts to new values chosen by the user, after meteo adopts it.
+# T0042: Refresh the bright look's colors and fonts to the variant the user picks from five rendered candidates.
 
 ## Goals
 Change the `bright` look's palette and font stacks to the values the user lists in the technical specification.
 Keep the token contract, AA contrast on every pair the token test checks, and every accent variant valid.
-Start only after meteo runs on its vendored copy, so its lossless switch proof stays clean.
+The user waived waiting for meteo on 2026-11-23; values follow the gallery review instead.
 Release the change as a new minor version; meteo picks it up with `vendor`.
-The human preview gate waits for the user's values; see the technical specification for files and tests.
+The user picks one of five rendered variants; see the technical specification for files and tests.
 
 ## Task Execution Steps
 - [ ] **[Read]**      Read ADR-0002, the look's spec, and the user's new values in the technical specification.
@@ -33,3 +33,11 @@ The human preview gate waits for the user's values; see the technical specificat
 ## Execution Log
 - [2026-11-13] **[Doc]**
   Created at the user's request after the design system milestone.
+
+- [2026-11-23] **[Decided]**
+  The user waived waiting for meteo adoption and asked for five rendered palette and font candidates.
+
+- [2026-11-23] **[Visual]**
+  Rendered five bright candidates and the current look in both themes; all pass the token test.
+  - Comparison: candidates/index.html and candidates.md.
+
