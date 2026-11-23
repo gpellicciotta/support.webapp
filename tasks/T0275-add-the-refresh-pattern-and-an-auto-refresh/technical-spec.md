@@ -31,6 +31,9 @@ Utility module `src/js/auto-refresh.js`, following the ADR-0003 JavaScript appro
 - src/demo/shell-demo.js
 - docs/adrs/ADR-0003-components-and-patterns.md
 - docs/specs/components.md
+- docs/specs/naming.md
+- docs/specs/visual-style-guide.md
+- src/demo/shell-portal.html
 
 Added files, not counted: `src/js/auto-refresh.js`, `tests/unit/auto-refresh.test.js`.
 
