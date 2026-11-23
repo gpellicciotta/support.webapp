@@ -12,7 +12,7 @@
 <body class="app app--scroll-page" data-demo-pull-refresh>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="app__top-bar">
-        <a class="app__brand" href="#main">Portal</a>
+        <a class="app__brand" href="#main"><img class="app__brand-logo" src="../img/app-icons/blue-flat/demos-icon.svg" alt="" width="32" height="32"><span>Portal</span></a>
         <nav class="app__breadcrumb" aria-label="Breadcrumb">
             <ol><li><a href="#main">Home</a></li><li><a href="#main" aria-current="page">Calendar</a></li></ol>
         </nav>
@@ -21,7 +21,14 @@
             <button class="icon-button" type="button" aria-label="Account"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-user"/></svg></button>
         </div>
     </header>
-    <div class="app__banners"></div>
+    <div class="app__banners">
+        <div class="banner" role="status">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg>
+            <p class="banner__text">Placeholder maintenance window starts tonight at 22:00.</p>
+            <a class="link-button" href="#sample-calendar-title">View details</a>
+            <button class="icon-button" type="button" aria-label="Dismiss"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-close"/></svg></button>
+        </div>
+    </div>
     <main class="app__main" id="main" tabindex="-1">
         <section class="gallery-section" aria-labelledby="demo-settings-title">
             <h2 id="demo-settings-title">Demo settings</h2>

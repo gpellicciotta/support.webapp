@@ -126,12 +126,19 @@
   display: inline-flex;
   flex: none;
   align-items: center;
+  gap: var(--space-2);
   min-block-size: var(--target-min);
   color: var(--color-text);
   font-family: var(--font-heading);
   font-size: var(--text-lg);
   font-weight: var(--weight-semibold);
   text-decoration: none;
+}
+
+.app__brand-logo {
+  flex: none;
+  inline-size: var(--space-7);
+  block-size: var(--space-7);
 }
 
 .app__menu-button,
@@ -189,6 +196,11 @@
   margin-inline-start: auto;
 }
 
+/* Top bar parts hidden by a layout stay hidden even where the shell or a component sets display. */
+.app__top-bar [hidden]:not([hidden='until-found' i]) {
+  display: none;
+}
+
 /* Navigation: a sidebar on wide screens and a bottom bar on narrow screens, with the same list and item parts. */
 .app__nav-list {
   display: grid;
@@ -224,8 +236,20 @@
   color: var(--color-primary);
 }
 
+/* Badges sit at the end of a navigation entry while staying part of its accessible name. */
+.app__nav-item .badge {
+  flex: none;
+  margin-inline-start: auto;
+}
+
 .app__sidebar {
   display: none;
+}
+
+/* An end navigation list pins to the sidebar bottom when open, as an icon rail, and as a drawer. */
+.app__sidebar > .app__nav-list--end {
+  margin-block-start: auto;
+  padding-block-end: var(--space-2);
 }
 
 .app__bottom-nav {
@@ -269,6 +293,7 @@
   inset: var(--_app-top-offset) auto 0 0;
   display: flex;
   flex-direction: column;
+  gap: var(--space-2);
   inline-size: min(var(--width-sidebar), 100% - var(--target-min));
   block-size: auto;
   margin: 0;
@@ -312,6 +337,16 @@
 
 .app__banners:not(:has(> :not([hidden]))) {
   display: none;
+}
+
+/* A shell banner's dismiss icon button stays at the end edge, even when wrapped after other actions. */
+.app__banners .banner > .icon-button {
+  margin-inline-start: auto;
+}
+
+/* When another action shares a wrapped line with the dismiss button, keep the action at the start instead of centered. */
+.app__banners .banner:has(> .icon-button) > .banner__text + :not(.icon-button) {
+  margin-inline-start: 0;
 }
 
 /* Main: the content, centered at the width option's token. */

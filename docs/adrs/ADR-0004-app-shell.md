@@ -27,9 +27,11 @@ Its component key is `app`, following the naming rules of [naming.md](../specs/n
 
 Areas, each optional except the main area:
 - Top bar: a nav toggle, title or brand, a menu button or breadcrumb, and account actions.
-  Its parts are `app__nav-toggle`, `app__title`, `app__brand`, `app__menu-button`, `app__breadcrumb`, and `app__top-actions`.
+  Its parts are `app__nav-toggle`, `app__title`, `app__brand`, `app__brand-logo`, `app__menu-button`, `app__breadcrumb`, and `app__top-actions`.
+  Setting `hidden` on a top bar part hides it despite its display rule, while sparing `hidden="until-found"`.
 - Navigation: a sidebar on wide screens, a bottom bar on narrow screens, or both.
-- Banners: system and status banners above the content.
+  An `app__nav-list--end` list pins to the sidebar bottom in every state, and a `.badge` sits at an `app__nav-item` end.
+- Banners: system and status banners above the content; a direct `.icon-button` sits at a banner's end edge.
 - Main: the content, the only required area.
 - Action bar: the main actions of the current screen, or a footer.
 - Side panel: a detail or editor panel beside the main column.

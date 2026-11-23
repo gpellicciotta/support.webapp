@@ -868,8 +868,23 @@ Upgrading an existing app:
 ## App Shell
 The shell has the key `app`, and [ADR-0004](../adrs/ADR-0004-app-shell.md) defines its areas and options.
 Choose a setup by navigation, scrolling, and content width; omit areas your application does not need.
-The top bar parts `app__nav-toggle`, `app__title`, `app__brand`, `app__menu-button`, `app__breadcrumb`, and `app__top-actions` come from ADR-0004.
+The top bar parts `app__nav-toggle`, `app__title`, `app__brand`, `app__brand-logo`, `app__menu-button`, `app__breadcrumb`, and `app__top-actions` come from ADR-0004.
 The sidebar and the bottom bar hold an `app__nav-list` of `app__nav-item` links, as the [demo pages](../../src/demo/visual-style-gallery.html#shell) show.
+
+Shell additions in [shell.css](../../src/css/shell.css):
+- Sidebar end list: add `app__nav-list--end` to a second `app__nav-list` inside `app__sidebar` to pin it to the bottom.
+  It stays pinned when the sidebar is open, an icon rail, or a narrow drawer.
+- Nav entry badges: place a `.badge` inside an `app__nav-item` to align it at the entry end.
+  Leave `aria-hidden` off the badge so its text stays in the link's accessible name.
+- Brand logo: place `<img class="app__brand-logo" alt="" width="32" height="32">` beside the brand text inside `app__brand`.
+  `shell.css` sizes the logo to `--space-7` and adds a `--space-2` gap to `app__brand`.
+- Hidden top bar parts: setting `hidden` on any part inside `app__top-bar` hides it despite shell or component display rules.
+  Elements with `hidden="until-found"` keep their box, matching [page.css](../../src/css/page.css).
+- Banner dismiss: a direct `.icon-button` inside `.app__banners .banner` stays at the banner end, even on a wrapped line.
+
+Upgrading an existing app:
+- Replace app-local `.app__sidebar > .nav-end` markup and CSS with `<ul class="app__nav-list app__nav-list--end">`.
+- Remove app-local rules for `.app__nav-item .badge`, `.app__brand` gap, `.app__brand-logo`, `.app__top-bar [hidden]`, and `.app__banners .banner > .icon-button`.
 
 ### Workspace with sidebar and bottom navigation
 Use every area, with sidebar and bottom navigation; the main column scrolls.
