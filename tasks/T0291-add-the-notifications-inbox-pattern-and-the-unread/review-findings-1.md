@@ -4,10 +4,13 @@ round: 1
 verdict: approved
 blocking: 0
 reviewer: "@claude"
-reviewed_at: 2026-11-23T23:04:09Z
+reviewed_at: 2026-11-23T23:24:13Z
 reviewed_commit: "8eadc4f"
 base_commit: "301d130"
 branch: task/T0291-add-the-notifications-inbox-pattern-and-the-unread
+session: claude-20261124-856192
+session_agent: claude-code
+session_created_at: 2026-11-23T23:04:09Z
 ---
 # Review Findings: Task T0291 (Round 1)
 
