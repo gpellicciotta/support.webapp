@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1446.5, input: 314819, output: 45458, cache_read: 12199880}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T19:50:21Z"
 ---
 # T0284: Add a view header component for a screen's title and summary line, promoted from Auth
 
@@ -63,4 +68,7 @@ Size estimate: 4 files, 50 lines.
   - Files touched: 5.
   - Lines touched: 36.
   - Reopenings: 0.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
