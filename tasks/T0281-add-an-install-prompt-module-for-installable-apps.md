@@ -1,11 +1,11 @@
 ---
 id: T0281
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0281-add-an-install-prompt-module-for-installable-apps
+worktree: .plan/work/T0281-add-an-install-prompt-module-for-installable-apps
+status: active
+started_at: "2026-11-23T17:33:05Z"
 ended_at: —
 review: agent
 preview: none
