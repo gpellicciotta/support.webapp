@@ -9,7 +9,7 @@ All notable changes to this project are documented here.
 
 ---
 
-## v0.2.2-pre
+## v0.3.0-pre
 - Looks: Refreshed the bright look with sea-tinted slate, cerulean blue, raspberry red, and self-hosted Lexend, keeping every contrast pair at AA.
 - DevEx: Paused the page clock in the form spec's async check and valid submit tests, so a slow run keeps their busy states.
 - DevEx: Set the `package-lock.json` root versions in both release version edits, so the lockfile tracks `package.json`.
