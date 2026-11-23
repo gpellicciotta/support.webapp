@@ -1,11 +1,11 @@
 ---
 id: T0285
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0285-add-a-file-download-helper-and-download-toast
+worktree: .plan/work/T0285-add-a-file-download-helper-and-download-toast
+status: active
+started_at: "2026-11-23T20:00:55Z"
 ended_at: —
 review: agent
 preview: none
