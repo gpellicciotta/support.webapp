@@ -69,6 +69,47 @@ All checks passed!
 gpellicciotta-support.webapp-0.4.0-pre.tgz
 ```
 
+### Review Round 1 Rework
+The fixes keep a pull through a zero move, drop it on a second finger or `touchcancel`, and accept text node targets.
+
+Command: `npx vitest run tests/unit/pull-refresh.test.js`, before the fixes (exit code 1).
+
+```text
+ ❯ tests/unit/pull-refresh.test.js (20 tests | 4 failed) 1436ms
+     × keeps a pull through a move that returns to the start height 34ms
+     × lets the indicator go when a second finger lands mid-pull 9ms
+     × starts a pull on a text node, as WebKit reports touches on text 6ms
+     × cancels an armed pull when the system takes the touch 18ms
+      Tests  4 failed | 16 passed (20)
+```
+
+Command: `npx vitest run tests/unit/pull-refresh.test.js`, after the fixes (exit code 0).
+
+```text
+      Tests  20 passed (20)
+   Duration  3.55s (environment 52%, tests 44%, transform 2%, import 1%, worker 1%)
+```
+
+Command: `python scripts/devops.py check`, after the fixes (exit code 0).
+
+```text
+[... 2 lines omitted ...]
+All 27 markdown files passed linting.
+[... 2 lines omitted ...]
+All checks passed!
+[... 21 lines omitted ...]
+======================== 61 passed, 1 skipped in 4.60s ========================
+[... 5 lines omitted ...]
+ Test Files  36 passed (36)
+      Tests  2213 passed (2213)
+[... 1196 lines omitted ...]
+  858 passed (8.2m)
+[... 6 lines omitted ...]
+      Tests  7 passed (7)
+[... 134 lines omitted ...]
+gpellicciotta-support.webapp-0.4.0-pre.tgz
+```
+
 ### Visual Verification
 A scratch Playwright script loaded `/demo/shell-portal.html` at 390 px with a standalone `matchMedia` and a 140 px synthetic pull.
 The server returned HTTP 200; the script reported no console, page, or HTTP problems before or after.

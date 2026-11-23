@@ -11,8 +11,9 @@ review: agent
 preview: none
 protocol: standard
 review_status: pending
-review_round: 1
-review_requested_at: "2026-11-23T10:29:28Z"
+review_round: 2
+review_requested_at: "2026-11-23T10:56:40Z"
+review_session: antigravity-20261123-812336
 ---
 # T0274: Add pull-to-refresh to the app shell, promoted from Auth's installed SPA
 
@@ -72,4 +73,29 @@ Completion check: `python scripts/devops.py check` passes, with the new unit and
 
 - [2026-11-23] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-23] **[Review]**
+  Round 1 rejected by @gemini: Rejected in round 1 with 3 blocking defects in `src/js/pull-refresh.js`.
+  - Findings: [review-findings-1.md](T0274-add-pull-to-refresh-to-the-app-shell/review-findings-1.md).
+
+- [2026-11-23] **[Implement]**
+  Fixed round 1 findings: a zero move keeps the pull, a second finger or touchcancel drops it, and text node targets start pulls.
+  - Listed both new test files in the style guide.
+
+- [2026-11-23] **[Verify]**
+  Added four unit tests that failed before the fixes and pass after them.
+
+- [2026-11-23] **[Verify]**
+  Confirmed python scripts/devops.py check passed after the rework.
+  - 2213 Vitest and 61 pytest tests passed.
+  - 858 Playwright and 7 integration tests passed.
+
+- [2026-11-23] **[Verify]**
+  Recorded task outcomes after the rework.
+  - Files touched: 7.
+  - Lines touched: 123.
+  - Reopenings: 0.
+
+- [2026-11-23] **[Review]**
+  Round 2 requested (mode: agent).
 
