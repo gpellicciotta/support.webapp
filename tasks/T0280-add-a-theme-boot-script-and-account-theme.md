@@ -1,6 +1,7 @@
 ---
 id: T0280
 owner: "@gemini"
+session: antigravity-20261123-56e788
 needs: []
 branch: task/T0280-add-a-theme-boot-script-and-account-theme
 worktree: .plan/work/T0280-add-a-theme-boot-script-and-account-theme
@@ -22,13 +23,13 @@ Completion check: `python scripts/devops.py check`, with the new tests green.
 Size estimate: 4 files, 100 lines.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read the technical specification, the audit section, and the Auth source it cites.
-- [ ] **[Decide]**    Choose the module key and exported API, following naming.md and the ADR-0003 JavaScript approach.
-- [ ] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
-- [ ] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
-- [ ] **[Implement]** Add the theme boot script and account sync, its contract entry, and a gallery or shell demo section.
-- [ ] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
-- [ ] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
+- [x] **[Read]**      Read the technical specification, the audit section, and the Auth source it cites.
+- [x] **[Decide]**    Choose the module key and exported API, following naming.md and the ADR-0003 JavaScript approach.
+- [x] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
+- [x] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
+- [x] **[Implement]** Add the theme boot script and account sync, its contract entry, and a gallery or shell demo section.
+- [x] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
+- [x] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -37,4 +38,31 @@ Size estimate: 4 files, 100 lines.
 
 - [2026-11-23] **[Doc]**
   Task fleshed out from the T0277 audit of Auth's webapp at commit eeb9439.
+
+- [2026-11-23] **[Decided]**
+  Kept module key theme-switch, adding classic src/js/theme-boot.js with data-theme-switch-app/legacy-key hooks plus normalizeTheme, themeOfSettings, themeBootScript, syncAccountTheme, and attachThemeSwitch sync callbacks.
+
+- [2026-11-23] **[Verify]**
+  Red-phase TDD confirmed: 13 unit tests and 3 browser tests failed as expected before implementation.
+  - vitest theme-boot.test.js: 13 failed.
+  - playwright theme-boot.spec.js: 3 failed.
+
+- [2026-11-23] **[Implement]**
+  Added src/js/theme-boot.js, account theme sync in src/js/theme-switch.js, template boot tag, and gallery demo section. Contract already listed theme-switch.
+  - Undeclared modified: src/demo/visual-style-gallery.html, src/demo/gallery.js, docs/adrs/ADR-0003-components-and-patterns.md.
+  - Counted diff: 6 files, 321 lines (within typical line).
+
+- [2026-11-23] **[Doc]**
+  Updated components.md with boot script, account sync API, and upgrade note, recorded decision in ADR-0003, and updated CHANGELOG.md.
+
+- [2026-11-23] **[Verify]**
+  Full devops check passed (exit 0) and visual gallery screenshots verified in light and dark modes.
+  - Linters, 61 pytest, 2296 vitest, 910 playwright, 7 integration, pack dry-run green.
+  - Screenshots linked in validation-proof.md (before/after/section light and dark).
+
+- [2026-11-23] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 6.
+  - Lines touched: 321.
+  - Reopenings: 0.
 
