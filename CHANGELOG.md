@@ -9,7 +9,7 @@ All notable changes to this project are documented here.
 
 ---
 
-## v0.3.1-pre
+## v0.4.0-pre
 - Components: Added the entry list: log lines and events as spaced cards, with the message first and chips for time, severity, and source.
 
 ## v0.3.0 [released: 2026-11-23]
