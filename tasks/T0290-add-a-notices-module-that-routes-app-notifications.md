@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 1416.0, input: 506074, output: 76315, cache_read: 17662871}
+  worker: {turns: 3, duration_s: 2225.1, input: 541376, output: 81227, cache_read: 18605043}
 work_duration: 1471.7
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T22:29:11Z"
 ---
 # T0290: Add a notices module that routes app notifications to banners and toasts, promoted from Auth
 
@@ -76,4 +79,7 @@ Size estimate: 5 files, 200 lines.
   Ran python scripts/devops.py check directly in-turn (task-62) with exit code 0.
   - Lint, 61 pytest, 2375 Vitest, 986 Playwright, 7 integration tests, and pack passed.
   - Recorded verbatim proof in validation-proof.md.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
