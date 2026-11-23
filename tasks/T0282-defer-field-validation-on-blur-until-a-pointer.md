@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1801.4, input: 5990, output: 522}
+work_duration: 1811.8
 ---
 # T0282: Defer field validation on blur until a pointer press ends, promoted from Auth's admin console
 
