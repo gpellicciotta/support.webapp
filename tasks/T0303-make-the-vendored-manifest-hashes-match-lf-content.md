@@ -5,17 +5,22 @@ session: antigravity-20261123-b52085
 needs: []
 branch: task/T0303-make-the-vendored-manifest-hashes-match-lf-content
 worktree: .plan/work/T0303-make-the-vendored-manifest-hashes-match-lf-content
-status: active
+status: completed
 started_at: "2026-11-23T15:04:39Z"
-ended_at: —
+ended_at: "2026-11-23T15:33:31Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 1, duration_s: 1598.8, input: 181347, output: 30419, cache_read: 3688221}
-review_status: pending
+  review: {turns: 1, duration_s: 102.7, input: 18, output: 5179, cache_read: 340162, cache_write: 40042}
+review_status: approved
 review_round: 1
 review_requested_at: "2026-11-23T15:31:36Z"
+reviewed_by: "@claude"
+review_session: claude-20261123-80bcb2
+work_duration: 1732.2
+completion-commit: 78014873bdacc08a2c9144f5700dd4b3ebd9ffbb
 ---
 # T0303: Make the design integrity hashes ignore line endings, so LF and CRLF checkouts of a vendored copy both pass.
 
@@ -34,7 +39,7 @@ See [technical-spec.md](T0303-make-the-vendored-manifest-hashes-match-lf-content
 - [x] **[Implement]** Add the normalizing hash to `check.mjs` and use it in `manifest.mjs`.
 - [x] **[Verify]**    Run `python scripts/devops.py check` and record its output.
 - [x] **[Doc]**       Update ADR-0005, `docs/devops.md`, and `CHANGELOG.md` with the line-ending rule.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-23] **[Doc]**
@@ -62,4 +67,11 @@ See [technical-spec.md](T0303-make-the-vendored-manifest-hashes-match-lf-content
 
 - [2026-11-23] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-23] **[Review]**
+  Round 1 approved by @claude: The work meets the goals and the technical specification.
+  - Findings: [review-findings-1.md](T0303-make-the-vendored-manifest-hashes-match-lf-content/review-findings-1.md).
+
+- [2026-11-23] **[Complete]**
+  Task completed successfully.
 

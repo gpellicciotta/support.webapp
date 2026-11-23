@@ -4,10 +4,13 @@ round: 1
 verdict: approved
 blocking: 0
 reviewer: "@claude"
-reviewed_at: 2026-11-23T15:31:38Z
+reviewed_at: 2026-11-23T15:33:28Z
 reviewed_commit: "024b841"
 base_commit: "6cd2c62"
 branch: task/T0303-make-the-vendored-manifest-hashes-match-lf-content
+session: claude-20261123-80bcb2
+session_agent: claude-code
+session_created_at: 2026-11-23T15:31:38Z
 ---
 # Review Findings: Task T0303 (Round 1)
 
