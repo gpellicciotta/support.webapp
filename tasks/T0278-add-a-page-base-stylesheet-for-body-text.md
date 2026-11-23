@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1693.7, input: 374357, output: 63064, cache_read: 15620526}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T16:02:27Z"
 ---
 # T0278: Add a page base stylesheet for body text, headings, links, code, and the hidden guard, promoted from Auth
 
@@ -60,4 +65,7 @@ Size estimate: 4 files, 80 lines.
   - Files touched: 5.
   - Lines touched: 80.
   - Reopenings: 0.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
