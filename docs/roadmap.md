@@ -6,6 +6,7 @@ The decisions behind each phase are in the [ADRs](adrs/ADR-0001-layer-model-and-
 - Date: 2026-11-11.
 - **[Decided]** with the user on 2026-11-12: sibling backlog tasks wait until the system work of their phase is done.
 - **[Decided]** with the user on 2026-11-15: T0025 plans auth only, and T0046 plans counters.
+- **[Decided]** with the user on 2026-11-23: counters.server T0272 plans counters, replacing T0046 here.
 - Components follow the catalog in [components.md](specs/components.md) and the names in [naming.md](specs/naming.md).
 
 ---
@@ -16,7 +17,7 @@ The decisions behind each phase are in the [ADRs](adrs/ADR-0001-layer-model-and-
 3. Build the generator from the two adopted apps.
 4. Add the `bright` look from meteo and move meteo onto the system, dropping its quiz leftovers.
 5. Redesign and re-create auth and counters on the system, then retire the support.js styles.
-   auth follows the [auth redesign plan](plans/auth-redesign.md); T0046 plans counters.
+   auth follows the [auth redesign plan](plans/auth-redesign.md); counters.server T0272 plans counters.
 
 ---
 
@@ -126,8 +127,8 @@ Entry criteria:
 
 Work in this repository:
 - T0025: the [auth redesign plan](plans/auth-redesign.md), and the sibling tasks it proposes.
-- T0046: the counters redesign plan, and the sibling tasks it proposes.
 - Promote ToDo's admin console components, which auth's console needs, and release them.
+- Add any components or look that counters.server T0272 finds missing, as tasks created from its plan.
 
 Work in auth.server, as backlog tasks created there once the promotion is released:
 - Re-create the app on the `neutral` look and the shell, with no support.js stylesheets left.
@@ -137,7 +138,7 @@ Work in auth.server, as backlog tasks created there once the promotion is releas
 Work in todos.webapp and todos.server, after the same release:
 - Vendor the release, then swap the console's local components for the promoted ones.
 
-Work in counters and support.js, as T0046 proposes:
+Work in counters.server and support.js, as counters.server T0272 proposes:
 - Re-create counters on the system, with no support.js stylesheets left.
 - Retire the support.js stylesheets once no app loads them.
 

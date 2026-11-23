@@ -187,7 +187,7 @@ App-local in auth:
 ---
 
 ## Proposed Tasks
-auth.server tasks start once the promotion is released; they do not wait for T0046.
+auth.server tasks start once the promotion is released; they do not wait for counters.server T0272.
 Every sibling task is created only after the user approves this plan.
 
 In this repository, created on 2026-11-15:
