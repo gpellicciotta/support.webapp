@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1598.8, input: 181347, output: 30419, cache_read: 3688221}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T15:31:36Z"
 ---
 # T0303: Make the design integrity hashes ignore line endings, so LF and CRLF checkouts of a vendored copy both pass.
 
@@ -54,4 +59,7 @@ See [technical-spec.md](T0303-make-the-vendored-manifest-hashes-match-lf-content
   - Files touched: 7.
   - Lines touched: 107.
   - Reopenings: 0.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
