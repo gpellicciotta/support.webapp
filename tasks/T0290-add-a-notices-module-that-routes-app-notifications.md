@@ -1,11 +1,11 @@
 ---
 id: T0290
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0290-add-a-notices-module-that-routes-app-notifications
+worktree: .plan/work/T0290-add-a-notices-module-that-routes-app-notifications
+status: active
+started_at: "2026-11-23T21:50:47Z"
 ended_at: —
 review: agent
 preview: none
