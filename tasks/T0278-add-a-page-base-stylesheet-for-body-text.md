@@ -1,11 +1,11 @@
 ---
 id: T0278
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0278-add-a-page-base-stylesheet-for-body-text
+worktree: .plan/work/T0278-add-a-page-base-stylesheet-for-body-text
+status: active
+started_at: "2026-11-23T15:33:59Z"
 ended_at: —
 review: agent
 preview: none
