@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1800.5, input: 2320, output: 175}
+work_duration: 1813.9
 ---
 # T0286: Add a screen action bar renderer for the screen actions of routed views, promoted from Auth's shell
 
@@ -60,4 +63,13 @@ Size estimate: 4 files, 70 lines.
   - Files touched: 6.
   - Lines touched: 132.
   - Reopenings: 0.
+
+- [2026-11-23] **[Read]**
+  Reviewed technical-spec.md, auth-webapp-ui-audit.md, Auth app-shell.mjs, counters app-action-bar.mjs, naming.md, and ADR-0003/ADR-0004.
+
+- [2026-11-23] **[Verify]**
+  Confirmed red-phase failures for missing screen-action-bar.js module and demo hook before implementation.
+
+- [2026-11-23] **[Doc]**
+  Updated components.md with upgrade notes, ADR-0003, ADR-0004, and CHANGELOG.md.
 
