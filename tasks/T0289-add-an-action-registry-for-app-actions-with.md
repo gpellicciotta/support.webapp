@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1379.8, input: 281813, output: 52847, cache_read: 10121576}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T21:46:58Z"
 ---
 # T0289: Add an action registry for app actions with enabled state and disabled reasons, promoted from Auth's App
 
@@ -58,4 +63,7 @@ Size estimate: 4 files, 150 lines.
 
 - [2026-11-23] **[Implement]**
   Implemented src/js/action-registry.js, wired it into src/demo/shell-demo.js, registered action-registry in src/contract.json, and added unit and Playwright tests.
+
+- [2026-11-23] **[Review]**
+  Round 1 requested (mode: agent).
 
