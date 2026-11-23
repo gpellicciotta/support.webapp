@@ -5,6 +5,7 @@ import { attachForm } from '../js/form.js';
 import { setSpriteUrl } from '../js/icon.js';
 import { attachAccountMenu } from '../js/account-menu.js';
 import { attachCollapsible } from '../js/collapsible.js';
+import { attachReleaseNotes } from '../js/release-notes.js';
 import { attachTabs } from '../js/tabs.js';
 import { attachSelection } from '../js/selection.js';
 import { confirmDialog, openDialog } from '../js/dialog.js';
@@ -220,6 +221,54 @@ if (typeof document !== 'undefined' && document.querySelector('.gallery-main')) 
     });
     for (const collapsible of document.querySelectorAll('[data-collapsible]')) {
         attachCollapsible(collapsible);
+    }
+    const sampleReleases = [
+        {
+            version: '1.3.0',
+            isPreRelease: true,
+            tag: 'in development',
+            isLatest: true,
+            entries: [
+                { rawText: 'FrontEnd: **[breaking]** Moved settings to `theme-switch` with [migration notes](docs/upgrade.md).', text: 'Moved settings to `theme-switch` with [migration notes](docs/upgrade.md).', category: 'ux', isUserFacing: true, isBreaking: true },
+                { rawText: 'DevEx: Updated `vitest` snapshots for dark mode.', text: 'Updated `vitest` snapshots for dark mode.', category: 'internal', isUserFacing: false, isBreaking: false }
+            ]
+        },
+        {
+            version: '1.2.0',
+            isPreRelease: false,
+            tag: 'released: 2026-11-23',
+            isLatest: false,
+            entries: [
+                { rawText: 'BackEnd: Added `offline` export for saved notes.', text: 'Added `offline` export for saved notes.', category: 'feature', isUserFacing: true, isBreaking: false },
+                { rawText: 'Fix: Restored keyboard focus after closing a panel.', text: 'Restored keyboard focus after closing a panel.', category: 'fix', isUserFacing: true, isBreaking: false }
+            ]
+        },
+        {
+            version: '1.1.1',
+            isPreRelease: false,
+            tag: '2026-11-18',
+            isLatest: false,
+            entries: [
+                { rawText: 'Docs: Clarified `vendor` setup steps.', text: 'Clarified `vendor` setup steps.', category: 'internal', isUserFacing: false, isBreaking: false }
+            ]
+        },
+        {
+            version: '1.1.0',
+            isPreRelease: false,
+            tag: 'released: 2026-11-10 • broken',
+            isLatest: false,
+            entries: [
+                { rawText: 'CLI: Added `check` integrity verification.', text: 'Added `check` integrity verification.', category: 'client', isUserFacing: true, isBreaking: false }
+            ]
+        }
+    ];
+    const highlightsDemo = document.querySelector('[data-release-notes-demo="highlights"]');
+    if (highlightsDemo) {
+        attachReleaseNotes(highlightsDemo, { releases: sampleReleases.slice(0, 3), idPrefix: 'gallery-release-notes-highlights' });
+    }
+    const groupedDemo = document.querySelector('[data-release-notes-demo="grouped"]');
+    if (groupedDemo) {
+        attachReleaseNotes(groupedDemo, { releases: sampleReleases, showFilter: false, groupByArea: true, showStatus: true, pageSize: 2, idPrefix: 'gallery-release-notes-grouped' });
     }
     for (const tabs of document.querySelectorAll('[data-tabs-root]')) {
         attachTabs(tabs);

@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Components: Added the [release-notes](src/js/release-notes.js) renderer with filters, category and Breaking badges, area groups, status chips, and paging.
 - Components: Added [page.css](src/css/page.css) for body text, headings, links, code, and a `[hidden]` guard sparing `until-found`.
 - CLI: Normalized CRLF to LF in text integrity hashes, so LF and CRLF checkouts of vendored copies both pass.
 

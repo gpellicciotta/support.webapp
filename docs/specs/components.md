@@ -51,20 +51,21 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `selection`     | Multi-select with bulk actions | `selection.js`: `attachSelection`                | none, some, or all selected; bar with count and actions         | native checkboxes; Shift selects a range; count announced                        |
 
 ### Containers
-| Key            | Component    | Module and functions                  | Variants and states                                           | Accessibility minimum                              |
-| :------------- | :----------- | :------------------------------------ | :------------------------------------------------------------ | :------------------------------------------------- |
-| `card`         | Card         | none                                  | static, link card with hover lift, with media                 | a link card nests no other controls                |
-| `icon-tile`    | Icon tile    | none                                  | tones 1 to 4; sizes sm, md, lg                                | decorative icon is `aria-hidden`                   |
-| `row`          | Row base     | none                                  | dense row with trailing actions; container query at 36rem     | list semantics; actions reachable by keyboard      |
-| `empty-state`  | Empty state  | none                                  | icon, title, text, at most two actions                        | heading level set by the app                       |
-| `collapsible`  | Collapsible  | `collapsible.js`: `attachCollapsible` | collapsed, expanded                                           | button with `aria-expanded` and `aria-controls`    |
-| `list`         | List         | none                                  | simple list, definition rows, bordered facts, compact facts   | native `ul`, `ol`, or `dl`                         |
-| `toolbar`      | Toolbar      | none                                  | wrapping filter fields and actions aligned to the bottom edge | `role="search"` landmark; labeled native controls  |
-| `table`        | Data table   | none                                  | plain, dense, framed; hover and `aria-selected` rows; numeric | native table with `caption` and `th scope`         |
-| `pager`        | Pager        | none                                  | status text with First, Previous, Next, and Last buttons      | labeled `nav`; native `disabled` on boundaries     |
-| `entry-list`   | Entry list   | none                                  | log or event cards; code message; action; details; hover      | labeled native `ul`; time chip with `time` element |
-| `detail-panel` | Detail panel | none                                  | fixed header, scrolling body, sections, and danger zone       | labeled landmark; focus moves in and returns       |
-| `tabs`         | Tabs         | `tabs.js`: `attachTabs`               | selected, disabled                                            | `tablist`, `tab`, and `tabpanel` roles; arrow keys |
+| Key             | Component     | Module and functions                                                                              | Variants and states                                               | Accessibility minimum                                       |
+| :-------------- | :------------ | :------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------- | :---------------------------------------------------------- |
+| `card`          | Card          | none                                                                                              | static, link card with hover lift, with media                     | a link card nests no other controls                         |
+| `icon-tile`     | Icon tile     | none                                                                                              | tones 1 to 4; sizes sm, md, lg                                    | decorative icon is `aria-hidden`                            |
+| `row`           | Row base      | none                                                                                              | dense row with trailing actions; container query at 36rem         | list semantics; actions reachable by keyboard               |
+| `empty-state`   | Empty state   | none                                                                                              | icon, title, text, at most two actions                            | heading level set by the app                                |
+| `collapsible`   | Collapsible   | `collapsible.js`: `attachCollapsible`                                                             | collapsed, expanded                                               | button with `aria-expanded` and `aria-controls`             |
+| `release-notes` | Release notes | `release-notes.js`: `createReleaseNotes`, `attachReleaseNotes`, using `collapsible.js`, `icon.js` | collapsibles or open blocks; filters, area groups, status, paging | filter group `aria-pressed`; `role="list"`; findable panels |
+| `list`          | List          | none                                                                                              | simple list, definition rows, bordered facts, compact facts       | native `ul`, `ol`, or `dl`                                  |
+| `toolbar`       | Toolbar       | none                                                                                              | wrapping filter fields and actions aligned to the bottom edge     | `role="search"` landmark; labeled native controls           |
+| `table`         | Data table    | none                                                                                              | plain, dense, framed; hover and `aria-selected` rows; numeric     | native table with `caption` and `th scope`                  |
+| `pager`         | Pager         | none                                                                                              | status text with First, Previous, Next, and Last buttons          | labeled `nav`; native `disabled` on boundaries              |
+| `entry-list`    | Entry list    | none                                                                                              | log or event cards; code message; action; details; hover          | labeled native `ul`; time chip with `time` element          |
+| `detail-panel`  | Detail panel  | none                                                                                              | fixed header, scrolling body, sections, and danger zone           | labeled landmark; focus moves in and returns                |
+| `tabs`          | Tabs          | `tabs.js`: `attachTabs`                                                                           | selected, disabled                                                | `tablist`, `tab`, and `tabpanel` roles; arrow keys          |
 
 ### Feedback
 | Key           | Component       | Module and functions                   | Variants and states                          | Accessibility minimum                                        |
@@ -372,6 +373,48 @@ Collapsible.
   <div class="collapsible__panel" id="done-list" hidden>...</div>
 </div>
 ```
+
+### release-notes
+Release notes. Renders parsed changelog releases from plain objects, with no support.js import; uses `collapsible.js` and `icon.js`.
+- `createReleaseNotes(doc, options)` builds the `.release-notes` skeleton and calls `attachReleaseNotes(root, options)`.
+- Controller methods: `setReleases`, `setFilter`, `getFilter`, `showMore`, `expandAll`, `collapseAll`, and `destroy`.
+- Also exports `describeRelease(release)` and `parseInlineMarkdown(text)` for plain release normalization and inline parsing.
+- Escapes all text via DOM text nodes; turns backtick spans into `<code>` and flattens Markdown links to labels.
+- Collapsible mode opens the newest visible release and marks older panels `hidden="until-found"` for find in page.
+- Supports `User Highlights` / `All Changes` filter chips, category and `Breaking` badges, area groups, status chips, and `pageSize` paging.
+- Call `setSpriteUrl` before creating instances; icons default to core contract glyphs and may be overridden via `options.icons`.
+
+```html
+<div class="release-notes" data-release-notes>
+  <div class="release-notes__filters" role="group" aria-label="Changes to show" data-release-notes-filters>
+    <button class="chip chip--filter" type="button" aria-pressed="true" data-release-notes-filter="user">User Highlights</button>
+    <button class="chip chip--filter" type="button" aria-pressed="false" data-release-notes-filter="all">All Changes</button>
+  </div>
+  <div class="release-notes__list" data-release-notes-list>
+    <div class="collapsible release-notes__release" data-release-notes-release>
+      <button class="collapsible__toggle release-notes__toggle" type="button" aria-expanded="true" aria-controls="rn-1">
+        <span class="release-notes__version">v1.2.0</span>
+        <span class="release-notes__tag">released: 2026-11-23</span>
+        <span class="badge badge--success" data-release-notes-latest>Latest</span>
+        <svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="icons.svg#icon-chevron-down"/></svg>
+      </button>
+      <div class="collapsible__panel release-notes__panel" id="rn-1" data-release-notes-panel>
+        <ul class="release-notes__entries" role="list">
+          <li class="release-notes__entry">
+            <span class="release-notes__badges"><span class="badge" data-release-notes-category="feature">Feature</span></span>
+            <span class="release-notes__text">Added <code>release-notes</code> renderer.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+Upgrading an existing app:
+- Replace local changelog renderers and release CSS with `attachReleaseNotes` or `createReleaseNotes` from `release-notes.js`.
+- Pass parsed releases from `parseChangelog` or a server changelog endpoint; use `groupByArea`, `showStatus`, and `pageSize` for admin consoles.
+- See the [Release notes section](../../src/demo/visual-style-gallery.html#release-notes) of the gallery.
 
 ### list
 List. Native collection and description markup; no JavaScript module.
