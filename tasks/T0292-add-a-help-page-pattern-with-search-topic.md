@@ -1,11 +1,11 @@
 ---
 id: T0292
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0292-add-a-help-page-pattern-with-search-topic
+worktree: .plan/work/T0292-add-a-help-page-pattern-with-search-topic
+status: active
+started_at: "2026-11-23T23:24:48Z"
 ended_at: —
 review: agent
 preview: none

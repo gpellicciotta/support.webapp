@@ -17,7 +17,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0289 Add an action registry for app actions with enabled state and disabled reasons, promoted from Auth's App.
 - [x] T0290 Add a notices module that routes app notifications to banners and toasts, promoted from Auth.
 - [x] T0291 Add the notifications inbox pattern and the unread count button, promoted from Auth.
-- [ ] T0292 Add a help page pattern with search, topic chips, FAQ, and feedback link, promoted from Auth.
+- [~] T0292 [owner: @gemini] Add a help page pattern with search, topic chips, FAQ, and feedback link, promoted from Auth.
 - [ ] T0293 [needs: T0294] Add an admin console frame with hash router, screen registry, and gate pages, promoted from Auth.
 - [ ] T0294 Add DOM builders for package components, promoted from Auth's and ToDo's admin console helpers.
 - [ ] T0295 Add a view router for routed views with sign-in guards and a fallback view, promoted from Auth's App.
