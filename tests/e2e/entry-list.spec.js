@@ -62,7 +62,17 @@ for (const look of ['neutral', 'warm', 'bright']) {
         await expect(card.getByRole('button', { name: 'Hide details of event 107' })).toHaveCount(1);
         const [cardBox, toggleBox] = [await card.boundingBox(), await toggle.boundingBox()];
         expect(cardBox.x + cardBox.width - (toggleBox.x + toggleBox.width)).toBeLessThan(cardBox.width / 8);
-        await expect(card.locator('.entry-list__details')).toHaveCSS('white-space', 'pre-wrap');
+        const details = card.locator('.entry-list__details');
+        await expect(details).toHaveCSS('white-space', 'pre-wrap');
+        await expect(toggle.locator('.icon')).toHaveCSS('transform', 'matrix(-1, 0, 0, -1, 0, 0)');
+        await expect(events.getByRole('button', { name: 'Show details of event 104' }).locator('.icon')).toHaveCSS('transform', 'none');
+        await page.mouse.move(0, 0);
+        await settleGalleryStyles(page);
+        await expect(details).toHaveCSS('background-color', sunken);
+        await details.hover();
+        await settleGalleryStyles(page);
+        await expect(card).toHaveCSS('background-color', hover);
+        await expect(details).toHaveCSS('background-color', surface);
         await toggle.focus();
         expectRing(await ring(toggle), await tokenColor(page, '--color-focus'), 'entry list details toggle');
         const targets = await smallTargets(page, '#entry-list button');
