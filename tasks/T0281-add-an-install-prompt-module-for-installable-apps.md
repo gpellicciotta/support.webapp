@@ -1,6 +1,7 @@
 ---
 id: T0281
 owner: "@gemini"
+session: antigravity-20261123-504b38
 needs: []
 branch: task/T0281-add-an-install-prompt-module-for-installable-apps
 worktree: .plan/work/T0281-add-an-install-prompt-module-for-installable-apps
@@ -22,13 +23,13 @@ Completion check: `python scripts/devops.py check`, with the new tests green.
 Size estimate: 3 files, 60 lines.
 
 ## Task Execution Steps
-- [ ] **[Read]**      Read the technical specification, the audit section, and the Auth source it cites.
-- [ ] **[Decide]**    Choose the module key and exported API, following naming.md and the ADR-0003 JavaScript approach.
-- [ ] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
-- [ ] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
-- [ ] **[Implement]** Add the install prompt module, its contract entry, and a gallery or shell demo section.
-- [ ] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
-- [ ] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
+- [x] **[Read]**      Read the technical specification, the audit section, and the Auth source it cites.
+- [x] **[Decide]**    Choose the module key and exported API, following naming.md and the ADR-0003 JavaScript approach.
+- [x] **[Implement]** Author failing unit and browser tests for the behavior in the technical specification.
+- [x] **[Verify]**    Run the new tests and confirm they fail for the expected reason.
+- [x] **[Implement]** Add the install prompt module, its contract entry, and a gallery or shell demo section.
+- [x] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
+- [x] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -37,4 +38,34 @@ Size estimate: 3 files, 60 lines.
 
 - [2026-11-23] **[Doc]**
   Task fleshed out from the T0277 audit of Auth's webapp at commit eeb9439.
+
+- [2026-11-23] **[Read]**
+  Read technical-spec.md, auth-webapp-ui-audit.md, naming.md, ADR-0003, and sibling install code in auth, counters.server, and meteo.
+
+- [2026-11-23] **[Decided]**
+  Chose key install-prompt in contract.json with attachInstallPrompt({ window, matchMedia, onChange }) in src/js/install-prompt.js.
+  - Controller exposes getState, isInstallable, isInstalled, prompt, and destroy.
+  - Shell portal demo wires data-install-prompt-action using hidden and aria-disabled.
+
+- [2026-11-23] **[Implement]**
+  Authored failing unit tests in tests/unit/install-prompt.test.js and browser tests in tests/e2e/install-prompt.spec.js.
+
+- [2026-11-23] **[Verify]**
+  Confirmed red-phase failures for the new unit and browser tests before implementation.
+  - Vitest failed: missing src/js/install-prompt.js (exit 1).
+  - Playwright failed: missing demo install hook and listener (exit 1).
+
+- [2026-11-23] **[Implement]**
+  Added src/js/install-prompt.js, registered install-prompt in src/contract.json, and wired the portal shell demo.
+  - Undeclared file touched: src/demo/shell-portal.html (1 line).
+
+- [2026-11-23] **[Doc]**
+  Updated docs/specs/components.md with the install-prompt catalog entry and upgrade notes, ADR-0003, and CHANGELOG.md.
+  - Undeclared file touched: docs/adrs/ADR-0003-components-and-patterns.md (2 lines).
+
+- [2026-11-23] **[Verify]**
+  Verified all linters, 61 pytest, 2308 vitest, 926 Playwright, 7 integration tests, and npm pack dry-run green.
+  - Files touched: 5.
+  - Lines touched: 70.
+  - Reopenings: 0.
 
