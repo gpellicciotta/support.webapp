@@ -947,6 +947,7 @@
     "table-state",
     "admin-console",
     "admin-overview",
+    "admin-logs",
     "view-router"
   ]
 }

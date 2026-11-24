@@ -2,6 +2,7 @@
 
 import { attachAccountMenu } from '../js/account-menu.js';
 import { attachAdminConsole } from '../js/admin-console.js';
+import { createAdminLogsScreen } from '../js/admin-logs.js';
 import { createAdminOverviewScreen } from '../js/admin-overview.js';
 import { attachDataLoader } from '../js/data-loader.js';
 import { createDomBuilders } from '../js/dom-builders.js';
@@ -276,6 +277,72 @@ export function initAdminConsoleDemo(doc, view) {
         }
     });
 
+    let logsMode = 'populated';
+    const sampleLogEntries = [
+        {
+            time: '2026-11-24T09:15:30Z',
+            level: 'ERROR',
+            name: 'org.example.auth.TokenService',
+            message: '\n    Token signature verification failed for key kid-2026-11\n        at TokenService.verify(TokenService.java:84)\n        at AuthFilter.handle(AuthFilter.java:41)\n'
+        },
+        {
+            time: '2026-11-24T09:12:14Z',
+            level: 'WARN',
+            name: 'org.example.auth.RateLimiter',
+            message: '    Burst limit approached on /api/sessions (42 of 50 requests/min)'
+        },
+        {
+            time: '2026-11-24T09:10:05Z',
+            level: 'INFO',
+            name: 'org.example.http.Server',
+            message: '    Admin console listener ready on https://demo.example.test/api'
+        },
+        {
+            time: '2026-11-24T09:08:42Z',
+            level: 'DEBUG',
+            name: 'org.example.repository.Pool',
+            message: '    Checked out read-only connection #7 in 2 ms'
+        },
+        {
+            time: '2026-11-24T09:05:19Z',
+            level: 'ERROR',
+            name: 'org.example.repository.AccountStore',
+            message: '    Query timed out after 5000 ms\n        at AccountStore.findByEmail(AccountStore.java:118)'
+        },
+        {
+            time: '2026-11-24T09:02:08Z',
+            level: 'WARN',
+            name: 'org.example.mail.RelayClient',
+            message: '    Slow SMTP handshake (1840 ms) on primary relay'
+        },
+        {
+            time: '2026-11-24T08:59:00Z',
+            level: 'INFO',
+            name: 'org.example.bootstrap.Startup',
+            message: '    Loaded 14 schema migrations and initialized in-memory log buffer'
+        }
+    ];
+    const logsScreen = createAdminLogsScreen({
+        sizes: [4, 10, 25],
+        defaultSize: 4,
+        adapter: {
+            fetchLogs: async () => {
+                const mode = logsMode;
+                logsMode = 'populated';
+                if (mode === 'empty') {
+                    return { 'log-entries': [] };
+                }
+                if (mode === 'fail-once') {
+                    throw new Error('Log buffer temporarily unavailable');
+                }
+                if (mode === 'unauthorized') {
+                    throw Object.assign(new Error('Session expired'), { status: 401 });
+                }
+                return { 'log-entries': sampleLogEntries };
+            }
+        }
+    });
+
     const frame = attachAdminConsole(doc.body, {
         document: doc,
         window: view,
@@ -388,6 +455,29 @@ export function initAdminConsoleDemo(doc, view) {
                             ['tok-877', 'Jordan Kim', '2026-11-10 17:22:00', 'warning', 'Expiring']
                         ].map(([id, owner, lastSeen, sev, label]) => ctx.dom.h('tr', null,
                             ctx.dom.h('th', { scope: 'row' }, id), ctx.dom.h('td', null, owner), ctx.dom.h('td', null, lastSeen), ctx.dom.h('td', null, ctx.dom.severityChip(sev, label)))))))
+            },
+            {
+                name: logsScreen.name,
+                title: logsScreen.title,
+                mount: (screenView, ctx, route) => {
+                    const logsHost = ctx.dom.h('div', { class: 'gallery-section' });
+                    let logsController = null;
+                    const triggerLogsMode = (mode) => {
+                        logsMode = mode;
+                        logsController?.refresh();
+                    };
+                    ctx.dom.setChildren(screenView,
+                        logsHost,
+                        ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'logs-states-heading' },
+                            ctx.dom.h('h2', { id: 'logs-states-heading' }, 'Log buffer states'),
+                            ctx.dom.h('p', null, 'Preview an empty server buffer, fetch failures, and 401 sign-in prompts.'),
+                            ctx.dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'Log buffer state previews' },
+                                ctx.dom.button('Empty buffer', () => triggerLogsMode('empty'), { 'data-demo-logs': 'empty' }),
+                                ctx.dom.button('Fail fetch once', () => triggerLogsMode('fail-once'), { 'data-demo-logs': 'fail-once' }),
+                                ctx.dom.button('Simulate 401', () => triggerLogsMode('unauthorized'), { 'data-demo-logs': 'unauthorized' }))));
+                    logsController = logsScreen.mount(logsHost, ctx, route);
+                    return { dispose: () => logsController?.dispose() };
+                }
             },
             {
                 name: 'system-events',

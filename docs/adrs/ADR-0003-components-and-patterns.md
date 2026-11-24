@@ -129,6 +129,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It keeps filters and pages in the URL hash, supports client and server paging, and wires `.pager` via `data-*` hooks.
 - **[Decided]** on 2026-11-24: `admin-overview` moved in from Auth's and ToDo's admin consoles as [admin-overview.js](../../src/js/admin-overview.js).
   It reads server state via an app data adapter, reloads quietly while visible via [auto-refresh.js](../../src/js/auto-refresh.js), and exposes extension hooks.
+- **[Decided]** on 2026-11-24: `admin-logs` moved in from Auth's and ToDo's admin consoles as [admin-logs.js](../../src/js/admin-logs.js).
+  It reads log buffers via an app data adapter, strips shared indent, and keeps filters and pages in the URL via [table-state.js](../../src/js/table-state.js).
 
 ### Shared patterns
 Documented as contracts without components of their own:

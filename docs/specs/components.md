@@ -108,6 +108,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `dom-builders`      | DOM builders          | `dom-builders.js`: `createDomBuilders`, `h`, `setChildren`, and catalog builders                                                                                 | buttons, selects, checkboxes, facts, tables, confirm    | emits catalog ARIA skeletons; text nodes only, no `innerHTML`     |
 | `admin-console`     | Admin console frame   | `admin-console.js`: `createAdminConsole`, `attachAdminConsole`, `parseRoute`, `displayName`, using `account-menu.js`, `app-nav.js`, `dom-builders.js`, `icon.js` | shell with side panel, hash router, gates, signed-out   | skip link focuses `#main`; `aria-current="page"`; single `<main>` |
 | `admin-overview`    | Admin Overview screen | `admin-overview.js`: `createAdminOverview`, `attachAdminOverview`, `createAdminOverviewScreen`, using `auto-refresh.js`, `data-loader.js`, `dom-builders.js`     | server facts, visible 30 s reload, disconnected alert   | polite status line; `role="alert"` banners; `data-*` hooks        |
+| `admin-logs`        | Admin Logs screen     | `admin-logs.js`: `createAdminLogs`, `attachAdminLogs`, `createAdminLogsScreen`, using `data-loader.js`, `dom-builders.js`, `icon.js`, `table-state.js`           | entry cards, level/text filters, URL paging, empty      | labeled `<search>` and `role="list"`; `<time>`; `data-*` hooks    |
 | `view-router`       | View router           | `view-router.js`: `createViewRouter`, `attachViewRouter`                                                                                                         | routed views, fallback, sign-in guards, outside routes  | `aria-current="page"` route marks; `data-view-router-*` hooks     |
 
 ### Not in the Package
@@ -1251,6 +1252,40 @@ Upgrading an existing app:
 - Replace `overview-view.mjs` in Auth's and ToDo's admin consoles with `createAdminOverviewScreen` from [admin-overview.js](../../src/js/admin-overview.js).
 - Pass `{ adapter: { fetchStatus: ({ signal }) => api.get('/server', { signal }) } }` so each app keeps its own endpoint.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html#/overview) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
+
+### admin-logs
+Shared admin Logs screen ([admin-logs.js](../../src/js/admin-logs.js)), using [data-loader.js](../../src/js/data-loader.js), [dom-builders.js](../../src/js/dom-builders.js), [icon.js](../../src/js/icon.js), and [table-state.js](../../src/js/table-state.js).
+Renders the server's log buffer as newest-first `.entry-list` cards, filtered by level and text and paged via URL hash.
+
+```js
+import { createAdminConsole } from './admin-console.js';
+import { createAdminLogsScreen } from './admin-logs.js';
+
+const consoleFrame = createAdminConsole(root, {
+    title: 'Admin Console',
+    screens: [
+        createAdminLogsScreen({
+            adapter: { fetchLogs: ({ signal }) => api.get('/logs', { signal }) }
+        })
+    ]
+});
+```
+
+- `createAdminLogsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor that reuses `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
+- `attachAdminLogs(root, options)` mounts into an existing container; `createAdminLogs(doc, options)` builds a root for an injected document.
+- Controller methods: `refresh({ quiet })`, `getEntries()`, `getFilteredEntries()`, `getState()`, `resetFilters()`, `tableState`, `dispose()`, and `destroy()`.
+- `options.adapter.fetchLogs({ signal })` supplies entries; Auth's `log-entries`, ToDo's `elements`, and plain arrays normalize automatically.
+- `stripIndent(message)` removes shared leading indent and trailing whitespace while keeping line breaks and stack-frame indentation intact.
+- Filters (`q`, `level`), page size (`size`), and page number (`page`) persist in the URL hash via [table-state.js](../../src/js/table-state.js).
+- Dotted logger names insert `<wbr>` after each dot inside `.entry-list__code`, so long class names wrap on phones.
+- Empty buffers render a plain empty state; unmatched filters render an empty state with a Clear filters action.
+- Fetch failures and 401 errors render [data-loader.js](../../src/js/data-loader.js) Retry and Sign in banners and hide the pager.
+- Extension hooks `extraChips`, `renderCard`, and `filterText` customize entry rendering and matching; hooks use `data-admin-logs-*` only.
+
+Upgrading an existing app:
+- Replace `logs-view.mjs` in Auth's and ToDo's admin consoles with `createAdminLogsScreen` from [admin-logs.js](../../src/js/admin-logs.js).
+- Pass `{ adapter: { fetchLogs: ({ signal }) => api.get('/logs', { signal }) } }` so each app keeps its own endpoint.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html#/logs) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
 
 ### view-router
 View router for `RoutedView` screens ([view-router.js](../../src/js/view-router.js)).
