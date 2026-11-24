@@ -2,6 +2,7 @@
 
 import { attachAccountMenu } from '../js/account-menu.js';
 import { attachAdminConsole } from '../js/admin-console.js';
+import { createAdminBroadcastsScreen } from '../js/admin-broadcasts.js';
 import { createAdminLogsScreen } from '../js/admin-logs.js';
 import { createAdminOverviewScreen } from '../js/admin-overview.js';
 import { createAdminSystemEventsScreen } from '../js/admin-system-events.js';
@@ -430,6 +431,93 @@ export function initAdminConsoleDemo(doc, view) {
         }
     });
 
+    let broadcastsMode = 'populated';
+    let nextBroadcastId = 305;
+    let sampleBroadcasts = [
+        {
+            id: 304,
+            title: 'Scheduled maintenance',
+            message: 'Sign-in restarts at 22:00 UTC for five minutes.',
+            type: 'warning',
+            banner: true,
+            'action-url': '/help',
+            'target-filter': { type: 'all' },
+            'created-at': '2026-11-24T09:14:00Z',
+            'deletion-time': '2026-11-25T00:00:00Z',
+            status: 'active'
+        },
+        {
+            id: 303,
+            title: 'Security review reminder',
+            message: 'Review delegated sessions before the end of the week.',
+            type: 'info',
+            banner: false,
+            'target-filter': { type: 'role', 'role-name': 'admin' },
+            'created-at': '2026-11-23T11:30:00Z',
+            status: 'active'
+        },
+        {
+            id: 302,
+            title: 'Draft release notice',
+            message: 'Retracted prior to rollout.',
+            type: 'info',
+            banner: false,
+            'target-filter': { type: 'all' },
+            'created-at': '2026-11-22T15:18:00Z',
+            status: 'retracted'
+        }
+    ];
+    const sampleBroadcastUsers = [
+        { id: 1, email: 'alex.north@example.test', name: 'Alex North' },
+        { id: 34, email: 'samira.patel@example.test', name: 'Samira Patel' },
+        { id: 47, email: 'taylor.brooks@example.test', name: 'Taylor Brooks' },
+        { id: 52, email: 'casey.rivera@example.test', name: 'Casey Rivera' }
+    ];
+    const broadcastsScreen = createAdminBroadcastsScreen({
+        debounce: 0,
+        adapter: {
+            fetchHistory: async () => {
+                const mode = broadcastsMode;
+                broadcastsMode = 'populated';
+                if (mode === 'empty') {
+                    return [];
+                }
+                if (mode === 'fail-once') {
+                    throw new Error('Broadcast history temporarily unavailable');
+                }
+                if (mode === 'unauthorized') {
+                    throw Object.assign(new Error('Session expired'), { status: 401 });
+                }
+                return sampleBroadcasts.map((item) => ({ ...item }));
+            },
+            fetchUsers: async () => sampleBroadcastUsers,
+            publish: async (payload) => {
+                const id = nextBroadcastId;
+                nextBroadcastId += 1;
+                sampleBroadcasts = [
+                    {
+                        id,
+                        title: payload.title ?? null,
+                        message: payload.message,
+                        type: payload.type,
+                        banner: Boolean(payload.banner),
+                        'action-url': payload['action-url'] ?? null,
+                        'target-filter': payload['target-filter'] ?? { type: 'all' },
+                        'created-at': new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
+                        'deletion-time': payload['deletion-time'] ?? null,
+                        status: 'active'
+                    },
+                    ...sampleBroadcasts
+                ];
+                return { message: `Broadcast #${id} published` };
+            },
+            retract: async (id) => {
+                sampleBroadcasts = sampleBroadcasts.filter((item) => String(item.id) !== String(id));
+                return { message: `Broadcast #${id} retracted` };
+            }
+        }
+    });
+
     const frame = attachAdminConsole(doc.body, {
         document: doc,
         window: view,
@@ -587,6 +675,29 @@ export function initAdminConsoleDemo(doc, view) {
                                 ctx.dom.button('Simulate 401', () => triggerEventsMode('unauthorized'), { 'data-demo-events': 'unauthorized' }))));
                     eventsController = systemEventsScreen.mount(eventsHost, ctx, route);
                     return { dispose: () => eventsController?.dispose() };
+                }
+            },
+            {
+                name: broadcastsScreen.name,
+                title: broadcastsScreen.title,
+                mount: (screenView, ctx, route) => {
+                    const broadcastsHost = ctx.dom.h('div', { class: 'gallery-section' });
+                    let broadcastsController = null;
+                    const triggerBroadcastsMode = (mode) => {
+                        broadcastsMode = mode;
+                        broadcastsController?.refresh();
+                    };
+                    ctx.dom.setChildren(screenView,
+                        broadcastsHost,
+                        ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'broadcasts-states-heading' },
+                            ctx.dom.h('h2', { id: 'broadcasts-states-heading' }, 'Broadcast history states'),
+                            ctx.dom.h('p', null, 'Preview an empty history, fetch failures, and 401 sign-in prompts.'),
+                            ctx.dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'Broadcast history state previews' },
+                                ctx.dom.button('Empty history', () => triggerBroadcastsMode('empty'), { 'data-demo-broadcasts': 'empty' }),
+                                ctx.dom.button('Fail fetch once', () => triggerBroadcastsMode('fail-once'), { 'data-demo-broadcasts': 'fail-once' }),
+                                ctx.dom.button('Simulate 401', () => triggerBroadcastsMode('unauthorized'), { 'data-demo-broadcasts': 'unauthorized' }))));
+                    broadcastsController = broadcastsScreen.mount(broadcastsHost, ctx, route);
+                    return { dispose: () => broadcastsController?.dispose() };
                 }
             }
         ]

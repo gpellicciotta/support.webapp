@@ -110,6 +110,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `admin-overview`      | Admin Overview screen | `admin-overview.js`: `createAdminOverview`, `attachAdminOverview`, `createAdminOverviewScreen`, using `auto-refresh.js`, `data-loader.js`, `dom-builders.js`     | server facts, visible 30 s reload, disconnected alert   | polite status line; `role="alert"` banners; `data-*` hooks        |
 | `admin-logs`          | Admin Logs screen     | `admin-logs.js`: `createAdminLogs`, `attachAdminLogs`, `createAdminLogsScreen`, using `data-loader.js`, `dom-builders.js`, `icon.js`, `table-state.js`           | entry cards, level/text filters, URL paging, empty      | labeled `<search>` and `role="list"`; `<time>`; `data-*` hooks    |
 | `admin-system-events` | Admin System events   | `admin-system-events.js`: `createAdminSystemEvents`, `attachAdminSystemEvents`, `createAdminSystemEventsScreen`                                                  | audit cards, server filters/paging, search, JSON toggle | `aria-expanded`/`aria-controls` details; `<search>`; `data-*`     |
+| `admin-broadcasts`    | Admin Broadcasts      | `admin-broadcasts.js`: `createAdminBroadcasts`, `attachAdminBroadcasts`, `createAdminBroadcastsScreen`                                                           | compose, inbox/banner preview, recipients, retraction   | `field.js` validation; `selection.js`; inline confirm; `data-*`   |
 | `view-router`         | View router           | `view-router.js`: `createViewRouter`, `attachViewRouter`                                                                                                         | routed views, fallback, sign-in guards, outside routes  | `aria-current="page"` route marks; `data-view-router-*` hooks     |
 
 ### Not in the Package
@@ -1325,6 +1326,46 @@ Upgrading an existing app:
 - Pass `adapter.fetchEvents` (and optional `adapter.fetchUsers`) so each app keeps its own endpoints and severity or actor shapes.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html#/system-events) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
 
+### admin-broadcasts
+Shared admin Broadcasts screen ([admin-broadcasts.js](../../src/js/admin-broadcasts.js)), using [data-loader.js](../../src/js/data-loader.js), [dom-builders.js](../../src/js/dom-builders.js), [field.js](../../src/js/field.js), [icon.js](../../src/js/icon.js), [inbox.js](../../src/js/inbox.js), [notices.js](../../src/js/notices.js), [selection.js](../../src/js/selection.js), and [table-state.js](../../src/js/table-state.js).
+Composes announcements with live inbox and banner previews, optional recipient selection, history filtering, and inline-confirmed retraction.
+
+```js
+import { createAdminBroadcastsScreen } from './admin-broadcasts.js';
+import { createAdminConsole } from './admin-console.js';
+
+const consoleFrame = createAdminConsole(root, {
+    title: 'Admin Console',
+    screens: [
+        createAdminBroadcastsScreen({
+            adapter: {
+                fetchHistory: ({ signal }) => api.get('/admin/system-events?limit=200', { signal }),
+                fetchUsers: ({ signal }) => api.get('/users?expired=true', { signal }),
+                publish: (payload, { signal }) => api.post('/admin/broadcast-notifications', payload, { signal }),
+                retract: (id, _entry, { signal }) => api.post(`/admin/broadcast-notifications/${encodeURIComponent(id)}/retract`, null, { signal })
+            }
+        })
+    ]
+});
+```
+
+- `createAdminBroadcastsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
+- `attachAdminBroadcasts(root, options)` mounts into a container; `createAdminBroadcasts(doc, options)` creates a root in an injected document.
+- Controller methods: `refresh`, `updatePreview`, `resetForm`, `buildPayload`, `getHistory`, `getFilteredHistory`, `getState`, `resetFilters`, `tableState`, `dispose`, and `destroy`.
+- `.app__split` in [shell.css](../../src/css/shell.css) stacks compose and preview below `64rem` and arranges them `3fr 2fr` above `64rem`.
+- Non-banner drafts preview as `.inbox__item` rows; checking the banner option also previews a `.banner` with `bannerVariant` and `bannerRole`.
+- Preview links pass through `safeUrl` from [notices.js](../../src/js/notices.js), dropping unsafe URL schemes before setting `href`.
+- Selecting `specific-users` lazily loads active accounts via `adapter.fetchUsers` into a searchable [selection.js](../../src/js/selection.js) checklist.
+- `normalizeBroadcastHistory` accepts Auth `broadcast-published`/`broadcast-retracted` events (`buildBroadcastHistory`) and ToDo direct broadcast lists.
+- History filters (`q`, `type`, `status`) persist in the URL hash via [table-state.js](../../src/js/table-state.js) with `Show more` paging.
+- Retraction asks through `dom.inlineConfirm`, calls `adapter.retract(id, entry)`, announces status, and reloads history quietly; hooks use `data-admin-broadcasts-*`.
+
+Upgrading an existing app:
+- Replace `broadcasts-view.mjs` in Auth's and ToDo's admin consoles with `createAdminBroadcastsScreen` from [admin-broadcasts.js](../../src/js/admin-broadcasts.js).
+- Pass `adapter.fetchHistory`, `adapter.publish`, `adapter.retract`, and optional `adapter.fetchUsers`; ToDo passes `payloadFormat: 'audience'`, `defaultBanner: true`, and `showExpires: false`.
+- Remove app-local `.split`, `.preview`, `.recipients`, and `.selection__scroll` rules replaced by `.app__split`, `.app__section`, and `.app__scroll-list`.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html#/broadcasts) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
+
 ### view-router
 View router for `RoutedView` screens ([view-router.js](../../src/js/view-router.js)).
 Registers routed views and a fallback, enforces sign-in guards, manages history, and opens outside routes with full loads.
@@ -1397,6 +1438,8 @@ Shell additions in [shell.css](../../src/css/shell.css):
   Drive it with `attachUnreadButton` from [inbox.js](../../src/js/inbox.js); its badge and accessible name cap at `99+`.
 - Gate page: render `<main class="app__gate" id="main" tabindex="-1">` with `.app__gate-actions` for centered session checks and forbidden states.
   `admin-console.js` drives it alongside the signed-out shell and hash router.
+- Split layout: `.app__split` stacks `.app__section` blocks below `64rem` and arranges them `3fr 2fr` at `64rem` and above.
+  `.app__scroll-list` bounds tall selection checklists with contained overscroll; `.app__slot:empty` and `.app__status:empty` collapse empty feedback slots.
 
 Upgrading an existing app:
 - Replace app-local `.app__sidebar > .nav-end` markup and CSS with `<ul class="app__nav-list app__nav-list--end">`.
