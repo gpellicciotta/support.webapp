@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1727.9, input: 651635, output: 74160, cache_read: 15707763}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T02:53:13Z"
 ---
 # T0295: Add a view router for routed views with sign-in guards and a fallback view, promoted from Auth's App
 
@@ -61,4 +66,7 @@ Size estimate: 5 files, 200 lines.
 
 - [2026-11-24] **[Read]**
   Reviewed technical spec, Auth audit View Router section, Auth and counters App routing, and package contracts.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
