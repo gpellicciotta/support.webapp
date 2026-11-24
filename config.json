@@ -1,6 +1,6 @@
 {
   "plan-version": "3.1.38-pre",
-  "work-max-usage": "week=20%",
+  "work-max-usage": "week=35%",
   "work-agents": [
     "agy",
     "claude",
