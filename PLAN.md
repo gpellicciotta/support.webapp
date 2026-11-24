@@ -20,7 +20,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0292 Add a help page pattern with search, topic chips, FAQ, and feedback link, promoted from Auth.
 - [x] T0293 Add an admin console frame with hash router, screen registry, and gate pages, promoted from Auth.
 - [x] T0294 Add DOM builders for package components, promoted from Auth's and ToDo's admin console helpers.
-- [ ] T0295 Add a view router for routed views with sign-in guards and a fallback view, promoted from Auth's App.
+- [~] T0295 [owner: @gemini] Add a view router for routed views with sign-in guards and a fallback view, promoted from Auth's App.
 - [ ] T0296 Add the shared admin Overview screen with server state reloaded while visible, promoted from Auth's and ToDo's consoles.
 - [ ] T0297 Add the shared admin Logs screen with filtered, paged entry cards, promoted from Auth's and ToDo's consoles.
 - [ ] T0298 Add the shared admin System events screen with filters, paging, and JSON details, promoted from Auth's and ToDo's consoles.

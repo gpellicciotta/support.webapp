@@ -1,11 +1,11 @@
 ---
 id: T0295
-owner: ~
-needs: ['T0276', 'T0289']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0295-add-a-view-router-for-routed-views-with
+worktree: .plan/work/T0295-add-a-view-router-for-routed-views-with
+status: active
+started_at: "2026-11-24T02:24:14Z"
 ended_at: —
 review: agent
 preview: none
