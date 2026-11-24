@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1741.8, input: 443124, output: 62109, cache_read: 15494828}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T06:30:00Z"
 ---
 # T0301: Add the shared admin Sessions screen with single, bulk, and expired token revocation, promoted from Auth's and ToDo's consoles
 
@@ -65,4 +70,7 @@ Size estimate: 5 files, 160 lines.
 
 - [2026-11-24] **[Read]**
   Read technical-spec.md, Auth sessions-view.mjs, ToDo tokens-view.mjs, admin.css, naming.md, and ADR-0003.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
