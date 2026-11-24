@@ -4,10 +4,13 @@ round: 1
 verdict: approved
 blocking: 0
 reviewer: "@claude"
-reviewed_at: 2026-11-24T00:21:56Z
+reviewed_at: 2026-11-24T00:31:12Z
 reviewed_commit: "174b4e4"
 base_commit: "03732a2"
 branch: task/T0294-add-dom-builders-for-package-components-promoted-from
+session: claude-20261124-bafa86
+session_agent: claude-code
+session_created_at: 2026-11-24T00:21:56Z
 ---
 # Review Findings: Task T0294 (Round 1)
 
