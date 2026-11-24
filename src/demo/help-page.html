@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <script src="../js/theme-boot.js" data-theme-switch-app="support-webapp-help-demo"></script>
+    <link rel="icon" href="data:,">
+    <title>Help page demo · support.webapp</title>
+    <link id="look-stylesheet" rel="stylesheet" href="../looks/neutral/index.css">
+    <link rel="stylesheet" href="gallery.css">
+    <script type="module" src="help-page-demo.js"></script>
+</head>
+<body class="app app--scroll-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="app__top-bar">
+        <a class="app__brand" href="visual-style-gallery.html#help-page"><span>Help Demo</span></a>
+        <div class="app__top-actions">
+            <a class="button button--quiet" href="visual-style-gallery.html#help-page">Gallery</a>
+        </div>
+    </header>
+    <main class="app__main" id="main" tabindex="-1">
+        <section class="gallery-section" aria-labelledby="demo-settings-title">
+            <h2 id="demo-settings-title">Demo settings</h2>
+            <p>Try deep links such as <a href="?topic=faq&amp;q=backup"><code>?topic=faq&amp;q=backup</code></a> or switch looks and themes below.</p>
+            <form class="gallery-controls" aria-label="Demo settings">
+                <div class="gallery-controls__look">
+                    <label for="look-select">Look</label>
+                    <select id="look-select" name="look">
+                        <option value="neutral">Neutral</option>
+                        <option value="warm">Warm</option>
+                        <option value="bright">Bright</option>
+                    </select>
+                </div>
+                <div class="gallery-controls__look">
+                    <label for="accent-select">Accent</label>
+                    <select id="accent-select" name="accent" disabled>
+                        <option value="">Default</option>
+                    </select>
+                </div>
+                <fieldset class="gallery-controls__theme">
+                    <legend>Theme</legend>
+                    <label><input type="radio" name="theme" value="system" checked> System</label>
+                    <label><input type="radio" name="theme" value="light"> Light</label>
+                    <label><input type="radio" name="theme" value="dark"> Dark</label>
+                </fieldset>
+            </form>
+        </section>
+
+        <div class="help-page" data-help-page>
+            <header class="view-header">
+                <h1 class="view-header__title">Help &amp; Guides</h1>
+                <p class="view-header__text">Application guides, security notes, frequently asked questions, and release notes.</p>
+            </header>
+
+            <div class="help-page__toolbar">
+                <div class="field help-page__search">
+                    <label class="field__label" for="help-search">Search help</label>
+                    <div class="help-page__search-row">
+                        <input class="field__control help-page__search-control" id="help-search" type="search" autocomplete="off" placeholder="Search guides, security, FAQ, or release notes" data-help-page-search>
+                        <button class="icon-button help-page__search-clear" type="button" aria-label="Clear search" title="Clear search" data-help-page-search-clear hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-close"/></svg></button>
+                    </div>
+                </div>
+                <div class="help-page__filters" role="group" aria-label="Help topics" data-help-page-filters>
+                    <button class="chip chip--filter" type="button" aria-pressed="true" data-help-page-topic="all">All Topics</button>
+                    <button class="chip chip--filter" type="button" aria-pressed="false" data-help-page-topic="system-info">Application &amp; Support</button>
+                    <button class="chip chip--filter" type="button" aria-pressed="false" data-help-page-topic="getting-started">Getting Started</button>
+                    <button class="chip chip--filter" type="button" aria-pressed="false" data-help-page-topic="security">Security &amp; Sessions</button>
+                    <button class="chip chip--filter" type="button" aria-pressed="false" data-help-page-topic="faq">Q&amp;A / FAQ</button>
+                    <button class="chip chip--filter" type="button" aria-pressed="false" data-help-page-topic="release-notes">Release Notes</button>
+                </div>
+            </div>
+
+            <div class="empty-state help-page__no-results" data-help-page-no-results hidden>
+                <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-help"/></svg>
+                <h2 class="empty-state__title">No matching topics</h2>
+                <p class="empty-state__text" role="status" aria-live="polite">No help topics, questions, or release notes match "<span data-help-page-no-results-term></span>".</p>
+                <div class="empty-state__actions">
+                    <button class="button button--secondary" type="button" data-help-page-reset>Reset Search</button>
+                </div>
+            </div>
+
+            <section class="card help-page__section" data-help-page-section data-help-page-topics="system-info" aria-labelledby="help-system-info-title">
+                <h2 class="card__title" id="help-system-info-title">Application &amp; Support</h2>
+                <dl class="list list--definitions">
+                    <dt class="list__term">Version</dt><dd class="list__value">1.4.2</dd>
+                    <dt class="list__term">Build time</dt><dd class="list__value">2026-11-23</dd>
+                    <dt class="list__term">Status</dt><dd class="list__value">Running</dd>
+                </dl>
+                <h3 class="help-page__subtitle">Feedback &amp; Technical Support</h3>
+                <p class="card__text">Questions, feedback, or bug reports reach our team at <a data-help-page-feedback-address href="mailto:support@example.test">support@example.test</a>.</p>
+                <div class="help-page__actions">
+                    <a class="button button--secondary" data-help-page-feedback-link href="mailto:support@example.test">Send Feedback</a>
+                </div>
+            </section>
+
+            <section class="card help-page__section" data-help-page-section data-help-page-topics="getting-started" aria-labelledby="help-welcome-title">
+                <h2 class="card__title" id="help-welcome-title">Welcome &amp; Core Concepts</h2>
+                <p class="card__text">Sample placeholder workspace guides demonstrating definition lists and filtered cards.</p>
+                <dl class="list list--definitions">
+                    <dt class="list__term">Unified Sign-In</dt><dd class="list__value">Sign in once to open connected applications without re-entering credentials.</dd>
+                    <dt class="list__term">Offline Reading</dt><dd class="list__value">Guides and static assets stay precached so help loads on slow connections.</dd>
+                </dl>
+            </section>
+
+            <section class="card help-page__section" data-help-page-section data-help-page-topics="getting-started security" aria-labelledby="help-security-title">
+                <h2 class="card__title" id="help-security-title">Security &amp; Active Sessions</h2>
+                <ol class="list help-page__steps">
+                    <li class="list__item">Review active device sessions on your Account screen.</li>
+                    <li class="list__item">Revoke unrecognized devices immediately to invalidate their session tokens.</li>
+                    <li class="list__item">Choose System, Light, or Dark theme preferences synced across devices.</li>
+                </ol>
+            </section>
+
+            <section class="card help-page__section" data-help-page-section data-help-page-topics="faq security" aria-labelledby="help-faq-title">
+                <h2 class="card__title" id="help-faq-title">Questions &amp; Answers (FAQ)</h2>
+                <div class="help-page__actions">
+                    <button class="button button--quiet help-page__faq-toggle" type="button" data-help-page-faq-toggle aria-expanded="false">Expand All</button>
+                </div>
+                <div class="help-page__faq-list" data-help-page-faq-list>
+                    <div class="collapsible help-page__faq" data-help-page-faq-item data-help-page-tags="sso login delegated token">
+                        <button class="collapsible__toggle help-page__faq-question" type="button" aria-expanded="false" aria-controls="help-demo-faq-1"><span class="help-page__faq-question-text">How does Single Sign-On work across connected apps?</span><svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button>
+                        <div class="collapsible__panel" id="help-demo-faq-1" hidden="until-found"><p class="card__text">Connected applications request a short-lived session token automatically while you remain signed in.</p></div>
+                    </div>
+                    <div class="collapsible help-page__faq" data-help-page-faq-item data-help-page-tags="backup export archive takeout json">
+                        <button class="collapsible__toggle help-page__faq-question" type="button" aria-expanded="false" aria-controls="help-demo-faq-2"><span class="help-page__faq-question-text">How do I export a copy of my account data?</span><svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button>
+                        <div class="collapsible__panel" id="help-demo-faq-2" hidden="until-found"><p class="card__text">Open Account and choose Export Data to download a JSON archive of your records.</p></div>
+                    </div>
+                    <div class="collapsible help-page__faq" data-help-page-faq-item data-help-page-tags="feedback bug report email support">
+                        <button class="collapsible__toggle help-page__faq-question" type="button" aria-expanded="false" aria-controls="help-demo-faq-3"><span class="help-page__faq-question-text">Where can I report an issue or send feedback?</span><svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button>
+                        <div class="collapsible__panel" id="help-demo-faq-3" hidden="until-found"><p class="card__text">Use <a data-help-page-feedback-link href="mailto:support@example.test">Send Feedback</a> to email support with your version and account details prefilled.</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card help-page__section" data-help-page-section data-help-page-topics="getting-started" aria-labelledby="help-links-title">
+                <h2 class="card__title" id="help-links-title">Quick Navigation</h2>
+                <ul class="help-page__links" role="list">
+                    <li><a class="card help-page__link" href="visual-style-gallery.html"><span class="card__body"><span class="card__title">Visual Style Gallery</span><span class="card__text">Inspect every design token and component specimen.</span></span></a></li>
+                    <li><a class="card help-page__link" href="shell-portal.html"><span class="card__body"><span class="card__title">Portal Shell Demo</span><span class="card__text">Explore the portal shell, notices, and notifications inbox.</span></span></a></li>
+                </ul>
+            </section>
+
+            <section class="card help-page__section" data-help-page-section data-help-page-topics="release-notes" aria-labelledby="help-releases-title">
+                <h2 class="card__title" id="help-releases-title">Release Notes &amp; Changelog</h2>
+                <div class="release-notes" data-help-page-release-notes></div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

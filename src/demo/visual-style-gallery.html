@@ -89,6 +89,7 @@
                     <li><a href="#pager">Pager</a></li>
                     <li><a href="#entry-list">Entry list</a></li>
                     <li><a href="#release-notes">Release notes</a></li>
+                    <li><a href="#help-page">Help page</a></li>
                     <li><a href="#detail-panel">Detail panel</a></li>
                     <li><a href="#progress">Progress</a></li>
                     <li><a href="#spinner">Spinner</a></li>
@@ -1268,6 +1269,57 @@
             <div class="release-notes" data-release-notes data-release-notes-demo="highlights"></div>
             <h3>Area groups, release status chips, and paging</h3>
             <div class="release-notes" data-release-notes data-release-notes-demo="grouped"></div>
+        </section>
+        <section id="help-page" class="gallery-section" aria-labelledby="help-page-title">
+            <h2 id="help-page-title">Help page</h2>
+            <p>Search with a clear button, topic filter chips, filtered section cards, FAQ collapsibles hidden until found with Expand All, no-results state, and feedback links. See the full <a href="help-page.html">help page demo</a> with <code>?q=</code>, <code>?topic=</code>, and release notes.</p>
+            <div class="help-page" data-help-page data-help-page-demo>
+                <div class="help-page__toolbar">
+                    <div class="field help-page__search">
+                        <label class="field__label" for="gallery-help-search">Search help</label>
+                        <div class="help-page__search-row">
+                            <input class="field__control help-page__search-control" id="gallery-help-search" type="search" autocomplete="off" placeholder="Search guides or FAQ" data-help-page-search>
+                            <button class="icon-button help-page__search-clear" type="button" aria-label="Clear search" title="Clear search" data-help-page-search-clear hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-close"/></svg></button>
+                        </div>
+                    </div>
+                    <div class="help-page__filters" role="group" aria-label="Help topics" data-help-page-filters>
+                        <button class="chip chip--filter" type="button" aria-pressed="true" data-help-page-topic="all">All Topics</button>
+                        <button class="chip chip--filter" type="button" aria-pressed="false" data-help-page-topic="support">Support</button>
+                        <button class="chip chip--filter" type="button" aria-pressed="false" data-help-page-topic="faq">Q&amp;A / FAQ</button>
+                    </div>
+                </div>
+                <div class="empty-state help-page__no-results" data-help-page-no-results hidden>
+                    <svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-help"/></svg>
+                    <h3 class="empty-state__title">No matching topics</h3>
+                    <p class="empty-state__text" role="status" aria-live="polite">No help topics or questions match "<span data-help-page-no-results-term></span>".</p>
+                    <div class="empty-state__actions">
+                        <button class="button button--secondary" type="button" data-help-page-reset>Reset Search</button>
+                    </div>
+                </div>
+                <section class="card help-page__section" data-help-page-section data-help-page-topics="support" aria-labelledby="gallery-help-support-title">
+                    <h3 class="card__title" id="gallery-help-support-title">Application &amp; Support</h3>
+                    <p class="card__text">Reach our team at <a data-help-page-feedback-address href="mailto:support@example.test">support@example.test</a>.</p>
+                    <div class="help-page__actions">
+                        <a class="button button--secondary" data-help-page-feedback-link href="mailto:support@example.test">Send Feedback</a>
+                    </div>
+                </section>
+                <section class="card help-page__section" data-help-page-section data-help-page-topics="faq" aria-labelledby="gallery-help-faq-title">
+                    <h3 class="card__title" id="gallery-help-faq-title">Questions &amp; Answers</h3>
+                    <div class="help-page__actions">
+                        <button class="button button--quiet help-page__faq-toggle" type="button" data-help-page-faq-toggle aria-expanded="false">Expand All</button>
+                    </div>
+                    <div class="help-page__faq-list" data-help-page-faq-list>
+                        <div class="collapsible help-page__faq" data-help-page-faq-item data-help-page-tags="theme dark light appearance">
+                            <button class="collapsible__toggle help-page__faq-question" type="button" aria-expanded="false" aria-controls="gallery-help-faq-1"><span class="help-page__faq-question-text">How do I switch themes?</span><svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button>
+                            <div class="collapsible__panel" id="gallery-help-faq-1" hidden="until-found"><p class="card__text">Choose System, Light, or Dark in your preferences.</p></div>
+                        </div>
+                        <div class="collapsible help-page__faq" data-help-page-faq-item data-help-page-tags="offline pwa cache sync">
+                            <button class="collapsible__toggle help-page__faq-question" type="button" aria-expanded="false" aria-controls="gallery-help-faq-2"><span class="help-page__faq-question-text">Can I use the app offline?</span><svg class="icon collapsible__icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-chevron-down"/></svg></button>
+                            <div class="collapsible__panel" id="gallery-help-faq-2" hidden="until-found"><p class="card__text">Guides and static assets stay cached for offline reading.</p></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </section>
         <section id="dialog" class="gallery-section" aria-labelledby="dialog-section-title">
             <h2 id="dialog-section-title">Dialog</h2>

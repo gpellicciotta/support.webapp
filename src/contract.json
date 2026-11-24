@@ -940,6 +940,7 @@
     "screen-action-bar",
     "action-registry",
     "notices",
-    "inbox"
+    "inbox",
+    "help-page"
   ]
 }

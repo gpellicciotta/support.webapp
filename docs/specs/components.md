@@ -59,6 +59,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `empty-state`   | Empty state   | none                                                                                              | icon, title, text, at most two actions                            | heading level set by the app                                |
 | `collapsible`   | Collapsible   | `collapsible.js`: `attachCollapsible`                                                             | collapsed, expanded                                               | button with `aria-expanded` and `aria-controls`             |
 | `release-notes` | Release notes | `release-notes.js`: `createReleaseNotes`, `attachReleaseNotes`, using `collapsible.js`, `icon.js` | collapsibles or open blocks; filters, area groups, status, paging | filter group `aria-pressed`; `role="list"`; findable panels |
+| `help-page`     | Help page     | `help-page.js`: `createHelpPage`, `attachHelpPage`, `buildFeedbackMailto`, `parseHelpQuery`       | search, topic chips, FAQ collapsibles, no-results, release notes  | labeled search; `aria-pressed` chips; findable FAQ panels   |
 | `list`          | List          | none                                                                                              | simple list, definition rows, bordered facts, compact facts       | native `ul`, `ol`, or `dl`                                  |
 | `view-header`   | View header   | none                                                                                              | title with optional muted summary; empty summary collapses        | heading level set by the app; `role="status"` when live     |
 | `toolbar`       | Toolbar       | none                                                                                              | wrapping filter fields and actions aligned to the bottom edge     | `role="search"` landmark; labeled native controls           |
@@ -428,6 +429,57 @@ Upgrading an existing app:
 - Replace local changelog renderers and release CSS with `attachReleaseNotes` or `createReleaseNotes` from `release-notes.js`.
 - Pass parsed releases from `parseChangelog` or a server changelog endpoint; use `groupByArea`, `showStatus`, and `pageSize` for admin consoles.
 - See the [Release notes section](../../src/demo/visual-style-gallery.html#release-notes) of the gallery.
+
+### help-page
+Help page pattern ([help-page.js](../../src/js/help-page.js), [help-page.css](../../src/css/components/help-page.css)).
+Uses [collapsible.js](../../src/js/collapsible.js), [release-notes.js](../../src/js/release-notes.js), and [icon.js](../../src/js/icon.js).
+- `attachHelpPage(root, options)` enhances existing markup via `data-help-page-*` hooks; `createHelpPage(doc, options)` builds the skeleton first.
+- Also exports `buildFeedbackMailto(options)`, `parseHelpQuery(input)`, and `formatHelpQuery(params)`.
+- Controller methods: `setTopic`, `getTopic`, `setQuery`, `getQuery`, `reset`, `applyQuery`, `getQueryString`, `expandAllFaq`, `collapseAllFaq`, `toggleAllFaq`, `setFeedback`, `setReleases`, `refresh`, and `destroy`.
+- Sections list space-separated topics in `data-help-page-topics`; matching FAQ items auto-expand during search and stay `hidden="until-found"` when collapsed.
+- Supports `?q=` and `?topic=` links on load or via `applyQuery`, optional `syncUrl`, feedback `mailto:` updates, and release notes in `[data-help-page-release-notes]`.
+
+```html
+<div class="help-page" data-help-page>
+  <div class="help-page__toolbar">
+    <div class="field help-page__search">
+      <label class="field__label" for="help-search">Search help</label>
+      <div class="help-page__search-row">
+        <input class="field__control help-page__search-control" id="help-search" type="search" data-help-page-search>
+        <button class="icon-button help-page__search-clear" type="button" aria-label="Clear search" data-help-page-search-clear hidden>...</button>
+      </div>
+    </div>
+    <div class="help-page__filters" role="group" aria-label="Help topics" data-help-page-filters>
+      <button class="chip chip--filter" type="button" aria-pressed="true" data-help-page-topic="all">All Topics</button>
+      <button class="chip chip--filter" type="button" aria-pressed="false" data-help-page-topic="faq">Q&amp;A / FAQ</button>
+    </div>
+  </div>
+  <div class="empty-state help-page__no-results" data-help-page-no-results hidden>
+    <h2 class="empty-state__title">No matching topics</h2>
+    <p class="empty-state__text" role="status" aria-live="polite">No topics match "<span data-help-page-no-results-term></span>".</p>
+    <div class="empty-state__actions"><button class="button button--secondary" type="button" data-help-page-reset>Reset Search</button></div>
+  </div>
+  <section class="card help-page__section" data-help-page-section data-help-page-topics="faq">
+    <h2 class="card__title">Questions &amp; Answers</h2>
+    <div class="help-page__actions"><button class="button button--quiet help-page__faq-toggle" type="button" data-help-page-faq-toggle aria-expanded="false">Expand All</button></div>
+    <div class="help-page__faq-list" data-help-page-faq-list>
+      <div class="collapsible help-page__faq" data-help-page-faq-item data-help-page-tags="sso login">
+        <button class="collapsible__toggle help-page__faq-question" type="button" aria-expanded="false" aria-controls="help-faq-1">...</button>
+        <div class="collapsible__panel" id="help-faq-1" hidden="until-found"><p class="card__text">...</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="card help-page__section" data-help-page-section data-help-page-topics="release-notes">
+    <h2 class="card__title">Release Notes</h2>
+    <div class="release-notes" data-help-page-release-notes></div>
+  </section>
+</div>
+```
+
+Upgrading an existing app:
+- Replace local help view filtering, FAQ expand-all, query parsing, and feedback mailto helpers with `attachHelpPage` from [help-page.js](../../src/js/help-page.js).
+- Keep app-specific help text and server info fetching local; call `setFeedback` on sign-in or status updates and `setReleases` after parsing the changelog.
+- See the [Help page section](../../src/demo/visual-style-gallery.html#help-page) of the gallery and the standalone [help-page.html](../../src/demo/help-page.html) demo.
 
 ### list
 List. Native collection and description markup; no JavaScript module.

@@ -5,6 +5,7 @@ import { attachForm } from '../js/form.js';
 import { setSpriteUrl } from '../js/icon.js';
 import { attachAccountMenu } from '../js/account-menu.js';
 import { attachCollapsible } from '../js/collapsible.js';
+import { attachHelpPage } from '../js/help-page.js';
 import { attachReleaseNotes } from '../js/release-notes.js';
 import { attachTabs } from '../js/tabs.js';
 import { attachSelection } from '../js/selection.js';
@@ -288,6 +289,13 @@ if (typeof document !== 'undefined' && document.querySelector('.gallery-main')) 
     const groupedDemo = document.querySelector('[data-release-notes-demo="grouped"]');
     if (groupedDemo) {
         attachReleaseNotes(groupedDemo, { releases: sampleReleases, showFilter: false, groupByArea: true, showStatus: true, pageSize: 2, idPrefix: 'gallery-release-notes-grouped' });
+    }
+    const helpDemo = document.querySelector('[data-help-page-demo]');
+    if (helpDemo) {
+        attachHelpPage(helpDemo, {
+            readLocation: false,
+            feedback: { address: 'support@example.test', appName: 'Gallery', version: '0.4.1', user: { name: 'Alex North', email: 'alex@example.test' } }
+        });
     }
     for (const tabs of document.querySelectorAll('[data-tabs-root]')) {
         attachTabs(tabs);
