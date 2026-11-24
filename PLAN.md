@@ -3,8 +3,8 @@ An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
 - [x] T0307 Add standard core icons for admin console screens from Auth.
-- [~] T0306 [owner: @gemini] Remove sibling app mentions from source code and test comments.
-- [ ] T0308 [protocol: adhoc] [needs: T0306] Release and publish support.webapp as v0.5.0.
+- [x] T0306 Remove sibling app mentions from source code and test comments.
+- [ ] T0308 [protocol: adhoc] Release and publish support.webapp as v0.5.0. Also run `plan gc --commit`
 - [x] T0305 [owner: @gemini] [protocol: adhoc] Prevent touching borders on gallery status bars and action rows.
 - [x] T0304 Align control messages with label starts and frame gallery status bars.
 - [x] T0303 Make the design integrity hashes ignore line endings, so LF and CRLF checkouts of a vendored copy both pass.
