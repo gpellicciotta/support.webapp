@@ -103,6 +103,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `file-download`     | File download     | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`       | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
 | `screen-action-bar` | Screen action bar | `screen-action-bar.js`: `attachScreenActionBar`                                                | buttons, links, disabled hints, empty-bar removal       | native `disabled` on buttons; `aria-disabled` on links            |
 | `action-registry`   | Action registry   | `action-registry.js`: `createActionRegistry`, `attachActionRegistry`                           | enabled, disabled with reason, scoped lookup, events    | blocks disabled and `aria-disabled` `[data-action]` triggers      |
+| `dom-builders`      | DOM builders      | `dom-builders.js`: `createDomBuilders`, `h`, `setChildren`, and catalog builders               | buttons, selects, checkboxes, facts, tables, confirm    | emits catalog ARIA skeletons; text nodes only, no `innerHTML`     |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -1083,6 +1084,33 @@ Upgrading an existing app:
 - Replace Auth's `notifications-view.mjs` rendering and `app.css` inbox and unread button styles, or counters' `notifications-view.mjs`, with [inbox.js](../../src/js/inbox.js).
 - Wire `attachUnreadButton` and `attachInbox` to your [notices.js](../../src/js/notices.js) store and handle `inbox:action` with your API client.
 - See the [Notifications inbox section](../../src/demo/visual-style-gallery.html#inbox) and the interactive [portal shell demo](../../src/demo/shell-portal.html#sample-inbox-title).
+
+### dom-builders
+DOM builders ([dom-builders.js](../../src/js/dom-builders.js)), using [icon.js](../../src/js/icon.js) and [inline-confirm.js](../../src/js/inline-confirm.js).
+Builds light-DOM elements and catalog component skeletons without `innerHTML`, using `data-*` hooks and native ARIA states.
+
+```js
+import { createDomBuilders } from './dom-builders.js';
+
+const dom = createDomBuilders(document);
+const slot = dom.inlineConfirm(
+    dom.button('Delete', null, { kind: 'primary', danger: true }),
+    { label: 'Confirm delete', text: 'Delete forever?', confirmLabel: 'Delete', onConfirm }
+);
+```
+
+- Call `createDomBuilders(doc, { icons })` to bind builders to an injected `document` and release `inlineConfirm` listeners via `destroy()`.
+- Top-level exports mirror those methods: `h`, `setChildren`, `button`, `select`, `checkbox`, `facts`, `dataTable`, `severityOf`, `severityChip`, `statusLine`, `errorBanner`, `emptyState`, and `inlineConfirm`.
+- `h(tag, props, ...children)` wires `on*` listeners and sets `value`, `checked`, `disabled`, `hidden`, `open`, and `selected` properties.
+- `h` and `setChildren` flatten nested arrays, skip `null`, `undefined`, and `false`, and escape primitives as text nodes.
+- Each component builder emits its normative catalog skeleton from this document.
+- `severityOf(name)` normalizes `warn` to `warning`, `danger` to `error`, and unknown names to `info`.
+- `severityChip` pairs distinct sprite icons with text; call `setSpriteUrl` first, or pass `{ icons }` overrides.
+
+Upgrading an existing app:
+- Replace local `h`, `setChildren`, and component builders in Auth's and ToDo's `admin/js/ui.mjs` with [dom-builders.js](../../src/js/dom-builders.js).
+- Remove legacy `.facts`, `.table-wrap`, `.data-table`, `.chip--sev`, `.muted`, and `.confirm-slot` rules; builders emit package skeletons directly.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live builder usage.
 
 ---
 

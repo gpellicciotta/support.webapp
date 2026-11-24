@@ -941,6 +941,7 @@
     "action-registry",
     "notices",
     "inbox",
-    "help-page"
+    "help-page",
+    "dom-builders"
   ]
 }

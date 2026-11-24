@@ -121,6 +121,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It reuses [selection.js](../../src/js/selection.js), [notices.js](../../src/js/notices.js), and [icon.js](../../src/js/icon.js), emitting action events so apps keep APIs local.
 - **[Decided]** on 2026-11-24: `help-page` moved in from Auth and counters as [help-page.js](../../src/js/help-page.js) and [help-page.css](../../src/css/components/help-page.css).
   It reuses [collapsible.js](../../src/js/collapsible.js), [release-notes.js](../../src/js/release-notes.js), and [icon.js](../../src/js/icon.js), leaving app help copy and server fetching local.
+- **[Decided]** on 2026-11-24: `dom-builders` moved in from the admin consoles as [dom-builders.js](../../src/js/dom-builders.js).
+  It exports `createDomBuilders`, `h`, `setChildren`, and catalog builders using [icon.js](../../src/js/icon.js) and [inline-confirm.js](../../src/js/inline-confirm.js).
 
 ### Shared patterns
 Documented as contracts without components of their own:
