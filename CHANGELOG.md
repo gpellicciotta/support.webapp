@@ -9,6 +9,8 @@ All notable changes to this project are documented here.
 
 ---
 
+## v0.5.1-pre
+
 ## v0.5.0 [released: 2026-11-24]
 - DevEx: Replaced sibling-application references in source and test comments with app-neutral descriptions and added a neutrality unit test.
 - Looks: Added seven admin console screen core icons to [contract.json](src/contract.json), every look sprite, and admin screen defaults.
