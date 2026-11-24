@@ -30,11 +30,11 @@ See [technical-spec.md](T0306-remove-sibling-app-mentions-from-source-code-and/t
 
 ## Task Execution Steps
 - [x] **[Read]**      Scan `src/` and `tests/` for all sibling-app mentions in comments and test descriptions.
-- [ ] **[Implement]** Add a unit check asserting source and test comments contain no sibling-app references.
-- [ ] **[Verify]**    Run the new check and confirm it fails on the existing mentions.
-- [ ] **[Implement]** Rewrite comments in `src/js/` and `tests/` in clean, app-neutral language.
-- [ ] **[Verify]**    Run `python scripts/devops.py check` and confirm zero remaining sibling-app comment matches.
-- [ ] **[Doc]**       Update `CHANGELOG.md` without removing provenance notes from `docs/`.
+- [x] **[Implement]** Add a unit check asserting source and test comments contain no sibling-app references.
+- [x] **[Verify]**    Run the new check and confirm it fails on the existing mentions.
+- [x] **[Implement]** Rewrite comments in `src/js/` and `tests/` in clean, app-neutral language.
+- [x] **[Verify]**    Run `python scripts/devops.py check` and confirm zero remaining sibling-app comment matches.
+- [x] **[Doc]**       Update `CHANGELOG.md` without removing provenance notes from `docs/`.
 - [ ] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
@@ -51,4 +51,27 @@ See [technical-spec.md](T0306-remove-sibling-app-mentions-from-source-code-and/t
 
 - [2026-11-24] **[Size]**
   Size approved by @giova for 36 files, 160 lines.
+
+- [2026-11-24] **[Implement]**
+  Added comment-neutrality.test.js checking src/js/, src/css/, tests/unit/, and tests/e2e/ comments and test titles.
+  - Red-phase Vitest run failed with 65 violations across 36 files.
+
+- [2026-11-24] **[Implement]**
+  Rewrote sibling-app mentions across 19 src/js/, 15 tests/unit/, and 2 tests/e2e/ files into app-neutral descriptions.
+  - Preserved all runtime code, exported aliases, and public APIs unchanged.
+  - Verified comment-neutrality.test.js passes with zero remaining sibling-app matches.
+
+- [2026-11-24] **[Doc]**
+  Added v0.4.1-pre entry to CHANGELOG.md while preserving provenance history under docs/.
+
+- [2026-11-24] **[Verify]**
+  Verified all linters, pytest (61 passed), Vitest (2622 passed), Playwright (1158 passed), and integration (7 passed) with zero sibling-app comment matches.
+  - Installed worktree node_modules via npm ci so generate-app integration tests pass.
+  - Recorded verbatim terminal evidence in validation-proof.md.
+
+- [2026-11-24] **[Verify]**
+  Recorded task outcomes.
+  - Files touched: 36.
+  - Lines touched: 142.
+  - Reopenings: 0.
 
