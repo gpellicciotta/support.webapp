@@ -107,6 +107,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `action-registry`   | Action registry     | `action-registry.js`: `createActionRegistry`, `attachActionRegistry`                                                                                             | enabled, disabled with reason, scoped lookup, events    | blocks disabled and `aria-disabled` `[data-action]` triggers      |
 | `dom-builders`      | DOM builders        | `dom-builders.js`: `createDomBuilders`, `h`, `setChildren`, and catalog builders                                                                                 | buttons, selects, checkboxes, facts, tables, confirm    | emits catalog ARIA skeletons; text nodes only, no `innerHTML`     |
 | `admin-console`     | Admin console frame | `admin-console.js`: `createAdminConsole`, `attachAdminConsole`, `parseRoute`, `displayName`, using `account-menu.js`, `app-nav.js`, `dom-builders.js`, `icon.js` | shell with side panel, hash router, gates, signed-out   | skip link focuses `#main`; `aria-current="page"`; single `<main>` |
+| `view-router`       | View router         | `view-router.js`: `createViewRouter`, `attachViewRouter`                                                                                                         | routed views, fallback, sign-in guards, outside routes  | `aria-current="page"` route marks; `data-view-router-*` hooks     |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -1215,6 +1216,39 @@ Upgrading an existing app:
 - Remove app-local `.gate` and `.gate__actions` CSS rules; [shell.css](../../src/css/shell.css) styles `.app__gate` and `.app__gate-actions`.
 - Pass session lookup, account check, sign-in, and sign-out callbacks in options, and keep `ctx.editor` or `ctx.panel` for detail panels.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for hash routing and gate previews.
+
+### view-router
+View router for `RoutedView` screens ([view-router.js](../../src/js/view-router.js)).
+Registers routed views and a fallback, enforces sign-in guards, manages history, and opens outside routes with full loads.
+
+```html
+<body class="app app--scroll-page" data-view-router>
+  <header class="app__top-bar">
+    <h1 class="app__title" data-view-router-title>Home</h1>
+  </header>
+  <nav class="app__sidebar" aria-label="Main" data-view-router-nav>
+    <a class="app__nav-item" href="/" data-view-router-link aria-current="page">Home</a>
+    <a class="app__nav-item" href="/notes" data-view-router-link data-action="navigate-to-notes">Notes</a>
+  </nav>
+  <main class="app__main" id="main" tabindex="-1" data-view-router-outlet></main>
+</body>
+```
+
+- Call `createViewRouter(options)` or `attachViewRouter(root, options)` with injectable `document`, `window`, `location`, and `history`.
+- Controller methods: `addView`, `setFallbackView`, `getViews`, `getFallbackView`, `getActiveView`, `getCurrentRoute`, `findViewForRoute`, and `findViewById`.
+- Activation and lifecycle: `activateView`, `activateViewById`, `activateSpecificView`, `openOutside`, `setTitle`, `markRoute`, `start`, `attach`, `detach`, and `destroy`.
+- Events exported: `CONTENT_VIEW_ADDED_EVENT`, `CONTENT_VIEW_CHANGED_EVENT`, and `CONTENT_VIEW_TITLE_CHANGED_EVENT`.
+- Views match in registration order; unmatched routes select the fallback view, and re-activating the active view returns `false`.
+- `onlyWhenSignedIn` and `neverWhenSignedIn` guards read `isSignedIn()`, with optional `signInRoute`, `returnUrlParam`, `signedInRoute`, `signedInViewId`, and `guard` callbacks.
+- History uses `replaceState` for the current address or `{ replace: true }`, `pushState` otherwise, and no history write on `popstate`.
+- `outsidePrefixes`, `resolveOutsideRoute`, and cross-origin URLs open via `location.assign` or `location.replace`, rejecting unsafe URL schemes.
+- Shell title updates `[data-view-router-title]` and `document.title`; route marks sync `aria-current="page"` and optional `accountMenu.setRoute`.
+
+Upgrading an existing app:
+- Replace view lists, `findViewForRoute`, `activateView`, `popstate`, and `openOutsideSpa` in Auth's and counters' `App` with [view-router.js](../../src/js/view-router.js).
+- Wire `isSignedIn`, `outsidePrefixes`, and `resolveOutsideRoute` in options, and forward [action-registry.js](../../src/js/action-registry.js) `onNavigate` to `router.activateView`.
+- Replace app-local shell `markRoute` and `setTitle` hooks with `data-view-router-nav`, `data-view-router-title`, and `data-view-router-outlet`.
+- See the [portal shell demo](../../src/demo/shell-portal.html) and [shell-demo.js](../../src/demo/shell-demo.js) for routed views with links and browser history.
 
 ---
 

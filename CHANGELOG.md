@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Modules: Added [view-router.js](src/js/view-router.js) for routed views with sign-in guards, history, titles, route marks, and outside loads.
 - Modules: Added [admin-console.js](src/js/admin-console.js) with screen registry, hash router, signed-out shell, and centered gate pages in [shell.css](src/css/shell.css).
 - Modules: Added [table-state.js](src/js/table-state.js) with URL hash filter and page state, client slicing, server parameters, and pager wiring.
 - Modules: Added [data-loader.js](src/js/data-loader.js) with loading, Retry, 401 Sign in, newest-wins cancellation, and quiet refresh states.

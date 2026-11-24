@@ -13,13 +13,14 @@ import { attachPullRefresh } from '../js/pull-refresh.js';
 import { attachScreenActionBar } from '../js/screen-action-bar.js';
 import { createToast } from '../js/toast.js';
 import { RoutedView } from '../js/view.js';
+import { CONTENT_VIEW_CHANGED_EVENT, attachViewRouter } from '../js/view-router.js';
 
 /**
  * A sample view whose first load fails and whose later loads succeed, to show the error page, Try again, and screen actions.
  */
 class SampleView extends RoutedView {
     constructor(app, options) {
-        super('sample-view', app, 'Sample', undefined, options);
+        super('sample-view', app, 'Sample', /^\/demo\/shell-portal\.html(?:$|\?view=sample(?:[&#].*)?$|#)/i, options);
         this.loads = 0;
     }
 
@@ -34,6 +35,13 @@ class SampleView extends RoutedView {
 
     createMainUIHtml() {
         return '<div class="sample-view"><p data-sample-view-text>Not loaded yet.</p></div>';
+    }
+
+    attach(el, route, state) {
+        super.attach(el, route, state);
+        if (this.loads === 0) {
+            this.refreshComponentUI();
+        }
     }
 
     async refreshData() {
@@ -53,16 +61,52 @@ class SampleView extends RoutedView {
 }
 
 /**
- * Attach the sample view to its host, connect the action registry and screen action bar, and wire the attach/detach toggle.
- * @param {HTMLElement} host the element that receives the view
+ * A second routed view on the portal demo to exercise link routing, screen action swaps, and browser history.
+ */
+class SampleNotesView extends RoutedView {
+    constructor(app, options) {
+        super('sample-notes-view', app, 'Notes', /^\/demo\/shell-portal\.html\?view=notes(?:[&#].*)?$/i, options);
+    }
+
+    getActions() {
+        return [
+            { id: 'sample-notes-view.archive', title: 'Archive notes', description: 'Archive the sample notes', run: () => this.app.showToast?.('Sample notes archived.') }
+        ];
+    }
+
+    createMainUIHtml() {
+        return '<div class="sample-notes-view"><p data-sample-notes-text>Placeholder notes view switched through the view router.</p></div>';
+    }
+}
+
+/**
+ * Fallback routed view shown for unmatched portal demo routes.
+ */
+class SampleFallbackView extends RoutedView {
+    constructor(app, options) {
+        super('sample-fallback-view', app, 'Not found', /^\/not-found$/i, options);
+    }
+
+    createMainUIHtml() {
+        return '<div class="sample-fallback-view"><p>No routed sample view matches this route.</p></div>';
+    }
+}
+
+/**
+ * Attach the view router to the portal sample host, wire the action registry and screen action bar, and keep the detach toggle working.
+ * @param {HTMLElement} host the element that receives routed views
  * @param {{show: (message: string) => void}} toaster toast controller for sample action feedback
  */
 function mountSampleView(host, toaster) {
     const doc = host.ownerDocument;
-    let activeView = null;
+    const section = host.closest('section') ?? doc.body;
+    let router = null;
     const registry = attachActionRegistry(doc.body, {
         document: doc,
-        getScope: () => activeView?.id ?? null,
+        getScope: () => router?.getActiveView()?.id ?? null,
+        actions: [
+            { id: 'navigate-to-sample', title: 'Sample', href: '/demo/shell-portal.html' }
+        ],
         onNavigate: (href) => {
             if (href.startsWith('#')) {
                 const target = doc.getElementById(href.slice(1));
@@ -70,7 +114,9 @@ function mountSampleView(host, toaster) {
                 if (doc.defaultView?.location) {
                     doc.defaultView.location.hash = href;
                 }
+                return;
             }
+            router?.activateView(href, {}, 'navigate action');
         }
     });
     const app = {
@@ -79,22 +125,42 @@ function mountSampleView(host, toaster) {
     };
     const bar = attachScreenActionBar(doc.body, { app });
     app.setScreenActions = bar.setScreenActions;
-    const view = new SampleView(app, { document: doc });
+
+    router = attachViewRouter(section, {
+        document: doc,
+        outlet: host,
+        actions: registry,
+        updateDocumentTitle: false
+    });
+    const sampleView = new SampleView(app, { document: doc });
+    const notesView = new SampleNotesView(app, { document: doc });
+    const fallbackView = new SampleFallbackView(app, { document: doc });
+    router.addView(sampleView);
+    router.addView(notesView);
+    router.setFallbackView(fallbackView);
+
     let attached = true;
-    activeView = view;
-    view.attach(host);
-    view.refreshComponentUI();
     const toggle = doc.querySelector('[data-demo-view-toggle]');
+    router.addEventListener(CONTENT_VIEW_CHANGED_EVENT, () => {
+        attached = true;
+        if (toggle) {
+            toggle.textContent = 'Detach sample view';
+        }
+    });
+    router.start();
+
     toggle?.addEventListener('click', () => {
+        const active = router.getActiveView();
+        if (!active) {
+            return;
+        }
         if (attached) {
-            view.detach();
-            activeView = null;
+            active.detach();
             attached = false;
             toggle.textContent = 'Attach sample view';
         }
         else {
-            activeView = view;
-            view.attach(host);
+            active.attach(host, router.getCurrentRoute(), {});
             attached = true;
             toggle.textContent = 'Detach sample view';
         }

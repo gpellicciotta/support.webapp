@@ -945,6 +945,7 @@
     "dom-builders",
     "data-loader",
     "table-state",
-    "admin-console"
+    "admin-console",
+    "view-router"
   ]
 }

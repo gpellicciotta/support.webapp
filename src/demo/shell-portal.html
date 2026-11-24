@@ -62,11 +62,15 @@
         </section>
         <section class="gallery-section" aria-labelledby="sample-view-title">
             <h2 id="sample-view-title">Sample view</h2>
-            <p>A view that loads its own data: the first load fails to show the error page, and Try again loads the sample data. Its screen actions show in the action bar and disappear when detached.</p>
+            <p>A routed view host with links, browser history, and screen actions: the first Sample load fails to show the error page, Try again loads data, and Notes switches views. Active view: <strong data-view-router-title>Sample</strong>.</p>
             <div class="toast-demo-actions">
+                <nav class="toast-demo-actions" aria-label="Sample views" data-view-router-nav>
+                    <a class="button button--secondary" href="/demo/shell-portal.html" data-view-router-link data-action="navigate-to-sample">Sample</a>
+                    <a class="button button--secondary" href="/demo/shell-portal.html?view=notes" data-view-router-link>Notes</a>
+                </nav>
                 <button class="button button--secondary" type="button" data-demo-view-toggle>Detach sample view</button>
             </div>
-            <div data-demo-view></div>
+            <div data-demo-view data-view-router-outlet></div>
         </section>
         <section class="gallery-section" aria-labelledby="sample-notices-title">
             <h2 id="sample-notices-title">Sample notices</h2>
