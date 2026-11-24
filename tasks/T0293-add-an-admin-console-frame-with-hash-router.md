@@ -1,11 +1,11 @@
 ---
 id: T0293
-owner: ~
-needs: ['T0294']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0293-add-an-admin-console-frame-with-hash-router
+worktree: .plan/work/T0293-add-an-admin-console-frame-with-hash-router
+status: active
+started_at: "2026-11-24T01:41:54Z"
 ended_at: —
 review: agent
 preview: none

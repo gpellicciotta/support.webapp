@@ -18,7 +18,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0290 Add a notices module that routes app notifications to banners and toasts, promoted from Auth.
 - [x] T0291 Add the notifications inbox pattern and the unread count button, promoted from Auth.
 - [x] T0292 Add a help page pattern with search, topic chips, FAQ, and feedback link, promoted from Auth.
-- [ ] T0293 Add an admin console frame with hash router, screen registry, and gate pages, promoted from Auth.
+- [~] T0293 [owner: @gemini] Add an admin console frame with hash router, screen registry, and gate pages, promoted from Auth.
 - [x] T0294 Add DOM builders for package components, promoted from Auth's and ToDo's admin console helpers.
 - [ ] T0295 Add a view router for routed views with sign-in guards and a fallback view, promoted from Auth's App.
 - [ ] T0296 [needs: T0293] Add the shared admin Overview screen with server state reloaded while visible, promoted from Auth's and ToDo's consoles.
