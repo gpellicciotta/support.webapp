@@ -1,11 +1,11 @@
 ---
 id: T0301
-owner: ~
-needs: ['T0293', 'T0294']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0301-add-the-shared-admin-sessions-screen-with-single
+worktree: .plan/work/T0301-add-the-shared-admin-sessions-screen-with-single
+status: active
+started_at: "2026-11-24T06:00:47Z"
 ended_at: —
 review: agent
 preview: none
