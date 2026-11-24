@@ -27,7 +27,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0299 Add the shared admin Broadcasts screen with compose, live preview, history, and retraction, promoted from Auth's and ToDo's consoles.
 - [x] T0300 Add the shared admin Users screen with table, detail panel, creation, and deletion, promoted from Auth's and ToDo's consoles.
 - [x] T0301 Add the shared admin Sessions screen with single, bulk, and expired token revocation, promoted from Auth's and ToDo's consoles.
-- [~] T0302 [owner: @gemini] Add the shared admin Changelog screen on the release notes renderer, promoted from Auth's and ToDo's consoles.
+- [x] T0302 Add the shared admin Changelog screen on the release notes renderer, promoted from Auth's and ToDo's consoles.
 
 ## Backlog
 *(Currently no tasks)*
