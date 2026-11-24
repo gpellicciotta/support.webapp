@@ -11,6 +11,9 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1800.9, input: 366383, output: 235}
+work_duration: 1812.5
 ---
 # T0293: Add an admin console frame with hash router, screen registry, and gate pages, promoted from Auth
 
