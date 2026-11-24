@@ -1330,8 +1330,10 @@
         <section id="dialog" class="gallery-section" aria-labelledby="dialog-section-title">
             <h2 id="dialog-section-title">Dialog</h2>
             <p>Use a modal for consequential actions. Require a word for irreversible bulk operations.</p>
-            <button class="button button--secondary" type="button" data-dialog-open="confirm-list">Delete a list</button>
-            <button class="button button--danger" type="button" data-dialog-open="confirm-data">Erase sample data</button>
+            <div class="toast-demo-actions">
+                <button class="button button--secondary" type="button" data-dialog-open="confirm-list">Delete a list</button>
+                <button class="button button--danger" type="button" data-dialog-open="confirm-data">Erase sample data</button>
+            </div>
             <p class="demo-status" data-dialog-result role="status">No action taken.</p>
             <dialog class="dialog" id="confirm-list" aria-labelledby="confirm-list-title">
                 <div class="dialog__header"><h3 class="dialog__title" id="confirm-list-title">Delete the list Groceries?</h3></div>
@@ -1655,21 +1657,27 @@
             <p>Bright changes action fills and labels through wrapper accents. Other looks retain their own actions.</p>
             <div data-accent="blue">
                 <h3>Blue</h3>
-                <button class="button" type="button">Default</button>
-                <button class="button is-hover" type="button">Hover</button>
-                <button class="button is-active" type="button">Active</button>
+                <div class="toast-demo-actions">
+                    <button class="button" type="button">Default</button>
+                    <button class="button is-hover" type="button">Hover</button>
+                    <button class="button is-active" type="button">Active</button>
+                </div>
             </div>
             <div data-accent="yellow">
                 <h3>Yellow</h3>
-                <button class="button" type="button">Default</button>
-                <button class="button is-hover" type="button">Hover</button>
-                <button class="button is-active" type="button">Active</button>
+                <div class="toast-demo-actions">
+                    <button class="button" type="button">Default</button>
+                    <button class="button is-hover" type="button">Hover</button>
+                    <button class="button is-active" type="button">Active</button>
+                </div>
             </div>
             <div data-accent="red">
                 <h3>Red</h3>
-                <button class="button" type="button">Default</button>
-                <button class="button is-hover" type="button">Hover</button>
-                <button class="button is-active" type="button">Active</button>
+                <div class="toast-demo-actions">
+                    <button class="button" type="button">Default</button>
+                    <button class="button is-hover" type="button">Hover</button>
+                    <button class="button is-active" type="button">Active</button>
+                </div>
             </div>
         </section>
         <section id="seasons" class="gallery-section" aria-labelledby="seasons-title">

@@ -168,3 +168,87 @@ test('the error summary title takes the danger color and its links the text colo
     }
     expect(problems).toEqual([]);
 });
+
+test('separate bordered controls and containers in the gallery never touch borders', async ({ page }) => {
+    const problems = await openGallery(page);
+    const space4 = px(await tokenLength(page, '--space-4'));
+    for (const selector of [
+        '#dialog [data-dialog-result]',
+        '#menu [data-menu-result]',
+        '#toast [data-toast-result]',
+        '#file-download [data-file-download-result]',
+        '#account-menu [data-account-menu-result]',
+        '#theme-switch [data-theme-sync-status]'
+    ]) {
+        const gap = await page.locator(selector).evaluate((el) => {
+            const prev = el.previousElementSibling;
+            const prevTarget = prev?.classList.contains('card-specimens') && prev.getBoundingClientRect().height === 0
+                ? prev.previousElementSibling
+                : prev;
+            return el.getBoundingClientRect().top - prevTarget.getBoundingClientRect().bottom;
+        });
+        expect(gap, `${selector} top gap`).toBeGreaterThanOrEqual(space4 - 0.5);
+    }
+
+    const touches = await page.evaluate(() => {
+        const isTransparent = (color) => !color || color === 'rgba(0, 0, 0, 0)' || color === 'transparent';
+        const hasAllBorder = (el) => {
+            const st = getComputedStyle(el);
+            return Number.parseFloat(st.borderTopWidth) > 0 && !isTransparent(st.borderTopColor)
+                && Number.parseFloat(st.borderBottomWidth) > 0 && !isTransparent(st.borderBottomColor)
+                && Number.parseFloat(st.borderLeftWidth) > 0 && !isTransparent(st.borderLeftColor)
+                && Number.parseFloat(st.borderRightWidth) > 0 && !isTransparent(st.borderRightColor);
+        };
+        const bordered = [...document.querySelectorAll('main *')].filter((el) => el.getClientRects().length > 0 && hasAllBorder(el));
+        const hits = [];
+        for (let i = 0; i < bordered.length; i++) {
+            const a = bordered[i];
+            const ar = a.getBoundingClientRect();
+            if (ar.width === 0 || ar.height === 0) {
+                continue;
+            }
+            for (let j = i + 1; j < bordered.length; j++) {
+                const c = bordered[j];
+                if (a.contains(c) || c.contains(a)) {
+                    continue;
+                }
+                const cr = c.getBoundingClientRect();
+                if (cr.width === 0 || cr.height === 0) {
+                    continue;
+                }
+                if (Math.min(ar.right, cr.right) - Math.max(ar.left, cr.left) > 1) {
+                    const dy = Math.max(cr.top - ar.bottom, ar.top - cr.bottom);
+                    if (dy >= -0.5 && dy < 2) {
+                        hits.push(`v:${a.tagName}.${a.className}->${c.tagName}.${c.className}@${a.closest('section')?.id}`);
+                    }
+                }
+                if (Math.min(ar.bottom, cr.bottom) - Math.max(ar.top, cr.top) > 1) {
+                    const dx = Math.max(cr.left - ar.right, ar.left - cr.right);
+                    if (dx >= -0.5 && dx < 2) {
+                        hits.push(`h:${a.tagName}.${a.className}->${c.tagName}.${c.className}@${a.closest('section')?.id}`);
+                    }
+                }
+            }
+        }
+        return hits;
+    });
+    expect(touches).toEqual([]);
+
+    const actionContainers = page.locator('#dialog .toast-demo-actions, #file-download .toast-demo-actions, #accents [data-accent] .toast-demo-actions, #form .form__actions');
+    expect(await actionContainers.count()).toBe(6);
+    for (const container of await actionContainers.all()) {
+        const edges = await container.evaluate((el) => {
+            const first = el.firstElementChild;
+            const last = el.lastElementChild;
+            return {
+                firstMarginLeft: Number.parseFloat(getComputedStyle(first).marginLeft),
+                lastMarginRight: Number.parseFloat(getComputedStyle(last).marginRight),
+                firstOffset: first.getBoundingClientRect().left - el.getBoundingClientRect().left
+            };
+        });
+        expect(edges.firstMarginLeft).toBe(0);
+        expect(edges.lastMarginRight).toBe(0);
+        expect(edges.firstOffset).toBeGreaterThanOrEqual(0);
+    }
+    expect(problems).toEqual([]);
+});

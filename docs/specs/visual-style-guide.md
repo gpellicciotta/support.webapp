@@ -266,6 +266,11 @@ Their corners take the rounder of `--radius-chip` and `--radius-control`.
   It wraps below the text whenever the text would need a second line beside it.
   Text keeps its full end inset, so text-only banners look unchanged.
 - Forced colors mode drops shadows, so pressed chips and toggles thicken their border, and checked options gain one.
+- Separate bordered controls and containers never touch borders; only shared dividers inside a list, table, or collapsible touch.
+- Action rows and control groups space items with flex or grid `gap`, keeping first and last edges margin-free.
+
+**[Decided]** Enforce border separation on action rows and control groups with wrapping flex or grid `gap`.
+- Side margins on individual controls: rejected, because first and last items in a row must stay margin-free.
 
 **[Decided]** One partial per key, so the icon button gets `icon-button.css` beside `button.css`.
 - One shared controls file: rejected, because the naming link of ADR-0003 maps each key to its own file.

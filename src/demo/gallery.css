@@ -90,7 +90,7 @@
 .gallery-header h1 { font-size: var(--text-3xl); }
 .gallery-section > h2 { font-size: var(--text-xl); }
 .gallery-header p,
-.gallery-section > p { margin: 0 0 var(--space-4); }
+.gallery-section > p:not(.demo-status) { margin: 0 0 var(--space-4); }
 
 /* Header and main column. */
 .gallery-header {
