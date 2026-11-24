@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1154.9, input: 401726, output: 75039, cache_read: 16271603}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T00:21:55Z"
 ---
 # T0294: Add DOM builders for package components, promoted from Auth's and ToDo's admin console helpers
 
@@ -61,4 +66,7 @@ Size estimate: 4 files, 120 lines.
   - Files touched: 4.
   - Lines touched: 226.
   - Reopenings: 0.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
