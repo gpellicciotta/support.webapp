@@ -1,9 +1,9 @@
 ## Walkthrough & Validation
 ### Summary of Changes
-- Added [notices.js](../../../src/js/notices.js) exporting `createNotices`, `attachNotices`, `noticeKind`, `bannerVariant`, `bannerRole`, `pickBanner`, `safeUrl`, and `NOTIFICATION_ADDED_EVENT`, `NOTIFICATION_DELETED_EVENT`, `NOTIFICATIONS_CLEARED_EVENT`, `NOTIFICATIONS_UPDATED_EVENT`.
-- Registered `notices` in [contract.json](../../../src/contract.json) and wired a live notices demo into [shell-portal.html](../../../src/demo/shell-portal.html) and [shell-demo.js](../../../src/demo/shell-demo.js).
-- Added unit tests in [notices.test.js](../../../tests/unit/notices.test.js) and browser tests in [notices.spec.js](../../../tests/e2e/notices.spec.js).
-- Updated [components.md](../../../docs/specs/components.md), [ADR-0003-components-and-patterns.md](../../../docs/adrs/ADR-0003-components-and-patterns.md), [ADR-0004-app-shell.md](../../../docs/adrs/ADR-0004-app-shell.md), and [CHANGELOG.md](../../../CHANGELOG.md).
+- Added [notices.js](../../../../src/js/notices.js) exporting `createNotices`, `attachNotices`, `noticeKind`, `bannerVariant`, `bannerRole`, `pickBanner`, `safeUrl`, and `NOTIFICATION_ADDED_EVENT`, `NOTIFICATION_DELETED_EVENT`, `NOTIFICATIONS_CLEARED_EVENT`, `NOTIFICATIONS_UPDATED_EVENT`.
+- Registered `notices` in [contract.json](../../../../src/contract.json) and wired a live notices demo into [shell-portal.html](../../../../src/demo/shell-portal.html) and [shell-demo.js](../../../../src/demo/shell-demo.js).
+- Added unit tests in [notices.test.js](../../../../tests/unit/notices.test.js) and browser tests in [notices.spec.js](../../../../tests/e2e/notices.spec.js).
+- Updated [components.md](../../../../docs/specs/components.md), [ADR-0003-components-and-patterns.md](../../../../docs/adrs/ADR-0003-components-and-patterns.md), [ADR-0004-app-shell.md](../../../../docs/adrs/ADR-0004-app-shell.md), and [CHANGELOG.md](../../../../CHANGELOG.md).
 
 ### Red-Phase Proof
 Command: `npx.cmd vitest run tests/unit/notices.test.js`

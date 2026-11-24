@@ -1,10 +1,10 @@
 ## Walkthrough & Validation
 
 ### Summary of Changes
-- Added [inbox.js](../../../src/js/inbox.js) with `createInbox`, `attachInbox`, `createUnreadButton`, `attachUnreadButton`, pure helpers (`isUnread`, `inboxTypeBadge`, `formatUnreadCount`, `formatUnreadLabel`, `formatInboxSummary`), and bubbling `inbox:action` / `inbox:navigate` events integrated with `selection.js`, `notices.js`, and `icon.js`.
-- Added [inbox.css](../../../src/css/components/inbox.css) imported in [style.css](../../../src/css/style.css), added top-bar `.app__notifications-button` and `.app__notifications-count` rules to [shell.css](../../../src/css/shell.css), and registered `inbox` in [contract.json](../../../src/contract.json).
-- Added the interactive inbox and top-bar unread count button to [shell-portal.html](../../../src/demo/shell-portal.html) and [shell-demo.js](../../../src/demo/shell-demo.js), plus static specimens in [visual-style-gallery.html](../../../src/demo/visual-style-gallery.html).
-- Updated [components.md](../../../docs/specs/components.md) (removing `Inbox panel` from `Not in the Package`), [ADR-0003-components-and-patterns.md](../../../docs/adrs/ADR-0003-components-and-patterns.md), [ADR-0004-app-shell.md](../../../docs/adrs/ADR-0004-app-shell.md), [visual-style-guide.md](../../../docs/specs/visual-style-guide.md), and [CHANGELOG.md](../../../CHANGELOG.md).
+- Added [inbox.js](../../../../src/js/inbox.js) with `createInbox`, `attachInbox`, `createUnreadButton`, `attachUnreadButton`, pure helpers (`isUnread`, `inboxTypeBadge`, `formatUnreadCount`, `formatUnreadLabel`, `formatInboxSummary`), and bubbling `inbox:action` / `inbox:navigate` events integrated with `selection.js`, `notices.js`, and `icon.js`.
+- Added [inbox.css](../../../../src/css/components/inbox.css) imported in [style.css](../../../../src/css/style.css), added top-bar `.app__notifications-button` and `.app__notifications-count` rules to [shell.css](../../../../src/css/shell.css), and registered `inbox` in [contract.json](../../../../src/contract.json).
+- Added the interactive inbox and top-bar unread count button to [shell-portal.html](../../../../src/demo/shell-portal.html) and [shell-demo.js](../../../../src/demo/shell-demo.js), plus static specimens in [visual-style-gallery.html](../../../../src/demo/visual-style-gallery.html).
+- Updated [components.md](../../../../docs/specs/components.md) (removing `Inbox panel` from `Not in the Package`), [ADR-0003-components-and-patterns.md](../../../../docs/adrs/ADR-0003-components-and-patterns.md), [ADR-0004-app-shell.md](../../../../docs/adrs/ADR-0004-app-shell.md), [visual-style-guide.md](../../../../docs/specs/visual-style-guide.md), and [CHANGELOG.md](../../../../CHANGELOG.md).
 
 ### Red-Phase Proof (Before Implementation)
 

@@ -1,10 +1,10 @@
 ## Walkthrough & Validation
 
 ### Summary of Changes
-- Added [action-registry.js](../../../src/js/action-registry.js) exporting `createActionRegistry`, `attachActionRegistry`, and `ACTION_ADDED_EVENT`, `ACTION_REMOVED_EVENT`, `ACTION_STATE_CHANGED_EVENT`, `ACTION_RUN_EVENT`.
-- Registered `action-registry` in [contract.json](../../../src/contract.json) and replaced the inline stub in [shell-demo.js](../../../src/demo/shell-demo.js) with `attachActionRegistry`.
-- Added unit tests in [action-registry.test.js](../../../tests/unit/action-registry.test.js) and browser tests in [action-registry.spec.js](../../../tests/e2e/action-registry.spec.js).
-- Updated [components.md](../../../docs/specs/components.md), [ADR-0003-components-and-patterns.md](../../../docs/adrs/ADR-0003-components-and-patterns.md), [ADR-0004-app-shell.md](../../../docs/adrs/ADR-0004-app-shell.md), and [CHANGELOG.md](../../../CHANGELOG.md).
+- Added [action-registry.js](../../../../src/js/action-registry.js) exporting `createActionRegistry`, `attachActionRegistry`, and `ACTION_ADDED_EVENT`, `ACTION_REMOVED_EVENT`, `ACTION_STATE_CHANGED_EVENT`, `ACTION_RUN_EVENT`.
+- Registered `action-registry` in [contract.json](../../../../src/contract.json) and replaced the inline stub in [shell-demo.js](../../../../src/demo/shell-demo.js) with `attachActionRegistry`.
+- Added unit tests in [action-registry.test.js](../../../../tests/unit/action-registry.test.js) and browser tests in [action-registry.spec.js](../../../../tests/e2e/action-registry.spec.js).
+- Updated [components.md](../../../../docs/specs/components.md), [ADR-0003-components-and-patterns.md](../../../../docs/adrs/ADR-0003-components-and-patterns.md), [ADR-0004-app-shell.md](../../../../docs/adrs/ADR-0004-app-shell.md), and [CHANGELOG.md](../../../../CHANGELOG.md).
 
 ### Red-Phase Proof (Before Implementation)
 Command: `npx.cmd vitest run tests/unit/action-registry.test.js`

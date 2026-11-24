@@ -1,11 +1,11 @@
 ## Walkthrough & Validation
 
 ### Summary of Changes
-- Added [help-page.js](../../../src/js/help-page.js) exporting `attachHelpPage`, `createHelpPage`, `buildFeedbackMailto`, `parseHelpQuery`, and `formatHelpQuery`, reusing `collapsible.js`, `release-notes.js`, and `icon.js` via `data-help-page-*` hooks and ARIA states.
-- Added [help-page.css](../../../src/css/components/help-page.css) imported in [style.css](../../../src/css/style.css) and registered `help-page` in [contract.json](../../../src/contract.json).
-- Added the standalone [help-page.html](../../../src/demo/help-page.html) and [help-page-demo.js](../../../src/demo/help-page-demo.js) demo page, plus the `#help-page` specimen in [visual-style-gallery.html](../../../src/demo/visual-style-gallery.html) wired in [gallery.js](../../../src/demo/gallery.js).
-- Added unit tests in [help-page.test.js](../../../tests/unit/help-page.test.js) and Playwright browser tests in [help-page.spec.js](../../../tests/e2e/help-page.spec.js).
-- Updated [components.md](../../../docs/specs/components.md), [ADR-0003-components-and-patterns.md](../../../docs/adrs/ADR-0003-components-and-patterns.md), and [CHANGELOG.md](../../../CHANGELOG.md).
+- Added [help-page.js](../../../../src/js/help-page.js) exporting `attachHelpPage`, `createHelpPage`, `buildFeedbackMailto`, `parseHelpQuery`, and `formatHelpQuery`, reusing `collapsible.js`, `release-notes.js`, and `icon.js` via `data-help-page-*` hooks and ARIA states.
+- Added [help-page.css](../../../../src/css/components/help-page.css) imported in [style.css](../../../../src/css/style.css) and registered `help-page` in [contract.json](../../../../src/contract.json).
+- Added the standalone [help-page.html](../../../../src/demo/help-page.html) and [help-page-demo.js](../../../../src/demo/help-page-demo.js) demo page, plus the `#help-page` specimen in [visual-style-gallery.html](../../../../src/demo/visual-style-gallery.html) wired in [gallery.js](../../../../src/demo/gallery.js).
+- Added unit tests in [help-page.test.js](../../../../tests/unit/help-page.test.js) and Playwright browser tests in [help-page.spec.js](../../../../tests/e2e/help-page.spec.js).
+- Updated [components.md](../../../../docs/specs/components.md), [ADR-0003-components-and-patterns.md](../../../../docs/adrs/ADR-0003-components-and-patterns.md), and [CHANGELOG.md](../../../../CHANGELOG.md).
 
 ### Red-Phase Proof (Before Implementation)
 

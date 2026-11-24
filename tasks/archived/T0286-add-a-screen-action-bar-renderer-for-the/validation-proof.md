@@ -1,10 +1,10 @@
 ## Walkthrough & Validation
 ### Summary of Changes
-- Added [screen-action-bar.js](../../../src/js/screen-action-bar.js) exporting `attachScreenActionBar` and `ACTION_STATE_CHANGED_EVENT` to draw routed-view screen actions in `.app__action-bar`, block disabled link clicks, expose disabled hints via `title` and `aria-description`, redraw on state change, escape all text/attributes via DOM APIs, and remove empty bars.
-- Registered `screen-action-bar` in [contract.json](../../../src/contract.json).
-- Wired `SampleView` and `attachScreenActionBar` into [shell-portal.html](../../../src/demo/shell-portal.html) and [shell-demo.js](../../../src/demo/shell-demo.js) with an attach/detach toggle.
-- Added unit tests in [screen-action-bar.test.js](../../../tests/unit/screen-action-bar.test.js) and browser integration tests in [screen-action-bar.spec.js](../../../tests/e2e/screen-action-bar.spec.js).
-- Updated [components.md](../../../docs/specs/components.md), [ADR-0003-components-and-patterns.md](../../../docs/adrs/ADR-0003-components-and-patterns.md), [ADR-0004-app-shell.md](../../../docs/adrs/ADR-0004-app-shell.md), and [CHANGELOG.md](../../../CHANGELOG.md).
+- Added [screen-action-bar.js](../../../../src/js/screen-action-bar.js) exporting `attachScreenActionBar` and `ACTION_STATE_CHANGED_EVENT` to draw routed-view screen actions in `.app__action-bar`, block disabled link clicks, expose disabled hints via `title` and `aria-description`, redraw on state change, escape all text/attributes via DOM APIs, and remove empty bars.
+- Registered `screen-action-bar` in [contract.json](../../../../src/contract.json).
+- Wired `SampleView` and `attachScreenActionBar` into [shell-portal.html](../../../../src/demo/shell-portal.html) and [shell-demo.js](../../../../src/demo/shell-demo.js) with an attach/detach toggle.
+- Added unit tests in [screen-action-bar.test.js](../../../../tests/unit/screen-action-bar.test.js) and browser integration tests in [screen-action-bar.spec.js](../../../../tests/e2e/screen-action-bar.spec.js).
+- Updated [components.md](../../../../docs/specs/components.md), [ADR-0003-components-and-patterns.md](../../../../docs/adrs/ADR-0003-components-and-patterns.md), [ADR-0004-app-shell.md](../../../../docs/adrs/ADR-0004-app-shell.md), and [CHANGELOG.md](../../../../CHANGELOG.md).
 
 ### Red-Phase Proof
 Command: `npx.cmd vitest run tests/unit/screen-action-bar.test.js`

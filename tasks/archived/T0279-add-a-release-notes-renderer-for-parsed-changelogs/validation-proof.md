@@ -1,5 +1,5 @@
 ## Walkthrough & Validation
-Added the `release-notes` renderer ([release-notes.js](../../../src/js/release-notes.js)) and its stylesheet ([release-notes.css](../../../src/css/components/release-notes.css)), registered `release-notes` in `src/contract.json`, imported its partial in `src/css/style.css`, added interactive highlights and area-grouped specimens to `#release-notes` in `src/demo/visual-style-gallery.html` and `src/demo/gallery.js`, and documented the skeleton, upgrade note, ADR-0003 entry, and changelog bullet.
+Added the `release-notes` renderer ([release-notes.js](../../../../src/js/release-notes.js)) and its stylesheet ([release-notes.css](../../../../src/css/components/release-notes.css)), registered `release-notes` in `src/contract.json`, imported its partial in `src/css/style.css`, added interactive highlights and area-grouped specimens to `#release-notes` in `src/demo/visual-style-gallery.html` and `src/demo/gallery.js`, and documented the skeleton, upgrade note, ADR-0003 entry, and changelog bullet.
 
 ### Red-Phase Proof
 Command: `npx.cmd vitest run tests/unit/release-notes.test.js` (exit code 1)

@@ -1,5 +1,5 @@
 ## Walkthrough & Validation
-Added [page.css](../../../src/css/page.css) after `reset.css` in `src/css/style.css` for default body ground and typography, headings (`h1`–`h6`), underlined links, inline `code`, and the `[hidden]:not([hidden='until-found' i])` guard.
+Added [page.css](../../../../src/css/page.css) after `reset.css` in `src/css/style.css` for default body ground and typography, headings (`h1`–`h6`), underlined links, inline `code`, and the `[hidden]:not([hidden='until-found' i])` guard.
 Element rules use zero-specificity `:where(:root:not([data-page-base='off']) ...)` selectors so component classes and app stylesheets win, and `data-page-base="off"` on `<html>` opts a page out while keeping the `[hidden]` guard.
 Added a `#page` section in `src/demo/visual-style-gallery.html`, removed duplicated `body`/`a`/`code` rules from `src/demo/gallery.css`, updated `ADR-0003`, `docs/specs/components.md` (with upgrade notes), and `CHANGELOG.md`.
 

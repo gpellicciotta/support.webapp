@@ -1,8 +1,8 @@
 ## Walkthrough & Validation
-- Added `fileHash(path)` to [check.mjs](../../../bin/check.mjs) to normalize `\r\n` to `\n` for `css`, `js`, `mjs`, `json`, `svg`, `html`, `md`, and `txt` files while leaving lone `\r` bytes unchanged and hashing all other files as raw bytes.
-- Updated `buildManifest()` in [manifest.mjs](../../../bin/manifest.mjs) to import and use `fileHash`.
-- Added unit and integration tests for LF, CRLF, lone CR, text edits, and binary `\r\n` bytes across [check.test.js](../../../tests/unit/check.test.js), [manifest.test.js](../../../tests/unit/manifest.test.js), and [vendor.test.js](../../../tests/integration/vendor.test.js).
-- Updated [ADR-0005-distribution-and-versioning.md](../../../docs/adrs/ADR-0005-distribution-and-versioning.md), [devops.md](../../../docs/devops.md), and [CHANGELOG.md](../../../CHANGELOG.md).
+- Added `fileHash(path)` to [check.mjs](../../../../bin/check.mjs) to normalize `\r\n` to `\n` for `css`, `js`, `mjs`, `json`, `svg`, `html`, `md`, and `txt` files while leaving lone `\r` bytes unchanged and hashing all other files as raw bytes.
+- Updated `buildManifest()` in [manifest.mjs](../../../../bin/manifest.mjs) to import and use `fileHash`.
+- Added unit and integration tests for LF, CRLF, lone CR, text edits, and binary `\r\n` bytes across [check.test.js](../../../../tests/unit/check.test.js), [manifest.test.js](../../../../tests/unit/manifest.test.js), and [vendor.test.js](../../../../tests/integration/vendor.test.js).
+- Updated [ADR-0005-distribution-and-versioning.md](../../../../docs/adrs/ADR-0005-distribution-and-versioning.md), [devops.md](../../../../docs/devops.md), and [CHANGELOG.md](../../../../CHANGELOG.md).
 
 ### Red-Phase Unit Verification
 Command: `npx vitest run tests/unit/check.test.js tests/unit/manifest.test.js`

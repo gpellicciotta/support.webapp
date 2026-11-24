@@ -1,9 +1,9 @@
 ## Walkthrough & Validation
 Added the `view-header` component promoted from Auth's SPA and admin console:
-- Created [view-header.css](../../../src/css/components/view-header.css) with `.view-header`, `.view-header__title`, and `.view-header__text` using semantic tokens only, collapsing empty summary lines via `.view-header:has(> .view-header__text:empty)` so live `role="status"` regions stay mounted without taking vertical space.
-- Registered `view-header` in [contract.json](../../../src/contract.json) and imported `components/view-header.css` before `components/toolbar.css` in [style.css](../../../src/css/style.css).
-- Added the `#view-header` gallery section with polite status, title-only, and empty-status specimens in [visual-style-gallery.html](../../../src/demo/visual-style-gallery.html).
-- Updated [components.md](../../../docs/specs/components.md) with the catalog entry, skeleton, and upgrade note, recorded the decision in [ADR-0003-components-and-patterns.md](../../../docs/adrs/ADR-0003-components-and-patterns.md), and added a bullet to [CHANGELOG.md](../../../CHANGELOG.md).
+- Created [view-header.css](../../../../src/css/components/view-header.css) with `.view-header`, `.view-header__title`, and `.view-header__text` using semantic tokens only, collapsing empty summary lines via `.view-header:has(> .view-header__text:empty)` so live `role="status"` regions stay mounted without taking vertical space.
+- Registered `view-header` in [contract.json](../../../../src/contract.json) and imported `components/view-header.css` before `components/toolbar.css` in [style.css](../../../../src/css/style.css).
+- Added the `#view-header` gallery section with polite status, title-only, and empty-status specimens in [visual-style-gallery.html](../../../../src/demo/visual-style-gallery.html).
+- Updated [components.md](../../../../docs/specs/components.md) with the catalog entry, skeleton, and upgrade note, recorded the decision in [ADR-0003-components-and-patterns.md](../../../../docs/adrs/ADR-0003-components-and-patterns.md), and added a bullet to [CHANGELOG.md](../../../../CHANGELOG.md).
 
 ### Red-Phase Proof
 Command: `npx.cmd vitest run tests/unit/view-header.test.js` (exit code 1)

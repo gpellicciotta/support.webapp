@@ -1,12 +1,12 @@
 ## Walkthrough & Validation
-Added Auth's shell additions to [shell.css](../../../src/css/shell.css) following `docs/specs/naming.md`:
+Added Auth's shell additions to [shell.css](../../../../src/css/shell.css) following `docs/specs/naming.md`:
 - `.app__sidebar > .app__nav-list--end` pins an end navigation list to the sidebar bottom across wide open, icon rail, and narrow drawer states (with `gap: var(--space-2)` in the drawer to match the wide sidebar).
 - `.app__nav-item .badge` aligns entry badges to the inline end while keeping badge text in the link's accessible name.
 - `.app__brand` adds `gap: var(--space-2)` and `.app__brand-logo` sizes the brand logo to `--space-7` (`2rem`).
 - `.app__top-bar [hidden]:not([hidden='until-found' i])` hides hidden top bar parts despite shell or component display rules while sparing `hidden="until-found"`.
 - `.app__banners .banner > .icon-button` keeps a shell banner's dismiss button at the end edge, while `.app__banners .banner:has(> .icon-button) > .banner__text + :not(.icon-button)` aligns a sibling action to the start on wrapped narrow lines instead of centering it.
 
-Demonstrated the additions in [shell-admin-console.html](../../../src/demo/shell-admin-console.html) and [shell-portal.html](../../../src/demo/shell-portal.html), and updated [components.md](../../../docs/specs/components.md), [ADR-0004-app-shell.md](../../../docs/adrs/ADR-0004-app-shell.md), and [CHANGELOG.md](../../../CHANGELOG.md).
+Demonstrated the additions in [shell-admin-console.html](../../../../src/demo/shell-admin-console.html) and [shell-portal.html](../../../../src/demo/shell-portal.html), and updated [components.md](../../../../docs/specs/components.md), [ADR-0004-app-shell.md](../../../../docs/adrs/ADR-0004-app-shell.md), and [CHANGELOG.md](../../../../CHANGELOG.md).
 
 ### Red-Phase Proof
 Command: `npx.cmd vitest run tests/unit/shell.test.js` (exit code 1)

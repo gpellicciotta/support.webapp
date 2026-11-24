@@ -22,5 +22,13 @@
   "T0246": {
     "description": "Run release --yes for v0.2.0 from main, then create vendor backlog tasks in auth, family-portal, meteo, and todos.webapp.",
     "purged_at": "2026-11-17"
+  },
+  "T0308": {
+    "description": "Release and publish support.webapp as v0.5.0. Also run `plan gc --commit`",
+    "purged_at": "2026-11-24"
+  },
+  "T0305": {
+    "description": "Prevent touching borders on gallery status bars and action rows.",
+    "purged_at": "2026-11-24"
   }
 }
