@@ -624,3 +624,39 @@ html[data-pull-refresh] {
 .app__view :is([data-view-error], [data-view-wait], [data-view-main], [data-view-back])[hidden] {
   display: none;
 }
+
+/* Gate page (admin-console.js): centered card for session checks, failures, and forbidden access before the shell exists. */
+.app[data-admin-console-mode='gate'] {
+  display: block;
+  block-size: auto;
+  min-block-size: 100dvh;
+  overflow: visible;
+}
+
+.app__gate {
+  display: grid;
+  gap: var(--space-4);
+  inline-size: min(var(--width-narrow), 100% - 2 * var(--gutter));
+  margin: var(--space-9) auto;
+  padding: var(--space-5);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+.app__gate:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.app__gate h1,
+.app__gate p {
+  margin: 0;
+}
+
+.app__gate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}

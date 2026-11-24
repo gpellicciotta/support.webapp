@@ -944,6 +944,7 @@
     "help-page",
     "dom-builders",
     "data-loader",
-    "table-state"
+    "table-state",
+    "admin-console"
   ]
 }

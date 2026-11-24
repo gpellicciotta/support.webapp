@@ -94,18 +94,19 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `tooltip`        | Tooltip             | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                |
 
 ### Identity and Foundations
-| Key                 | Component         | Module and functions                                                                           | Variants and states                                     | Accessibility minimum                                             |
-| :------------------ | :---------------- | :--------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
-| none, base          | Page base         | none                                                                                           | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable           |
-| `avatar`            | Avatar            | none                                                                                           | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name                |
-| `account-menu`      | Account menu      | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                        | signed in, signed out                                   | menu pattern; marks the current route                             |
-| `icon`              | Icon              | `icon.js`: `createIcon`                                                                        | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                           |
-| `theme-switch`      | Theme switch      | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js` | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                                |
-| `install-prompt`    | Install prompt    | `install-prompt.js`: `attachInstallPrompt`                                                     | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
-| `file-download`     | File download     | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`       | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
-| `screen-action-bar` | Screen action bar | `screen-action-bar.js`: `attachScreenActionBar`                                                | buttons, links, disabled hints, empty-bar removal       | native `disabled` on buttons; `aria-disabled` on links            |
-| `action-registry`   | Action registry   | `action-registry.js`: `createActionRegistry`, `attachActionRegistry`                           | enabled, disabled with reason, scoped lookup, events    | blocks disabled and `aria-disabled` `[data-action]` triggers      |
-| `dom-builders`      | DOM builders      | `dom-builders.js`: `createDomBuilders`, `h`, `setChildren`, and catalog builders               | buttons, selects, checkboxes, facts, tables, confirm    | emits catalog ARIA skeletons; text nodes only, no `innerHTML`     |
+| Key                 | Component           | Module and functions                                                                                                                                             | Variants and states                                     | Accessibility minimum                                             |
+| :------------------ | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
+| none, base          | Page base           | none                                                                                                                                                             | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable           |
+| `avatar`            | Avatar              | none                                                                                                                                                             | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name                |
+| `account-menu`      | Account menu        | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                                                                                          | signed in, signed out                                   | menu pattern; marks the current route                             |
+| `icon`              | Icon                | `icon.js`: `createIcon`                                                                                                                                          | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                           |
+| `theme-switch`      | Theme switch        | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js`                                                                   | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                                |
+| `install-prompt`    | Install prompt      | `install-prompt.js`: `attachInstallPrompt`                                                                                                                       | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
+| `file-download`     | File download       | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`                                                                         | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
+| `screen-action-bar` | Screen action bar   | `screen-action-bar.js`: `attachScreenActionBar`                                                                                                                  | buttons, links, disabled hints, empty-bar removal       | native `disabled` on buttons; `aria-disabled` on links            |
+| `action-registry`   | Action registry     | `action-registry.js`: `createActionRegistry`, `attachActionRegistry`                                                                                             | enabled, disabled with reason, scoped lookup, events    | blocks disabled and `aria-disabled` `[data-action]` triggers      |
+| `dom-builders`      | DOM builders        | `dom-builders.js`: `createDomBuilders`, `h`, `setChildren`, and catalog builders                                                                                 | buttons, selects, checkboxes, facts, tables, confirm    | emits catalog ARIA skeletons; text nodes only, no `innerHTML`     |
+| `admin-console`     | Admin console frame | `admin-console.js`: `createAdminConsole`, `attachAdminConsole`, `parseRoute`, `displayName`, using `account-menu.js`, `app-nav.js`, `dom-builders.js`, `icon.js` | shell with side panel, hash router, gates, signed-out   | skip link focuses `#main`; `aria-current="page"`; single `<main>` |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -1176,6 +1177,45 @@ Upgrading an existing app:
 - Replace `readFilters`, `saveFilters`, `pageParams`, and pager wiring in ToDo's `admin/js/ui.mjs` with `createTableState({ mode: 'server' })` or `attachTableState`.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live reload-safe filtering and paging.
 
+### admin-console
+Admin console frame ([admin-console.js](../../src/js/admin-console.js)), using [account-menu.js](../../src/js/account-menu.js), [app-nav.js](../../src/js/app-nav.js), [dom-builders.js](../../src/js/dom-builders.js), and [icon.js](../../src/js/icon.js).
+Provides a screen registry, hash router, route marks, screen titles, centered gate pages, and a signed-out shell.
+
+```js
+import { createAdminConsole } from './admin-console.js';
+
+const consoleFrame = createAdminConsole(document.getElementById('app'), {
+    title: 'Admin Console',
+    backLink: { href: '/', label: 'Back to Auth' },
+    screens: [
+        { name: 'overview', title: 'Overview', icon: 'lists', mount: mountOverview },
+        { name: 'users', title: 'Users', icon: 'people', mount: mountUsers }
+    ],
+    checkSession: () => lookUpSession(),
+    checkAccount: (session) => fetchAccount(session),
+    onSignIn: () => redirectToSignIn(),
+    onSignOut: () => endSession()
+});
+await consoleFrame.start();
+```
+
+- `parseRoute(hash, screens, defaultScreen)` parses `#/screen`, `#/screen/id`, and hash queries, falling back to `defaultScreen`.
+- `displayName(account)` returns the trimmed account name, falling back to `email`.
+- Each screen's `mount(view, ctx, route)` returns an optional `{ update, dispose }` controller.
+- Same-screen hash changes call `update(route, ctx)` when present, keeping detail-panel filter queries; otherwise the frame disposes and remounts.
+- Screen changes call `dispose()`, hide and clear the side panel, reset `main.scrollTop`, and update `aria-current="page"` and titles.
+- The skip link prevents default navigation and focuses `#main`, keeping the hash route unchanged.
+- `showChecking`, `showCheckFailed`, `showForbidden`, and `showGate` tear down active screens and render a centered `<main class="app__gate">`.
+- `showSignedOut(message, { failure })` shows a primary Sign In button and tracks route marks without mounting protected screens.
+- `createAdminConsole(rootOrDoc, options)` builds the shell and gates; `attachAdminConsole(root, options)` enhances existing `.app` markup via `data-admin-console-*` hooks.
+- Session lookup (`checkSession`), account lookup (`checkAccount`), and authorization (`isAuthorized`) stay with the app as callbacks.
+
+Upgrading an existing app:
+- Replace local router, shell builder, account menu wiring, and gate helpers in Auth's and ToDo's `admin/js/main.mjs` with [admin-console.js](../../src/js/admin-console.js).
+- Remove app-local `.gate` and `.gate__actions` CSS rules; [shell.css](../../src/css/shell.css) styles `.app__gate` and `.app__gate-actions`.
+- Pass session lookup, account check, sign-in, and sign-out callbacks in options, and keep `ctx.editor` or `ctx.panel` for detail panels.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for hash routing and gate previews.
+
 ---
 
 ## Page Base
@@ -1213,6 +1253,8 @@ Shell additions in [shell.css](../../src/css/shell.css):
 - Banner dismiss: a direct `.icon-button` inside `.app__banners .banner` stays at the banner end, even on a wrapped line.
 - Unread count button: place `.icon-button.app__notifications-button` with `.badge.badge--count.app__notifications-count` inside `.app__top-actions`.
   Drive it with `attachUnreadButton` from [inbox.js](../../src/js/inbox.js); its badge and accessible name cap at `99+`.
+- Gate page: render `<main class="app__gate" id="main" tabindex="-1">` with `.app__gate-actions` for centered session checks and forbidden states.
+  `admin-console.js` drives it alongside the signed-out shell and hash router.
 
 Upgrading an existing app:
 - Replace app-local `.app__sidebar > .nav-end` markup and CSS with `<ul class="app__nav-list app__nav-list--end">`.

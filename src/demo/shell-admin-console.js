@@ -1,7 +1,7 @@
 /* Admin console shell demo interactions: look/theme switchers, nav toggle, row selection, detail panel focus, and inline confirmation. */
 
 import { attachAccountMenu } from '../js/account-menu.js';
-import { attachAppNav } from '../js/app-nav.js';
+import { attachAdminConsole } from '../js/admin-console.js';
 import { attachDataLoader } from '../js/data-loader.js';
 import { createDomBuilders } from '../js/dom-builders.js';
 import { createLiveRegion } from '../js/live-region.js';
@@ -11,10 +11,6 @@ import { initGallery } from './gallery.js';
 
 export function initAdminConsoleDemo(doc, view) {
     initGallery(doc, view);
-    const navToggle = doc.querySelector('[data-app-nav-toggle]');
-    if (navToggle) {
-        attachAppNav(navToggle, doc.getElementById(navToggle.getAttribute('aria-controls')));
-    }
     const liveRegion = createLiveRegion({ document: doc });
     const toaster = createToast({
         document: doc,
@@ -38,7 +34,8 @@ export function initAdminConsoleDemo(doc, view) {
     }
     const dom = createDomBuilders(doc);
     const confirmSlot = doc.querySelector('[data-admin-confirm]');
-    const panel = doc.querySelector('.app__side-panel');
+    const panel = doc.querySelector('[data-admin-console-panel]');
+    const detailPanel = panel?.firstElementChild ?? null;
     const title = doc.getElementById('detail-panel-demo-title');
     const nameInput = doc.getElementById('admin-detail-name');
     const emailInput = doc.getElementById('admin-detail-email');
@@ -78,7 +75,9 @@ export function initAdminConsoleDemo(doc, view) {
     });
     doc.getElementById('admin-size')?.replaceWith(sizeSelect);
 
-    const tableState = attachTableState(accountsSection ?? doc, {
+    let tableState = null;
+    let accountsMounts = 0;
+    const attachAccountsTable = () => attachTableState(accountsSection ?? doc, {
         window: view,
         document: doc,
         dom,
@@ -121,7 +120,7 @@ export function initAdminConsoleDemo(doc, view) {
         factsSection?.querySelector('dl')?.replaceWith(dom.facts(rows, true));
     }
 
-    function openAccount(account, button) {
+    function openAccount(account, button, focusTitle = true) {
         opener = button;
         selected = account;
         panelOpen = true;
@@ -129,6 +128,9 @@ export function initAdminConsoleDemo(doc, view) {
         const question = confirmSlot?.querySelector('[data-inline-confirm]');
         if (question && !question.hidden) {
             question.dispatchEvent(new view.KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+        }
+        if (detailPanel && detailPanel.parentElement !== panel) {
+            panel.replaceChildren(detailPanel);
         }
         title.textContent = account.name;
         nameInput.value = account.name;
@@ -143,7 +145,9 @@ export function initAdminConsoleDemo(doc, view) {
             }
         }
         panel.hidden = false;
-        title.focus();
+        if (focusTitle) {
+            title.focus();
+        }
     }
 
     function renderAccounts() {
@@ -186,17 +190,14 @@ export function initAdminConsoleDemo(doc, view) {
             rows, { captionId: 'admin-accounts-caption' }));
     }
 
-    if (selected) {
-        fillFacts(selected);
-    }
-    renderAccounts();
-
+    let statusSection = null;
+    let statusLoader = null;
     const main = doc.querySelector('.app__main');
     if (main) {
         let checks = 0;
         let failNext = false;
         const statusHost = dom.h('div', { 'data-admin-status-host': '' });
-        const statusLoader = attachDataLoader(statusHost, {
+        statusLoader = attachDataLoader(statusHost, {
             document: doc,
             dom,
             what: 'Server status',
@@ -215,7 +216,7 @@ export function initAdminConsoleDemo(doc, view) {
             ], true),
             onSignIn: () => toaster.show('Sign-in flow requested.')
         });
-        main.append(dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'admin-status-heading', 'data-admin-loader-demo': '' },
+        statusSection = dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'admin-status-heading', 'data-admin-loader-demo': '' },
             dom.h('h2', { id: 'admin-status-heading' }, 'Server status'),
             dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'Server status actions' },
                 dom.button('Load (fail once)', () => {
@@ -228,17 +229,137 @@ export function initAdminConsoleDemo(doc, view) {
                 dom.button('Quiet refresh', () => statusLoader.load({ quiet: true }), { 'data-admin-load': 'quiet' })
             ),
             statusHost
-        ));
-        statusLoader.load();
+        );
     }
 
-    panel?.querySelector('[data-demo-panel-close]')?.addEventListener('click', () => {
+    function closeAccountPanel() {
         panelOpen = false;
         panel.hidden = true;
         for (const row of tableHost.querySelectorAll('tbody tr[aria-selected="true"]')) {
             row.removeAttribute('aria-selected');
         }
         opener?.focus();
+    }
+    detailPanel?.querySelector('[data-demo-panel-close]')?.addEventListener('click', closeAccountPanel);
+
+    const frame = attachAdminConsole(doc.body, {
+        document: doc,
+        window: view,
+        dom,
+        title: 'Admin Console',
+        defaultScreen: 'accounts',
+        backLink: { href: 'visual-style-gallery.html#shell', label: 'Back to gallery' },
+        formatDocumentTitle: (screen, appTitle, { initial, hash }) => (initial && !hash ? 'Admin console shell demo · support.webapp' : `${screen.title} · ${appTitle}`),
+        onSignIn: () => {
+            frame.showShell();
+            toaster.show('Signed in as Alex North.');
+        },
+        onSignOut: () => toaster.show('Signed out.'),
+        screens: [
+            {
+                name: 'overview',
+                title: 'Overview',
+                mount: (screenView, ctx) => ctx.dom.setChildren(screenView,
+                    ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'overview-summary-heading' },
+                        ctx.dom.h('h2', { id: 'overview-summary-heading' }, 'Console overview'),
+                        ctx.dom.facts([
+                            { term: 'Service', value: ctx.dom.severityChip('ok', 'Healthy') },
+                            { term: 'Accounts', value: String(accounts.length) },
+                            { term: 'Active sessions', value: '12' },
+                            { term: 'Unread events', value: '3' }
+                        ], true)),
+                    ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'frame-states-heading' },
+                        ctx.dom.h('h2', { id: 'frame-states-heading' }, 'Frame states'),
+                        ctx.dom.h('p', null, 'Preview centered gate pages and the signed-out shell.'),
+                        ctx.dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'Frame state previews' },
+                            ctx.dom.button('Show forbidden gate', () => frame.showForbidden({
+                                message: 'Administrator access is required to use Admin Console. Your account does not have the admin realm.',
+                                backLabel: 'Return to console',
+                                onBack: () => frame.showShell()
+                            }), { 'data-demo-gate': 'forbidden' }),
+                            ctx.dom.button('Show session check gate', () => frame.showGate(
+                                [ctx.dom.statusLine('Checking your session…')],
+                                [ctx.dom.button('Return to console', () => frame.showShell())],
+                                { label: 'Admin Console', state: 'checking' }
+                            ), { 'data-demo-gate': 'checking' }),
+                            ctx.dom.button('Show check failed gate', () => frame.showCheckFailed(
+                                'The session could not be checked: service unavailable.',
+                                { onRetry: () => frame.showShell() }
+                            ), { 'data-demo-gate': 'error' }),
+                            ctx.dom.button('Show signed-out shell', () => frame.showSignedOut('You are signed out.'), { 'data-demo-gate': 'signed-out' }))))
+            },
+            {
+                name: 'accounts',
+                title: 'Accounts',
+                mount: (screenView, ctx, route) => {
+                    accountsMounts += 1;
+                    screenView.dataset.demoAccountsMounts = String(accountsMounts);
+                    ctx.dom.setChildren(screenView, accountsSection, statusSection);
+                    tableState = attachAccountsTable();
+                    const initialMatch = route.id ? accounts.find((item) => item.id === route.id) : null;
+                    if (initialMatch) {
+                        selected = initialMatch;
+                        panelOpen = true;
+                    }
+                    else if (accountsMounts > 1) {
+                        panelOpen = false;
+                    }
+                    if (panelOpen && selected && detailPanel) {
+                        ctx.panel.replaceChildren(detailPanel);
+                        ctx.panel.hidden = false;
+                        fillFacts(selected);
+                        title.textContent = selected.name;
+                        nameInput.value = selected.name;
+                        emailInput.value = selected.email;
+                    }
+                    renderAccounts();
+                    statusLoader?.load();
+                    return {
+                        update: (next) => {
+                            const match = next.id ? accounts.find((item) => item.id === next.id) : null;
+                            if (match) {
+                                openAccount(match, null, false);
+                            }
+                            else {
+                                closeAccountPanel();
+                            }
+                        },
+                        dispose: () => {
+                            statusLoader?.cancel();
+                            tableState?.destroy();
+                            tableState = null;
+                        }
+                    };
+                }
+            },
+            {
+                name: 'sessions',
+                title: 'Sessions',
+                mount: (screenView, ctx) => ctx.dom.setChildren(screenView,
+                    ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'sessions-heading' },
+                        ctx.dom.h('h2', { id: 'sessions-heading' }, 'Active sessions'),
+                        ctx.dom.dataTable('Sample active sessions', ['Token', 'Account', 'Last seen', 'Status'], [
+                            ['tok-901', 'Alex North', '2026-11-17 07:40:00', 'ok', 'Active'],
+                            ['tok-902', 'Samira Patel', '2026-11-16 08:15:00', 'ok', 'Active'],
+                            ['tok-877', 'Jordan Kim', '2026-11-10 17:22:00', 'warning', 'Expiring']
+                        ].map(([id, owner, lastSeen, sev, label]) => ctx.dom.h('tr', null,
+                            ctx.dom.h('th', { scope: 'row' }, id), ctx.dom.h('td', null, owner), ctx.dom.h('td', null, lastSeen), ctx.dom.h('td', null, ctx.dom.severityChip(sev, label)))))))
+            },
+            {
+                name: 'system-events',
+                title: 'System events',
+                mount: (screenView, ctx) => ctx.dom.setChildren(screenView,
+                    ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'events-heading' },
+                        ctx.dom.h('h2', { id: 'events-heading' }, 'Recent audit events'),
+                        ctx.dom.h('ul', { class: 'entry-list', 'aria-label': 'Recent audit events' }, [
+                            ['warning', 'Warning', '2026-11-17 07:35:00', 'Account Jordan Kim marked for deletion.'],
+                            ['error', 'Error', '2026-11-12 09:03:00', 'Account Morgan Lee locked after repeated failures.'],
+                            ['info', 'Info', '2026-11-10 14:20:00', 'Admin console frame router initialized.']
+                        ].map(([sev, label, time, msg]) => ctx.dom.h('li', { class: 'entry-list__item' },
+                            ctx.dom.h('p', { class: 'entry-list__message' }, msg),
+                            ctx.dom.h('div', { class: 'entry-list__meta' }, ctx.dom.severityChip(sev, label), ctx.dom.h('span', { class: 'chip' }, ctx.dom.h('time', null, time))))))))
+            }
+        ]
     });
 }
 

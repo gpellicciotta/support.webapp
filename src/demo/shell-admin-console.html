@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="gallery.css">
     <script type="module" src="shell-admin-console.js"></script>
 </head>
-<body class="app app--scroll-main">
-    <a class="skip-link" href="#main">Skip to content</a>
+<body class="app app--scroll-main" data-admin-console>
+    <a class="skip-link" href="#main" data-admin-console-skip>Skip to content</a>
     <header class="app__top-bar">
         <button class="app__nav-toggle icon-button" type="button" popovertarget="admin-nav" aria-controls="admin-nav" aria-expanded="true" aria-label="Navigation" data-app-nav-toggle>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-nav-menu"/></svg>
         </button>
-        <a class="app__brand" href="#main">Admin Console</a>
-        <div class="app__top-actions">
+        <a class="app__brand" href="#/accounts" data-admin-console-brand>Admin Console</a>
+        <div class="app__top-actions" data-admin-console-top-actions>
             <div class="account-menu" data-account-menu>
                 <button class="account-menu__button" type="button" popovertarget="admin-account-menu" aria-label="Alex North" title="Alex North">
                     <span class="avatar avatar--sm avatar--initials" aria-hidden="true">AN</span>
@@ -30,20 +30,20 @@
             </div>
         </div>
     </header>
-    <nav class="app__sidebar" id="admin-nav" aria-label="Main" popover>
+    <nav class="app__sidebar" id="admin-nav" aria-label="Main" popover data-admin-console-sidebar>
         <ul class="app__nav-list">
-            <li><a class="app__nav-item" href="#demo-settings-title"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-lists"/></svg>Overview</a></li>
-            <li><a class="app__nav-item" href="#main" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-people"/></svg>Accounts</a></li>
-            <li><a class="app__nav-item" href="#accounts-heading"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg>Sessions</a></li>
-            <li><a class="app__nav-item" href="#accounts-heading"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-note"/></svg><span>System events</span><span class="badge badge--count">3<span class="visually-hidden"> unread</span></span></a></li>
+            <li><a class="app__nav-item" href="#/overview" data-admin-console-nav="overview"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-lists"/></svg>Overview</a></li>
+            <li><a class="app__nav-item" href="#/accounts" aria-current="page" data-admin-console-nav="accounts"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-people"/></svg>Accounts</a></li>
+            <li><a class="app__nav-item" href="#/sessions" data-admin-console-nav="sessions"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-clock"/></svg>Sessions</a></li>
+            <li><a class="app__nav-item" href="#/system-events" data-admin-console-nav="system-events"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-note"/></svg><span>System events</span><span class="badge badge--count">3<span class="visually-hidden"> unread</span></span></a></li>
         </ul>
         <ul class="app__nav-list app__nav-list--end">
             <li><a class="app__nav-item" href="visual-style-gallery.html#shell"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-back"/></svg>Back to gallery</a></li>
         </ul>
     </nav>
-    <div class="app__banners"></div>
-    <main class="app__main" id="main" tabindex="-1">
-        <h1>Accounts</h1>
+    <div class="app__banners" data-admin-console-banners></div>
+    <main class="app__main" id="main" tabindex="-1" data-admin-console-main>
+        <h1 data-admin-console-title>Accounts</h1>
         <section class="gallery-section" aria-labelledby="demo-settings-title">
             <h2 id="demo-settings-title">Demo settings</h2>
             <p>Return to the <a href="visual-style-gallery.html#shell">visual style gallery</a> for the other shell demos.</p>
@@ -73,6 +73,7 @@
                 <button class="button button--secondary" type="button" data-demo-toast="Sample audit entry refreshed.">Show a sample toast</button>
             </div>
         </section>
+        <div data-admin-console-view>
         <section class="gallery-section" aria-labelledby="accounts-heading" data-table-state>
             <h2 id="accounts-heading">Sample accounts</h2>
             <div class="toolbar" role="search" aria-label="Filter accounts">
@@ -173,8 +174,9 @@
                 </div>
             </nav>
         </section>
+        </div>
     </main>
-    <aside class="app__side-panel" aria-labelledby="detail-panel-demo-title">
+    <aside class="app__side-panel" aria-labelledby="detail-panel-demo-title" data-admin-console-panel>
         <div class="detail-panel">
             <header class="detail-panel__header">
                 <h2 class="detail-panel__title" id="detail-panel-demo-title" tabindex="-1">Samira Patel</h2>
@@ -224,6 +226,6 @@
             </div>
         </div>
     </aside>
-    <div class="app__overlays"><div class="toast-region" role="region" aria-label="Notifications"></div></div>
+    <div class="app__overlays" data-admin-console-overlays><div class="toast-region" role="region" aria-label="Notifications"></div></div>
 </body>
 </html>
