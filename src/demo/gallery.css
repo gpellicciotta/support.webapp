@@ -41,6 +41,17 @@
   gap: var(--space-2);
 }
 
+/* Section-wide demo status bar: visually distinct from control-level hints or errors. */
+.demo-status {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface-sunken);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
 /* Layout containment makes the frame the containing block of the fixed toast region, so toasts stay inside it.
  * The frame has room for three single-line toasts, the most a toaster shows by default. */
 .toast-frame {

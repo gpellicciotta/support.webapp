@@ -10,12 +10,20 @@ test.describe('file download', () => {
         await section.scrollIntoViewIfNeeded();
 
         const trigger = section.locator('[data-file-download-json]');
+        const result = section.locator('[data-file-download-result]');
+        await expect(result).toHaveClass(/\bdemo-status\b/);
+        await expect(result).toHaveText(/^Download status: /);
+        const sectionBox = await section.boundingBox();
+        const resultBox = await result.boundingBox();
+        expect(resultBox.width).toBeCloseTo(sectionBox.width, 0);
+
         const [download] = await Promise.all([
             page.waitForEvent('download'),
             trigger.click()
         ]);
 
         expect(download.suggestedFilename()).toBe('sample-export.json');
+        await expect(result).toHaveText('Download status: downloaded sample-export.json.');
         const content = await readFile(await download.path(), 'utf8');
         expect(content.endsWith('\n')).toBe(true);
         expect(JSON.parse(content)).toMatchObject({ app: 'support.webapp' });
@@ -48,6 +56,7 @@ test.describe('file download', () => {
         expect(download.suggestedFilename()).toBe('account-export.json');
         const content = await readFile(await download.path(), 'utf8');
         expect(JSON.parse(content)).toMatchObject({ account: 'Alex North' });
+        await expect(section.locator('[data-file-download-result]')).toHaveText('Download status: downloaded account-export.json from toast.');
         await expect(toasts).toHaveCount(0);
         await expect(opener).toBeFocused();
 

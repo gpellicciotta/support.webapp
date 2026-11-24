@@ -455,6 +455,12 @@
                 <li class="state"><button class="button button--small is-active" type="button">Apply</button><span class="state__label">Active</span></li>
                 <li class="state"><button class="button button--small" type="button" disabled>Apply</button><span class="state__label">Disabled</span></li>
             </ul>
+            <h3>With helper text</h3>
+            <p>Helper or status text pertaining to a button aligns with the start of the button's label.</p>
+            <ul class="states">
+                <li class="state"><button class="button button--secondary" id="button-hint-trigger" type="button" aria-describedby="button-hint">Export JSON</button><p class="field__hint" id="button-hint">Downloads your saved items.</p><span class="state__label">Text button</span></li>
+                <li class="state"><button class="button" id="button-icon-hint-trigger" type="button" aria-describedby="button-icon-hint"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-plus"/></svg>Add item</button><p class="field__hint" id="button-icon-hint">Adds an item to the active list.</p><span class="state__label">With icon</span></li>
+            </ul>
         </section>
         <section id="fab" class="gallery-section" aria-labelledby="fab-title">
             <h2 id="fab-title">Floating action button</h2>
@@ -736,7 +742,7 @@
                 <li class="state"><label class="checkbox"><input class="checkbox__control is-focus" type="checkbox" name="checkbox-focus"><span class="checkbox__label">Remind me</span></label><span class="state__label">Focus-visible</span></li>
                 <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-disabled" disabled><span class="checkbox__label">Remind me</span></label><span class="state__label">Disabled</span></li>
                 <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-disabled-checked" checked disabled><span class="checkbox__label">Remind me</span></label><span class="state__label">Disabled, checked</span></li>
-                <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-invalid" aria-invalid="true"><span class="checkbox__label">I accept the terms</span></label><span class="state__label">Invalid</span></li>
+                <li class="state"><label class="checkbox"><input class="checkbox__control" type="checkbox" name="checkbox-invalid" aria-invalid="true" aria-describedby="checkbox-error"><span class="checkbox__label">I accept the terms</span></label><p id="checkbox-error" class="field__error">Accept the terms to continue.</p><span class="state__label">Invalid</span></li>
             </ul>
         </section>
         <section id="switch" class="gallery-section" aria-labelledby="switch-title">
@@ -750,7 +756,7 @@
                 <li class="state"><label class="switch is-active"><input class="switch__control" type="checkbox" role="switch" checked><span class="switch__label">Notifications</span></label><span class="state__label">Active</span></li>
                 <li class="state"><label class="switch"><input class="switch__control" type="checkbox" role="switch" disabled><span class="switch__label">Notifications</span></label><span class="state__label">Disabled, off</span></li>
                 <li class="state"><label class="switch"><input class="switch__control" type="checkbox" role="switch" disabled checked><span class="switch__label">Notifications</span></label><span class="state__label">Disabled, on</span></li>
-                <li class="state"><label class="switch"><input class="switch__control" type="checkbox" role="switch" aria-invalid="true" aria-describedby="switch-error"><span class="switch__label">Notifications</span></label><span class="state__label">Invalid</span><p id="switch-error" class="field__error">Enable notifications to receive alerts.</p></li>
+                <li class="state"><label class="switch"><input class="switch__control" type="checkbox" role="switch" aria-invalid="true" aria-describedby="switch-error"><span class="switch__label">Notifications</span></label><p id="switch-error" class="field__error">Enable notifications to receive alerts.</p><span class="state__label">Invalid</span></li>
             </ul>
         </section>
         <section id="radio" class="gallery-section" aria-labelledby="radio-title">
@@ -1326,7 +1332,7 @@
             <p>Use a modal for consequential actions. Require a word for irreversible bulk operations.</p>
             <button class="button button--secondary" type="button" data-dialog-open="confirm-list">Delete a list</button>
             <button class="button button--danger" type="button" data-dialog-open="confirm-data">Erase sample data</button>
-            <p data-dialog-result role="status">No action taken.</p>
+            <p class="demo-status" data-dialog-result role="status">No action taken.</p>
             <dialog class="dialog" id="confirm-list" aria-labelledby="confirm-list-title">
                 <div class="dialog__header"><h3 class="dialog__title" id="confirm-list-title">Delete the list Groceries?</h3></div>
                 <div class="dialog__body"><p>The list will move to the recycle bin.</p></div>
@@ -1364,7 +1370,7 @@
                     <button class="button button--secondary" type="button" data-inline-confirm-answer="no">Keep note</button>
                 </div>
             </div>
-            <p data-inline-confirm-result role="status">No action taken.</p>
+            <p class="demo-status" data-inline-confirm-result role="status">No action taken.</p>
         </section>
         <section id="menu" class="gallery-section" aria-labelledby="menu-title">
             <h2 id="menu-title">Menu</h2>
@@ -1399,7 +1405,7 @@
                 <div class="menu__separator" role="separator"></div>
                 <button class="menu__item menu__item--danger" type="button" role="menuitem"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-bin"/></svg>Delete</button>
             </div>
-            <p id="menu-demo-result" data-menu-result role="status">Last action: none</p>
+            <p class="demo-status" id="menu-demo-result" data-menu-result role="status">Last action: none</p>
         </section>
         <section id="popover" class="gallery-section" aria-labelledby="popover-title">
             <h2 id="popover-title">Popover</h2>
@@ -1445,7 +1451,7 @@
             <div class="toast-frame">
                 <div class="toast-region" id="toast-demo-region" role="region" aria-label="Notifications"></div>
             </div>
-            <p id="toast-demo-result" data-toast-result role="status">No action taken.</p>
+            <p class="demo-status" id="toast-demo-result" data-toast-result role="status">No action taken.</p>
             <dialog class="dialog" id="toast-modal" aria-labelledby="toast-modal-title">
                 <div class="dialog__header"><h3 class="dialog__title" id="toast-modal-title">Sample task</h3></div>
                 <div class="dialog__body"><p>Its toast waits until this modal closes.</p></div>
@@ -1465,7 +1471,7 @@
             <div class="card-specimens">
                 <div class="toast-region" data-file-download-region role="region" aria-label="Download notifications"></div>
             </div>
-            <p data-file-download-result role="status">No file downloaded.</p>
+            <p class="demo-status" data-file-download-result role="status">Download status: no file downloaded yet.</p>
         </section>
         <section id="avatar" class="gallery-section" aria-labelledby="avatar-title">
             <h2 id="avatar-title">Avatar</h2>
@@ -1535,7 +1541,7 @@
                     </div>
                 </div>
             </div>
-            <p id="account-menu-demo-result" data-account-menu-result role="status">Route: #/bin</p>
+            <p class="demo-status" id="account-menu-demo-result" data-account-menu-result role="status">Route: #/bin</p>
         </section>
         <section id="progress" class="gallery-section" aria-labelledby="progress-title">
             <h2 id="progress-title">Progress</h2>
@@ -1683,7 +1689,7 @@
                 <button class="button button--secondary" type="button" data-theme-sync-demo="dark">Simulate sign-in (Dark)</button>
                 <button class="button button--secondary" type="button" data-theme-sync-demo="default">Simulate sign-in (Legacy default)</button>
             </div>
-            <p data-theme-sync-status role="status">Account theme: idle. Use the header Theme control or simulate sign-in.</p>
+            <p class="demo-status" data-theme-sync-status role="status">Account theme: idle. Use the header Theme control or simulate sign-in.</p>
         </section>
         <section id="shell" class="gallery-section" aria-labelledby="shell-title">
             <h2 id="shell-title">App shell</h2>

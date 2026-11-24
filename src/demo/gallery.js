@@ -395,14 +395,14 @@ if (typeof document !== 'undefined' && document.querySelector('.gallery-main')) 
         document.querySelector('[data-file-download-json]')?.addEventListener('click', (event) => {
             const filename = event.currentTarget.dataset.fileDownloadJson;
             downloadJson({ app: 'support.webapp', exportedAt: '2026-11-23T00:00:00Z' }, filename);
-            downloadResult.textContent = `Downloaded ${filename}.`;
+            downloadResult.textContent = `Download status: downloaded ${filename}.`;
         });
         document.querySelector('[data-file-download-toast]')?.addEventListener('click', (event) => {
             const filename = event.currentTarget.dataset.fileDownloadToast;
             downloadToaster.show('Account export is ready.', {
                 download: { json: { account: 'Alex North', exportedAt: '2026-11-23T00:00:00Z' }, filename },
                 onAction: () => {
-                    downloadResult.textContent = `Downloaded ${filename} from toast.`;
+                    downloadResult.textContent = `Download status: downloaded ${filename} from toast.`;
                 }
             });
         });

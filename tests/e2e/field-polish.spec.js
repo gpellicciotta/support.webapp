@@ -186,3 +186,46 @@ test('the select section shows every select state', async ({ page }) => {
     expect(overflow).toBeLessThanOrEqual(0);
     expect(problems).toEqual([]);
 });
+
+test('pertaining messages under buttons, checkboxes, and switches align with the control text start', async ({ page }) => {
+    const problems = await openGallery(page);
+    const pairs = [
+        ['#switch .state:has(#switch-error) label.switch', '.switch__label', '#switch-error'],
+        ['#checkbox .state:has(#checkbox-error) label.checkbox', '.checkbox__label', '#checkbox-error'],
+        ['#button-hint-trigger', null, '#button-hint'],
+        ['#button-icon-hint-trigger', null, '#button-icon-hint']
+    ];
+    for (const dir of ['ltr', 'rtl']) {
+        await page.evaluate((direction) => {
+            document.documentElement.dir = direction;
+        }, dir);
+        for (const [controlSelector, labelSelector, messageSelector] of pairs) {
+            const control = page.locator(controlSelector);
+            const message = page.locator(messageSelector);
+            await expect(control, `${dir} ${controlSelector}`).toBeVisible();
+            await expect(message, `${dir} ${messageSelector}`).toBeVisible();
+            const offset = await page.evaluate(([ctrlSel, lblSel, msgSel, direction]) => {
+                const ctrl = document.querySelector(ctrlSel);
+                const msg = document.querySelector(msgSel);
+                const range = document.createRange();
+                const target = lblSel ? ctrl.querySelector(lblSel) : ctrl;
+                const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT, {
+                    acceptNode: (node) => (node.textContent.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP)
+                });
+                const textNode = walker.nextNode();
+                range.selectNodeContents(textNode);
+                const textRect = range.getBoundingClientRect();
+                const msgBox = msg.getBoundingClientRect();
+                const msgStyle = getComputedStyle(msg);
+                if (direction === 'rtl') {
+                    const msgEnd = msgBox.right - Number.parseFloat(msgStyle.paddingRight);
+                    return textRect.right - msgEnd;
+                }
+                const msgStart = msgBox.left + Number.parseFloat(msgStyle.paddingLeft);
+                return msgStart - textRect.left;
+            }, [controlSelector, labelSelector, messageSelector, dir]);
+            expect(Math.abs(offset), `${dir} ${controlSelector} -> ${messageSelector}`).toBeLessThanOrEqual(1);
+        }
+    }
+    expect(problems).toEqual([]);
+});

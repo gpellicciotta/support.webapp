@@ -181,6 +181,22 @@ describe('gallery page', () => {
     it('uses no inline styles on the page', () => {
         expect(html).not.toMatch(/\sstyle=|<style/i);
     });
+
+    it('marks every section-wide demo status line as a .demo-status bar', () => {
+        for (const attr of [
+            'data-dialog-result',
+            'data-inline-confirm-result',
+            'data-menu-result',
+            'data-toast-result',
+            'data-file-download-result',
+            'data-account-menu-result',
+            'data-theme-sync-status'
+        ]) {
+            expect(html, attr).toMatch(new RegExp(`<p[^>]*class="[^"]*\\bdemo-status\\b[^"]*"[^>]*${attr}|<p[^>]*${attr}[^>]*class="[^"]*\\bdemo-status\\b`));
+        }
+        expect(html).toContain('Download status:');
+        expect(css).toMatch(/\.demo-status\s*\{/);
+    });
 });
 
 describe('banner specimens', () => {

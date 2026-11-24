@@ -313,7 +313,9 @@ Fields, choices, and forms share markup for labels, help, character counts, erro
 - Pending: `aria-busy` on the field, and a muted status line with the more icon.
 - Valid: a success border, and a status line with the check icon and a message.
 - Read-only: a sunken ground without a border; focus still shows the focus border and glow.
-- Hint, counter, status, and error lines inset their text to start and end with the text inside the control.
+- Hint, counter, status, and error lines align their text start with the text inside their control.
+  This applies to fields, buttons, link buttons, checkboxes, radios, and switches.
+- Section-wide status lines sit in their own full-width container, visually distinct from single-control messages.
 - Field rows keep their natural height, so messages sit one small step below the control in any grid.
 - A select replaces the native arrow with a chevron one small step inside the edge, like the collapsible's.
   The [Select section](../../src/demo/visual-style-gallery.html#select) shows its states.
@@ -346,6 +348,9 @@ Fields, choices, and forms share markup for labels, help, character counts, erro
 
 **[Decided]** A field group indents through fieldset padding, and its legend pulls back by the same step.
 - A margin on each item: rejected, because it widens the gaps between row variant columns.
+
+**[Decided]** [field.css](../../src/css/components/field.css) owns control message alignment for buttons, checkboxes, radios, switches, and fields.
+- Per-component message classes: rejected, to avoid duplicating hint, status, and error styles across controls.
 
 **[Decided]** The valid state needs no attribute: a visible status line on a field without `aria-busy` styles it.
 - A `data-field-state` attribute: rejected, because ADR-0003 keeps state in native and ARIA attributes.

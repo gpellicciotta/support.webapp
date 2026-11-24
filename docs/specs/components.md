@@ -173,6 +173,8 @@ The shell fixes it above bottom navigation and action bars, with safe-area spaci
 
 ### field
 Field. Every part except the label and the control is optional. The help text stays in `aria-describedby` while collapsed.
+Hint, status, and error lines (`.field__hint`, `.field__status`, `.field__error`) align with a button, link button, checkbox, radio, or switch.
+Place them directly after the control, or inside a `.field` wrapper.
 `attachField` orders `aria-describedby` as hint, help, counter, status, and error, naming only visible status and error lines.
 A blur during a pointer press waits until after release, so a new error line cannot shift pressed buttons.
 Keyboard blur validates at once; calling `validate`, `clear`, or `setError` drops any held check.

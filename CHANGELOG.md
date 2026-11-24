@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Components: Aligned `.field__hint`, `.field__status`, and `.field__error` with button, link button, checkbox, radio, and switch label starts in [field.css](src/css/components/field.css), and framed gallery demo status bars in [gallery.css](src/demo/gallery.css).
 - Modules: Added [admin-changelog.js](src/js/admin-changelog.js) for the shared admin Changelog screen on the release notes renderer, paged ten at a time.
 - Modules: Added [admin-sessions.js](src/js/admin-sessions.js) for the shared admin Sessions screen with single, bulk, and expired revocation plus table multi-select.
 - Modules: Added [admin-users.js](src/js/admin-users.js) for the shared admin Users screen with filters, paging, detail panel, creation, and deletion.
