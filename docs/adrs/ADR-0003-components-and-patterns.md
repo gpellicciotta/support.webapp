@@ -139,6 +139,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It renders the filtered, paged account table, detail and New user panels, inline-confirmed deletion and restore, and `extraColumns`/`extraFacts`/`extraSections` hooks.
 - **[Decided]** on 2026-11-24: `admin-sessions` moved in from Auth's and ToDo's admin consoles as [admin-sessions.js](../../src/js/admin-sessions.js), adding `.selection--table` to [selection.css](../../src/css/components/selection.css).
   It filters and pages tokens, protects the console's own session, and confirms single, bulk, and expired revocations inline.
+- **[Decided]** on 2026-11-24: `admin-changelog` moved in from Auth's and ToDo's admin consoles as [admin-changelog.js](../../src/js/admin-changelog.js).
+  It loads releases through an app adapter and renders them on [release-notes.js](../../src/js/release-notes.js), paged ten at a time.
 
 ### Shared patterns
 Documented as contracts without components of their own:

@@ -3,6 +3,7 @@
 import { attachAccountMenu } from '../js/account-menu.js';
 import { attachAdminConsole } from '../js/admin-console.js';
 import { createAdminBroadcastsScreen } from '../js/admin-broadcasts.js';
+import { createAdminChangelogScreen } from '../js/admin-changelog.js';
 import { createAdminLogsScreen } from '../js/admin-logs.js';
 import { createAdminOverviewScreen } from '../js/admin-overview.js';
 import { createAdminSessionsScreen } from '../js/admin-sessions.js';
@@ -743,6 +744,74 @@ export function initAdminConsoleDemo(doc, view) {
         }
     });
 
+    let changelogMode = 'populated';
+    const sampleReleases = [
+        {
+            version: '2.5.0',
+            isPreRelease: true,
+            tag: 'in development',
+            entries: [
+                { rawText: 'Modules: **[breaking]** Added `admin-changelog` screen in [components.md](docs/specs/components.md).', isBreaking: true },
+                { rawText: 'Modules: Added `admin-sessions` with inline bulk and expired revocation.' },
+                { rawText: 'Shell: Linked the Overview version fact directly to `#/changelog`.' }
+            ]
+        },
+        {
+            version: '2.4.0',
+            tag: 'released: 2026-11-20',
+            isLatest: true,
+            entries: [
+                { rawText: 'Modules: Added `admin-users` with detail and New user side panels.' },
+                { rawText: 'Modules: Added `admin-broadcasts` with live inbox and banner previews.' }
+            ]
+        },
+        {
+            version: '2.3.1',
+            tag: '2026-11-16',
+            entries: [
+                { rawText: 'Modules: Added `admin-system-events` with server paging and JSON details.' },
+                { rawText: 'Components: Refined `.entry-list` card wrapping on 390 px screens.' }
+            ]
+        },
+        {
+            version: '2.3.0',
+            tag: 'released: 2026-11-12 • broken',
+            entries: [
+                { rawText: 'CLI: Reverted lockfile normalization regression on CRLF checkouts.' }
+            ]
+        },
+        ...Array.from({ length: 10 }, (_, index) => {
+            const minor = 10 - index;
+            const day = String(Math.max(1, 28 - index * 2)).padStart(2, '0');
+            return {
+                version: `2.2.${minor}`,
+                tag: `released: 2026-10-${day}`,
+                entries: [
+                    { rawText: `Modules: Shipped \`v2.2.${minor}\` admin console maintenance update.` },
+                    { rawText: `Docs: Updated adoption notes for release \`2.2.${minor}\`.` }
+                ]
+            };
+        })
+    ];
+    const changelogScreen = createAdminChangelogScreen({
+        adapter: {
+            fetchReleases: async () => {
+                const mode = changelogMode;
+                changelogMode = 'populated';
+                if (mode === 'empty') {
+                    return [];
+                }
+                if (mode === 'fail-once') {
+                    throw new Error('Changelog file temporarily unavailable');
+                }
+                if (mode === 'unauthorized') {
+                    throw Object.assign(new Error('Session expired'), { status: 401 });
+                }
+                return sampleReleases;
+            }
+        }
+    });
+
     const frame = attachAdminConsole(doc.body, {
         document: doc,
         window: view,
@@ -968,6 +1037,29 @@ export function initAdminConsoleDemo(doc, view) {
                                 ctx.dom.button('Simulate 401', () => triggerBroadcastsMode('unauthorized'), { 'data-demo-broadcasts': 'unauthorized' }))));
                     broadcastsController = broadcastsScreen.mount(broadcastsHost, ctx, route);
                     return { dispose: () => broadcastsController?.dispose() };
+                }
+            },
+            {
+                name: changelogScreen.name,
+                title: changelogScreen.title,
+                mount: (screenView, ctx, route) => {
+                    const changelogHost = ctx.dom.h('div', { class: 'gallery-section' });
+                    let changelogController = null;
+                    const triggerChangelogMode = (mode) => {
+                        changelogMode = mode;
+                        changelogController?.refresh();
+                    };
+                    ctx.dom.setChildren(screenView,
+                        changelogHost,
+                        ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'changelog-states-heading' },
+                            ctx.dom.h('h2', { id: 'changelog-states-heading' }, 'Changelog states'),
+                            ctx.dom.h('p', null, 'Preview an empty changelog, fetch failures, and 401 sign-in prompts.'),
+                            ctx.dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'Changelog state previews' },
+                                ctx.dom.button('Empty changelog', () => triggerChangelogMode('empty'), { 'data-demo-changelog': 'empty' }),
+                                ctx.dom.button('Fail fetch once', () => triggerChangelogMode('fail-once'), { 'data-demo-changelog': 'fail-once' }),
+                                ctx.dom.button('Simulate 401', () => triggerChangelogMode('unauthorized'), { 'data-demo-changelog': 'unauthorized' }))));
+                    changelogController = changelogScreen.mount(changelogHost, ctx, route);
+                    return { dispose: () => changelogController?.dispose() };
                 }
             }
         ]

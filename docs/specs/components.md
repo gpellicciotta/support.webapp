@@ -113,6 +113,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `admin-broadcasts`    | Admin Broadcasts      | `admin-broadcasts.js`: `createAdminBroadcasts`, `attachAdminBroadcasts`, `createAdminBroadcastsScreen`                                                           | compose, inbox/banner preview, recipients, retraction   | `field.js` validation; `selection.js`; inline confirm; `data-*`   |
 | `admin-users`         | Admin Users screen    | `admin-users.js`: `createAdminUsers`, `attachAdminUsers`, `createAdminUsersScreen`                                                                               | account table, filters, paging, detail/create panel     | `aria-selected`, focus return, inline confirm, `data-*` hooks     |
 | `admin-sessions`      | Admin Sessions screen | `admin-sessions.js`: `createAdminSessions`, `attachAdminSessions`, `createAdminSessionsScreen`                                                                   | token table, filters, paging, single/bulk/expired       | own session protected; `selection.js`; inline confirm; `data-*`   |
+| `admin-changelog`     | Admin Changelog       | `admin-changelog.js`: `createAdminChangelog`, `attachAdminChangelog`, `createAdminChangelogScreen`                                                               | adapter releases, area groups, status chips, 10/page    | `aria-labelledby` sections; `role="status"`/`alert`; `data-*`     |
 | `view-router`         | View router           | `view-router.js`: `createViewRouter`, `attachViewRouter`                                                                                                         | routed views, fallback, sign-in guards, outside routes  | `aria-current="page"` route marks; `data-view-router-*` hooks     |
 
 ### Not in the Package
@@ -1449,6 +1450,40 @@ Upgrading an existing app:
 - Remove app-local `.selection--table` and `.selection__count` rules replaced by [selection.css](../../src/css/components/selection.css).
 - Pass `mode: 'server'`, `showTypeFilter: false`, and `showStateFilter: false` in ToDo, omitting `adapter.revokeExpired`.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html#/sessions) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
+
+### admin-changelog
+Shared admin Changelog screen ([admin-changelog.js](../../src/js/admin-changelog.js)), using [release-notes.js](../../src/js/release-notes.js), [data-loader.js](../../src/js/data-loader.js), and [dom-builders.js](../../src/js/dom-builders.js).
+Loads releases through an app-supplied adapter and renders them grouped by area, paged ten at a time.
+
+```js
+import { createAdminChangelogScreen } from './admin-changelog.js';
+import { createAdminConsole } from './admin-console.js';
+
+const consoleFrame = createAdminConsole(root, {
+    title: 'Admin Console',
+    screens: [
+        createAdminChangelogScreen({
+            adapter: {
+                fetchReleases: ({ signal }) => api.get('/changelog', { signal })
+            }
+        })
+    ]
+});
+```
+
+- `createAdminChangelogScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
+- `attachAdminChangelog(root, options)` mounts into a container; `createAdminChangelog(doc, options)` creates a root in an injected document.
+- Controller methods: `refresh`, `showMore`, `setFilter`, `getFilter`, `expandAll`, `collapseAll`, `getReleases`, `getReleaseNotes`, `dispose`, and `destroy`.
+- `options.adapter.fetchReleases({ signal })` returns a release array or `{ releases }` envelope; `normalizeReleasesResult` accepts both shapes.
+- Defaults to `groupByArea: true`, `showStatus: true`, `showFilter: false`, `collapsible: false`, and `pageSize: 10` (`DEFAULT_PAGE_SIZE`).
+- Empty lists render `.empty-state`; failures and 401 responses render [data-loader.js](../../src/js/data-loader.js) Retry and Sign in banners.
+- `extraSections` appends app-specific sections after the releases; hooks use `data-admin-changelog-*` and `data-release-notes-*` only.
+
+Upgrading an existing app:
+- Replace `changelog-view.mjs` in Auth and ToDo with `createAdminChangelogScreen` from [admin-changelog.js](../../src/js/admin-changelog.js).
+- In Auth, pass `fetchReleases` that fetches `/CHANGELOG.md` and parses it with `parseChangelog`.
+- In ToDo, pass `fetchReleases: ({ signal }) => api.get('/changelog', { signal })`; `{ releases }` normalizes automatically.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html#/changelog) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
 
 ### view-router
 View router for `RoutedView` screens ([view-router.js](../../src/js/view-router.js)).

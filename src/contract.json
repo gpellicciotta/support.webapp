@@ -952,6 +952,7 @@
     "admin-broadcasts",
     "admin-users",
     "admin-sessions",
+    "admin-changelog",
     "view-router"
   ]
 }
