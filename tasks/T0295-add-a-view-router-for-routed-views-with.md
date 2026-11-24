@@ -5,17 +5,22 @@ session: antigravity-20261124-b28b22
 needs: []
 branch: task/T0295-add-a-view-router-for-routed-views-with
 worktree: .plan/work/T0295-add-a-view-router-for-routed-views-with
-status: active
+status: completed
 started_at: "2026-11-24T02:24:14Z"
-ended_at: —
+ended_at: "2026-11-24T03:02:37Z"
 review: agent
 preview: none
 protocol: standard
 usage:
   worker: {turns: 1, duration_s: 1727.9, input: 651635, output: 74160, cache_read: 15707763}
-review_status: pending
+  review: {turns: 1, duration_s: 558.1, input: 12, output: 2326, cache_read: 471603, cache_write: 4144}
+review_status: approved
 review_round: 1
 review_requested_at: "2026-11-24T02:53:13Z"
+reviewed_by: "@claude"
+review_session: claude-20261124-f012ea
+work_duration: 2303.5
+completion-commit: 8bdc6190a4d0d0f329d477751185b38a29f97a3a
 ---
 # T0295: Add a view router for routed views with sign-in guards and a fallback view, promoted from Auth's App
 
@@ -35,7 +40,7 @@ Size estimate: 5 files, 200 lines.
 - [x] **[Implement]** Add the view router, its contract entry, and a gallery or shell demo section.
 - [x] **[Verify]**    Run the affected tests and `python scripts/devops.py check`.
 - [x] **[Doc]**       Update components.md, the ADRs it touches, the upgrade note for apps, and CHANGELOG.md.
-- [ ] **[Review]**    Obtain review approval of the finished work before completion.
+- [x] **[Review]**    Obtain review approval of the finished work before completion.
 
 ## Execution Log
 - [2026-11-23] **[Doc]**
@@ -69,4 +74,11 @@ Size estimate: 5 files, 200 lines.
 
 - [2026-11-24] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-24] **[Review]**
+  Round 1 approved by @claude: Approved.
+  - Findings: [review-findings-1.md](T0295-add-a-view-router-for-routed-views-with/review-findings-1.md).
+
+- [2026-11-24] **[Complete]**
+  Task completed successfully.
 
