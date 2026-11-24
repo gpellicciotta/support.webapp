@@ -1,11 +1,11 @@
 ---
 id: T0288
-owner: ~
-needs: ['T0294']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0288-add-paged-and-filtered-table-state-kept-in
+worktree: .plan/work/T0288-add-paged-and-filtered-table-state-kept-in
+status: active
+started_at: "2026-11-24T00:59:24Z"
 ended_at: —
 review: agent
 preview: none
