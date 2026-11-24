@@ -14,11 +14,14 @@ protocol: standard
 size_status: approved
 size_estimate: 36 files, 160 lines
 usage:
-  worker: {turns: 1, duration_s: 321.7, input: 90075, output: 11069, cache_read: 823341}
+  worker: {turns: 2, duration_s: 2075.0, input: 798685, output: 45799, cache_read: 6953276}
 work_duration: 334.1
 size_approved: 36 files, 160 lines
 size_approved_by: "@giova"
 size_approved_at: "2026-11-24T09:06:50Z"
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T09:36:32Z"
 ---
 # T0306: Remove sibling app mentions from source code and test comments
 
@@ -74,4 +77,7 @@ See [technical-spec.md](T0306-remove-sibling-app-mentions-from-source-code-and/t
   - Files touched: 36.
   - Lines touched: 142.
   - Reopenings: 0.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
