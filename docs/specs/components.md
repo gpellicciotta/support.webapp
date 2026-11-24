@@ -65,6 +65,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `toolbar`       | Toolbar       | none                                                                                              | wrapping filter fields and actions aligned to the bottom edge     | `role="search"` landmark; labeled native controls           |
 | `table`         | Data table    | none                                                                                              | plain, dense, framed; hover and `aria-selected` rows; numeric     | native table with `caption` and `th scope`                  |
 | `pager`         | Pager         | none                                                                                              | status text with First, Previous, Next, and Last buttons          | labeled `nav`; native `disabled` on boundaries              |
+| `table-state`   | Table state   | `table-state.js`: `createTableState`, `attachTableState`, `createPager`, `pageOf`, `pageParams`   | client slicing, server bookmarks or offsets, URL hash persistence | labeled pager nav; native disabled buttons; `data-*` hooks  |
 | `entry-list`    | Entry list    | none                                                                                              | log or event cards; code message; action; details; hover          | labeled native `ul`; time chip with `time` element          |
 | `detail-panel`  | Detail panel  | none                                                                                              | fixed header, scrolling body, sections, and danger zone           | labeled landmark; focus moves in and returns                |
 | `tabs`          | Tabs          | `tabs.js`: `attachTabs`                                                                           | selected, disabled                                                | `tablist`, `tab`, and `tabpanel` roles; arrow keys          |
@@ -1142,6 +1143,38 @@ Upgrading an existing app:
 - Replace local `loadInto` in Auth's and ToDo's `admin/js/ui.mjs` with [data-loader.js](../../src/js/data-loader.js); call `setSpriteUrl` before error banners render.
 - Positional `loadInto(container, ctx, what, fetcher, render, { quiet })` calls keep working, or bind shared defaults with `createDataLoader({ onSignIn })`.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for Retry, 401, and quiet refresh.
+
+### table-state
+Paged and filtered table state ([table-state.js](../../src/js/table-state.js)), using [dom-builders.js](../../src/js/dom-builders.js).
+Keeps filters, page size, and page number in the URL hash query without adding a history entry.
+
+```js
+import { attachTableState } from './table-state.js';
+
+const table = attachTableState(section, {
+    sizes: [20, 50, 100],
+    defaultSize: 20,
+    filters: { q: { default: '', trim: true }, status: { default: '', values: ['active', 'marked'] } },
+    onChange: () => render()
+});
+const cut = table.slice(filteredRows);
+table.updatePager({ cut, shown: filteredRows.length, loaded: allRows.length, noun: 'user' });
+```
+
+- `readHashQuery`, `formatHashQuery`, and `writeHashQuery` round-trip hash parameters via `history.replaceState` without firing `hashchange`.
+- Empty values, `null`, `undefined`, `page <= 1`, and default filter or size values drop out of the hash query.
+- `pageOf(rows, page, size)` and `table.slice(rows)` clamp page numbers to `[1, pages]` and sync clamped URLs.
+- `pageParams(direction, envelope, size, extra)` builds bookmark Page envelope parameters; `offsetParams(page, size, extra)` builds `limit` and `offset`.
+- In server mode (`mode: 'server'`), `pageKey` defaults to `null`, and `applyEnvelope` saves the prior request parameters for `serverParams('current')`.
+- `createTableState(options)` manages state headlessly; `attachTableState(root, options)` binds controls via `data-table-state-*` hooks only.
+- Supported hooks: `[data-table-state]`, `[data-table-state-filter="key"]`, `[data-table-state-size]`, `[data-table-state-pager]`, `[data-table-state-text]`, and `[data-table-state-action]`.
+- `createPager(doc, options)` and `updatePager(options)` drive the normative `.pager` skeleton with native `disabled` boundary states.
+- Same-route `hashchange` events reload state and sync controls; different route prefixes are ignored, and `destroy()` cleans up listeners.
+
+Upgrading an existing app:
+- Replace `readFilters`, `filterQuery`, `saveFilters`, `pageOf`, and `pager` in Auth's `admin/js/ui.mjs` with [table-state.js](../../src/js/table-state.js).
+- Replace `readFilters`, `saveFilters`, `pageParams`, and pager wiring in ToDo's `admin/js/ui.mjs` with `createTableState({ mode: 'server' })` or `attachTableState`.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live reload-safe filtering and paging.
 
 ---
 

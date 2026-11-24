@@ -5,6 +5,7 @@ import { attachAppNav } from '../js/app-nav.js';
 import { attachDataLoader } from '../js/data-loader.js';
 import { createDomBuilders } from '../js/dom-builders.js';
 import { createLiveRegion } from '../js/live-region.js';
+import { attachTableState } from '../js/table-state.js';
 import { createToast } from '../js/toast.js';
 import { initGallery } from './gallery.js';
 
@@ -42,8 +43,7 @@ export function initAdminConsoleDemo(doc, view) {
     const nameInput = doc.getElementById('admin-detail-name');
     const emailInput = doc.getElementById('admin-detail-email');
     const factsSection = doc.getElementById('admin-detail-facts')?.closest('section');
-    const filterInput = doc.getElementById('admin-filter');
-    const pagerText = doc.querySelector('.pager__text');
+    const accountsSection = doc.querySelector('[data-table-state]');
     const accounts = [...doc.querySelectorAll('.table tbody tr')].map((row) => {
         const [idCell, emailCell, rolesCell, statusCell] = row.querySelectorAll('td');
         const btn = row.querySelector('[data-demo-panel-open]');
@@ -65,30 +65,30 @@ export function initAdminConsoleDemo(doc, view) {
     doc.querySelector('.table__frame')?.replaceWith(tableHost);
     let selected = accounts.find((item) => item.selected) ?? accounts[0];
     let panelOpen = Boolean(selected);
-    let query = '';
-    let statusFilter = '';
-    let pageSize = '20';
     let opener = null;
 
-    const statusSelect = dom.select([['', 'All statuses'], ['active', 'Active'], ['warning', 'Marked for deletion'], ['error', 'Locked']], statusFilter, {
+    const statusSelect = dom.select([['', 'All statuses'], ['active', 'Active'], ['warning', 'Marked for deletion'], ['error', 'Locked']], '', {
         id: 'admin-status',
-        onchange: () => {
-            statusFilter = statusSelect.value;
-            renderAccounts();
-        }
+        'data-table-state-filter': 'status'
     });
     doc.getElementById('admin-status')?.replaceWith(statusSelect);
-    const sizeSelect = dom.select(['20', '50', '100'], pageSize, {
+    const sizeSelect = dom.select(['2', '4', '20'], '4', {
         id: 'admin-size',
-        onchange: () => {
-            pageSize = sizeSelect.value;
-            renderAccounts();
-        }
+        'data-table-state-size': ''
     });
     doc.getElementById('admin-size')?.replaceWith(sizeSelect);
-    filterInput?.addEventListener('input', () => {
-        query = filterInput.value.trim();
-        renderAccounts();
+
+    const tableState = attachTableState(accountsSection ?? doc, {
+        window: view,
+        document: doc,
+        dom,
+        sizes: [2, 4, 20],
+        defaultSize: 4,
+        filters: {
+            q: { default: '', trim: true },
+            status: { default: '', values: ['active', 'warning', 'error'] }
+        },
+        onChange: () => renderAccounts()
     });
 
     if (confirmSlot) {
@@ -147,26 +147,25 @@ export function initAdminConsoleDemo(doc, view) {
     }
 
     function renderAccounts() {
+        const { filters, size } = tableState.getState();
+        const query = filters.q;
+        const statusFilter = filters.status;
         const needle = query.toLowerCase();
         const visible = accounts.filter((a) => (!needle || a.name.toLowerCase().includes(needle) || a.email.toLowerCase().includes(needle))
             && (!statusFilter || a.statusKey === statusFilter));
-        if (pagerText) {
-            pagerText.textContent = `Page 1 · ${visible.length} ${visible.length === 1 ? 'account' : 'accounts'} shown`;
-        }
+        const cut = tableState.slice(visible);
+        tableState.updatePager({
+            cut,
+            shown: visible.length,
+            loaded: accounts.length,
+            noun: 'account'
+        });
         if (visible.length === 0) {
-            const clear = dom.button('Clear filter', () => {
-                query = '';
-                statusFilter = '';
-                if (filterInput) {
-                    filterInput.value = '';
-                }
-                statusSelect.value = '';
-                renderAccounts();
-            });
+            const clear = dom.button('Clear filter', () => tableState.resetFilters());
             dom.setChildren(tableHost, dom.emptyState(`No account matches ${query ? `“${query}”` : 'this filter'}.`, clear));
             return;
         }
-        const rows = visible.map((account) => {
+        const rows = cut.rows.map((account) => {
             const inspect = dom.button(['Inspect ', dom.h('span', { class: 'visually-hidden' }, account.name)],
                 (event) => openAccount(account, event.currentTarget),
                 { small: true, 'data-demo-panel-open': account.name });
@@ -182,7 +181,7 @@ export function initAdminConsoleDemo(doc, view) {
                 dom.h('td', null, dom.severityChip(account.severity, account.status)),
                 dom.h('td', null, inspect));
         });
-        dom.setChildren(tableHost, dom.dataTable(`Sample accounts, ${pageSize} per page`,
+        dom.setChildren(tableHost, dom.dataTable(`Sample accounts, ${size} per page`,
             [{ label: 'ID', numeric: true }, 'Name', 'Email', 'Roles', 'Status', 'Details'],
             rows, { captionId: 'admin-accounts-caption' }));
     }

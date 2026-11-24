@@ -73,33 +73,34 @@
                 <button class="button button--secondary" type="button" data-demo-toast="Sample audit entry refreshed.">Show a sample toast</button>
             </div>
         </section>
-        <section class="gallery-section" aria-labelledby="accounts-heading">
+        <section class="gallery-section" aria-labelledby="accounts-heading" data-table-state>
             <h2 id="accounts-heading">Sample accounts</h2>
             <div class="toolbar" role="search" aria-label="Filter accounts">
                 <div class="field">
-                    <label class="field__label" for="admin-filter">Filter this page</label>
-                    <input class="field__control" id="admin-filter" type="search" placeholder="Name or email">
+                    <label class="field__label" for="admin-filter">Filter accounts</label>
+                    <input class="field__control" id="admin-filter" type="search" placeholder="Name or email" data-table-state-filter="q">
                 </div>
                 <div class="field">
                     <label class="field__label" for="admin-status">Status</label>
-                    <select class="field__control" id="admin-status">
+                    <select class="field__control" id="admin-status" data-table-state-filter="status">
                         <option value="">All statuses</option>
                         <option value="active">Active</option>
                         <option value="warning">Marked for deletion</option>
+                        <option value="error">Locked</option>
                     </select>
                 </div>
                 <div class="field">
                     <label class="field__label" for="admin-size">Page size</label>
-                    <select class="field__control" id="admin-size">
-                        <option>20</option>
-                        <option>50</option>
-                        <option>100</option>
+                    <select class="field__control" id="admin-size" data-table-state-size>
+                        <option value="2">2</option>
+                        <option value="4" selected>4</option>
+                        <option value="20">20</option>
                     </select>
                 </div>
             </div>
             <div class="table__frame" role="region" aria-labelledby="admin-accounts-caption" tabindex="0">
                 <table class="table table--dense">
-                    <caption class="visually-hidden" id="admin-accounts-caption">Sample accounts, 20 per page</caption>
+                    <caption class="visually-hidden" id="admin-accounts-caption">Sample accounts, 4 per page</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="table__numeric">ID</th>
@@ -143,16 +144,32 @@
                             <td><span class="chip chip--status chip--danger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-alert"/></svg>Locked</span></td>
                             <td><button class="button button--secondary button--small" type="button" data-demo-panel-open="Morgan Lee" data-demo-facts="{&quot;created&quot;:&quot;2026-10-02 11:45:00&quot;,&quot;last-active&quot;:&quot;2026-11-12 09:03:00&quot;,&quot;auth-user-id&quot;:&quot;967&quot;,&quot;lists&quot;:&quot;1&quot;,&quot;sessions&quot;:&quot;0&quot;}" data-demo-panel-email="morgan.lee@example.test">Inspect <span class="visually-hidden">Morgan Lee</span></button></td>
                         </tr>
+                        <tr>
+                            <td class="table__numeric">47</td>
+                            <th scope="row">Taylor Brooks</th>
+                            <td>taylor.brooks@example.test</td>
+                            <td><span class="chip">owner</span></td>
+                            <td><span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>Active</span></td>
+                            <td><button class="button button--secondary button--small" type="button" data-demo-panel-open="Taylor Brooks" data-demo-facts="{&quot;created&quot;:&quot;2026-10-14 08:20:00&quot;,&quot;last-active&quot;:&quot;2026-11-15 19:05:00&quot;,&quot;auth-user-id&quot;:&quot;981&quot;,&quot;lists&quot;:&quot;4&quot;,&quot;sessions&quot;:&quot;1&quot;}" data-demo-panel-email="taylor.brooks@example.test">Inspect <span class="visually-hidden">Taylor Brooks</span></button></td>
+                        </tr>
+                        <tr>
+                            <td class="table__numeric">52</td>
+                            <th scope="row">Casey Rivera</th>
+                            <td>casey.rivera@example.test</td>
+                            <td><span class="chip">owner</span></td>
+                            <td><span class="chip chip--status"><svg class="icon" aria-hidden="true" focusable="false"><use href="../looks/neutral/icons.svg#icon-check"/></svg>Active</span></td>
+                            <td><button class="button button--secondary button--small" type="button" data-demo-panel-open="Casey Rivera" data-demo-facts="{&quot;created&quot;:&quot;2026-11-01 16:10:00&quot;,&quot;last-active&quot;:&quot;2026-11-16 14:30:00&quot;,&quot;auth-user-id&quot;:&quot;994&quot;,&quot;lists&quot;:&quot;2&quot;,&quot;sessions&quot;:&quot;1&quot;}" data-demo-panel-email="casey.rivera@example.test">Inspect <span class="visually-hidden">Casey Rivera</span></button></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-            <nav class="pager" aria-label="Pages">
-                <p class="pager__text">Page 1 · 4 accounts shown</p>
+            <nav class="pager" aria-label="Accounts pages" data-table-state-pager>
+                <p class="pager__text" data-table-state-text>Page 1 of 2 · 1–4 of 6 accounts</p>
                 <div class="pager__buttons">
-                    <button class="button button--secondary" type="button" disabled>First</button>
-                    <button class="button button--secondary" type="button" disabled>Previous</button>
-                    <button class="button button--secondary" type="button">Next</button>
-                    <button class="button button--secondary" type="button">Last</button>
+                    <button class="button button--secondary" type="button" data-table-state-action="first" disabled>First</button>
+                    <button class="button button--secondary" type="button" data-table-state-action="prev" disabled>Previous</button>
+                    <button class="button button--secondary" type="button" data-table-state-action="next">Next</button>
+                    <button class="button button--secondary" type="button" data-table-state-action="last">Last</button>
                 </div>
             </nav>
         </section>

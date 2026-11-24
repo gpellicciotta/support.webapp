@@ -125,6 +125,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It exports `createDomBuilders`, `h`, `setChildren`, and catalog builders using [icon.js](../../src/js/icon.js) and [inline-confirm.js](../../src/js/inline-confirm.js).
 - **[Decided]** on 2026-11-24: `data-loader` moved in from the admin consoles as [data-loader.js](../../src/js/data-loader.js).
   It exports `createDataLoader`, `attachDataLoader`, and `loadInto`, using [dom-builders.js](../../src/js/dom-builders.js) for status lines, banners, and actions.
+- **[Decided]** on 2026-11-24: `table-state` moved in from the admin consoles as [table-state.js](../../src/js/table-state.js).
+  It keeps filters and pages in the URL hash, supports client and server paging, and wires `.pager` via `data-*` hooks.
 
 ### Shared patterns
 Documented as contracts without components of their own:

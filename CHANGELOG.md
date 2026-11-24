@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Modules: Added [table-state.js](src/js/table-state.js) with URL hash filter and page state, client slicing, server parameters, and pager wiring.
 - Modules: Added [data-loader.js](src/js/data-loader.js) with loading, Retry, 401 Sign in, newest-wins cancellation, and quiet refresh states.
 - Modules: Added [dom-builders.js](src/js/dom-builders.js) with `h`, `setChildren`, and catalog component builders, promoted from the admin consoles.
 - Components: Added [help-page.js](src/js/help-page.js) and [help-page.css](src/css/components/help-page.css) with search, topic chips, FAQ, query links, and feedback mail links.

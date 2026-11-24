@@ -943,6 +943,7 @@
     "inbox",
     "help-page",
     "dom-builders",
-    "data-loader"
+    "data-loader",
+    "table-state"
   ]
 }
