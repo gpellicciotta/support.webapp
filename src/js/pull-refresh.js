@@ -10,7 +10,6 @@
  * - an upward move, a second finger, or a cancelled touch drops the pull without refreshing.
  * Touch events are used rather than pointer events, since browsers cancel a touch pointer once they take over the pan.
  * State lives in the indicator's `hidden` and `data-state` attributes; travel and progress are private properties.
- * Auth's installed SPA built the first version app-locally, in its task T0249.
  */
 
 import { createIcon } from './icon.js';

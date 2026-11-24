@@ -1,5 +1,5 @@
 /**
- * Shared admin Users screen (ADR-0003), promoted from Auth's and ToDo's admin consoles.
+ * Shared admin Users screen (ADR-0003).
  *
  * - Displays user accounts in a semantic data table with search, realm, status, and page-size filters
  *   persisted in the URL hash via `table-state.js` (supporting both client paging and server bookmark paging).
@@ -7,8 +7,8 @@
  *   data (`file-download.js`), and confirming mark-for-deletion, restore, and permanent deletion in-place
  *   through `dom.inlineConfirm`.
  * - Opens a New user creation panel when `adapter.createUser` is supplied, validates with `field.js`, and
- *   exposes `extraColumns`, `extraFacts`, and `extraSections` extension hooks so Auth's password, credentials,
- *   and application-access sections stay app-local.
+ *   exposes `extraColumns`, `extraFacts`, and `extraSections` extension hooks so app-specific sections
+ *   (such as passwords, credentials, and application access) stay app-local.
  * - Mounts in the `admin-console.js` frame via `createAdminUsersScreen` and uses `data-admin-users-*`
  *   hooks and ARIA states only.
  */
@@ -176,7 +176,7 @@ function defaultIsUnauthorized(error) {
 }
 
 /**
- * Tell whether a user account is marked for deletion across Auth (`expiry-time`) and ToDo (`deletion-time`).
+ * Tell whether a user account is marked for deletion across `expiry-time`, `deletion-time`, and `deleted` fields.
  * @param {object|null|undefined} user account record
  * @returns {boolean} `true` when the account has a scheduled deletion or `deleted` flag
  */

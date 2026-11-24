@@ -1,11 +1,11 @@
 /**
- * Shared admin Broadcasts screen (ADR-0003), promoted from Auth's and ToDo's admin consoles.
+ * Shared admin Broadcasts screen (ADR-0003).
  *
  * - Composes announcements with a live recipient preview (inbox row plus optional banner when enabled),
  *   lazy searchable recipient selection (`selection.js`), validation (`field.js`), and publishing through an
  *   app-supplied data adapter (`adapter.publish`, `adapter.fetchHistory`, `adapter.retract`, optional `adapter.fetchUsers`).
- * - Displays broadcast history normalized from either Auth's `system-events` (`broadcast-published` / `broadcast-retracted`)
- *   or ToDo's direct broadcast lists, with URL-hash filter persistence (`table-state.js`), Show more paging, and
+ * - Displays broadcast history normalized from either `system-events` records (`broadcast-published` / `broadcast-retracted`)
+ *   or direct broadcast lists, with URL-hash filter persistence (`table-state.js`), Show more paging, and
  *   inline confirmation (`dom-builders.js` / `inline-confirm.js`) for retraction.
  * - Mounts in the `admin-console.js` frame via `createAdminBroadcastsScreen` and uses `data-admin-broadcasts-*`
  *   hooks and ARIA states only.
@@ -295,7 +295,7 @@ export function toUtcTime(value) {
 }
 
 /**
- * Describe a broadcast audience from either Auth's `target-filter` object or ToDo's string audience value.
+ * Describe a broadcast audience from either a `target-filter` object or a string audience value.
  * @param {object|string|null|undefined} filterOrAudience target filter object or audience string
  * @returns {string} human-readable audience label
  */
@@ -329,7 +329,7 @@ export function formatAudience(filterOrAudience) {
 }
 
 /**
- * Rebuild broadcast history entries from Auth's `system-events` records (`broadcast-published` and `broadcast-retracted`).
+ * Rebuild broadcast history entries from `system-events` records (`broadcast-published` and `broadcast-retracted`).
  * @param {object[]} events system event records, newest first
  * @returns {Array<{id: string|number|null, title: string|null, message: string, type: string, banner: boolean,
  *   actionUrl: string|null, filter: object, audience: string|null, recipientCount: number|null,
@@ -376,7 +376,7 @@ export function buildBroadcastHistory(events) {
 }
 
 /**
- * Normalize one direct broadcast record (ToDo or custom endpoint) into the shared entry shape.
+ * Normalize one direct broadcast record into the shared entry shape.
  * @param {object} item raw broadcast record
  * @returns {object} normalized entry
  */
@@ -405,8 +405,8 @@ function normalizeDirectBroadcast(item) {
 }
 
 /**
- * Normalize broadcast history returned by `adapter.fetchHistory`, accepting Auth system-event lists,
- * ToDo direct broadcast lists, or envelope objects (`broadcasts`, `system-events`, `events`, `items`, `elements`).
+ * Normalize broadcast history returned by `adapter.fetchHistory`, accepting system-event lists,
+ * direct broadcast lists, or envelope objects (`broadcasts`, `system-events`, `events`, `items`, `elements`).
  * @param {unknown} raw adapter payload
  * @returns {Array<ReturnType<typeof normalizeDirectBroadcast>>} normalized broadcast entries
  */

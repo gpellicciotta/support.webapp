@@ -1,4 +1,4 @@
-// Browser verifier, ported from family-portal's scripts/verify-ui.py at commit 1953f75.
+// Browser verifier for gallery and shell demo pages across looks, themes, and viewports.
 // The static token test covers raw colors, so this verifier checks only rendered pages.
 import { expect, test } from '@playwright/test';
 import { lookHref, looks } from '../../src/demo/gallery.js';
@@ -406,7 +406,7 @@ for (const target of pages) {
                     await page.screenshot({ path: testInfo.outputPath(`${target.name}-${look}-${effective}-${viewport.width}-${theme === 'system' ? 'system' : 'explicit'}.png`), fullPage: true });
                     const data = await check(page);
                     const sprites = await page.evaluate(collectSprites);
-                    // One summary line per run, as family-portal's verifier printed.
+                    // Print one summary line per run.
                     console.log(`[${look} ${theme} ${viewport.width}px] ${data.stylesheets.length} stylesheets, ${data.texts.length} texts, `
                         + `${data.targets.length} targets, ${data.focus.length} focus records, ${sprites.references} sprite references, `
                         + `overflow ${data.overflow}px, errors ${errors.length}`);

@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-// Ported from todos.webapp tests/unit/menu.test.js at commit 0cf4981.
+// Unit tests for popover anchoring, keyboard dismissal, and focus restoration.
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { anchorPanel } from '../../src/js/anchor.js';
 import { attachPopover } from '../../src/js/popover.js';

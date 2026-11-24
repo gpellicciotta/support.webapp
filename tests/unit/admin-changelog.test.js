@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-// Unit tests for admin-changelog.js: adapter loading (Auth and ToDo shapes), paging ten at a time,
+// Unit tests for admin-changelog.js: adapter loading (array and envelope shapes), paging ten at a time,
 // empty/failure/401 states, concurrency, admin-console frame integration, and contract entry.
 import { readFileSync } from 'node:fs';
 import { Window } from 'happy-dom';
@@ -42,7 +42,7 @@ async function flushMicrotasks() {
 }
 
 /**
- * Build a sample list of Auth-shaped parsed releases, newest first.
+ * Build a sample list of parsed releases, newest first.
  * @param {number} count number of releases to generate
  * @returns {object[]} parsed release objects
  */
@@ -143,7 +143,7 @@ function makeAuthReleases(count) {
 }
 
 /**
- * Build a sample ToDo `/changelog` envelope `{ releases: [...] }`.
+ * Build a sample `/changelog` envelope `{ releases: [...] }`.
  * @param {number} count number of releases to generate
  * @returns {{releases: object[]}} changelog envelope
  */
@@ -200,7 +200,7 @@ describe('admin-changelog', () => {
     });
 
     describe('adapter loading and rendering', () => {
-        it('shows loading status while fetching and renders Auth releases grouped by area with statuses', async () => {
+        it('shows loading status while fetching and renders parsed releases grouped by area with statuses', async () => {
             const pending = deferred();
             const fetchReleases = vi.fn(() => pending.promise);
             const root = document.createElement('div');
@@ -237,7 +237,7 @@ describe('admin-changelog', () => {
             expect(controller.getReleaseNotes()).not.toBeNull();
         });
 
-        it('renders ToDo changelog envelopes and empty state when no releases are returned', async () => {
+        it('renders changelog envelopes and empty state when no releases are returned', async () => {
             const root = document.createElement('div');
             document.body.append(root);
 

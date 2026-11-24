@@ -1,5 +1,5 @@
 /**
- * Shared admin Logs screen (ADR-0003), promoted from Auth's and ToDo's admin consoles.
+ * Shared admin Logs screen (ADR-0003).
  *
  * - Displays the server's in-memory log buffer as spaced `.entry-list` cards, newest first,
  *   loaded through an app-supplied data adapter (`adapter.fetchLogs`) and `data-loader.js`.
@@ -128,7 +128,7 @@ function normalizeLogEntry(entry) {
 }
 
 /**
- * Normalize Auth (`{ 'log-entries': [...] }`), ToDo (`{ elements: [...] }`), generic envelope,
+ * Normalize `{ 'log-entries': [...] }`, `{ elements: [...] }`, generic envelope,
  * and plain array log payloads into an array of normalized entries in newest-first order.
  * @param {unknown} raw payload returned by `adapter.fetchLogs`
  * @returns {Array<{time: string|Date|number|null, level: string, severity: string, name: string, message: string, raw: unknown}>}

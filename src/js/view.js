@@ -7,8 +7,6 @@
  * - `[data-view-main]`: the view's own markup, kept in place while the wait status shows.
  * State lives in `data-view-state` (`ready`, `updating`, or `error`), `hidden`, and `aria-busy`; no class is a hook.
  * `RoutedView` adds a title, a route pattern, and the registration of the view's actions with the app.
- * Promoted from Auth's `Component` and `AppView`, which support.js v3 shipped and v4 removed; counters used them too.
- * Member names follow those classes, so views move over by changing their import.
  */
 
 import { createIcon } from './icon.js';

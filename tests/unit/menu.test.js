@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-// Ported from todos.webapp tests/unit/menu.test.js at commit 0cf4981.
+// Unit tests for menu keyboard navigation, selection, and popover dismissal.
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attachMenu } from '../../src/js/menu.js';
 import { installPopoverShim, isShowing, lightDismiss, nextTask } from './popover-shim.js';

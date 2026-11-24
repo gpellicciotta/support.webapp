@@ -1,5 +1,5 @@
 /**
- * Admin console frame (ADR-0003, ADR-0004), promoted from Auth's and ToDo's admin consoles.
+ * Admin console frame (ADR-0003, ADR-0004).
  *
  * - Provides a screen registry (`mount`, `update`, `dispose`), hash router (`parseRoute`), route marks (`aria-current`),
  *   and screen/document titles.

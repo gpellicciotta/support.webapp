@@ -138,7 +138,7 @@ describe('admin-system-events helpers', () => {
         expect(formatEventTime(new Date(2026, 10, 24, 9, 5, 3))).toBe('2026-11-24 09:05:03');
     });
 
-    it('normalizes Auth arrays and ToDo or envelope payloads', () => {
+    it('normalizes plain arrays and envelope payloads', () => {
         const authRows = normalizeSystemEvents(SAMPLE_EVENTS);
         expect(authRows).toHaveLength(4);
         expect(authRows[0]).toMatchObject({

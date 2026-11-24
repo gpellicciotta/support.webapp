@@ -1,8 +1,8 @@
 /**
- * Shared admin Changelog screen (ADR-0003), promoted from Auth's and ToDo's admin consoles.
+ * Shared admin Changelog screen (ADR-0003).
  *
  * - Loads releases through an app-supplied data adapter (`adapter.fetchReleases`) via `data-loader.js`,
- *   hiding endpoint differences such as Auth's `/CHANGELOG.md` and ToDo's `/changelog`.
+ *   hiding endpoint differences such as parsed Markdown files (`/CHANGELOG.md`) and JSON endpoints (`/changelog`).
  * - Draws releases with `release-notes.js` grouped by area with status chips and dates, paged ten at a time
  *   (`DEFAULT_PAGE_SIZE = 10`), and uses `dom-builders.js` for empty, loading, failure, and 401 states.
  * - Mounts in the `admin-console.js` frame via `createAdminChangelogScreen` and uses `data-admin-changelog-*`
@@ -79,7 +79,7 @@ function pickReleaseNotesLabels(labels, explicit) {
 
 /**
  * Normalize an adapter result into a plain array of release objects.
- * Accepts an array (Auth `parseChangelog` shape), `{ releases: [...] }` (ToDo `/changelog` shape), or `{ items: [...] }`.
+ * Accepts a plain release array, `{ releases: [...] }`, or `{ items: [...] }`.
  * @param {unknown} raw value returned by `adapter.fetchReleases`
  * @returns {object[]} shallow copy of the normalized release list
  */

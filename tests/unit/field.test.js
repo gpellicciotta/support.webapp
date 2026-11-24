@@ -40,7 +40,7 @@ const SKELETON = `<div class="field" data-field>
 </div>`;
 
 describe('createField', () => {
-    it('keeps the todos.webapp result: a labeled control and a hidden error line', () => {
+    it('returns a labeled control and a hidden error line', () => {
         const field = createField(doc, { label: 'Name', name: 'name' });
         expect(Object.keys(field)).toEqual(expect.arrayContaining(['element', 'control', 'setError']));
         expect(field.element.className).toBe('field');

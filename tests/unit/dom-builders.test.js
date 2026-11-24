@@ -383,7 +383,7 @@ describe('dom-builders', () => {
             expect(question.hidden).toBe(true);
         });
 
-        it('supports static text and ToDo onKeep alias when called standalone', () => {
+        it('supports static text and the onKeep callback alias when called standalone', () => {
             const onKeep = vi.fn();
             const trigger = button('Revoke', null, { kind: 'primary', danger: true });
             const slot = inlineConfirm(trigger, {

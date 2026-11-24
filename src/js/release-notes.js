@@ -1,8 +1,8 @@
 /**
  * Release notes renderer for parsed changelog releases (ADR-0003).
  *
- * Accepts plain release objects, such as those produced by support.js `changelog-parser.mjs` or a changelog endpoint,
- * so the package imports nothing from support.js. All text is inserted as DOM text nodes; only inline backtick spans
+ * Accepts plain release objects from any changelog parser or JSON endpoint, with no external parser dependency.
+ * All text is inserted as DOM text nodes; only inline backtick spans
  * become `<code>`, and Markdown links outside code spans show as their label.
  *
  * Collapsibles reuse `collapsible.js`; chips, badges, and buttons reuse the catalog markup and variants.

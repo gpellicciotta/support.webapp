@@ -1,4 +1,4 @@
-// Browser checks of Auth's shell additions in shell.css: sidebar end group, entry badges,
+// Browser checks of shell additions in shell.css: sidebar end group, entry badges,
 // hidden top bar parts, brand logo sizing, and shell banner dismiss button.
 import { expect, test } from '@playwright/test';
 

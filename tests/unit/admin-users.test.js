@@ -244,7 +244,7 @@ describe('admin-users', () => {
             expect(NEW_USER_ROUTE_ID).toBe('new');
         });
 
-        it('detects marked-for-deletion users across Auth and ToDo shapes', () => {
+        it('detects marked-for-deletion users across expiry-time, deletion-time, and deleted shapes', () => {
             expect(isUserMarked({ 'expiry-time': '2026-12-01T00:00:00Z' })).toBe(true);
             expect(isUserMarked({ 'deletion-time': '2026-12-01T00:00:00Z' })).toBe(true);
             expect(isUserMarked({ deleted: true })).toBe(true);

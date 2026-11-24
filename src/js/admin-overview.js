@@ -1,5 +1,5 @@
 /**
- * Shared admin Overview screen (ADR-0003), promoted from Auth's and ToDo's admin consoles.
+ * Shared admin Overview screen (ADR-0003).
  *
  * - Displays the server's state as bordered facts (`dom-builders.js`), loaded through an app-supplied data adapter
  *   (`adapter.fetchStatus`) and `data-loader.js`.
@@ -148,7 +148,7 @@ export function formatTimestamp(value, emptyText = '—') {
 }
 
 /**
- * Normalize Auth's nested `extra-info`, ToDo's flat kebab-case, and camelCase server status payloads into one shape.
+ * Normalize nested `extra-info`, flat kebab-case, and camelCase server status payloads into one shape.
  * @param {object|null|undefined} raw server status payload returned by `adapter.fetchStatus`
  * @param {object} [options] normalization options
  * @param {string} [options.healthyStatus] server status value treated as healthy, `'running'` by default

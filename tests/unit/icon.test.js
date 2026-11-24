@@ -85,7 +85,7 @@ describe('createIcon', () => {
         expect(() => setSpriteUrl(url)).toThrow(error);
     });
 
-    it('keeps the deprecated spriteIcon alias of todos.webapp', () => {
+    it('keeps the deprecated spriteIcon alias', () => {
         expect(spriteIcon(doc, 'check').outerHTML).toBe(createIcon(doc, 'check').outerHTML);
         expect(spriteIcon(doc, 'add', 'icon empty-state__icon').getAttribute('class')).toBe('icon empty-state__icon');
     });

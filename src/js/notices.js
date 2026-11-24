@@ -1,5 +1,5 @@
 /**
- * Notices module: notification store and shell router (ADR-0003, ADR-0004), promoted from Auth.
+ * Notices module: notification store and shell router (ADR-0003, ADR-0004).
  *
  * - Stores app notifications (newest first) and inbox notifications with unread counts and deduplicated updates.
  * - Routes app errors and warnings to dismissible `.banner` elements in `.app__banners`, capped at three visible.

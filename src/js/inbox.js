@@ -1,5 +1,5 @@
 /**
- * Notifications inbox pattern and top-bar unread count button (ADR-0003, ADR-0004), promoted from Auth.
+ * Notifications inbox pattern and top-bar unread count button (ADR-0003, ADR-0004).
  *
  * - Renders one selectable row per notification on `selection.js`, with type badge, unread mark, source and time chips,
  *   and row actions (Open, Mark Read, Discard), plus bulk Mark Read and Discard, Discard All, empty state, and summary line.

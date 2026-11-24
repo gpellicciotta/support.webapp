@@ -1,5 +1,5 @@
 /**
- * Shared admin System events screen (ADR-0003), promoted from Auth's and ToDo's admin consoles.
+ * Shared admin System events screen (ADR-0003).
  *
  * - Displays persistent audit records as spaced `.entry-list` cards, newest first, loaded through an
  *   app-supplied data adapter (`adapter.fetchEvents` and optional `adapter.fetchUsers`) via `data-loader.js`.
@@ -129,7 +129,7 @@ export function formatEventTime(value, emptyText = '—') {
 }
 
 /**
- * Normalize one raw Auth or ToDo system event record into a consistent shape while keeping `raw`.
+ * Normalize one raw system event record into a consistent shape while keeping `raw`.
  * @param {unknown} item raw event object
  * @returns {{id: string|number|null, eventType: string, severity: string, description: string, time: string|Date|number|null, actorUserId: string|number|null, actor: string|null, metadata: unknown, raw: unknown}}
  *   normalized system event
@@ -159,7 +159,7 @@ function normalizeSystemEvent(item) {
 }
 
 /**
- * Normalize Auth plain arrays and ToDo or generic envelope payloads into an array of normalized events.
+ * Normalize plain arrays and envelope payloads (`system-events`, `events`, `elements`, `items`) into an array of normalized events.
  * @param {unknown} raw payload returned by `adapter.fetchEvents`
  * @returns {Array<ReturnType<typeof normalizeSystemEvent>>} normalized system events
  */

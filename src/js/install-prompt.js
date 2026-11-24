@@ -1,5 +1,5 @@
 /**
- * Install prompt tracking for installable web apps, promoted from Auth, counters, and meteo.
+ * Install prompt tracking for installable web apps.
  *
  * - Keeps the browser's `beforeinstallprompt` event after calling `preventDefault()`.
  * - Detects an installed app through `(display-mode: standalone)`, legacy `navigator.standalone`, and `appinstalled`.

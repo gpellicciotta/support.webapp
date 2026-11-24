@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-// Covers the behavior of todos.webapp src/js/ui/user-menu.js at commit 0cf4981, on the package menu module.
+// Unit tests for the account menu trigger, popover wiring, and initials helper.
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attachAccountMenu, initialsOf } from '../../src/js/account-menu.js';
 import { setSpriteUrl } from '../../src/js/icon.js';

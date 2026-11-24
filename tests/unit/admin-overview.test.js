@@ -60,7 +60,7 @@ function setVisibility(doc, state, emit = true) {
 }
 
 /**
- * Build a sample Auth-shaped `StatusMessage` payload.
+ * Build a sample nested `extra-info` status payload.
  * @param {object} [overrides] field overrides for `extra-info` or top level
  * @returns {object} sample status payload
  */
@@ -85,7 +85,7 @@ function authStatus(overrides = {}) {
 }
 
 /**
- * Build a sample ToDo-shaped flat server status payload.
+ * Build a sample flat kebab-case server status payload.
  * @param {object} [overrides] field overrides
  * @returns {object} sample flat status payload
  */
@@ -128,7 +128,7 @@ describe('admin-overview', () => {
             expect(formatTimestamp(undefined, 'n/a')).toBe('n/a');
         });
 
-        it('normalizes both Auth nested payloads and ToDo flat payloads while preserving zero session counts', () => {
+        it('normalizes both nested extra-info payloads and flat payloads while preserving zero session counts', () => {
             const fromAuth = normalizeServerStatus(authStatus());
             expect(fromAuth.running).toBe(true);
             expect(fromAuth.repositoryConnected).toBe(true);
@@ -159,7 +159,7 @@ describe('admin-overview', () => {
     });
 
     describe('facts from adapter data', () => {
-        it('renders Auth server facts, links, code, status chips, and updated status line', async () => {
+        it('renders nested server facts, links, code, status chips, and updated status line', async () => {
             const root = document.createElement('div');
             document.body.append(root);
             const fixedClock = () => new Date(2026, 10, 24, 14, 30, 45).getTime();
@@ -199,7 +199,7 @@ describe('admin-overview', () => {
             expect(controller.getStatus()).toEqual(authStatus());
         });
 
-        it('renders ToDo flat payloads cleanly, preserves 0 sessions, and omits feedback address when absent', async () => {
+        it('renders flat payloads cleanly, preserves 0 sessions, and omits feedback address when absent', async () => {
             const root = document.createElement('div');
             document.body.append(root);
             controller = attachAdminOverview(root, {

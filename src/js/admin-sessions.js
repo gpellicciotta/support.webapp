@@ -1,5 +1,5 @@
 /**
- * Shared admin Sessions screen (ADR-0003), promoted from Auth's and ToDo's admin consoles.
+ * Shared admin Sessions screen (ADR-0003).
  *
  * - Displays authentication and session tokens in a semantic data table with search, type, state,
  *   and page-size filters persisted in the URL hash via `table-state.js` (supporting client slicing
@@ -188,7 +188,7 @@ export function isTokenExpired(token, now = Date.now()) {
 
 /**
  * Tell whether a token belongs to the console's own current session.
- * Matches `token.current === true` (ToDo shape) or an ID matching `currentTokenId` (Auth shape).
+ * Matches `token.current === true` or a token ID matching `currentTokenId`.
  * @param {object|null|undefined} token token record
  * @param {string|number|null|undefined} [currentTokenId] console's own token identifier
  * @returns {boolean} `true` when the token is the console's own session
@@ -210,7 +210,7 @@ export function isOwnToken(token, currentTokenId = null) {
 }
 
 /**
- * Extract the trimmed email address of a token's user across Auth nested and ToDo flat shapes.
+ * Extract the trimmed email address of a token's user across nested (`token.user.email`) and flat (`user-email`) shapes.
  * @param {object|null|undefined} token token record
  * @returns {string} trimmed email or empty string
  */

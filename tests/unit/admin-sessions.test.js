@@ -111,7 +111,7 @@ describe('admin-sessions helpers', () => {
         expect(isOwnToken({ id: 902 }, null)).toBe(false);
     });
 
-    it('extracts user name and email across Auth nested and ToDo flat shapes', () => {
+    it('extracts user name and email across nested and flat token shapes', () => {
         expect(tokenUserName({ user: { name: 'Alex North', email: 'alex@example.test' } })).toBe('Alex North');
         expect(tokenUserName({ user: { name: '  ', email: 'alex@example.test' } })).toBe('alex@example.test');
         expect(tokenUserName({ 'user-name': 'Samira Patel', 'user-email': 'samira@example.test' })).toBe('Samira Patel');
@@ -122,7 +122,7 @@ describe('admin-sessions helpers', () => {
         expect(tokenUserEmail({})).toBe('');
     });
 
-    it('formats timestamps and normalizes Auth arrays and ToDo Page envelopes', () => {
+    it('formats timestamps and normalizes plain arrays and Page envelopes', () => {
         expect(formatSessionTime(null, 'Never')).toBe('Never');
         expect(formatSessionTime('not-a-date')).toBe('not-a-date');
         expect(formatSessionTime('2026-11-24T08:05:09Z')).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/);
@@ -183,7 +183,7 @@ describe('own-session protection', () => {
         expect(revokeToken).not.toHaveBeenCalled();
     });
 
-    it('also protects tokens marked with current: true (ToDo shape)', async () => {
+    it('also protects tokens marked with current: true', async () => {
         const revokeToken = vi.fn(async () => {});
         track(attachAdminSessions(host, {
             now: () => NOW,
@@ -415,7 +415,7 @@ describe('filters, paging, empty states, errors, and console integration', () =>
         expect(window.location.hash).toBe('#/sessions');
     });
 
-    it('supports server bookmark paging mode for ToDo-style envelopes', async () => {
+    it('supports server bookmark paging mode for Page envelopes', async () => {
         const fetchTokens = vi.fn(async ({ direction }) => {
             if (direction === 'next') {
                 return {

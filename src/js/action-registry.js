@@ -1,5 +1,5 @@
 /**
- * Action registry for app and routed-view actions (ADR-0003, ADR-0004), promoted from Auth's App.
+ * Action registry for app and routed-view actions (ADR-0003, ADR-0004).
  *
  * - Stores action descriptors (`id`, `title`, `description`, `href` or `run`, `disabled`, `disabled-reason`) with run counts.
  * - Supports optional active-view scoping (`getScope`), state toggles with disabled reasons, and `CustomEvent` notifications.
@@ -366,7 +366,7 @@ export function createActionRegistry(options = {}) {
         actions.clear();
     }
 
-    // Load any initial actions silently, matching Auth's startup registration.
+    // Register initial actions silently during startup.
     if (Array.isArray(options.actions)) {
         for (const action of options.actions) {
             if (action) {

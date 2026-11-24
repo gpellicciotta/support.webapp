@@ -1,5 +1,5 @@
 /**
- * View router for `RoutedView` screens (ADR-0003, ADR-0004), promoted from Auth's and counters' `App`.
+ * View router for `RoutedView` screens (ADR-0003, ADR-0004).
  *
  * - Registers routed views in matching order and an optional fallback view, picking a view by `routeRegex`.
  * - Enforces `onlyWhenSignedIn` and `neverWhenSignedIn` guards via an app `isSignedIn` callback, plus optional custom guards.
@@ -284,7 +284,7 @@ export function createViewRouter(options = {}) {
     }
 
     /**
-     * Initialize Auth-compatible `activation-count` on a registered view if missing.
+     * Initialize `activation-count` on a registered view if missing.
      * @param {object} view routed view instance
      */
     function ensureActivationCount(view) {

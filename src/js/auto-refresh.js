@@ -6,7 +6,6 @@
  *   and `long` once that time reaches `longAbsence`, so the app may also reload the current screen.
  * What to refresh, change detection, and which screens opt in stay with the app:
  * a refresh never reloads a screen with a form, and updates the UI only when the data changed.
- * Auth's SPA built the first version app-locally, in its task T0248.
  */
 
 /**

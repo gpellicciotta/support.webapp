@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-// Covers the aria-expanded rows of todos.webapp src/js/views/view-controls.js at commit 0cf4981.
+// Unit tests for aria-expanded collapsible disclosure toggles and panels.
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attachCollapsible } from '../../src/js/collapsible.js';
 

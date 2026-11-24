@@ -1,5 +1,5 @@
 /**
- * Data loading helper (ADR-0003), promoted from Auth's and ToDo's admin consoles.
+ * Data loading helper (ADR-0003).
  *
  * - Loads async data into a container with loading, failed (Retry), and expired-session (Sign in) states.
  * - Uses `dom-builders.js` for status lines, danger error banners, and action buttons.
@@ -184,7 +184,7 @@ async function executeLoad(container, config) {
 
 /**
  * Load data into `container` with loading, Retry on failure, and Sign in on 401 states.
- * Accepts either the positional Auth/ToDo signature `(container, ctx, what, fetcher, render, options)`
+ * Accepts either the positional signature `(container, ctx, what, fetcher, render, options)`
  * or an options object `(container, { what, fetcher, render, onSignIn, quiet, ... })`.
  * @param {HTMLElement} container target container element
  * @param {object|null|undefined} ctxOrOptions app context (`{ signIn }` / `{ onSignIn }`) or full load options

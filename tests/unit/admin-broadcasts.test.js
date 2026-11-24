@@ -183,7 +183,7 @@ describe('admin-broadcasts helpers', () => {
         expect(DEFAULT_HISTORY_STEP).toBe(25);
     });
 
-    it('reconstructs broadcast history from Auth system events and marks retracted entries', () => {
+    it('reconstructs broadcast history from system-events records and marks retracted entries', () => {
         const entries = buildBroadcastHistory(SAMPLE_SYSTEM_EVENTS);
         expect(entries).toHaveLength(2);
         expect(entries[0]).toMatchObject({
@@ -209,7 +209,7 @@ describe('admin-broadcasts helpers', () => {
         });
     });
 
-    it('normalizes both Auth system-event payloads and ToDo direct broadcast lists', () => {
+    it('normalizes both system-event payloads and direct broadcast lists', () => {
         expect(normalizeBroadcastHistory(SAMPLE_SYSTEM_EVENTS)).toHaveLength(2);
         expect(normalizeBroadcastHistory({ 'system-events': SAMPLE_SYSTEM_EVENTS })).toHaveLength(2);
 
@@ -490,7 +490,7 @@ describe('attachAdminBroadcasts', () => {
         expect(host.querySelector('[data-admin-broadcasts-compose-status]').textContent).toContain('Published to 12 accounts');
         expect(adapter.fetchHistory).toHaveBeenCalledTimes(2);
 
-        // Verify ToDo-style audience payload format on a second instance.
+        // Verify string audience payload format on a second instance.
         const secondHost = document.createElement('div');
         document.body.append(secondHost);
         const secondPublish = vi.fn().mockResolvedValue({ 'recipient-count': 5 });

@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- DevEx: Replaced sibling-application references in source and test comments with app-neutral descriptions and added a neutrality unit test.
 - Looks: Added seven admin console screen core icons to [contract.json](src/contract.json), every look sprite, and admin screen defaults.
 - Components: Added `attachLabelTooltips` and `.tooltip--label` to [tooltip.js](src/js/tooltip.js), naming icon buttons and icon rail entries on hover and keyboard focus.
 - Docs: Enforced non-touching borders via wrapping `gap` in [visual-style-guide.md](docs/specs/visual-style-guide.md), and fixed `.demo-status` top margin in [gallery.css](src/demo/gallery.css).

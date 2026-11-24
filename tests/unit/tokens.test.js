@@ -23,7 +23,7 @@ function files(path) {
     return readdirSync(path, { withFileTypes: true }).flatMap((entry) => entry.isDirectory() ? files(join(path, entry.name)) : [join(path, entry.name)]);
 }
 
-// Ported resolution and WCAG helpers from todos.webapp; see the neutral look page.
+// CSS variable resolution and WCAG contrast helpers; see the neutral look page.
 function splitArgs(args) {
     const parts = [];
     let depth = 0;

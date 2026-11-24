@@ -147,7 +147,7 @@ describe('admin-logs', () => {
     });
 
     describe('normalizeLogEntries, formatLogTime, and filterLogEntries', () => {
-        it('normalizes Auth, ToDo, and plain array payloads while keeping newest-first order', () => {
+        it('normalizes log-entries, elements, generic envelopes, and plain array payloads while keeping newest-first order', () => {
             const entries = sampleEntries().slice(0, 2);
             expect(normalizeLogEntries({ 'log-entries': entries }).map((e) => e.name)).toEqual([
                 'org.example.auth.TokenService',

@@ -1,5 +1,5 @@
 /**
- * Paged and filtered table state kept in the URL hash query (ADR-0003), promoted from Auth's and ToDo's admin consoles.
+ * Paged and filtered table state kept in the URL hash query (ADR-0003).
  *
  * - Keeps active filter values, non-default page sizes, and page numbers (> 1) in the hash query via `history.replaceState`
  *   so reloads and shared links restore the table without adding history entries or firing `hashchange`.
