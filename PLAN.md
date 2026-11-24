@@ -18,16 +18,16 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0290 Add a notices module that routes app notifications to banners and toasts, promoted from Auth.
 - [x] T0291 Add the notifications inbox pattern and the unread count button, promoted from Auth.
 - [x] T0292 Add a help page pattern with search, topic chips, FAQ, and feedback link, promoted from Auth.
-- [~] T0293 [owner: @gemini] Add an admin console frame with hash router, screen registry, and gate pages, promoted from Auth.
+- [x] T0293 Add an admin console frame with hash router, screen registry, and gate pages, promoted from Auth.
 - [x] T0294 Add DOM builders for package components, promoted from Auth's and ToDo's admin console helpers.
 - [ ] T0295 Add a view router for routed views with sign-in guards and a fallback view, promoted from Auth's App.
-- [ ] T0296 [needs: T0293] Add the shared admin Overview screen with server state reloaded while visible, promoted from Auth's and ToDo's consoles.
-- [ ] T0297 [needs: T0293] Add the shared admin Logs screen with filtered, paged entry cards, promoted from Auth's and ToDo's consoles.
-- [ ] T0298 [needs: T0293] Add the shared admin System events screen with filters, paging, and JSON details, promoted from Auth's and ToDo's consoles.
-- [ ] T0299 [needs: T0293] Add the shared admin Broadcasts screen with compose, live preview, history, and retraction, promoted from Auth's and ToDo's consoles.
-- [ ] T0300 [needs: T0293] Add the shared admin Users screen with table, detail panel, creation, and deletion, promoted from Auth's and ToDo's consoles.
-- [ ] T0301 [needs: T0293] Add the shared admin Sessions screen with single, bulk, and expired token revocation, promoted from Auth's and ToDo's consoles.
-- [ ] T0302 [needs: T0293] Add the shared admin Changelog screen on the release notes renderer, promoted from Auth's and ToDo's consoles.
+- [ ] T0296 Add the shared admin Overview screen with server state reloaded while visible, promoted from Auth's and ToDo's consoles.
+- [ ] T0297 Add the shared admin Logs screen with filtered, paged entry cards, promoted from Auth's and ToDo's consoles.
+- [ ] T0298 Add the shared admin System events screen with filters, paging, and JSON details, promoted from Auth's and ToDo's consoles.
+- [ ] T0299 Add the shared admin Broadcasts screen with compose, live preview, history, and retraction, promoted from Auth's and ToDo's consoles.
+- [ ] T0300 Add the shared admin Users screen with table, detail panel, creation, and deletion, promoted from Auth's and ToDo's consoles.
+- [ ] T0301 Add the shared admin Sessions screen with single, bulk, and expired token revocation, promoted from Auth's and ToDo's consoles.
+- [ ] T0302 Add the shared admin Changelog screen on the release notes renderer, promoted from Auth's and ToDo's consoles.
 
 ## Backlog
 *(Currently no tasks)*
