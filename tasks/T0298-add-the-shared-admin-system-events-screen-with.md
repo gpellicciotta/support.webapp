@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1356.5, input: 354122, output: 66523, cache_read: 12660693}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T04:34:34Z"
 ---
 # T0298: Add the shared admin System events screen with filters, paging, and JSON details, promoted from Auth's and ToDo's consoles
 
@@ -66,4 +71,7 @@ Size estimate: 4 files, 120 lines.
 
 - [2026-11-24] **[Implement]**
   Added admin-system-events.js, contract entry, admin console demo integration, 17 unit tests, and 16 browser tests.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
