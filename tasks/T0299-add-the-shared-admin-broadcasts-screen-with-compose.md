@@ -1,11 +1,11 @@
 ---
 id: T0299
-owner: ~
-needs: ['T0293', 'T0294']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0299-add-the-shared-admin-broadcasts-screen-with-compose
+worktree: .plan/work/T0299-add-the-shared-admin-broadcasts-screen-with-compose
+status: active
+started_at: "2026-11-24T04:44:29Z"
 ended_at: —
 review: agent
 preview: none
