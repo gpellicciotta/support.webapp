@@ -2,6 +2,7 @@
 
 import { attachAccountMenu } from '../js/account-menu.js';
 import { attachAdminConsole } from '../js/admin-console.js';
+import { createAdminOverviewScreen } from '../js/admin-overview.js';
 import { attachDataLoader } from '../js/data-loader.js';
 import { createDomBuilders } from '../js/dom-builders.js';
 import { createLiveRegion } from '../js/live-region.js';
@@ -242,6 +243,39 @@ export function initAdminConsoleDemo(doc, view) {
     }
     detailPanel?.querySelector('[data-demo-panel-close]')?.addEventListener('click', closeAccountPanel);
 
+    let overviewMode = 'healthy';
+    let overviewChecks = 0;
+    const overviewScreen = createAdminOverviewScreen({
+        adapter: {
+            fetchStatus: async () => {
+                const mode = overviewMode;
+                overviewMode = 'healthy';
+                if (mode === 'fail-once') {
+                    throw new Error('Service temporarily unavailable');
+                }
+                if (mode === 'unauthorized') {
+                    throw Object.assign(new Error('Session expired'), { status: 401 });
+                }
+                overviewChecks += 1;
+                const connected = mode !== 'disconnected';
+                return {
+                    status: 'running',
+                    version: '2.4.0',
+                    'extra-info': {
+                        uptime: `3d 4h ${11 + overviewChecks}m`,
+                        'build-time': '2026-11-20T10:15:30Z',
+                        environment: 'demo',
+                        'repository-status': connected ? 'connected' : 'disconnected',
+                        'repository-version': '14',
+                        'logged-in-sessions': 12,
+                        'feedback-address': 'admin@example.test',
+                        'api-url': 'https://demo.example.test/api'
+                    }
+                };
+            }
+        }
+    });
+
     const frame = attachAdminConsole(doc.body, {
         document: doc,
         window: view,
@@ -257,36 +291,46 @@ export function initAdminConsoleDemo(doc, view) {
         onSignOut: () => toaster.show('Signed out.'),
         screens: [
             {
-                name: 'overview',
-                title: 'Overview',
-                mount: (screenView, ctx) => ctx.dom.setChildren(screenView,
-                    ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'overview-summary-heading' },
-                        ctx.dom.h('h2', { id: 'overview-summary-heading' }, 'Console overview'),
-                        ctx.dom.facts([
-                            { term: 'Service', value: ctx.dom.severityChip('ok', 'Healthy') },
-                            { term: 'Accounts', value: String(accounts.length) },
-                            { term: 'Active sessions', value: '12' },
-                            { term: 'Unread events', value: '3' }
-                        ], true)),
-                    ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'frame-states-heading' },
-                        ctx.dom.h('h2', { id: 'frame-states-heading' }, 'Frame states'),
-                        ctx.dom.h('p', null, 'Preview centered gate pages and the signed-out shell.'),
-                        ctx.dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'Frame state previews' },
-                            ctx.dom.button('Show forbidden gate', () => frame.showForbidden({
-                                message: 'Administrator access is required to use Admin Console. Your account does not have the admin realm.',
-                                backLabel: 'Return to console',
-                                onBack: () => frame.showShell()
-                            }), { 'data-demo-gate': 'forbidden' }),
-                            ctx.dom.button('Show session check gate', () => frame.showGate(
-                                [ctx.dom.statusLine('Checking your session…')],
-                                [ctx.dom.button('Return to console', () => frame.showShell())],
-                                { label: 'Admin Console', state: 'checking' }
-                            ), { 'data-demo-gate': 'checking' }),
-                            ctx.dom.button('Show check failed gate', () => frame.showCheckFailed(
-                                'The session could not be checked: service unavailable.',
-                                { onRetry: () => frame.showShell() }
-                            ), { 'data-demo-gate': 'error' }),
-                            ctx.dom.button('Show signed-out shell', () => frame.showSignedOut('You are signed out.'), { 'data-demo-gate': 'signed-out' }))))
+                name: overviewScreen.name,
+                title: overviewScreen.title,
+                mount: (screenView, ctx, route) => {
+                    const overviewHost = ctx.dom.h('div', { class: 'gallery-section' });
+                    let overviewController = null;
+                    const triggerOverviewMode = (mode) => {
+                        overviewMode = mode;
+                        overviewController?.refresh();
+                    };
+                    ctx.dom.setChildren(screenView,
+                        overviewHost,
+                        ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'overview-states-heading' },
+                            ctx.dom.h('h2', { id: 'overview-states-heading' }, 'Overview states'),
+                            ctx.dom.h('p', null, 'Preview repository disconnection, fetch failures, and 401 sign-in prompts.'),
+                            ctx.dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'Overview state previews' },
+                                ctx.dom.button('Simulate disconnected repository', () => triggerOverviewMode('disconnected'), { 'data-demo-overview': 'disconnected' }),
+                                ctx.dom.button('Fail fetch once', () => triggerOverviewMode('fail-once'), { 'data-demo-overview': 'fail-once' }),
+                                ctx.dom.button('Simulate 401', () => triggerOverviewMode('unauthorized'), { 'data-demo-overview': 'unauthorized' }))),
+                        ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'frame-states-heading' },
+                            ctx.dom.h('h2', { id: 'frame-states-heading' }, 'Frame states'),
+                            ctx.dom.h('p', null, 'Preview centered gate pages and the signed-out shell.'),
+                            ctx.dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'Frame state previews' },
+                                ctx.dom.button('Show forbidden gate', () => frame.showForbidden({
+                                    message: 'Administrator access is required to use Admin Console. Your account does not have the admin realm.',
+                                    backLabel: 'Return to console',
+                                    onBack: () => frame.showShell()
+                                }), { 'data-demo-gate': 'forbidden' }),
+                                ctx.dom.button('Show session check gate', () => frame.showGate(
+                                    [ctx.dom.statusLine('Checking your session…')],
+                                    [ctx.dom.button('Return to console', () => frame.showShell())],
+                                    { label: 'Admin Console', state: 'checking' }
+                                ), { 'data-demo-gate': 'checking' }),
+                                ctx.dom.button('Show check failed gate', () => frame.showCheckFailed(
+                                    'The session could not be checked: service unavailable.',
+                                    { onRetry: () => frame.showShell() }
+                                ), { 'data-demo-gate': 'error' }),
+                                ctx.dom.button('Show signed-out shell', () => frame.showSignedOut('You are signed out.'), { 'data-demo-gate': 'signed-out' }))));
+                    overviewController = overviewScreen.mount(overviewHost, ctx, route);
+                    return { dispose: () => overviewController?.dispose() };
+                }
             },
             {
                 name: 'accounts',

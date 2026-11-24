@@ -127,6 +127,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It exports `createDataLoader`, `attachDataLoader`, and `loadInto`, using [dom-builders.js](../../src/js/dom-builders.js) for status lines, banners, and actions.
 - **[Decided]** on 2026-11-24: `table-state` moved in from the admin consoles as [table-state.js](../../src/js/table-state.js).
   It keeps filters and pages in the URL hash, supports client and server paging, and wires `.pager` via `data-*` hooks.
+- **[Decided]** on 2026-11-24: `admin-overview` moved in from Auth's and ToDo's admin consoles as [admin-overview.js](../../src/js/admin-overview.js).
+  It reads server state via an app data adapter, reloads quietly while visible via [auto-refresh.js](../../src/js/auto-refresh.js), and exposes extension hooks.
 
 ### Shared patterns
 Documented as contracts without components of their own:

@@ -946,6 +946,7 @@
     "data-loader",
     "table-state",
     "admin-console",
+    "admin-overview",
     "view-router"
   ]
 }

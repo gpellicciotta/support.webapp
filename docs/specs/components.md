@@ -94,20 +94,21 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `tooltip`        | Tooltip             | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                |
 
 ### Identity and Foundations
-| Key                 | Component           | Module and functions                                                                                                                                             | Variants and states                                     | Accessibility minimum                                             |
-| :------------------ | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
-| none, base          | Page base           | none                                                                                                                                                             | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable           |
-| `avatar`            | Avatar              | none                                                                                                                                                             | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name                |
-| `account-menu`      | Account menu        | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                                                                                          | signed in, signed out                                   | menu pattern; marks the current route                             |
-| `icon`              | Icon                | `icon.js`: `createIcon`                                                                                                                                          | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                           |
-| `theme-switch`      | Theme switch        | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js`                                                                   | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                                |
-| `install-prompt`    | Install prompt      | `install-prompt.js`: `attachInstallPrompt`                                                                                                                       | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
-| `file-download`     | File download       | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`                                                                         | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
-| `screen-action-bar` | Screen action bar   | `screen-action-bar.js`: `attachScreenActionBar`                                                                                                                  | buttons, links, disabled hints, empty-bar removal       | native `disabled` on buttons; `aria-disabled` on links            |
-| `action-registry`   | Action registry     | `action-registry.js`: `createActionRegistry`, `attachActionRegistry`                                                                                             | enabled, disabled with reason, scoped lookup, events    | blocks disabled and `aria-disabled` `[data-action]` triggers      |
-| `dom-builders`      | DOM builders        | `dom-builders.js`: `createDomBuilders`, `h`, `setChildren`, and catalog builders                                                                                 | buttons, selects, checkboxes, facts, tables, confirm    | emits catalog ARIA skeletons; text nodes only, no `innerHTML`     |
-| `admin-console`     | Admin console frame | `admin-console.js`: `createAdminConsole`, `attachAdminConsole`, `parseRoute`, `displayName`, using `account-menu.js`, `app-nav.js`, `dom-builders.js`, `icon.js` | shell with side panel, hash router, gates, signed-out   | skip link focuses `#main`; `aria-current="page"`; single `<main>` |
-| `view-router`       | View router         | `view-router.js`: `createViewRouter`, `attachViewRouter`                                                                                                         | routed views, fallback, sign-in guards, outside routes  | `aria-current="page"` route marks; `data-view-router-*` hooks     |
+| Key                 | Component             | Module and functions                                                                                                                                             | Variants and states                                     | Accessibility minimum                                             |
+| :------------------ | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
+| none, base          | Page base             | none                                                                                                                                                             | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable           |
+| `avatar`            | Avatar                | none                                                                                                                                                             | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name                |
+| `account-menu`      | Account menu          | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                                                                                          | signed in, signed out                                   | menu pattern; marks the current route                             |
+| `icon`              | Icon                  | `icon.js`: `createIcon`                                                                                                                                          | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                           |
+| `theme-switch`      | Theme switch          | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js`                                                                   | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                                |
+| `install-prompt`    | Install prompt        | `install-prompt.js`: `attachInstallPrompt`                                                                                                                       | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
+| `file-download`     | File download         | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`                                                                         | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
+| `screen-action-bar` | Screen action bar     | `screen-action-bar.js`: `attachScreenActionBar`                                                                                                                  | buttons, links, disabled hints, empty-bar removal       | native `disabled` on buttons; `aria-disabled` on links            |
+| `action-registry`   | Action registry       | `action-registry.js`: `createActionRegistry`, `attachActionRegistry`                                                                                             | enabled, disabled with reason, scoped lookup, events    | blocks disabled and `aria-disabled` `[data-action]` triggers      |
+| `dom-builders`      | DOM builders          | `dom-builders.js`: `createDomBuilders`, `h`, `setChildren`, and catalog builders                                                                                 | buttons, selects, checkboxes, facts, tables, confirm    | emits catalog ARIA skeletons; text nodes only, no `innerHTML`     |
+| `admin-console`     | Admin console frame   | `admin-console.js`: `createAdminConsole`, `attachAdminConsole`, `parseRoute`, `displayName`, using `account-menu.js`, `app-nav.js`, `dom-builders.js`, `icon.js` | shell with side panel, hash router, gates, signed-out   | skip link focuses `#main`; `aria-current="page"`; single `<main>` |
+| `admin-overview`    | Admin Overview screen | `admin-overview.js`: `createAdminOverview`, `attachAdminOverview`, `createAdminOverviewScreen`, using `auto-refresh.js`, `data-loader.js`, `dom-builders.js`     | server facts, visible 30 s reload, disconnected alert   | polite status line; `role="alert"` banners; `data-*` hooks        |
+| `view-router`       | View router           | `view-router.js`: `createViewRouter`, `attachViewRouter`                                                                                                         | routed views, fallback, sign-in guards, outside routes  | `aria-current="page"` route marks; `data-view-router-*` hooks     |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -1216,6 +1217,40 @@ Upgrading an existing app:
 - Remove app-local `.gate` and `.gate__actions` CSS rules; [shell.css](../../src/css/shell.css) styles `.app__gate` and `.app__gate-actions`.
 - Pass session lookup, account check, sign-in, and sign-out callbacks in options, and keep `ctx.editor` or `ctx.panel` for detail panels.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for hash routing and gate previews.
+
+### admin-overview
+Shared admin Overview screen ([admin-overview.js](../../src/js/admin-overview.js)), using [auto-refresh.js](../../src/js/auto-refresh.js), [data-loader.js](../../src/js/data-loader.js), and [dom-builders.js](../../src/js/dom-builders.js).
+Renders server state as bordered facts from an app-supplied data adapter and reloads quietly while the page is visible.
+
+```js
+import { createAdminConsole } from './admin-console.js';
+import { createAdminOverviewScreen } from './admin-overview.js';
+
+const consoleFrame = createAdminConsole(root, {
+    title: 'Admin Console',
+    screens: [
+        createAdminOverviewScreen({
+            adapter: { fetchStatus: ({ signal }) => api.get('/server', { signal }) }
+        })
+    ]
+});
+```
+
+- `createAdminOverviewScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor that reuses `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
+- `attachAdminOverview(root, options)` mounts into an existing element; `createAdminOverview(doc, options)` builds a root for an injected document.
+- Controller methods: `refresh({ quiet })`, `getStatus()`, `dispose()`, and `destroy()` (alias of `dispose()`).
+- `options.adapter.fetchStatus({ signal })` supplies server status; both Auth's `extra-info` and ToDo's flat payloads normalize automatically.
+- `options.interval` defaults to `30_000` ms (`DEFAULT_RELOAD_INTERVAL`), stops while hidden, and refreshes on tab return after one interval.
+- Passing `0`, `null`, or `false` as `interval` disables polling and omits the refresh cadence from the status line.
+- Disconnected repositories render a danger banner (`[data-admin-overview-banner="repository"]`) with Retry above the Server facts.
+- Fetch failures and 401 errors render [data-loader.js](../../src/js/data-loader.js) Retry and Sign in banners.
+- Extension hooks `extraFacts`, `facts`, and `extraSections` add app-specific facts or sections without server changes.
+- Pure helpers exported: `normalizeServerStatus`, `buildServerFacts`, and `formatTimestamp`; hooks use `data-admin-overview-*` and `data-fact` only.
+
+Upgrading an existing app:
+- Replace `overview-view.mjs` in Auth's and ToDo's admin consoles with `createAdminOverviewScreen` from [admin-overview.js](../../src/js/admin-overview.js).
+- Pass `{ adapter: { fetchStatus: ({ signal }) => api.get('/server', { signal }) } }` so each app keeps its own endpoint.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html#/overview) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
 
 ### view-router
 View router for `RoutedView` screens ([view-router.js](../../src/js/view-router.js)).
