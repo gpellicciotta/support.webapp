@@ -5,14 +5,20 @@ session: antigravity-20261124-8ba8c9
 needs: []
 branch: task/T0306-remove-sibling-app-mentions-from-source-code-and
 worktree: .plan/work/T0306-remove-sibling-app-mentions-from-source-code-and
-status: suspended
-started_at: "2026-11-24T08:47:41Z"
+status: active
+started_at: "2026-11-24T09:07:07Z"
 ended_at: —
 review: agent
 preview: none
 protocol: standard
-size_status: requested
+size_status: approved
 size_estimate: 36 files, 160 lines
+usage:
+  worker: {turns: 1, duration_s: 321.7, input: 90075, output: 11069, cache_read: 823341}
+work_duration: 334.1
+size_approved: 36 files, 160 lines
+size_approved_by: "@giova"
+size_approved_at: "2026-11-24T09:06:50Z"
 ---
 # T0306: Remove sibling app mentions from source code and test comments
 
@@ -42,4 +48,7 @@ See [technical-spec.md](T0306-remove-sibling-app-mentions-from-source-code-and/t
 
 - [2026-11-24] **[Size]**
   Size approval requested for 36 files, 160 lines.
+
+- [2026-11-24] **[Size]**
+  Size approved by @giova for 36 files, 160 lines.
 
