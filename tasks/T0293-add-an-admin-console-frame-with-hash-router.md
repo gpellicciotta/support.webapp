@@ -12,8 +12,11 @@ review: agent
 preview: none
 protocol: standard
 usage:
-  worker: {turns: 2, duration_s: 1852.8, input: 1193672, output: 96023, cache_read: 21937282}
+  worker: {turns: 3, duration_s: 2162.1, input: 1245815, output: 104925, cache_read: 28793809}
 work_duration: 1888.9
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T02:18:55Z"
 ---
 # T0293: Add an admin console frame with hash router, screen registry, and gate pages, promoted from Auth
 
@@ -66,4 +69,7 @@ Size estimate: 6 files, 220 lines.
 
 - [2026-11-24] **[Verify]**
   Confirmed red-phase failures in admin-console.test.js and admin-console.spec.js before implementation; recorded verbatim proof in validation-proof.md.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
