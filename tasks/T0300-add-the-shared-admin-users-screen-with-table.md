@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1720.3, input: 645670, output: 74845, cache_read: 21349120}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T05:50:19Z"
 ---
 # T0300: Add the shared admin Users screen with table, detail panel, creation, and deletion, promoted from Auth's and ToDo's consoles
 
@@ -62,4 +67,7 @@ Size estimate: 4 files, 220 lines.
 
 - [2026-11-24] **[Doc]**
   Updated docs/specs/components.md, docs/adrs/ADR-0003-components-and-patterns.md, and CHANGELOG.md with admin-users documentation and upgrade notes.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
