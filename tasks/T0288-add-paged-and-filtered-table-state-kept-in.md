@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1562.0, input: 376643, output: 70260, cache_read: 10929884}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T01:25:36Z"
 ---
 # T0288: Add paged and filtered table state kept in the URL, promoted from Auth's and ToDo's admin consoles
 
@@ -59,4 +64,7 @@ Size estimate: 4 files, 120 lines.
   - Files touched: 5.
   - Lines touched: 145.
   - Reopenings: 0.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
