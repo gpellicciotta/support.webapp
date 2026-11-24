@@ -1219,6 +1219,7 @@ await consoleFrame.start();
 - The skip link prevents default navigation and focuses `#main`, keeping the hash route unchanged.
 - `showChecking`, `showCheckFailed`, `showForbidden`, and `showGate` tear down active screens and render a centered `<main class="app__gate">`.
 - `showSignedOut(message, { failure })` shows a primary Sign In button and tracks route marks without mounting protected screens.
+- `navStates: ['open', 'hidden']` makes the nav toggle skip the icon rail.
 - `createAdminConsole(rootOrDoc, options)` builds the shell and gates; `attachAdminConsole(root, options)` enhances existing `.app` markup via `data-admin-console-*` hooks.
 - Session lookup (`checkSession`), account lookup (`checkAccount`), and authorization (`isAuthorized`) stay with the app as callbacks.
 

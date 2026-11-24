@@ -105,7 +105,7 @@ describe('core icon ids', () => {
     it('lists unique icon-prefixed kebab-case ids, validation icons included', () => {
         expect(new Set(icons).size).toBe(icons.length);
         expect(icons.filter((id) => !/^icon-[a-z0-9]+(-[a-z0-9]+)*$/.test(id))).toEqual([]);
-        expect(icons).toEqual(expect.arrayContaining(['icon-alert', 'icon-check', 'icon-help', 'icon-close', 'icon-more', 'icon-chevron-down', 'icon-nav-menu', 'icon-refresh']));
+        expect(icons).toEqual(expect.arrayContaining(['icon-alert', 'icon-check', 'icon-help', 'icon-close', 'icon-more', 'icon-chevron-down', 'icon-nav-menu', 'icon-nav-collapse', 'icon-nav-hide', 'icon-nav-close', 'icon-refresh']));
     });
 
     for (const look of looks) {
@@ -145,6 +145,26 @@ describe('core icon ids', () => {
                     .map(([, x, y, length]) => ({ x: Number(x), y: Number(y), length: Number(length) }));
                 expect(lines.map(({ y }) => y)).toEqual([6, 12, 18]);
                 expect(new Set(lines.map(({ x, length }) => `${x}+${length}`)).size).toBe(1);
+            });
+
+            it.each([
+                ['icon-nav-collapse', 'a left chevron'],
+                ['icon-nav-hide', 'a left chevron against an edge'],
+                ['icon-nav-close', 'a cross']
+            ])('draws %s as the menu lines with %s in the bottom-right corner', (id) => {
+                const glyph = glyphs.find((entry) => entry.id === id);
+                const lines = [...(glyph?.body ?? '').matchAll(/M\s*([\d.]+)[ ,]([\d.]+)\s*h\s*([\d.]+)/g)]
+                    .map(([, x, y, length]) => ({ x: Number(x), y: Number(y), length: Number(length) }));
+                const menu = glyphs.find((entry) => entry.id === 'icon-nav-menu').body.match(/M\s*([\d.]+)[ ,][\d.]+\s*h\s*([\d.]+)/);
+                expect(lines.map(({ y }) => y)).toEqual([6, 12, 18]);
+                expect(new Set(lines.map(({ x }) => x)).size).toBe(1);
+                // The top two lines keep the menu glyph's width; the bottom one stops short of the corner symbol.
+                expect(lines.slice(0, 2).map(({ x, length }) => [x, length])).toEqual([[Number(menu[1]), Number(menu[2])], [Number(menu[1]), Number(menu[2])]]);
+                expect(lines[2].x + lines[2].length).toBeLessThanOrEqual(12);
+                const corner = glyph.body.replace(/M\s*[\d.]+[ ,][\d.]+\s*h\s*[\d.]+/g, '');
+                const points = [...corner.matchAll(/M\s*([\d.]+)[ ,]([\d.]+)/g)].map(([, x, y]) => [Number(x), Number(y)]);
+                expect(points.length).toBeGreaterThan(0);
+                expect(points.every(([x, y]) => x >= 14 && y >= 15)).toBe(true);
             });
 
             it('holds no color of its own', () => {

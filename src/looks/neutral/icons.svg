@@ -52,6 +52,15 @@
   <symbol id="icon-nav-menu" viewBox="0 0 24 24">
     <path d="M4 6h16M4 12h16M4 18h16"/>
   </symbol>
+  <symbol id="icon-nav-collapse" viewBox="0 0 24 24">
+    <path d="M4 6h16M4 12h16M4 18h7M18.5 15l-3 3 3 3"/>
+  </symbol>
+  <symbol id="icon-nav-hide" viewBox="0 0 24 24">
+    <path d="M4 6h16M4 12h16M4 18h7M14 15v6M20 15l-3 3 3 3"/>
+  </symbol>
+  <symbol id="icon-nav-close" viewBox="0 0 24 24">
+    <path d="M4 6h16M4 12h16M4 18h7M14 15l6 6M20 15l-6 6"/>
+  </symbol>
   <symbol id="icon-refresh" viewBox="0 0 24 24">
     <path d="M20 12a8 8 0 1 1-2.3-5.7"/>
     <path d="M17.7 2.6v3.7h-3.7"/>

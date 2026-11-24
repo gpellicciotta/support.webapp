@@ -200,6 +200,71 @@ describe('attachAppNav', () => {
         });
     });
 
+    describe('glyph', () => {
+        const glyph = () => toggle.querySelector('use').getAttribute('href');
+
+        beforeEach(() => {
+            toggle.innerHTML = '<svg class="icon" aria-hidden="true" focusable="false"><use href="vendor/looks/neutral/icons.svg#icon-nav-menu"/></svg>';
+        });
+
+        it('draws the next step on wide screens, keeping the sprite path', () => {
+            controller = attachAppNav(toggle, sidebar, { media: fakeMedia(true) });
+            const seen = [glyph()];
+            toggle.click();
+            seen.push(glyph());
+            toggle.click();
+            seen.push(glyph());
+            expect(seen).toEqual([
+                'vendor/looks/neutral/icons.svg#icon-nav-collapse',
+                'vendor/looks/neutral/icons.svg#icon-nav-hide',
+                'vendor/looks/neutral/icons.svg#icon-nav-menu'
+            ]);
+        });
+
+        it('draws the menu glyph on a closed drawer and the close glyph on an open one', () => {
+            controller = attachAppNav(toggle, sidebar, { media: fakeMedia(false) });
+            expect(glyph()).toMatch(/#icon-nav-menu$/);
+            toggle.click();
+            expect(glyph()).toMatch(/#icon-nav-close$/);
+        });
+
+        it('uses caller icon names', () => {
+            controller = attachAppNav(toggle, sidebar, { media: fakeMedia(true), icons: { collapse: 'chevron-down' } });
+            expect(glyph()).toMatch(/#icon-chevron-down$/);
+        });
+    });
+
+    describe('with two states', () => {
+        it('cycles open and hidden from the states option, drawing the close glyph while open', () => {
+            toggle.innerHTML = '<svg class="icon"><use href="icons.svg#icon-nav-menu"/></svg>';
+            controller = attachAppNav(toggle, sidebar, { media: fakeMedia(true), states: ['open', 'hidden'] });
+            const seen = [];
+            for (let index = 0; index < 3; index += 1) {
+                seen.push([controller.state(), toggle.getAttribute('aria-expanded'), toggle.getAttribute('aria-label'), sidebar.hidden, toggle.querySelector('use').getAttribute('href')]);
+                toggle.click();
+            }
+            expect(seen).toEqual([
+                ['open', 'true', 'Hide navigation', false, 'icons.svg#icon-nav-close'],
+                ['hidden', 'false', 'Show navigation', true, 'icons.svg#icon-nav-menu'],
+                ['open', 'true', 'Hide navigation', false, 'icons.svg#icon-nav-close']
+            ]);
+            expect(() => controller.setState('rail')).toThrow(/open or hidden/);
+        });
+
+        it('reads the states from the toggle markup', () => {
+            toggle.dataset.appNavStates = 'open hidden';
+            toggle.setAttribute('aria-expanded', 'false');
+            controller = attachAppNav(toggle, sidebar, { media: fakeMedia(true) });
+            expect(controller.state()).toBe('hidden');
+            toggle.click();
+            expect(controller.state()).toBe('open');
+        });
+
+        it('rejects other state lists', () => {
+            expect(() => attachAppNav(toggle, sidebar, { media: fakeMedia(true), states: ['open', 'rail'] })).toThrow(RangeError);
+        });
+    });
+
     it('stops listening on destroy', () => {
         const media = fakeMedia(true);
         controller = attachAppNav(toggle, sidebar, { media });

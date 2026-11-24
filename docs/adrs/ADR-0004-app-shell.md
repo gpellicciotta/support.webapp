@@ -94,6 +94,7 @@ Layout rules:
 - **[Decided]** with the user on 2026-11-17, in the layout review: the top bar is a full-width app bar.
   From 64rem it and the action bar span every column, with the sidebar and side panel between them.
 - The nav toggle, `icon-nav-menu`, cycles the wide sidebar through open, an icon rail, and hidden.
+  Its glyph shows what the next press does; a two-state toggle skips the rail.
   Below 64rem it opens the sidebar as a drawer under the top bar, with a backdrop, Escape, and focus return.
   It hides below 64rem when a bottom bar holds the navigation.
 - The toggle's `aria-expanded`, the sidebar's `hidden`, and the sidebar's `auto` popover state carry the state.

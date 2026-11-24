@@ -47,6 +47,15 @@
   <symbol id="icon-nav-menu" viewBox="0 0 24 24">
     <path d="M3 6h18M3 12h18M3 18h18"/>
   </symbol>
+  <symbol id="icon-nav-collapse" viewBox="0 0 24 24">
+    <path d="M3 6h18M3 12h18M3 18h8M19.5 15l-3 3 3 3"/>
+  </symbol>
+  <symbol id="icon-nav-hide" viewBox="0 0 24 24">
+    <path d="M3 6h18M3 12h18M3 18h8M15 15v6M21 15l-3 3 3 3"/>
+  </symbol>
+  <symbol id="icon-nav-close" viewBox="0 0 24 24">
+    <path d="M3 6h18M3 12h18M3 18h8M15 15l6 6M21 15l-6 6"/>
+  </symbol>
   <symbol id="icon-refresh" viewBox="0 0 24 24">
     <path d="M20 12a8 8 0 1 1-2.3-5.7"/>
     <path d="M17.7 2.6v3.7h-3.7"/>

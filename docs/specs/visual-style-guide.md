@@ -204,6 +204,15 @@ Components reference only core ids; apps may add local glyphs in their own sprit
 **[Decided]** The core list adds `icon-nav-menu`, three horizontal lines, for the shell's nav toggle.
 - `icon-menu`: rejected, because the warm look already draws a utensils glyph under that id.
 
+**[Decided]** with the user on 2026-11-24: the core list adds three nav toggle glyphs that show what a press does.
+Each draws the menu lines with a shortened bottom line and a symbol in the bottom-right corner.
+- `icon-nav-collapse`: a left chevron, to narrow the sidebar to its icon rail.
+- `icon-nav-hide`: a left chevron against an edge, to hide the sidebar.
+- `icon-nav-close`: a cross, to close a two-state sidebar or the drawer.
+- `icon-nav-menu` stays the glyph that shows the navigation.
+- Glyphs of the current layout, such as a framed pane: rejected, because the user preferred the next step.
+- A symbol beside full-height shortened lines: rejected by the user, who wanted the plain menu shape kept.
+
 **[Decided]** with the user on 2026-11-23: the core list adds `icon-refresh`, one clockwise arrowed arc, for pull-to-refresh.
 - `icon-sync-syncing`: rejected, because its two arrows mean a sync in progress, not a refresh.
 
@@ -571,10 +580,13 @@ Layout rules:
 
 Nav toggle:
 - Put the `app__nav-toggle` icon button first in the top bar, drawing `icon-nav-menu`.
+  The script swaps the glyph to the next step: `icon-nav-collapse`, `icon-nav-hide`, `icon-nav-menu`, or `icon-nav-close`.
 - Give the sidebar an `id` and the `popover` attribute, and point the toggle's `popovertarget` and `aria-controls` at it.
 - Call `attachAppNav(toggle, sidebar)` from [app-nav.js](../../src/js/app-nav.js).
 - From 64rem each press cycles the sidebar through open, an icon rail, and hidden.
   `aria-expanded` is true only while it is open, and the label names the next step.
+- Pass `states: ['open', 'hidden']`, or set `data-app-nav-states="open hidden"`, to skip the rail.
+  The open sidebar then draws `icon-nav-close`, labeled "Hide navigation".
 - Below 64rem each press opens or closes a drawer under the top bar, with a backdrop.
   Escape, a click outside, and a followed link close it; Escape returns focus to the toggle.
 - Below 64rem the toggle hides when a bottom bar holds the navigation.

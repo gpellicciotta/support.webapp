@@ -570,7 +570,7 @@ function initAdminConsole(root, options, attached) {
 
         dom.setChildren(root, appEl);
 
-        const navController = attachAppNav(toggleEl, sidebarEl, { media: options.media });
+        const navController = attachAppNav(toggleEl, sidebarEl, { media: options.media, states: options.navStates });
         signal.addEventListener('abort', () => navController.destroy(), { once: true });
 
         shellParts = {
@@ -633,7 +633,7 @@ function initAdminConsole(root, options, attached) {
 
         bindSkipLink(skipEl, mainEl, signal);
         if (toggleEl && sidebarEl && options.attachNav !== false) {
-            const navController = attachAppNav(toggleEl, sidebarEl, { media: options.media });
+            const navController = attachAppNav(toggleEl, sidebarEl, { media: options.media, states: options.navStates });
             signal.addEventListener('abort', () => navController.destroy(), { once: true });
         }
 

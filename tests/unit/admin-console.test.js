@@ -615,3 +615,29 @@ describe('admin-console contract and naming compliance', () => {
         expect(shellCss).toMatch(/\.app__gate-actions\s*\{/);
     });
 });
+
+describe('createAdminConsole navigation states', () => {
+    it('passes navStates to the nav toggle, so a press skips the icon rail', () => {
+        const env = createEnvironment('/admin/#/overview');
+        const host = env.doc.createElement('div');
+        env.doc.body.append(host);
+        const frame = createAdminConsole(host, {
+            document: env.doc,
+            window: env.view,
+            media: env.media,
+            navStates: ['open', 'hidden'],
+            screens: [{ name: 'overview', title: 'Overview', icon: 'lists', mount: () => {} }]
+        });
+        frame.showShell({ name: 'Alex North' }, { id: 'tok-1' });
+        const toggle = host.querySelector('[data-app-nav-toggle]');
+        const sidebar = host.querySelector('.app__sidebar');
+        expect(toggle.getAttribute('aria-label')).toBe('Hide navigation');
+        expect(toggle.querySelector('use').getAttribute('href')).toMatch(/#icon-nav-close$/);
+        toggle.click();
+        expect(sidebar.hidden).toBe(true);
+        toggle.click();
+        expect(sidebar.hidden).toBe(false);
+        expect(toggle.getAttribute('aria-expanded')).toBe('true');
+        frame.destroy();
+    });
+});

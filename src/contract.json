@@ -889,6 +889,9 @@
     "icon-help",
     "icon-chevron-down",
     "icon-nav-menu",
+    "icon-nav-collapse",
+    "icon-nav-hide",
+    "icon-nav-close",
     "icon-refresh"
   ],
   "components": [

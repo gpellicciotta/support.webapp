@@ -365,16 +365,15 @@ for (const demo of demos.filter(({ areas }) => areas.includes('sidebar'))) {
         const problems = await openDemo(page, demo.path);
         const toggle = page.locator('body > .app__top-bar > .app__nav-toggle');
         await expect(toggle).toHaveCount(1);
-        await expect(toggle.locator('use')).toHaveAttribute('href', /#icon-nav-menu$/);
         const glyphLeft = () => page.evaluate(() => ({
             toggle: document.querySelector('.app__nav-toggle .icon').getBoundingClientRect().left,
             nav: document.querySelector('.app__sidebar .app__nav-item .icon')?.getBoundingClientRect().left ?? null
         }));
         const states = [
-            { expanded: 'true', label: 'Collapse navigation', track: SIDEBAR },
-            { expanded: 'false', label: 'Hide navigation', track: RAIL },
-            { expanded: 'false', label: 'Show navigation', track: 0 },
-            { expanded: 'true', label: 'Collapse navigation', track: SIDEBAR }
+            { expanded: 'true', label: 'Collapse navigation', track: SIDEBAR, glyph: 'nav-collapse' },
+            { expanded: 'false', label: 'Hide navigation', track: RAIL, glyph: 'nav-hide' },
+            { expanded: 'false', label: 'Show navigation', track: 0, glyph: 'nav-menu' },
+            { expanded: 'true', label: 'Collapse navigation', track: SIDEBAR, glyph: 'nav-collapse' }
         ];
         for (const [index, state] of states.entries()) {
             if (index > 0) {
@@ -382,6 +381,8 @@ for (const demo of demos.filter(({ areas }) => areas.includes('sidebar'))) {
             }
             await expect(toggle).toHaveAttribute('aria-expanded', state.expanded);
             await expect(toggle).toHaveAccessibleName(state.label);
+            // The glyph shows what the next press does, drawn from the look's sprite.
+            await expect(toggle.locator('use')).toHaveAttribute('href', new RegExp(`/icons\.svg#icon-${state.glyph}$`));
             const sidebar = await areaBox(page, 'sidebar');
             const main = await areaBox(page, 'main');
             expect(sidebar?.width ?? 0, state.label).toBeCloseTo(state.track, 0);
@@ -423,6 +424,7 @@ test('admin-console opens its navigation as a drawer under the bar below 64rem',
     await expect(toggle).toBeVisible();
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     await expect(toggle).toHaveAccessibleName('Open navigation');
+    await expect(toggle.locator('use')).toHaveAttribute('href', /#icon-nav-menu$/);
     await expect(sidebar).toBeHidden();
     const edges = await topBarEdges(page);
     expect(Math.abs(edges.start), `start offset of ${edges.first}`).toBeLessThan(0.5);
@@ -431,6 +433,7 @@ test('admin-console opens its navigation as a drawer under the bar below 64rem',
     await expect(sidebar).toBeVisible();
     await expect(toggle).toHaveAttribute('aria-expanded', 'true');
     await expect(toggle).toHaveAccessibleName('Close navigation');
+    await expect(toggle.locator('use')).toHaveAttribute('href', /#icon-nav-close$/);
     await expect(sidebar.locator('[aria-current="page"]')).toBeFocused();
     const top = await areaBox(page, 'top-bar');
     const drawer = await sidebar.boundingBox();
