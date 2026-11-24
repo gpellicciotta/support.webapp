@@ -48,7 +48,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `field`         | Validation states              | `field.js`: `setError`, `setValid`, `setPending` | valid, invalid, pending; icon and text, never color alone       | `aria-invalid`; `aria-busy` while pending; message in the live region            |
 | `error-summary` | Error summary                  | filled by `attachForm`                           | hidden; shown after a failed submit, one link per invalid field | focus moves to it; links jump to the fields                                      |
 | `field-group`   | Field group                    | none                                             | checkbox group, radio group, related fields                     | native fieldset and legend                                                       |
-| `selection`     | Multi-select with bulk actions | `selection.js`: `attachSelection`                | none, some, or all selected; bar with count and actions         | native checkboxes; Shift selects a range; count announced                        |
+| `selection`     | Multi-select with bulk actions | `selection.js`: `attachSelection`                | list or `--table`; none, some, or all selected; bulk bar        | native checkboxes; Shift selects a range; count announced                        |
 
 ### Containers
 | Key             | Component     | Module and functions                                                                              | Variants and states                                               | Accessibility minimum                                       |
@@ -112,6 +112,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `admin-system-events` | Admin System events   | `admin-system-events.js`: `createAdminSystemEvents`, `attachAdminSystemEvents`, `createAdminSystemEventsScreen`                                                  | audit cards, server filters/paging, search, JSON toggle | `aria-expanded`/`aria-controls` details; `<search>`; `data-*`     |
 | `admin-broadcasts`    | Admin Broadcasts      | `admin-broadcasts.js`: `createAdminBroadcasts`, `attachAdminBroadcasts`, `createAdminBroadcastsScreen`                                                           | compose, inbox/banner preview, recipients, retraction   | `field.js` validation; `selection.js`; inline confirm; `data-*`   |
 | `admin-users`         | Admin Users screen    | `admin-users.js`: `createAdminUsers`, `attachAdminUsers`, `createAdminUsersScreen`                                                                               | account table, filters, paging, detail/create panel     | `aria-selected`, focus return, inline confirm, `data-*` hooks     |
+| `admin-sessions`      | Admin Sessions screen | `admin-sessions.js`: `createAdminSessions`, `attachAdminSessions`, `createAdminSessionsScreen`                                                                   | token table, filters, paging, single/bulk/expired       | own session protected; `selection.js`; inline confirm; `data-*`   |
 | `view-router`         | View router           | `view-router.js`: `createViewRouter`, `attachViewRouter`                                                                                                         | routed views, fallback, sign-in guards, outside routes  | `aria-current="page"` route marks; `data-view-router-*` hooks     |
 
 ### Not in the Package
@@ -339,6 +340,8 @@ Labels provide touch targets; native checks convey selection without relying on 
 Disabled inputs stay unavailable; `aria-invalid="true"` adds the shared danger outline when validation requires it.
 Without JavaScript, individual native checkboxes remain usable; the bulk bar stays hidden.
 For delete, move records to the recycle bin and offer Undo through the host's toast controller.
+Add `selection--table` on the fieldset to pair the bulk action bar above a data table.
+Wrap each table checkbox in `<label class="selection__cell">` to preserve a 44 px touch target inside dense tables.
 
 ### card
 Card. A link card is one link and nests no other controls.
@@ -1407,6 +1410,45 @@ Upgrading an existing app:
 - Wire Auth's password, linked credentials, and application access sections through `extraSections`, loading their data inside `adapter.fetchUser`.
 - Pass `mode: 'server'`, `showRealms: false`, and `extraFacts` in ToDo's console, omitting `adapter.createUser`.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html#/users) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
+
+### admin-sessions
+Shared admin Sessions screen ([admin-sessions.js](../../src/js/admin-sessions.js)), using [data-loader.js](../../src/js/data-loader.js), [dom-builders.js](../../src/js/dom-builders.js), [selection.js](../../src/js/selection.js), and [table-state.js](../../src/js/table-state.js).
+Displays tokens with search, type, state, and size filters, paging, and single, bulk, and expired revocation.
+
+```js
+import { createAdminConsole } from './admin-console.js';
+import { createAdminSessionsScreen } from './admin-sessions.js';
+
+const consoleFrame = createAdminConsole(root, {
+    title: 'Admin Console',
+    screens: [
+        createAdminSessionsScreen({
+            adapter: {
+                fetchTokens: ({ signal }) => api.get('/tokens', { signal }),
+                revokeToken: (id, _token, { signal }) => api.delete(`/tokens/${encodeURIComponent(id)}`, { signal }),
+                revokeExpired: ({ signal }) => api.delete('/tokens?expired=true', { signal })
+            }
+        })
+    ]
+});
+```
+
+- `createAdminSessionsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor reusing `ctx.dom`, `ctx.signIn`, `ctx.session`, and `ctx.screenSignal`.
+- `attachAdminSessions(root, options)` mounts into a container; `createAdminSessions(doc, options)` creates a root in an injected document.
+- Controller methods: `refresh`, `revoke`, `removeExpired`, `getTokens`, `getFilteredTokens`, `getSelectedIds`, `getExpiredCount`, `getState`, `resetFilters`, `tableState`, `dispose`, and `destroy`.
+- Protects the console's own token via `currentTokenId`, `ctx.tokenId()`, `ctx.session.id`, or `token.current === true`.
+- The own session's checkbox and Revoke button stay disabled, and programmatic `revoke()` skips the own token.
+- Table multi-select uses `.selection--table` and `.selection__cell` in [selection.css](../../src/css/components/selection.css) through [selection.js](../../src/js/selection.js).
+- Single, bulk, and expired revocations ask through `dom.inlineConfirm`, report partial bulk failures, and reload quietly.
+- Supports client slicing (`mode: 'client'`) and bookmark Page envelopes (`mode: 'server'`), keeping filters and page in the hash.
+- Omitting `adapter.revokeExpired` hides `Remove expired`; `adapter.revokeTokens` enables single-request bulk revocation when supplied.
+- Pure helpers exported: `isTokenExpired`, `isOwnToken`, `tokenUserName`, `tokenUserEmail`, `formatSessionTime`, and `normalizeTokensResult`; hooks use `data-admin-sessions-*`.
+
+Upgrading an existing app:
+- Replace `sessions-view.mjs` in Auth and `tokens-view.mjs` in ToDo with `createAdminSessionsScreen` from [admin-sessions.js](../../src/js/admin-sessions.js).
+- Remove app-local `.selection--table` and `.selection__count` rules replaced by [selection.css](../../src/css/components/selection.css).
+- Pass `mode: 'server'`, `showTypeFilter: false`, and `showStateFilter: false` in ToDo, omitting `adapter.revokeExpired`.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html#/sessions) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
 
 ### view-router
 View router for `RoutedView` screens ([view-router.js](../../src/js/view-router.js)).

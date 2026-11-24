@@ -137,6 +137,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It composes announcements with live inbox and banner previews, recipient selection, history filtering, inline retraction, and `.app__split` in [shell.css](../../src/css/shell.css).
 - **[Decided]** on 2026-11-24: `admin-users` moved in from Auth's and ToDo's admin consoles as [admin-users.js](../../src/js/admin-users.js).
   It renders the filtered, paged account table, detail and New user panels, inline-confirmed deletion and restore, and `extraColumns`/`extraFacts`/`extraSections` hooks.
+- **[Decided]** on 2026-11-24: `admin-sessions` moved in from Auth's and ToDo's admin consoles as [admin-sessions.js](../../src/js/admin-sessions.js), adding `.selection--table` to [selection.css](../../src/css/components/selection.css).
+  It filters and pages tokens, protects the console's own session, and confirms single, bulk, and expired revocations inline.
 
 ### Shared patterns
 Documented as contracts without components of their own:

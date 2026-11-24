@@ -951,6 +951,7 @@
     "admin-system-events",
     "admin-broadcasts",
     "admin-users",
+    "admin-sessions",
     "view-router"
   ]
 }

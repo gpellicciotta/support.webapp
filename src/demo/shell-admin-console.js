@@ -5,6 +5,7 @@ import { attachAdminConsole } from '../js/admin-console.js';
 import { createAdminBroadcastsScreen } from '../js/admin-broadcasts.js';
 import { createAdminLogsScreen } from '../js/admin-logs.js';
 import { createAdminOverviewScreen } from '../js/admin-overview.js';
+import { createAdminSessionsScreen } from '../js/admin-sessions.js';
 import { createAdminSystemEventsScreen } from '../js/admin-system-events.js';
 import { createAdminUsersScreen } from '../js/admin-users.js';
 import { attachDataLoader } from '../js/data-loader.js';
@@ -658,12 +659,97 @@ export function initAdminConsoleDemo(doc, view) {
         ]
     });
 
+    let sessionsMode = 'populated';
+    const initialTokens = () => [
+        {
+            id: 901,
+            user: { name: 'Alex North', email: 'alex.north@example.test' },
+            type: 'session',
+            'creation-time': '2026-11-24T07:40:00Z',
+            'expiry-time': '2099-11-25T07:40:00Z'
+        },
+        {
+            id: 902,
+            user: { name: 'Samira Patel', email: 'samira.patel@example.test' },
+            type: 'session',
+            'creation-time': '2026-11-24T08:15:00Z',
+            'expiry-time': '2099-11-25T08:15:00Z'
+        },
+        {
+            id: 903,
+            user: { name: 'Taylor Brooks', email: 'taylor.brooks@example.test' },
+            type: 'session',
+            'creation-time': '2026-11-23T19:05:00Z',
+            'expiry-time': '2099-11-25T19:05:00Z'
+        },
+        {
+            id: 904,
+            user: { name: 'Casey Rivera', email: 'casey.rivera@example.test' },
+            type: 'one-time-code',
+            'creation-time': '2026-11-24T09:10:00Z',
+            'expiry-time': null
+        },
+        {
+            id: 905,
+            user: { name: 'Morgan Lee', email: 'morgan.lee@example.test' },
+            type: 'authorization',
+            'creation-time': '2026-11-22T09:03:00Z',
+            'expiry-time': '2099-12-01T00:00:00Z'
+        },
+        {
+            id: 877,
+            user: { name: 'Jordan Kim', email: 'jordan.kim@example.test' },
+            type: 'session',
+            'creation-time': '2025-11-01T17:22:00Z',
+            'expiry-time': '2025-11-10T17:22:00Z'
+        },
+        {
+            id: 876,
+            user: { name: 'Alex North', email: 'alex.north@example.test' },
+            type: 'change-request',
+            'creation-time': '2025-10-12T10:00:00Z',
+            'expiry-time': '2025-10-13T10:00:00Z'
+        }
+    ];
+    let sampleTokens = initialTokens();
+    const sessionsScreen = createAdminSessionsScreen({
+        sizes: [4, 10, 20],
+        defaultSize: 4,
+        adapter: {
+            fetchTokens: async () => {
+                const mode = sessionsMode;
+                sessionsMode = 'populated';
+                if (mode === 'empty') {
+                    return [];
+                }
+                if (mode === 'fail-once') {
+                    throw new Error('Token store temporarily unavailable');
+                }
+                if (mode === 'unauthorized') {
+                    throw Object.assign(new Error('Session expired'), { status: 401 });
+                }
+                return sampleTokens.map((token) => ({
+                    ...token,
+                    user: token.user ? { ...token.user } : null
+                }));
+            },
+            revokeToken: async (id) => {
+                sampleTokens = sampleTokens.filter((token) => String(token.id) !== String(id));
+            },
+            revokeExpired: async () => {
+                const now = Date.now();
+                sampleTokens = sampleTokens.filter((token) => !token['expiry-time'] || new Date(token['expiry-time']).getTime() > now);
+            }
+        }
+    });
+
     const frame = attachAdminConsole(doc.body, {
         document: doc,
         window: view,
         dom,
         title: 'Admin Console',
         account: { id: 1, name: 'Alex North', email: 'alex.north@example.test', realms: ['owner', 'admin'] },
+        session: { id: 901 },
         defaultScreen: 'accounts',
         backLink: { href: 'visual-style-gallery.html#shell', label: 'Back to gallery' },
         formatDocumentTitle: (screen, appTitle, { initial, hash }) => (initial && !hash ? 'Admin console shell demo · support.webapp' : `${screen.title} · ${appTitle}`),
@@ -786,17 +872,34 @@ export function initAdminConsoleDemo(doc, view) {
                 }
             },
             {
-                name: 'sessions',
-                title: 'Sessions',
-                mount: (screenView, ctx) => ctx.dom.setChildren(screenView,
-                    ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'sessions-heading' },
-                        ctx.dom.h('h2', { id: 'sessions-heading' }, 'Active sessions'),
-                        ctx.dom.dataTable('Sample active sessions', ['Token', 'Account', 'Last seen', 'Status'], [
-                            ['tok-901', 'Alex North', '2026-11-17 07:40:00', 'ok', 'Active'],
-                            ['tok-902', 'Samira Patel', '2026-11-16 08:15:00', 'ok', 'Active'],
-                            ['tok-877', 'Jordan Kim', '2026-11-10 17:22:00', 'warning', 'Expiring']
-                        ].map(([id, owner, lastSeen, sev, label]) => ctx.dom.h('tr', null,
-                            ctx.dom.h('th', { scope: 'row' }, id), ctx.dom.h('td', null, owner), ctx.dom.h('td', null, lastSeen), ctx.dom.h('td', null, ctx.dom.severityChip(sev, label)))))))
+                name: sessionsScreen.name,
+                title: sessionsScreen.title,
+                mount: (screenView, ctx, route) => {
+                    const sessionsHost = ctx.dom.h('div', { class: 'gallery-section' });
+                    let sessionsController = null;
+                    const triggerSessionsMode = (mode) => {
+                        if (mode === 'reset') {
+                            sampleTokens = initialTokens();
+                            sessionsMode = 'populated';
+                        }
+                        else {
+                            sessionsMode = mode;
+                        }
+                        sessionsController?.refresh();
+                    };
+                    ctx.dom.setChildren(screenView,
+                        sessionsHost,
+                        ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'sessions-states-heading' },
+                            ctx.dom.h('h2', { id: 'sessions-states-heading' }, 'Session store states'),
+                            ctx.dom.h('p', null, 'Preview an empty token store, fetch failures, and 401 sign-in prompts.'),
+                            ctx.dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'Session store state previews' },
+                                ctx.dom.button('Empty token list', () => triggerSessionsMode('empty'), { 'data-demo-sessions': 'empty' }),
+                                ctx.dom.button('Fail fetch once', () => triggerSessionsMode('fail-once'), { 'data-demo-sessions': 'fail-once' }),
+                                ctx.dom.button('Simulate 401', () => triggerSessionsMode('unauthorized'), { 'data-demo-sessions': 'unauthorized' }),
+                                ctx.dom.button('Reset sample tokens', () => triggerSessionsMode('reset'), { 'data-demo-sessions': 'reset' }))));
+                    sessionsController = sessionsScreen.mount(sessionsHost, ctx, route);
+                    return { dispose: () => sessionsController?.dispose() };
+                }
             },
             {
                 name: logsScreen.name,
