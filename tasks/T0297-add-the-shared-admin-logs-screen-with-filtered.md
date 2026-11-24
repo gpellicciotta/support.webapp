@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1541.0, input: 373753, output: 57853, cache_read: 14506844}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T04:01:47Z"
 ---
 # T0297: Add the shared admin Logs screen with filtered, paged entry cards, promoted from Auth's and ToDo's consoles
 
@@ -62,4 +67,7 @@ Size estimate: 4 files, 80 lines.
   - Files touched: 5.
   - Lines touched: 129.
   - Reopenings: 0.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
