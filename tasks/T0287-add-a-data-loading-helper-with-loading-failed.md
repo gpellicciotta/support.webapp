@@ -1,11 +1,11 @@
 ---
 id: T0287
-owner: ~
-needs: ['T0294']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0287-add-a-data-loading-helper-with-loading-failed
+worktree: .plan/work/T0287-add-a-data-loading-helper-with-loading-failed
+status: active
+started_at: "2026-11-24T00:31:34Z"
 ended_at: —
 review: agent
 preview: none
