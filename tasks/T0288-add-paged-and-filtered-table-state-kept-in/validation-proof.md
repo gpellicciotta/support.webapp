@@ -109,3 +109,74 @@ Verified `shell-admin-console.html` at 1440×900 in light and dark modes (HTTP 2
 - Before (dark): [before-admin-console-dark.png](before-admin-console-dark.png)
 - After (light): [after-admin-console-light.png](after-admin-console-light.png)
 - After (dark): [after-admin-console-dark.png](after-admin-console-dark.png)
+
+### Review Round 1 Rework
+
+#### Red Phase (Regression Tests for Blocking Defects 1 and 2)
+
+Command: `npx.cmd vitest run tests/unit/table-state.test.js` (exit code 1)
+
+```text
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0288-add-paged-and-filtered-table-state-kept-in
+
+ ❯ tests/unit/table-state.test.js (20 tests | 2 failed) 149ms
+[... 24 lines omitted ...]
+ FAIL  tests/unit/table-state.test.js > table-state > createTableState controller > replays the request that produced the envelope on serverParams("current") after applyEnvelope
+AssertionError: expected 'page=next&page-size=20&page-bookmark=…' to be 'page=next&page-size=20&page-bookmark=…' // Object.is equality
+
+Expected: "page=next&page-size=20&page-bookmark=b-1"
+Received: "page=next&page-size=20&page-bookmark=b-2"
+
+ FAIL  tests/unit/table-state.test.js > table-state > createTableState controller > does not write server bookmark page numbers to the hash and ignores stale page params on reload
+AssertionError: expected { filters: { q: 'alex' }, …(5) } to match object { filters: { q: 'alex' }, …(2) }
+-   "page": 1,
+-   "pageNumber": 1,
++   "page": 2,
++   "pageNumber": 2,
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 18 passed (20)
+```
+
+#### Green Phase (After Rework Fixes)
+
+Command: `npx.cmd vitest run` (exit code 0)
+
+```text
+ RUN  v5.1.0 C:/Dev-Projects/support.webapp/.plan/work/T0288-add-paged-and-filtered-table-state-kept-in
+[... 60 lines omitted ...]
+ ✓ tests/unit/table-state.test.js (20 tests) 114ms
+[... 3 lines omitted ...]
+ Test Files  53 passed (53)
+      Tests  2458 passed (2458)
+   Start at  02:34:24
+   Duration  14.12s (environment 55%, import 29%, tests 14%, worker 1%, transform 1%)
+```
+
+Command: `npx.cmd eslint .` (exit code 0)
+
+```text
+(no output)
+```
+
+Command: `lint-markdown check --offline` (exit code 0)
+
+```text
+All 28 markdown files passed linting.
+```
+
+Command: `npx.cmd playwright test tests/e2e/table-state.spec.js tests/e2e/verify-ui.spec.js --project=desktop-light --project=desktop-dark` (exit code 0)
+
+```text
+Running 68 tests using 4 workers
+
+  ✓   1 [desktop-light] › tests\e2e\table-state.spec.js:5:1 › admin console demo persists filters and page in the hash without history entries and survives reload (2.7s)
+[... 140 lines omitted ...]
+  ✓  62 [desktop-dark] › tests\e2e\verify-ui.spec.js:390:9 › shell-admin-console passes every verifier check in the neutral look (2.6s)
+  ✓  63 [desktop-dark] › tests\e2e\verify-ui.spec.js:390:9 › shell-admin-console passes every verifier check in the warm look (3.0s)
+  ✓  64 [desktop-dark] › tests\e2e\verify-ui.spec.js:390:9 › shell-admin-console passes every verifier check in the bright look blue (3.2s)
+  ✓  65 [desktop-dark] › tests\e2e\verify-ui.spec.js:390:9 › shell-admin-console passes every verifier check in the bright look yellow (3.5s)
+  ✓  66 [desktop-dark] › tests\e2e\verify-ui.spec.js:390:9 › shell-admin-console passes every verifier check in the bright look red (3.3s)
+
+  68 passed (1.3m)
+```

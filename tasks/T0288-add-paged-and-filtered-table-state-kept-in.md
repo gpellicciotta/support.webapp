@@ -13,9 +13,13 @@ preview: none
 protocol: standard
 usage:
   worker: {turns: 1, duration_s: 1562.0, input: 376643, output: 70260, cache_read: 10929884}
-review_status: pending
+  review: {turns: 1, duration_s: 286.7, input: 32, output: 7930, cache_read: 940572, cache_write: 64089}
+review_status: rejected
 review_round: 1
 review_requested_at: "2026-11-24T01:25:36Z"
+reviewed_by: "@claude"
+review_session: claude-20261124-e1dcf8
+work_duration: 1865.4
 ---
 # T0288: Add paged and filtered table state kept in the URL, promoted from Auth's and ToDo's admin consoles
 
@@ -67,4 +71,17 @@ Size estimate: 4 files, 120 lines.
 
 - [2026-11-24] **[Review]**
   Round 1 requested (mode: agent).
+
+- [2026-11-24] **[Review]**
+  Round 1 rejected by @claude: Client paging, hash persistence, clamping, and the admin console demo work and are well tested.
+  - Findings: [review-findings-1.md](T0288-add-paged-and-filtered-table-state-kept-in/review-findings-1.md).
+
+- [2026-11-24] **[Implement]**
+  Addressed round 1 review: fixed applyEnvelope replay params, omitted server bookmark pageKey from hash, updated demo label and components.md.
+
+- [2026-11-24] **[Verify]**
+  Rework verified: 20 table-state tests, 2458 unit tests, eslint, lint-markdown, and 68 desktop browser tests passed.
+  - Files touched: 5.
+  - Lines touched: 148.
+  - Reopenings: 0.
 
