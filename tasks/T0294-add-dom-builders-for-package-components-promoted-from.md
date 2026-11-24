@@ -1,11 +1,11 @@
 ---
 id: T0294
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0294-add-dom-builders-for-package-components-promoted-from
+worktree: .plan/work/T0294-add-dom-builders-for-package-components-promoted-from
+status: active
+started_at: "2026-11-24T00:02:28Z"
 ended_at: —
 review: agent
 preview: none
