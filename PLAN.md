@@ -2,6 +2,7 @@
 An overview of all tasks and their planning, possibly split by milestone.
 
 ## Next Milestone
+- [x] T0304 Align control messages with label starts and frame gallery status bars.
 - [x] T0303 Make the design integrity hashes ignore line endings, so LF and CRLF checkouts of a vendored copy both pass.
 - [x] T0278 Add a page base stylesheet for body text, headings, links, code, and the hidden guard, promoted from Auth.
 - [x] T0279 Add a release notes renderer for parsed changelogs, promoted from Auth's Help view and admin console.
