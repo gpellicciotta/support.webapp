@@ -48,6 +48,7 @@ APPS = [
     "time",
     "tools",
     "demos",
+    "hiscores",
 ]
 
 # Hexagon: polygon radius + round-joined stroke; corner radius = HEX_STROKE / 2.
@@ -69,6 +70,7 @@ FIT = {
     "time": (0.84, 50, 50),
     "tools": (0.88, 52.1, 46.6),
     "demos": (0.9, 52, 47.4),
+    "hiscores": (1.0, 50, 50),
 }
 
 
@@ -293,6 +295,15 @@ def g_demos(fg, uid):
     return f'<g fill="{fg}" stroke="{fg}" stroke-width="3" stroke-linejoin="round"><path d="{big}"/><path d="{small}"/></g>'
 
 
+def g_hiscores(fg, uid):
+    """A three-place podium with the winning tier in the center."""
+    return (
+        f'<g fill="{fg}"><rect x="24" y="46" width="14" height="23" rx="2"/>'
+        '<rect x="43" y="30" width="14" height="39" rx="2"/>'
+        '<rect x="62" y="54" width="14" height="15" rx="2"/></g>'
+    )
+
+
 GLYPHS = {
     "meteo": g_meteo,
     "verkeersregels-quiz": g_quiz,
@@ -306,6 +317,7 @@ GLYPHS = {
     "time": g_time,
     "tools": g_tools,
     "demos": g_demos,
+    "hiscores": g_hiscores,
 }
 
 

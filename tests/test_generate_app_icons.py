@@ -77,6 +77,14 @@ def test_requirements_declare_pillow_for_the_generator():
 
 
 @pytest.mark.parametrize("variant", GEN.VARIANTS)
+def test_hiscores_is_generated_in_every_style(variant):
+    assert "hiscores" in GEN.APPS
+    svg = GEN.build("hiscores", variant, "t")
+    assert 'aria-label="hiscores icon"' in svg
+    assert all((ICONS / variant / name).is_file() for name in GEN.rendition_names("hiscores"))
+
+
+@pytest.mark.parametrize("variant", GEN.VARIANTS)
 def test_committed_icons_hold_every_rendition(variant):
     missing = [
         f"{variant}/{name}"

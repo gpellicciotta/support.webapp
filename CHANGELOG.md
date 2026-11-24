@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.5.1-pre
+- Looks: Added the Hiscores podium app icon in all four styles and previewed it in the app icon gallery.
 
 ## v0.5.0 [released: 2026-11-24]
 - DevEx: Replaced sibling-application references in source and test comments with app-neutral descriptions and added a neutrality unit test.
