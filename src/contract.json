@@ -942,6 +942,7 @@
     "notices",
     "inbox",
     "help-page",
-    "dom-builders"
+    "dom-builders",
+    "data-loader"
   ]
 }

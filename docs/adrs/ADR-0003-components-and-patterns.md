@@ -123,6 +123,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It reuses [collapsible.js](../../src/js/collapsible.js), [release-notes.js](../../src/js/release-notes.js), and [icon.js](../../src/js/icon.js), leaving app help copy and server fetching local.
 - **[Decided]** on 2026-11-24: `dom-builders` moved in from the admin consoles as [dom-builders.js](../../src/js/dom-builders.js).
   It exports `createDomBuilders`, `h`, `setChildren`, and catalog builders using [icon.js](../../src/js/icon.js) and [inline-confirm.js](../../src/js/inline-confirm.js).
+- **[Decided]** on 2026-11-24: `data-loader` moved in from the admin consoles as [data-loader.js](../../src/js/data-loader.js).
+  It exports `createDataLoader`, `attachDataLoader`, and `loadInto`, using [dom-builders.js](../../src/js/dom-builders.js) for status lines, banners, and actions.
 
 ### Shared patterns
 Documented as contracts without components of their own:

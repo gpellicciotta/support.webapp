@@ -2,6 +2,7 @@
 
 import { attachAccountMenu } from '../js/account-menu.js';
 import { attachAppNav } from '../js/app-nav.js';
+import { attachDataLoader } from '../js/data-loader.js';
 import { createDomBuilders } from '../js/dom-builders.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { createToast } from '../js/toast.js';
@@ -190,6 +191,47 @@ export function initAdminConsoleDemo(doc, view) {
         fillFacts(selected);
     }
     renderAccounts();
+
+    const main = doc.querySelector('.app__main');
+    if (main) {
+        let checks = 0;
+        let failNext = false;
+        const statusHost = dom.h('div', { 'data-admin-status-host': '' });
+        const statusLoader = attachDataLoader(statusHost, {
+            document: doc,
+            dom,
+            what: 'Server status',
+            fetcher: async () => {
+                if (failNext) {
+                    failNext = false;
+                    throw new Error('Service temporarily unavailable');
+                }
+                checks += 1;
+                return { state: 'Healthy', checks, sessions: 12 };
+            },
+            render: (status) => dom.facts([
+                { term: 'Status', value: dom.severityChip('ok', status.state), key: 'server-status' },
+                { term: 'Checks', value: String(status.checks), key: 'checks' },
+                { term: 'Active sessions', value: String(status.sessions), key: 'sessions' }
+            ], true),
+            onSignIn: () => toaster.show('Sign-in flow requested.')
+        });
+        main.append(dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'admin-status-heading', 'data-admin-loader-demo': '' },
+            dom.h('h2', { id: 'admin-status-heading' }, 'Server status'),
+            dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'Server status actions' },
+                dom.button('Load (fail once)', () => {
+                    failNext = true;
+                    statusLoader.load();
+                }, { 'data-admin-load': 'fail-once' }),
+                dom.button('Simulate 401', () => statusLoader.load({
+                    fetcher: () => Promise.reject(Object.assign(new Error('Session expired'), { status: 401 }))
+                }), { 'data-admin-load': 'unauthorized' }),
+                dom.button('Quiet refresh', () => statusLoader.load({ quiet: true }), { 'data-admin-load': 'quiet' })
+            ),
+            statusHost
+        ));
+        statusLoader.load();
+    }
 
     panel?.querySelector('[data-demo-panel-close]')?.addEventListener('click', () => {
         panelOpen = false;

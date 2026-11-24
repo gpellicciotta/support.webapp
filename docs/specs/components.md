@@ -79,6 +79,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `notices`     | Notices             | `notices.js`: `createNotices`, `attachNotices`, using `toast.js`, `icon.js`                                                         | app banners (cap 3), sticky inbox banner, toasts                              | `role="alert"` for errors, `role="status"` otherwise; safe URLs        |
 | `inbox`       | Notifications inbox | `inbox.js`: `createInbox`, `attachInbox`, `createUnreadButton`, `attachUnreadButton`, using `selection.js`, `notices.js`, `icon.js` | selectable rows, unread edge and badge, bulk actions, empty state, 99+ button | 44 px checkbox labels; disambiguated row actions; count in button name |
 | `loading`     | Loading pattern     | none                                                                                                                                | busy region, status line, slow-list skeleton                                  | `aria-busy`; polite status text; static under reduced motion           |
+| `data-loader` | Data loader         | `data-loader.js`: `createDataLoader`, `attachDataLoader`, `loadInto`, using `dom-builders.js`                                       | loading, quiet polling, failed with Retry, 401 with Sign in                   | polite status outside busy region; `aria-busy` on quiet; alert banners |
 | `progress`    | Progress bar        | none                                                                                                                                | determinate, indeterminate                                                    | native `progress` with a label                                         |
 | `spinner`     | Spinner             | none                                                                                                                                | sizes sm, md                                                                  | label in the status line; static under reduced motion                  |
 
@@ -1111,6 +1112,36 @@ Upgrading an existing app:
 - Replace local `h`, `setChildren`, and component builders in Auth's and ToDo's `admin/js/ui.mjs` with [dom-builders.js](../../src/js/dom-builders.js).
 - Remove legacy `.facts`, `.table-wrap`, `.data-table`, `.chip--sev`, `.muted`, and `.confirm-slot` rules; builders emit package skeletons directly.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live builder usage.
+
+### data-loader
+Data loading helper ([data-loader.js](../../src/js/data-loader.js)), using [dom-builders.js](../../src/js/dom-builders.js).
+Loads async data into a container with loading, failed with Retry, and 401 Sign in states.
+
+```js
+import { attachDataLoader } from './data-loader.js';
+
+const loader = attachDataLoader(container, {
+    what: 'Server status',
+    fetcher: ({ signal }) => fetchJson('/server', { signal }),
+    render: (status) => dom.facts(rowsOf(status), true),
+    onSignIn: () => ctx.signIn()
+});
+await loader.load();
+await loader.reload({ quiet: true });
+```
+
+- `createDataLoader(defaults)` binds shared `document`, `dom`, `onSignIn`, and text formatters, returning `load`, `loadInto`, `cancel`, and `destroy`.
+- `attachDataLoader(container, defaults)` binds one container with `load`, `reload`, `cancel`, and `destroy`.
+- `loadInto(container, ctx, what, fetcher, render, options)` and `loadInto(container, options)` support direct one-off loads.
+- Newest call per container wins; superseded calls abort their `AbortSignal`, drop late results, and resolve to `false`.
+- Non-quiet loads render `statusLine` with `data-data-loader-status` outside `aria-busy`; quiet refreshes keep content under `aria-busy="true"`.
+- Failures render `errorBanner` (`role="alert"`) with `data-data-loader-error="failed"` and a Retry button (`data-data-loader-action="retry"`).
+- A 401 error renders `data-data-loader-error="unauthorized"` and a primary Sign in button (`data-data-loader-action="sign-in"`) when `onSignIn` exists.
+
+Upgrading an existing app:
+- Replace local `loadInto` in Auth's and ToDo's `admin/js/ui.mjs` with [data-loader.js](../../src/js/data-loader.js); call `setSpriteUrl` before error banners render.
+- Positional `loadInto(container, ctx, what, fetcher, render, { quiet })` calls keep working, or bind shared defaults with `createDataLoader({ onSignIn })`.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for Retry, 401, and quiet refresh.
 
 ---
 

@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Modules: Added [data-loader.js](src/js/data-loader.js) with loading, Retry, 401 Sign in, newest-wins cancellation, and quiet refresh states.
 - Modules: Added [dom-builders.js](src/js/dom-builders.js) with `h`, `setChildren`, and catalog component builders, promoted from the admin consoles.
 - Components: Added [help-page.js](src/js/help-page.js) and [help-page.css](src/css/components/help-page.css) with search, topic chips, FAQ, query links, and feedback mail links.
 - Components: Added [inbox.js](src/js/inbox.js), [inbox.css](src/css/components/inbox.css), and the top-bar unread count button in [shell.css](src/css/shell.css).
