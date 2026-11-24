@@ -1524,7 +1524,7 @@ export function createAdminBroadcastsScreen(options = {}) {
     const {
         name = 'broadcasts',
         title = 'Broadcasts',
-        icon = 'bell',
+        icon = 'broadcast',
         badge,
         ...broadcastOptions
     } = options;

@@ -1264,7 +1264,7 @@ const consoleFrame = createAdminConsole(root, {
 });
 ```
 
-- `createAdminOverviewScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor that reuses `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
+- `createAdminOverviewScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor with default icon `overview`, reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
 - `attachAdminOverview(root, options)` mounts into an existing element; `createAdminOverview(doc, options)` builds a root for an injected document.
 - Controller methods: `refresh({ quiet })`, `getStatus()`, `dispose()`, and `destroy()` (alias of `dispose()`).
 - `options.adapter.fetchStatus({ signal })` supplies server status; both Auth's `extra-info` and ToDo's flat payloads normalize automatically.
@@ -1298,7 +1298,7 @@ const consoleFrame = createAdminConsole(root, {
 });
 ```
 
-- `createAdminLogsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor that reuses `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
+- `createAdminLogsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor with default icon `logs`, reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
 - `attachAdminLogs(root, options)` mounts into an existing container; `createAdminLogs(doc, options)` builds a root for an injected document.
 - Controller methods: `refresh({ quiet })`, `getEntries()`, `getFilteredEntries()`, `getState()`, `resetFilters()`, `tableState`, `dispose()`, and `destroy()`.
 - `options.adapter.fetchLogs({ signal })` supplies entries; Auth's `log-entries`, ToDo's `elements`, and plain arrays normalize automatically.
@@ -1335,7 +1335,7 @@ const consoleFrame = createAdminConsole(root, {
 });
 ```
 
-- `createAdminSystemEventsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
+- `createAdminSystemEventsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor with default icon `events`, reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
 - `attachAdminSystemEvents(root, options)` mounts into an existing container; `createAdminSystemEvents(doc, options)` builds a root for an injected document.
 - Controller methods: `refresh({ quiet })`, `getEvents()`, `getFilteredEvents()`, `getState()`, `resetFilters()`, `tableState`, `dispose()`, and `destroy()`.
 - `options.adapter.fetchEvents({ eventType, severity, limit, offset, params, signal })` supplies records; Auth arrays and ToDo envelopes normalize automatically.
@@ -1374,7 +1374,7 @@ const consoleFrame = createAdminConsole(root, {
 });
 ```
 
-- `createAdminBroadcastsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
+- `createAdminBroadcastsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor with default icon `broadcast`, reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
 - `attachAdminBroadcasts(root, options)` mounts into a container; `createAdminBroadcasts(doc, options)` creates a root in an injected document.
 - Controller methods: `refresh`, `updatePreview`, `resetForm`, `buildPayload`, `getHistory`, `getFilteredHistory`, `getState`, `resetFilters`, `tableState`, `dispose`, and `destroy`.
 - `.app__split` in [shell.css](../../src/css/shell.css) stacks compose and preview below `64rem` and arranges them `3fr 2fr` above `64rem`.
@@ -1417,7 +1417,7 @@ const consoleFrame = createAdminConsole(root, {
 });
 ```
 
-- `createAdminUsersScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor reusing `ctx.dom`, `ctx.panel`, `ctx.navigate`, `ctx.me`, and `ctx.screenSignal`.
+- `createAdminUsersScreen(options)` builds an [admin-console.js](../../src/js/admin-console.js) descriptor (default icon `people`), reusing `ctx.dom`, `ctx.panel`, `ctx.navigate`, `ctx.me`, and `ctx.screenSignal`.
 - `attachAdminUsers(root, options)` mounts into a container; `createAdminUsers(doc, options)` creates a root in an injected document.
 - Controller methods: `refresh`, `update`, `openUser`, `openCreate`, `closePanel`, `getUsers`, `getFilteredUsers`, `getSelectedId`, `getState`, `resetFilters`, `tableState`, `dispose`, and `destroy`.
 - Supports client slicing (`mode: 'client'`) and bookmark Page envelopes (`mode: 'server'`), keeping filters and page in the hash.
@@ -1454,7 +1454,7 @@ const consoleFrame = createAdminConsole(root, {
 });
 ```
 
-- `createAdminSessionsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor reusing `ctx.dom`, `ctx.signIn`, `ctx.session`, and `ctx.screenSignal`.
+- `createAdminSessionsScreen(options)` builds an [admin-console.js](../../src/js/admin-console.js) descriptor (default icon `sessions`), reusing `ctx.dom`, `ctx.signIn`, `ctx.session`, and `ctx.screenSignal`.
 - `attachAdminSessions(root, options)` mounts into a container; `createAdminSessions(doc, options)` creates a root in an injected document.
 - Controller methods: `refresh`, `revoke`, `removeExpired`, `getTokens`, `getFilteredTokens`, `getSelectedIds`, `getExpiredCount`, `getState`, `resetFilters`, `tableState`, `dispose`, and `destroy`.
 - Protects the console's own token via `currentTokenId`, `ctx.tokenId()`, `ctx.session.id`, or `token.current === true`.
@@ -1491,7 +1491,7 @@ const consoleFrame = createAdminConsole(root, {
 });
 ```
 
-- `createAdminChangelogScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
+- `createAdminChangelogScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor with default icon `note`, reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
 - `attachAdminChangelog(root, options)` mounts into a container; `createAdminChangelog(doc, options)` creates a root in an injected document.
 - Controller methods: `refresh`, `showMore`, `setFilter`, `getFilter`, `expandAll`, `collapseAll`, `getReleases`, `getReleaseNotes`, `dispose`, and `destroy`.
 - `options.adapter.fetchReleases({ signal })` returns a release array or `{ releases }` envelope; `normalizeReleasesResult` accepts both shapes.

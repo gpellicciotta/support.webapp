@@ -506,7 +506,7 @@ export function createAdminOverviewScreen(options = {}) {
     const {
         name = 'overview',
         title = 'Overview',
-        icon = 'lists',
+        icon = 'overview',
         badge,
         ...overviewOptions
     } = options;

@@ -1138,7 +1138,7 @@ export function createAdminSessionsScreen(options = {}) {
     const {
         name = 'sessions',
         title = 'Sessions',
-        icon = 'clock',
+        icon = 'sessions',
         badge,
         ...sessionOptions
     } = options;

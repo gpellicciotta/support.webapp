@@ -597,7 +597,7 @@ export function createAdminLogsScreen(options = {}) {
     const {
         name = 'logs',
         title = 'Logs',
-        icon = 'note',
+        icon = 'logs',
         badge,
         ...logsOptions
     } = options;

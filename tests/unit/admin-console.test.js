@@ -3,12 +3,19 @@
 import { readFileSync } from 'node:fs';
 import { Window } from 'happy-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { createAdminBroadcastsScreen } from '../../src/js/admin-broadcasts.js';
+import { createAdminChangelogScreen } from '../../src/js/admin-changelog.js';
 import {
     attachAdminConsole,
     createAdminConsole,
     displayName,
     parseRoute
 } from '../../src/js/admin-console.js';
+import { createAdminLogsScreen } from '../../src/js/admin-logs.js';
+import { createAdminOverviewScreen } from '../../src/js/admin-overview.js';
+import { createAdminSessionsScreen } from '../../src/js/admin-sessions.js';
+import { createAdminSystemEventsScreen } from '../../src/js/admin-system-events.js';
+import { createAdminUsersScreen } from '../../src/js/admin-users.js';
 import { setSpriteUrl } from '../../src/js/icon.js';
 import { installPopoverShim } from './popover-shim.js';
 
@@ -660,5 +667,71 @@ describe('createAdminConsole label tooltips', () => {
         expect([...tips()].map((tip) => tip.textContent)).toEqual(['Collapse navigation']);
         frame.destroy();
         expect(env.doc.querySelectorAll('.tooltip--label')).toHaveLength(0);
+    });
+});
+
+describe('admin screen default icons', () => {
+    it('wires the seven standard core icons as defaults across all admin screen descriptors and sidebar links', () => {
+        const screens = [
+            createAdminOverviewScreen({ adapter: { fetchStatus: async () => ({}) }, autoLoad: false, interval: 0 }),
+            createAdminUsersScreen({ adapter: { fetchUsers: async () => [] }, autoLoad: false }),
+            createAdminSessionsScreen({ adapter: { fetchTokens: async () => [] }, autoLoad: false }),
+            createAdminSystemEventsScreen({ adapter: { fetchEvents: async () => [] }, autoLoad: false }),
+            createAdminLogsScreen({ adapter: { fetchLogs: async () => [] }, autoLoad: false }),
+            createAdminBroadcastsScreen({
+                adapter: {
+                    fetchHistory: async () => [],
+                    publish: async () => ({}),
+                    retract: async () => ({})
+                },
+                autoLoad: false
+            }),
+            createAdminChangelogScreen({ adapter: { fetchReleases: async () => [] }, autoLoad: false })
+        ];
+
+        const expected = [
+            ['overview', 'overview'],
+            ['users', 'people'],
+            ['sessions', 'sessions'],
+            ['system-events', 'events'],
+            ['logs', 'logs'],
+            ['broadcasts', 'broadcast'],
+            ['changelog', 'note']
+        ];
+
+        expect(screens.map(({ name, icon }) => [name, icon])).toEqual(expected);
+
+        const env = createEnvironment('/admin/#/overview');
+        const host = env.doc.createElement('div');
+        env.doc.body.append(host);
+        const frame = createAdminConsole(host, {
+            document: env.doc,
+            window: env.view,
+            media: env.media,
+            screens
+        });
+        frame.showShell({ name: 'Alex North' }, { id: 'tok-1' });
+
+        for (const [name, icon] of expected) {
+            const href = host.querySelector(`[data-admin-console-nav="${name}"] use`)?.getAttribute('href');
+            expect(href, name).toBe(`/looks/neutral/icons.svg#icon-${icon}`);
+        }
+        frame.destroy();
+    });
+
+    it('uses the standard core icons in the admin console demo sidebar', () => {
+        const html = readFileSync('src/demo/shell-admin-console.html', 'utf8');
+        for (const [screen, icon] of [
+            ['overview', 'icon-overview'],
+            ['accounts', 'icon-people'],
+            ['users', 'icon-people'],
+            ['sessions', 'icon-sessions'],
+            ['logs', 'icon-logs'],
+            ['system-events', 'icon-events'],
+            ['broadcasts', 'icon-broadcast'],
+            ['changelog', 'icon-note']
+        ]) {
+            expect(html, screen).toMatch(new RegExp(`data-admin-console-nav="${screen}"[^>]*><svg[^>]*><use href="\\.\\./looks/neutral/icons\\.svg#${icon}"`));
+        }
     });
 });

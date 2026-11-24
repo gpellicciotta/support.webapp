@@ -216,6 +216,15 @@ Each draws the menu lines with a shortened bottom line and a symbol in the botto
 **[Decided]** with the user on 2026-11-23: the core list adds `icon-refresh`, one clockwise arrowed arc, for pull-to-refresh.
 - `icon-sync-syncing`: rejected, because its two arrows mean a sync in progress, not a refresh.
 
+**[Decided]** The core list adds seven admin console screen icons promoted from Auth.
+- `icon-overview`: dial gauge for the Overview screen.
+- `icon-people`: two figures for the Users screen.
+- `icon-sessions`: key for the Sessions screen.
+- `icon-events`: pulse waveform for the System events screen.
+- `icon-logs`: lined document for the Logs screen.
+- `icon-broadcast`: megaphone with waves for the Broadcasts screen.
+- `icon-note`: folded note for the Changelog screen.
+
 ### Focus
 - One global `:focus-visible` glow marks focus, from [reset.css](../../src/css/reset.css).
 - The glow is a solid `--focus-ring-width` contour in `--color-focus`, plus a soft halo at 20% of that color.

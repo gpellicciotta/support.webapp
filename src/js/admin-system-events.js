@@ -936,7 +936,7 @@ export function createAdminSystemEventsScreen(options = {}) {
     const {
         name = 'system-events',
         title = 'System events',
-        icon = 'note',
+        icon = 'events',
         badge,
         ...eventsOptions
     } = options;

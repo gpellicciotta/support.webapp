@@ -102,10 +102,14 @@ describe('createIcon without a sprite url', () => {
 describe('core icon ids', () => {
     const icons = readContract().icons;
 
-    it('lists unique icon-prefixed kebab-case ids, validation icons included', () => {
+    it('lists unique icon-prefixed kebab-case ids, validation and admin console icons included', () => {
         expect(new Set(icons).size).toBe(icons.length);
         expect(icons.filter((id) => !/^icon-[a-z0-9]+(-[a-z0-9]+)*$/.test(id))).toEqual([]);
-        expect(icons).toEqual(expect.arrayContaining(['icon-alert', 'icon-check', 'icon-help', 'icon-close', 'icon-more', 'icon-chevron-down', 'icon-nav-menu', 'icon-nav-collapse', 'icon-nav-hide', 'icon-nav-close', 'icon-refresh']));
+        expect(icons).toEqual(expect.arrayContaining([
+            'icon-alert', 'icon-check', 'icon-help', 'icon-close', 'icon-more', 'icon-chevron-down',
+            'icon-nav-menu', 'icon-nav-collapse', 'icon-nav-hide', 'icon-nav-close', 'icon-refresh',
+            'icon-overview', 'icon-people', 'icon-sessions', 'icon-events', 'icon-logs', 'icon-broadcast', 'icon-note'
+        ]));
     });
 
     for (const look of looks) {
@@ -116,6 +120,12 @@ describe('core icon ids', () => {
             it('provides every core id', () => {
                 const ids = new Set(glyphs.map(({ id }) => id));
                 expect(icons.filter((id) => !ids.has(id))).toEqual([]);
+            });
+
+            it('provides the seven standard admin console screen glyphs', () => {
+                const ids = new Set(glyphs.map(({ id }) => id));
+                const adminIds = ['icon-overview', 'icon-people', 'icon-sessions', 'icon-events', 'icon-logs', 'icon-broadcast', 'icon-note'];
+                expect(adminIds.filter((id) => !ids.has(id))).toEqual([]);
             });
 
             it('draws unique icon-prefixed symbols on the 24-unit grid', () => {

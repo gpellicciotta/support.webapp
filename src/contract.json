@@ -892,7 +892,14 @@
     "icon-nav-collapse",
     "icon-nav-hide",
     "icon-nav-close",
-    "icon-refresh"
+    "icon-refresh",
+    "icon-overview",
+    "icon-people",
+    "icon-sessions",
+    "icon-events",
+    "icon-logs",
+    "icon-broadcast",
+    "icon-note"
   ],
   "components": [
     "button",
