@@ -1,11 +1,11 @@
 ---
 id: T0300
-owner: ~
-needs: ['T0293', 'T0294']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0300-add-the-shared-admin-users-screen-with-table
+worktree: .plan/work/T0300-add-the-shared-admin-users-screen-with-table
+status: active
+started_at: "2026-11-24T05:21:27Z"
 ended_at: —
 review: agent
 preview: none
