@@ -1,15 +1,18 @@
 ---
 id: T0306
 owner: "@gemini"
+session: antigravity-20261124-8ba8c9
 needs: []
 branch: task/T0306-remove-sibling-app-mentions-from-source-code-and
 worktree: .plan/work/T0306-remove-sibling-app-mentions-from-source-code-and
-status: active
+status: suspended
 started_at: "2026-11-24T08:47:41Z"
 ended_at: —
 review: agent
 preview: none
 protocol: standard
+size_status: requested
+size_estimate: 36 files, 160 lines
 ---
 # T0306: Remove sibling app mentions from source code and test comments
 
@@ -20,7 +23,7 @@ Keep provenance history in `docs/` (such as `components.md` and ADRs) untouched,
 See [technical-spec.md](T0306-remove-sibling-app-mentions-from-source-code-and/technical-spec.md).
 
 ## Task Execution Steps
-- [ ] **[Read]**      Scan `src/` and `tests/` for all sibling-app mentions in comments and test descriptions.
+- [x] **[Read]**      Scan `src/` and `tests/` for all sibling-app mentions in comments and test descriptions.
 - [ ] **[Implement]** Add a unit check asserting source and test comments contain no sibling-app references.
 - [ ] **[Verify]**    Run the new check and confirm it fails on the existing mentions.
 - [ ] **[Implement]** Rewrite comments in `src/js/` and `tests/` in clean, app-neutral language.
@@ -31,3 +34,12 @@ See [technical-spec.md](T0306-remove-sibling-app-mentions-from-source-code-and/t
 ## Execution Log
 - [2026-11-24] **[Doc]**
   Companion task file scaffolded at task creation.
+
+- [2026-11-24] **[Read]**
+  Scanned src/ and tests/; confirmed 36 counted files (~160 lines) match the declared scope, exceeding the 18-file large line.
+  - 19 files in src/js/, 15 in tests/unit/, 2 in tests/e2e/, 0 in src/css/.
+  - Requesting human size approval before editing, or confirmation to split by folder.
+
+- [2026-11-24] **[Size]**
+  Size approval requested for 36 files, 160 lines.
+
