@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1647.5, input: 438765, output: 65413, cache_read: 17190650}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T03:30:38Z"
 ---
 # T0296: Add the shared admin Overview screen with server state reloaded while visible, promoted from Auth's and ToDo's consoles
 
@@ -61,4 +66,7 @@ Size estimate: 4 files, 50 lines.
 
 - [2026-11-24] **[Read]**
   Read technical-spec.md, the Shared Admin Screens audit section, Auth's and ToDo's overview-view.mjs, admin-console.js, dom-builders.js, data-loader.js, and auto-refresh.js.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
