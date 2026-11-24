@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1539.8, input: 356631, output: 45832, cache_read: 12792857}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T07:06:20Z"
 ---
 # T0302: Add the shared admin Changelog screen on the release notes renderer, promoted from Auth's and ToDo's consoles
 
@@ -67,4 +72,7 @@ Size estimate: 4 files, 40 lines.
   - Files touched: 5.
   - Lines touched: 131.
   - Reopenings: 0.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
