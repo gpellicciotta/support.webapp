@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1642.8, input: 323213, output: 64650, cache_read: 11492171}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-23T23:52:28Z"
 ---
 # T0292: Add a help page pattern with search, topic chips, FAQ, and feedback link, promoted from Auth
 
@@ -68,4 +73,7 @@ Size estimate: 4 files, 150 lines.
 
 - [2026-11-24] **[Read]**
   Read technical-spec.md, Auth UI audit Help Page section, and Auth and counters help-view.mjs sources.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
