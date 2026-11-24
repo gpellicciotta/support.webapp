@@ -13,7 +13,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0285 Add a file download helper and download toast actions, promoted from Auth's account export.
 - [x] T0286 Add a screen action bar renderer for the screen actions of routed views, promoted from Auth's shell.
 - [x] T0287 Add a data loading helper with loading, failed, and sign-in states, promoted from Auth's admin console.
-- [~] T0288 [owner: @gemini] Add paged and filtered table state kept in the URL, promoted from Auth's and ToDo's admin consoles.
+- [x] T0288 Add paged and filtered table state kept in the URL, promoted from Auth's and ToDo's admin consoles.
 - [x] T0289 Add an action registry for app actions with enabled state and disabled reasons, promoted from Auth's App.
 - [x] T0290 Add a notices module that routes app notifications to banners and toasts, promoted from Auth.
 - [x] T0291 Add the notifications inbox pattern and the unread count button, promoted from Auth.
