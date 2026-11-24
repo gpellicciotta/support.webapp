@@ -1,11 +1,11 @@
 ---
 id: T0306
-owner: ~
+owner: "@gemini"
 needs: []
-branch: —
-worktree: —
-status: ready
-started_at: —
+branch: task/T0306-remove-sibling-app-mentions-from-source-code-and
+worktree: .plan/work/T0306-remove-sibling-app-mentions-from-source-code-and
+status: active
+started_at: "2026-11-24T08:47:41Z"
 ended_at: —
 review: agent
 preview: none
