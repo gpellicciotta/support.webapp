@@ -135,6 +135,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It sends type, severity, limit, and offset to an app adapter, searches loaded rows, and toggles formatted JSON metadata.
 - **[Decided]** on 2026-11-24: `admin-broadcasts` moved in from Auth's and ToDo's admin consoles as [admin-broadcasts.js](../../src/js/admin-broadcasts.js).
   It composes announcements with live inbox and banner previews, recipient selection, history filtering, inline retraction, and `.app__split` in [shell.css](../../src/css/shell.css).
+- **[Decided]** on 2026-11-24: `admin-users` moved in from Auth's and ToDo's admin consoles as [admin-users.js](../../src/js/admin-users.js).
+  It renders the filtered, paged account table, detail and New user panels, inline-confirmed deletion and restore, and `extraColumns`/`extraFacts`/`extraSections` hooks.
 
 ### Shared patterns
 Documented as contracts without components of their own:

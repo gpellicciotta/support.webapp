@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Modules: Added [admin-users.js](src/js/admin-users.js) for the shared admin Users screen with filters, paging, detail panel, creation, and deletion.
 - Modules: Added [admin-broadcasts.js](src/js/admin-broadcasts.js) for the shared admin Broadcasts screen with compose, live preview, recipients, history, and retraction.
 - Modules: Added [admin-system-events.js](src/js/admin-system-events.js) for the shared admin System events screen with filters, server paging, and JSON details.
 - Modules: Added [admin-logs.js](src/js/admin-logs.js) for the shared admin Logs screen with indent-stripped entry cards, filters, and URL paging.

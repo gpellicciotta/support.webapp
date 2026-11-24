@@ -6,6 +6,7 @@ import { createAdminBroadcastsScreen } from '../js/admin-broadcasts.js';
 import { createAdminLogsScreen } from '../js/admin-logs.js';
 import { createAdminOverviewScreen } from '../js/admin-overview.js';
 import { createAdminSystemEventsScreen } from '../js/admin-system-events.js';
+import { createAdminUsersScreen } from '../js/admin-users.js';
 import { attachDataLoader } from '../js/data-loader.js';
 import { createDomBuilders } from '../js/dom-builders.js';
 import { createLiveRegion } from '../js/live-region.js';
@@ -518,11 +519,151 @@ export function initAdminConsoleDemo(doc, view) {
         }
     });
 
+    let usersMode = 'populated';
+    let nextDemoUserId = 60;
+    let sampleUsers = [
+        {
+            id: 1,
+            name: 'Alex North',
+            email: 'alex.north@example.test',
+            realms: ['owner', 'admin'],
+            'creation-time': '2026-01-05T09:30:00Z',
+            'last-activity-time': '2026-11-17T07:40:00Z',
+            'expiry-time': null,
+            sessions: 3
+        },
+        {
+            id: 34,
+            name: 'Samira Patel',
+            email: 'samira.patel@example.test',
+            realms: ['owner'],
+            'creation-time': '2026-09-01T10:00:00Z',
+            'last-activity-time': '2026-11-16T08:15:00Z',
+            'expiry-time': null,
+            sessions: 2
+        },
+        {
+            id: 36,
+            name: 'Jordan Kim',
+            email: 'jordan.kim@example.test',
+            realms: ['owner', 'test'],
+            'creation-time': '2026-09-20T14:05:00Z',
+            'last-activity-time': '2026-11-10T17:22:00Z',
+            'expiry-time': '2026-12-01T00:00:00Z',
+            sessions: 0
+        },
+        {
+            id: 41,
+            name: 'Morgan Lee',
+            email: 'morgan.lee@example.test',
+            realms: ['owner'],
+            'creation-time': '2026-10-02T11:45:00Z',
+            'last-activity-time': '2026-11-12T09:03:00Z',
+            'expiry-time': null,
+            sessions: 1
+        },
+        {
+            id: 47,
+            name: 'Taylor Brooks',
+            email: 'taylor.brooks@example.test',
+            realms: ['owner'],
+            'creation-time': '2026-10-14T08:20:00Z',
+            'last-activity-time': '2026-11-15T19:05:00Z',
+            'expiry-time': null,
+            sessions: 1
+        },
+        {
+            id: 52,
+            name: 'Casey Rivera',
+            email: 'casey.rivera@example.test',
+            realms: ['test'],
+            'creation-time': '2026-11-01T16:10:00Z',
+            'last-activity-time': null,
+            'expiry-time': null,
+            sessions: 0
+        }
+    ];
+    const usersScreen = createAdminUsersScreen({
+        sizes: [4, 10, 20],
+        defaultSize: 4,
+        adapter: {
+            fetchUsers: async () => {
+                const mode = usersMode;
+                usersMode = 'populated';
+                if (mode === 'empty') {
+                    return [];
+                }
+                if (mode === 'fail-once') {
+                    throw new Error('User directory temporarily unavailable');
+                }
+                if (mode === 'unauthorized') {
+                    throw Object.assign(new Error('Session expired'), { status: 401 });
+                }
+                return sampleUsers.map((user) => ({ ...user, realms: [...user.realms] }));
+            },
+            fetchUser: async (id) => {
+                const found = sampleUsers.find((user) => String(user.id) === String(id));
+                if (!found) {
+                    throw new Error(`Account ${id} was not found`);
+                }
+                return { ...found, realms: [...found.realms] };
+            },
+            updateUser: async (id, body) => {
+                const index = sampleUsers.findIndex((user) => String(user.id) === String(id));
+                if (index < 0) {
+                    throw new Error(`Account ${id} was not found`);
+                }
+                sampleUsers[index] = {
+                    ...sampleUsers[index],
+                    ...body,
+                    realms: body.realms ? [...body.realms] : sampleUsers[index].realms
+                };
+                return { ...sampleUsers[index] };
+            },
+            createUser: async (body) => {
+                const created = {
+                    id: nextDemoUserId,
+                    name: body.name ?? '',
+                    email: body.email,
+                    realms: ['owner'],
+                    'creation-time': new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
+                    'last-activity-time': null,
+                    'expiry-time': null,
+                    sessions: 0
+                };
+                nextDemoUserId += 1;
+                sampleUsers = [...sampleUsers, created];
+                return { ...created };
+            },
+            markUserForDeletion: async (id) => {
+                const index = sampleUsers.findIndex((user) => String(user.id) === String(id));
+                if (index >= 0) {
+                    sampleUsers[index] = { ...sampleUsers[index], 'expiry-time': '2026-12-10T00:00:00Z' };
+                }
+                return sampleUsers[index];
+            },
+            restoreUser: async (id) => {
+                const index = sampleUsers.findIndex((user) => String(user.id) === String(id));
+                if (index >= 0) {
+                    sampleUsers[index] = { ...sampleUsers[index], 'expiry-time': null };
+                }
+                return sampleUsers[index];
+            },
+            deleteUser: async (id) => {
+                sampleUsers = sampleUsers.filter((user) => String(user.id) !== String(id));
+            }
+        },
+        extraFacts: ({ user }) => [
+            { term: 'Sessions', value: `${user.sessions ?? 0} active`, key: 'sessions' }
+        ]
+    });
+
     const frame = attachAdminConsole(doc.body, {
         document: doc,
         window: view,
         dom,
         title: 'Admin Console',
+        account: { id: 1, name: 'Alex North', email: 'alex.north@example.test', realms: ['owner', 'admin'] },
         defaultScreen: 'accounts',
         backLink: { href: 'visual-style-gallery.html#shell', label: 'Back to gallery' },
         formatDocumentTitle: (screen, appTitle, { initial, hash }) => (initial && !hash ? 'Admin console shell demo · support.webapp' : `${screen.title} · ${appTitle}`),
@@ -615,6 +756,32 @@ export function initAdminConsoleDemo(doc, view) {
                             tableState?.destroy();
                             tableState = null;
                         }
+                    };
+                }
+            },
+            {
+                name: usersScreen.name,
+                title: usersScreen.title,
+                mount: (screenView, ctx, route) => {
+                    const usersHost = ctx.dom.h('div', { class: 'gallery-section' });
+                    let usersController = null;
+                    const triggerUsersMode = (mode) => {
+                        usersMode = mode;
+                        usersController?.refresh();
+                    };
+                    ctx.dom.setChildren(screenView,
+                        usersHost,
+                        ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'users-states-heading' },
+                            ctx.dom.h('h2', { id: 'users-states-heading' }, 'User directory states'),
+                            ctx.dom.h('p', null, 'Preview an empty directory, fetch failures, and 401 sign-in prompts.'),
+                            ctx.dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'User directory state previews' },
+                                ctx.dom.button('Empty directory', () => triggerUsersMode('empty'), { 'data-demo-users': 'empty' }),
+                                ctx.dom.button('Fail fetch once', () => triggerUsersMode('fail-once'), { 'data-demo-users': 'fail-once' }),
+                                ctx.dom.button('Simulate 401', () => triggerUsersMode('unauthorized'), { 'data-demo-users': 'unauthorized' }))));
+                    usersController = usersScreen.mount(usersHost, ctx, route);
+                    return {
+                        update: (next) => usersController?.update(next),
+                        dispose: () => usersController?.dispose()
                     };
                 }
             },

@@ -111,6 +111,7 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `admin-logs`          | Admin Logs screen     | `admin-logs.js`: `createAdminLogs`, `attachAdminLogs`, `createAdminLogsScreen`, using `data-loader.js`, `dom-builders.js`, `icon.js`, `table-state.js`           | entry cards, level/text filters, URL paging, empty      | labeled `<search>` and `role="list"`; `<time>`; `data-*` hooks    |
 | `admin-system-events` | Admin System events   | `admin-system-events.js`: `createAdminSystemEvents`, `attachAdminSystemEvents`, `createAdminSystemEventsScreen`                                                  | audit cards, server filters/paging, search, JSON toggle | `aria-expanded`/`aria-controls` details; `<search>`; `data-*`     |
 | `admin-broadcasts`    | Admin Broadcasts      | `admin-broadcasts.js`: `createAdminBroadcasts`, `attachAdminBroadcasts`, `createAdminBroadcastsScreen`                                                           | compose, inbox/banner preview, recipients, retraction   | `field.js` validation; `selection.js`; inline confirm; `data-*`   |
+| `admin-users`         | Admin Users screen    | `admin-users.js`: `createAdminUsers`, `attachAdminUsers`, `createAdminUsersScreen`                                                                               | account table, filters, paging, detail/create panel     | `aria-selected`, focus return, inline confirm, `data-*` hooks     |
 | `view-router`         | View router           | `view-router.js`: `createViewRouter`, `attachViewRouter`                                                                                                         | routed views, fallback, sign-in guards, outside routes  | `aria-current="page"` route marks; `data-view-router-*` hooks     |
 
 ### Not in the Package
@@ -1365,6 +1366,47 @@ Upgrading an existing app:
 - Pass `adapter.fetchHistory`, `adapter.publish`, `adapter.retract`, and optional `adapter.fetchUsers`; ToDo passes `payloadFormat: 'audience'`, `defaultBanner: true`, and `showExpires: false`.
 - Remove app-local `.split`, `.preview`, `.recipients`, and `.selection__scroll` rules replaced by `.app__split`, `.app__section`, and `.app__scroll-list`.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html#/broadcasts) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
+
+### admin-users
+Shared admin Users screen ([admin-users.js](../../src/js/admin-users.js)), using [data-loader.js](../../src/js/data-loader.js), [dom-builders.js](../../src/js/dom-builders.js), [field.js](../../src/js/field.js), [file-download.js](../../src/js/file-download.js), [icon.js](../../src/js/icon.js), and [table-state.js](../../src/js/table-state.js).
+Displays user accounts with filters, paging, a detail panel, a New user panel, and inline-confirmed deletion and restore.
+
+```js
+import { createAdminConsole } from './admin-console.js';
+import { createAdminUsersScreen } from './admin-users.js';
+
+const consoleFrame = createAdminConsole(root, {
+    title: 'Admin Console',
+    screens: [
+        createAdminUsersScreen({
+            adapter: {
+                fetchUsers: ({ signal }) => api.get('/users?expired=true', { signal }),
+                fetchUser: (id, { signal }) => api.get(`/users/${encodeURIComponent(id)}`, { signal }),
+                updateUser: (id, body, { signal }) => api.put(`/users/${encodeURIComponent(id)}`, body, { signal }),
+                createUser: (body, { signal }) => api.post('/users', body, { signal }),
+                markUserForDeletion: (id, { signal }) => api.put(`/users/${encodeURIComponent(id)}`, { deleted: true }, { signal }),
+                restoreUser: (id, { signal }) => api.put(`/users/${encodeURIComponent(id)}`, { deleted: false }, { signal }),
+                deleteUser: (id, { signal }) => api.delete(`/users/${encodeURIComponent(id)}`, { signal })
+            }
+        })
+    ]
+});
+```
+
+- `createAdminUsersScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor reusing `ctx.dom`, `ctx.panel`, `ctx.navigate`, `ctx.me`, and `ctx.screenSignal`.
+- `attachAdminUsers(root, options)` mounts into a container; `createAdminUsers(doc, options)` creates a root in an injected document.
+- Controller methods: `refresh`, `update`, `openUser`, `openCreate`, `closePanel`, `getUsers`, `getFilteredUsers`, `getSelectedId`, `getState`, `resetFilters`, `tableState`, `dispose`, and `destroy`.
+- Supports client slicing (`mode: 'client'`) and bookmark Page envelopes (`mode: 'server'`), keeping filters and page in the hash.
+- `extraColumns`, `extraFacts`, and `extraSections` add table columns, Facts rows, and detail panel sections with `block()` and `act()` helpers.
+- Marking for deletion, restoring, and permanent deletion ask through `dom.inlineConfirm` in the danger zone, guarding the signed-in account.
+- Omitting `adapter.createUser` hides the `New user` button; `adapter.exportUserData` enables JSON export via [file-download.js](../../src/js/file-download.js).
+- Hooks use `data-admin-users-*` only; row selection uses `aria-selected`, and closing the panel returns focus to the opener.
+
+Upgrading an existing app:
+- Replace `users-view.mjs` in Auth's and ToDo's admin consoles with `createAdminUsersScreen` from [admin-users.js](../../src/js/admin-users.js).
+- Wire Auth's password, linked credentials, and application access sections through `extraSections`, loading their data inside `adapter.fetchUser`.
+- Pass `mode: 'server'`, `showRealms: false`, and `extraFacts` in ToDo's console, omitting `adapter.createUser`.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html#/users) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
 
 ### view-router
 View router for `RoutedView` screens ([view-router.js](../../src/js/view-router.js)).

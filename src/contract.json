@@ -950,6 +950,7 @@
     "admin-logs",
     "admin-system-events",
     "admin-broadcasts",
+    "admin-users",
     "view-router"
   ]
 }
