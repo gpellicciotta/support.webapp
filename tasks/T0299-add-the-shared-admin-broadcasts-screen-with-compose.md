@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1612.6, input: 427244, output: 76146, cache_read: 19755537}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T05:11:32Z"
 ---
 # T0299: Add the shared admin Broadcasts screen with compose, live preview, history, and retraction, promoted from Auth's and ToDo's consoles
 
@@ -65,4 +70,7 @@ Size estimate: 5 files, 200 lines.
   - Files touched: 6.
   - Lines touched: 205.
   - Reopenings: 0.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
