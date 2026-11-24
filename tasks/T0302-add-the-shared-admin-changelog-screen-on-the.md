@@ -1,11 +1,11 @@
 ---
 id: T0302
-owner: ~
-needs: ['T0279', 'T0293', 'T0294']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0302-add-the-shared-admin-changelog-screen-on-the
+worktree: .plan/work/T0302-add-the-shared-admin-changelog-screen-on-the
+status: active
+started_at: "2026-11-24T06:40:29Z"
 ended_at: —
 review: agent
 preview: none
