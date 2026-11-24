@@ -94,22 +94,23 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `tooltip`        | Tooltip             | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                |
 
 ### Identity and Foundations
-| Key                 | Component             | Module and functions                                                                                                                                             | Variants and states                                     | Accessibility minimum                                             |
-| :------------------ | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
-| none, base          | Page base             | none                                                                                                                                                             | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable           |
-| `avatar`            | Avatar                | none                                                                                                                                                             | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name                |
-| `account-menu`      | Account menu          | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                                                                                          | signed in, signed out                                   | menu pattern; marks the current route                             |
-| `icon`              | Icon                  | `icon.js`: `createIcon`                                                                                                                                          | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                           |
-| `theme-switch`      | Theme switch          | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js`                                                                   | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                                |
-| `install-prompt`    | Install prompt        | `install-prompt.js`: `attachInstallPrompt`                                                                                                                       | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
-| `file-download`     | File download         | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`                                                                         | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
-| `screen-action-bar` | Screen action bar     | `screen-action-bar.js`: `attachScreenActionBar`                                                                                                                  | buttons, links, disabled hints, empty-bar removal       | native `disabled` on buttons; `aria-disabled` on links            |
-| `action-registry`   | Action registry       | `action-registry.js`: `createActionRegistry`, `attachActionRegistry`                                                                                             | enabled, disabled with reason, scoped lookup, events    | blocks disabled and `aria-disabled` `[data-action]` triggers      |
-| `dom-builders`      | DOM builders          | `dom-builders.js`: `createDomBuilders`, `h`, `setChildren`, and catalog builders                                                                                 | buttons, selects, checkboxes, facts, tables, confirm    | emits catalog ARIA skeletons; text nodes only, no `innerHTML`     |
-| `admin-console`     | Admin console frame   | `admin-console.js`: `createAdminConsole`, `attachAdminConsole`, `parseRoute`, `displayName`, using `account-menu.js`, `app-nav.js`, `dom-builders.js`, `icon.js` | shell with side panel, hash router, gates, signed-out   | skip link focuses `#main`; `aria-current="page"`; single `<main>` |
-| `admin-overview`    | Admin Overview screen | `admin-overview.js`: `createAdminOverview`, `attachAdminOverview`, `createAdminOverviewScreen`, using `auto-refresh.js`, `data-loader.js`, `dom-builders.js`     | server facts, visible 30 s reload, disconnected alert   | polite status line; `role="alert"` banners; `data-*` hooks        |
-| `admin-logs`        | Admin Logs screen     | `admin-logs.js`: `createAdminLogs`, `attachAdminLogs`, `createAdminLogsScreen`, using `data-loader.js`, `dom-builders.js`, `icon.js`, `table-state.js`           | entry cards, level/text filters, URL paging, empty      | labeled `<search>` and `role="list"`; `<time>`; `data-*` hooks    |
-| `view-router`       | View router           | `view-router.js`: `createViewRouter`, `attachViewRouter`                                                                                                         | routed views, fallback, sign-in guards, outside routes  | `aria-current="page"` route marks; `data-view-router-*` hooks     |
+| Key                   | Component             | Module and functions                                                                                                                                             | Variants and states                                     | Accessibility minimum                                             |
+| :-------------------- | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------ | :---------------------------------------------------------------- |
+| none, base            | Page base             | none                                                                                                                                                             | body text, headings, links, code, and `[hidden]` guard  | underlined links; `hidden="until-found"` stays findable           |
+| `avatar`              | Avatar                | none                                                                                                                                                             | sizes sm, md, lg; image, initials, icon fallback; stack | `alt` text, or `aria-hidden` beside a visible name                |
+| `account-menu`        | Account menu          | `account-menu.js`: `attachAccountMenu`, using `menu.js`                                                                                                          | signed in, signed out                                   | menu pattern; marks the current route                             |
+| `icon`                | Icon                  | `icon.js`: `createIcon`                                                                                                                                          | sizes sm, md, lg; stroke token                          | `aria-hidden` unless it carries meaning                           |
+| `theme-switch`        | Theme switch          | `theme-switch.js`: `attachThemeSwitch`, `syncAccountTheme`, `themeOfSettings`; `theme-boot.js`                                                                   | System, Light, Dark; pre-paint boot and account sync    | segmented control of native radios                                |
+| `install-prompt`      | Install prompt        | `install-prompt.js`: `attachInstallPrompt`                                                                                                                       | installable, installed; standalone and `appinstalled`   | app-owned button starts `hidden`; `aria-disabled` while prompting |
+| `file-download`       | File download         | `file-download.js`: `createFileDownload`, `downloadFile`, `downloadJson`, `downloadBlob`                                                                         | JSON or Blob one-shot download; reusable handle         | hidden temporary anchor removed after click; toast action         |
+| `screen-action-bar`   | Screen action bar     | `screen-action-bar.js`: `attachScreenActionBar`                                                                                                                  | buttons, links, disabled hints, empty-bar removal       | native `disabled` on buttons; `aria-disabled` on links            |
+| `action-registry`     | Action registry       | `action-registry.js`: `createActionRegistry`, `attachActionRegistry`                                                                                             | enabled, disabled with reason, scoped lookup, events    | blocks disabled and `aria-disabled` `[data-action]` triggers      |
+| `dom-builders`        | DOM builders          | `dom-builders.js`: `createDomBuilders`, `h`, `setChildren`, and catalog builders                                                                                 | buttons, selects, checkboxes, facts, tables, confirm    | emits catalog ARIA skeletons; text nodes only, no `innerHTML`     |
+| `admin-console`       | Admin console frame   | `admin-console.js`: `createAdminConsole`, `attachAdminConsole`, `parseRoute`, `displayName`, using `account-menu.js`, `app-nav.js`, `dom-builders.js`, `icon.js` | shell with side panel, hash router, gates, signed-out   | skip link focuses `#main`; `aria-current="page"`; single `<main>` |
+| `admin-overview`      | Admin Overview screen | `admin-overview.js`: `createAdminOverview`, `attachAdminOverview`, `createAdminOverviewScreen`, using `auto-refresh.js`, `data-loader.js`, `dom-builders.js`     | server facts, visible 30 s reload, disconnected alert   | polite status line; `role="alert"` banners; `data-*` hooks        |
+| `admin-logs`          | Admin Logs screen     | `admin-logs.js`: `createAdminLogs`, `attachAdminLogs`, `createAdminLogsScreen`, using `data-loader.js`, `dom-builders.js`, `icon.js`, `table-state.js`           | entry cards, level/text filters, URL paging, empty      | labeled `<search>` and `role="list"`; `<time>`; `data-*` hooks    |
+| `admin-system-events` | Admin System events   | `admin-system-events.js`: `createAdminSystemEvents`, `attachAdminSystemEvents`, `createAdminSystemEventsScreen`                                                  | audit cards, server filters/paging, search, JSON toggle | `aria-expanded`/`aria-controls` details; `<search>`; `data-*`     |
+| `view-router`         | View router           | `view-router.js`: `createViewRouter`, `attachViewRouter`                                                                                                         | routed views, fallback, sign-in guards, outside routes  | `aria-current="page"` route marks; `data-view-router-*` hooks     |
 
 ### Not in the Package
 | Component                                     | Reason                                                                            |
@@ -1286,6 +1287,43 @@ Upgrading an existing app:
 - Replace `logs-view.mjs` in Auth's and ToDo's admin consoles with `createAdminLogsScreen` from [admin-logs.js](../../src/js/admin-logs.js).
 - Pass `{ adapter: { fetchLogs: ({ signal }) => api.get('/logs', { signal }) } }` so each app keeps its own endpoint.
 - See the [admin console shell demo](../../src/demo/shell-admin-console.html#/logs) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
+
+### admin-system-events
+Shared admin System events screen ([admin-system-events.js](../../src/js/admin-system-events.js)), using [data-loader.js](../../src/js/data-loader.js), [dom-builders.js](../../src/js/dom-builders.js), [icon.js](../../src/js/icon.js), and [table-state.js](../../src/js/table-state.js).
+Renders audit records as newest-first `.entry-list` cards with server filters, offset paging, client search, and JSON details.
+
+```js
+import { createAdminConsole } from './admin-console.js';
+import { createAdminSystemEventsScreen } from './admin-system-events.js';
+
+const consoleFrame = createAdminConsole(root, {
+    title: 'Admin Console',
+    screens: [
+        createAdminSystemEventsScreen({
+            adapter: {
+                fetchEvents: ({ params, signal }) => api.get(`/admin/system-events?${params}`, { signal }),
+                fetchUsers: ({ signal }) => api.get('/users?expired=true', { signal })
+            }
+        })
+    ]
+});
+```
+
+- `createAdminSystemEventsScreen(options)` returns an [admin-console.js](../../src/js/admin-console.js) screen descriptor reusing `ctx.dom`, `ctx.signIn`, and `ctx.screenSignal`.
+- `attachAdminSystemEvents(root, options)` mounts into an existing container; `createAdminSystemEvents(doc, options)` builds a root for an injected document.
+- Controller methods: `refresh({ quiet })`, `getEvents()`, `getFilteredEvents()`, `getState()`, `resetFilters()`, `tableState`, `dispose()`, and `destroy()`.
+- `options.adapter.fetchEvents({ eventType, severity, limit, offset, params, signal })` supplies records; Auth arrays and ToDo envelopes normalize automatically.
+- Optional `options.adapter.fetchUsers({ signal })` resolves actor IDs once and falls back cleanly to `User #{{id}}` on failure.
+- Event type, severity, limit, and offset go to the adapter; Search filters loaded rows in memory without re-fetching.
+- Active filters (`q`, `event-type`, `severity`) and non-default row limits (`limit`) persist in the URL hash via [table-state.js](../../src/js/table-state.js).
+- Each card's details toggle manages `aria-expanded`, `aria-controls`, and a unique `<pre class="entry-list__details">` block with pretty-printed JSON.
+- Toggles disable with `title="No metadata"` when `formatMetadata(metadata)` returns `null`; hooks use `data-admin-system-events-*` only.
+- Extension hooks `extraChips`, `renderCard`, `formatActor`, `formatTime`, and `filterText` customize card rendering, actor labels, and search matching.
+
+Upgrading an existing app:
+- Replace `system-events-view.mjs` in Auth's and ToDo's admin consoles with `createAdminSystemEventsScreen` from [admin-system-events.js](../../src/js/admin-system-events.js).
+- Pass `adapter.fetchEvents` (and optional `adapter.fetchUsers`) so each app keeps its own endpoints and severity or actor shapes.
+- See the [admin console shell demo](../../src/demo/shell-admin-console.html#/system-events) and [shell-admin-console.js](../../src/demo/shell-admin-console.js) for live states.
 
 ### view-router
 View router for `RoutedView` screens ([view-router.js](../../src/js/view-router.js)).

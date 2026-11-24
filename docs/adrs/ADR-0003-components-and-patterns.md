@@ -131,6 +131,8 @@ The rules of [ADR-0001](ADR-0001-layer-model-and-token-contract.md) apply to com
   It reads server state via an app data adapter, reloads quietly while visible via [auto-refresh.js](../../src/js/auto-refresh.js), and exposes extension hooks.
 - **[Decided]** on 2026-11-24: `admin-logs` moved in from Auth's and ToDo's admin consoles as [admin-logs.js](../../src/js/admin-logs.js).
   It reads log buffers via an app data adapter, strips shared indent, and keeps filters and pages in the URL via [table-state.js](../../src/js/table-state.js).
+- **[Decided]** on 2026-11-24: `admin-system-events` moved in from Auth's and ToDo's admin consoles as [admin-system-events.js](../../src/js/admin-system-events.js).
+  It sends type, severity, limit, and offset to an app adapter, searches loaded rows, and toggles formatted JSON metadata.
 
 ### Shared patterns
 Documented as contracts without components of their own:

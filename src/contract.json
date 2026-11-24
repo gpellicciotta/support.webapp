@@ -948,6 +948,7 @@
     "admin-console",
     "admin-overview",
     "admin-logs",
+    "admin-system-events",
     "view-router"
   ]
 }

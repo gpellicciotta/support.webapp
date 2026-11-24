@@ -4,6 +4,7 @@ import { attachAccountMenu } from '../js/account-menu.js';
 import { attachAdminConsole } from '../js/admin-console.js';
 import { createAdminLogsScreen } from '../js/admin-logs.js';
 import { createAdminOverviewScreen } from '../js/admin-overview.js';
+import { createAdminSystemEventsScreen } from '../js/admin-system-events.js';
 import { attachDataLoader } from '../js/data-loader.js';
 import { createDomBuilders } from '../js/dom-builders.js';
 import { createLiveRegion } from '../js/live-region.js';
@@ -343,6 +344,92 @@ export function initAdminConsoleDemo(doc, view) {
         }
     });
 
+    let eventsMode = 'populated';
+    const sampleEventUsers = [
+        { id: 1, email: 'alex.north@example.test', name: 'Alex North' },
+        { id: 34, email: 'samira.patel@example.test', name: 'Samira Patel' }
+    ];
+    const sampleSystemEvents = [
+        {
+            id: 214,
+            'event-type': 'broadcast-published',
+            severity: 'info',
+            description: 'Published scheduled maintenance notice to active sessions.',
+            'creation-time': '2026-11-24T09:14:00Z',
+            'actor-user-id': 1,
+            metadata: '{"broadcastId":48,"recipients":128,"channel":"in-app"}'
+        },
+        {
+            id: 213,
+            'event-type': 'user-locked',
+            severity: 'error',
+            description: 'Account Morgan Lee locked after repeated failed sign-ins.',
+            'creation-time': '2026-11-24T08:42:15Z',
+            'actor-user-id': null,
+            metadata: '{"accountId":41,"attempts":5,"windowSeconds":300}'
+        },
+        {
+            id: 212,
+            'event-type': 'user-deletion-marked',
+            severity: 'warning',
+            description: 'Account Jordan Kim marked for deletion by administrator.',
+            'creation-time': '2026-11-23T17:35:00Z',
+            'actor-user-id': 34,
+            metadata: '{"accountId":36,"graceDays":14}'
+        },
+        {
+            id: 211,
+            'event-type': 'session-revoked',
+            severity: 'warning',
+            description: 'Revoked stale refresh token during nightly sweep.',
+            'creation-time': '2026-11-23T02:00:00Z',
+            'actor-user-id': null,
+            metadata: null
+        },
+        {
+            id: 210,
+            'event-type': 'broadcast-retracted',
+            severity: 'info',
+            description: 'Retracted draft release announcement before delivery.',
+            'creation-time': '2026-11-22T15:18:00Z',
+            'actor-user-id': 1,
+            metadata: '{"broadcastId":47,"reason":"postponed"}'
+        },
+        {
+            id: 209,
+            'event-type': 'database-upgraded',
+            severity: 'info',
+            description: 'Applied schema migration v14 on startup.',
+            'creation-time': '2026-11-20T10:15:30Z',
+            'actor-user-id': null,
+            metadata: '{"from":13,"to":14,"durationMs":412}'
+        }
+    ];
+    const systemEventsScreen = createAdminSystemEventsScreen({
+        limits: [4, 10, 25],
+        defaultLimit: 4,
+        debounce: 0,
+        adapter: {
+            fetchEvents: async ({ eventType, severity, limit, offset }) => {
+                const mode = eventsMode;
+                eventsMode = 'populated';
+                if (mode === 'empty') {
+                    return [];
+                }
+                if (mode === 'fail-once') {
+                    throw new Error('Audit store temporarily unavailable');
+                }
+                if (mode === 'unauthorized') {
+                    throw Object.assign(new Error('Session expired'), { status: 401 });
+                }
+                const matching = sampleSystemEvents.filter((item) => (!eventType || item['event-type'] === eventType)
+                    && (!severity || item.severity === severity));
+                return matching.slice(offset, offset + limit);
+            },
+            fetchUsers: async () => sampleEventUsers
+        }
+    });
+
     const frame = attachAdminConsole(doc.body, {
         document: doc,
         window: view,
@@ -480,18 +567,27 @@ export function initAdminConsoleDemo(doc, view) {
                 }
             },
             {
-                name: 'system-events',
-                title: 'System events',
-                mount: (screenView, ctx) => ctx.dom.setChildren(screenView,
-                    ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'events-heading' },
-                        ctx.dom.h('h2', { id: 'events-heading' }, 'Recent audit events'),
-                        ctx.dom.h('ul', { class: 'entry-list', 'aria-label': 'Recent audit events' }, [
-                            ['warning', 'Warning', '2026-11-17 07:35:00', 'Account Jordan Kim marked for deletion.'],
-                            ['error', 'Error', '2026-11-12 09:03:00', 'Account Morgan Lee locked after repeated failures.'],
-                            ['info', 'Info', '2026-11-10 14:20:00', 'Admin console frame router initialized.']
-                        ].map(([sev, label, time, msg]) => ctx.dom.h('li', { class: 'entry-list__item' },
-                            ctx.dom.h('p', { class: 'entry-list__message' }, msg),
-                            ctx.dom.h('div', { class: 'entry-list__meta' }, ctx.dom.severityChip(sev, label), ctx.dom.h('span', { class: 'chip' }, ctx.dom.h('time', null, time))))))))
+                name: systemEventsScreen.name,
+                title: systemEventsScreen.title,
+                mount: (screenView, ctx, route) => {
+                    const eventsHost = ctx.dom.h('div', { class: 'gallery-section' });
+                    let eventsController = null;
+                    const triggerEventsMode = (mode) => {
+                        eventsMode = mode;
+                        eventsController?.refresh();
+                    };
+                    ctx.dom.setChildren(screenView,
+                        eventsHost,
+                        ctx.dom.h('section', { class: 'gallery-section', 'aria-labelledby': 'events-states-heading' },
+                            ctx.dom.h('h2', { id: 'events-states-heading' }, 'System event states'),
+                            ctx.dom.h('p', null, 'Preview an empty audit log, fetch failures, and 401 sign-in prompts.'),
+                            ctx.dom.h('div', { class: 'toolbar', role: 'group', 'aria-label': 'System event state previews' },
+                                ctx.dom.button('Empty audit log', () => triggerEventsMode('empty'), { 'data-demo-events': 'empty' }),
+                                ctx.dom.button('Fail fetch once', () => triggerEventsMode('fail-once'), { 'data-demo-events': 'fail-once' }),
+                                ctx.dom.button('Simulate 401', () => triggerEventsMode('unauthorized'), { 'data-demo-events': 'unauthorized' }))));
+                    eventsController = systemEventsScreen.mount(eventsHost, ctx, route);
+                    return { dispose: () => eventsController?.dispose() };
+                }
             }
         ]
     });
