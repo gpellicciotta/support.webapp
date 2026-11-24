@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1604.8, input: 310694, output: 38930, cache_read: 10884279}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T08:44:38Z"
 ---
 # T0307: Add standard core icons for admin console screens from Auth
 
@@ -56,4 +61,7 @@ See [technical-spec.md](T0307-add-standard-core-icons-for-admin-console-screens/
 
 - [2026-11-24] **[Doc]**
   Updated visual-style-guide.md, components.md, and CHANGELOG.md with the seven standard admin console core icons and screen defaults.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
