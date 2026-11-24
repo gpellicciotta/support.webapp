@@ -85,13 +85,13 @@ A generated app ([ADR-0006](../adrs/ADR-0006-generator.md)) needs at least these
 | `spinner`     | Spinner             | none                                                                                                                                | sizes sm, md                                                                  | label in the status line; static under reduced motion                  |
 
 ### Overlays
-| Key              | Component           | Module and functions                       | Variants and states                       | Accessibility minimum                              |
-| :--------------- | :------------------ | :----------------------------------------- | :---------------------------------------- | :------------------------------------------------- |
-| `dialog`         | Dialog              | `dialog.js`: `openDialog`, `confirmDialog` | modal, type-to-confirm; sheet below 64rem | native dialog; focus trap; Escape; focus return    |
-| `inline-confirm` | Inline confirmation | `inline-confirm.js`: `attachInlineConfirm` | asking, confirmed, cancelled              | focus moves to the question and back               |
-| `menu`           | Menu                | `menu.js`: `attachMenu`                    | items, separators, danger item            | menu roles; roving focus; type-ahead; Escape       |
-| `popover`        | Popover             | `popover.js`: `attachPopover`              | anchored panel; light dismiss             | native `popover` attribute; focus returns on close |
-| `tooltip`        | Tooltip             | `attachTooltip`, `createTooltip`           | focus, mouse hover, Escape dismissal      | explicit text in `aria-describedby`                |
+| Key              | Component           | Module and functions                                    | Variants and states                       | Accessibility minimum                                     |
+| :--------------- | :------------------ | :------------------------------------------------------ | :---------------------------------------- | :-------------------------------------------------------- |
+| `dialog`         | Dialog              | `dialog.js`: `openDialog`, `confirmDialog`              | modal, type-to-confirm; sheet below 64rem | native dialog; focus trap; Escape; focus return           |
+| `inline-confirm` | Inline confirmation | `inline-confirm.js`: `attachInlineConfirm`              | asking, confirmed, cancelled              | focus moves to the question and back                      |
+| `menu`           | Menu                | `menu.js`: `attachMenu`                                 | items, separators, danger item            | menu roles; roving focus; type-ahead; Escape              |
+| `popover`        | Popover             | `popover.js`: `attachPopover`                           | anchored panel; light dismiss             | native `popover` attribute; focus returns on close        |
+| `tooltip`        | Tooltip             | `attachTooltip`, `createTooltip`, `attachLabelTooltips` | focus, hover, Escape; `tooltip--label`    | explicit text in `aria-describedby`; labels `aria-hidden` |
 
 ### Identity and Foundations
 | Key                   | Component             | Module and functions                                                                                                                                             | Variants and states                                     | Accessibility minimum                                             |
@@ -861,6 +861,22 @@ Narrator first announces the enclosing section heading, so a leading section nam
 Escape closed the tooltip and kept focus on the button; hover showed it visually, and Narrator speaks nothing on hover.
 Not verified: NVDA, other browsers, and touch screen readers.
 
+Label tooltips name icon-only controls on mouse hover and keyboard focus:
+
+```js
+import { attachLabelTooltips } from './tooltip.js';
+
+const labels = attachLabelTooltips(document); // every .icon-button, by delegation
+attachLabelTooltips(sidebar, { selector: 'a[href]', placement: 'inline-end', when: () => isRail() });
+labels.destroy();
+```
+
+- One shared `tooltip tooltip--label` element per call shows the control's name, read from `aria-label`, `aria-labelledby`, `title`, or text.
+- It is `aria-hidden` and adds no `aria-describedby`, since the name is already the accessible name.
+- `when(control)` gates each control; `placement` is `block-end` (below, flipping above) or `inline-end` (beside).
+- It follows `aria-label` changes, closes when a click hides or removes the control, and suspends a native `title` while open.
+- Nested roots may overlap; the innermost root that names a control shows its tooltip.
+
 ### avatar
 Avatar. The fallback shows initials, or the person icon when no name is known.
 
@@ -1220,6 +1236,7 @@ await consoleFrame.start();
 - `showChecking`, `showCheckFailed`, `showForbidden`, and `showGate` tear down active screens and render a centered `<main class="app__gate">`.
 - `showSignedOut(message, { failure })` shows a primary Sign In button and tracks route marks without mounting protected screens.
 - `navStates: ['open', 'hidden']` makes the nav toggle skip the icon rail.
+- The shell names its icon buttons with label tooltips from `attachLabelTooltips`.
 - `createAdminConsole(rootOrDoc, options)` builds the shell and gates; `attachAdminConsole(root, options)` enhances existing `.app` markup via `data-admin-console-*` hooks.
 - Session lookup (`checkSession`), account lookup (`checkAccount`), and authorization (`isAuthorized`) stay with the app as callbacks.
 

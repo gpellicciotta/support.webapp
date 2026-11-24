@@ -405,6 +405,52 @@ for (const demo of demos.filter(({ areas }) => areas.includes('sidebar'))) {
     });
 }
 
+test('admin-console names its icon controls and rail entries with label tooltips on wide screens', async ({ page }) => {
+    const { width } = page.viewportSize();
+    test.skip(width < BREAKPOINT, 'hover tooltips and the rail exist only in the wide layout');
+    const problems = await openDemo(page, demos[4].path);
+    const toggle = page.locator('.app__nav-toggle');
+    const tip = page.locator('.tooltip--label:not([hidden])');
+    await toggle.hover();
+    await expect(tip).toHaveCount(1);
+    await expect(tip).toHaveText('Collapse navigation');
+    await expect(tip).toHaveAttribute('aria-hidden', 'true');
+    const toggleBox = await toggle.boundingBox();
+    const below = await tip.boundingBox();
+    expect(below.y).toBeGreaterThanOrEqual(toggleBox.y + toggleBox.height);
+    await toggle.click();
+    // The tooltip follows the label of the next step.
+    await expect(tip).toHaveText('Hide navigation');
+
+    const sessions = page.locator('.app__sidebar .app__nav-item', { hasText: 'Sessions' });
+    await sessions.hover();
+    await expect(tip).toHaveCount(1);
+    await expect(tip).toHaveText('Sessions');
+    const itemBox = await sessions.boundingBox();
+    const beside = await tip.boundingBox();
+    expect(beside.x).toBeGreaterThanOrEqual(itemBox.x + itemBox.width);
+    expect(beside.y + beside.height / 2).toBeCloseTo(itemBox.y + itemBox.height / 2, 0);
+    expect(await tip.evaluate((element) => element.matches(':popover-open'))).toBe(true);
+    await page.mouse.move(width / 2, 600);
+    await expect(tip).toHaveCount(0);
+
+    // Keyboard focus shows the tooltip too, and Escape closes it without moving focus.
+    await page.locator('.app__sidebar .app__nav-item', { hasText: 'Logs' }).focus();
+    await page.keyboard.press('Shift+Tab');
+    await expect(sessions).toBeFocused();
+    await expect(tip).toHaveText('Sessions');
+    await page.keyboard.press('Escape');
+    await expect(tip).toHaveCount(0);
+    await expect(sessions).toBeFocused();
+
+    // Open again, the sidebar shows its labels and the entries need no tooltip.
+    await toggle.click();
+    await toggle.click();
+    await sessions.hover();
+    await expect(tip).toHaveCount(0);
+    expect(problems).toEqual([]);
+});
+
 test('list-editor hides its nav toggle below 64rem, where the bottom bar holds the navigation', async ({ page }) => {
     const { width } = page.viewportSize();
     test.skip(width >= BREAKPOINT, 'the toggle shows in the wide layout');

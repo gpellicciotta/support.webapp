@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 ---
 
 ## v0.4.1-pre
+- Components: Added `attachLabelTooltips` and `.tooltip--label` to [tooltip.js](src/js/tooltip.js), naming icon buttons and icon rail entries on hover and keyboard focus.
 - Docs: Enforced non-touching borders via wrapping `gap` in [visual-style-guide.md](docs/specs/visual-style-guide.md), and fixed `.demo-status` top margin in [gallery.css](src/demo/gallery.css).
 - Shell: Made the nav toggle draw the next step with the new core `icon-nav-collapse`, `icon-nav-hide`, and `icon-nav-close` glyphs, and added a two-state mode without the rail.
 - Components: Aligned `.field__hint`, `.field__status`, and `.field__error` with button, link button, checkbox, radio, and switch label starts in [field.css](src/css/components/field.css), and framed gallery demo status bars in [gallery.css](src/demo/gallery.css).

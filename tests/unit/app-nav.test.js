@@ -234,6 +234,31 @@ describe('attachAppNav', () => {
         });
     });
 
+    describe('rail tooltips', () => {
+        const hover = (node) => node.dispatchEvent(new PointerEvent('pointerover', { bubbles: true, pointerType: 'mouse' }));
+        const tip = () => document.querySelector('.tooltip--label');
+
+        it('names a hovered navigation entry only while the sidebar is an icon rail', () => {
+            controller = attachAppNav(toggle, sidebar, { media: fakeMedia(true) });
+            const link = sidebar.querySelector('a[href="#one"]');
+            hover(link);
+            expect(tip().hidden).toBe(true);
+            toggle.click();
+            hover(link);
+            expect(tip().hidden).toBe(false);
+            expect(tip().textContent).toBe('One');
+            controller.destroy();
+            controller = null;
+            expect(tip()).toBeNull();
+        });
+
+        it('leaves the entries alone with tooltips off', () => {
+            controller = attachAppNav(toggle, sidebar, { media: fakeMedia(true), state: 'rail', tooltips: false });
+            hover(sidebar.querySelector('a'));
+            expect(tip()).toBeNull();
+        });
+    });
+
     describe('with two states', () => {
         it('cycles open and hidden from the states option, drawing the close glyph while open', () => {
             toggle.innerHTML = '<svg class="icon"><use href="icons.svg#icon-nav-menu"/></svg>';

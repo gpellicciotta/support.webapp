@@ -2,6 +2,7 @@
 
 import { initGallery } from './gallery.js';
 import { attachHelpPage } from '../js/help-page.js';
+import { attachLabelTooltips } from '../js/tooltip.js';
 
 const DEMO_RELEASES = [
     {
@@ -45,6 +46,7 @@ const DEMO_RELEASES = [
 
 if (typeof document !== 'undefined') {
     initGallery(document, window);
+    attachLabelTooltips(document);
     const root = document.querySelector('[data-help-page]');
     if (root) {
         attachHelpPage(root, {

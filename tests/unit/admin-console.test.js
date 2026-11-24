@@ -641,3 +641,24 @@ describe('createAdminConsole navigation states', () => {
         frame.destroy();
     });
 });
+
+describe('createAdminConsole label tooltips', () => {
+    it('names hovered icon buttons in the shell, and removes the tooltip with the shell', () => {
+        const env = createEnvironment('/admin/#/overview');
+        const host = env.doc.createElement('div');
+        env.doc.body.append(host);
+        const frame = createAdminConsole(host, {
+            document: env.doc,
+            window: env.view,
+            media: env.media,
+            screens: [{ name: 'overview', title: 'Overview', icon: 'lists', mount: () => {} }]
+        });
+        frame.showShell({ name: 'Alex North' }, { id: 'tok-1' });
+        const toggle = host.querySelector('[data-app-nav-toggle]');
+        toggle.dispatchEvent(new env.win.PointerEvent('pointerover', { bubbles: true, pointerType: 'mouse' }));
+        const tips = () => env.doc.querySelectorAll('.tooltip--label:not([hidden])');
+        expect([...tips()].map((tip) => tip.textContent)).toEqual(['Collapse navigation']);
+        frame.destroy();
+        expect(env.doc.querySelectorAll('.tooltip--label')).toHaveLength(0);
+    });
+});

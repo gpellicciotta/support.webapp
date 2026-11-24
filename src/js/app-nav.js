@@ -11,7 +11,10 @@
  * The markup's `popovertarget` keeps the drawer working without the script and keeps toggle presses out of light dismiss.
  * The module cancels that native toggle and drives the popover itself, so it can set focus and labels.
  * The toggle's glyph shows what a press does: it swaps the fragment of the toggle's sprite `<use>` reference.
+ * In the rail, hovering or focusing a navigation entry shows its clipped label as a tooltip.
  */
+
+import { attachLabelTooltips } from './tooltip.js';
 
 const STATES = ['open', 'rail', 'hidden'];
 const TWO_STATES = ['open', 'hidden'];
@@ -44,6 +47,7 @@ const DEFAULT_ICONS = {
  *   the sprite glyph names, without the `icon-` prefix, for a press that collapses to the rail, hides, shows, or closes
  * @param {{collapse?: string, hide?: string, show?: string, open?: string, close?: string}} [options.labels]
  *   the toggle's accessible names: wide open, rail, and hidden, then narrow closed and open
+ * @param {boolean} [options.tooltips] show the entries' clipped labels as tooltips in the rail, true by default
  * @param {(state: string) => void} [options.onChange] called after a press or `setState` changes the wide state
  * @returns {{state: () => string, setState: (state: string) => void, isDrawerOpen: () => boolean, destroy: () => void}}
  *   the controller
@@ -61,6 +65,9 @@ export function attachAppNav(toggle, sidebar, options = {}) {
     let state = options.state ?? markupState();
     let drawerOpen = false;
     let returnFocus = true;
+    const railTooltips = options.tooltips === false
+        ? null
+        : attachLabelTooltips(sidebar, { selector: 'a[href], button', placement: 'inline-end', when: () => media.matches && state === 'rail' });
 
     /**
      * Read the wide state the markup declares.
@@ -231,6 +238,7 @@ export function attachAppNav(toggle, sidebar, options = {}) {
             sidebar.removeEventListener('keydown', onKeydown);
             sidebar.removeEventListener('click', onSidebarClick);
             media.removeEventListener('change', onMediaChange);
+            railTooltips?.destroy();
         }
     };
 }

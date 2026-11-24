@@ -14,6 +14,7 @@ import { attachAccountMenu } from './account-menu.js';
 import { attachAppNav } from './app-nav.js';
 import { createDomBuilders } from './dom-builders.js';
 import { createIcon } from './icon.js';
+import { attachLabelTooltips } from './tooltip.js';
 
 const DEFAULT_TITLE = 'Admin Console';
 
@@ -572,6 +573,8 @@ function initAdminConsole(root, options, attached) {
 
         const navController = attachAppNav(toggleEl, sidebarEl, { media: options.media, states: options.navStates });
         signal.addEventListener('abort', () => navController.destroy(), { once: true });
+        const labelTooltips = attachLabelTooltips(appEl);
+        signal.addEventListener('abort', () => labelTooltips.destroy(), { once: true });
 
         shellParts = {
             app: appEl,
@@ -636,6 +639,8 @@ function initAdminConsole(root, options, attached) {
             const navController = attachAppNav(toggleEl, sidebarEl, { media: options.media, states: options.navStates });
             signal.addEventListener('abort', () => navController.destroy(), { once: true });
         }
+        const labelTooltips = attachLabelTooltips(root);
+        signal.addEventListener('abort', () => labelTooltips.destroy(), { once: true });
 
         shellParts = {
             app: root,

@@ -591,6 +591,7 @@ Nav toggle:
   Escape, a click outside, and a followed link close it; Escape returns focus to the toggle.
 - Below 64rem the toggle hides when a bottom bar holds the navigation.
 - The rail clips the link labels, which stay the links' accessible names; its glyphs keep their open-state column.
+  Hovering or focusing an entry in the rail shows its label as a tooltip beside it; pass `tooltips: false` to skip it.
 - Without the script, the toggle still opens the drawer at every width through `popovertarget`.
 
 ```html
@@ -738,3 +739,17 @@ No animation is applied under any motion preference.
 For translations, apply `data-i18n` to the tooltip text; avoid the legacy `data-i18n-tooltip` title hook.
 Destroy the controller before removing its trigger or replacing its text element.
 Without JavaScript, keep description markup visible; do not add `hidden` or `popover` to the authored skeleton.
+
+Label tooltips:
+- Icon-only controls show their name as a `tooltip--label` on mouse hover and keyboard focus.
+- Call `attachLabelTooltips(document)` once at page load; it names every `.icon-button` by delegation.
+- The name comes from `aria-label`, `aria-labelledby`, `title`, or the text, in that order.
+- The tooltip stays `aria-hidden`, since the name is already the control's accessible name.
+- It sits below the control on one line, flipping above, and follows label changes such as the nav toggle's.
+- A native `title` steps aside while the tooltip shows, so only one tooltip appears.
+- Touch shows nothing; keep icon-only controls to clear, frequent actions.
+- `attachAdminConsole` and `createAdminConsole` attach it to their shell; `attachAppNav` adds it to the rail.
+
+**[Decided]** with the user on 2026-11-24: icon-only controls always show their name as a tooltip on desktop.
+- Native `title` attributes: rejected, because they show late, never on keyboard focus, and in no look's style.
+- `aria-describedby` labels: rejected, because screen readers would read the name twice.

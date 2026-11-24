@@ -12,6 +12,7 @@ import { attachNotices } from '../js/notices.js';
 import { attachPullRefresh } from '../js/pull-refresh.js';
 import { attachScreenActionBar } from '../js/screen-action-bar.js';
 import { createToast } from '../js/toast.js';
+import { attachLabelTooltips } from '../js/tooltip.js';
 import { RoutedView } from '../js/view.js';
 import { CONTENT_VIEW_CHANGED_EVENT, attachViewRouter } from '../js/view-router.js';
 
@@ -174,6 +175,7 @@ function mountSampleView(host, toaster) {
  */
 export function initShellDemo(doc, view) {
     initGallery(doc, view);
+    attachLabelTooltips(doc);
     const navToggle = doc.querySelector('[data-app-nav-toggle]');
     if (navToggle) {
         attachAppNav(navToggle, doc.getElementById(navToggle.getAttribute('aria-controls')));

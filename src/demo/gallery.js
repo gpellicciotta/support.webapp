@@ -13,7 +13,7 @@ import { confirmDialog, openDialog } from '../js/dialog.js';
 import { attachInlineConfirm } from '../js/inline-confirm.js';
 import { attachMenu } from '../js/menu.js';
 import { attachPopover } from '../js/popover.js';
-import { attachTooltip } from '../js/tooltip.js';
+import { attachLabelTooltips, attachTooltip } from '../js/tooltip.js';
 import { createLiveRegion } from '../js/live-region.js';
 import { downloadJson } from '../js/file-download.js';
 import { createToast } from '../js/toast.js';
@@ -202,6 +202,7 @@ export function initGallery(doc, view) {
 // The shell demo pages import the switchers from here and skip the gallery specimens.
 if (typeof document !== 'undefined' && document.querySelector('.gallery-main')) {
     initGallery(document, window);
+    attachLabelTooltips(document);
     initSpecimens(document, window);
     for (const opener of document.querySelectorAll('[data-dialog-open]')) {
         opener.addEventListener('click', async () => {
