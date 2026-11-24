@@ -1,11 +1,11 @@
 ---
 id: T0298
-owner: ~
-needs: ['T0293', 'T0294']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0298-add-the-shared-admin-system-events-screen-with
+worktree: .plan/work/T0298-add-the-shared-admin-system-events-screen-with
+status: active
+started_at: "2026-11-24T04:11:46Z"
 ended_at: —
 review: agent
 preview: none
