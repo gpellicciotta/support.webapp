@@ -1,11 +1,11 @@
 ---
 id: T0296
-owner: ~
-needs: ['T0293', 'T0294']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0296-add-the-shared-admin-overview-screen-with-server
+worktree: .plan/work/T0296-add-the-shared-admin-overview-screen-with-server
+status: active
+started_at: "2026-11-24T03:02:59Z"
 ended_at: —
 review: agent
 preview: none
