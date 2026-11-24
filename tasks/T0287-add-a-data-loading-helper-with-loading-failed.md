@@ -11,6 +11,11 @@ ended_at: —
 review: agent
 preview: none
 protocol: standard
+usage:
+  worker: {turns: 1, duration_s: 1419.5, input: 285101, output: 53973, cache_read: 10689050}
+review_status: pending
+review_round: 1
+review_requested_at: "2026-11-24T00:55:25Z"
 ---
 # T0287: Add a data loading helper with loading, failed, and sign-in states, promoted from Auth's admin console
 
@@ -58,4 +63,7 @@ Size estimate: 3 files, 60 lines.
 
 - [2026-11-24] **[Doc]**
   Updated components.md with data-loader catalog entry and upgrade note, ADR-0003 sharing rule, and CHANGELOG.md under v0.4.1-pre.
+
+- [2026-11-24] **[Review]**
+  Round 1 requested (mode: agent).
 
