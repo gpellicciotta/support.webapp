@@ -1,6 +1,6 @@
 {
   "name": "@gpellicciotta/support.webapp",
-  "version": "0.4.1-pre",
+  "version": "0.5.0-pre",
   "description": "Shared visual design system and app starter",
   "type": "module",
   "engines": {
