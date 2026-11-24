@@ -1,11 +1,11 @@
 ---
 id: T0297
-owner: ~
-needs: ['T0293', 'T0294']
-branch: —
-worktree: —
-status: ready
-started_at: —
+owner: "@gemini"
+needs: []
+branch: task/T0297-add-the-shared-admin-logs-screen-with-filtered
+worktree: .plan/work/T0297-add-the-shared-admin-logs-screen-with-filtered
+status: active
+started_at: "2026-11-24T03:35:54Z"
 ended_at: —
 review: agent
 preview: none

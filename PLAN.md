@@ -22,7 +22,7 @@ An overview of all tasks and their planning, possibly split by milestone.
 - [x] T0294 Add DOM builders for package components, promoted from Auth's and ToDo's admin console helpers.
 - [x] T0295 Add a view router for routed views with sign-in guards and a fallback view, promoted from Auth's App.
 - [x] T0296 Add the shared admin Overview screen with server state reloaded while visible, promoted from Auth's and ToDo's consoles.
-- [ ] T0297 Add the shared admin Logs screen with filtered, paged entry cards, promoted from Auth's and ToDo's consoles.
+- [~] T0297 [owner: @gemini] Add the shared admin Logs screen with filtered, paged entry cards, promoted from Auth's and ToDo's consoles.
 - [ ] T0298 Add the shared admin System events screen with filters, paging, and JSON details, promoted from Auth's and ToDo's consoles.
 - [ ] T0299 Add the shared admin Broadcasts screen with compose, live preview, history, and retraction, promoted from Auth's and ToDo's consoles.
 - [ ] T0300 Add the shared admin Users screen with table, detail panel, creation, and deletion, promoted from Auth's and ToDo's consoles.
